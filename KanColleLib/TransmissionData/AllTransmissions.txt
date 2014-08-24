@@ -1,0 +1,326 @@
+﻿全API通信データ一覧
+各種swfを解析した結果
+どのswfに入っているかはカッコ内に記述（無表記のものはCore.swf）
+requestにapi_tokenおよびapi_version以外のモノが必要な場合には特記してある
+requestにイコールで書いてあるものはコードの仕様上固定されているもの
+
+-- START2 --
+
+api_start2
+各種マスターデータ
+
+-- GET_MEMBER --
+
+api_get_member/material
+資材情報
+
+api_get_member/deck
+デッキ情報
+
+api_get_member/ship3
+所有艦情報とデッキ情報と未装備スロットアイテム
+api_sort_key=5, api_sort_order=2
+
+api_get_member/ship3（RemodelMain）
+艦情報更新
+api_shipid, api_sort_key=1, api_sort_order=1
+
+api_get_member/kdock
+工廠ドック情報
+
+api_get_member/furniture
+家具情報
+
+api_get_member/basic
+ユーザー情報
+
+api_get_member/slot_item
+スロット装備情報
+
+api_get_member/unsetslot
+未装備スロットアイテム
+
+api_get_member/useitem
+使用アイテム情報
+
+api_get_member/record
+戦績情報
+
+api_get_member/ship2
+所有艦情報
+api_sort_key=5, api_sort_order=2
+
+api_get_member/ndock
+入渠情報
+
+api_get_member/practice（SallyMain）
+演習相手一覧取得
+
+api_get_member/mapcell（SallyMain）
+マップセル情報
+api_maparea_id, api_mapinfo_no
+
+api_get_member/mapinfo（SallyMain）
+マップインフォユーザー情報
+
+api_get_member/sortie_conditions（SallyMain）
+出撃条件用情報
+
+api_get_member/picture_book（AlbumMain）
+図鑑情報の取得
+api_type, api_no
+
+api_get_member/payitem（ItemlistMain）
+購入済みアイテム情報
+
+api_get_member/questlist（DutyMain）
+任務一覧
+api_page_no
+
+-- PORT --
+
+api_port/port
+母港TOP用新API
+api_sort_key=5, api_sort_order=2, api_port
+api_portは解析してはいけないヤツ
+
+-- REQ_FURNITURE --
+
+api_req_furniture/change
+模様替え
+api_floor, api_wallpaper, api_window, api_wallhanging, api_shelf, api_desk
+
+api_req_furniture/buy（ItemlistMain）
+家具の購入
+api_type, api_no
+
+-- REQ_MEMBER --
+
+api_req_member/update_tutorial_progress
+チュートリアル進行度更新
+api_no
+
+api_req_member/get_incentive
+インセンティブチェック（複数ログインの確認?）
+
+api_req_member/get_practice_enemyinfo（SallyMain）
+演習相手詳細情報
+
+api_req_hensei/change（OrganizeMain）
+編成
+api_id, api_ship_idx, api_ship_id
+
+api_req_hensei/combined（OrganizeMain）
+連合艦隊通信
+
+api_req_member/updatedeckname（OrganizeMain）
+艦隊名更新
+api_deck_id, api_name, api_name_id
+
+api_req_member/itemuse_cond（OrganizeMain）
+間宮使用
+api_deck_id, api_useitem_id=54
+
+api_req_hensei/lock（OrganizeMain）
+ロック
+api_ship_id
+
+api_req_member/updatecomment（RecordMain）
+コメント文言更新
+api_cmt, api_cmt_id
+
+api_req_member/payitemuse（ItemlistMain）
+購入済みアイテムの取り出し
+api_payitem_id, api_force_flag
+
+api_req_member/itemuse（ItemlistMain）
+所持アイテムの使用
+api_useitem_id, api_force_flag, api_exchange_type（あれば1）
+
+-- REQ_MISSION --
+
+api_req_mission/result（PortMain）
+遠征結果取得
+
+api_req_mission/start（SallyMain）
+遠征開始
+api_mission_id, api_deck_id, api_mission
+
+api_req_mission/return_instruction（SallyMain）
+遠征旗艦（帰還のミス?）
+api_deck_id
+
+-- GET_MASTER --
+
+api_get_member/mission（SallyMain）
+遠征情報（プログラム側のミス?）
+
+-- REQ_MAP --
+
+api_req_map/start（SallyMain）
+マップ開始
+maparea_id, mapinfo_no, deck_id, formation_id=1
+
+api_req_map/next（SallyMain）
+次のセル
+api_recovery_type（ダメコン使用の場合1、女神使用の場合2、それ以外は0）
+
+-- REQ_INIT --
+
+api_req_init/nickname（tutorial）
+提督名の登録・変更
+api_nickname, api_nickname_id
+
+api_req_init/firstship（tutorial）
+初回キャラ作成
+api_ship_id
+
+-- REQ_RANKING --
+
+api_req_ranking/getlist（RecordMain）
+ランキングリスト取得
+api_pageno=1～99
+
+-- REQ_QUEST --
+
+api_req_quest/stop（DutyMain）
+任務中断
+api_quest_id
+
+api_req_quest/clearitemget（DutyMain）
+任務終了
+api_quest_id, api_quest
+api_questはおそらく解析してはいけないヤツ
+
+api_req_quest/start（DutyMain）
+任務開始
+api_quest_id
+
+-- REQ_HOKYU --
+
+api_req_hokyu/charge（SupplyMain）
+補給
+api_id_items, api_kind=1～3, api_onslot
+
+-- REQ_KAISOU --
+
+api_req_kaisou/unsetslot_all（RemodelMain）
+装備一括解除
+api_id
+
+api_req_kaisou/slotset（RemodelMain）
+装備変更
+api_id, api_slot_idx, api_item_id
+
+api_req_kaisou/marriage（RemodelMain）
+ケッコン
+api_id
+
+api_req_kaisou/powerup（RemodelMain）
+近代化改修
+api_id, api_id_items
+
+api_req_kaisou/remodeling（RemodelMain）
+改造
+api_id
+
+api_req_kaisou/lock（RemodelMain）
+スロット装備のロック
+api_slotitem_id
+
+-- REQ_NYUKYO --
+
+api_req_nyukyo/speedchange（RepairMain）
+通常入渠を高速入渠に変更
+api_ndock_id
+
+api_req_nyukyo/open_new_dock（RepairMain）
+入渠ドックを新規開放
+
+api_req_nyukyo/start（RepairMain）
+入渠ドックの開始
+api_highspeed=0～1, api_ndock_id, api_ship_id
+
+-- REQ_KOUSYOU --
+
+api_req_kousyou/getship（ArsenalMain）
+建造完了
+api_kdock_id
+
+api_req_kousyou/open_new_dock（ArsenalMain）
+建造ドックオープン
+
+api_req_kousyou/createship（ArsenalMain）
+建造
+api_highspeed=0～1, api_kdock_id, api_large_flag, api_item1, api_item2, api_item3, api_item4, api_item5
+
+api_req_kousyou/createship_speedchange（ArsenalMain）
+高速建造への変更
+api_highspeed=1, api_kdock_id
+
+api_req_kousyou/createitem（ArsenalMain）
+開発
+api_item1, api_item2, api_item3, api_item4
+
+api_req_kousyou/destroyship（ArsenalMain）
+艦の解体
+api_ship_id
+
+api_req_kousyou/destroyitem2（ArsenalMain）
+スロットアイテムの廃棄
+api_slotitem_ids（カンマ区切り）
+
+-- REQ_SORTIE --
+
+api_req_sortie/battle（BattleMain）
+戦闘開始
+api_formation, api_recovery_type
+
+api_req_sortie/battleresult（BattleResultMain）
+戦闘結果
+
+-- REQ_BATTLE_MIDNIGHT --
+
+api_req_battle_midnight/battle（BattleMain）
+戦闘開始（夜戦）
+api_recovery_type
+
+api_req_battle_midnight/sp_midnight（BattleMain）
+戦闘開始（特殊夜戦）
+api_formation, api_recovery_type
+
+-- REQ_COMBINED_BATTLE --
+
+api_req_combined_battle/battle（BattleMain）
+戦闘開始（連合艦隊）
+api_formation, api_recovery_type
+
+api_req_combined_battle/airbattle（BattleMain）
+戦闘開始（連合艦隊 - 航空戦）
+api_formation, api_recovery_type
+
+api_req_combined_battle/sp_midnight（BattleMain）
+戦闘開始（特殊夜戦）
+api_formation, api_recovery_type
+
+api_req_combined_battle/midnight_battle（BattleMain）
+戦闘開始（夜戦）
+api_recovery_type
+
+api_req_combined_battle/goback_port（BattleMain）
+護衛艦退避
+
+api_req_combined_battle/battleresult（BattleResultMain）
+戦闘結果（連合艦隊での戦闘）
+
+-- REQ_PRACTICE --
+
+api_req_practice/battle（BattleMain）
+戦闘開始（演習）
+api_deck_id, api_formation_id, api_enemy_id
+
+api_req_practice/midnight_battle（BattleMain）
+戦闘開始（演習・夜戦）
+
+api_req_practice/battle_result（BattleResultMain）
+戦闘結果（演習）
