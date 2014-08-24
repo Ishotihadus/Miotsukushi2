@@ -19,11 +19,11 @@ api_get_member/deck
 
 api_get_member/ship3
 所有艦情報とデッキ情報と未装備スロットアイテム
-api_sort_key=5, api_sort_order=2
+api_sort_key=5, spi_sort_order=2
 
 api_get_member/ship3（RemodelMain）
 艦情報更新
-api_shipid, api_sort_key=1, api_sort_order=1
+api_shipid, api_sort_key=1, spi_sort_order=1
 
 api_get_member/kdock
 工廠ドック情報
@@ -48,7 +48,7 @@ api_get_member/record
 
 api_get_member/ship2
 所有艦情報
-api_sort_key=5, api_sort_order=2
+api_sort_key=5, spi_sort_order=2
 
 api_get_member/ndock
 入渠情報
@@ -81,7 +81,7 @@ api_page_no
 
 api_port/port
 母港TOP用新API
-api_sort_key=5, api_sort_order=2, api_port
+api_sort_key=5, spi_sort_order=2, api_port
 api_portは解析してはいけないヤツ
 
 -- REQ_FURNITURE --
@@ -153,7 +153,7 @@ api_deck_id
 -- GET_MASTER --
 
 api_get_member/mission（SallyMain）
-遠征情報（プログラム側のミス?）
+遠征情報
 
 -- REQ_MAP --
 

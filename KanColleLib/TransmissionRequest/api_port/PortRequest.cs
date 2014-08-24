@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KanColleLib.TransmissionRequest.api_port
+{
+    public class PortRequest : RequestBase
+    {
+        public string port;
+        public int sort_key;
+        public int sort_order;
+
+        public PortRequest(string request)
+            : base(request)
+        {
+            port = _Get_Reqest("api_port");
+            sort_key = (int)_Get_Reqest_int("api_sort_key");
+            sort_order = (int)_Get_Reqest_int("spi_sort_order");
+        }
+    }
+}
