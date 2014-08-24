@@ -14,8 +14,8 @@ namespace KanColleLib.TransmissionRequest.api_get_member
         public Ship2Request(string request)
             : base(request)
         {
-            sort_key = int.Parse(_Get_Reqest("api_sort_key"));
-            sort_order = int.Parse(_Get_Reqest("spi_sort_order"));
+            sort_key = int.Parse(_Get_Request("api_sort_key"));
+            sort_order = int.Parse(_Get_Request("spi_sort_order"));
         }
     }
 }

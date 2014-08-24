@@ -15,9 +15,9 @@ namespace KanColleLib.TransmissionRequest.api_port
         public PortRequest(string request)
             : base(request)
         {
-            port = _Get_Reqest("api_port");
-            sort_key = (int)_Get_Reqest_int("api_sort_key");
-            sort_order = (int)_Get_Reqest_int("spi_sort_order");
+            port = _Get_Request("api_port");
+            sort_key = (int)_Get_Request_int("api_sort_key");
+            sort_order = (int)_Get_Request_int("spi_sort_order");
         }
     }
 }

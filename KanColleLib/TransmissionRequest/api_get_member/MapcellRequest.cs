@@ -14,8 +14,8 @@ namespace KanColleLib.TransmissionRequest.api_get_member
         public MapcellRequest(string request)
             : base(request)
         {
-            maparea_id = int.Parse(_Get_Reqest("api_maparea_id"));
-            mapinfo_no = int.Parse(_Get_Reqest("api_mapinfo_no"));
+            maparea_id = int.Parse(_Get_Request("api_maparea_id"));
+            mapinfo_no = int.Parse(_Get_Request("api_mapinfo_no"));
         }
 
 

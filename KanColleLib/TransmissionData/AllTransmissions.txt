@@ -145,6 +145,7 @@ api_req_mission/result（PortMain）
 api_req_mission/start（SallyMain）
 遠征開始
 api_mission_id, api_deck_id, api_mission
+api_missionは解析しちゃいけないヤツ
 
 api_req_mission/return_instruction（SallyMain）
 遠征旗艦（帰還のミス?）

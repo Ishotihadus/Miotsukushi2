@@ -17,11 +17,11 @@ namespace KanColleLib.TransmissionRequest
         {
             _requestraw = RequestDecorder.DecordRequest(request);
 
-            token = _Get_Reqest("api_token");
-            verno = _Get_Reqest("api_verno");
+            token = _Get_Request("api_token");
+            verno = _Get_Request("api_verno");
         }
 
-        protected string _Get_Reqest(string key)
+        protected string _Get_Request(string key)
         {
             if (_requestraw == null || !_requestraw.ContainsKey(key))
                 return null;
@@ -29,14 +29,40 @@ namespace KanColleLib.TransmissionRequest
                 return _requestraw[key];
         }
 
-        protected int? _Get_Reqest_int(string key)
+        protected int? _Get_Request_int(string key)
         {
             int r;
-            string t = _Get_Reqest(key);
+            string t = _Get_Request(key);
             if (t != null && int.TryParse(t, out r))
                 return r;
             else
                 return null;
+        }
+
+        /// <summary>
+        /// カンマ区切りでうー
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        protected int?[] _Get_Request_int_array(string key)
+        {
+            string t = _Get_Request(key);
+            if (t == null)
+                return null;
+
+            string[] ts = t.Split(',');
+            int?[] i_array = new int?[ts.Length];
+
+            for (int i = 0; i < ts.Length; i++)
+            {
+                int c;
+                if (int.TryParse(ts[i], out c))
+                    i_array[i] = c;
+                else
+                    i_array[i] = null;
+            }
+
+            return i_array;
         }
     }
 }

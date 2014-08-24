@@ -11,7 +11,7 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            test_req_hensei();
+            test_req_mission();
         }
 
         static void test_request()
@@ -30,6 +30,15 @@ namespace KanColleLibTest
 
             string api_port = "api%5Fverno=1&api%5Fport=8525211803957362787025&api%5Ftoken=xxx&spi%5Fsort%5Forder=2&api%5Fsort%5Fkey=5";
             var port = new KanColleLib.TransmissionRequest.api_port.PortRequest(api_port);
+
+            string api_charge = "api%5Fverno=1&api%5Fonslot=1&api%5Fid%5Fitems=379%2C858%2C2061%2C857%2C125%2C1366&api%5Ftoken=xxx&api%5Fkind=3";
+            var charge = new KanColleLib.TransmissionRequest.api_req_hokyu.ChargeRequest(api_charge);
+
+            string api_nyukyostart = "api%5Fverno=1&api%5Fship%5Fid=14315&api%5Fndock%5Fid=2&api%5Ftoken=xxx&api%5Fhighspeed=0";
+            var nyukyostart = new KanColleLib.TransmissionRequest.api_req_nyukyo.StartRequest(api_nyukyostart);
+
+            string api_missionstart = "api%5Fmission=55&api%5Fmission%5Fid=21&api%5Fdeck%5Fid=2&api%5Fverno=1&api%5Ftoken=xxx";
+            var missionstart = new KanColleLib.TransmissionRequest.api_req_mission.StartRequest(api_missionstart);
         }
 
         static void test_start2()
@@ -96,6 +105,20 @@ namespace KanColleLibTest
 
             string api_lock = System.IO.File.ReadAllText("api_req_hensei/lock.txt");
             var _lock = KanColleLib.TransmissionData.api_req_hensei.Lock.fromDynamic(DynamicJson.Parse(api_lock).api_data);
+        }
+
+        static void test_req_hokyu()
+        {
+            string api_charge = System.IO.File.ReadAllText("api_req_hokyu/charge.txt");
+            var charge = KanColleLib.TransmissionData.api_req_hokyu.Charge.fromDynamic(DynamicJson.Parse(api_charge).api_data);
+
+        }
+
+        static void test_req_mission()
+        {
+            string api_start = System.IO.File.ReadAllText("api_req_mission/start.txt");
+            var start = KanColleLib.TransmissionData.api_req_mission.Start.fromDynamic(DynamicJson.Parse(api_start).api_data);
+
         }
     }
 }
