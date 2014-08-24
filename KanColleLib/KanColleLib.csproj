@@ -49,6 +49,34 @@
     <Compile Include="KanColleNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestDecorder.cs" />
+    <Compile Include="TransmissionData\api_get_member\Basic.cs" />
+    <Compile Include="TransmissionData\api_get_member\Deck.cs" />
+    <Compile Include="TransmissionData\api_get_member\Furniture.cs" />
+    <Compile Include="TransmissionData\api_get_member\Mapcell.cs" />
+    <Compile Include="TransmissionData\api_get_member\Mapinfo.cs" />
+    <Compile Include="TransmissionData\api_get_member\Mission.cs" />
+    <Compile Include="TransmissionData\api_get_member\NDock.cs" />
+    <Compile Include="TransmissionData\api_get_member\Ship2.cs" />
+    <Compile Include="TransmissionData\api_get_member\Ship3.cs" />
+    <Compile Include="TransmissionData\api_get_member\SlotItem.cs" />
+    <Compile Include="TransmissionData\api_get_member\Unsetslot.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\DeckValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\KDock.cs" />
+    <Compile Include="TransmissionData\api_get_member\Material.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\FurnitureValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\KDockValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\MapcellValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\MapinfoValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\MaterialValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\MissionValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\NDockValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\ShipValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\SlotItemValue.cs" />
+    <Compile Include="TransmissionData\api_port\Log.cs" />
+    <Compile Include="TransmissionData\api_port\Port.cs" />
+    <Compile Include="TransmissionData\api_port\values\LogValue.cs" />
+    <Compile Include="TransmissionData\api_req_hensei\Combined.cs" />
+    <Compile Include="TransmissionData\api_req_hensei\Lock.cs" />
     <Compile Include="TransmissionData\start2\MstFurniture.cs" />
     <Compile Include="TransmissionData\start2\MstFurnituregraph.cs" />
     <Compile Include="TransmissionData\start2\MstMaparea.cs" />
@@ -65,10 +93,23 @@
     <Compile Include="TransmissionData\start2\MstSlotitemgraph.cs" />
     <Compile Include="TransmissionData\start2\MstStype.cs" />
     <Compile Include="TransmissionData\start2\MstUseitem.cs" />
+    <Compile Include="TransmissionRequest\api_get_member\MapcellRequest.cs" />
+    <Compile Include="TransmissionRequest\api_get_member\Ship2Request.cs" />
+    <Compile Include="TransmissionRequest\api_get_member\Ship3Request.cs" />
+    <Compile Include="TransmissionRequest\api_port\PortRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_hensei\ChangeRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />
+    <Compile Include="TransmissionRequest\RequestBase.cs" />
+    <Compile Include="TransmissionRequest\RequestDecorder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TransmissionData\AllTransmissions.txt" />
+    <Content Include="TransmissionData\AllTransmissions_table.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
