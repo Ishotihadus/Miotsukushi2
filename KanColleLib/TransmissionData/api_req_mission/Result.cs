@@ -10,6 +10,7 @@ namespace KanColleLib.TransmissionData.api_req_mission
     {
         /// <summary>
         /// 遠征から帰投した艦娘たちのID
+        /// ただしindex0は必ず-1
         /// </summary>
         public int[] ship_id;
 
@@ -40,7 +41,8 @@ namespace KanColleLib.TransmissionData.api_req_mission
         public int[] get_ship_exp;
 
         /// <summary>
-        /// 艦娘の経験値情報（現在の累計経験値/次のレベルまでの累計経験値）
+        /// 艦娘の経験値情報（経験値が入る前の累計経験値/次のレベルまでの累計経験値/さらに次のレベルまでの累計経験値/……）
+        /// レベルがあがると要素数が増えることになる（最後のレベルまでの経験値がわからないといけない）
         /// </summary>
         public int[][] get_exp_lvup;
 
@@ -88,12 +90,43 @@ namespace KanColleLib.TransmissionData.api_req_mission
 
         public static Result fromDynamic(dynamic json)
         {
-            // not implemented
+            Result result = new Result();
+
+            result.ship_id = json.api_ship_id.Deserialize<int[]>();
+            result.clear_result = (int)json.api_clear_result;
+            result.get_exp = (int)json.api_get_exp;
+            result.member_lv = (int)json.api_member_lv;
+            result.member_exp = (int)json.api_member_exp;
+            result.get_ship_exp = json.api_get_ship_exp.Deserialize<int[]>();
+            result.get_exp_lvup = json.api_get_exp_lvup.Deserialize<int[][]>();
+            result.maparea_name = json.api_maparea_name as string;
+            result.detail = json.api_detail as string;
+            result.quest_name = json.api_quest_name as string;
+            result.quest_level = (int)json.api_quest_level;
+
+            try
+            {
+                result.get_material = json.api_get_material.Deserialize<int[]>();
+            }
+            catch
+            {
+                result.get_material = null;
+            }
+
+            result.useitem_flag = json.api_useitem_flag.Deserialize<int[]>();
+
+            if (json.api_get_item1())
+                result.get_item1 = values.GetItemValue.fromDynamic(json.api_get_item1);
+            else
+                result.get_item1 = null;
+
+            if (json.api_get_item2())
+                result.get_item2 = values.GetItemValue.fromDynamic(json.api_get_item2);
+            else
+                result.get_item2 = null;
+
+            return result;
         }
 
-        // {"api_ship_id":[-1,8407,4850,1687,14315,9436,1688],"api_clear_result":0,"api_get_exp":15,"api_member_lv":106,"api_member_exp":3718319,"api_get_ship_exp":[97,65,65,65,65,65],
-        // "api_get_exp_lvup":[[271995,275000],[70653,74100],[72879,74100],[1662,2100],[67301,70300],[72912,74100]],
-        // "api_maparea_name":"\u5357\u65b9\u6d77\u57df","api_detail":"\u6c34\u96f7\u6226\u968a\u306b\u30c9\u30e9\u30e0\u7f36(\u8f38\u9001\u7528)\u3092\u6e80\u8f09\u3057\u3001\u5357\u65b9\u65b9\u9762\u53cb\u8ecd\u3078\u306e\u9f20\u8f38\u9001\u4f5c\u6226\u3092\u9042\u884c\u305b\u3088\uff01",
-        // "api_quest_name":"\u6771\u4eac\u6025\u884c","api_quest_level":7,"api_get_material":-1,"api_useitem_flag":[0,0]}
     }
 }

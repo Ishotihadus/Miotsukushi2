@@ -48,7 +48,6 @@
     <Compile Include="EventArgs\GetSessionDataEventArgs.cs" />
     <Compile Include="KanColleNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestDecorder.cs" />
     <Compile Include="TransmissionData\api_get_member\Basic.cs" />
     <Compile Include="TransmissionData\api_get_member\Deck.cs" />
     <Compile Include="TransmissionData\api_get_member\Furniture.cs" />

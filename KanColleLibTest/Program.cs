@@ -14,6 +14,8 @@ namespace KanColleLibTest
             test_req_mission();
         }
 
+        
+
         static void test_request()
         {
             string api_mapcell_request = "api%5Fmapinfo%5Fno=5&api%5Fmaparea%5Fid=27&api%5Fverno=1&api%5Ftoken=xxx";
@@ -119,6 +121,14 @@ namespace KanColleLibTest
             string api_start = System.IO.File.ReadAllText("api_req_mission/start.txt");
             var start = KanColleLib.TransmissionData.api_req_mission.Start.fromDynamic(DynamicJson.Parse(api_start).api_data);
 
+            string api_result = System.IO.File.ReadAllText("api_req_mission/result.txt");
+            var result = KanColleLib.TransmissionData.api_req_mission.Result.fromDynamic(DynamicJson.Parse(api_result).api_data);
+
+            string api_result_2 = System.IO.File.ReadAllText("api_req_mission/result_2.txt");
+            var result_2 = KanColleLib.TransmissionData.api_req_mission.Result.fromDynamic(DynamicJson.Parse(api_result_2).api_data);
+
+            string api_result_3 = System.IO.File.ReadAllText("api_req_mission/result_3.txt");
+            var result_3 = KanColleLib.TransmissionData.api_req_mission.Result.fromDynamic(DynamicJson.Parse(api_result_3).api_data);
         }
     }
 }
