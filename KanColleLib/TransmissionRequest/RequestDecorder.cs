@@ -31,24 +31,26 @@ namespace KanColleLib.TransmissionRequest
 
         private static string DecodeString(string str)
         {
-            string returnstring = str;
+            return System.Web.HttpUtility.UrlDecode(str, Encoding.UTF8);
 
-            int lastindex = -1;
-            while (true)
-            {
-                try
-                {
-                    int index = returnstring.IndexOf('%', lastindex + 1);
-                    if (index == -1)
-                        break;
-                    int charnum = Convert.ToInt32(returnstring.Substring(index + 1, 2), 16);
-                    returnstring = returnstring.Substring(0, index) + (char)charnum + returnstring.Substring(index + 3);
-                    lastindex = index;
-                }
-                catch { ++lastindex; }
-            }
+            //string returnstring = str;
 
-            return returnstring;
+            //int lastindex = -1;
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        int index = returnstring.IndexOf('%', lastindex + 1);
+            //        if (index == -1)
+            //            break;
+            //        int charnum = Convert.ToInt32(returnstring.Substring(index + 1, 2), 16);
+            //        returnstring = returnstring.Substring(0, index) + (char)charnum + returnstring.Substring(index + 3);
+            //        lastindex = index;
+            //    }
+            //    catch { ++lastindex; }
+            //}
+
+            //return returnstring;
         }
     }
 }
