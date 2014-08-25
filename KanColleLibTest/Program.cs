@@ -11,7 +11,7 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            test_req_mission();
+            test_request();
         }
 
         
@@ -41,6 +41,12 @@ namespace KanColleLibTest
 
             string api_missionstart = "api%5Fmission=55&api%5Fmission%5Fid=21&api%5Fdeck%5Fid=2&api%5Fverno=1&api%5Ftoken=xxx";
             var missionstart = new KanColleLib.TransmissionRequest.api_req_mission.StartRequest(api_missionstart);
+
+            string api_changecomment = "api%5Fverno=1&api%5Fcmt%5Fid=127435711&api%5Ftoken=xxx&api%5Fcmt=1%E6%97%A51%E9%8C%A0%E3%83%AA%E3%82%B9%E3%83%9A%E3%83%AA%E3%83%89%E3%83%B3%E3%80%82";
+            var changecomment = new KanColleLib.TransmissionRequest.api_req_member.UpdatecommentRequest(api_changecomment);
+
+            string api_changedeckname = "api%5Fname=%E9%9B%BB%E7%A3%81%E6%B0%97%E5%AD%A6&api%5Fdeck%5Fid=3&api%5Fverno=1&api%5Fname%5Fid=127435660&api%5Ftoken=xxx";
+            var changedeckname = new KanColleLib.TransmissionRequest.api_req_member.UpdatedecknameRequest(api_changedeckname);
         }
 
         static void test_start2()
@@ -129,6 +135,9 @@ namespace KanColleLibTest
 
             string api_result_3 = System.IO.File.ReadAllText("api_req_mission/result_3.txt");
             var result_3 = KanColleLib.TransmissionData.api_req_mission.Result.fromDynamic(DynamicJson.Parse(api_result_3).api_data);
+
+            string api_return_instruction = System.IO.File.ReadAllText("api_req_mission/return_instruction.txt");
+            var return_instruction = KanColleLib.TransmissionData.api_req_mission.ReturnInstruction.fromDynamic(DynamicJson.Parse(api_return_instruction).api_data);
         }
     }
 }
