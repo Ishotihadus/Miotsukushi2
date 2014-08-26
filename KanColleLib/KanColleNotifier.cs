@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Fiddler;
 using KanColleLib.EventArgs;
+using KanColleLib.TransmissionData;
+using KanColleLib.TransmissionRequest;
 
 namespace KanColleLib
 {
     public class KanColleNotifier
     {
+
         public KanColleNotifier(bool IsAsync)
         {
             if (IsAsync)
@@ -25,13 +28,33 @@ namespace KanColleLib
             string kcsapiurl = null;
             int kcsapiindex = oSession.fullUrl.IndexOf("/kcsapi/");
             if (kcsapiindex != -1)
-                kcsapiurl = oSession.fullUrl.Substring(kcsapiindex + 8);
+                kcsapiurl = oSession.fullUrl.Substring(kcsapiindex + 8); // 8は/kcsapi/の8文字のこと
 
             if (kcsapiurl != null || oSession.oResponse.MIMEType == "text/plain")
             {
                 string request = oSession.GetRequestBodyAsString();
+                string response = oSession.GetResponseBodyAsString();
+                RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+            }
+        }
 
-                // not implemented
+        void RaiseEventFromKcsAPISessions(string kcsapiurl, string request, string response)
+        {
+            dynamic json = null;
+
+            try
+            {
+                json = Codeplex.Data.DynamicJson.Parse(response.Substring(("svdata").Length));
+            }
+            catch (Exception e)
+            {
+                throw new KanColleLibException("Response Json Parse Error", e);
+            }
+
+            switch (kcsapiurl)
+            {
+                default:
+                    throw new NotImplementedException(kcsapiurl);
             }
         }
 
@@ -40,7 +63,7 @@ namespace KanColleLib
             await Task.Run(() => FiddlerApplication_AfterSessionComplete(oSession));
         }
 
-        #region イベント定義
+        #region 通常イベント定義
 
         /// <summary>
         /// FiddlerがAfterSessionCompleteからデータを取り出した際に発生します。
@@ -55,6 +78,13 @@ namespace KanColleLib
         public event GetFiddlerLogStringEventHandler GetFiddlerLogString;
         public delegate void GetFiddlerLogStringEventHandler(object sender, GetFiddlerLogStringEventArgs e);
         protected virtual void OnGetFiddlerLogString(GetFiddlerLogStringEventArgs e) { if (GetFiddlerLogString != null) { GetFiddlerLogString(this, e); } }
+
+        /// <summary>
+        /// 艦これのAPIからデータを受信した際に発生します。
+        /// </summary>
+        public event GetKcsAPIDataEventHandler GetKcsAPIData;
+        public delegate void GetKcsAPIDataEventHandler(object sender, GetKcsAPIDataEventArgs e);
+        protected virtual void OnGetKcsAPIData(GetKcsAPIDataEventArgs e) { if (GetKcsAPIData != null) { GetKcsAPIData(this, e); } }
 
         #endregion
 
