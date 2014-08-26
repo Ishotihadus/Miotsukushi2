@@ -51,9 +51,65 @@ namespace KanColleLib
                 throw new KanColleLibException("Response Json Parse Error", e);
             }
 
+            SvdataHeader svdataheader = SvdataHeader.fromDynamic(json);
+
             switch (kcsapiurl)
             {
+                case "api_get_member/basic":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new RequestBase(request), svdataheader,
+                        TransmissionData.api_get_member.Basic.fromDynamic(json.api_data))
+                        );
+                    break;
+                case "api_get_member/deck":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new RequestBase(request), svdataheader,
+                        TransmissionData.api_get_member.Deck.fromDynamic(json.api_data))
+                        );
+                    break;
+                case "api_get_member/furniture":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new RequestBase(request), svdataheader,
+                        TransmissionData.api_get_member.Basic.fromDynamic(json.api_data))
+                        );
+                    break;
+                case "api_get_member/kdock":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new RequestBase(request), svdataheader,
+                        TransmissionData.api_get_member.KDock.fromDynamic(json.api_data))
+                        );
+                    break;
+                case "api_get_member/mapcell":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new TransmissionRequest.api_get_member.MapcellRequest(request), svdataheader,
+                        TransmissionData.api_get_member.Mapcell.fromDynamic(json.api_data))
+                        );
+                    break;
+                case "api_get_member/mapinfo":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new RequestBase(request), svdataheader,
+                        TransmissionData.api_get_member.Mapinfo.fromDynamic(json.api_data))
+                        );
+                    break;
+                case "api_get_member/material":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new RequestBase(request), svdataheader,
+                        TransmissionData.api_get_member.Material.fromDynamic(json.api_data))
+                        );
+                    break;
+
+
+                case "api_start2":
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(
+                        kcsapiurl, new RequestBase(request), svdataheader,
+                        TransmissionData.api_start2.Start2.fromDynamic(json.api_data))
+                        );
+                    break;
                 default:
+                    
+                    System.Diagnostics.Debug.WriteLine("UNDEFINED KCSAPIURL: " + kcsapiurl);
+                    System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
+                    System.Diagnostics.Debug.WriteLine("RESPONSE BODY: " + response);
                     throw new NotImplementedException(kcsapiurl);
             }
         }
