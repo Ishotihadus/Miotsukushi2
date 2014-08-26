@@ -52,7 +52,7 @@ namespace KanColleLibTest
         static void test_start2()
         {
             string api_start2 = System.IO.File.ReadAllText("api_start2.txt");
-            var start2 = KanColleLib.TransmissionData.Start2.fromDynamic(DynamicJson.Parse(api_start2).api_data);
+            var start2 = KanColleLib.TransmissionData.api_start2.Start2.fromDynamic(DynamicJson.Parse(api_start2).api_data);
         }
 
         static void test_get_member()

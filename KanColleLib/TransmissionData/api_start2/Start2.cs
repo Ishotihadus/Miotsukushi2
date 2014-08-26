@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KanColleLib.TransmissionData.start2;
+using KanColleLib.TransmissionData.api_start2.start2;
 
-namespace KanColleLib.TransmissionData
+namespace KanColleLib.TransmissionData.api_start2
 {
     /// <summary>
     /// /kcsapi/api_start2

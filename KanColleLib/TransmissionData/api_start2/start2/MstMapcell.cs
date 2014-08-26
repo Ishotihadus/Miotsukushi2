@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanColleLib.TransmissionData.start2
+namespace KanColleLib.TransmissionData.api_start2.start2
 {
     /// <summary>
     /// マップ中のセルのマスターデータ
