@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FiddlerCore">
-      <HintPath>C:\Progs\FiddlerCoreAPI\FiddlerCore.dll</HintPath>
+    <Reference Include="FiddlerCore4">
+      <HintPath>C:\Progs\FiddlerCoreAPI\DotNet4\FiddlerCore4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
