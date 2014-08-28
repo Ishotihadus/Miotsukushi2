@@ -81,6 +81,8 @@
     <Compile Include="TransmissionData\api_req_hensei\Lock.cs" />
     <Compile Include="TransmissionData\api_req_hokyu\Charge.cs" />
     <Compile Include="TransmissionData\api_req_hokyu\values\ShipValue.cs" />
+    <Compile Include="TransmissionData\api_req_kousyou\Createitem.cs" />
+    <Compile Include="TransmissionData\api_req_kousyou\values\CreateitemValue.cs" />
     <Compile Include="TransmissionData\api_req_mission\Result.cs" />
     <Compile Include="TransmissionData\api_req_mission\ReturnInstruction.cs" />
     <Compile Include="TransmissionData\api_req_mission\Start.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="TransmissionRequest\api_req_hensei\ChangeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hokyu\ChargeRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_kousyou\CreateitemRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_member\UpdatecommentRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_member\UpdatedecknameRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_mission\ResultRequest.cs" />

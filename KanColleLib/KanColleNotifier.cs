@@ -34,7 +34,14 @@ namespace KanColleLib
             {
                 string request = oSession.GetRequestBodyAsString();
                 string response = oSession.GetResponseBodyAsString();
-                RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+                try
+                {
+                    RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+                }
+                catch (Exception e)
+                {
+                    throw new KanColleLibException("Session Response Analyze Error", e);
+                }
             }
         }
 
@@ -106,7 +113,6 @@ namespace KanColleLib
                         );
                     break;
                 default:
-                    
                     System.Diagnostics.Debug.WriteLine("UNDEFINED KCSAPIURL: " + kcsapiurl);
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
                     System.Diagnostics.Debug.WriteLine("RESPONSE BODY: " + response);

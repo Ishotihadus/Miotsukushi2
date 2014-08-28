@@ -11,7 +11,7 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            test_request();
+            test_req_kousyou();
         }
 
         
@@ -138,6 +138,15 @@ namespace KanColleLibTest
 
             string api_return_instruction = System.IO.File.ReadAllText("api_req_mission/return_instruction.txt");
             var return_instruction = KanColleLib.TransmissionData.api_req_mission.ReturnInstruction.fromDynamic(DynamicJson.Parse(api_return_instruction).api_data);
+        }
+
+        static void test_req_kousyou()
+        {
+            string api_createitem = System.IO.File.ReadAllText("api_req_kousyou/createitem.txt");
+            var createitem = KanColleLib.TransmissionData.api_req_kousyou.Createitem.fromDynamic(DynamicJson.Parse(api_createitem).api_data);
+
+            string api_createitem_2 = System.IO.File.ReadAllText("api_req_kousyou/createitem_2.txt");
+            var createitem_2 = KanColleLib.TransmissionData.api_req_kousyou.Createitem.fromDynamic(DynamicJson.Parse(api_createitem_2).api_data);
         }
     }
 }
