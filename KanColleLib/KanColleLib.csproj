@@ -82,7 +82,11 @@
     <Compile Include="TransmissionData\api_req_hokyu\Charge.cs" />
     <Compile Include="TransmissionData\api_req_hokyu\values\ShipValue.cs" />
     <Compile Include="TransmissionData\api_req_kousyou\Createitem.cs" />
+    <Compile Include="TransmissionData\api_req_kousyou\Destroyship.cs" />
+    <Compile Include="TransmissionData\api_req_kousyou\Getship.cs" />
     <Compile Include="TransmissionData\api_req_kousyou\values\CreateitemValue.cs" />
+    <Compile Include="TransmissionData\api_req_kousyou\values\GetshipSlotitemValue.cs" />
+    <Compile Include="TransmissionData\api_req_member\GetIncentive.cs" />
     <Compile Include="TransmissionData\api_req_mission\Result.cs" />
     <Compile Include="TransmissionData\api_req_mission\ReturnInstruction.cs" />
     <Compile Include="TransmissionData\api_req_mission\Start.cs" />
@@ -112,6 +116,10 @@
     <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hokyu\ChargeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kousyou\CreateitemRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_kousyou\CreateshipRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_kousyou\CreateshipSpeedchangeRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_kousyou\DestroyshipRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_kousyou\GetshipRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_member\UpdatecommentRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_member\UpdatedecknameRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_mission\ResultRequest.cs" />
