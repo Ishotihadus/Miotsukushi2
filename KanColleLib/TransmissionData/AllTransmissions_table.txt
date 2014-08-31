@@ -31,6 +31,7 @@ api_req_combined_battle/midnight_battle
 api_req_combined_battle/sp_midnight
 api_req_furniture/buy
 api_req_furniture/change
+api_req_furniture/music_play
 api_req_hensei/change
 api_req_hensei/combined
 api_req_hensei/lock

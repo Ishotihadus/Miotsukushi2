@@ -107,7 +107,7 @@
     <Compile Include="TransmissionData\api_start2\start2\MstSlotitemgraph.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstStype.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstUseitem.cs" />
-    <Compile Include="TransmissionData\SvdataHeader.cs" />
+    <Compile Include="TransmissionData\Svdata.cs" />
     <Compile Include="TransmissionRequest\api_get_member\MapcellRequest.cs" />
     <Compile Include="TransmissionRequest\api_get_member\Ship2Request.cs" />
     <Compile Include="TransmissionRequest\api_get_member\Ship3Request.cs" />

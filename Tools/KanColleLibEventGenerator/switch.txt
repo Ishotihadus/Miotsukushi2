@@ -1,0 +1,168 @@
+case "api_get_member/basic":
+if(json.api_data())
+OnGetGetmemberBasic(new RequestBase(request), Svdata<TransmissionData.api_get_member.Basic>.fromDynamic(json, TransmissionData.api_get_member.Basic.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/deck":
+if(json.api_data())
+OnGetGetmemberDeck(new RequestBase(request), Svdata<TransmissionData.api_get_member.Deck>.fromDynamic(json, TransmissionData.api_get_member.Deck.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/furniture":
+if(json.api_data())
+OnGetGetmemberFurniture(new RequestBase(request), Svdata<TransmissionData.api_get_member.Furniture>.fromDynamic(json, TransmissionData.api_get_member.Furniture.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/kdock":
+if(json.api_data())
+OnGetGetmemberKdock(new RequestBase(request), Svdata<TransmissionData.api_get_member.KDock>.fromDynamic(json, TransmissionData.api_get_member.KDock.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/mapcell":
+if(json.api_data())
+OnGetGetmemberMapcell(new TransmissionRequest.api_get_member.MapcellRequest(request), Svdata<TransmissionData.api_get_member.Mapcell>.fromDynamic(json, TransmissionData.api_get_member.Mapcell.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/mapinfo":
+if(json.api_data())
+OnGetGetmemberMapinfo(new RequestBase(request), Svdata<TransmissionData.api_get_member.Mapinfo>.fromDynamic(json, TransmissionData.api_get_member.Mapinfo.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/material":
+if(json.api_data())
+OnGetGetmemberMaterial(new RequestBase(request), Svdata<TransmissionData.api_get_member.Material>.fromDynamic(json, TransmissionData.api_get_member.Material.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/mission":
+if(json.api_data())
+OnGetGetmemberMission(new RequestBase(request), Svdata<TransmissionData.api_get_member.Mission>.fromDynamic(json, TransmissionData.api_get_member.Mission.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/ndock":
+if(json.api_data())
+OnGetGetmemberNdock(new RequestBase(request), Svdata<TransmissionData.api_get_member.NDock>.fromDynamic(json, TransmissionData.api_get_member.NDock.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/ship2":
+if(json.api_data())
+OnGetGetmemberShip2(new TransmissionRequest.api_get_member.Ship2Request(request), Svdata<TransmissionData.api_get_member.Ship2>.fromDynamic(json, TransmissionData.api_get_member.Ship2.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/ship3":
+if(json.api_data())
+OnGetGetmemberShip3(new TransmissionRequest.api_get_member.Ship3Request(request), Svdata<TransmissionData.api_get_member.Ship3>.fromDynamic(json, TransmissionData.api_get_member.Ship3.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/slot_item":
+if(json.api_data())
+OnGetGetmemberSlotItem(new RequestBase(request), Svdata<TransmissionData.api_get_member.SlotItem>.fromDynamic(json, TransmissionData.api_get_member.SlotItem.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_get_member/unsetslot":
+if(json.api_data())
+OnGetGetmemberUnsetslot(new RequestBase(request), Svdata<TransmissionData.api_get_member.Unsetslot>.fromDynamic(json, TransmissionData.api_get_member.Unsetslot.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_port/port":
+if(json.api_data())
+OnGetPortPort(new TransmissionRequest.api_port.PortRequest(request), Svdata<TransmissionData.api_port.Port>.fromDynamic(json, TransmissionData.api_port.Port.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_hensei/change":
+OnGetReqhenseiChange(new TransmissionRequest.api_req_hensei.ChangeRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_hensei/combined":
+if(json.api_data())
+OnGetReqhenseiCombined(new RequestBase(request), Svdata<TransmissionData.api_req_hensei.Combined>.fromDynamic(json, TransmissionData.api_req_hensei.Combined.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_hensei/lock":
+if(json.api_data())
+OnGetReqhenseiLock(new TransmissionRequest.api_req_hensei.LockRequest(request), Svdata<TransmissionData.api_req_hensei.Lock>.fromDynamic(json, TransmissionData.api_req_hensei.Lock.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_hokyu/charge":
+if(json.api_data())
+OnGetReqhokyuCharge(new TransmissionRequest.api_req_hokyu.ChargeRequest(request), Svdata<TransmissionData.api_req_hokyu.Charge>.fromDynamic(json, TransmissionData.api_req_hokyu.Charge.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_kousyou/createitem":
+if(json.api_data())
+OnGetReqkousyouCreateitem(new TransmissionRequest.api_req_kousyou.CreateitemRequest(request), Svdata<TransmissionData.api_req_kousyou.Createitem>.fromDynamic(json, TransmissionData.api_req_kousyou.Createitem.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_kousyou/createship":
+OnGetReqkousyouCreateship(new TransmissionRequest.api_req_kousyou.CreateshipRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_kousyou/createship_speedchange":
+OnGetReqkousyouCreateshipSpeedchange(new TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_kousyou/destroyship":
+OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_kousyou/getship":
+if(json.api_data())
+OnGetReqkousyouGetship(new TransmissionRequest.api_req_kousyou.GetshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Getship>.fromDynamic(json, TransmissionData.api_req_kousyou.Getship.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_member/get_incentive":
+if(json.api_data())
+OnGetReqmemberGetIncentive(new RequestBase(request), Svdata<TransmissionData.api_req_member.GetIncentive>.fromDynamic(json, TransmissionData.api_req_member.GetIncentive.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_member/updatecomment":
+OnGetReqmemberUpdatecomment(new TransmissionRequest.api_req_member.UpdatecommentRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_member/updatedeckname":
+OnGetReqmemberUpdatedeckname(new TransmissionRequest.api_req_member.UpdatedecknameRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_mission/result":
+if(json.api_data())
+OnGetReqmissionResult(new TransmissionRequest.api_req_mission.ResultRequest(request), Svdata<TransmissionData.api_req_mission.Result>.fromDynamic(json, TransmissionData.api_req_mission.Result.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_mission/return_instruction":
+if(json.api_data())
+OnGetReqmissionReturnInstruction(new TransmissionRequest.api_req_mission.ReturnInstructionRequest(request), Svdata<TransmissionData.api_req_mission.ReturnInstruction>.fromDynamic(json, TransmissionData.api_req_mission.ReturnInstruction.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_mission/start":
+if(json.api_data())
+OnGetReqmissionStart(new TransmissionRequest.api_req_mission.StartRequest(request), Svdata<TransmissionData.api_req_mission.Start>.fromDynamic(json, TransmissionData.api_req_mission.Start.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_nyukyo/speedchange":
+OnGetReqnyukyoSpeedchange(new TransmissionRequest.api_req_nyukyo.SpeedchangeRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_nyukyo/start":
+OnGetReqnyukyoStart(new TransmissionRequest.api_req_nyukyo.StartRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_start2":
+if(json.api_data())
+OnGetStart2(new RequestBase(request), Svdata<TransmissionData.api_start2.Start2>.fromDynamic(json, TransmissionData.api_start2.Start2.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;

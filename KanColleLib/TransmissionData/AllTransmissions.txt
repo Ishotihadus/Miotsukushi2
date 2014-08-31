@@ -94,6 +94,10 @@ api_req_furniture/buy（ItemlistMain）
 家具の購入
 api_type, api_no
 
+api_req_furniture/music_play（PortMain）
+家具コインの使用（ジュークボックス）
+api_music_id
+
 -- REQ_MEMBER --
 
 api_req_member/update_tutorial_progress

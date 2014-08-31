@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace KanColleLib.TransmissionData
 {
-    public class SvdataHeader
+    public class Svdata<T>
     {
         public int result;
         public string result_msg;
+        public T data;
 
-        public static SvdataHeader fromDynamic(dynamic json)
+        public static Svdata<T> fromDynamic(dynamic json, T data)
         {
-            SvdataHeader header = new SvdataHeader();
+            Svdata<T> header = new Svdata<T>();
 
             header.result = (int)json.api_result;
             header.result_msg = json.api_result_msg as string;
+            header.data = data;
 
             return header;
         }

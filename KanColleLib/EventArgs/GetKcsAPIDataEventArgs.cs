@@ -8,18 +8,14 @@ namespace KanColleLib.EventArgs
 {
     public class GetKcsAPIDataEventArgs : System.EventArgs
     {
-        public TransmissionRequest.RequestBase request;
-        public object response;
-        public TransmissionData.SvdataHeader response_header;
+        public string request;
+        public string response;
         public string kcsapiurl;
-        public bool IsSuccess { get { return (response_header != null && response_header.result == 1); } }
-        public Type responseType { get { return response.GetType(); } }
 
-        public GetKcsAPIDataEventArgs(string kcsapiurl, TransmissionRequest.RequestBase request, TransmissionData.SvdataHeader response_header, object response)
+        public GetKcsAPIDataEventArgs(string kcsapiurl, string request, string response)
         {
             this.kcsapiurl = kcsapiurl;
             this.request = request;
-            this.response_header = response_header;
             this.response = response;
         }
     }
