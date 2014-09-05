@@ -12,17 +12,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using Miotsukushi.Tools;
 
 namespace Miotsukushi.View
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
+        }
+
+        async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            var result = await this.ShowMessageAsync(
+                ResourceStringGetter.GetResourceString("WindowCloseConfirmationTitle"),
+                ResourceStringGetter.GetResourceString("WindowCloseConfirmationMessage"),
+                MessageDialogStyle.AffirmativeAndNegative);
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                this.Closing -= MainWindow_Closing;
+                this.Close();
+            }
         }
     }
 }

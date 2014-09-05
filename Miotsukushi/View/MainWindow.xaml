@@ -1,8 +1,29 @@
-﻿<Window x:Class="Miotsukushi.View.MainWindow"
+﻿<Controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:WindowParts="clr-namespace:Miotsukushi.View.WindowParts"
+        x:Class="Miotsukushi.View.MainWindow"
+        xmlns:vm="clr-namespace:Miotsukushi.ViewModel"
+        Title="MainWindow" Height="768" Width="1366" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False">
+    <Controls:MetroWindow.DataContext>
+        <vm:MainViewModel />
+    </Controls:MetroWindow.DataContext>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+        <WindowParts:StatusBar Margin="0" Grid.Row="2" Grid.ColumnSpan="2" />
+        <WindowParts:WebView HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800"/>
+		<WindowParts:EasyInformationPanel Margin="0" Grid.Row="1"/>
+		<WindowParts:InformationPanel Grid.Column="1" Margin="0" Grid.RowSpan="2"/>
+
     </Grid>
-</Window>
+</Controls:MetroWindow>

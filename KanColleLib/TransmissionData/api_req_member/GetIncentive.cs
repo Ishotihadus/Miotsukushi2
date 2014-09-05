@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_req_member
         /// </summary>
         public int count;
 
-        public GetIncentive fromDynamic(dynamic json)
+        public static GetIncentive fromDynamic(dynamic json)
         {
             return new GetIncentive() { count = (int)json.api_count };
         }

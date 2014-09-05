@@ -13,5 +13,22 @@ namespace Miotsukushi
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            Model.MainModel.GetInstance();
+            var Window = new View.MainWindow();
+            Window.Closed += Window_Closed;
+            Window.Show();
+        }
+
+        /// <summary>
+        /// 終了処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void Window_Closed(object sender, EventArgs e)
+        {
+            Model.MainModel.CurrentClose();
+        }
     }
 }

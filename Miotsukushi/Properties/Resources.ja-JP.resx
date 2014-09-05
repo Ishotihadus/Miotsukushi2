@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="WindowCloseConfirmationMessage" xml:space="preserve">
-    <value>Are you sure to exit?</value>
+    <value>アプリケーションを終了してもよろしいですか?</value>
   </data>
   <data name="WindowCloseConfirmationTitle" xml:space="preserve">
-    <value>Confirmation</value>
+    <value>終了確認</value>
   </data>
 </root>

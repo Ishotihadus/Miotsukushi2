@@ -13,16 +13,14 @@ namespace KanColleLib
     public class KanColleNotifier
     {
 
-        public KanColleNotifier(bool IsAsync)
+        public KanColleNotifier()
         {
-            if (IsAsync)
-                FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete_Async;
-            else
-                FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
+            FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.AfterSessionComplete += (oSession) => OnGetSessionData(new GetSessionDataEventArgs() { session = oSession });
             FiddlerApplication.Log.OnLogString += (sender, e) => OnGetFiddlerLogString(new GetFiddlerLogStringEventArgs() { logtext = e.LogString });
         }
 
+        // 非同期で叩くと死ぬみたい
         void FiddlerApplication_AfterSessionComplete(Session oSession)
         {
             string kcsapiurl = null;
@@ -34,6 +32,7 @@ namespace KanColleLib
             {
                 string request = oSession.GetRequestBodyAsString();
                 string response = oSession.GetResponseBodyAsString();
+
                 try
                 {
                     RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
@@ -52,7 +51,7 @@ namespace KanColleLib
 
             try
             {
-                json = Codeplex.Data.DynamicJson.Parse(response.Substring(6)); // "svdata".Length
+                json = Codeplex.Data.DynamicJson.Parse(response.Substring(7)); // "svdata=".Length
             }
             catch (Exception e)
             {
@@ -234,14 +233,11 @@ namespace KanColleLib
                     System.Diagnostics.Debug.WriteLine("UNDEFINED KCSAPIURL: " + kcsapiurl);
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
                     System.Diagnostics.Debug.WriteLine("RESPONSE BODY: " + response);
-                    throw new NotImplementedException(kcsapiurl);
+                    break;
+                    // throw new NotImplementedException(kcsapiurl);
             }
         }
 
-        async void FiddlerApplication_AfterSessionComplete_Async(Session oSession)
-        {
-            await Task.Run(() => FiddlerApplication_AfterSessionComplete(oSession));
-        }
 
         #region 通常イベント定義
 
