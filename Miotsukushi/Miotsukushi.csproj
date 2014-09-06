@@ -82,6 +82,7 @@
     <Compile Include="Model\KanColle\CharacterData.cs" />
     <Compile Include="Model\KanColle\KanColleModel.cs" />
     <Compile Include="Model\KanColle\MissionData.cs" />
+    <Compile Include="Model\KanColle\ShipData.cs" />
     <Compile Include="Model\KanColle\ShiptypeData.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -165,6 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\WindowParts\EasyInfoParts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,13 +9,13 @@ namespace KanColleLib.TransmissionData.api_port
 {
     public class Port
     {
-        Material material;
-        Deck deck_port;
-        NDock ndock;
-        Ship2 ship;
-        Basic basic;
-        Log log;
-        bool combined_flag;
+        public Material material;
+        public Deck deck_port;
+        public NDock ndock;
+        public Ship2 ship;
+        public Basic basic;
+        public Log log;
+        public bool combined_flag;
 
         public static Port fromDynamic(dynamic json)
         {

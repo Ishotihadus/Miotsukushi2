@@ -22,5 +22,15 @@ namespace Miotsukushi.Model.KanColle
         /// 艦種ID
         /// </summary>
         public int shiptype;
+
+        public static CharacterData fromKanColleLib(KanColleLib.TransmissionData.api_start2.start2.MstShip data)
+        {
+            return new CharacterData()
+            {
+                name = data.name,
+                name_yomi = data.yomi,
+                shiptype = data.stype
+            };
+        }
     }
 }
