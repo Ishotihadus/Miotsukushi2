@@ -12,6 +12,7 @@
         </Grid.RowDefinitions>
         <!--<interop:AirspaceDecorator AirspaceMode="Redirect" IsInputRedirectionEnabled="True" IsOutputRedirectionEnabled="True">-->
         <!--<WebBrowser x:Name="webBrowser" Source="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/" Width="800" Height="480"/>-->
+		<WebBrowser x:Name="webBrowser" Source="http://www.ishotihadus.jp/" Width="800" Height="480"/>
         <!--</interop:AirspaceDecorator>-->
 
     </Grid>

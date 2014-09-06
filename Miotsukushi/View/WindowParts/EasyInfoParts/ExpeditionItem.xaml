@@ -1,0 +1,49 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Miotsukushi.View.WindowParts.EasyInfoParts.ExpeditionItem"
+	x:Name="UserControl"
+	d:DesignWidth="180" Height="45">
+	<UserControl.Resources>
+		<Storyboard x:Key="TimeTextAnimation">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock">
+				<EasingDoubleKeyFrame KeyTime="0:0:2.7" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:5.7" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:6" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock1">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.7" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:5.7" Value="0.995"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:6" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="grid">
+			<BeginStoryboard x:Name="TimeTextAnimation_BeginStoryboard" Storyboard="{StaticResource TimeTextAnimation}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="FrameworkElement.Unloaded" SourceName="grid">
+			<StopStoryboard BeginStoryboardName="TimeTextAnimation_BeginStoryboard"/>
+		</EventTrigger>
+	</UserControl.Triggers>
+
+	<Grid x:Name="LayoutRoot">
+		<Grid x:Name="grid">
+			<Viewbox VerticalAlignment="Top" StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="Fill" Margin="5,5,5,0">
+				<TextBlock><Run Text="2. "/><Run FontSize="15" Text="囮機動部隊なんとか任務"/></TextBlock>
+			</Viewbox>
+			<TextBlock x:Name="textBlock" HorizontalAlignment="Right" Margin="0,0,5,5" TextWrapping="Wrap" Text="残り 23:50:55" VerticalAlignment="Bottom"/>
+			<TextBlock x:Name="textBlock1" HorizontalAlignment="Right" Margin="0,0,5,5" TextWrapping="Wrap" Text="完了時刻 23:50:50" VerticalAlignment="Bottom" Opacity="0.015"/>
+		</Grid>
+		<Grid Visibility="Hidden">
+			<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="遠征に出ていません"/>
+			
+		</Grid>
+	</Grid>
+</UserControl>
