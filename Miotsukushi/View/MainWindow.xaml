@@ -6,9 +6,6 @@
         x:Class="Miotsukushi.View.MainWindow"
         xmlns:vm="clr-namespace:Miotsukushi.ViewModel"
         Title="MainWindow" Height="768" Width="1366" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False">
-    <Controls:MetroWindow.DataContext>
-        <vm:MainViewModel />
-    </Controls:MetroWindow.DataContext>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Miotsukushi.Model.KanColle
 {
-    class FleetsCollection
+    enum FleetExpeditionStatus
     {
-        FleetData[] fleets;
+        unknown,
 
-        public FleetsCollection()
-        {
+        at_home,
 
-        }
+        on_expedition,
+
+        force_backing,
+
+        expedition_complete,
     }
 }

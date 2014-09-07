@@ -9,10 +9,12 @@ namespace Miotsukushi.Model
 {
     class MainModel : IDisposable
     {
+        public TimerModel timerModel { get; private set; }
         public KanColleModel kancolleModel { get; private set; }
 
         private MainModel()
         {
+            timerModel = new TimerModel();
             kancolleModel = new KanColleModel();
         }
 

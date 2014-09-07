@@ -12,10 +12,11 @@ namespace Miotsukushi.Model.KanColle
     class KanColleModel
     {
         KanColleNotifier kclib;
-        Dictionary<int, CharacterData> charamaster = new Dictionary<int,CharacterData>();
-        Dictionary<int, ShiptypeData> shiptypemaster = new Dictionary<int,ShiptypeData>();
-        Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
-        ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
+        public Dictionary<int, CharacterData> charamaster = new Dictionary<int,CharacterData>();
+        public Dictionary<int, ShiptypeData> shiptypemaster = new Dictionary<int,ShiptypeData>();
+        public Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
+        public ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
+        public List<FleetData> fleetdata = new List<FleetData>();
 
         public KanColleModel()
         {
@@ -23,10 +24,55 @@ namespace Miotsukushi.Model.KanColle
             URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}", FiddlerApplication.oProxy.ListenPort), "<local>");
 
             kclib = new KanColleNotifier();
+
+            kclib.GameStart += (_, __) => OnGameStart(new EventArgs());
+
             kclib.GetStart2 += kclib_GetStart2;
             kclib.GetPortPort += kclib_GetPortPort;
             kclib.GetGetmemberShip2 += kclib_GetGetmemberShip2;
             kclib.GetGetmemberShip3 += kclib_GetGetmemberShip3;
+            kclib.GetGetmemberDeck += kclib_GetGetmemberDeck;
+            kclib.GetReqmissionStart += kclib_GetReqmissionStart;
+            kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
+        }
+
+        async void kclib_GetReqmissionReturnInstruction(object sender, KanColleLib.TransmissionRequest.api_req_mission.ReturnInstructionRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.ReturnInstruction> response)
+        {
+            await Task.Run(() =>
+            {
+                if (fleetdata.Count > request.deck_id - 1)
+                {
+                    if(response.data.mission.Length >= 3)
+                        fleetdata[request.deck_id - 1].ChangeMissionStatus((int)response.data.mission[0], (int)response.data.mission[1], response.data.mission[2]);
+                    else
+                        fleetdata[request.deck_id - 1].ChangeMissionStatus(-1, -1, -1);
+                }
+            });
+        }
+
+        async void kclib_GetReqmissionStart(object sender, KanColleLib.TransmissionRequest.api_req_mission.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.Start> response)
+        {
+            await Task.Run(() =>
+            {
+                if(fleetdata.Count > request.deck_id - 1)
+                    fleetdata[request.deck_id - 1].ChangeMissionStatus(1, request.mission_id, response.data.complatetime); // 遠征中の1は固定
+            });
+        }
+
+        async void kclib_GetGetmemberDeck(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Deck> response)
+        {
+            await Task.Run(() =>
+            {
+                if (response.data.decks.Count >= 1)
+                {
+                    while (fleetdata.Count < response.data.decks.Count)
+                        fleetdata.Add(new FleetData());
+                    while (fleetdata.Count > response.data.decks.Count)
+                        fleetdata.RemoveAt(fleetdata.Count - 1);
+                    for (int i = 0; i < fleetdata.Count; i++)
+                        fleetdata[i].FromDeckValue(response.data.decks[i]);
+                }
+            });
         }
 
         async void kclib_GetGetmemberShip3(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship3Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship3> response)
@@ -45,6 +91,20 @@ namespace Miotsukushi.Model.KanColle
             {
                 AppendShipDataFromList(response.data.ship.ships);
                 DeleteShipDataFromList(response.data.ship.ships);
+                InitializeConfirm();
+            });
+            await Task.Run(() =>
+            {
+                if (response.data.deck_port.decks.Count >= 1)
+                {
+                    while (fleetdata.Count < response.data.deck_port.decks.Count)
+                        fleetdata.Add(new FleetData());
+                    while (fleetdata.Count > response.data.deck_port.decks.Count)
+                        fleetdata.RemoveAt(fleetdata.Count - 1);
+                    for (int i = 0; i < fleetdata.Count; i++)
+                        fleetdata[i].FromDeckValue(response.data.deck_port.decks[i]);
+                }
+                InitializeConfirm();
             });
         }
 
@@ -58,6 +118,7 @@ namespace Miotsukushi.Model.KanColle
                     charamaster.Add(chara.id, CharacterData.fromKanColleLib(chara));
                 }
                 System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_ship");
+                InitializeConfirm();
             });
 
             await Task.Run(() =>
@@ -68,6 +129,7 @@ namespace Miotsukushi.Model.KanColle
                     shiptypemaster.Add(stype.id, new ShiptypeData() { name = stype.name });
                 }
                 System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_stype");
+                InitializeConfirm();
             });
 
             await Task.Run(() =>
@@ -82,6 +144,7 @@ namespace Miotsukushi.Model.KanColle
                     });
                 }
                 System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_mission");
+                InitializeConfirm();
             });
         }
 
@@ -125,5 +188,27 @@ namespace Miotsukushi.Model.KanColle
                     shipdata.RemoveAt(i);
             }
         }
+
+        int initializecount = 0;
+        int initializecountflag = 5;
+
+        void InitializeConfirm()
+        {
+            ++initializecount;
+            if (initializecountflag == initializecount)
+                OnInitializeComplete(new EventArgs());
+        }
+
+        /// <summary>
+        /// 初期データをすべて取得した際に呼び出されます
+        /// </summary>
+        public event EventHandler InitializeComplete;
+        protected virtual void OnInitializeComplete(EventArgs e) { if (InitializeComplete != null) { InitializeComplete(this, e); } }
+
+        /// <summary>
+        /// ゲームが開始された際に呼び出されます
+        /// </summary>
+        public event EventHandler GameStart;
+        protected virtual void OnGameStart(EventArgs e) { if (GameStart != null) { GameStart(this, e); } }
     }
 }

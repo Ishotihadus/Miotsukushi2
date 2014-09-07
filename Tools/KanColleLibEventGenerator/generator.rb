@@ -48,7 +48,7 @@ open( "source.txt" ) {|f|
 			file.puts ""
 			file.puts "/// <summary>"
 			file.puts "/// " + kcsapiurl + " を受信して解析に成功した際に呼び出されます"
-			file.puts "/// <summary>"
+			file.puts "/// </summary>"
 			file.puts "public event Get" + eventname + "EventHandler Get" + eventname + ";"
 			file.puts "public delegate void Get" + eventname + "EventHandler(object sender, " + requestclass + " request, Svdata<" + responseclass + "> response);"
 			file.puts "protected virtual void OnGet" + eventname + "(" + requestclass + " request, Svdata<" + responseclass + "> response) { if (Get" + eventname + " != null) Get" + eventname + "(this, request, response); }"

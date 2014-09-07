@@ -25,6 +25,8 @@ namespace Miotsukushi.View.WindowParts
         {
             InitializeComponent();
             BrowserSupressScriptError();
+
+            Model.MainModel.Current.kancolleModel.GameStart += (_, __) => BrowserScroll(70, 75); // ゆるせ、後で何とかする
         }
 
         /// <summary>

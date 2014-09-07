@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             x:Class="Miotsukushi.View.WindowParts.EasyInformationPanel" 
+             xmlns:vm="clr-namespace:Miotsukushi.ViewModel.EasyInfoPanel"
+             xmlns:EasyInfoParts="clr-namespace:Miotsukushi.View.WindowParts.EasyInfoParts" 
+             x:Class="Miotsukushi.View.WindowParts.EasyInformationPanel"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:EasyInfoPanelViewModel />
+    </UserControl.DataContext>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="1*"/>
@@ -13,14 +18,18 @@
 			<ColumnDefinition Width="1*"/>
 			<ColumnDefinition Width="1*"/>
 		</Grid.ColumnDefinitions>
-		<GroupBox Header="遠征" Margin="5">
+		<GroupBox Header="遠征" Margin="5" VerticalAlignment="Top">
 			<ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
-				<StackPanel/>
+                <StackPanel DataContext="{Binding ExpeditionCollection}">
+					<EasyInfoParts:ExpeditionItem DataContext="{Binding [0]}" Margin="1"/>
+					<EasyInfoParts:ExpeditionItem DataContext="{Binding [1]}" Margin="1"/>
+					<EasyInfoParts:ExpeditionItem DataContext="{Binding [2]}" Margin="1"/>
+				</StackPanel>
 			</ScrollViewer>
 		</GroupBox>
-		<GroupBox Header="建造" Margin="5" Grid.Column="1"/>
-		<GroupBox Header="入渠" Margin="5" Grid.Column="2"/>
-		<GroupBox Header="任務" Margin="5" Grid.Column="3"/>
+		<GroupBox Header="建造" Margin="5" Grid.Column="1" VerticalAlignment="Top"/>
+		<GroupBox Header="入渠" Margin="5" Grid.Column="2" VerticalAlignment="Top"/>
+		<GroupBox Header="任務" Margin="5" Grid.Column="3" VerticalAlignment="Top"/>
             
 	</Grid>
 </UserControl>

@@ -79,14 +79,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\BooleanConverter.cs" />
+    <Compile Include="Converter\BooleanToVisibilityReverseConverter.cs" />
+    <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converter\DateTimeConverter.cs" />
+    <Compile Include="Converter\TotalTimeConverter.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
     <Compile Include="Model\KanColle\FleetData.cs" />
-    <Compile Include="Model\KanColle\FleetsCollection.cs" />
+    <Compile Include="Model\KanColle\FleetExpeditionStatus.cs" />
     <Compile Include="Model\KanColle\KanColleModel.cs" />
     <Compile Include="Model\KanColle\MissionData.cs" />
     <Compile Include="Model\KanColle\ShipData.cs" />
     <Compile Include="Model\KanColle\ShiptypeData.cs" />
     <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\TimerModel.cs" />
+    <Compile Include="Properties\Resources.ja-JP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ja-JP.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\EasyInfoPanelViewModel.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\ExpeditionViewModel.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\ExpeditionCollectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\WindowParts\EasyInfoParts\ExpeditionItem.xaml.cs">
@@ -156,7 +171,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ja-JP.resx" />
+    <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ja-JP.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -172,9 +190,6 @@
       <Project>{094a9f0c-859c-4b15-94e5-62a3a19ef689}</Project>
       <Name>KanColleLib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
