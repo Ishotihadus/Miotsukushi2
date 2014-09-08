@@ -17,7 +17,8 @@ namespace Miotsukushi
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            SetCurrentCulture("en-US");
+            //SetCurrentCulture("en-US");
+            GetCurrentCulture();
             Model.MainModel.GetInstance();
             var Window = new View.MainWindow();
             Window.Closed += Window_Closed;
@@ -28,6 +29,12 @@ namespace Miotsukushi
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culname);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culname);
+        }
+
+        private void GetCurrentCulture()
+        {
+            System.Diagnostics.Debug.WriteLine("CurrentCulture: " + Thread.CurrentThread.CurrentCulture.Name);
+            System.Diagnostics.Debug.WriteLine("CurrentUICulture: " + Thread.CurrentThread.CurrentUICulture.Name);
         }
 
         /// <summary>

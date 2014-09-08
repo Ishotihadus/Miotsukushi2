@@ -36,7 +36,7 @@ namespace KanColleLib.TransmissionData.api_req_kousyou
         /// </summary>
         public List<GetshipSlotitemValue> slotitem;
 
-        public Getship fromDynamic(dynamic json)
+        public static Getship fromDynamic(dynamic json)
         {
             Getship getship = new Getship();
 

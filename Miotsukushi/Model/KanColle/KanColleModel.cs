@@ -17,6 +17,7 @@ namespace Miotsukushi.Model.KanColle
         public Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
         public ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
         public List<FleetData> fleetdata = new List<FleetData>();
+        public List<KDockData> kdockdata = new List<KDockData>();
 
         public KanColleModel()
         {
@@ -34,6 +35,35 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetGetmemberDeck += kclib_GetGetmemberDeck;
             kclib.GetReqmissionStart += kclib_GetReqmissionStart;
             kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
+            kclib.GetGetmemberKdock += kclib_GetGetmemberKdock;
+            kclib.GetReqkousyouGetship += kclib_GetReqkousyouGetship;
+        }
+
+        async void kclib_GetReqkousyouGetship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.GetshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Getship> response)
+        {
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < response.data.kdock.kdocks.Count; i++)
+                {
+                    if (kdockdata.Count <= i)
+                        kdockdata.Add(new KDockData());
+                    kdockdata[i].FromKDockValue(response.data.kdock.kdocks[i]);
+                }
+                AppendShipData(response.data.ship);
+            });
+        }
+
+        async void kclib_GetGetmemberKdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.KDock> response)
+        {
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < response.data.kdocks.Count; i++)
+                {
+                    if (kdockdata.Count <= i)
+                        kdockdata.Add(new KDockData());
+                    kdockdata[i].FromKDockValue(response.data.kdocks[i]);
+                }
+            });
         }
 
         async void kclib_GetReqmissionReturnInstruction(object sender, KanColleLib.TransmissionRequest.api_req_mission.ReturnInstructionRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.ReturnInstruction> response)
@@ -157,21 +187,26 @@ namespace Miotsukushi.Model.KanColle
         {
             foreach (var ship in shiplist)
             {
-                var temp = ShipData.FromKanColleLib(ship);
-
-                bool is_found = false;
-                for (int i = 0; i < shipdata.Count; i++)
-                {
-                    if (shipdata[i].shipid == ship.id)
-                    {
-                        is_found = true;
-                        if (!shipdata[i].Equals(temp))
-                            shipdata[i] = temp;
-                    }
-                }
-                if (!is_found)
-                    shipdata.Add(temp);
+                AppendShipData(ship);
             }
+        }
+
+        void AppendShipData(KanColleLib.TransmissionData.api_get_member.values.ShipValue ship)
+        {
+            var temp = ShipData.FromKanColleLib(ship);
+
+            bool is_found = false;
+            for (int i = 0; i < shipdata.Count; i++)
+            {
+                if (shipdata[i].shipid == ship.id)
+                {
+                    is_found = true;
+                    if (!shipdata[i].Equals(temp))
+                        shipdata[i] = temp;
+                }
+            }
+            if (!is_found)
+                shipdata.Add(temp);
         }
 
         /// <summary>
@@ -206,7 +241,7 @@ namespace Miotsukushi.Model.KanColle
         protected virtual void OnInitializeComplete(EventArgs e) { if (InitializeComplete != null) { InitializeComplete(this, e); } }
 
         /// <summary>
-        /// ゲームが開始された際に呼び出されます
+        /// ゲームが開始された（フラッシュがロードされた）際に呼び出されます
         /// </summary>
         public event EventHandler GameStart;
         protected virtual void OnGameStart(EventArgs e) { if (GameStart != null) { GameStart(this, e); } }

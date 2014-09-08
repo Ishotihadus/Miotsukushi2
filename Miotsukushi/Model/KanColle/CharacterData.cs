@@ -23,13 +23,19 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         public int shiptype;
 
+        /// <summary>
+        /// 建造時間（分）
+        /// </summary>
+        public int buildingtime;
+
         public static CharacterData fromKanColleLib(KanColleLib.TransmissionData.api_start2.start2.MstShip data)
         {
             return new CharacterData()
             {
                 name = data.name,
                 name_yomi = data.yomi,
-                shiptype = data.stype
+                shiptype = data.stype,
+                buildingtime = data.buildtime
             };
         }
     }

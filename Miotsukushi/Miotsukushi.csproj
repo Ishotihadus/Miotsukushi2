@@ -89,6 +89,7 @@
     <Compile Include="Model\KanColle\FleetExpeditionStatus.cs" />
     <Compile Include="Model\KanColle\KanColleModel.cs" />
     <Compile Include="Model\KanColle\KDockData.cs" />
+    <Compile Include="Model\KanColle\KDockStatus.cs" />
     <Compile Include="Model\KanColle\MissionData.cs" />
     <Compile Include="Model\KanColle\ShipData.cs" />
     <Compile Include="Model\KanColle\ShiptypeData.cs" />
@@ -101,12 +102,17 @@
     </Compile>
     <Compile Include="Tools\TimeParser.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\EasyInfoPanelViewModel.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\ConstructionCollectionViewModel.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\ConstructionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\ExpeditionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\ExpeditionCollectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\WindowParts\EasyInfoParts\ExpeditionItem.xaml.cs">
       <DependentUpon>ExpeditionItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\EasyInfoParts\ConstructionItem.xaml.cs">
+      <DependentUpon>ConstructionItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowParts\EasyInformationPanel.xaml.cs">
       <DependentUpon>EasyInformationPanel.xaml</DependentUpon>
@@ -134,6 +140,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\WindowParts\EasyInfoParts\ExpeditionItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WindowParts\EasyInfoParts\ConstructionItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
