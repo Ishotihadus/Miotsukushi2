@@ -27,8 +27,11 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id && model.missionmaster.ContainsKey(model.fleetdata[id].expedition_id))
-                    return model.missionmaster[model.fleetdata[id].expedition_id].name;
+                if (model.fleetdata != null && model.fleetdata.Count > id)
+                    if (model.missionmaster.ContainsKey(model.fleetdata[id].expedition_id))
+                        return model.missionmaster[model.fleetdata[id].expedition_id].name;
+                    else
+                        return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                 else
                     return null;
             }
@@ -82,18 +85,23 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id)
-                    switch (model.fleetdata[id].expedition_status)
-                    {
-                        case FleetExpeditionStatus.unknown:
-                            return "不明";
-                        case FleetExpeditionStatus.at_home:
-                            return "遠征に出ていません";
-                        default:
-                            return null;
-                    }
+                if (model.fleetdata != null)
+                    if (model.fleetdata.Count > id)
+                        switch (model.fleetdata[id].expedition_status)
+                        {
+                            case FleetExpeditionStatus.unknown:
+                                return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
+                            case FleetExpeditionStatus.at_home:
+                                return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_AtHome");
+                            default:
+                                return null;
+                        }
+                    else if (model.fleetdata.Count > 0)
+                        return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotOpened");
+                    else
+                        return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotLoaded");
                 else
-                    return "読み込まれていません";
+                    return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotLoaded");
             }
         }
 
@@ -116,36 +124,13 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             }
         }
 
+        private Brush _BorderBrush = Brushes.Gray;
+
         public Brush BorderBrush
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id)
-                    switch (model.fleetdata[id].expedition_status)
-                    {
-                        case FleetExpeditionStatus.at_home:
-                            return Brushes.SpringGreen;
-                        case FleetExpeditionStatus.on_expedition:
-                            if(RemainTime.TotalMinutes < 0)
-                                return Brushes.OrangeRed;
-                            else if(RemainTime.TotalMinutes < 1)
-                                return Brushes.DarkOrange;
-                            else
-                                return Brushes.SlateBlue;
-                        case FleetExpeditionStatus.force_backing:
-                            if (RemainTime.TotalMinutes < 0)
-                                return Brushes.OrangeRed;
-                            else if (RemainTime.TotalMinutes < 1)
-                                return Brushes.Chocolate;
-                            else
-                                return Brushes.Crimson;
-                        case FleetExpeditionStatus.expedition_complete:
-                            return Brushes.OrangeRed;
-                        default:
-                            return Brushes.Gray;
-                    }
-                else
-                    return Brushes.Gray;
+                return _BorderBrush;
             }
         }
 
@@ -163,19 +148,61 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             OnPropertyChanged(() => RemainTime);
             OnPropertyChanged(() => ProgressValue);
-            OnPropertyChanged(() => BorderBrush);
+            UpdateBorderBrush();
         }
 
         void model_InitializeComplete(object sender, EventArgs e)
         {
             if (model.fleetdata != null && model.fleetdata.Count > id)
                 model.fleetdata[id].FleetMissionChanged += ExpeditionViewModel_FleetMissionChanged;
+            UpdateBorderBrush();
             OnPropertyChanged("");
         }
 
         void ExpeditionViewModel_FleetMissionChanged(object sender, EventArgs e)
         {
+            UpdateBorderBrush();
             OnPropertyChanged("");
+        }
+
+        void UpdateBorderBrush()
+        {
+            var nowbrush = GetBorderBrush();
+            if (_BorderBrush != nowbrush)
+            {
+                _BorderBrush = nowbrush;
+                OnPropertyChanged(() => BorderBrush);
+            }
+        }
+
+        Brush GetBorderBrush()
+        {
+            if (model.fleetdata != null && model.fleetdata.Count > id)
+                switch (model.fleetdata[id].expedition_status)
+                {
+                    case FleetExpeditionStatus.at_home:
+                        return Brushes.SpringGreen;
+                    case FleetExpeditionStatus.on_expedition:
+                        if (RemainTime.TotalMinutes < 0)
+                            return Brushes.OrangeRed;
+                        else if (RemainTime.TotalMinutes < 1)
+                            return Brushes.DarkOrange;
+                        else
+                            return Brushes.SlateBlue;
+                    case FleetExpeditionStatus.force_backing:
+                        if (RemainTime.TotalMinutes < 0)
+                            return Brushes.OrangeRed;
+                        else if (RemainTime.TotalMinutes < 1)
+                            return Brushes.Chocolate;
+                        else
+                            return Brushes.Crimson;
+                    case FleetExpeditionStatus.expedition_complete:
+                        return Brushes.OrangeRed;
+                    default:
+                        return Brushes.Gray;
+                }
+            else
+                return Brushes.Gray;
         }
 
     }

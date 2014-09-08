@@ -61,6 +61,96 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
+        ///   Construction に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string EasyInfoPanelTitle_BuildingDock {
+            get {
+                return ResourceManager.GetString("EasyInfoPanelTitle_BuildingDock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Expedition に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string EasyInfoPanelTitle_Expedition {
+            get {
+                return ResourceManager.GetString("EasyInfoPanelTitle_Expedition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mission に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string EasyInfoPanelTitle_Mission {
+            get {
+                return ResourceManager.GetString("EasyInfoPanelTitle_Mission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Docking に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string EasyInfoPanelTitle_RepairDock {
+            get {
+                return ResourceManager.GetString("EasyInfoPanelTitle_RepairDock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Finish Time: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Expedition_FinishTime {
+            get {
+                return ResourceManager.GetString("Expedition_FinishTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Remain: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Expedition_Remain {
+            get {
+                return ResourceManager.GetString("Expedition_Remain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Not on expedition に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExpeditionStatus_AtHome {
+            get {
+                return ResourceManager.GetString("ExpeditionStatus_AtHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Not loaded に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExpeditionStatus_NotLoaded {
+            get {
+                return ResourceManager.GetString("ExpeditionStatus_NotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   This fleet cannot be used に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExpeditionStatus_NotOpened {
+            get {
+                return ResourceManager.GetString("ExpeditionStatus_NotOpened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Unknown に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExpeditionStatus_Unknown {
+            get {
+                return ResourceManager.GetString("ExpeditionStatus_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Are you sure to exit? に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string WindowCloseConfirmationMessage {

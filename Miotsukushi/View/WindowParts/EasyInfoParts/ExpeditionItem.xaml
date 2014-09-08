@@ -13,7 +13,7 @@
         <Converter:TotalTimeConverter x:Key="TotalTimeConverter"/>
         <Converter:BooleanToVisibilityReverseConverter x:Key="BooleanToVisibilityReverseConverter"/>
         <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <Storyboard x:Key="TimeTextAnimation">
+        <Storyboard x:Key="TimeTextAnimation" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock">
                 <EasingDoubleKeyFrame KeyTime="0:0:2.7" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
@@ -44,8 +44,8 @@
                 <Viewbox VerticalAlignment="Top" StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="Fill" Margin="5,5,5,0">
                     <TextBlock><Run Text="{Binding ID, Mode=OneWay}"/><Run Text=". "/><Run FontSize="15" Text="{Binding MissionName, Mode=OneWay}"/></TextBlock>
                 </Viewbox>
-                <TextBlock x:Name="textBlock" HorizontalAlignment="Right" Margin="0,0,5,8" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="残り"/><Run Text=" "/><Run Text="{Binding RemainTime, Converter={StaticResource TotalTimeConverter}, Mode=OneWay}"/></TextBlock>
-                <TextBlock x:Name="textBlock1" HorizontalAlignment="Right" Margin="0,0,5,8" TextWrapping="Wrap" VerticalAlignment="Bottom" Opacity="0"><Run Text="完了予定"/><Run Text=" "/><Run Text="{Binding CompleteTime, Converter={StaticResource DateTimeConverter}, Mode=OneWay}"/></TextBlock>
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Right" Margin="0,0,5,8" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding Expedition_Remain, Mode=OneWay, Source={StaticResource resources}}"/><Run Text=" "/><Run Text="{Binding RemainTime, Converter={StaticResource TotalTimeConverter}, Mode=OneWay}"/></TextBlock>
+                <TextBlock x:Name="textBlock1" HorizontalAlignment="Right" Margin="0,0,5,8" TextWrapping="Wrap" VerticalAlignment="Bottom" Opacity="0"><Run Text="{Binding Expedition_FinishTime, Mode=OneWay, Source={StaticResource resources}}"/><Run Text=" "/><Run Text="{Binding CompleteTime, Converter={StaticResource DateTimeConverter}, Mode=OneWay}"/></TextBlock>
                 <ProgressBar Margin="0" VerticalAlignment="Bottom" Height="3" Value="{Binding ProgressValue, Mode=OneWay}" Maximum="{Binding ProgressMax, Mode=OneWay}"/>
             </Grid>
             <Grid Visibility="{Binding DetailVisibility, Converter={StaticResource BooleanToVisibilityReverseConverter}}">

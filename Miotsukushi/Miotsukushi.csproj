@@ -88,6 +88,7 @@
     <Compile Include="Model\KanColle\FleetData.cs" />
     <Compile Include="Model\KanColle\FleetExpeditionStatus.cs" />
     <Compile Include="Model\KanColle\KanColleModel.cs" />
+    <Compile Include="Model\KanColle\KDockData.cs" />
     <Compile Include="Model\KanColle\MissionData.cs" />
     <Compile Include="Model\KanColle\ShipData.cs" />
     <Compile Include="Model\KanColle\ShiptypeData.cs" />

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -15,10 +17,17 @@ namespace Miotsukushi
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            SetCurrentCulture("en-US");
             Model.MainModel.GetInstance();
             var Window = new View.MainWindow();
             Window.Closed += Window_Closed;
             Window.Show();
+        }
+
+        private void SetCurrentCulture(string culname)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(culname);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culname);
         }
 
         /// <summary>

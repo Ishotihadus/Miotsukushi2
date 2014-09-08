@@ -33,6 +33,11 @@ namespace Miotsukushi.Model.KanColle
             return shipid == s.shipid && characterid == s.characterid && level == s.level;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public static ShipData FromKanColleLib(KanColleLib.TransmissionData.api_get_member.values.ShipValue data)
         {
             return new ShipData()

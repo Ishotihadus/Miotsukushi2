@@ -32,7 +32,7 @@ namespace KanColleLib
             if (kcsapiindex != -1)
                 kcsapiurl = oSession.fullUrl.Substring(kcsapiindex + 8); // "/kcsapi/".Length
 
-            if (kcsapiurl != null || oSession.oResponse.MIMEType == "text/plain")
+            if (kcsapiurl != null && oSession.oResponse.MIMEType == "text/plain")
             {
                 string request = oSession.GetRequestBodyAsString();
                 string response = oSession.GetResponseBodyAsString();
