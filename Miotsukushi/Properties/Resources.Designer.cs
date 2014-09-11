@@ -340,6 +340,15 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
+        ///   Shinano に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string 信濃 {
+            get {
+                return ResourceManager.GetString("信濃", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Hatsuharu に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string 初春 {
@@ -934,7 +943,7 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   Kaibokan に類似しているローカライズされた文字列を検索します。
+        ///   Escort ship に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string 海防艦 {
             get {
@@ -1150,6 +1159,15 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
+        ///   Akizuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string 秋月 {
+            get {
+                return ResourceManager.GetString("秋月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Akigumo に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string 秋雲 {
@@ -1285,7 +1303,7 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   Transport Ship に類似しているローカライズされた文字列を検索します。
+        ///   Supply Ship に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string 補給艦 {
             get {

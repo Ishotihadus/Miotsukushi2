@@ -10,7 +10,7 @@ namespace Miotsukushi.Model.KanColle
     {
         public KDockStatus status = KDockStatus.unknown;
 
-        public int shipid;
+        public int charaid;
 
         public DateTime complete_time;
 
@@ -45,9 +45,9 @@ namespace Miotsukushi.Model.KanColle
             }
 
             int _shipid = data.created_ship_id;
-            if (_shipid != shipid)
+            if (_shipid != charaid)
             {
-                shipid = _shipid;
+                charaid = _shipid;
                 changed = true;
             }
 
@@ -65,7 +65,7 @@ namespace Miotsukushi.Model.KanColle
         public void GetShip()
         {
             status = KDockStatus.empty;
-            shipid = 0;
+            charaid = 0;
             complete_time = new DateTime();
             OnKDockChanged(new EventArgs());
         }

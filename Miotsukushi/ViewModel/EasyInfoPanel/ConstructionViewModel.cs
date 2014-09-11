@@ -20,9 +20,9 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             get
             {
                 if (model.kdockdata != null && model.kdockdata.Count > id)
-                    if (model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].shipid) &&
-                        model.shiptypemaster != null && model.shiptypemaster.ContainsKey(model.charamaster[model.kdockdata[id].shipid].shiptype))
-                        return Tools.ResourceStringGetter.GetNameResourceString(model.shiptypemaster[model.charamaster[model.kdockdata[id].shipid].shiptype].name);
+                    if (model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid) &&
+                        model.shiptypemaster != null && model.shiptypemaster.ContainsKey(model.charamaster[model.kdockdata[id].charaid].shiptype))
+                        return Tools.ResourceStringGetter.GetNameResourceString(model.shiptypemaster[model.charamaster[model.kdockdata[id].charaid].shiptype].name);
                     else
                         return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
                 else
@@ -35,8 +35,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             get
             {
                 if (model.kdockdata != null && model.kdockdata.Count > id)
-                    if (model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].shipid))
-                        return Tools.ResourceStringGetter.GetShipNameResourceString(model.charamaster[model.kdockdata[id].shipid].name);
+                    if (model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid))
+                        return Tools.ResourceStringGetter.GetShipNameResourceString(model.charamaster[model.kdockdata[id].charaid].name);
                     else
                         return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                 else
@@ -70,8 +70,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id && model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].shipid))
-                    return model.charamaster[model.kdockdata[id].shipid].buildingtime - RemainTime.TotalMinutes;
+                if (model.kdockdata != null && model.kdockdata.Count > id && model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid))
+                    return model.charamaster[model.kdockdata[id].charaid].buildingtime - RemainTime.TotalMinutes;
                 else
                     return 0;
             }
@@ -81,8 +81,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id && model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].shipid))
-                    return model.charamaster[model.kdockdata[id].shipid].buildingtime;
+                if (model.kdockdata != null && model.kdockdata.Count > id && model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid))
+                    return model.charamaster[model.kdockdata[id].charaid].buildingtime;
                 else
                     return 0;
             }
@@ -147,7 +147,24 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             this.id = id;
             model = Model.MainModel.Current.kancolleModel;
             model.InitializeComplete += model_InitializeComplete;
+            model.kdockdata.ItemAdded += kdockdata_ItemAdded;
             Model.MainModel.Current.timerModel.TimerElapsed += timerModel_TimerElapsed;
+        }
+
+        void model_InitializeComplete(object sender, EventArgs e)
+        {
+            OnPropertyChanged("");
+        }
+
+        void kdockdata_ItemAdded(object sender, EventArgs e)
+        {
+            if (model.kdockdata.Count > id)
+            {
+                model.kdockdata[id].KDockChanged += ConstructionViewModel_KDockChanged;
+                UpdateBorderBrush();
+                OnPropertyChanged("");
+                model.kdockdata.ItemAdded -= kdockdata_ItemAdded;
+            }
         }
 
         void timerModel_TimerElapsed(object sender, EventArgs e)
@@ -155,14 +172,6 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             OnPropertyChanged(() => RemainTime);
             OnPropertyChanged(() => ProgressValue);
             UpdateBorderBrush();
-        }
-
-        void model_InitializeComplete(object sender, EventArgs e)
-        {
-            if (model.kdockdata != null && model.kdockdata.Count > id)
-                model.kdockdata[id].KDockChanged += ConstructionViewModel_KDockChanged;
-            UpdateBorderBrush();
-            OnPropertyChanged("");
         }
 
         void ConstructionViewModel_KDockChanged(object sender, EventArgs e)

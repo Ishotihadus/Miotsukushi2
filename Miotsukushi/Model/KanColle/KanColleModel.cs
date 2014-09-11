@@ -16,8 +16,9 @@ namespace Miotsukushi.Model.KanColle
         public Dictionary<int, ShiptypeData> shiptypemaster = new Dictionary<int,ShiptypeData>();
         public Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
         public ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
-        public List<FleetData> fleetdata = new List<FleetData>();
-        public List<KDockData> kdockdata = new List<KDockData>();
+        public ExList<FleetData> fleetdata = new ExList<FleetData>();
+        public ExList<KDockData> kdockdata = new ExList<KDockData>();
+        public ExList<NDockData> ndockdata = new ExList<NDockData>();
 
         public KanColleModel()
         {
@@ -37,6 +38,26 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
             kclib.GetGetmemberKdock += kclib_GetGetmemberKdock;
             kclib.GetReqkousyouGetship += kclib_GetReqkousyouGetship;
+            kclib.GetGetmemberNdock += kclib_GetGetmemberNdock;
+            kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
+        }
+
+        async void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        {
+            await Task.Run(() => DestroyShip(request.ship_id));
+        }
+
+        async void kclib_GetGetmemberNdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.NDock> response)
+        {
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < response.data.ndocks.Count; i++)
+                {
+                    if (ndockdata.Count <= i)
+                        ndockdata.Add(new NDockData());
+                    ndockdata[i].FromNDockValue(response.data.ndocks[i]);
+                }
+            });
         }
 
         async void kclib_GetReqkousyouGetship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.GetshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Getship> response)
@@ -210,17 +231,27 @@ namespace Miotsukushi.Model.KanColle
         }
 
         /// <summary>
-        /// 艦娘一覧データからそこに存在しない艦を削除する
+        /// 艦娘一覧データから、ローカルデータに存在するが与えられたデータに存在しない艦をすべて削除する
+        /// 与えられたリストの艦を削除するわけではない
         /// </summary>
-        /// <param name="shiplist"></param>
-        void DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> shiplist)
+        /// <param name="existshiplist"></param>
+        void DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
         {
-            for (int i = 0; i < shipdata.Count; i++)
+            foreach (var item in from _ in shipdata where ((from __ in existshiplist where __.id == _.shipid select true).Count() == 0) select _)
             {
-                var query = from _ in shiplist where _.id == shipdata[i].shipid select true;
+                shipdata.Remove(item);
+            }
+        }
 
-                if (query.Count() <= 0)
-                    shipdata.RemoveAt(i);
+        /// <summary>
+        /// 指定されたIDの艦をリストから削除します。（同時に装備も削除したいけどとりあえず保留）
+        /// </summary>
+        /// <param name="ship"></param>
+        void DestroyShip(int id)
+        {
+            foreach (var item in from _ in shipdata where _.shipid == id select _)
+            {
+                shipdata.Remove(item);
             }
         }
 

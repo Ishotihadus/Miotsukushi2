@@ -117,6 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Construction_FinishTime" xml:space="preserve">
+    <value>完了予定</value>
+  </data>
+  <data name="Construction_Remain" xml:space="preserve">
+    <value>残り</value>
+  </data>
+  <data name="ConstructionStatus_Empty" xml:space="preserve">
+    <value>空き</value>
+  </data>
+  <data name="ConstructionStatus_Locked" xml:space="preserve">
+    <value>ロックされています</value>
+  </data>
+  <data name="ConstructionStatus_NotLoaded" xml:space="preserve">
+    <value>読み込まれていません</value>
+  </data>
+  <data name="ConstructionStatus_Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="EasyInfoPanelTitle_BuildingDock" xml:space="preserve">
+    <value>建造</value>
+  </data>
+  <data name="EasyInfoPanelTitle_Expedition" xml:space="preserve">
+    <value>遠征</value>
+  </data>
+  <data name="EasyInfoPanelTitle_Mission" xml:space="preserve">
+    <value>任務</value>
+  </data>
+  <data name="EasyInfoPanelTitle_RepairDock" xml:space="preserve">
+    <value>入渠</value>
+  </data>
   <data name="Expedition_FinishTime" xml:space="preserve">
     <value>完了予定</value>
   </data>
