@@ -63,6 +63,13 @@ public delegate void GetGetmemberNdockEventHandler(object sender, RequestBase re
 protected virtual void OnGetGetmemberNdock(RequestBase request, Svdata<TransmissionData.api_get_member.NDock> response) { if (GetGetmemberNdock != null) GetGetmemberNdock(this, request, response); }
 
 /// <summary>
+/// api_get_member/questlist を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetGetmemberQuestlistEventHandler GetGetmemberQuestlist;
+public delegate void GetGetmemberQuestlistEventHandler(object sender, TransmissionRequest.api_get_member.QuestlistRequest request, Svdata<TransmissionData.api_get_member.Questlist> response);
+protected virtual void OnGetGetmemberQuestlist(TransmissionRequest.api_get_member.QuestlistRequest request, Svdata<TransmissionData.api_get_member.Questlist> response) { if (GetGetmemberQuestlist != null) GetGetmemberQuestlist(this, request, response); }
+
+/// <summary>
 /// api_get_member/ship2 を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetGetmemberShip2EventHandler GetGetmemberShip2;

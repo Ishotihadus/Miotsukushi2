@@ -11,7 +11,7 @@ api_get_member/ndock,GetmemberNdock,RequestBase,TransmissionData.api_get_member.
 #api_get_member/payitem
 #api_get_member/picture_book
 #api_get_member/practice
-#api_get_member/questlist
+api_get_member/questlist,GetmemberQuestlist,TransmissionRequest.api_get_member.QuestlistRequest,TransmissionData.api_get_member.Questlist
 #api_get_member/record
 api_get_member/ship2,GetmemberShip2,TransmissionRequest.api_get_member.Ship2Request,TransmissionData.api_get_member.Ship2
 api_get_member/ship3,GetmemberShip3,TransmissionRequest.api_get_member.Ship3Request,TransmissionData.api_get_member.Ship3

@@ -55,14 +55,17 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             }
         }
 
-        public DateTime CompleteTime
+        public DateTime? CompleteTime
         {
             get
             {
                 if (model.kdockdata != null && model.kdockdata.Count > id)
-                    return model.kdockdata[id].complete_time;
+                    if (model.kdockdata[id].status == KDockStatus.building)
+                        return model.kdockdata[id].complete_time;
+                    else
+                        return null;
                 else
-                    return new DateTime();
+                    return null;
             }
         }
 

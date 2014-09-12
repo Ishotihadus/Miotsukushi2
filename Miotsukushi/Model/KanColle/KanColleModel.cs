@@ -218,7 +218,8 @@ namespace Miotsukushi.Model.KanColle
         /// <param name="existshiplist"></param>
         void DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
         {
-            foreach (var item in from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _)
+            var deletelist = (from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _).ToList();
+            foreach (var item in deletelist)
             {
                 shipdata.Remove(item);
             }
@@ -230,7 +231,8 @@ namespace Miotsukushi.Model.KanColle
         /// <param name="ship"></param>
         void DestroyShip(int id)
         {
-            foreach (var item in from _ in shipdata where _.shipid == id select _)
+            var deletelist = (from _ in shipdata where _.shipid == id select _).ToList();
+            foreach (var item in deletelist)
             {
                 shipdata.Remove(item);
             }

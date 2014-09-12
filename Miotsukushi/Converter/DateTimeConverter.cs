@@ -12,9 +12,14 @@ namespace Miotsukushi.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DateTime)
+            if (value == null)
+            {
+                return "?";
+            }
+            else if (value is DateTime)
             {
                 DateTime t = (DateTime)value;
+                
                 if(t.Date == DateTime.Today)
                     return t.ToString("HH:mm:ss");
                 else

@@ -118,6 +118,12 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_get_member/questlist":
+                    if (json.api_data())
+                        OnGetGetmemberQuestlist(new TransmissionRequest.api_get_member.QuestlistRequest(request), Svdata<TransmissionData.api_get_member.Questlist>.fromDynamic(json, TransmissionData.api_get_member.Questlist.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_get_member/ship2":
                     if (json.api_data())
                         OnGetGetmemberShip2(new TransmissionRequest.api_get_member.Ship2Request(request), Svdata<TransmissionData.api_get_member.Ship2>.fromDynamic(json, TransmissionData.api_get_member.Ship2.fromDynamic(json.api_data)));
@@ -233,6 +239,7 @@ namespace KanColleLib
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
 
+
                 default:
                     System.Diagnostics.Debug.WriteLine("UNDEFINED KCSAPIURL: " + kcsapiurl);
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
@@ -338,6 +345,13 @@ namespace KanColleLib
         public event GetGetmemberNdockEventHandler GetGetmemberNdock;
         public delegate void GetGetmemberNdockEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.NDock> response);
         protected virtual void OnGetGetmemberNdock(RequestBase request, Svdata<TransmissionData.api_get_member.NDock> response) { if (GetGetmemberNdock != null) GetGetmemberNdock(this, request, response); }
+
+        /// <summary>
+        /// api_get_member/questlist を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetGetmemberQuestlistEventHandler GetGetmemberQuestlist;
+        public delegate void GetGetmemberQuestlistEventHandler(object sender, TransmissionRequest.api_get_member.QuestlistRequest request, Svdata<TransmissionData.api_get_member.Questlist> response);
+        protected virtual void OnGetGetmemberQuestlist(TransmissionRequest.api_get_member.QuestlistRequest request, Svdata<TransmissionData.api_get_member.Questlist> response) { if (GetGetmemberQuestlist != null) GetGetmemberQuestlist(this, request, response); }
 
         /// <summary>
         /// api_get_member/ship2 を受信して解析に成功した際に呼び出されます

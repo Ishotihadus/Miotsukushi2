@@ -52,6 +52,12 @@ OnGetGetmemberNdock(new RequestBase(request), Svdata<TransmissionData.api_get_me
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_get_member/questlist":
+if(json.api_data())
+OnGetGetmemberQuestlist(new TransmissionRequest.api_get_member.QuestlistRequest(request), Svdata<TransmissionData.api_get_member.Questlist>.fromDynamic(json, TransmissionData.api_get_member.Questlist.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_get_member/ship2":
 if(json.api_data())
 OnGetGetmemberShip2(new TransmissionRequest.api_get_member.Ship2Request(request), Svdata<TransmissionData.api_get_member.Ship2>.fromDynamic(json, TransmissionData.api_get_member.Ship2.fromDynamic(json.api_data)));

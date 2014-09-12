@@ -11,7 +11,7 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            test_start2();
+            test_get_member();
         }
 
         
@@ -101,6 +101,9 @@ namespace KanColleLibTest
 
             string api_slot_item = System.IO.File.ReadAllText("api_get_member/slot_item.txt");
             var slot_item = KanColleLib.TransmissionData.api_get_member.SlotItem.fromDynamic(DynamicJson.Parse(api_slot_item).api_data);
+
+            string api_questlist = System.IO.File.ReadAllText("api_get_member/questlist.txt");
+            var questlist = KanColleLib.TransmissionData.api_get_member.Questlist.fromDynamic(DynamicJson.Parse(api_questlist).api_data);
         }
 
         static void test_port()

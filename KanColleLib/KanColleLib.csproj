@@ -58,6 +58,7 @@
     <Compile Include="TransmissionData\api_get_member\Mapinfo.cs" />
     <Compile Include="TransmissionData\api_get_member\Mission.cs" />
     <Compile Include="TransmissionData\api_get_member\NDock.cs" />
+    <Compile Include="TransmissionData\api_get_member\Questlist.cs" />
     <Compile Include="TransmissionData\api_get_member\Ship2.cs" />
     <Compile Include="TransmissionData\api_get_member\Ship3.cs" />
     <Compile Include="TransmissionData\api_get_member\SlotItem.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="TransmissionData\api_get_member\values\MaterialValue.cs" />
     <Compile Include="TransmissionData\api_get_member\values\MissionValue.cs" />
     <Compile Include="TransmissionData\api_get_member\values\NDockValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\QuestlistValue.cs" />
     <Compile Include="TransmissionData\api_get_member\values\ShipValue.cs" />
     <Compile Include="TransmissionData\api_get_member\values\SlotItemValue.cs" />
     <Compile Include="TransmissionData\api_port\Log.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="TransmissionData\api_start2\start2\MstUseitem.cs" />
     <Compile Include="TransmissionData\Svdata.cs" />
     <Compile Include="TransmissionRequest\api_get_member\MapcellRequest.cs" />
+    <Compile Include="TransmissionRequest\api_get_member\QuestlistRequest.cs" />
     <Compile Include="TransmissionRequest\api_get_member\Ship2Request.cs" />
     <Compile Include="TransmissionRequest\api_get_member\Ship3Request.cs" />
     <Compile Include="TransmissionRequest\api_port\PortRequest.cs" />
