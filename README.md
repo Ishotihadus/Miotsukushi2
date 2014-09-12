@@ -18,10 +18,10 @@
 
 ## 使用ライブラリ
 
-* [FiddlerCore](http://fiddler2.com/fiddlercore FiddlerCore)（通信のキャプチャ）
-* [DynamicJson](http://dynamicjson.codeplex.com/ DynamicJson)（Jsonのデコード） - Microsoft Public License
-* [Prism](https://compositewpf.codeplex.com/ Prism)（MVVM インフラストラクチャ） - Apache License 2.0
-* [MahApps.Metro](http://mahapps.com/ MahApps.Metro)（メトロデザインのベース） - Microsoft Public License
+* [FiddlerCore](http://fiddler2.com/fiddlercore)（通信のキャプチャ）
+* [DynamicJson](http://dynamicjson.codeplex.com/)（Jsonのデコード） - Microsoft Public License
+* [Prism](https://compositewpf.codeplex.com/)（MVVM インフラストラクチャ） - Apache License 2.0
+* [MahApps.Metro](http://mahapps.com/)（メトロデザインのベース） - Microsoft Public License
 
 ## 適用ライセンス
 
