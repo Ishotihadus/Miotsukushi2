@@ -23,6 +23,11 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         public int level;
 
+        /// <summary>
+        /// 入渠時間
+        /// </summary>
+        public TimeSpan ndock_time;
+
         public override bool Equals(object obj)
         {
             if (!(obj is ShipData) || obj == null)
@@ -44,7 +49,8 @@ namespace Miotsukushi.Model.KanColle
             {
                 shipid = data.id,
                 characterid = data.ship_id,
-                level = data.lv
+                level = data.lv,
+                ndock_time = TimeSpan.FromMilliseconds(data.ndock_time)
             };
         }
     }

@@ -160,7 +160,7 @@
     <value>Not loaded</value>
   </data>
   <data name="ExpeditionStatus_NotOpened" xml:space="preserve">
-    <value>This fleet cannot be used</value>
+    <value>Unavailable</value>
   </data>
   <data name="ExpeditionStatus_Unknown" xml:space="preserve">
     <value>Unknown</value>
@@ -659,5 +659,23 @@
   </data>
   <data name="秋月" xml:space="preserve">
     <value>Akizuki</value>
+  </data>
+  <data name="DockingStatus_Empty" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="DockingStatus_Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="DockingStatus_NotLoaded" xml:space="preserve">
+    <value>Not loaded</value>
+  </data>
+  <data name="DockingStatus_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Docking_FinishTime" xml:space="preserve">
+    <value>Finish Time:</value>
+  </data>
+  <data name="Docking_Remain" xml:space="preserve">
+    <value>Remain:</value>
   </data>
 </root>

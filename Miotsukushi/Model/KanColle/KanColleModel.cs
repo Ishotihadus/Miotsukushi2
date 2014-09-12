@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using KanColleLib;
 using Fiddler;
+using Miotsukushi.Tools;
 
 namespace Miotsukushi.Model.KanColle
 {
@@ -49,42 +50,21 @@ namespace Miotsukushi.Model.KanColle
 
         async void kclib_GetGetmemberNdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.NDock> response)
         {
-            await Task.Run(() =>
-            {
-                for (int i = 0; i < response.data.ndocks.Count; i++)
-                {
-                    if (ndockdata.Count <= i)
-                        ndockdata.Add(new NDockData());
-                    ndockdata[i].FromNDockValue(response.data.ndocks[i]);
-                }
-            });
+            await AppendNDockValue(response.data);
         }
 
         async void kclib_GetReqkousyouGetship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.GetshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Getship> response)
         {
+            await AppendKDockValue(response.data.kdock);
             await Task.Run(() =>
             {
-                for (int i = 0; i < response.data.kdock.kdocks.Count; i++)
-                {
-                    if (kdockdata.Count <= i)
-                        kdockdata.Add(new KDockData());
-                    kdockdata[i].FromKDockValue(response.data.kdock.kdocks[i]);
-                }
                 AppendShipData(response.data.ship);
             });
         }
 
         async void kclib_GetGetmemberKdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.KDock> response)
         {
-            await Task.Run(() =>
-            {
-                for (int i = 0; i < response.data.kdocks.Count; i++)
-                {
-                    if (kdockdata.Count <= i)
-                        kdockdata.Add(new KDockData());
-                    kdockdata[i].FromKDockValue(response.data.kdocks[i]);
-                }
-            });
+            await AppendKDockValue(response.data);
         }
 
         async void kclib_GetReqmissionReturnInstruction(object sender, KanColleLib.TransmissionRequest.api_req_mission.ReturnInstructionRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.ReturnInstruction> response)
@@ -157,6 +137,7 @@ namespace Miotsukushi.Model.KanColle
                 }
                 InitializeConfirm();
             });
+            await AppendNDockValue(response.data.ndock);
         }
 
         async void kclib_GetStart2(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_start2.Start2> response)
@@ -237,7 +218,7 @@ namespace Miotsukushi.Model.KanColle
         /// <param name="existshiplist"></param>
         void DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
         {
-            foreach (var item in from _ in shipdata where ((from __ in existshiplist where __.id == _.shipid select true).Count() == 0) select _)
+            foreach (var item in from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _)
             {
                 shipdata.Remove(item);
             }
@@ -263,6 +244,32 @@ namespace Miotsukushi.Model.KanColle
             ++initializecount;
             if (initializecountflag == initializecount)
                 OnInitializeComplete(new EventArgs());
+        }
+
+        async Task AppendNDockValue(KanColleLib.TransmissionData.api_get_member.NDock data)
+        {
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < data.ndocks.Count; i++)
+                {
+                    if (ndockdata.Count <= i)
+                        ndockdata.Add(new NDockData());
+                    ndockdata[i].FromNDockValue(data.ndocks[i]);
+                }
+            });
+        }
+
+        async Task AppendKDockValue(KanColleLib.TransmissionData.api_get_member.KDock data)
+        {
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < data.kdocks.Count; i++)
+                {
+                    if (kdockdata.Count <= i)
+                        kdockdata.Add(new KDockData());
+                    kdockdata[i].FromKDockValue(data.kdocks[i]);
+                }
+            });
         }
 
         /// <summary>

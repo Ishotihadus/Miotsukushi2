@@ -17,7 +17,7 @@ namespace Miotsukushi
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            //SetCurrentCulture("en-US");
+            SetCurrentCulture("en-US");
             GetCurrentCulture();
             Model.MainModel.GetInstance();
             var Window = new View.MainWindow();

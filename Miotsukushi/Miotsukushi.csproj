@@ -104,6 +104,8 @@
       <DependentUpon>Resources.ja-JP.resx</DependentUpon>
     </Compile>
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\DockingCollectionViewModel.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\DockingViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\EasyInfoPanelViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\ConstructionCollectionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\ConstructionViewModel.cs" />
@@ -116,6 +118,9 @@
     </Compile>
     <Compile Include="View\WindowParts\EasyInfoParts\ConstructionItem.xaml.cs">
       <DependentUpon>ConstructionItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\EasyInfoParts\DockingItem.xaml.cs">
+      <DependentUpon>DockingItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowParts\EasyInformationPanel.xaml.cs">
       <DependentUpon>EasyInformationPanel.xaml</DependentUpon>
@@ -147,6 +152,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\WindowParts\EasyInfoParts\ConstructionItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WindowParts\EasyInfoParts\DockingItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -183,7 +192,6 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

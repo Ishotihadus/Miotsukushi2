@@ -37,8 +37,17 @@
 				</StackPanel>
 			</ScrollViewer>
 		</GroupBox>
-		<GroupBox Header="{Binding EasyInfoPanelTitle_RepairDock, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="2" VerticalAlignment="Top"/>
-		<GroupBox Header="{Binding EasyInfoPanelTitle_Mission, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="3" VerticalAlignment="Top"/>
+        <GroupBox Header="{Binding EasyInfoPanelTitle_RepairDock, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="2" VerticalAlignment="Top">
+            <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel DataContext="{Binding DockingCollection}">
+                    <EasyInfoParts:DockingItem DataContext="{Binding [0]}" Margin="1"/>
+                    <EasyInfoParts:DockingItem DataContext="{Binding [1]}" Margin="1"/>
+                    <EasyInfoParts:DockingItem DataContext="{Binding [2]}" Margin="1"/>
+                    <EasyInfoParts:DockingItem DataContext="{Binding [3]}" Margin="1"/>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+        <GroupBox Header="{Binding EasyInfoPanelTitle_Mission, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="3" VerticalAlignment="Top"/>
             
 	</Grid>
 </UserControl>

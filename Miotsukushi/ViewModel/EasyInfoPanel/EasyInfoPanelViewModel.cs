@@ -10,11 +10,13 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
     {
         public ExpeditionCollectionViewModel ExpeditionCollection { get; private set; }
         public ConstructionCollectionViewModel ConstructionCollection { get; private set; }
+        public DockingCollectionViewModel DockingCollection { get; private set; }
 
         public EasyInfoPanelViewModel()
         {
             ExpeditionCollection = new ExpeditionCollectionViewModel();
             ConstructionCollection = new ConstructionCollectionViewModel();
+            DockingCollection = new DockingCollectionViewModel();
         }
     }
 }
