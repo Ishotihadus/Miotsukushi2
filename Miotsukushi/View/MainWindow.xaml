@@ -20,8 +20,8 @@
         <WindowParts:StatusBar Margin="0" Grid.Row="2" Grid.ColumnSpan="2" />
         <WindowParts:WebView HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800"/>
 		<WindowParts:EasyInformationPanel Margin="0" Grid.Row="1"/>
-		<WindowParts:InformationPanel Grid.Column="1" Margin="0" Grid.RowSpan="2"/>
-		<WindowParts:DetailInformationPanel Margin="10" Grid.Column="1" Grid.RowSpan="2"/>
+		<WindowParts:InformationPanel Grid.Column="1" Grid.RowSpan="2"/>
+		<WindowParts:DetailInformationPanel Grid.Column="1" Grid.RowSpan="2"/>
 
     </Grid>
 </Controls:MetroWindow>

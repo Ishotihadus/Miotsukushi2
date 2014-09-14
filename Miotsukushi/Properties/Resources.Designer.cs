@@ -61,7 +61,7 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   Finish Time: に類似しているローカライズされた文字列を検索します。
+        ///   Finish: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Construction_FinishTime {
             get {
@@ -115,7 +115,7 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   Finish Time: に類似しているローカライズされた文字列を検索します。
+        ///   Finish: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Docking_FinishTime {
             get {
@@ -205,7 +205,7 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   Finish Time: に類似しているローカライズされた文字列を検索します。
+        ///   Finish: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Expedition_FinishTime {
             get {

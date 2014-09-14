@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Construction_FinishTime" xml:space="preserve">
-    <value>Finish Time:</value>
+    <value>Finish:</value>
   </data>
   <data name="Construction_Remain" xml:space="preserve">
     <value>Remain:</value>
@@ -148,7 +148,7 @@
     <value>Docking</value>
   </data>
   <data name="Expedition_FinishTime" xml:space="preserve">
-    <value>Finish Time:</value>
+    <value>Finish:</value>
   </data>
   <data name="Expedition_Remain" xml:space="preserve">
     <value>Remain:</value>
@@ -673,7 +673,7 @@
     <value>Unknown</value>
   </data>
   <data name="Docking_FinishTime" xml:space="preserve">
-    <value>Finish Time:</value>
+    <value>Finish:</value>
   </data>
   <data name="Docking_Remain" xml:space="preserve">
     <value>Remain:</value>
