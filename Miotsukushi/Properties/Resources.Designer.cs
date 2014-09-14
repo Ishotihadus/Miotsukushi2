@@ -187,11 +187,11 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   Mission に類似しているローカライズされた文字列を検索します。
+        ///   Quests に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string EasyInfoPanelTitle_Mission {
+        public static string EasyInfoPanelTitle_Quests {
             get {
-                return ResourceManager.GetString("EasyInfoPanelTitle_Mission", resourceCulture);
+                return ResourceManager.GetString("EasyInfoPanelTitle_Quests", resourceCulture);
             }
         }
         
@@ -241,7 +241,7 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   This fleet cannot be used に類似しているローカライズされた文字列を検索します。
+        ///   Unavailable に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ExpeditionStatus_NotOpened {
             get {
@@ -255,6 +255,1491 @@ namespace Miotsukushi.Properties {
         public static string ExpeditionStatus_Unknown {
             get {
                 return ResourceManager.GetString("ExpeditionStatus_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Akitsu Maru に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_あきつ丸 {
+            get {
+                return ResourceManager.GetString("ShipName_あきつ丸", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Maruyu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_まるゆ {
+            get {
+                return ResourceManager.GetString("ShipName_まるゆ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mikazuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_三日月 {
+            get {
+                return ResourceManager.GetString("ShipName_三日月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mikuma に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_三隈 {
+            get {
+                return ResourceManager.GetString("ShipName_三隈", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shiranui に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_不知火 {
+            get {
+                return ResourceManager.GetString("ShipName_不知火", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Isuzu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_五十鈴 {
+            get {
+                return ResourceManager.GetString("ShipName_五十鈴", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Samidare に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_五月雨 {
+            get {
+                return ResourceManager.GetString("ShipName_五月雨", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   I-168 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_伊168 {
+            get {
+                return ResourceManager.GetString("ShipName_伊168", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   I-19 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_伊19 {
+            get {
+                return ResourceManager.GetString("ShipName_伊19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   I-401 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_伊401 {
+            get {
+                return ResourceManager.GetString("ShipName_伊401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   I-58 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_伊58 {
+            get {
+                return ResourceManager.GetString("ShipName_伊58", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   I-8 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_伊8 {
+            get {
+                return ResourceManager.GetString("ShipName_伊8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ise に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_伊勢 {
+            get {
+                return ResourceManager.GetString("ShipName_伊勢", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shinano に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_信濃 {
+            get {
+                return ResourceManager.GetString("ShipName_信濃", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hatsuharu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_初春 {
+            get {
+                return ResourceManager.GetString("ShipName_初春", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hatsuyuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_初雪 {
+            get {
+                return ResourceManager.GetString("ShipName_初雪", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hatsushimo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_初霜 {
+            get {
+                return ResourceManager.GetString("ShipName_初霜", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hatsukaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_初風 {
+            get {
+                return ResourceManager.GetString("ShipName_初風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tone に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_利根 {
+            get {
+                return ResourceManager.GetString("ShipName_利根", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kako に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_加古 {
+            get {
+                return ResourceManager.GetString("ShipName_加古", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kaga に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_加賀 {
+            get {
+                return ResourceManager.GetString("ShipName_加賀", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kitakami に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_北上 {
+            get {
+                return ResourceManager.GetString("ShipName_北上", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chiyoda に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_千代田 {
+            get {
+                return ResourceManager.GetString("ShipName_千代田", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chiyoda A に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_千代田甲 {
+            get {
+                return ResourceManager.GetString("ShipName_千代田甲", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chiyoda Carrier に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_千代田航 {
+            get {
+                return ResourceManager.GetString("ShipName_千代田航", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chitose に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_千歳 {
+            get {
+                return ResourceManager.GetString("ShipName_千歳", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chitose A に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_千歳甲 {
+            get {
+                return ResourceManager.GetString("ShipName_千歳甲", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chitose Carrier に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_千歳航 {
+            get {
+                return ResourceManager.GetString("ShipName_千歳航", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Uzuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_卯月 {
+            get {
+                return ResourceManager.GetString("ShipName_卯月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Murakumo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_叢雲 {
+            get {
+                return ResourceManager.GetString("ShipName_叢雲", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Furutaka に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_古鷹 {
+            get {
+                return ResourceManager.GetString("ShipName_古鷹", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Natori に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_名取 {
+            get {
+                return ResourceManager.GetString("ShipName_名取", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fubuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_吹雪 {
+            get {
+                return ResourceManager.GetString("ShipName_吹雪", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yubari に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_夕張 {
+            get {
+                return ResourceManager.GetString("ShipName_夕張", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yudachi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_夕立 {
+            get {
+                return ResourceManager.GetString("ShipName_夕立", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yugumo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_夕雲 {
+            get {
+                return ResourceManager.GetString("ShipName_夕雲", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tama に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_多摩 {
+            get {
+                return ResourceManager.GetString("ShipName_多摩", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Oi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_大井 {
+            get {
+                return ResourceManager.GetString("ShipName_大井", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yamato に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_大和 {
+            get {
+                return ResourceManager.GetString("ShipName_大和", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Oyodo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_大淀 {
+            get {
+                return ResourceManager.GetString("ShipName_大淀", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Oshio に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_大潮 {
+            get {
+                return ResourceManager.GetString("ShipName_大潮", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Taigei に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_大鯨 {
+            get {
+                return ResourceManager.GetString("ShipName_大鯨", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Taiho に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_大鳳 {
+            get {
+                return ResourceManager.GetString("ShipName_大鳳", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Amatsukaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_天津風 {
+            get {
+                return ResourceManager.GetString("ShipName_天津風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tenryu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_天龍 {
+            get {
+                return ResourceManager.GetString("ShipName_天龍", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kisaragi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_如月 {
+            get {
+                return ResourceManager.GetString("ShipName_如月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Myoko に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_妙高 {
+            get {
+                return ResourceManager.GetString("ShipName_妙高", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Nenohi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_子日 {
+            get {
+                return ResourceManager.GetString("ShipName_子日", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yamashiro に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_山城 {
+            get {
+                return ResourceManager.GetString("ShipName_山城", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shimakaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_島風 {
+            get {
+                return ResourceManager.GetString("ShipName_島風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sendai に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_川内 {
+            get {
+                return ResourceManager.GetString("ShipName_川内", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Makigumo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_巻雲 {
+            get {
+                return ResourceManager.GetString("ShipName_巻雲", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yayoi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_弥生 {
+            get {
+                return ResourceManager.GetString("ShipName_弥生", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Atago に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_愛宕 {
+            get {
+                return ResourceManager.GetString("ShipName_愛宕", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fusou に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_扶桑 {
+            get {
+                return ResourceManager.GetString("ShipName_扶桑", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Maya に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_摩耶 {
+            get {
+                return ResourceManager.GetString("ShipName_摩耶", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shikinami に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_敷波 {
+            get {
+                return ResourceManager.GetString("ShipName_敷波", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fumizuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_文月 {
+            get {
+                return ResourceManager.GetString("ShipName_文月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hyuga に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_日向 {
+            get {
+                return ResourceManager.GetString("ShipName_日向", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hayashimo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_早霜 {
+            get {
+                return ResourceManager.GetString("ShipName_早霜", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Akashi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_明石 {
+            get {
+                return ResourceManager.GetString("ShipName_明石", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Harusame に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_春雨 {
+            get {
+                return ResourceManager.GetString("ShipName_春雨", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tokitsukaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_時津風 {
+            get {
+                return ResourceManager.GetString("ShipName_時津風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shigure に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_時雨 {
+            get {
+                return ResourceManager.GetString("ShipName_時雨", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Akatsuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_暁 {
+            get {
+                return ResourceManager.GetString("ShipName_暁", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Akebono に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_曙 {
+            get {
+                return ResourceManager.GetString("ShipName_曙", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mogami に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_最上 {
+            get {
+                return ResourceManager.GetString("ShipName_最上", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mochizuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_望月 {
+            get {
+                return ResourceManager.GetString("ShipName_望月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Asashio に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_朝潮 {
+            get {
+                return ResourceManager.GetString("ShipName_朝潮", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Oboro に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_朧 {
+            get {
+                return ResourceManager.GetString("ShipName_朧", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kiso に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_木曾 {
+            get {
+                return ResourceManager.GetString("ShipName_木曾", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Murasame に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_村雨 {
+            get {
+                return ResourceManager.GetString("ShipName_村雨", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Haruna に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_榛名 {
+            get {
+                return ResourceManager.GetString("ShipName_榛名", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Musashi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_武蔵 {
+            get {
+                return ResourceManager.GetString("ShipName_武蔵", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hiei に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_比叡 {
+            get {
+                return ResourceManager.GetString("ShipName_比叡", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hamakaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_浜風 {
+            get {
+                return ResourceManager.GetString("ShipName_浜風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Urakaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_浦風 {
+            get {
+                return ResourceManager.GetString("ShipName_浦風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Suzukaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_涼風 {
+            get {
+                return ResourceManager.GetString("ShipName_涼風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Miyuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_深雪 {
+            get {
+                return ResourceManager.GetString("ShipName_深雪", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kiyoshimo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_清霜 {
+            get {
+                return ResourceManager.GetString("ShipName_清霜", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Michishio に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_満潮 {
+            get {
+                return ResourceManager.GetString("ShipName_満潮", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sazanami に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_漣 {
+            get {
+                return ResourceManager.GetString("ShipName_漣", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ushio に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_潮 {
+            get {
+                return ResourceManager.GetString("ShipName_潮", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kumano に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_熊野 {
+            get {
+                return ResourceManager.GetString("ShipName_熊野", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kuma に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_球磨 {
+            get {
+                return ResourceManager.GetString("ShipName_球磨", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Zuihou に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_瑞鳳 {
+            get {
+                return ResourceManager.GetString("ShipName_瑞鳳", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Zuikaku に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_瑞鶴 {
+            get {
+                return ResourceManager.GetString("ShipName_瑞鶴", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yura に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_由良 {
+            get {
+                return ResourceManager.GetString("ShipName_由良", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shirayuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_白雪 {
+            get {
+                return ResourceManager.GetString("ShipName_白雪", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shiratsuyu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_白露 {
+            get {
+                return ResourceManager.GetString("ShipName_白露", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Satsuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_皐月 {
+            get {
+                return ResourceManager.GetString("ShipName_皐月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mutsuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_睦月 {
+            get {
+                return ResourceManager.GetString("ShipName_睦月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yahagi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_矢矧 {
+            get {
+                return ResourceManager.GetString("ShipName_矢矧", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Isonami に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_磯波 {
+            get {
+                return ResourceManager.GetString("ShipName_磯波", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Isokaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_磯風 {
+            get {
+                return ResourceManager.GetString("ShipName_磯風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Jintsuu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_神通 {
+            get {
+                return ResourceManager.GetString("ShipName_神通", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shouhou に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_祥鳳 {
+            get {
+                return ResourceManager.GetString("ShipName_祥鳳", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Akizuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_秋月 {
+            get {
+                return ResourceManager.GetString("ShipName_秋月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Akigumo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_秋雲 {
+            get {
+                return ResourceManager.GetString("ShipName_秋雲", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chikuma に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_筑摩 {
+            get {
+                return ResourceManager.GetString("ShipName_筑摩", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ayanami に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_綾波 {
+            get {
+                return ResourceManager.GetString("ShipName_綾波", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Haguro に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_羽黒 {
+            get {
+                return ResourceManager.GetString("ShipName_羽黒", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Shokaku に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_翔鶴 {
+            get {
+                return ResourceManager.GetString("ShipName_翔鶴", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Noshiro に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_能代 {
+            get {
+                return ResourceManager.GetString("ShipName_能代", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Maikaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_舞風 {
+            get {
+                return ResourceManager.GetString("ShipName_舞風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Wakaba に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_若葉 {
+            get {
+                return ResourceManager.GetString("ShipName_若葉", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Arashio に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_荒潮 {
+            get {
+                return ResourceManager.GetString("ShipName_荒潮", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kikuzuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_菊月 {
+            get {
+                return ResourceManager.GetString("ShipName_菊月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Souryuu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_蒼龍 {
+            get {
+                return ResourceManager.GetString("ShipName_蒼龍", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kinugasa に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_衣笠 {
+            get {
+                return ResourceManager.GetString("ShipName_衣笠", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tanikaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_谷風 {
+            get {
+                return ResourceManager.GetString("ShipName_谷風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Akagi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_赤城 {
+            get {
+                return ResourceManager.GetString("ShipName_赤城", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ashigara に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_足柄 {
+            get {
+                return ResourceManager.GetString("ShipName_足柄", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Nachi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_那智 {
+            get {
+                return ResourceManager.GetString("ShipName_那智", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Naka に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_那珂 {
+            get {
+                return ResourceManager.GetString("ShipName_那珂", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sakawa に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_酒匂 {
+            get {
+                return ResourceManager.GetString("ShipName_酒匂", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kongo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_金剛 {
+            get {
+                return ResourceManager.GetString("ShipName_金剛", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Suzuya に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_鈴谷 {
+            get {
+                return ResourceManager.GetString("ShipName_鈴谷", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Nagatsuki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_長月 {
+            get {
+                return ResourceManager.GetString("ShipName_長月", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Naganami に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_長波 {
+            get {
+                return ResourceManager.GetString("ShipName_長波", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Nagara に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_長良 {
+            get {
+                return ResourceManager.GetString("ShipName_長良", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Nagato に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_長門 {
+            get {
+                return ResourceManager.GetString("ShipName_長門", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Abukuma に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_阿武隈 {
+            get {
+                return ResourceManager.GetString("ShipName_阿武隈", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Agano に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_阿賀野 {
+            get {
+                return ResourceManager.GetString("ShipName_阿賀野", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mutsu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_陸奥 {
+            get {
+                return ResourceManager.GetString("ShipName_陸奥", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kagerou に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_陽炎 {
+            get {
+                return ResourceManager.GetString("ShipName_陽炎", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Jun&apos;yo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_隼鷹 {
+            get {
+                return ResourceManager.GetString("ShipName_隼鷹", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yukikaze に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_雪風 {
+            get {
+                return ResourceManager.GetString("ShipName_雪風", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Unryu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_雲龍 {
+            get {
+                return ResourceManager.GetString("ShipName_雲龍", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ikazuchi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_雷 {
+            get {
+                return ResourceManager.GetString("ShipName_雷", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Inazuma に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_電 {
+            get {
+                return ResourceManager.GetString("ShipName_電", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kasumi に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_霞 {
+            get {
+                return ResourceManager.GetString("ShipName_霞", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kirishima に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_霧島 {
+            get {
+                return ResourceManager.GetString("ShipName_霧島", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Arare に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_霰 {
+            get {
+                return ResourceManager.GetString("ShipName_霰", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Aoba に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_青葉 {
+            get {
+                return ResourceManager.GetString("ShipName_青葉", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hibiki に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_響 {
+            get {
+                return ResourceManager.GetString("ShipName_響", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hiyo に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_飛鷹 {
+            get {
+                return ResourceManager.GetString("ShipName_飛鷹", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hiryu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_飛龍 {
+            get {
+                return ResourceManager.GetString("ShipName_飛龍", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Takao に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_高雄 {
+            get {
+                return ResourceManager.GetString("ShipName_高雄", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kinu に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_鬼怒 {
+            get {
+                return ResourceManager.GetString("ShipName_鬼怒", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Chokai に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_鳥海 {
+            get {
+                return ResourceManager.GetString("ShipName_鳥海", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Hosho に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_鳳翔 {
+            get {
+                return ResourceManager.GetString("ShipName_鳳翔", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Kuroshio に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_黒潮 {
+            get {
+                return ResourceManager.GetString("ShipName_黒潮", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tatsuta に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_龍田 {
+            get {
+                return ResourceManager.GetString("ShipName_龍田", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ryuujou に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_龍驤 {
+            get {
+                return ResourceManager.GetString("ShipName_龍驤", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ryuho に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipName_龍鳳 {
+            get {
+                return ResourceManager.GetString("ShipName_龍鳳", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Repair Ship に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_工作艦 {
+            get {
+                return ResourceManager.GetString("ShipType_工作艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Battleship に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_戦艦 {
+            get {
+                return ResourceManager.GetString("ShipType_戦艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Amphibious Assault Ship に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_揚陸艦 {
+            get {
+                return ResourceManager.GetString("ShipType_揚陸艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fleet Carrier に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_正規空母 {
+            get {
+                return ResourceManager.GetString("ShipType_正規空母", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Seaplane Tender に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_水上機母艦 {
+            get {
+                return ResourceManager.GetString("ShipType_水上機母艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Escort ship に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_海防艦 {
+            get {
+                return ResourceManager.GetString("ShipType_海防艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Submarine Tender に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_潜水母艦 {
+            get {
+                return ResourceManager.GetString("ShipType_潜水母艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Submarine Aircraft Carrier に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_潜水空母 {
+            get {
+                return ResourceManager.GetString("ShipType_潜水空母", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Submarine に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_潜水艦 {
+            get {
+                return ResourceManager.GetString("ShipType_潜水艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Aviation Cruiser に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_航空巡洋艦 {
+            get {
+                return ResourceManager.GetString("ShipType_航空巡洋艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Aviation Battleship に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_航空戦艦 {
+            get {
+                return ResourceManager.GetString("ShipType_航空戦艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Armored Aircraft Carrier に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_装甲空母 {
+            get {
+                return ResourceManager.GetString("ShipType_装甲空母", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Supply Ship に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_補給艦 {
+            get {
+                return ResourceManager.GetString("ShipType_補給艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Super Dreadnoughts に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_超弩級戦艦 {
+            get {
+                return ResourceManager.GetString("ShipType_超弩級戦艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Light Cruiser に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_軽巡洋艦 {
+            get {
+                return ResourceManager.GetString("ShipType_軽巡洋艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Light Aircraft Carrier に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_軽空母 {
+            get {
+                return ResourceManager.GetString("ShipType_軽空母", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Heavy Cruiser に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_重巡洋艦 {
+            get {
+                return ResourceManager.GetString("ShipType_重巡洋艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Torpedo Cruiser に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_重雷装巡洋艦 {
+            get {
+                return ResourceManager.GetString("ShipType_重雷装巡洋艦", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Destroyer に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShipType_駆逐艦 {
+            get {
+                return ResourceManager.GetString("ShipType_駆逐艦", resourceCulture);
             }
         }
         
@@ -277,501 +1762,6 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
-        ///   Akitsu Maru に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string あきつ丸 {
-            get {
-                return ResourceManager.GetString("あきつ丸", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Maruyu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string まるゆ {
-            get {
-                return ResourceManager.GetString("まるゆ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Mikazuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 三日月 {
-            get {
-                return ResourceManager.GetString("三日月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Mikuma に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 三隈 {
-            get {
-                return ResourceManager.GetString("三隈", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shiranui に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 不知火 {
-            get {
-                return ResourceManager.GetString("不知火", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Isuzu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 五十鈴 {
-            get {
-                return ResourceManager.GetString("五十鈴", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Samidare に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 五月雨 {
-            get {
-                return ResourceManager.GetString("五月雨", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   I-168 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 伊168 {
-            get {
-                return ResourceManager.GetString("伊168", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   I-19 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 伊19 {
-            get {
-                return ResourceManager.GetString("伊19", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   I-401 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 伊401 {
-            get {
-                return ResourceManager.GetString("伊401", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   I-58 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 伊58 {
-            get {
-                return ResourceManager.GetString("伊58", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   I-8 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 伊8 {
-            get {
-                return ResourceManager.GetString("伊8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ise に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 伊勢 {
-            get {
-                return ResourceManager.GetString("伊勢", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shinano に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 信濃 {
-            get {
-                return ResourceManager.GetString("信濃", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hatsuharu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 初春 {
-            get {
-                return ResourceManager.GetString("初春", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hatsuyuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 初雪 {
-            get {
-                return ResourceManager.GetString("初雪", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hatsushimo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 初霜 {
-            get {
-                return ResourceManager.GetString("初霜", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hatsukaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 初風 {
-            get {
-                return ResourceManager.GetString("初風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Tone に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 利根 {
-            get {
-                return ResourceManager.GetString("利根", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kako に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 加古 {
-            get {
-                return ResourceManager.GetString("加古", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kaga に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 加賀 {
-            get {
-                return ResourceManager.GetString("加賀", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kitakami に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 北上 {
-            get {
-                return ResourceManager.GetString("北上", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Chiyoda に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 千代田 {
-            get {
-                return ResourceManager.GetString("千代田", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Chitose に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 千歳 {
-            get {
-                return ResourceManager.GetString("千歳", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Uzuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 卯月 {
-            get {
-                return ResourceManager.GetString("卯月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Murakumo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 叢雲 {
-            get {
-                return ResourceManager.GetString("叢雲", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Furutaka に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 古鷹 {
-            get {
-                return ResourceManager.GetString("古鷹", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Natori に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 名取 {
-            get {
-                return ResourceManager.GetString("名取", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Fubuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 吹雪 {
-            get {
-                return ResourceManager.GetString("吹雪", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yuubari に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 夕張 {
-            get {
-                return ResourceManager.GetString("夕張", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yuudachi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 夕立 {
-            get {
-                return ResourceManager.GetString("夕立", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yuugumo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 夕雲 {
-            get {
-                return ResourceManager.GetString("夕雲", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Tama に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 多摩 {
-            get {
-                return ResourceManager.GetString("多摩", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ooi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 大井 {
-            get {
-                return ResourceManager.GetString("大井", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yamato に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 大和 {
-            get {
-                return ResourceManager.GetString("大和", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ooyodo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 大淀 {
-            get {
-                return ResourceManager.GetString("大淀", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ooshio に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 大潮 {
-            get {
-                return ResourceManager.GetString("大潮", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Taigei に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 大鯨 {
-            get {
-                return ResourceManager.GetString("大鯨", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Taihou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 大鳳 {
-            get {
-                return ResourceManager.GetString("大鳳", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Amatsukaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 天津風 {
-            get {
-                return ResourceManager.GetString("天津風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Tenryuu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 天龍 {
-            get {
-                return ResourceManager.GetString("天龍", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kisaragi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 如月 {
-            get {
-                return ResourceManager.GetString("如月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Myoukou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 妙高 {
-            get {
-                return ResourceManager.GetString("妙高", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Nenohi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 子日 {
-            get {
-                return ResourceManager.GetString("子日", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yamashiro に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 山城 {
-            get {
-                return ResourceManager.GetString("山城", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shimakaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 島風 {
-            get {
-                return ResourceManager.GetString("島風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sendai に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 川内 {
-            get {
-                return ResourceManager.GetString("川内", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Repair Ship に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 工作艦 {
-            get {
-                return ResourceManager.GetString("工作艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Makigumo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 巻雲 {
-            get {
-                return ResourceManager.GetString("巻雲", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yayoi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 弥生 {
-            get {
-                return ResourceManager.GetString("弥生", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Atago に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 愛宕 {
-            get {
-                return ResourceManager.GetString("愛宕", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Battleship に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 戦艦 {
-            get {
-                return ResourceManager.GetString("戦艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Fusou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 扶桑 {
-            get {
-                return ResourceManager.GetString("扶桑", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Amphibious Assault Ship に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 揚陸艦 {
-            get {
-                return ResourceManager.GetString("揚陸艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Maya に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 摩耶 {
-            get {
-                return ResourceManager.GetString("摩耶", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Kai に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string 改 {
@@ -786,960 +1776,6 @@ namespace Miotsukushi.Properties {
         public static string 改二 {
             get {
                 return ResourceManager.GetString("改二", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shikinami に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 敷波 {
-            get {
-                return ResourceManager.GetString("敷波", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Fumizuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 文月 {
-            get {
-                return ResourceManager.GetString("文月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hyuuga に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 日向 {
-            get {
-                return ResourceManager.GetString("日向", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hayashimo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 早霜 {
-            get {
-                return ResourceManager.GetString("早霜", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Akashi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 明石 {
-            get {
-                return ResourceManager.GetString("明石", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Harusame に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 春雨 {
-            get {
-                return ResourceManager.GetString("春雨", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Tokitsukaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 時津風 {
-            get {
-                return ResourceManager.GetString("時津風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shigure に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 時雨 {
-            get {
-                return ResourceManager.GetString("時雨", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Akatsuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 暁 {
-            get {
-                return ResourceManager.GetString("暁", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Akebono に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 曙 {
-            get {
-                return ResourceManager.GetString("曙", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Mogami に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 最上 {
-            get {
-                return ResourceManager.GetString("最上", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Mochizuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 望月 {
-            get {
-                return ResourceManager.GetString("望月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Asashio に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 朝潮 {
-            get {
-                return ResourceManager.GetString("朝潮", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Oboro に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 朧 {
-            get {
-                return ResourceManager.GetString("朧", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kiso に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 木曾 {
-            get {
-                return ResourceManager.GetString("木曾", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Murasame に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 村雨 {
-            get {
-                return ResourceManager.GetString("村雨", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Haruna に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 榛名 {
-            get {
-                return ResourceManager.GetString("榛名", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Fleet Carrier に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 正規空母 {
-            get {
-                return ResourceManager.GetString("正規空母", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Musashi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 武蔵 {
-            get {
-                return ResourceManager.GetString("武蔵", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hiei に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 比叡 {
-            get {
-                return ResourceManager.GetString("比叡", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Seaplane Tender に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 水上機母艦 {
-            get {
-                return ResourceManager.GetString("水上機母艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hamakaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 浜風 {
-            get {
-                return ResourceManager.GetString("浜風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Urakaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 浦風 {
-            get {
-                return ResourceManager.GetString("浦風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Escort ship に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 海防艦 {
-            get {
-                return ResourceManager.GetString("海防艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Suzukaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 涼風 {
-            get {
-                return ResourceManager.GetString("涼風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Miyuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 深雪 {
-            get {
-                return ResourceManager.GetString("深雪", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kiyoshimo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 清霜 {
-            get {
-                return ResourceManager.GetString("清霜", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Michishio に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 満潮 {
-            get {
-                return ResourceManager.GetString("満潮", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sazanami に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 漣 {
-            get {
-                return ResourceManager.GetString("漣", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Submarine Tender に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 潜水母艦 {
-            get {
-                return ResourceManager.GetString("潜水母艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Submarine Aircraft Carrier に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 潜水空母 {
-            get {
-                return ResourceManager.GetString("潜水空母", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Submarine に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 潜水艦 {
-            get {
-                return ResourceManager.GetString("潜水艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ushio に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 潮 {
-            get {
-                return ResourceManager.GetString("潮", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kumano に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 熊野 {
-            get {
-                return ResourceManager.GetString("熊野", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kuma に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 球磨 {
-            get {
-                return ResourceManager.GetString("球磨", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Zuihou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 瑞鳳 {
-            get {
-                return ResourceManager.GetString("瑞鳳", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Zuikaku に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 瑞鶴 {
-            get {
-                return ResourceManager.GetString("瑞鶴", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yura に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 由良 {
-            get {
-                return ResourceManager.GetString("由良", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shirayuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 白雪 {
-            get {
-                return ResourceManager.GetString("白雪", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shiratsuyu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 白露 {
-            get {
-                return ResourceManager.GetString("白露", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Satsuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 皐月 {
-            get {
-                return ResourceManager.GetString("皐月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Mutsuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 睦月 {
-            get {
-                return ResourceManager.GetString("睦月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yahagi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 矢矧 {
-            get {
-                return ResourceManager.GetString("矢矧", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Isonami に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 磯波 {
-            get {
-                return ResourceManager.GetString("磯波", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Isokaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 磯風 {
-            get {
-                return ResourceManager.GetString("磯風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Jintsuu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 神通 {
-            get {
-                return ResourceManager.GetString("神通", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shouhou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 祥鳳 {
-            get {
-                return ResourceManager.GetString("祥鳳", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Akizuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 秋月 {
-            get {
-                return ResourceManager.GetString("秋月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Akigumo に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 秋雲 {
-            get {
-                return ResourceManager.GetString("秋雲", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Chikuma に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 筑摩 {
-            get {
-                return ResourceManager.GetString("筑摩", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ayanami に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 綾波 {
-            get {
-                return ResourceManager.GetString("綾波", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Haguro に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 羽黒 {
-            get {
-                return ResourceManager.GetString("羽黒", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Shoukaku に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 翔鶴 {
-            get {
-                return ResourceManager.GetString("翔鶴", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Noshiro に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 能代 {
-            get {
-                return ResourceManager.GetString("能代", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Maikaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 舞風 {
-            get {
-                return ResourceManager.GetString("舞風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Aviation Cruiser に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 航空巡洋艦 {
-            get {
-                return ResourceManager.GetString("航空巡洋艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Aviation Battleship に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 航空戦艦 {
-            get {
-                return ResourceManager.GetString("航空戦艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Wakaba に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 若葉 {
-            get {
-                return ResourceManager.GetString("若葉", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Arashio に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 荒潮 {
-            get {
-                return ResourceManager.GetString("荒潮", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kikuzuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 菊月 {
-            get {
-                return ResourceManager.GetString("菊月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Souryuu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 蒼龍 {
-            get {
-                return ResourceManager.GetString("蒼龍", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kinugasa に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 衣笠 {
-            get {
-                return ResourceManager.GetString("衣笠", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Armored Aircraft Carrier に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 装甲空母 {
-            get {
-                return ResourceManager.GetString("装甲空母", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Supply Ship に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 補給艦 {
-            get {
-                return ResourceManager.GetString("補給艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Tanikaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 谷風 {
-            get {
-                return ResourceManager.GetString("谷風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Akagi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 赤城 {
-            get {
-                return ResourceManager.GetString("赤城", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Super Dreadnoughts に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 超弩級戦艦 {
-            get {
-                return ResourceManager.GetString("超弩級戦艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ashigara に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 足柄 {
-            get {
-                return ResourceManager.GetString("足柄", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Light Cruiser に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 軽巡洋艦 {
-            get {
-                return ResourceManager.GetString("軽巡洋艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Light Aircraft Carrier に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 軽空母 {
-            get {
-                return ResourceManager.GetString("軽空母", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Nachi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 那智 {
-            get {
-                return ResourceManager.GetString("那智", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Naka に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 那珂 {
-            get {
-                return ResourceManager.GetString("那珂", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sakawa に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 酒匂 {
-            get {
-                return ResourceManager.GetString("酒匂", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Heavy Cruiser に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 重巡洋艦 {
-            get {
-                return ResourceManager.GetString("重巡洋艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Torpedo Cruiser に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 重雷装巡洋艦 {
-            get {
-                return ResourceManager.GetString("重雷装巡洋艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kongou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 金剛 {
-            get {
-                return ResourceManager.GetString("金剛", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Suzuya に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 鈴谷 {
-            get {
-                return ResourceManager.GetString("鈴谷", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Nagatsuki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 長月 {
-            get {
-                return ResourceManager.GetString("長月", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Naganami に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 長波 {
-            get {
-                return ResourceManager.GetString("長波", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Nagara に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 長良 {
-            get {
-                return ResourceManager.GetString("長良", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Nagato に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 長門 {
-            get {
-                return ResourceManager.GetString("長門", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Abukuma に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 阿武隈 {
-            get {
-                return ResourceManager.GetString("阿武隈", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Agano に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 阿賀野 {
-            get {
-                return ResourceManager.GetString("阿賀野", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Mutsu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 陸奥 {
-            get {
-                return ResourceManager.GetString("陸奥", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kagerou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 陽炎 {
-            get {
-                return ResourceManager.GetString("陽炎", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Jun&apos;you に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 隼鷹 {
-            get {
-                return ResourceManager.GetString("隼鷹", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Yukikaze に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 雪風 {
-            get {
-                return ResourceManager.GetString("雪風", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Unryuu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 雲龍 {
-            get {
-                return ResourceManager.GetString("雲龍", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ikazuchi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 雷 {
-            get {
-                return ResourceManager.GetString("雷", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Inazuma に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 電 {
-            get {
-                return ResourceManager.GetString("電", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kasumi に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 霞 {
-            get {
-                return ResourceManager.GetString("霞", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kirishima に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 霧島 {
-            get {
-                return ResourceManager.GetString("霧島", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Arare に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 霰 {
-            get {
-                return ResourceManager.GetString("霰", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Aoba に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 青葉 {
-            get {
-                return ResourceManager.GetString("青葉", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hibiki に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 響 {
-            get {
-                return ResourceManager.GetString("響", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hiyou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 飛鷹 {
-            get {
-                return ResourceManager.GetString("飛鷹", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Hiryuu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 飛龍 {
-            get {
-                return ResourceManager.GetString("飛龍", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Destroyer に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 駆逐艦 {
-            get {
-                return ResourceManager.GetString("駆逐艦", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Takao に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 高雄 {
-            get {
-                return ResourceManager.GetString("高雄", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kinu に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 鬼怒 {
-            get {
-                return ResourceManager.GetString("鬼怒", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Choukai に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 鳥海 {
-            get {
-                return ResourceManager.GetString("鳥海", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Houshou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 鳳翔 {
-            get {
-                return ResourceManager.GetString("鳳翔", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Kuroshio に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 黒潮 {
-            get {
-                return ResourceManager.GetString("黒潮", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Tatsuta に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 龍田 {
-            get {
-                return ResourceManager.GetString("龍田", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ryuujou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 龍驤 {
-            get {
-                return ResourceManager.GetString("龍驤", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ryuuhou に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string 龍鳳 {
-            get {
-                return ResourceManager.GetString("龍鳳", resourceCulture);
             }
         }
     }

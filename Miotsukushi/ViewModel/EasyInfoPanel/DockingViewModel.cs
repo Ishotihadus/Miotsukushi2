@@ -24,7 +24,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                     {
                         var index = model.shipdata.FirstOrDefault(_ => _.shipid == model.ndockdata[id].shipid);
                         if(index != null && model.charamaster.ContainsKey(index.characterid))
-                            return Tools.ResourceStringGetter.GetNameResourceString(model.charamaster[index.characterid].name);
+                            return Tools.ResourceStringGetter.GetShipNameResourceString(model.charamaster[index.characterid].name);
                         else
                             return Tools.ResourceStringGetter.GetResourceString("DockingStatus_Unknown");
                     }

@@ -47,7 +47,7 @@
                 </StackPanel>
             </ScrollViewer>
         </GroupBox>
-        <GroupBox Header="{Binding EasyInfoPanelTitle_Mission, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="3" VerticalAlignment="Top"/>
+        <GroupBox Header="{Binding EasyInfoPanelTitle_Quests, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="3" VerticalAlignment="Top"/>
             
 	</Grid>
 </UserControl>

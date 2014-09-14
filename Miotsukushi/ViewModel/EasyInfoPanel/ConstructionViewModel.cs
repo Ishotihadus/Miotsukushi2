@@ -22,7 +22,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                 if (model.kdockdata != null && model.kdockdata.Count > id)
                     if (model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid) &&
                         model.shiptypemaster != null && model.shiptypemaster.ContainsKey(model.charamaster[model.kdockdata[id].charaid].shiptype))
-                        return Tools.ResourceStringGetter.GetNameResourceString(model.shiptypemaster[model.charamaster[model.kdockdata[id].charaid].shiptype].name);
+                        return Tools.ResourceStringGetter.GetShipTypeNameResourceString(model.shiptypemaster[model.charamaster[model.kdockdata[id].charaid].shiptype].name);
                     else
                         return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
                 else

@@ -19,6 +19,7 @@ namespace Miotsukushi
         {
             SetCurrentCulture("en-US");
             GetCurrentCulture();
+            System.Diagnostics.Debug.WriteLine(Tools.ResourceStringGetter.GetShipNameResourceString("天津風改二"));
             Model.MainModel.GetInstance();
             var Window = new View.MainWindow();
             Window.Closed += Window_Closed;

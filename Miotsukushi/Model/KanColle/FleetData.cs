@@ -58,7 +58,7 @@ namespace Miotsukushi.Model.KanColle
             bool shipchanged = false;
             for (int i = 0; i < data.ship.Length; i++)
             {
-                if (i == -1)
+                if (data.ship[i] == -1)
                     break;
                 if (i < ships.Count)
                 {

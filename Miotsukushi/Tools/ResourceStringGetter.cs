@@ -19,12 +19,9 @@ namespace Miotsukushi.Tools
             return Properties.Resources.ResourceManager.GetString(key) ?? _not_found_message;
         }
 
-        public static string GetNameResourceString(string key)
+        public static string GetShipTypeNameResourceString(string key)
         {
-            if (string.IsNullOrEmpty(key) || IsCultureJP())
-                return key;
-
-            return Properties.Resources.ResourceManager.GetString(key) ?? key;
+            return GetNameResourceString("ShipType_" + key) ?? key;
         }
 
         public static string GetShipNameResourceString(string key)
@@ -34,21 +31,29 @@ namespace Miotsukushi.Tools
 
             if (key.Length >= 2 && key.Substring(key.Length - 2) == "改二")
             {
-                return GetNameResourceString(key.Substring(0, key.Length - 2)) + GetNameResourceString("改二");
+                return (GetNameResourceString("ShipName_" + key.Substring(0, key.Length - 2)) ?? key.Substring(0, key.Length - 2)) + (GetNameResourceString("改二") ?? "改二");
             }
-            else if (key.Length >= 1 && key.Substring(key.Length - 1) == "改")
+            else if (key.Length >= 1 && key[key.Length - 1] == '改')
             {
-                return GetNameResourceString(key.Substring(0, key.Length - 1)) + GetNameResourceString("改");
+                return (GetNameResourceString("ShipName_" + key.Substring(0, key.Length - 1)) ?? key.Substring(0, key.Length - 1)) + (GetNameResourceString("改") ?? "改");
             }
             else
             {
-                return GetNameResourceString(key);
+                return GetNameResourceString("ShipName_" + key) ?? key;
             }
         }
 
         private static bool IsCultureJP()
         {
             return Thread.CurrentThread.CurrentCulture.Name == "ja-JP" && Thread.CurrentThread.CurrentUICulture.Name == "ja-JP";
+        }
+
+        private static string GetNameResourceString(string key)
+        {
+            if (string.IsNullOrEmpty(key) || IsCultureJP())
+                return null;
+
+            return Properties.Resources.ResourceManager.GetString(key);
         }
     }
 }
