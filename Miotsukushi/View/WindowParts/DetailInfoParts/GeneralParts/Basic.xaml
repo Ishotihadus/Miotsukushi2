@@ -1,0 +1,33 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.Basic"
+	x:Name="UserControl"
+	d:DesignWidth="554" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid Margin="0,0,5,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" Text="イショティハドゥスああああああああ" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2"/>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" Text="司令部コメント司令部コメント司令部コメント" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1"/>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2"><Run Text="Lv. "/><Run FontSize="15" Text="99"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"><Run Text="exp. "/><Run Text="99999999"/></TextBlock>
+		</Grid>
+	</Grid>
+</UserControl>

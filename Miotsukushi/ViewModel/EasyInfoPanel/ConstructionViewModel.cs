@@ -12,136 +12,172 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
     {
         int id;
         KanColleModel model;
+        static string unknown_text = Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
 
         #region プロパティ定義
 
+        private string _ShipType = unknown_text;
         public string ShipType
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id)
-                    if (model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid) &&
-                        model.shiptypemaster != null && model.shiptypemaster.ContainsKey(model.charamaster[model.kdockdata[id].charaid].shiptype))
-                        return Tools.ResourceStringGetter.GetShipTypeNameResourceString(model.shiptypemaster[model.charamaster[model.kdockdata[id].charaid].shiptype].name);
-                    else
-                        return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
-                else
-                    return null;
+                return _ShipType;
+            }
+
+            set
+            {
+                if (_ShipType != value)
+                {
+                    _ShipType = value;
+                    OnPropertyChanged(() => ShipType);
+                }
             }
         }
 
+        private string _ShipName = unknown_text;
         public string ShipName
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id)
-                    if (model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid))
-                        return Tools.ResourceStringGetter.GetShipNameResourceString(model.charamaster[model.kdockdata[id].charaid].name);
-                    else
-                        return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
-                else
-                    return null;
+                return _ShipName;
+            }
+
+            set
+            {
+                if (_ShipName != value)
+                {
+                    _ShipName = value;
+                    OnPropertyChanged(() => ShipName);
+                }
             }
         }
 
+        private TimeSpan _RemainTime = new TimeSpan();
         public TimeSpan RemainTime
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id)
-                    return model.kdockdata[id].complete_time - DateTime.Now;
-                else
-                    return new TimeSpan();
+                return _RemainTime;
+            }
+
+            set
+            {
+                if (_RemainTime != value)
+                {
+                    _RemainTime = value;
+                    OnPropertyChanged(() => RemainTime);
+                }
             }
         }
 
+        private DateTime? _CompleteTime = null;
         public DateTime? CompleteTime
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id)
-                    if (model.kdockdata[id].status == KDockStatus.building)
-                        return model.kdockdata[id].complete_time;
-                    else
-                        return null;
-                else
-                    return null;
+                return _CompleteTime;
+            }
+
+            set
+            {
+                if (_CompleteTime != value)
+                {
+                    _CompleteTime = value;
+                    OnPropertyChanged(() => CompleteTime);
+                }
             }
         }
 
+        private double _ProgressValue = 0;
         public double ProgressValue
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id && model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid))
-                    return model.charamaster[model.kdockdata[id].charaid].buildingtime - RemainTime.TotalMinutes;
-                else
-                    return 0;
+                return _ProgressValue;
+            }
+
+            set
+            {
+                if (_ProgressValue != value)
+                {
+                    _ProgressValue = value;
+                    OnPropertyChanged(() => ProgressValue);
+                }
             }
         }
 
+        private double _ProgressMax = 0;
         public double ProgressMax
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id && model.charamaster != null && model.charamaster.ContainsKey(model.kdockdata[id].charaid))
-                    return model.charamaster[model.kdockdata[id].charaid].buildingtime;
-                else
-                    return 0;
+                return _ProgressMax;
+            }
+
+            set
+            {
+                if (_ProgressMax != value)
+                {
+                    _ProgressMax = value;
+                    OnPropertyChanged(() => ProgressMax);
+                }
             }
         }
 
+        private string _Message = Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_NotLoaded");
         public string Message
         {
             get
             {
-                if (model.kdockdata != null)
-                    if (model.kdockdata.Count > id)
-                        switch (model.kdockdata[id].status)
-                        {
-                            case KDockStatus.unknown:
-                                return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
-                            case KDockStatus.locked:
-                                return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Locked");
-                            case KDockStatus.empty:
-                                return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Empty");
-                            default:
-                                return null;
-                        }
-                    else
-                        return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_NotLoaded");
-                else
-                    return Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
+                return _Message;
+            }
+
+            set
+            {
+                if (_Message != value)
+                {
+                    _Message = value;
+                    OnPropertyChanged(() => Message);
+                }
             }
         }
 
+        private bool _DetailVisibility = false;
         public bool DetailVisibility
         {
             get
             {
-                if (model.kdockdata != null && model.kdockdata.Count > id)
-                    switch (model.kdockdata[id].status)
-                    {
-                        case KDockStatus.building:
-                        case KDockStatus.complete:
-                            return true;
-                        default:
-                            return false;
-                    }
-                else
-                    return false;
+                return _DetailVisibility;
+            }
+
+            set
+            {
+                if (_DetailVisibility != value)
+                {
+                    _DetailVisibility = value;
+                    OnPropertyChanged(() => DetailVisibility);
+                }
             }
         }
 
         private Brush _BorderBrush = Brushes.Gray;
-
         public Brush BorderBrush
         {
             get
             {
                 return _BorderBrush;
             }
+
+            set
+            {
+                if (_BorderBrush != value)
+                {
+                    _BorderBrush = value;
+                    OnPropertyChanged(() => BorderBrush);
+                }
+            }
         }
+
 
         #endregion
 
@@ -156,63 +192,132 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         void model_InitializeComplete(object sender, EventArgs e)
         {
-            OnPropertyChanged("");
+            all_update();
         }
 
         void kdockdata_ItemAdded(object sender, EventArgs e)
         {
             if (model.kdockdata.Count > id)
             {
-                model.kdockdata[id].KDockChanged += ConstructionViewModel_KDockChanged;
-                UpdateBorderBrush();
-                OnPropertyChanged("");
+                model.kdockdata[id].PropertyChanged += ConstructionViewModel_PropertyChanged;
                 model.kdockdata.ItemAdded -= kdockdata_ItemAdded;
+                all_update();
             }
+        }
+
+        void ConstructionViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            all_update();
         }
 
         void timerModel_TimerElapsed(object sender, EventArgs e)
         {
-            OnPropertyChanged(() => RemainTime);
-            OnPropertyChanged(() => ProgressValue);
-            UpdateBorderBrush();
+            timer_update();
         }
 
-        void ConstructionViewModel_KDockChanged(object sender, EventArgs e)
+        void all_update()
         {
-            UpdateBorderBrush();
-            OnPropertyChanged("");
-        }
-
-        void UpdateBorderBrush()
-        {
-            var nowbrush = GetBorderBrush();
-            if (_BorderBrush != nowbrush)
+            if (id >= model.kdockdata.Count)
             {
-                _BorderBrush = nowbrush;
-                OnPropertyChanged(() => BorderBrush);
+                ShipType = unknown_text;
+                ShipName = unknown_text;
+                RemainTime = new TimeSpan();
+                CompleteTime = null;
+                ProgressValue = 0;
+                ProgressMax = 0;
+                Message = Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_NotLoaded");
+                DetailVisibility = false;
+                BorderBrush = Brushes.Gray;
             }
-        }
+            else
+            {
+                if (model.charamaster.ContainsKey(model.kdockdata[id].charaid))
+                {
+                    ShipName = Tools.ResourceStringGetter.GetShipNameResourceString(model.charamaster[model.kdockdata[id].charaid].name);
+                    if (model.shiptypemaster.ContainsKey(model.charamaster[model.kdockdata[id].charaid].shiptype))
+                        ShipType = Tools.ResourceStringGetter.GetShipTypeNameResourceString(model.shiptypemaster[model.charamaster[model.kdockdata[id].charaid].shiptype].name);
+                    else
+                        ShipType = unknown_text;
+                    ProgressMax = model.charamaster[model.kdockdata[id].charaid].buildingtime;
+                }
+                else
+                {
+                    ShipName = unknown_text;
+                    ShipType = unknown_text;
+                    ProgressMax = 0;
+                }
 
-        Brush GetBorderBrush()
-        {
-            if (model.kdockdata != null && model.kdockdata.Count > id)
+                CompleteTime = model.kdockdata[id].complete_time;
+
                 switch (model.kdockdata[id].status)
                 {
-                    case KDockStatus.empty:
-                        return Brushes.SpringGreen;
-                    case KDockStatus.building:
-                        if (RemainTime.TotalMinutes < 0)
-                            return Brushes.OrangeRed;
-                        else
-                            return Brushes.SlateBlue;
-                    case KDockStatus.complete:
-                        return Brushes.OrangeRed;
+                    case KDockStatus.Building:
+                        DetailVisibility = true;
+                        Message = null;
+                        break;
+                    case KDockStatus.Complete:
+                        DetailVisibility = true;
+                        Message = null;
+                        CompleteTime = null;
+                        break;
+                    case KDockStatus.Empty:
+                        Message = Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Empty");
+                        DetailVisibility = false;
+                        break;
+                    case KDockStatus.Locked:
+                        Message = Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Locked");
+                        DetailVisibility = false;
+                        break;
+                    case KDockStatus.Unknown:
                     default:
-                        return Brushes.Gray;
+                        Message = unknown_text;
+                        DetailVisibility = false;
+                        break;
                 }
-            else
-                return Brushes.Gray;
+            }
+
+            timer_update();
         }
 
+        void timer_update()
+        {
+            if (id >= model.kdockdata.Count)
+            {
+                RemainTime = new TimeSpan();
+                ProgressValue = 0;
+                BorderBrush = Brushes.Gray;
+            }
+            else
+            {
+                if (CompleteTime.HasValue)
+                {
+                    RemainTime = CompleteTime.Value - DateTime.Now;
+                    ProgressValue = ProgressMax - RemainTime.TotalMinutes;
+                }
+
+                switch (model.kdockdata[id].status)
+                {
+                    case KDockStatus.Building:
+                        if (RemainTime.TotalMinutes < 0)
+                            BorderBrush = Brushes.OrangeRed;
+                        else
+                            BorderBrush = Brushes.SlateBlue;
+                        break;
+                    case KDockStatus.Complete:
+                        BorderBrush = Brushes.OrangeRed;
+                        break;
+                    case KDockStatus.Empty:
+                        BorderBrush = Brushes.SpringGreen;
+                        break;
+                    case KDockStatus.Locked:
+                        BorderBrush = Brushes.Gray;
+                        break;
+                    case KDockStatus.Unknown:
+                    default:
+                        BorderBrush = Brushes.Gray;
+                        break;
+                }
+            }
+        }
     }
 }

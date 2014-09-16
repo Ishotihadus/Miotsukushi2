@@ -4,17 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Miotsukushi.Model.KanColle
+namespace Miotsukushi.Model
 {
-    enum NDockStatus
+    class NotifyModelBase : Microsoft.Practices.Prism.Mvvm.BindableBase
     {
-        Unknown,
-
-        Locked,
-
-        Empty,
-
-        Docking,
-
     }
 }

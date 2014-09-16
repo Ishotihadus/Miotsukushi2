@@ -23,16 +23,16 @@ namespace Miotsukushi.Model.KanColle
             switch (data.state)
             {
                 case -1:
-                    _status = NDockStatus.locked;
+                    _status = NDockStatus.Locked;
                     break;
                 case 0:
-                    _status = NDockStatus.empty;
+                    _status = NDockStatus.Empty;
                     break;
                 case 1:
-                    _status = NDockStatus.docking;
+                    _status = NDockStatus.Docking;
                     break;
                 default:
-                    _status = NDockStatus.unknown;
+                    _status = NDockStatus.Unknown;
                     break;
             }
 

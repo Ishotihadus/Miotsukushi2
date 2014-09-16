@@ -8,14 +8,14 @@ namespace Miotsukushi.Model.KanColle
 {
     enum KDockStatus
     {
-        unknown,
+        Unknown,
 
-        locked,
+        Locked,
 
-        empty,
+        Empty,
 
-        building,
+        Building,
 
-        complete
+        Complete
     }
 }

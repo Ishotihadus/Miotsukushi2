@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Globalization;
 
 namespace Miotsukushi.Tools
 {
     class ResourceStringGetter
     {
         const string _not_found_message = "### String Not Found ###";
+        public static CultureInfo culture = Thread.CurrentThread.CurrentCulture;
 
         public static string GetResourceString(string key)
         {
             if (string.IsNullOrEmpty(key))
                 return _not_found_message;
 
-            return Properties.Resources.ResourceManager.GetString(key) ?? _not_found_message;
+            return GetString(key) ?? _not_found_message;
         }
 
         public static string GetShipTypeNameResourceString(string key)
@@ -45,7 +47,7 @@ namespace Miotsukushi.Tools
 
         private static bool IsCultureJP()
         {
-            return Thread.CurrentThread.CurrentCulture.Name == "ja-JP" && Thread.CurrentThread.CurrentUICulture.Name == "ja-JP";
+            return culture.Name == "ja-JP";
         }
 
         private static string GetNameResourceString(string key)
@@ -53,6 +55,20 @@ namespace Miotsukushi.Tools
             if (string.IsNullOrEmpty(key) || IsCultureJP())
                 return null;
 
+            return GetString(key);
+        }
+
+        /// <summary>
+        /// Threadがごちゃごちゃになるとアレなので、リソースからの文字列の取得は必ずこれで行う
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private static string GetString(string key)
+        {
+            if (Thread.CurrentThread.CurrentCulture != culture)
+                Thread.CurrentThread.CurrentCulture = culture;
+            if (Thread.CurrentThread.CurrentUICulture != culture)
+                Thread.CurrentThread.CurrentUICulture = culture;
             return Properties.Resources.ResourceManager.GetString(key);
         }
     }

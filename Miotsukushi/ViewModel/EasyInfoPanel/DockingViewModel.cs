@@ -125,11 +125,11 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                     if(model.ndockdata.Count > id)
                         switch (model.ndockdata[id].status)
                         {
-                            case NDockStatus.unknown:
+                            case NDockStatus.Unknown:
                                 return Tools.ResourceStringGetter.GetResourceString("DockingStatus_Unknown");
-                            case NDockStatus.locked:
+                            case NDockStatus.Locked:
                                 return Tools.ResourceStringGetter.GetResourceString("DockingStatus_Locked");
-                            case NDockStatus.empty:
+                            case NDockStatus.Empty:
                                 return Tools.ResourceStringGetter.GetResourceString("DockingStatus_Empty");
                             default:
                                 return null;
@@ -148,7 +148,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                 if (model.ndockdata != null && model.ndockdata.Count > id)
                     switch (model.ndockdata[id].status)
                     {
-                        case NDockStatus.docking:
+                        case NDockStatus.Docking:
                             return true;
                         default:
                             return false;
@@ -223,9 +223,9 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             if (model.ndockdata != null && model.ndockdata.Count > id)
                 switch (model.ndockdata[id].status)
                 {
-                    case NDockStatus.empty:
+                    case NDockStatus.Empty:
                         return Brushes.SpringGreen;
-                    case NDockStatus.docking:
+                    case NDockStatus.Docking:
                         if (RemainTime.TotalMinutes < 0)
                             return Brushes.OrangeRed;
                         else if(RemainTime.TotalMinutes < 1)

@@ -30,6 +30,7 @@ namespace Miotsukushi
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culname);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culname);
+            Tools.ResourceStringGetter.culture = new CultureInfo(culname);
         }
 
         private void GetCurrentCulture()

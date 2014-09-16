@@ -20,6 +20,7 @@ namespace Miotsukushi.Model.KanColle
         public ExList<FleetData> fleetdata = new ExList<FleetData>();
         public ExList<KDockData> kdockdata = new ExList<KDockData>();
         public ExList<NDockData> ndockdata = new ExList<NDockData>();
+        public BasicData basicdata = new BasicData();
 
         public KanColleModel()
         {
@@ -32,6 +33,7 @@ namespace Miotsukushi.Model.KanColle
 
             kclib.GetStart2 += kclib_GetStart2;
             kclib.GetPortPort += kclib_GetPortPort;
+            kclib.GetGetmemberBasic += kclib_GetGetmemberBasic;
             kclib.GetGetmemberShip2 += kclib_GetGetmemberShip2;
             kclib.GetGetmemberShip3 += kclib_GetGetmemberShip3;
             kclib.GetGetmemberDeck += kclib_GetGetmemberDeck;
@@ -41,6 +43,26 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetReqkousyouGetship += kclib_GetReqkousyouGetship;
             kclib.GetGetmemberNdock += kclib_GetGetmemberNdock;
             kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
+            kclib.GetGetmemberMaterial += kclib_GetGetmemberMaterial;
+        }
+
+        void kclib_GetGetmemberMaterial(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Material> response)
+        {
+            basicdata.FromMaterial(response.data);
+        }
+
+        async void kclib_GetGetmemberBasic(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Basic> response)
+        {
+            await Task.Run(() =>
+            {
+                basicdata.admiral_name = response.data.nickname;
+                basicdata.AppendRank(response.data.rank);
+                basicdata.admiral_level = response.data.level;
+                basicdata.admiral_exp = response.data.experience;
+                basicdata.furniture_coin = response.data.fcoin;
+                basicdata.max_ship = response.data.max_chara;
+                basicdata.max_equipment = response.data.max_slotitem;
+            });
         }
 
         async void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<object> response)
@@ -113,11 +135,13 @@ namespace Miotsukushi.Model.KanColle
 
         async void kclib_GetGetmemberShip2(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship2Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship2> response)
         {
+            basicdata.now_ship_number = response.data.ships.Count;
             await Task.Run(() => AppendShipDataFromList(response.data.ships));
         }
 
         async void kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
         {
+            basicdata.now_ship_number = response.data.ship.ships.Count;
             await Task.Run(() =>
             {
                 AppendShipDataFromList(response.data.ship.ships);

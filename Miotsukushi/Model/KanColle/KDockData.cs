@@ -6,74 +6,94 @@ using System.Threading.Tasks;
 
 namespace Miotsukushi.Model.KanColle
 {
-    class KDockData
+    class KDockData : NotifyModelBase
     {
-        public KDockStatus status = KDockStatus.unknown;
+        private KDockStatus _status = KDockStatus.Unknown;
+        public KDockStatus status
+        {
+            get
+            {
+                return _status;
+            }
 
-        public int charaid;
+            set
+            {
+                if (_status != value)
+                {
+                    _status = value;
+                    OnPropertyChanged(() => status);
+                }
+            }
+        }
 
-        public DateTime complete_time;
+        private int _charaid;
+        public int charaid
+        {
+            get
+            {
+                return _charaid;
+            }
+
+            set
+            {
+                if (_charaid != value)
+                {
+                    _charaid = value;
+                    OnPropertyChanged(() => charaid);
+                }
+            }
+        }
+
+        private DateTime _complete_time;
+        public DateTime complete_time
+        {
+            get
+            {
+                return _complete_time;
+            }
+
+            set
+            {
+                if (_complete_time != value)
+                {
+                    _complete_time = value;
+                    OnPropertyChanged(() => complete_time);
+                }
+            }
+        }
 
         public void FromKDockValue(KanColleLib.TransmissionData.api_get_member.values.KDockValue data)
         {
-            bool changed = false;
-
-            KDockStatus _status;
             switch (data.state)
             {
                 case -1:
-                    _status = KDockStatus.locked;
+                    status = KDockStatus.Locked;
                     break;
                 case 0:
-                    _status = KDockStatus.empty;
+                    status = KDockStatus.Empty;
                     break;
                 case 2:
-                    _status = KDockStatus.building;
+                    status = KDockStatus.Building;
                     break;
                 case 3:
-                    _status = KDockStatus.complete;
+                    status = KDockStatus.Complete;
                     break;
                 default:
-                    _status = KDockStatus.unknown;
+                    status = KDockStatus.Unknown;
                     break;
             
             }
-            if (_status != status)
-            {
-                status = _status;
-                changed = true;
-            }
 
-            int _shipid = data.created_ship_id;
-            if (_shipid != charaid)
-            {
-                charaid = _shipid;
-                changed = true;
-            }
+            charaid = data.created_ship_id;
 
-            var _complete_time = Tools.TimeParser.ParseTimeFromLong(data.complete_time);
-            if (_complete_time != complete_time)
-            {
-                complete_time = _complete_time;
-                changed = true;
-            }
-
-            if (changed)
-                OnKDockChanged(new EventArgs());
+            complete_time = Tools.TimeParser.ParseTimeFromLong(data.complete_time);
         }
 
         public void GetShip()
         {
-            status = KDockStatus.empty;
+            status = KDockStatus.Empty;
             charaid = 0;
             complete_time = new DateTime();
-            OnKDockChanged(new EventArgs());
         }
-
-        /// <summary>
-        /// 建造ドックの情報が変更された際に呼び出されます
-        /// </summary>
-        public event EventHandler KDockChanged;
-        protected virtual void OnKDockChanged(EventArgs e) { if (KDockChanged != null) { KDockChanged(this, e); } }
     }
 }

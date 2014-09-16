@@ -85,6 +85,8 @@
     <Compile Include="Converter\DateTimeConverter.cs" />
     <Compile Include="Converter\TotalTimeConverter.cs" />
     <Compile Include="Model\ExList.cs" />
+    <Compile Include="Model\KanColle\AdmiralRank.cs" />
+    <Compile Include="Model\KanColle\BasicData.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
     <Compile Include="Model\KanColle\FleetData.cs" />
     <Compile Include="Model\KanColle\FleetExpeditionStatus.cs" />
@@ -97,16 +99,17 @@
     <Compile Include="Model\KanColle\ShipData.cs" />
     <Compile Include="Model\KanColle\ShiptypeData.cs" />
     <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\NotifyModelBase.cs" />
     <Compile Include="Model\TimerModel.cs" />
-    <Compile Include="Properties\Resources.ja-JP.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ja-JP.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Tools\TimeParser.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\DetailInfoPanelViewModel.cs" />
@@ -119,6 +122,12 @@
     <Compile Include="ViewModel\EasyInfoPanel\ExpeditionCollectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\WindowParts\DetailInfoParts\General.xaml.cs">
+      <DependentUpon>General.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\Basic.xaml.cs">
+      <DependentUpon>Basic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowParts\DetailInformationPanel.xaml.cs">
       <DependentUpon>DetailInformationPanel.xaml</DependentUpon>
     </Compile>
@@ -156,6 +165,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\WindowParts\DetailInfoParts\General.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\Basic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\WindowParts\DetailInformationPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -198,13 +215,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ja-JP.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

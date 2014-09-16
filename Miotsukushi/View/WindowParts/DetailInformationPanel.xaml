@@ -6,6 +6,7 @@
 	xmlns:System="clr-namespace:System;assembly=mscorlib"
 	xmlns:vm="clr-namespace:Miotsukushi.ViewModel.DetailInfoPanel"
 	xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls"
+	xmlns:DetailInfoParts="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts"
 	mc:Ignorable="d"
 	x:Class="Miotsukushi.View.WindowParts.DetailInformationPanel"
 	x:Name="UserControl"
@@ -75,7 +76,7 @@
 		</ListView>
 		<Custom:MetroAnimatedTabControl Margin="5" Grid.Row="1" ItemContainerStyle="{DynamicResource TabItemStyle1}" SelectedIndex="{Binding SelectedIndex, ElementName=listView}">
 			<TabItem Header="総合">
-				<Grid Background="#FFE5E5E5"/>
+				<DetailInfoParts:General/>
 			</TabItem>
 			<TabItem Header="総合">
 				<Grid Background="#FF25E5E5"/>
