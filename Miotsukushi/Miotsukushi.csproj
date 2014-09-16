@@ -113,6 +113,8 @@
     </Compile>
     <Compile Include="Tools\TimeParser.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\DetailInfoPanelViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\Fleets\FleetsViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\Fleets\ShipViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\BasicPanelViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\DockingCollectionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\DockingViewModel.cs" />

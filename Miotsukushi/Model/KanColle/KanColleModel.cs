@@ -44,6 +44,77 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetGetmemberNdock += kclib_GetGetmemberNdock;
             kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
             kclib.GetGetmemberMaterial += kclib_GetGetmemberMaterial;
+            kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
+        }
+
+        void kclib_GetReqhenseiChange(object sender, KanColleLib.TransmissionRequest.api_req_hensei.ChangeRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        {
+            if (request.id - 1 < fleetdata.Count)
+            {
+                if (request.ship_id == -2)
+                {
+                    // 旗艦以外全部解除
+                    int removecount = fleetdata[request.id - 1].ships.Count - 1;
+                    for (int i = 0; i < removecount; i++)
+                        fleetdata[request.id - 1].ships.RemoveAt(1);
+                }
+                else if (request.ship_id == -1)
+                {
+                    // その艦をはずす
+                    fleetdata[request.id - 1].ships.RemoveAt(request.ship_idx);
+                }
+                else
+                {
+                    int replaceindex = fleetdata[request.id - 1].ships.IndexOf(request.ship_id);
+
+                    if (replaceindex != -1)
+                    {
+                        // 艦隊の中に指定艦がいる場合
+                        if (fleetdata[request.id - 1].ships.Count > request.ship_idx)
+                        {
+                            // 他の艦との交代である場合
+                            int replaceshipid = fleetdata[request.id - 1].ships[request.ship_idx];
+                            fleetdata[request.id - 1].ships[request.ship_idx] = request.ship_id;
+                            fleetdata[request.id - 1].ships[replaceindex] = replaceshipid;
+                        }
+                        else
+                        {
+                            // なにもないところに宣言した場合
+                            fleetdata[request.id - 1].ships.RemoveAt(request.ship_idx);
+                            fleetdata[request.id - 1].ships.Add(request.ship_id);
+                        }
+                    }
+                    else
+                    {
+                        if (fleetdata[request.id - 1].ships.Count > request.ship_idx)
+                        {
+                            // 他の艦との交代である場合
+                            int replaceshipid = fleetdata[request.id - 1].ships[request.ship_idx];
+                            fleetdata[request.id - 1].ships[request.ship_idx] = request.ship_id;
+
+                            // 他の艦隊に同艦がいないかどうか確かめる
+                            for (int i = 0; i < fleetdata.Count; i++)
+                            {
+                                if (i == request.id - 1)
+                                    continue;
+                                for (int j = 0; j < fleetdata[i].ships.Count; j++)
+                                {
+                                    if (fleetdata[i].ships[j] == request.ship_id)
+                                    {
+                                        // もしあったら
+                                        fleetdata[i].ships[j] = replaceshipid;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // なにもないところに宣言した場合
+                            fleetdata[request.id - 1].ships.Add(request.ship_id);
+                        }
+                    }
+                }
+            }
         }
 
         void kclib_GetGetmemberMaterial(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Material> response)
