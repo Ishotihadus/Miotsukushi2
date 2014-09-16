@@ -56,6 +56,7 @@ namespace Miotsukushi.Model.KanColle
             await Task.Run(() =>
             {
                 basicdata.admiral_name = response.data.nickname;
+                basicdata.admiral_comment = response.data.comment;
                 basicdata.AppendRank(response.data.rank);
                 basicdata.admiral_level = response.data.level;
                 basicdata.admiral_exp = response.data.experience;
@@ -142,6 +143,7 @@ namespace Miotsukushi.Model.KanColle
         async void kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
         {
             basicdata.now_ship_number = response.data.ship.ships.Count;
+            basicdata.FromMaterial(response.data.material);
             await Task.Run(() =>
             {
                 AppendShipDataFromList(response.data.ship.ships);

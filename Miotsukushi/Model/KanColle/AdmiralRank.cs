@@ -42,9 +42,19 @@ namespace Miotsukushi.Model.KanColle
         Commander,
 
         /// <summary>
+        /// 新米中佐
+        /// </summary>
+        NoviceCommander,
+
+        /// <summary>
         /// 少佐
         /// </summary>
         LieutenantCommander,
+
+        /// <summary>
+        /// 中堅少佐
+        /// </summary>
+        MiddleLieutenantCommander,
 
         /// <summary>
         /// 新米少佐

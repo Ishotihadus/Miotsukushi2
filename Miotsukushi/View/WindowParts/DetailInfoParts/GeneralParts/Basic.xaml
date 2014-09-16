@@ -3,10 +3,14 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts"
 	mc:Ignorable="d"
 	x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.Basic"
 	x:Name="UserControl"
-	d:DesignWidth="554" d:DesignHeight="480">
+	d:DesignWidth="554">
+    <UserControl.DataContext>
+        <vm:BasicPanelViewModel />
+    </UserControl.DataContext>
 
 	<Grid x:Name="LayoutRoot">
 		<Grid.ColumnDefinitions>
@@ -22,12 +26,38 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
-				<RowDefinition/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" Text="イショティハドゥスああああああああ" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2"/>
-			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" Text="司令部コメント司令部コメント司令部コメント" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1"/>
-			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2"><Run Text="Lv. "/><Run FontSize="15" Text="99"/></TextBlock>
-			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"><Run Text="exp. "/><Run Text="99999999"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"><Run FontSize="15" Text="{Binding AdmiralName, Mode=OneWay}" /><Run Text=" "/><Run Text="{Binding AdmiralRank, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" Text="{Binding AdmiralComment, Mode=OneWay}" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1"/>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2"><Run Text="Lv. "/><Run FontSize="15" Text="{Binding AdmiralLevel, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"><Run Text="exp. "/><Run Text="{Binding AdmiralExp, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="3"><Run Text="艦娘数"/><Run Text=": "/><Run FontSize="15" Text="{Binding ShipCount, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding ShipMax, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"><Run Text="装備数"/><Run Text=": "/><Run FontSize="15" Text="{Binding ItemCount, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding ItemMax, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="4"><Run Text="残り保有枠"/><Run Text=": "/><Run FontSize="15" Text="{Binding RemainCount, Mode=OneWay}"/></TextBlock>
+		</Grid>
+		<Grid Grid.Column="1" Margin="5,0,0,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="燃料"/><Run Text=": "/><Run FontSize="15" Text="{Binding Fuel, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"><Run Text="鋼材"/><Run Text=": "/><Run FontSize="15" Text="{Binding Steel, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1"><Run Text="弾薬"/><Run Text=": "/><Run FontSize="15" Text="{Binding Ammo, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"><Run Text="ボーキ"/><Run Text=": "/><Run FontSize="15" Text="{Binding Bauxite, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1"><Run Text="回復上限"/><Run Text=": "/><Run FontSize="15" Text="{Binding ResourceCap, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="3"><Run Text="バケツ"/><Run Text=": "/><Run FontSize="15" Text="{Binding Bucket, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"><Run Text="バーナー"/><Run Text=": "/><Run FontSize="15" Text="{Binding Burner, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="4"><Run Text="開発資材"/><Run Text=": "/><Run FontSize="15" Text="{Binding DevKit, Mode=OneWay}"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"><Run Text="家具コイン"/><Run Text=": "/><Run FontSize="15" Text="{Binding FurnitureCoin, Mode=OneWay}"/></TextBlock>
 		</Grid>
 	</Grid>
 </UserControl>

@@ -115,6 +115,60 @@ namespace Miotsukushi.Properties {
         }
         
         /// <summary>
+        ///   完了予定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Docking_FinishTime {
+            get {
+                return ResourceManager.GetString("Docking_FinishTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   残り に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Docking_Remain {
+            get {
+                return ResourceManager.GetString("Docking_Remain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   空き に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DockingStatus_Empty {
+            get {
+                return ResourceManager.GetString("DockingStatus_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ロックされています に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DockingStatus_Locked {
+            get {
+                return ResourceManager.GetString("DockingStatus_Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   読み込まれていません に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DockingStatus_NotLoaded {
+            get {
+                return ResourceManager.GetString("DockingStatus_NotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   不明 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DockingStatus_Unknown {
+            get {
+                return ResourceManager.GetString("DockingStatus_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   建造 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string EasyInfoPanelTitle_BuildingDock {

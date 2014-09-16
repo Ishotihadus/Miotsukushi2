@@ -26,6 +26,24 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+        private string _admiral_comment;
+        public string admiral_comment
+        {
+            get
+            {
+                return _admiral_comment;
+            }
+
+            set
+            {
+                if (_admiral_comment != value)
+                {
+                    _admiral_comment = value;
+                    OnPropertyChanged(() => admiral_comment);
+                }
+            }
+        }
+
         private int _admiral_level;
         public int admiral_level
         {
