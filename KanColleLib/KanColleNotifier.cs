@@ -13,14 +13,21 @@ namespace KanColleLib
     public class KanColleNotifier
     {
 
-        public KanColleNotifier()
+        public KanColleNotifier(bool isAsync)
         {
-            FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
+            if (isAsync)
+                FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete_Async;
+            else
+                FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.AfterSessionComplete += (oSession) => OnGetSessionData(new GetSessionDataEventArgs() { session = oSession });
             FiddlerApplication.Log.OnLogString += (sender, e) => OnGetFiddlerLogString(new GetFiddlerLogStringEventArgs() { logtext = e.LogString });
         }
 
-        // 非同期で叩くと死ぬみたい
+        async void FiddlerApplication_AfterSessionComplete_Async(Session oSession)
+        {
+            await Task.Run(() => FiddlerApplication_AfterSessionComplete(oSession));
+        }
+
         void FiddlerApplication_AfterSessionComplete(Session oSession)
         {
             string kcsapiurl = null;

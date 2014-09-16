@@ -27,7 +27,7 @@ namespace Miotsukushi.Model.KanColle
             FiddlerApplication.Startup(0, FiddlerCoreStartupFlags.ChainToUpstreamGateway);
             URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}", FiddlerApplication.oProxy.ListenPort), "<local>");
 
-            kclib = new KanColleNotifier();
+            kclib = new KanColleNotifier(true);
 
             kclib.GameStart += (_, __) => OnGameStart(new EventArgs());
 
@@ -51,119 +51,81 @@ namespace Miotsukushi.Model.KanColle
             basicdata.FromMaterial(response.data);
         }
 
-        async void kclib_GetGetmemberBasic(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Basic> response)
+        void kclib_GetGetmemberBasic(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Basic> response)
         {
-            await Task.Run(() =>
+            basicdata.admiral_name = response.data.nickname;
+            basicdata.admiral_comment = response.data.comment;
+            basicdata.AppendRank(response.data.rank);
+            basicdata.admiral_level = response.data.level;
+            basicdata.admiral_exp = response.data.experience;
+            basicdata.furniture_coin = response.data.fcoin;
+            basicdata.max_ship = response.data.max_chara;
+            basicdata.max_equipment = response.data.max_slotitem;
+        }
+
+        void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        {
+            DestroyShip(request.ship_id);
+        }
+
+        void kclib_GetGetmemberNdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.NDock> response)
+        {
+            AppendNDockValue(response.data);
+        }
+
+        void kclib_GetReqkousyouGetship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.GetshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Getship> response)
+        {
+            AppendKDockValue(response.data.kdock);
+            AppendShipData(response.data.ship);
+        }
+
+        void kclib_GetGetmemberKdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.KDock> response)
+        {
+            AppendKDockValue(response.data);
+        }
+
+        void kclib_GetReqmissionReturnInstruction(object sender, KanColleLib.TransmissionRequest.api_req_mission.ReturnInstructionRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.ReturnInstruction> response)
+        {
+            if (fleetdata.Count > request.deck_id - 1)
             {
-                basicdata.admiral_name = response.data.nickname;
-                basicdata.admiral_comment = response.data.comment;
-                basicdata.AppendRank(response.data.rank);
-                basicdata.admiral_level = response.data.level;
-                basicdata.admiral_exp = response.data.experience;
-                basicdata.furniture_coin = response.data.fcoin;
-                basicdata.max_ship = response.data.max_chara;
-                basicdata.max_equipment = response.data.max_slotitem;
-            });
+                if (response.data.mission.Length >= 3)
+                    fleetdata[request.deck_id - 1].ChangeMissionStatus((int)response.data.mission[0], (int)response.data.mission[1], response.data.mission[2]);
+                else
+                    fleetdata[request.deck_id - 1].ChangeMissionStatus(-1, -1, -1);
+            }
         }
 
-        async void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        void kclib_GetReqmissionStart(object sender, KanColleLib.TransmissionRequest.api_req_mission.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.Start> response)
         {
-            await Task.Run(() => DestroyShip(request.ship_id));
+            if (fleetdata.Count > request.deck_id - 1)
+                fleetdata[request.deck_id - 1].ChangeMissionStatus(1, request.mission_id, response.data.complatetime); // 遠征中の1は固定
         }
 
-        async void kclib_GetGetmemberNdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.NDock> response)
+        void kclib_GetGetmemberDeck(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Deck> response)
         {
-            await AppendNDockValue(response.data);
-        }
-
-        async void kclib_GetReqkousyouGetship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.GetshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Getship> response)
-        {
-            await AppendKDockValue(response.data.kdock);
-            await Task.Run(() =>
-            {
-                AppendShipData(response.data.ship);
-            });
-        }
-
-        async void kclib_GetGetmemberKdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.KDock> response)
-        {
-            await AppendKDockValue(response.data);
-        }
-
-        async void kclib_GetReqmissionReturnInstruction(object sender, KanColleLib.TransmissionRequest.api_req_mission.ReturnInstructionRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.ReturnInstruction> response)
-        {
-            await Task.Run(() =>
-            {
-                if (fleetdata.Count > request.deck_id - 1)
-                {
-                    if(response.data.mission.Length >= 3)
-                        fleetdata[request.deck_id - 1].ChangeMissionStatus((int)response.data.mission[0], (int)response.data.mission[1], response.data.mission[2]);
-                    else
-                        fleetdata[request.deck_id - 1].ChangeMissionStatus(-1, -1, -1);
-                }
-            });
-        }
-
-        async void kclib_GetReqmissionStart(object sender, KanColleLib.TransmissionRequest.api_req_mission.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.Start> response)
-        {
-            await Task.Run(() =>
-            {
-                if(fleetdata.Count > request.deck_id - 1)
-                    fleetdata[request.deck_id - 1].ChangeMissionStatus(1, request.mission_id, response.data.complatetime); // 遠征中の1は固定
-            });
-        }
-
-        async void kclib_GetGetmemberDeck(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Deck> response)
-        {
-            await Task.Run(() =>
-            {
-                if (response.data.decks.Count >= 1)
-                {
-                    while (fleetdata.Count < response.data.decks.Count)
-                        fleetdata.Add(new FleetData());
-                    while (fleetdata.Count > response.data.decks.Count)
-                        fleetdata.RemoveAt(fleetdata.Count - 1);
-                    for (int i = 0; i < fleetdata.Count; i++)
-                        fleetdata[i].FromDeckValue(response.data.decks[i]);
-                }
-            });
+            AppendDeckValue(response.data);
         }
 
         async void kclib_GetGetmemberShip3(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship3Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship3> response)
         {
-            await Task.Run(() => AppendShipDataFromList(response.data.ship_data.ships));
+            await AppendShipDataFromList(response.data.ship_data.ships);
         }
 
         async void kclib_GetGetmemberShip2(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship2Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship2> response)
         {
             basicdata.now_ship_number = response.data.ships.Count;
-            await Task.Run(() => AppendShipDataFromList(response.data.ships));
+            await AppendShipDataFromList(response.data.ships);
         }
 
         async void kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
         {
             basicdata.now_ship_number = response.data.ship.ships.Count;
             basicdata.FromMaterial(response.data.material);
-            await Task.Run(() =>
-            {
-                AppendShipDataFromList(response.data.ship.ships);
-                DeleteShipDataFromList(response.data.ship.ships);
-                InitializeConfirm();
-            });
-            await Task.Run(() =>
-            {
-                if (response.data.deck_port.decks.Count >= 1)
-                {
-                    while (fleetdata.Count < response.data.deck_port.decks.Count)
-                        fleetdata.Add(new FleetData());
-                    while (fleetdata.Count > response.data.deck_port.decks.Count)
-                        fleetdata.RemoveAt(fleetdata.Count - 1);
-                    for (int i = 0; i < fleetdata.Count; i++)
-                        fleetdata[i].FromDeckValue(response.data.deck_port.decks[i]);
-                }
-                InitializeConfirm();
-            });
-            await AppendNDockValue(response.data.ndock);
+            await AppendShipDataFromList(response.data.ship.ships);
+            await DeleteShipDataFromList(response.data.ship.ships);
+            AppendDeckValue(response.data.deck_port);
+            AppendNDockValue(response.data.ndock);
+            InitializeConfirm();
         }
 
         async void kclib_GetStart2(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_start2.Start2> response)
@@ -211,12 +173,15 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         /// <param name="shiplist"></param>
         /// <returns></returns>
-        void AppendShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> shiplist)
+        async Task AppendShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> shiplist)
         {
-            foreach (var ship in shiplist)
+            await Task.Run(() =>
             {
-                AppendShipData(ship);
-            }
+                foreach (var ship in shiplist)
+                {
+                    AppendShipData(ship);
+                }
+            });
         }
 
         void AppendShipData(KanColleLib.TransmissionData.api_get_member.values.ShipValue ship)
@@ -242,13 +207,16 @@ namespace Miotsukushi.Model.KanColle
         /// 与えられたリストの艦を削除するわけではない
         /// </summary>
         /// <param name="existshiplist"></param>
-        void DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
+        async Task DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
         {
-            var deletelist = (from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _).ToList();
-            foreach (var item in deletelist)
+            await Task.Run(() =>
             {
-                shipdata.Remove(item);
-            }
+                var deletelist = (from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _).ToList();
+                foreach (var item in deletelist)
+                {
+                    shipdata.Remove(item);
+                }
+            });
         }
 
         /// <summary>
@@ -265,7 +233,7 @@ namespace Miotsukushi.Model.KanColle
         }
 
         int initializecount = 0;
-        int initializecountflag = 5;
+        int initializecountflag = 4;
 
         void InitializeConfirm()
         {
@@ -274,30 +242,37 @@ namespace Miotsukushi.Model.KanColle
                 OnInitializeComplete(new EventArgs());
         }
 
-        async Task AppendNDockValue(KanColleLib.TransmissionData.api_get_member.NDock data)
+        void AppendNDockValue(KanColleLib.TransmissionData.api_get_member.NDock data)
         {
-            await Task.Run(() =>
+            for (int i = 0; i < data.ndocks.Count; i++)
             {
-                for (int i = 0; i < data.ndocks.Count; i++)
-                {
-                    if (ndockdata.Count <= i)
-                        ndockdata.Add(new NDockData());
-                    ndockdata[i].FromNDockValue(data.ndocks[i]);
-                }
-            });
+                if (ndockdata.Count <= i)
+                    ndockdata.Add(new NDockData());
+                ndockdata[i].FromNDockValue(data.ndocks[i]);
+            }
         }
 
-        async Task AppendKDockValue(KanColleLib.TransmissionData.api_get_member.KDock data)
+        void AppendKDockValue(KanColleLib.TransmissionData.api_get_member.KDock data)
         {
-            await Task.Run(() =>
+            for (int i = 0; i < data.kdocks.Count; i++)
             {
-                for (int i = 0; i < data.kdocks.Count; i++)
-                {
-                    if (kdockdata.Count <= i)
-                        kdockdata.Add(new KDockData());
-                    kdockdata[i].FromKDockValue(data.kdocks[i]);
-                }
-            });
+                if (kdockdata.Count <= i)
+                    kdockdata.Add(new KDockData());
+                kdockdata[i].FromKDockValue(data.kdocks[i]);
+            }
+        }
+
+        void AppendDeckValue(KanColleLib.TransmissionData.api_get_member.Deck data)
+        {
+            if (data.decks.Count >= 1)
+            {
+                while (fleetdata.Count < data.decks.Count)
+                    fleetdata.Add(new FleetData());
+                while (fleetdata.Count > data.decks.Count)
+                    fleetdata.RemoveAt(fleetdata.Count - 1);
+                for (int i = 0; i < fleetdata.Count; i++)
+                    fleetdata[i].FromDeckValue(data.decks[i]);
+            }
         }
 
         /// <summary>
