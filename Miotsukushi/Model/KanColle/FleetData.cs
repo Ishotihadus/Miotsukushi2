@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Miotsukushi.Model.KanColle
 {
@@ -24,9 +25,9 @@ namespace Miotsukushi.Model.KanColle
                 }
             }
         }
-        List<int> ships = new List<int>();
 
-        public int this[int i] { get { return ships[i]; } }
+        public ObservableCollection<int> ships = new ObservableCollection<int>();
+
         public int Count { get { return ships.Count; } }
 
         public FleetExpeditionStatus expedition_status;
@@ -40,12 +41,6 @@ namespace Miotsukushi.Model.KanColle
         protected virtual void OnFleetNameChanged(EventArgs e) { if (FleetNameChanged != null) { FleetNameChanged(this, e); } }
 
         /// <summary>
-        /// 艦隊の編成が変更されたときに呼び出されます
-        /// </summary>
-        public event EventHandler FleetChanged;
-        protected virtual void OnFleetChanged(EventArgs e) { if (FleetChanged != null) { FleetChanged(this, e); } }
-
-        /// <summary>
         /// 遠征の情報が変更されたときに呼び出されます
         /// </summary>
         public event EventHandler FleetMissionChanged;
@@ -55,7 +50,6 @@ namespace Miotsukushi.Model.KanColle
         {
             name = data.name;
 
-            bool shipchanged = false;
             for (int i = 0; i < data.ship.Length; i++)
             {
                 if (data.ship[i] == -1)
@@ -65,17 +59,13 @@ namespace Miotsukushi.Model.KanColle
                     if (ships[i] != data.ship[i])
                     {
                         ships[i] = data.ship[i];
-                        shipchanged = true;
                     }
                 }
                 else
                 {
                     ships.Add(data.ship[i]);
-                    shipchanged = true;
                 }
             }
-            if (shipchanged)
-                OnFleetChanged(new EventArgs());
 
             if (data.mission.Length >= 3)
                 ChangeMissionStatus((int)data.mission[0], (int)data.mission[1], data.mission[2]);
