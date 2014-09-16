@@ -78,8 +78,10 @@
 			<TabItem Header="総合">
 				<DetailInfoParts:General/>
 			</TabItem>
-			<TabItem Header="総合">
-				<Grid Background="#FF25E5E5"/>
+			<TabItem Header="第1艦隊">
+				<Grid DataContext="{Binding FleetsCollection}" >
+					<DataGrid Margin="10,10,10,0" VerticalAlignment="Top" Height="200" DataContext="{Binding [0]}" ItemsSource="{Binding Ships}"/>
+				</Grid>
 			</TabItem>
 		</Custom:MetroAnimatedTabControl>
 		

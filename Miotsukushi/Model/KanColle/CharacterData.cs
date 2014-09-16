@@ -28,6 +28,16 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         public int buildingtime;
 
+        /// <summary>
+        /// 燃料
+        /// </summary>
+        public int fuel_max;
+
+        /// <summary>
+        /// 弾薬
+        /// </summary>
+        public int ammo_max;
+
         public static CharacterData fromKanColleLib(KanColleLib.TransmissionData.api_start2.start2.MstShip data)
         {
             return new CharacterData()
@@ -35,7 +45,9 @@ namespace Miotsukushi.Model.KanColle
                 name = data.name,
                 name_yomi = data.yomi,
                 shiptype = data.stype,
-                buildingtime = data.buildtime
+                buildingtime = data.buildtime,
+                fuel_max = data.fuel_max,
+                ammo_max = data.bull_max,
             };
         }
     }

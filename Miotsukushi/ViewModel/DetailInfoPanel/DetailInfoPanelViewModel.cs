@@ -10,6 +10,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel
     {
         public List<string> TabTitle { get; private set; }
 
+        public Fleets.FleetsCollectionViewModel FleetsCollection { get; private set; }
+
         public DetailInfoPanelViewModel()
         {
             TabTitle = new List<string>()
@@ -30,6 +32,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel
                 "戦闘結果",
                 "マップ詳細"
             };
+
+            FleetsCollection = new Fleets.FleetsCollectionViewModel();
         }
     }
 }

@@ -257,20 +257,21 @@ namespace Miotsukushi.Model.KanColle
 
         void AppendShipData(KanColleLib.TransmissionData.api_get_member.values.ShipValue ship)
         {
-            var temp = ShipData.FromKanColleLib(ship);
-
             bool is_found = false;
             for (int i = 0; i < shipdata.Count; i++)
             {
                 if (shipdata[i].shipid == ship.id)
                 {
                     is_found = true;
-                    if (!shipdata[i].Equals(temp))
-                        shipdata[i] = temp;
+                    shipdata[i].FromKanColleLib(ship);
                 }
             }
             if (!is_found)
+            {
+                var temp = new ShipData();
+                temp.FromKanColleLib(ship);
                 shipdata.Add(temp);
+            }
         }
 
         /// <summary>
