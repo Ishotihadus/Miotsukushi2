@@ -419,7 +419,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     ShipMax = model.basicdata.max_ship;
                     break;
                 case "max_equipment":
-                    ItemMax = model.basicdata.max_equipment;
+                    ItemMax = model.basicdata.max_equipment + 3;
                     break;
                 case "now_ship_number":
                     ShipCount = model.basicdata.now_ship_number;

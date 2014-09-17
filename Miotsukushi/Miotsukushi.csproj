@@ -91,6 +91,8 @@
     <Compile Include="Model\KanColle\CharacterData.cs" />
     <Compile Include="Model\KanColle\FleetData.cs" />
     <Compile Include="Model\KanColle\FleetExpeditionStatus.cs" />
+    <Compile Include="Model\KanColle\ItemData.cs" />
+    <Compile Include="Model\KanColle\ItemEquipTypeData.cs" />
     <Compile Include="Model\KanColle\KanColleModel.cs" />
     <Compile Include="Model\KanColle\KDockData.cs" />
     <Compile Include="Model\KanColle\KDockStatus.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Model\KanColle\NDockStatus.cs" />
     <Compile Include="Model\KanColle\ShipData.cs" />
     <Compile Include="Model\KanColle\ShiptypeData.cs" />
+    <Compile Include="Model\KanColle\SlotData.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\NotifyModelBase.cs" />
     <Compile Include="Model\TimerModel.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="ViewModel\DetailInfoPanel\Fleets\FleetsCollectionViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Fleets\FleetViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Fleets\ShipViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\Fleets\SlotViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\BasicPanelViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\DockingCollectionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\DockingViewModel.cs" />

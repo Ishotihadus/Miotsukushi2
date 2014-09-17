@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Miotsukushi.Model.KanColle;
+using System.Collections.ObjectModel;
 
 namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 {
@@ -232,10 +233,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             }
         }
 
+        public ObservableCollection<SlotViewModel> Slots { get; private set; }
+
         #endregion
 
         public ShipViewModel(int shipid)
         {
+            Slots = new ObservableCollection<SlotViewModel>();
             model = Model.MainModel.Current.kancolleModel;
             this.shipid = shipid;
             shipdata = model.shipdata.FirstOrDefault(_ => _.shipid == shipid);
@@ -245,7 +249,77 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 character_initialize();
                 initialize();
                 shipdata.PropertyChanged += shipdata_PropertyChanged;
+                shipdata.Slots.CollectionChanged += Slots_CollectionChanged;
+                shipdata.OnSlotCount.CollectionChanged += OnSlotCount_CollectionChanged;
             }
+        }
+
+        // 仮実装
+        void OnSlotCount_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            App.Current.Dispatcher.BeginInvoke((Action)delegate
+            {
+                for (int i = 0; i < shipdata.OnSlotCount.Count; i++)
+                {
+                    if (i < Slots.Count)
+                        Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
+                }
+            });
+        }
+
+        // 仮実装（もっときれいなコードになるはず）
+        void Slots_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            App.Current.Dispatcher.BeginInvoke((Action)delegate
+            {
+                for (int i = 0; i < shipdata.Slots.Count; i++)
+                {
+                    if (i >= Slots.Count)
+                    {
+                        Slots.Add(new SlotViewModel() { slotid = -1 });
+                        if (shipdata.OnSlotCount.Count > i)
+                            Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
+                    }
+                    if (Slots[i].slotid != shipdata.Slots[i])
+                    {
+                        Slots[i].slotid = shipdata.Slots[i];
+                        if (Slots[i].slotid == -1)
+                        {
+                            Slots[i].IsEmpty = true;
+                            Slots[i].ItemName = "空き";
+                        }
+                        else
+                        {
+                            Slots[i].IsEmpty = false;
+                            var slotmodel = model.slotdata.FirstOrDefault(_ => _.id == Slots[i].slotid);
+                            if (slotmodel != null)
+                            {
+                                if (model.slotitemmaster.ContainsKey(slotmodel.itemid))
+                                {
+                                    Slots[i].ItemTypeBrush = Tools.KanColleTools.GetSlotItemEquipTypeBrush(model.slotitemmaster[slotmodel.itemid].type_equiptype);
+                                    Slots[i].ItemName = model.slotitemmaster[slotmodel.itemid].name;
+                                    if (model.slotitem_equiptypemaster.ContainsKey(model.slotitemmaster[slotmodel.itemid].type_equiptype))
+                                        Slots[i].ItemType = model.slotitem_equiptypemaster[model.slotitemmaster[slotmodel.itemid].type_equiptype].name;
+                                    else
+                                        Slots[i].ItemType = "不明";
+                                }
+                                else
+                                {
+                                    Slots[i].ItemTypeBrush = System.Windows.Media.Brushes.Transparent;
+                                    Slots[i].ItemName = "不明";
+                                    Slots[i].ItemType = "不明";
+                                }
+                            }
+                            else
+                            {
+                                Slots[i].ItemTypeBrush = System.Windows.Media.Brushes.Transparent;
+                                Slots[i].ItemName = "不明";
+                                Slots[i].ItemType = "不明";
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         void shipdata_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -3,34 +3,94 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Behavior="clr-namespace:Miotsukushi.Behavior"
+	xmlns:CommonParts="clr-namespace:Miotsukushi.View.CommonParts"
 	mc:Ignorable="d"
 	x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts.ShipSummary"
-	x:Name="UserControl"
-	d:DesignWidth="400">
+	x:Name="UserControl" d:DesignWidth="350">
+	<UserControl.Resources>
+		<Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
+			<Setter Property="BorderBrush" Value="{DynamicResource BlackBrush}"/>
+			<Setter Property="Background" Value="{DynamicResource WhiteBrush}"/>
+			<Setter Property="BorderThickness" Value="0,1,0,0"/>
+			<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+			<Setter Property="AlternationCount" Value="2"/>
+			<Setter Property="SnapsToDevicePixels" Value="True"/>
+			<Setter Property="OverridesDefaultStyle" Value="True"/>
+			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ListView}">
+						<ScrollViewer Padding="{TemplateBinding Padding}" Style="{DynamicResource MetroGridViewScrollViewerStyle}">
+							<ItemsPresenter/>
+						</ScrollViewer>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsGrouping" Value="True">
+								<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+			<UniformGrid IsItemsHost="True" Columns="4"/>
+		</ItemsPanelTemplate>
+		<DataTemplate x:Key="DataTemplate1">
+			<Grid>
+				<Border Margin="3" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" >
+					<CommonParts:SlotView IsSlotEmpty="{Binding IsEmpty}" ItemName="{Binding ItemName}" ItemTypeBrush="{Binding ItemTypeBrush}" ItemTypeName="{Binding ItemType}" OnSlotCount="{Binding OnSlotCount}"/>
+				</Border>
+			</Grid>
+		</DataTemplate>
+	</UserControl.Resources>
 
 	<Grid x:Name="LayoutRoot">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		<TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="HP: "/><Run Text="{Binding HpNow, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding HpMax, Mode=OneWay}"/></TextBlock>
-		<ProgressBar Grid.Column="1" Margin="5,25,5,5" VerticalAlignment="Bottom" Height="3" Value="{Binding HpNow, Mode=OneWay}" Maximum="{Binding HpMax, Mode=OneWay}"/>
-		<Viewbox Margin="5" StretchDirection="DownOnly" Stretch="Fill" HorizontalAlignment="Left">
-			<TextBlock><Run Text="{Binding ShipType, Mode=OneWay}"/><Run Text=" "/><Run FontSize="15" Text="{Binding ShipName, Mode=OneWay}"/></TextBlock>
-		</Viewbox>
-		<TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1"><Run Text="Lv. "/><Run Text="{Binding ShipLevel, Mode=OneWay}"/></TextBlock>
-		<ProgressBar Margin="5,25,5,5" VerticalAlignment="Bottom" Height="3" Grid.Row="1" Value="{Binding ExpPercentage, Mode=OneWay}"/>
-		<TextBlock HorizontalAlignment="Right" Margin="0,5,5,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1"><Run Text="next: "/><Run Text="{Binding ExpToNextLv, Mode=OneWay}"/></TextBlock>
-		<TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"><Run Text="Cond: "/><Run Text="{Binding Cond, Mode=OneWay}"/></TextBlock>
-		<ProgressBar Margin="5,0,5,5" VerticalAlignment="Bottom" Height="3" Grid.Row="1" Grid.Column="1" Value="{Binding Cond, Mode=OneWay}"/>
-		<TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="燃料: "/><Run Text="{Binding FuelNow, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding FuelMax, Mode=OneWay}"/></TextBlock>
-		<ProgressBar Grid.Column="2" Margin="5,0,5,5" VerticalAlignment="Bottom" Height="3" Value="{Binding FuelNow, Mode=OneWay}" Maximum="{Binding FuelMax, Mode=OneWay}"/>
-		<TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1"><Run Text="弾薬: "/><Run Text="{Binding AmmoNow, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding AmmoMax, Mode=OneWay}"/></TextBlock>
-		<ProgressBar Grid.Column="2" Margin="5,0,5,5" VerticalAlignment="Bottom" Height="3" Grid.Row="1" Value="{Binding AmmoNow, Mode=OneWay}" Maximum="{Binding AmmoMax, Mode=OneWay}"/>
+		<UniformGrid Columns="3" Rows="2">
+			<Grid Margin="3">
+				<Viewbox HorizontalAlignment="Left" Stretch="Fill" StretchDirection="DownOnly">
+					<TextBlock TextWrapping="Wrap"><Run Text="{Binding ShipType, Mode=OneWay}"/><Run Text=" "/><Run FontSize="15" Text="{Binding ShipName, Mode=OneWay}"/></TextBlock>
+				</Viewbox>
+			</Grid>
+			<Grid Margin="3">
+				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="2,2,0,0"><Run Text="HP: "/><Run Text="{Binding HpNow, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding HpMax, Mode=OneWay}"/></TextBlock>
+				<ProgressBar Margin="2,20,2,2" VerticalAlignment="Bottom" Height="3" Value="{Binding HpNow, Mode=OneWay}" Maximum="{Binding HpMax, Mode=OneWay}"/>
+			</Grid>
+			<Grid Margin="3">
+				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="2,2,0,0"><Run Text="燃料: "/><Run Text="{Binding FuelNow, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding FuelMax, Mode=OneWay}"/></TextBlock>
+				<ProgressBar Margin="2,20,2,2" VerticalAlignment="Bottom" Height="3" Value="{Binding FuelNow, Mode=OneWay}" Maximum="{Binding FuelMax, Mode=OneWay}"/>
+			</Grid>
+			<Grid Margin="3">
+				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="2,2,0,0"><Run Text="Lv. "/><Run Text="{Binding ShipLevel, Mode=OneWay}"/></TextBlock>
+				<ProgressBar Margin="2,20,2,2" VerticalAlignment="Bottom" Height="3" Value="{Binding ExpPercentage, Mode=OneWay}"/>
+				<TextBlock HorizontalAlignment="Right" Margin="0,2,2,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="next: "/><Run Text="{Binding ExpToNextLv, Mode=OneWay}"/></TextBlock>
+			</Grid>
+			<Grid Margin="3">
+				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="2,2,0,0"><Run Text="Cond: "/><Run Text="{Binding Cond, Mode=OneWay}"/></TextBlock>
+				<ProgressBar VerticalAlignment="Bottom" Height="3" Value="{Binding Cond, Mode=OneWay}" Margin="2,20,2,2"/>
+			</Grid>
+			<Grid Margin="3">
+				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="2,2,0,0"><Run Text="弾薬: "/><Run Text="{Binding AmmoNow, Mode=OneWay}"/><Run Text="/"/><Run Text="{Binding AmmoMax, Mode=OneWay}"/></TextBlock>
+				<ProgressBar VerticalAlignment="Bottom" Height="3" Value="{Binding AmmoNow, Mode=OneWay}" Maximum="{Binding AmmoMax, Mode=OneWay}" Margin="2,20,2,2"/>
+			</Grid>
+			
+		</UniformGrid>
+		<ListView ItemsSource="{Binding Slots}" Style="{DynamicResource ListViewStyle1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" ItemTemplate="{DynamicResource DataTemplate1}" Margin="3" Grid.Row="1">
+			<ListView.Resources>
+				<Style TargetType="{x:Type GridViewColumnHeader}">
+					<Setter Property="Visibility" Value="Collapsed" />
+				</Style>
+			</ListView.Resources>
+			<i:Interaction.Behaviors>
+				<Behavior:ReadOnlyListViewBehavior/>
+			</i:Interaction.Behaviors>
+		</ListView>
 	</Grid>
 </UserControl>

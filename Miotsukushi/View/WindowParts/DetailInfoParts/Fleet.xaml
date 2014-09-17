@@ -40,7 +40,7 @@
 		<DataTemplate x:Key="DataTemplate1">
 			<Expander x:Name="expander" Margin="3">
 				<Expander.Header>
-					<Grid Height="Auto" Background="{DynamicResource WhiteBrush}">
+					<Grid Background="{DynamicResource WhiteBrush}">
 						<FleetParts:ShipSummary/>
 					</Grid>
 				</Expander.Header>

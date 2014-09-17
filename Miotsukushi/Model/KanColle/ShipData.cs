@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Miotsukushi.Model.KanColle
 {
@@ -275,6 +276,9 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+        public ObservableCollection<int> Slots = new ObservableCollection<int>();
+        public ObservableCollection<int> OnSlotCount = new ObservableCollection<int>();
+
         #endregion
 
         public void FromKanColleLib(KanColleLib.TransmissionData.api_get_member.values.ShipValue data)
@@ -291,6 +295,44 @@ namespace Miotsukushi.Model.KanColle
             fuel = data.fuel;
             ammo = data.bull;
             ndock_time = TimeSpan.FromMilliseconds(data.ndock_time);
+
+            for (int i = 0; i < data.slotnum; i++)
+            {
+                int slot = data.slot.Length > i ? data.slot[i] : -1;
+                if (Slots.Count > i)
+                {
+                    if (Slots[i] != slot)
+                        Slots[i] = slot;
+                }
+                else
+                {
+                    Slots.Add(slot);
+                }
+
+                int onslotcount = data.onslot.Length > i ? data.onslot[i] : 0;
+                if (OnSlotCount.Count > i)
+                {
+                    if (OnSlotCount[i] != onslotcount)
+                        OnSlotCount[i] = onslotcount;
+                }
+                else
+                {
+                    OnSlotCount.Add(onslotcount);
+                }
+                    
+            }
+
+            int slotovercount = Slots.Count - data.slotnum;
+            for (int i = 0; i < slotovercount; i++)
+            {
+                Slots.RemoveAt(Slots.Count - 1);
+            }
+
+            int onslotcountovercount = OnSlotCount.Count - data.slotnum;
+            for (int i = 0; i < onslotcountovercount; i++)
+            {
+                OnSlotCount.RemoveAt(Slots.Count - 1);
+            }
         }
     }
 }

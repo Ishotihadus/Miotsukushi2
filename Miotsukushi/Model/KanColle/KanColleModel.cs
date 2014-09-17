@@ -16,6 +16,9 @@ namespace Miotsukushi.Model.KanColle
         public Dictionary<int, CharacterData> charamaster = new Dictionary<int,CharacterData>();
         public Dictionary<int, ShiptypeData> shiptypemaster = new Dictionary<int,ShiptypeData>();
         public Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
+        public Dictionary<int, ItemData> slotitemmaster = new Dictionary<int, ItemData>();
+        public Dictionary<int, ItemEquipTypeData> slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
+        public ObservableCollection<SlotData> slotdata = new ObservableCollection<SlotData>();
         public ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
         public ExList<FleetData> fleetdata = new ExList<FleetData>();
         public ExList<KDockData> kdockdata = new ExList<KDockData>();
@@ -45,6 +48,41 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
             kclib.GetGetmemberMaterial += kclib_GetGetmemberMaterial;
             kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
+            kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
+            kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
+        }
+
+        void kclib_GetReqkousyouCreateitem(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.CreateitemRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Createitem> response)
+        {
+            if (response.data.slot_item != null)
+            {
+                slotdata.Add(new SlotData() { id = response.data.slot_item.id, itemid = response.data.slot_item.slotitem_id });
+                basicdata.now_equipment_number = slotdata.Count;
+            }
+        }
+
+        async void kclib_GetGetmemberSlotItem(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.SlotItem> response)
+        {
+            await Task.Run(() =>
+            {
+                foreach (var item in response.data.slotitems)
+                {
+                    if (!slotdata.Any(_ => _.id == item.id))
+                    {
+                        slotdata.Add(new SlotData() { id = item.id, itemid = item.slotitem_id });
+                    }
+                }
+
+                foreach (var item in slotdata)
+                {
+                    if (!response.data.slotitems.Any(_ => _.id == item.id))
+                    {
+                        slotdata.Remove(item);
+                    }
+                }
+
+                basicdata.now_equipment_number = slotdata.Count;
+            });
         }
 
         void kclib_GetReqhenseiChange(object sender, KanColleLib.TransmissionRequest.api_req_hensei.ChangeRequest request, KanColleLib.TransmissionData.Svdata<object> response)
@@ -237,6 +275,33 @@ namespace Miotsukushi.Model.KanColle
                 System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_mission");
                 InitializeConfirm();
             });
+
+            await Task.Run(() =>
+            {
+                slotitemmaster = new Dictionary<int, ItemData>();
+                foreach (var item in response.data.mst_slotitem)
+                {
+                    slotitemmaster.Add(item.id, new ItemData()
+                    {
+                        name = item.name,
+                        type_equiptype = item.type[2]
+                    });
+                }
+                InitializeConfirm();
+            });
+
+            await Task.Run(() =>
+            {
+                slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
+                foreach (var item in response.data.mst_slotitem_equiptype)
+                {
+                    slotitem_equiptypemaster.Add(item.id, new ItemEquipTypeData()
+                    {
+                        name = item.name,
+                        typebrush = KanColleTools.GetSlotItemEquipTypeBrush(item.id)
+                    });
+                }
+            });
         }
 
         /// <summary>
@@ -305,7 +370,7 @@ namespace Miotsukushi.Model.KanColle
         }
 
         int initializecount = 0;
-        int initializecountflag = 4;
+        int initializecountflag = 5;
 
         void InitializeConfirm()
         {
