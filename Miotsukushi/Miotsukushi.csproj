@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behavior\ReadOnlyListViewBehavior.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityReverseConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
@@ -127,6 +128,15 @@
     <Compile Include="ViewModel\EasyInfoPanel\ExpeditionCollectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\CommonParts\SlotView.xaml.cs">
+      <DependentUpon>SlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\Fleet.xaml.cs">
+      <DependentUpon>Fleet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\FleetParts\ShipSummary.xaml.cs">
+      <DependentUpon>ShipSummary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowParts\DetailInfoParts\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
@@ -157,6 +167,10 @@
     <Compile Include="View\WindowParts\WebView.xaml.cs">
       <DependentUpon>WebView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\CommonParts\SlotView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,6 +184,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\WindowParts\DetailInfoParts\Fleet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\FleetParts\ShipSummary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\WindowParts\DetailInfoParts\General.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

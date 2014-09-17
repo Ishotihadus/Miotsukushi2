@@ -7,7 +7,7 @@ using Miotsukushi.Model.KanColle;
 
 namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 {
-    class ShipViewModel : ViewModelBase
+    class ShipViewModel : ViewModelBase, IDisposable
     {
         private int shipid;
         private int charaid;
@@ -363,5 +363,39 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             AmmoNow = real_ammo_now;
             AmmoMax = real_ammo_max;
         }
+
+        #region IDisposable
+
+        bool disposed = false;
+
+        public void Dispose(){
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                // Free any other managed objects here.
+                if (shipdata != null)
+                    shipdata.PropertyChanged -= shipdata_PropertyChanged;
+                shipdata = null;
+                model = null;
+            }
+
+            // Free any unmanaged objects here.
+            disposed = true;
+        }
+
+        ~ShipViewModel()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }

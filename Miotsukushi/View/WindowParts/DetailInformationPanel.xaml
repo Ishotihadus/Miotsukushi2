@@ -79,9 +79,16 @@
 				<DetailInfoParts:General/>
 			</TabItem>
 			<TabItem Header="第1艦隊">
-				<Grid DataContext="{Binding FleetsCollection}" >
-					<DataGrid Margin="10,10,10,0" VerticalAlignment="Top" Height="200" DataContext="{Binding [0]}" ItemsSource="{Binding Ships}"/>
-				</Grid>
+				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[0]}"/>
+			</TabItem>
+			<TabItem Header="第2艦隊">
+				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[1]}"/>
+			</TabItem>
+			<TabItem Header="第3艦隊">
+				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[2]}"/>
+			</TabItem>
+			<TabItem Header="第4艦隊">
+				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[3]}"/>
 			</TabItem>
 		</Custom:MetroAnimatedTabControl>
 		
