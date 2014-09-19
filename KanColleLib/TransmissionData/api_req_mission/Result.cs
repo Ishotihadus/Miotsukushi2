@@ -104,14 +104,10 @@ namespace KanColleLib.TransmissionData.api_req_mission
             result.quest_name = json.api_quest_name as string;
             result.quest_level = (int)json.api_quest_level;
 
-            try
-            {
+            if(json.api_get_material is Codeplex.Data.DynamicJson)
                 result.get_material = json.api_get_material.Deserialize<int[]>();
-            }
-            catch
-            {
+            else
                 result.get_material = null;
-            }
 
             result.useitem_flag = json.api_useitem_flag.Deserialize<int[]>();
 
