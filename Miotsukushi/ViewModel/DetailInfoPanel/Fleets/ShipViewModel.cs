@@ -248,6 +248,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 charaid = shipdata.characterid;
                 character_initialize();
                 initialize();
+                SlotAppend();
                 shipdata.PropertyChanged += shipdata_PropertyChanged;
                 shipdata.Slots.CollectionChanged += Slots_CollectionChanged;
                 shipdata.OnSlotCount.CollectionChanged += OnSlotCount_CollectionChanged;
@@ -267,8 +268,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             });
         }
 
-        // 仮実装（もっときれいなコードになるはず）
+        // 仮実装
         void Slots_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            SlotAppend();
+        }
+
+        void SlotAppend()
         {
             App.Current.Dispatcher.BeginInvoke((Action)delegate
             {
