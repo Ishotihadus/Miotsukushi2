@@ -56,6 +56,22 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+        /// <summary>
+        /// 艦娘のキャラクター情報に直接アクセスする
+        /// キャラクター情報がなければnullを返す
+        /// </summary>
+        public CharacterData characterinfo
+        {
+            get
+            {
+                if (Model.MainModel.Current != null && Model.MainModel.Current.kancolleModel != null && Model.MainModel.Current.kancolleModel.charamaster != null &&
+                    Model.MainModel.Current.kancolleModel.charamaster.ContainsKey(characterid))
+                    return Model.MainModel.Current.kancolleModel.charamaster[characterid];
+                else
+                    return null;
+            }
+        }
+
         private int _level;
         
         /// <summary>

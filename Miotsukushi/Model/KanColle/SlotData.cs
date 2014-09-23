@@ -10,5 +10,20 @@ namespace Miotsukushi.Model.KanColle
     {
         public int id;
         public int itemid;
+
+        /// <summary>
+        /// 装備アイテムの情報を直接取得する
+        /// </summary>
+        public ItemData iteminfo
+        {
+            get
+            {
+                if (MainModel.Current != null && MainModel.Current.kancolleModel != null && MainModel.Current.kancolleModel.slotitemmaster != null &&
+                    MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(itemid))
+                    return MainModel.Current.kancolleModel.slotitemmaster[itemid];
+                else
+                    return null;
+            }
+        }
     }
 }

@@ -300,12 +300,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                             var slotmodel = model.slotdata.FirstOrDefault(_ => _.id == Slots[i].slotid);
                             if (slotmodel != null)
                             {
-                                if (model.slotitemmaster.ContainsKey(slotmodel.itemid))
+                                var slotitemdata = slotmodel.iteminfo;
+                                if (slotitemdata != null)
                                 {
-                                    Slots[i].ItemTypeBrush = Tools.KanColleTools.GetSlotItemEquipTypeBrush(model.slotitemmaster[slotmodel.itemid].type_equiptype);
-                                    Slots[i].ItemName = model.slotitemmaster[slotmodel.itemid].name;
-                                    if (model.slotitem_equiptypemaster.ContainsKey(model.slotitemmaster[slotmodel.itemid].type_equiptype))
-                                        Slots[i].ItemType = model.slotitem_equiptypemaster[model.slotitemmaster[slotmodel.itemid].type_equiptype].name;
+                                    Slots[i].ItemTypeBrush = Tools.KanColleTools.GetSlotItemEquipTypeBrush(slotitemdata.type_equiptype);
+                                    Slots[i].ItemName = slotitemdata.name;
+                                    if (model.slotitem_equiptypemaster.ContainsKey(slotitemdata.type_equiptype))
+                                        Slots[i].ItemType = model.slotitem_equiptypemaster[slotitemdata.type_equiptype].name;
                                     else
                                         Slots[i].ItemType = "不明";
                                 }
@@ -378,9 +379,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         /// </summary>
         void character_initialize()
         {
-            if (model.charamaster.ContainsKey(charaid))
+            var character = shipdata.characterinfo;
+            if (character != null)
             {
-                var character = model.charamaster[charaid];
                 if (model.shiptypemaster.ContainsKey(character.shiptype))
                 {
                     ShipType = model.shiptypemaster[character.shiptype].name;
@@ -389,7 +390,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 {
                     ShipType = "不明";
                 }
-
                 ShipName = character.name;
             }
             else
