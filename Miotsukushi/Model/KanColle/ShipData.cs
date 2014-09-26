@@ -295,6 +295,154 @@ namespace Miotsukushi.Model.KanColle
         public ObservableCollection<int> Slots = new ObservableCollection<int>();
         public ObservableCollection<int> OnSlotCount = new ObservableCollection<int>();
 
+        private int _air_mastery;
+        public int air_mastery
+        {
+            get
+            {
+                return _air_mastery;
+            }
+
+            set
+            {
+                if (_air_mastery != value)
+                {
+                    _air_mastery = value;
+                    OnPropertyChanged(() => air_mastery);
+                }
+            }
+        }
+
+        // 火力
+        private int _fire_power;
+        public int fire_power
+        {
+            get
+            {
+                return _fire_power;
+            }
+
+            set
+            {
+                if (_fire_power != value)
+                {
+                    _fire_power = value;
+                    OnPropertyChanged(() => fire_power);
+                }
+            }
+        }
+
+        // 装甲
+        private int _armor;
+        public int armor
+        {
+            get
+            {
+                return _armor;
+            }
+
+            set
+            {
+                if (_armor != value)
+                {
+                    _armor = value;
+                    OnPropertyChanged(() => armor);
+                }
+            }
+        }
+
+        // 雷装
+        private int _torpedo;
+        public int torpedo
+        {
+            get
+            {
+                return _torpedo;
+            }
+
+            set
+            {
+                if (_torpedo != value)
+                {
+                    _torpedo = value;
+                    OnPropertyChanged(() => torpedo);
+                }
+            }
+        }
+
+        // 回避
+        private int _evasion;
+        public int evasion
+        {
+            get
+            {
+                return _evasion;
+            }
+
+            set
+            {
+                if (_evasion != value)
+                {
+                    _evasion = value;
+                    OnPropertyChanged(() => evasion);
+                }
+            }
+        }
+
+        private int _anti_air;
+        public int anti_air
+        {
+            get
+            {
+                return _anti_air;
+            }
+
+            set
+            {
+                if (_anti_air != value)
+                {
+                    _anti_air = value;
+                    OnPropertyChanged(() => anti_air);
+                }
+            }
+        }
+
+        private int _anti_submarine;
+        public int anti_submarine
+        {
+            get
+            {
+                return _anti_submarine;
+            }
+
+            set
+            {
+                if (_anti_submarine != value)
+                {
+                    _anti_submarine = value;
+                    OnPropertyChanged(() => anti_submarine);
+                }
+            }
+        }
+
+        private int _luck;
+        public int luck
+        {
+            get
+            {
+                return _luck;
+            }
+
+            set
+            {
+                if (_luck != value)
+                {
+                    _luck = value;
+                    OnPropertyChanged(() => luck);
+                }
+            }
+        }
+
         #endregion
 
         public void FromKanColleLib(KanColleLib.TransmissionData.api_get_member.values.ShipValue data)
@@ -349,6 +497,15 @@ namespace Miotsukushi.Model.KanColle
             {
                 OnSlotCount.RemoveAt(Slots.Count - 1);
             }
+
+            air_mastery = Tools.KanColleTools.ShipAirMastery(this);
+            fire_power = data.karyoku[0];
+            armor = data.soukou[0];
+            torpedo = data.raisou[0];
+            evasion = data.kaihi[0];
+            anti_air = data.taiku[0];
+            anti_submarine = data.taisen[0];
+            luck = data.lucky[0];
         }
     }
 }

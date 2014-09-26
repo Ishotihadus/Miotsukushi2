@@ -46,8 +46,9 @@ namespace KanColleLib.TransmissionData.api_req_kousyou
             getship.ship = ShipValue.fromDynamic(json.api_ship);
 
             getship.slotitem = new List<GetshipSlotitemValue>();
-            foreach (var data in json.api_slotitem)
-                getship.slotitem.Add(GetshipSlotitemValue.fromDynamic(data));
+            if(json.api_slotitem != null)
+                foreach (var data in json.api_slotitem)
+                    getship.slotitem.Add(GetshipSlotitemValue.fromDynamic(data));
 
             return getship;
         }

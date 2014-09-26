@@ -7,7 +7,7 @@
 	xmlns:CommonParts="clr-namespace:Miotsukushi.View.CommonParts"
 	mc:Ignorable="d"
 	x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts.ShipSummary"
-	x:Name="UserControl" d:DesignWidth="150" d:DesignHeight="500">
+	x:Name="UserControl" d:DesignWidth="150" d:DesignHeight="800">
 	<UserControl.Resources>
 		<DataTemplate x:Key="SlotItemTemplate">
 			<CommonParts:SlotView ItemTypeBrush="{Binding ItemTypeBrush}" ItemTypeName="{Binding ItemType}" ItemName="{Binding ItemName}" IsSlotEmpty="{Binding IsEmpty}" OnSlotCount="{Binding OnSlotCount}"/>
@@ -32,6 +32,13 @@
 		<Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
 		<ItemsControl Margin="5,0" ItemTemplate="{DynamicResource SlotItemTemplate}" ItemsSource="{Binding Slots}" MinHeight="90"/>
 		<Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="制空" ParameterValue="{Binding AirMastery}"/>
+		<CommonParts:ShipParameterView Margin="5,3,5,8" ParameterName="制空" ParameterValue="{Binding AirMastery}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="火力" ParameterValue="{Binding Firepower}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="装甲" ParameterValue="{Binding Armor}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="雷装" ParameterValue="{Binding Torpedo}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="回避" ParameterValue="{Binding Evasion}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="対空" ParameterValue="{Binding AntiAir}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="対潜" ParameterValue="{Binding AntiSubmarine}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="運" ParameterValue="{Binding Luck}"/>
 	</StackPanel>
 </UserControl>

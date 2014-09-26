@@ -253,6 +253,136 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             }
         }
 
+        // 火力
+        private int _Firepower;
+        public int Firepower
+        {
+            get
+            {
+                return _Firepower;
+            }
+
+            set
+            {
+                if (_Firepower != value)
+                {
+                    _Firepower = value;
+                    OnPropertyChanged(() => Firepower);
+                }
+            }
+        }
+
+        // 装甲
+        private int _Armor;
+        public int Armor
+        {
+            get
+            {
+                return _Armor;
+            }
+
+            set
+            {
+                if (_Armor != value)
+                {
+                    _Armor = value;
+                    OnPropertyChanged(() => Armor);
+                }
+            }
+        }
+
+        // 雷装
+        private int _Torpedo;
+        public int Torpedo
+        {
+            get
+            {
+                return _Torpedo;
+            }
+
+            set
+            {
+                if (_Torpedo != value)
+                {
+                    _Torpedo = value;
+                    OnPropertyChanged(() => Torpedo);
+                }
+            }
+        }
+
+        // 回避
+        private int _Evasion;
+        public int Evasion
+        {
+            get
+            {
+                return _Evasion;
+            }
+
+            set
+            {
+                if (_Evasion != value)
+                {
+                    _Evasion = value;
+                    OnPropertyChanged(() => Evasion);
+                }
+            }
+        }
+
+        private int _AntiAir;
+        public int AntiAir
+        {
+            get
+            {
+                return _AntiAir;
+            }
+
+            set
+            {
+                if (_AntiAir != value)
+                {
+                    _AntiAir = value;
+                    OnPropertyChanged(() => AntiAir);
+                }
+            }
+        }
+
+        private int _AntiSubmarine;
+        public int AntiSubmarine
+        {
+            get
+            {
+                return _AntiSubmarine;
+            }
+
+            set
+            {
+                if (_AntiSubmarine != value)
+                {
+                    _AntiSubmarine = value;
+                    OnPropertyChanged(() => AntiSubmarine);
+                }
+            }
+        }
+
+        private int _Luck;
+        public int Luck
+        {
+            get
+            {
+                return _Luck;
+            }
+
+            set
+            {
+                if (_Luck != value)
+                {
+                    _Luck = value;
+                    OnPropertyChanged(() => Luck);
+                }
+            }
+        }
+
         #endregion
 
         public ShipViewModel(int shipid)
@@ -296,6 +426,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         {
             App.Current.Dispatcher.BeginInvoke((Action)delegate
             {
+                if (shipdata == null)
+                    return;
+
                 for (int i = 0; i < shipdata.Slots.Count; i++)
                 {
                     if (i >= Slots.Count)
@@ -345,8 +478,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                     }
                 }
             });
-
-            AirMastery = Tools.KanColleTools.ShipAirMastery(shipdata);
         }
 
         void shipdata_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -391,6 +522,30 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 case "ndock_time":
                     // 未使用
                     break;
+                case "air_mastery":
+                    AirMastery = shipdata.air_mastery;
+                    break;
+                case "fire_power":
+                    Firepower = shipdata.fire_power;
+                    break;
+                case "armor":
+                    Armor = shipdata.armor;
+                    break;
+                case "torpedo":
+                    Torpedo = shipdata.torpedo;
+                    break;
+                case "evasion":
+                    Evasion = shipdata.evasion;
+                    break;
+                case "anti_air":
+                    AntiAir = shipdata.anti_air;
+                    break;
+                case "anti_submarine":
+                    AntiSubmarine = shipdata.anti_submarine;
+                    break;
+                case "luck":
+                    Luck = shipdata.luck;
+                    break;
             }
         }
 
@@ -430,6 +585,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             HpNow = shipdata.hp_now;
             HpMax = shipdata.hp_max;
             Cond = shipdata.condition;
+            AirMastery = shipdata.air_mastery;
+            Firepower = shipdata.fire_power;
+            Armor = shipdata.armor;
+            Torpedo = shipdata.torpedo;
+            Evasion = shipdata.evasion;
+            AntiAir = shipdata.anti_air;
+            AntiSubmarine = shipdata.anti_submarine;
+            Luck = shipdata.luck;
             fuel_append();
             ammo_append();
         }
