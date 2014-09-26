@@ -235,6 +235,24 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 
         public ObservableCollection<SlotViewModel> Slots { get; private set; }
 
+        private int _AirMastery;
+        public int AirMastery
+        {
+            get
+            {
+                return _AirMastery;
+            }
+
+            set
+            {
+                if (_AirMastery != value)
+                {
+                    _AirMastery = value;
+                    OnPropertyChanged(() => AirMastery);
+                }
+            }
+        }
+
         #endregion
 
         public ShipViewModel(int shipid)
@@ -327,6 +345,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                     }
                 }
             });
+
+            AirMastery = Tools.KanColleTools.ShipAirMastery(shipdata);
         }
 
         void shipdata_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

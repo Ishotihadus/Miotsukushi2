@@ -284,7 +284,8 @@ namespace Miotsukushi.Model.KanColle
                     slotitemmaster.Add(item.id, new ItemData()
                     {
                         name = item.name,
-                        type_equiptype = item.type[2]
+                        type_equiptype = item.type[2],
+                        taiku = item.tyku
                     });
                 }
                 InitializeConfirm();

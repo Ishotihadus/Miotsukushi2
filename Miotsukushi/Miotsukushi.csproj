@@ -132,6 +132,9 @@
     <Compile Include="ViewModel\EasyInfoPanel\ExpeditionCollectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\CommonParts\ShipParameterView.xaml.cs">
+      <DependentUpon>ShipParameterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CommonParts\SlotView.xaml.cs">
       <DependentUpon>SlotView.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
     <Compile Include="View\WindowParts\WebView.xaml.cs">
       <DependentUpon>WebView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\CommonParts\ShipParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\CommonParts\SlotView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

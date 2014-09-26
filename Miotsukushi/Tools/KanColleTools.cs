@@ -70,5 +70,41 @@ namespace Miotsukushi.Tools
                 default: return Brushes.White;
             }
         }
+
+        public static int SlotAirMastery(Model.KanColle.SlotData slot, int onslot)
+        {
+            if (slot.iteminfo == null)
+                return 0;
+
+            switch (slot.iteminfo.type_equiptype)
+            {
+                case 6:
+                case 7:
+                case 8:
+                case 11:
+                    return (int)Math.Floor(slot.iteminfo.taiku * Math.Sqrt(onslot));
+                default:
+                    return 0;
+            }
+        }
+
+        public static int ShipAirMastery(Model.KanColle.ShipData ship)
+        {
+            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+                ship == null || ship.Slots == null || ship.OnSlotCount == null)
+                return 0;
+
+            int length = Math.Min(ship.Slots.Count, ship.OnSlotCount.Count);
+            int ret = 0;
+
+            for (int i = 0; i < length; i++)
+            {
+                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
+                if (slotmodel != null)
+                    ret += SlotAirMastery(slotmodel, ship.OnSlotCount[i]);
+            }
+
+            return ret;
+        }
     }
 }

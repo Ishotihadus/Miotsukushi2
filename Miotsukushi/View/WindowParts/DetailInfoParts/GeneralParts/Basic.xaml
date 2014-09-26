@@ -8,9 +8,6 @@
 	x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.Basic"
 	x:Name="UserControl"
 	d:DesignWidth="554">
-    <UserControl.DataContext>
-        <vm:BasicPanelViewModel />
-    </UserControl.DataContext>
 
 	<Grid x:Name="LayoutRoot">
 		<Grid.ColumnDefinitions>

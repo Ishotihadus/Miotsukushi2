@@ -10,5 +10,6 @@ namespace Miotsukushi.Model.KanColle
     {
         public string name;
         public int type_equiptype;
+        public int taiku;
     }
 }

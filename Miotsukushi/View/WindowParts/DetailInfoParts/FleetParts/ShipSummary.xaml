@@ -32,5 +32,6 @@
 		<Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
 		<ItemsControl Margin="5,0" ItemTemplate="{DynamicResource SlotItemTemplate}" ItemsSource="{Binding Slots}" MinHeight="90"/>
 		<Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+		<CommonParts:ShipParameterView Margin="5,3" ParameterName="制空" ParameterValue="{Binding AirMastery}"/>
 	</StackPanel>
 </UserControl>
