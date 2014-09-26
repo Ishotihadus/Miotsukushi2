@@ -35,15 +35,15 @@ namespace Miotsukushi.View.CommonParts
             }
         }
 
-        public static readonly DependencyProperty ParameterValueProperty = DependencyProperty.Register("ParameterValue", typeof(int), typeof(ShipParameterView));
+        public static readonly DependencyProperty ParameterValueProperty = DependencyProperty.Register("ParameterValue", typeof(string), typeof(ShipParameterView));
 
         [Description("パラメータの値"), Category("みおつくし")]
         [BindableAttribute(true)]
-        public int ParameterValue
+        public string ParameterValue
         {
             get
             {
-                return (int)GetValue(ParameterValueProperty);
+                return (string)GetValue(ParameterValueProperty);
             }
             set
             {
