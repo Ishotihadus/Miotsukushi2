@@ -17,8 +17,8 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Rectangle Fill="{DynamicResource AccentColorBrush}" Margin="0"/>
-			<TextBlock HorizontalAlignment="Center" Margin="2,1" TextWrapping="Wrap" Text="{Binding ParameterName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center" Foreground="{DynamicResource WhiteBrush}"/>
-			<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="2,1" TextWrapping="Wrap" Text="{Binding ParameterValue, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center"/>
+			<TextBlock HorizontalAlignment="Center" Margin="2,1" Text="{Binding ParameterName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center" Foreground="{DynamicResource WhiteBrush}"/>
+			<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="2,1" Text="{Binding ParameterValue, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center"/>
 		</Grid>
 	</Border>
 </UserControl>
