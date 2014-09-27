@@ -79,7 +79,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behavior\ReadOnlyListViewBehavior.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityReverseConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
