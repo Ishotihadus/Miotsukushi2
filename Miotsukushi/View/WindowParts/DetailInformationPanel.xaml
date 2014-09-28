@@ -11,58 +11,54 @@
 	x:Class="Miotsukushi.View.WindowParts.DetailInformationPanel"
 	x:Name="UserControl"
 	d:DesignWidth="566" d:DesignHeight="768">
-	<UserControl.Resources>
-		<ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
-			<UniformGrid Columns="5"/>
-		</ItemsPanelTemplate>
-		<Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
-			<Setter Property="BorderBrush" Value="{DynamicResource BlackBrush}"/>
-			<Setter Property="Background" Value="{DynamicResource WhiteBrush}"/>
-			<Setter Property="BorderThickness" Value="0,1,0,0"/>
-			<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-			<Setter Property="AlternationCount" Value="2"/>
-			<Setter Property="SnapsToDevicePixels" Value="True"/>
-			<Setter Property="OverridesDefaultStyle" Value="True"/>
-			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type ListView}">
-						<ScrollViewer Padding="{TemplateBinding Padding}" Style="{DynamicResource MetroGridViewScrollViewerStyle}" Background="{DynamicResource WhiteBrush}">
-							<ItemsPresenter/>
-						</ScrollViewer>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsGrouping" Value="True">
-								<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-							</Trigger>
-							<Trigger Property="IsEnabled" Value="False"/>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<DataTemplate x:Key="DataTemplate1">
-			<Grid Margin="0">
-				<Border Margin="3" Padding="0,6" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" >
-					<TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
-				</Border>
-			</Grid>
-		</DataTemplate>
-		<Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type TabItem}"/>
-				</Setter.Value>
-			</Setter>
-		</Style>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+            <UniformGrid Columns="5"/>
+        </ItemsPanelTemplate>
+        <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
+            <Setter Property="BorderBrush" Value="{DynamicResource BlackBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource WhiteBrush}"/>
+            <Setter Property="BorderThickness" Value="0,1,0,0"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            <Setter Property="AlternationCount" Value="2"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListView}">
+                        <ScrollViewer Padding="{TemplateBinding Padding}" Style="{DynamicResource MetroGridViewScrollViewerStyle}" Background="{DynamicResource WhiteBrush}">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsGrouping" Value="True">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="DataTemplate1">
+            <Grid Margin="0">
+                <Border Margin="3" Padding="0,6" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" >
+                    <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 
-	<UserControl.DataContext>
-		<vm:DetailInfoPanelViewModel />
-	</UserControl.DataContext>
-
-	<Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition/>

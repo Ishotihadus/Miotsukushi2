@@ -21,7 +21,11 @@ namespace Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts
 		public Basic()
 		{
 			this.InitializeComponent();
-            this.DataContext = new ViewModel.DetailInfoPanel.GeneralParts.BasicPanelViewModel();
+            try
+            {
+                this.DataContext = new ViewModel.DetailInfoPanel.GeneralParts.BasicPanelViewModel();
+            }
+            catch { }
 		}
 	}
 }
