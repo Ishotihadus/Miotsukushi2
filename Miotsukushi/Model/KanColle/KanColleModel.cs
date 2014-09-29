@@ -50,6 +50,19 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
             kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
             kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
+
+            shipdata.CollectionChanged += shipdata_CollectionChanged;
+            slotdata.CollectionChanged += slotdata_CollectionChanged;
+        }
+
+        void slotdata_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            basicdata.now_equipment_number = slotdata.Count;
+        }
+
+        void shipdata_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            basicdata.now_ship_number = shipdata.Count;
         }
 
         void kclib_GetReqkousyouCreateitem(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.CreateitemRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Createitem> response)
@@ -127,6 +140,7 @@ namespace Miotsukushi.Model.KanColle
                         if (fleetdata[request.id - 1].ships.Count > request.ship_idx)
                         {
                             // 他の艦との交代である場合
+                            // もとの艦のID
                             int replaceshipid = fleetdata[request.id - 1].ships[request.ship_idx];
                             fleetdata[request.id - 1].ships[request.ship_idx] = request.ship_id;
 
@@ -135,20 +149,25 @@ namespace Miotsukushi.Model.KanColle
                             {
                                 if (i == request.id - 1)
                                     continue;
-                                for (int j = 0; j < fleetdata[i].ships.Count; j++)
-                                {
-                                    if (fleetdata[i].ships[j] == request.ship_id)
-                                    {
-                                        // もしあったら
-                                        fleetdata[i].ships[j] = replaceshipid;
-                                    }
-                                }
+                                int rplidx = fleetdata[i].ships.IndexOf(request.ship_id);
+                                if (rplidx != -1)
+                                    fleetdata[i].ships[rplidx] = replaceshipid;
                             }
                         }
                         else
                         {
                             // なにもないところに宣言した場合
                             fleetdata[request.id - 1].ships.Add(request.ship_id);
+
+                            // 他の艦隊に同艦がいないかどうか確かめる
+                            for (int i = 0; i < fleetdata.Count; i++)
+                            {
+                                if (i == request.id - 1)
+                                    continue;
+                                int rplidx = fleetdata[i].ships.IndexOf(request.ship_id);
+                                if (rplidx != -1)
+                                    fleetdata[i].ships.RemoveAt(rplidx);
+                            }
                         }
                     }
                 }
@@ -222,13 +241,11 @@ namespace Miotsukushi.Model.KanColle
 
         async void kclib_GetGetmemberShip2(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship2Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship2> response)
         {
-            basicdata.now_ship_number = response.data.ships.Count;
             await AppendShipDataFromList(response.data.ships);
         }
 
         async void kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
         {
-            basicdata.now_ship_number = response.data.ship.ships.Count;
             basicdata.FromMaterial(response.data.material);
             await AppendShipDataFromList(response.data.ship.ships);
             await DeleteShipDataFromList(response.data.ship.ships);

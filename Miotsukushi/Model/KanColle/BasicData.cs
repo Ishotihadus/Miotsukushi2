@@ -393,7 +393,7 @@ namespace Miotsukushi.Model.KanColle
         private void remaincount_append()
         {
             var shipremain = max_ship - now_ship_number;
-            var equipremain = max_equipment + 3 - now_equipment_number;
+            var equipremain = (max_equipment + 3 - now_equipment_number) / 3;
             remain_count = shipremain < equipremain ? shipremain : equipremain;
         }
     }

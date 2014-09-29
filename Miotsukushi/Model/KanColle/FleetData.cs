@@ -28,8 +28,6 @@ namespace Miotsukushi.Model.KanColle
 
         public ObservableCollection<int> ships = new ObservableCollection<int>();
 
-        public int Count { get { return ships.Count; } }
-
         public FleetExpeditionStatus expedition_status;
         public DateTime expedition_backtime;
         public int expedition_id;
@@ -53,17 +51,23 @@ namespace Miotsukushi.Model.KanColle
             for (int i = 0; i < data.ship.Length; i++)
             {
                 if (data.ship[i] == -1)
-                    break;
-                if (i < ships.Count)
                 {
-                    if (ships[i] != data.ship[i])
-                    {
-                        ships[i] = data.ship[i];
-                    }
+                    if (ships.Count > i)
+                        ships.RemoveAt(i);
                 }
                 else
                 {
-                    ships.Add(data.ship[i]);
+                    if (i < ships.Count)
+                    {
+                        if (ships[i] != data.ship[i])
+                        {
+                            ships[i] = data.ship[i];
+                        }
+                    }
+                    else
+                    {
+                        ships.Add(data.ship[i]);
+                    }
                 }
             }
 

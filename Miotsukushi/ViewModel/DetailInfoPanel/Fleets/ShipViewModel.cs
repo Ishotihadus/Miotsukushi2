@@ -433,7 +433,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 {
                     if (i >= Slots.Count)
                     {
-                        Slots.Add(new SlotViewModel() { slotid = -1 });
+                        Slots.Add(new SlotViewModel() { slotid = -1, IsEmpty = true, ItemName = "空き" });
                         if (shipdata.OnSlotCount.Count > i)
                             Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
                     }
