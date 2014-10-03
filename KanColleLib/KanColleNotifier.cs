@@ -68,6 +68,7 @@ namespace KanColleLib
             {
                 throw new KanColleLibException("Response Json Parse Error", e);
             }
+            System.Diagnostics.Debug.WriteLine("KCSAPIURL: " + kcsapiurl);
 
             switch (kcsapiurl)
             {
@@ -248,7 +249,6 @@ namespace KanColleLib
 
 
                 default:
-                    System.Diagnostics.Debug.WriteLine("UNDEFINED KCSAPIURL: " + kcsapiurl);
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
                     System.Diagnostics.Debug.WriteLine("RESPONSE BODY: " + response);
                     break;

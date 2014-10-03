@@ -8,11 +8,23 @@ using System.Collections.ObjectModel;
 
 namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 {
-    class ShipViewModel : ViewModelBase, IDisposable
+    class ShipViewModel : ViewModelBase
     {
         private int shipid;
         private int charaid;
-        private ShipData shipdata;
+        private ShipData _shipdata;
+        private ShipData shipdata
+        {
+            get
+            {
+                if (_shipdata == null)
+                {
+                    if(model.shipdata != null)
+                        _shipdata = model.shipdata.FirstOrDefault(_ => _.shipid == shipid);
+                }
+                return _shipdata;
+            }
+        }
         private KanColleModel model;
 
         #region プロパティ定義
@@ -390,7 +402,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             Slots = new ObservableCollection<SlotViewModel>();
             model = Model.MainModel.Current.kancolleModel;
             this.shipid = shipid;
-            shipdata = model.shipdata.FirstOrDefault(_ => _.shipid == shipid);
             if (shipdata != null)
             {
                 charaid = shipdata.characterid;
@@ -626,39 +637,5 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             AmmoNow = real_ammo_now;
             AmmoMax = real_ammo_max;
         }
-
-        #region IDisposable
-
-        bool disposed = false;
-
-        public void Dispose(){
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                // Free any other managed objects here.
-                if (shipdata != null)
-                    shipdata.PropertyChanged -= shipdata_PropertyChanged;
-                shipdata = null;
-                model = null;
-            }
-
-            // Free any unmanaged objects here.
-            disposed = true;
-        }
-
-        ~ShipViewModel()
-        {
-            Dispose(false);
-        }
-
-        #endregion
     }
 }

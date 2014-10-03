@@ -53,8 +53,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             // なんかしらないけどUIスレッドとは別のところでObservableCollectionを死ぬとか云々
             App.Current.Dispatcher.BeginInvoke((Action)delegate
             {
-                // あとでDisposeするViewModelを指定してあげる（たぶんこれがいい）
-                List<ShipViewModel> disposeitem = new List<ShipViewModel>();
                 switch (e.Action)
                 {
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
@@ -65,18 +63,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                         Ships.Move(e.OldStartingIndex, e.NewStartingIndex);
                         break;
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                        disposeitem.Add(Ships[e.OldStartingIndex]);
                         Ships.RemoveAt(e.OldStartingIndex);
                         break;
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-                        disposeitem.Add(Ships[e.OldStartingIndex]);
                         Ships[e.OldStartingIndex] = new ShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
                         break;
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                        foreach (var d in Ships)
-                        {
-                            disposeitem.Add(d);
-                        }
                         for (int i = 0; i < model.fleetdata[id].ships.Count; i++)
                         {
                             if (i < Ships.Count)
@@ -86,11 +78,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                         }
                         break;
                 }
-                foreach (var d in disposeitem)
-                {
-                    d.Dispose();
-                }
-                disposeitem = null;
             });
         }
     }
