@@ -37,21 +37,6 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         public int stype;
 
         /// <summary>
-        /// 艦種の艦型ID
-        /// </summary>
-        public int ctype;
-
-        /// <summary>
-        /// 艦種の艦型番号（陽炎型12番艦の12）
-        /// </summary>
-        public int cnum;
-
-        /// <summary>
-        /// 不明（未使用）
-        /// </summary>
-        public int enqflg;
-
-        /// <summary>
         /// 改造Lv
         /// </summary>
         public int afterlv;
@@ -72,11 +57,6 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         public int[] souk;
 
         /// <summary>
-        /// 搭載（初期値/最大値）
-        /// </summary>
-        public int[] tous;
-
-        /// <summary>
         /// 火力（初期値/最大値）
         /// </summary>
         public int[] houg;
@@ -87,69 +67,14 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         public int[] raig;
 
         /// <summary>
-        /// 爆装（初期値/最大値）（未使用）
-        /// </summary>
-        public int[] baku;
-
-        /// <summary>
         /// 対空（初期値/最大値）
         /// </summary>
         public int[] tyku;
 
         /// <summary>
-        /// 不明（初期値/最大値）（未使用）
-        /// </summary>
-        public int[] atap;
-
-        /// <summary>
-        /// 対潜（初期値/最大値）
-        /// </summary>
-        public int[] tais;
-
-        /// <summary>
-        /// 命中（初期値/最大値）（未使用）
-        /// </summary>
-        public int[] houm;
-
-        /// <summary>
-        /// 回避（初期値/最大値）
-        /// </summary>
-        public int[] kaih;
-
-        /// <summary>
-        /// 砲撃回避（初期値/最大値）（未使用）
-        /// </summary>
-        public int[] houk;
-
-        /// <summary>
-        /// 雷撃回避（初期値/最大値）（未使用）
-        /// </summary>
-        public int[] raik;
-
-        /// <summary>
-        /// 爆撃回避（初期値/最大値）（未使用）
-        /// </summary>
-        public int[] bakk;
-
-        /// <summary>
-        /// 索敵（初期値/最大値）
-        /// </summary>
-        public int[] saku;
-
-        /// <summary>
-        /// 索敵ボーナス?（初期値/最大値）（未使用）
-        /// </summary>
-        public int[] sakb;
-
-        /// <summary>
         /// 運（初期値/最大値）
         /// </summary>
         public int[] luck;
-
-        /// <summary>
-        /// 速力換算?（未使用）
-        /// </summary>
-        public int sokuh;
 
         /// <summary>
         /// 速力
@@ -165,11 +90,6 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         public int leng;
 
         /// <summary>
-        /// 初期改装（未使用）
-        /// </summary>
-        public int[] grow;
-
-        /// <summary>
         /// スロット数
         /// </summary>
         public int slot_num;
@@ -178,12 +98,6 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// 最大搭載数
         /// </summary>
         public int[] maxeq;
-
-        /// <summary>
-        /// 初期装備
-        /// 未装備は-1
-        /// </summary>
-        public int[] defeq;
 
         /// <summary>
         /// 建造時間（分）
@@ -201,11 +115,6 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         public int[] powup;
 
         /// <summary>
-        /// 不明（未使用）
-        /// </summary>
-        public int[] gumax;
-
-        /// <summary>
         /// 背景画像/レアリティ
         /// </summary>
         public int backs;
@@ -216,26 +125,6 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         public string getmes;
 
         /// <summary>
-        /// 母校到着時メッセージ?（未使用）
-        /// </summary>
-        public string homemes;
-
-        /// <summary>
-        /// 出撃時メッセージ?（未使用）
-        /// </summary>
-        public string gomes;
-
-        /// <summary>
-        /// 出撃時メッセージ2?（未使用）
-        /// </summary>
-        public string gomes2;
-
-        /// <summary>
-        /// 図鑑説明
-        /// </summary>
-        public string sinfo;
-
-        /// <summary>
         /// 改造に必要な燃料
         /// </summary>
         public int afterfuel;
@@ -244,21 +133,6 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// 改造に必要な弾薬
         /// </summary>
         public int afterbull;
-
-        /// <summary>
-        /// 不明（未使用）
-        /// </summary>
-        public string[] touchs;
-
-        /// <summary>
-        /// 不明（未使用）
-        /// </summary>
-        public string missions;
-
-        /// <summary>
-        /// 不明（未使用）
-        /// </summary>
-        public string systems;
 
         /// <summary>
         /// 燃料最大値
@@ -284,50 +158,25 @@ namespace KanColleLib.TransmissionData.api_start2.start2
             ship.name = json.api_name as string;
             ship.yomi = json.api_yomi as string;
             ship.stype = (int)json.api_stype;
-            ship.ctype = (int)json.api_ctype;
-            ship.cnum = (int)json.api_cnum;
-            ship.enqflg = int.Parse(json.api_enqflg as string);
             ship.afterlv = (int)json.api_afterlv;
             ship.aftershipid = int.Parse(json.api_aftershipid as string);
             ship.taik = json.api_taik.Deserialize<int[]>();
             ship.souk = json.api_souk.Deserialize<int[]>();
-            ship.tous = json.api_tous.Deserialize<int[]>();
             ship.houg = json.api_houg.Deserialize<int[]>();
             ship.raig = json.api_raig.Deserialize<int[]>();
-            ship.baku = json.api_baku.Deserialize<int[]>();
             ship.tyku = json.api_tyku.Deserialize<int[]>();
-            ship.atap = json.api_atap.Deserialize<int[]>();
-            ship.tais = json.api_tais.Deserialize<int[]>();
-            ship.houm = json.api_houm.Deserialize<int[]>();
-            ship.kaih = json.api_kaih.Deserialize<int[]>();
-            ship.houk = json.api_houk.Deserialize<int[]>();
-            ship.raik = json.api_raik.Deserialize<int[]>();
-            ship.bakk = json.api_bakk.Deserialize<int[]>();
-            ship.saku = json.api_saku.Deserialize<int[]>();
-            ship.sakb = json.api_sakb.Deserialize<int[]>();
             ship.luck = json.api_luck.Deserialize<int[]>();
-            ship.sokuh = (int)json.api_sokuh;
             ship.soku = (int)json.api_soku;
             ship.leng = (int)json.api_leng;
-            ship.grow = json.api_grow.Deserialize<int[]>();
             ship.slot_num = (int)json.api_slot_num;
             ship.maxeq = json.api_maxeq.Deserialize<int[]>();
-            ship.defeq = json.api_defeq.Deserialize<int[]>();
             ship.buildtime = (int)json.api_buildtime;
             ship.broken = json.api_broken.Deserialize<int[]>();
             ship.powup = json.api_powup.Deserialize<int[]>();
-            ship.gumax = json.api_gumax.Deserialize<int[]>();
             ship.backs = (int)json.api_backs;
             ship.getmes = json.api_getmes as string;
-            ship.homemes = json.api_homemes as string;
-            ship.gomes = json.api_gomes as string;
-            ship.gomes2 = json.api_gomes2 as string;
-            ship.sinfo = json.api_sinfo as string;
             ship.afterfuel = (int)json.api_afterfuel;
             ship.afterbull = (int)json.api_afterbull;
-            ship.touchs = json.api_touchs.Deserialize<string[]>();
-            ship.missions = json.api_missions as string;
-            ship.systems = json.api_systems as string;
             ship.fuel_max = (int)json.api_fuel_max;
             ship.bull_max = (int)json.api_bull_max;
             ship.voicef = (int)json.api_voicef;
@@ -343,5 +192,10 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         // "api_gomes":null,"api_gomes2":null,
         // "api_sinfo":"\u5e1d\u56fd\u6d77\u8ecd\u306e\u99c6\u9010\u8266\u3067\u521d\u3081\u3066\u5927\u578b\u3067\u5f37\u529b\u306a61cm\u9b5a\u96f7\u3092\u642d\u8f09\u3057\u307e\u3057\u305f\u3001\u7766\u6708\u3067\u3059\uff01<br>\u65e7\u5f0f\u306a\u304c\u3089\u3001\u7b2c\u4e00\u7dda\u3067\u9811\u5f35\u3063\u305f\u306e\u3067\u3059\uff01",
         // "api_afterfuel":100,"api_afterbull":100,"api_touchs":[null,null,null],"api_missions":null,"api_systems":null,"api_fuel_max":15,"api_bull_max":15,"api_voicef":0
+
+        // 10月10日のメンテで情報が減少
+        // "api_id":1,"api_sortno":31,"api_name":"睦月","api_yomi":"むつき","api_stype":2,"api_afterlv":20,"api_aftershipid":"254","api_taik":[13,24],"api_souk":[5,18],"api_houg":[6,29],"api_raig":[18,59],
+        // "api_tyku":[7,29],"api_luck":[12,49],"api_soku":10,"api_leng":1,"api_slot_num":2,"api_maxeq":[0,0,0,0,0],"api_buildtime":18,"api_broken":[1,1,4,0],"api_powup":[1,1,0,0],"api_backs":3,
+        // "api_getmes":"睦月です。<br>はりきって、まいりましょー！","api_afterfuel":100,"api_afterbull":100,"api_fuel_max":15,"api_bull_max":15,"api_voicef":0
     }
 }

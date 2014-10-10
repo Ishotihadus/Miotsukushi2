@@ -86,12 +86,11 @@ namespace Miotsukushi.Model.KanColle
                     }
                 }
 
-                foreach (var item in slotdata)
+                var deletelist = from _ in slotdata where !response.data.slotitems.Any(__ => __.id == _.id) select _;
+
+                foreach (var item in deletelist)
                 {
-                    if (!response.data.slotitems.Any(_ => _.id == item.id))
-                    {
-                        slotdata.Remove(item);
-                    }
+                    slotdata.Remove(item);
                 }
 
                 basicdata.now_equipment_number = slotdata.Count;
