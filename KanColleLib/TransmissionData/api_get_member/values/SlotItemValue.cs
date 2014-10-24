@@ -23,6 +23,11 @@ namespace KanColleLib.TransmissionData.api_get_member.values
         /// </summary>
         public bool locked;
 
+        /// <summary>
+        /// 改修レベル
+        /// </summary>
+        public int level;
+
         public static SlotItemValue fromDynamic(dynamic json)
         {
             SlotItemValue slotitem = new SlotItemValue();
@@ -30,6 +35,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
             slotitem.id = (int)json.api_id;
             slotitem.slotitem_id = (int)json.api_slotitem_id;
             slotitem.locked = (int)json.api_locked == 1;
+            slotitem.level = (int)json.api_level;
 
             return slotitem;
         }

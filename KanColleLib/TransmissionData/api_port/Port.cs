@@ -17,6 +17,11 @@ namespace KanColleLib.TransmissionData.api_port
         public Log log;
         public bool combined_flag;
 
+        /// <summary>
+        /// 母港BGMID
+        /// </summary>
+        public int p_bgm_id;
+
         public static Port fromDynamic(dynamic json)
         {
             Port port = new Port();
@@ -28,6 +33,7 @@ namespace KanColleLib.TransmissionData.api_port
             port.basic = Basic.fromDynamic(json.api_basic);
             port.log = Log.fromDynamic(json.api_log);
             port.combined_flag = (int)json.api_combined_flag == 1;
+            port.p_bgm_id = (int)json.api_p_bgm_id;
 
             return port;
         }

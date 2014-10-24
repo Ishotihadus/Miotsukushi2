@@ -93,6 +93,7 @@
     <Compile Include="TransmissionData\api_req_mission\ReturnInstruction.cs" />
     <Compile Include="TransmissionData\api_req_mission\Start.cs" />
     <Compile Include="TransmissionData\api_req_mission\values\GetItemValue.cs" />
+    <Compile Include="TransmissionData\api_start2\start2\MstBGM.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstFurniture.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstFurnituregraph.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstMaparea.cs" />

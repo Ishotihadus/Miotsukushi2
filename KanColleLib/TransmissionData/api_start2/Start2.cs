@@ -29,6 +29,7 @@ namespace KanColleLib.TransmissionData.api_start2
         public List<MstMission> mst_mission;
         // mst_constは実用性低いので未実装
         // mst_shipupgradeも実用性低いので未実装
+        public List<MstBGM> mst_bgm;
 
         /// <summary>
         /// /kcsapi/api_start2.api_data
@@ -94,6 +95,10 @@ namespace KanColleLib.TransmissionData.api_start2
             start2.mst_mission = new List<MstMission>();
             foreach (var data in json.api_mst_mission)
                 start2.mst_mission.Add(MstMission.fromDynamic(data));
+
+            start2.mst_bgm = new List<MstBGM>();
+            foreach (var data in json.api_mst_bgm)
+                start2.mst_bgm.Add(MstBGM.fromDynamic(data));
 
             return start2;
         }
