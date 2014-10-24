@@ -338,6 +338,24 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             }
         }
 
+        private int? _RevAmp;
+        public int? RevAmp
+        {
+            get
+            {
+                return _RevAmp;
+            }
+
+            set
+            {
+                if (_RevAmp != value)
+                {
+                    _RevAmp = value;
+                    OnPropertyChanged(() => RevAmp);
+                }
+            }
+        }
+
         private int? _FurnitureCoin;
         public int? FurnitureCoin
         {
@@ -456,6 +474,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     break;
                 case "furniture_coin":
                     FurnitureCoin = model.basicdata.furniture_coin;
+                    break;
+                case "modding_material":
+                    RevAmp = model.basicdata.modding_material;
                     break;
             }
         }

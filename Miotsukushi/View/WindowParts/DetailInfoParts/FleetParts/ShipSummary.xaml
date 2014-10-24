@@ -38,7 +38,8 @@
 		<CommonParts:ShipParameterView Margin="5,3" ParameterName="雷装" ParameterValue="{Binding Torpedo}"/>
 		<CommonParts:ShipParameterView Margin="5,3" ParameterName="回避" ParameterValue="{Binding Evasion}"/>
 		<CommonParts:ShipParameterView Margin="5,3" ParameterName="対空" ParameterValue="{Binding AntiAir}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="対潜" ParameterValue="{Binding AntiSubmarine}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="運" ParameterValue="{Binding Luck}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="対潜" ParameterValue="{Binding AntiSubmarine}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="索敵" ParameterValue="{Binding Reconnaissance}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="運" ParameterValue="{Binding Luck}"/>
 	</StackPanel>
 </UserControl>

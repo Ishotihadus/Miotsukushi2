@@ -346,6 +346,24 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+        private int _modding_material;
+        public int modding_material
+        {
+            get
+            {
+                return _modding_material;
+            }
+
+            set
+            {
+                if(_modding_material != value)
+                {
+                    _modding_material = value;
+                    OnPropertyChanged(() => modding_material);
+                }
+            }
+        }
+
 
         public void AppendRank(int rank)
         {
@@ -385,6 +403,9 @@ namespace Miotsukushi.Model.KanColle
                         break;
                     case 7:
                         development_material = m.value;
+                        break;
+                    case 8:
+                        modding_material = m.value;
                         break;
                 }
             }

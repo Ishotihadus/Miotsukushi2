@@ -44,8 +44,9 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="燃料"/><Run Text=": "/><Run Text="{Binding Fuel, Mode=OneWay}"/></TextBlock>
 			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"><Run Text="鋼材"/><Run Text=": "/><Run Text="{Binding Steel, Mode=OneWay}"/></TextBlock>
 			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1"><Run Text="弾薬"/><Run Text=": "/><Run Text="{Binding Ammo, Mode=OneWay}"/></TextBlock>
@@ -53,8 +54,9 @@
 			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1"><Run Text="回復上限"/><Run Text=": "/><Run Text="{Binding ResourceCap, Mode=OneWay}"/></TextBlock>
 			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="3"><Run Text="バケツ"/><Run Text=": "/><Run Text="{Binding Bucket, Mode=OneWay}"/></TextBlock>
 			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"><Run Text="バーナー"/><Run Text=": "/><Run Text="{Binding Burner, Mode=OneWay}"/></TextBlock>
-			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="4"><Run Text="開発資材"/><Run Text=": "/><Run Text="{Binding DevKit, Mode=OneWay}"/></TextBlock>
-			<TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"><Run Text="家具コイン"/><Run Text=": "/><Run Text="{Binding FurnitureCoin, Mode=OneWay}"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="4"><Run Text="開発資材"/><Run Text=": "/><Run Text="{Binding DevKit, Mode=OneWay}"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"><Run Text="改修資材"/><Run Text=": "/><Run Text="{Binding RevAmp, Mode=OneWay}"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="5,5,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="5" Grid.Column="1"><Run Text="家具コイン"/><Run Text=": "/><Run Text="{Binding FurnitureCoin, Mode=OneWay}"/></TextBlock>
 		</Grid>
 	</Grid>
 </UserControl>

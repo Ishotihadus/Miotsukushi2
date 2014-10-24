@@ -377,6 +377,25 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             }
         }
 
+        // 索敵
+        private int _Reconnaissance;
+        public int Reconnaissance
+        {
+            get
+            {
+                return _Reconnaissance;
+            }
+
+            set
+            {
+                if (_Reconnaissance != value)
+                {
+                    _Reconnaissance = value;
+                    OnPropertyChanged(() => Reconnaissance);
+                }
+            }
+        }
+
         private int _Luck;
         public int Luck
         {
@@ -554,6 +573,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 case "anti_submarine":
                     AntiSubmarine = shipdata.anti_submarine;
                     break;
+                case "reconnaissance":
+                    Reconnaissance = shipdata.reconnaissance;
+                    break;
                 case "luck":
                     Luck = shipdata.luck;
                     break;
@@ -603,6 +625,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             Evasion = shipdata.evasion;
             AntiAir = shipdata.anti_air;
             AntiSubmarine = shipdata.anti_submarine;
+            Reconnaissance = shipdata.reconnaissance;
             Luck = shipdata.luck;
             fuel_append();
             ammo_append();

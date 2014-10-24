@@ -425,6 +425,26 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+        // 索敵
+        private int _reconnaissance;
+        public int reconnaissance
+        {
+            get
+            {
+                return _reconnaissance;
+            }
+
+            set
+            {
+                if (_reconnaissance != value)
+                {
+                    _reconnaissance = value;
+                    OnPropertyChanged(() => reconnaissance);
+                }
+            }
+        }
+
+
         private int _luck;
         public int luck
         {
@@ -505,6 +525,7 @@ namespace Miotsukushi.Model.KanColle
             evasion = data.kaihi[0];
             anti_air = data.taiku[0];
             anti_submarine = data.taisen[0];
+            reconnaissance = data.sakuteki[0];
             luck = data.lucky[0];
         }
     }
