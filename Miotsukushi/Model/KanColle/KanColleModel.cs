@@ -86,7 +86,7 @@ namespace Miotsukushi.Model.KanColle
                     }
                 }
 
-                var deletelist = from _ in slotdata where !response.data.slotitems.Any(__ => __.id == _.id) select _;
+                var deletelist = (from _ in slotdata where !response.data.slotitems.Any(__ => __.id == _.id) select _).ToList();
 
                 foreach (var item in deletelist)
                 {
