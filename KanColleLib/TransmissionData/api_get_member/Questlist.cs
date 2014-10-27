@@ -50,13 +50,13 @@ namespace KanColleLib.TransmissionData.api_get_member
             };
 
             questlist.list = new List<values.QuestlistValue>();
-            foreach (var data in json.api_list)
+
+            if (json.api_list != null)
             {
-                try
+                foreach (var data in json.api_list)
                 {
                     questlist.list.Add(values.QuestlistValue.fromDynamic(data));
                 }
-                catch { }
             }
 
             return questlist;
