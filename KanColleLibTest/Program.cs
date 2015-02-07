@@ -11,7 +11,7 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            test_start2();
+            test_get_member();
         }
 
         
@@ -60,11 +60,11 @@ namespace KanColleLibTest
 
         static void test_get_member()
         {
-            string api_material = System.IO.File.ReadAllText("api_get_member/material.txt");
-            var material = KanColleLib.TransmissionData.api_get_member.Material.fromDynamic(DynamicJson.Parse(api_material).api_data);
+            // string api_material = System.IO.File.ReadAllText("api_get_member/material.txt");
+            //var material = KanColleLib.TransmissionData.api_get_member.Material.fromDynamic(DynamicJson.Parse(api_material).api_data);
 
-            string api_deck = System.IO.File.ReadAllText("api_get_member/deck.txt");
-            var deck = KanColleLib.TransmissionData.api_get_member.Deck.fromDynamic(DynamicJson.Parse(api_deck).api_data);
+            //string api_deck = System.IO.File.ReadAllText("api_get_member/deck.txt");
+            //var deck = KanColleLib.TransmissionData.api_get_member.Deck.fromDynamic(DynamicJson.Parse(api_deck).api_data);
 
             string api_kdock = System.IO.File.ReadAllText("api_get_member/kdock.txt");
             var kdock = KanColleLib.TransmissionData.api_get_member.KDock.fromDynamic(DynamicJson.Parse(api_kdock).api_data);
@@ -75,29 +75,29 @@ namespace KanColleLibTest
             string api_furniture = System.IO.File.ReadAllText("api_get_member/furniture.txt");
             var furniture = KanColleLib.TransmissionData.api_get_member.Furniture.fromDynamic(DynamicJson.Parse(api_furniture).api_data);
 
-            string api_mapcell = System.IO.File.ReadAllText("api_get_member/mapcell.txt");
-            var mapcell = KanColleLib.TransmissionData.api_get_member.Mapcell.fromDynamic(DynamicJson.Parse(api_mapcell).api_data);
+            //string api_mapcell = System.IO.File.ReadAllText("api_get_member/mapcell.txt");
+            //var mapcell = KanColleLib.TransmissionData.api_get_member.Mapcell.fromDynamic(DynamicJson.Parse(api_mapcell).api_data);
 
-            string api_mapinfo = System.IO.File.ReadAllText("api_get_member/mapinfo.txt");
-            var mapinfo = KanColleLib.TransmissionData.api_get_member.Mapinfo.fromDynamic(DynamicJson.Parse(api_mapinfo).api_data);
+            //string api_mapinfo = System.IO.File.ReadAllText("api_get_member/mapinfo.txt");
+            //var mapinfo = KanColleLib.TransmissionData.api_get_member.Mapinfo.fromDynamic(DynamicJson.Parse(api_mapinfo).api_data);
 
-            string api_mission = System.IO.File.ReadAllText("api_get_member/mission.txt");
-            var mission = KanColleLib.TransmissionData.api_get_member.Mission.fromDynamic(DynamicJson.Parse(api_mission).api_data);
+            //string api_mission = System.IO.File.ReadAllText("api_get_member/mission.txt");
+            //var mission = KanColleLib.TransmissionData.api_get_member.Mission.fromDynamic(DynamicJson.Parse(api_mission).api_data);
 
-            string api_ndock = System.IO.File.ReadAllText("api_get_member/ndock.txt");
-            var ndock = KanColleLib.TransmissionData.api_get_member.NDock.fromDynamic(DynamicJson.Parse(api_ndock).api_data);
+            //string api_ndock = System.IO.File.ReadAllText("api_get_member/ndock.txt");
+            //var ndock = KanColleLib.TransmissionData.api_get_member.NDock.fromDynamic(DynamicJson.Parse(api_ndock).api_data);
 
-            string api_ship2 = System.IO.File.ReadAllText("api_get_member/ship2.txt");
-            var ship2 = KanColleLib.TransmissionData.api_get_member.Ship2.fromDynamic(DynamicJson.Parse(api_ship2).api_data);
+            //string api_ship2 = System.IO.File.ReadAllText("api_get_member/ship2.txt");
+            //var ship2 = KanColleLib.TransmissionData.api_get_member.Ship2.fromDynamic(DynamicJson.Parse(api_ship2).api_data);
 
             string api_unsetslot = System.IO.File.ReadAllText("api_get_member/unsetslot.txt");
             var unsetslot = KanColleLib.TransmissionData.api_get_member.Unsetslot.fromDynamic(DynamicJson.Parse(api_unsetslot).api_data);
 
-            string api_ship3 = System.IO.File.ReadAllText("api_get_member/ship3.txt");
-            var ship3 = KanColleLib.TransmissionData.api_get_member.Ship3.fromDynamic(DynamicJson.Parse(api_ship3).api_data);
+            //string api_ship3 = System.IO.File.ReadAllText("api_get_member/ship3.txt");
+            //var ship3 = KanColleLib.TransmissionData.api_get_member.Ship3.fromDynamic(DynamicJson.Parse(api_ship3).api_data);
 
-            string api_ship3_2 = System.IO.File.ReadAllText("api_get_member/ship3_2.txt");
-            var ship3_2 = KanColleLib.TransmissionData.api_get_member.Ship3.fromDynamic(DynamicJson.Parse(api_ship3_2).api_data);
+            //string api_ship3_2 = System.IO.File.ReadAllText("api_get_member/ship3_2.txt");
+            //var ship3_2 = KanColleLib.TransmissionData.api_get_member.Ship3.fromDynamic(DynamicJson.Parse(api_ship3_2).api_data);
 
             string api_slot_item = System.IO.File.ReadAllText("api_get_member/slot_item.txt");
             var slot_item = KanColleLib.TransmissionData.api_get_member.SlotItem.fromDynamic(DynamicJson.Parse(api_slot_item).api_data);
