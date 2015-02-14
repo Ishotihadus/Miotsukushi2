@@ -10,10 +10,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!--<interop:AirspaceDecorator AirspaceMode="Redirect" IsInputRedirectionEnabled="True" IsOutputRedirectionEnabled="True">
         <WebBrowser x:Name="webBrowser" Source="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/" Width="800" Height="480"/>
-        </interop:AirspaceDecorator>-->
-        <WebBrowser x:Name="webBrowser" Source="http://www.dmm.com/netgame_s/kancolle/" Width="800" Height="480"/>
 
     </Grid>
 </UserControl>

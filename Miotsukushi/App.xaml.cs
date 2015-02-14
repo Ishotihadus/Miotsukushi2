@@ -17,7 +17,9 @@ namespace Miotsukushi
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // SetCurrentCulture("en-US");
+#if DEBUG
+            SetCurrentCulture("en-US");
+#endif
             GetCurrentCulture();
             System.Diagnostics.Debug.WriteLine(Tools.ResourceStringGetter.GetShipNameResourceString("天津風改二"));
             Model.MainModel.GetInstance();

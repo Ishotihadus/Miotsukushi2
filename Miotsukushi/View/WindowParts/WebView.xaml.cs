@@ -26,7 +26,32 @@ namespace Miotsukushi.View.WindowParts
             InitializeComponent();
             BrowserSupressScriptError();
 
-            Model.MainModel.Current.kancolleModel.GameStart += (_, __) => BrowserScroll(70, 75); // ゆるせ、後で何とかする
+            Model.MainModel.Current.kancolleModel.GameStart += kancolleModel_GameStart; // ゆるせ、後で何とかする
+        }
+
+        /// <summary>
+        /// ゲームスタート時に呼び出されるアレ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void kancolleModel_GameStart(object sender, EventArgs e)
+        {
+            if (!CheckAccess())
+            {
+                Dispatcher.Invoke(() => kancolleModel_GameStart(sender, e));
+                return;
+            }
+
+            mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
+            if (htmlDoc != null)
+            {
+                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.left='-50px'");
+                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.top='-16px'");
+                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.zIndex='1024'");
+                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.position='fixed'");
+                htmlDoc.parentWindow.execScript("document.body.style.overflow ='hidden'");
+                htmlDoc.parentWindow.scrollTo(0, 0);
+            }
         }
 
         /// <summary>

@@ -12,6 +12,8 @@ namespace KanColleLib
 {
     public class KanColleNotifier
     {
+        List<double> processingcode = new List<double>();
+        Random random = new Random();
 
         public KanColleNotifier(bool isAsync)
         {
@@ -30,6 +32,7 @@ namespace KanColleLib
 
         void FiddlerApplication_AfterSessionComplete(Session oSession)
         {
+
             string kcsapiurl = null;
 
             if (oSession.fullUrl.IndexOf("kcs/mainD2.swf") != -1)
@@ -41,6 +44,14 @@ namespace KanColleLib
 
             if (kcsapiurl != null && oSession.oResponse.MIMEType == "text/plain")
             {
+                // 処理の順番をなるべく保証する
+                var thisprocessingcode = random.NextDouble();
+                processingcode.Add(thisprocessingcode);
+                while (processingcode[0] != thisprocessingcode)
+                {
+                    System.Threading.Thread.Sleep(1);
+                }
+
                 string request = oSession.GetRequestBodyAsString();
                 string response = oSession.GetResponseBodyAsString();
 
@@ -53,6 +64,8 @@ namespace KanColleLib
                     throw new KanColleLibException(string.Format("Session Response Analyze Error: {0}", kcsapiurl), e);
                 }
                 OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
+
+                processingcode.RemoveAt(0);
             }
         }
 

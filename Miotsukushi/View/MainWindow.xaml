@@ -5,7 +5,7 @@
         xmlns:WindowParts="clr-namespace:Miotsukushi.View.WindowParts"
         x:Class="Miotsukushi.View.MainWindow"
         xmlns:vm="clr-namespace:Miotsukushi.ViewModel"
-        Title="MainWindow" Height="768" Width="1366" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False">
+        Title="MainWindow" Height="850" Width="1450" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>

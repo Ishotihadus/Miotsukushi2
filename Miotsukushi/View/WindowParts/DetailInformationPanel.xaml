@@ -70,7 +70,7 @@
 				</Style>
 			</ListView.Resources>
 		</ListView>
-		<Custom:MetroAnimatedTabControl Margin="5" Grid.Row="1" ItemContainerStyle="{DynamicResource TabItemStyle1}" SelectedIndex="{Binding SelectedIndex, ElementName=listView}">
+		<Custom:MetroTabControl Margin="5" Grid.Row="1" ItemContainerStyle="{DynamicResource TabItemStyle1}" SelectedIndex="{Binding SelectedIndex, ElementName=listView}">
 			<TabItem Header="総合">
 				<DetailInfoParts:General/>
 			</TabItem>
@@ -86,7 +86,7 @@
 			<TabItem Header="第4艦隊">
 				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[3]}"/>
 			</TabItem>
-		</Custom:MetroAnimatedTabControl>
+		</Custom:MetroTabControl>
 		
 	</Grid>
 </UserControl>

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Construction_FinishTime" xml:space="preserve">
     <value>Finish:</value>
@@ -367,7 +367,7 @@
     <value>Zuikaku</value>
   </data>
   <data name="ShipName_瑞鳳" xml:space="preserve">
-    <value>Zuihou</value>
+    <value>Zuiho</value>
   </data>
   <data name="ShipName_清霜" xml:space="preserve">
     <value>Kiyoshimo</value>
@@ -409,7 +409,7 @@
     <value>Hayashimo</value>
   </data>
   <data name="ShipName_蒼龍" xml:space="preserve">
-    <value>Souryuu</value>
+    <value>Soryu</value>
   </data>
   <data name="ShipName_足柄" xml:space="preserve">
     <value>Ashigara</value>
@@ -517,7 +517,7 @@
     <value>Shiranui</value>
   </data>
   <data name="ShipName_扶桑" xml:space="preserve">
-    <value>Fusou</value>
+    <value>Fuso</value>
   </data>
   <data name="ShipName_敷波" xml:space="preserve">
     <value>Shikinami</value>
@@ -601,7 +601,7 @@
     <value>Ryuho</value>
   </data>
   <data name="ShipName_龍驤" xml:space="preserve">
-    <value>Ryuujou</value>
+    <value>Ryujo</value>
   </data>
   <data name="ShipName_涼風" xml:space="preserve">
     <value>Suzukaze</value>
@@ -689,5 +689,29 @@
   </data>
   <data name="改二" xml:space="preserve">
     <value> Kai Ni</value>
+  </data>
+  <data name="ShipName_呂500" xml:space="preserve">
+    <value>Ro-500</value>
+  </data>
+  <data name="ShipName_天城" xml:space="preserve">
+    <value>Amagi</value>
+  </data>
+  <data name="ShipName_山雲" xml:space="preserve">
+    <value>Yamagumo</value>
+  </data>
+  <data name="ShipName_朝雲" xml:space="preserve">
+    <value>Asagumo</value>
+  </data>
+  <data name="ShipName_朝霜" xml:space="preserve">
+    <value>Asashimo</value>
+  </data>
+  <data name="ShipName_野分" xml:space="preserve">
+    <value>Nowaki</value>
+  </data>
+  <data name="ShipName_香取" xml:space="preserve">
+    <value>Katori</value>
+  </data>
+  <data name="ShipType_練習巡洋艦" xml:space="preserve">
+    <value>Training Cruiser</value>
   </data>
 </root>

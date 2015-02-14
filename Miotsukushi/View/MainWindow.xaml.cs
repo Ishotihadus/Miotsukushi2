@@ -29,18 +29,30 @@ namespace Miotsukushi.View
             this.Closing += MainWindow_Closing;
         }
 
-        async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            /*
             e.Cancel = true;
+            
             var result = await this.ShowMessageAsync(
                 ResourceStringGetter.GetResourceString("WindowCloseConfirmationTitle"),
                 ResourceStringGetter.GetResourceString("WindowCloseConfirmationMessage"),
                 MessageDialogStyle.AffirmativeAndNegative);
+            
 
             if (result == MessageDialogResult.Affirmative)
             {
                 this.Closing -= MainWindow_Closing;
                 this.Close();
+            }
+             * 
+             * */
+
+            var result = MessageBox.Show(ResourceStringGetter.GetResourceString("WindowCloseConfirmationMessage"), ResourceStringGetter.GetResourceString("WindowCloseConfirmationTitle"), 
+                MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if(result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
             }
         }
     }
