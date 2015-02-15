@@ -49,6 +49,12 @@ namespace Miotsukushi.ViewModel
                         case "Error":
                             StatusAlertBackground = System.Windows.Media.Brushes.Crimson;
                             break;
+                        case "Success":
+                            StatusAlertBackground = System.Windows.Media.Brushes.RoyalBlue;
+                            break;
+                        case "Failed":
+                            StatusAlertBackground = System.Windows.Media.Brushes.LightCoral;
+                            break;
                         default:
                             StatusAlertBackground = System.Windows.Media.Brushes.DarkMagenta;
                             break;
@@ -120,6 +126,12 @@ namespace Miotsukushi.ViewModel
                 {
                     StatusAlertTitle = "Fiddler";
                     StatusAlertText = e.message;
+                };
+
+            model.CreateItem += (_, e) =>
+                {
+                    StatusAlertTitle = e.success ? "Success" : "Failed";
+                    StatusAlertText = (e.name ?? "（不明）") + " の開発に" + (e.success ? "成功" : "失敗") + "しました。"; 
                 };
         }
     }

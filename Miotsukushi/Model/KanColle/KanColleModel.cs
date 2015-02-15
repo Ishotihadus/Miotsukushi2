@@ -75,6 +75,33 @@ namespace Miotsukushi.Model.KanColle
                 slotdata.Add(new SlotData() { id = response.data.slot_item.id, itemid = response.data.slot_item.slotitem_id });
                 basicdata.now_equipment_number = slotdata.Count;
             }
+
+            var args = new CreateItemEventArgs() { success = response.data.create_flag };
+            if (response.data.create_flag)
+            {
+                if (response.data.slot_item != null)
+                {
+                    args.id = response.data.slot_item.id;
+                    args.item_id = response.data.slot_item.slotitem_id;
+                }
+            }
+            else
+            {
+                args.id = 0;
+                try
+                {
+                    args.item_id = int.Parse(response.data.fdata.Split(',')[1]);
+                }
+                catch { }
+            }
+            if (slotitemmaster.ContainsKey(args.item_id))
+            {
+                args.name = slotitemmaster[args.item_id].name;
+                args.type_id = slotitemmaster[args.item_id].type_equiptype;
+                if (slotitem_equiptypemaster.ContainsKey(args.type_id))
+                    args.type = slotitem_equiptypemaster[args.type_id].name;
+            }
+            OnCreateItem(args);
         }
 
         async void kclib_GetGetmemberSlotItem(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.SlotItem> response)
@@ -451,8 +478,18 @@ namespace Miotsukushi.Model.KanColle
         public delegate void APIAnalyzeErrorEventHandler(object sender, APIAnalyzeErrorEventArgs e);
         protected virtual void OnAPIAnalyzeError(APIAnalyzeErrorEventArgs e) { if (APIAnalyzeError != null) { APIAnalyzeError(this, e); } }
 
+        /// <summary>
+        /// FiddlerのLogを取得した際に呼び出されます
+        /// </summary>
         public event GetFiddlerLogEventHandler GetFiddlerLog;
         public delegate void GetFiddlerLogEventHandler(object sender, StringEventArgs e);
         protected virtual void OnGetFiddlerLog(StringEventArgs e) { if (GetFiddlerLog != null) { GetFiddlerLog(this, e); } }
+
+        /// <summary>
+        /// 装備を開発したときに呼び出されます
+        /// </summary>
+        public event CreateItemEventHandler CreateItem;
+        public delegate void CreateItemEventHandler(object sender, CreateItemEventArgs e);
+        protected virtual void OnCreateItem(CreateItemEventArgs e) { if (CreateItem != null) { CreateItem(this, e); } }
     }
 }

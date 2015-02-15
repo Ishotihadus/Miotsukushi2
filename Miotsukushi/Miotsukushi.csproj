@@ -114,6 +114,7 @@
     <Compile Include="Model\KanColle\BasicData.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
     <Compile Include="Model\KanColle\EventArgs\APIAnalyzeErrorEventArgs.cs" />
+    <Compile Include="Model\KanColle\EventArgs\CreateItemEventArgs.cs" />
     <Compile Include="Model\KanColle\EventArgs\StringEventArgs.cs" />
     <Compile Include="Model\KanColle\FleetData.cs" />
     <Compile Include="Model\KanColle\FleetExpeditionStatus.cs" />
