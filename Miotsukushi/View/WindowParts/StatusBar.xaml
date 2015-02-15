@@ -10,6 +10,5 @@
 
 	<Grid x:Name="LayoutRoot" Background="{DynamicResource AccentColorBrush}">
         <TextBlock HorizontalAlignment="Left" Margin="10,5,0,5" TextWrapping="Wrap" Text="{Binding Text, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" VerticalAlignment="Center" Foreground="{DynamicResource WhiteColorBrush}"/>
-		<ResizeGrip HorizontalAlignment="Right" Margin="0" VerticalAlignment="Bottom"/>
 	</Grid>
 </UserControl>

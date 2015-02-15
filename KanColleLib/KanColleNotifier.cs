@@ -61,7 +61,8 @@ namespace KanColleLib
                 }
                 catch (Exception e)
                 {
-                    throw new KanColleLibException(string.Format("Session Response Analyze Error: {0}", kcsapiurl), e);
+                    // throw new KanColleLibException(string.Format("Session Response Analyze Error: {0}", kcsapiurl), e);
+                    OnKcsAPIDataAnalyzeFailed(new KcsAPIDataAnalyzeFailedEventArgs(kcsapiurl, request, response, e));
                 }
                 OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
 
@@ -298,6 +299,13 @@ namespace KanColleLib
         public event GetKcsAPIDataEventHandler GetKcsAPIData;
         public delegate void GetKcsAPIDataEventHandler(object sender, GetKcsAPIDataEventArgs e);
         protected virtual void OnGetKcsAPIData(GetKcsAPIDataEventArgs e) { if (GetKcsAPIData != null) { GetKcsAPIData(this, e); } }
+
+        /// <summary>
+        /// 艦これのAPIデータの解析に失敗した際に発生します。
+        /// </summary>
+        public event KcsAPIDataAnalyzeFailedEventHandler KcsAPIDataAnalyzeFailed;
+        public delegate void KcsAPIDataAnalyzeFailedEventHandler(object sender, KcsAPIDataAnalyzeFailedEventArgs e);
+        protected virtual void OnKcsAPIDataAnalyzeFailed(KcsAPIDataAnalyzeFailedEventArgs e) { if (KcsAPIDataAnalyzeFailed != null) { KcsAPIDataAnalyzeFailed(this, e); } }
 
         #endregion
 
