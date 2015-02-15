@@ -67,6 +67,7 @@
     <Compile Include="EventArgs\GetFiddlerLogStringEventArgs.cs" />
     <Compile Include="EventArgs\GetKcsAPIDataEventArgs.cs" />
     <Compile Include="EventArgs\GetSessionDataEventArgs.cs" />
+    <Compile Include="EventArgs\KcsAPIDataAnalyzeFailedEventArgs.cs" />
     <Compile Include="KanColleLibException.cs" />
     <Compile Include="KanColleNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
