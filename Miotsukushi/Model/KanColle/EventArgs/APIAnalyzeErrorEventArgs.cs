@@ -4,21 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanColleLib.EventArgs
+namespace Miotsukushi.Model.KanColle.EventArgs
 {
-    public class KcsAPIDataAnalyzeFailedEventArgs : System.EventArgs
+    class APIAnalyzeErrorEventArgs : System.EventArgs
     {
         public string request;
         public string response;
         public string kcsapiurl;
-        public Exception originalexception;
 
-        public KcsAPIDataAnalyzeFailedEventArgs(string kcsapiurl, string request, string response, Exception originalexception)
+        public APIAnalyzeErrorEventArgs(string kcsapiurl, string request, string response)
         {
             this.request = request;
             this.response = response;
             this.kcsapiurl = kcsapiurl;
-            this.originalexception = originalexception;
         }
     }
 }

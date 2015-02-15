@@ -57,13 +57,13 @@ namespace Miotsukushi.Model.KanColle
             }
 
             if (changed)
-                OnNDockChanged(new EventArgs());
+                OnNDockChanged(new System.EventArgs());
         }
 
         /// <summary>
         /// 入渠ドックの情報が変更された際に呼び出されます
         /// </summary>
         public event EventHandler NDockChanged;
-        protected virtual void OnNDockChanged(EventArgs e) { if (NDockChanged != null) { NDockChanged(this, e); } }
+        protected virtual void OnNDockChanged(System.EventArgs e) { if (NDockChanged != null) { NDockChanged(this, e); } }
     }
 }

@@ -3,12 +3,43 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:Miotsukushi.View.WindowParts"
 	mc:Ignorable="d"
 	x:Class="Miotsukushi.View.WindowParts.StatusBar"
 	x:Name="UserControl"
-	d:DesignWidth="640">
+	d:DesignWidth="640" Height="26">
+	<UserControl.Resources>
+		<Storyboard x:Key="OnAlertTextChanged1">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid">
+				<EasingDoubleKeyFrame KeyTime="0" Value="26"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.8" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3" Value="26"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="local:StatusBar.AlertTextChanged">
+			<BeginStoryboard Storyboard="{StaticResource OnAlertTextChanged1}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
 
 	<Grid x:Name="LayoutRoot" Background="{DynamicResource AccentColorBrush}">
-        <TextBlock HorizontalAlignment="Left" Margin="10,5,0,5" TextWrapping="Wrap" Text="{Binding Text, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" VerticalAlignment="Center" Foreground="{DynamicResource WhiteColorBrush}"/>
+		<TextBlock HorizontalAlignment="Left" Margin="10,5,0,5" Text="{Binding Text, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" VerticalAlignment="Center" Foreground="{DynamicResource WhiteColorBrush}" TextTrimming="CharacterEllipsis"/>
+        <Grid x:Name="grid" Height="26" Margin="0" VerticalAlignment="Top" Background="{Binding AlertBGBrush, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" RenderTransformOrigin="0.5,0.5">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform Y="26"/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,5.38,0,5.38" VerticalAlignment="Center" Foreground="{DynamicResource WhiteColorBrush}" TextTrimming="CharacterEllipsis">
+                <Run Text="{Binding AlertTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" FontWeight="Bold" />
+                <Run Text="  " />
+                <Run Text="{Binding AlertText, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            </TextBlock>
+        </Grid>
 	</Grid>
 </UserControl>

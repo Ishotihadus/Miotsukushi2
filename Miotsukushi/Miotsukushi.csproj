@@ -113,6 +113,8 @@
     <Compile Include="Model\KanColle\AdmiralRank.cs" />
     <Compile Include="Model\KanColle\BasicData.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
+    <Compile Include="Model\KanColle\EventArgs\APIAnalyzeErrorEventArgs.cs" />
+    <Compile Include="Model\KanColle\EventArgs\StringEventArgs.cs" />
     <Compile Include="Model\KanColle\FleetData.cs" />
     <Compile Include="Model\KanColle\FleetExpeditionStatus.cs" />
     <Compile Include="Model\KanColle\ItemData.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="ViewModel\EasyInfoPanel\ExpeditionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\ExpeditionCollectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CommonParts\ShipParameterView.xaml.cs">
       <DependentUpon>ShipParameterView.xaml</DependentUpon>

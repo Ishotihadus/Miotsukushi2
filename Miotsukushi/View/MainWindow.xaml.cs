@@ -26,6 +26,13 @@ namespace Miotsukushi.View
         public MainWindow()
         {
             InitializeComponent();
+
+            try
+            {
+                this.DataContext = new ViewModel.MainViewModel();
+            }
+            catch { }
+
             this.Closing += MainWindow_Closing;
         }
 

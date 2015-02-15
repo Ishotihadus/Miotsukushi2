@@ -8,11 +8,11 @@ namespace Miotsukushi.ViewModel
 {
     class MainViewModel : ViewModelBase
     {
-        public string a { get; set; }
+        public StatusViewModel Status { get; set; }
 
         public MainViewModel()
         {
-
+            Status = new StatusViewModel();
         }
     }
 }

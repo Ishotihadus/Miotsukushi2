@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using KanColleLib;
 using Fiddler;
 using Miotsukushi.Tools;
+using Miotsukushi.Model.KanColle.EventArgs;
 
 namespace Miotsukushi.Model.KanColle
 {
@@ -32,7 +33,9 @@ namespace Miotsukushi.Model.KanColle
 
             kclib = new KanColleNotifier(true);
 
-            kclib.GameStart += (_, __) => OnGameStart(new EventArgs());
+            kclib.GameStart += (_, __) => OnGameStart(new System.EventArgs());
+            kclib.KcsAPIDataAnalyzeFailed += (_, e) => OnAPIAnalyzeError(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
+            kclib.GetFiddlerLogString += (_, e) => OnGetFiddlerLog(new StringEventArgs(e.logtext));
 
             kclib.GetStart2 += kclib_GetStart2;
             kclib.GetPortPort += kclib_GetPortPort;
@@ -393,7 +396,7 @@ namespace Miotsukushi.Model.KanColle
         {
             ++initializecount;
             if (initializecountflag == initializecount)
-                OnInitializeComplete(new EventArgs());
+                OnInitializeComplete(new System.EventArgs());
         }
 
         void AppendNDockValue(KanColleLib.TransmissionData.api_get_member.NDock data)
@@ -433,12 +436,23 @@ namespace Miotsukushi.Model.KanColle
         /// 初期データをすべて取得した際に呼び出されます
         /// </summary>
         public event EventHandler InitializeComplete;
-        protected virtual void OnInitializeComplete(EventArgs e) { if (InitializeComplete != null) { InitializeComplete(this, e); } }
+        protected virtual void OnInitializeComplete(System.EventArgs e) { if (InitializeComplete != null) { InitializeComplete(this, e); } }
 
         /// <summary>
         /// ゲームが開始された（フラッシュがロードされた）際に呼び出されます
         /// </summary>
         public event EventHandler GameStart;
-        protected virtual void OnGameStart(EventArgs e) { if (GameStart != null) { GameStart(this, e); } }
+        protected virtual void OnGameStart(System.EventArgs e) { if (GameStart != null) { GameStart(this, e); } }
+
+        /// <summary>
+        /// APIの解析エラーが起きた際に呼び出されます
+        /// </summary>
+        public event APIAnalyzeErrorEventHandler APIAnalyzeError;
+        public delegate void APIAnalyzeErrorEventHandler(object sender, APIAnalyzeErrorEventArgs e);
+        protected virtual void OnAPIAnalyzeError(APIAnalyzeErrorEventArgs e) { if (APIAnalyzeError != null) { APIAnalyzeError(this, e); } }
+
+        public event GetFiddlerLogEventHandler GetFiddlerLog;
+        public delegate void GetFiddlerLogEventHandler(object sender, StringEventArgs e);
+        protected virtual void OnGetFiddlerLog(StringEventArgs e) { if (GetFiddlerLog != null) { GetFiddlerLog(this, e); } }
     }
 }

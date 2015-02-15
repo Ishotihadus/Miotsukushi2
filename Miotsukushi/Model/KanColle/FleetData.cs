@@ -21,7 +21,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_name != value)
                 {
                     _name = value;
-                    OnFleetNameChanged(new EventArgs());
+                    OnFleetNameChanged(new System.EventArgs());
                 }
             }
         }
@@ -36,13 +36,13 @@ namespace Miotsukushi.Model.KanColle
         /// 艦隊名が変更されたときに呼び出されます
         /// </summary>
         public event EventHandler FleetNameChanged;
-        protected virtual void OnFleetNameChanged(EventArgs e) { if (FleetNameChanged != null) { FleetNameChanged(this, e); } }
+        protected virtual void OnFleetNameChanged(System.EventArgs e) { if (FleetNameChanged != null) { FleetNameChanged(this, e); } }
 
         /// <summary>
         /// 遠征の情報が変更されたときに呼び出されます
         /// </summary>
         public event EventHandler FleetMissionChanged;
-        protected virtual void OnFleetMissionChanged(EventArgs e) { if (FleetMissionChanged != null) { FleetMissionChanged(this, e); } }
+        protected virtual void OnFleetMissionChanged(System.EventArgs e) { if (FleetMissionChanged != null) { FleetMissionChanged(this, e); } }
 
         public void FromDeckValue(KanColleLib.TransmissionData.api_get_member.values.DeckValue data)
         {
@@ -108,7 +108,7 @@ namespace Miotsukushi.Model.KanColle
             }
 
             if (missionchanged)
-                OnFleetMissionChanged(new EventArgs());
+                OnFleetMissionChanged(new System.EventArgs());
         }
     }
 }

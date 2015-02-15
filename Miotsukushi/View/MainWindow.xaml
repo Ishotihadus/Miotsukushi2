@@ -17,7 +17,7 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-        <WindowParts:StatusBar Margin="0" Grid.Row="2" Grid.ColumnSpan="2" />
+        <WindowParts:StatusBar Margin="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding StatusText}" AlertText="{Binding StatusAlertText}" AlertTitle="{Binding StatusAlertTitle}" AlertBGBrush="{Binding StatusAlertBackground}" DataContext="{Binding Status}" />
         <WindowParts:WebView HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800"/>
 		<WindowParts:EasyInformationPanel Margin="0" Grid.Row="1"/>
 		<WindowParts:InformationPanel Grid.Column="1" Grid.RowSpan="2"/>
