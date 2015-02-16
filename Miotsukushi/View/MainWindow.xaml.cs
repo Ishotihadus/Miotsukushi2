@@ -55,6 +55,7 @@ namespace Miotsukushi.View
              * 
              * */
 
+            System.Media.SystemSounds.Beep.Play();
             var result = MessageBox.Show(ResourceStringGetter.GetResourceString("WindowCloseConfirmationMessage"), ResourceStringGetter.GetResourceString("WindowCloseConfirmationTitle"), 
                 MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
             if(result == MessageBoxResult.No)

@@ -265,6 +265,7 @@ namespace KanColleLib
                 default:
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
                     System.Diagnostics.Debug.WriteLine("RESPONSE BODY: " + response);
+                    OnUnknownKcsAPIDataReceived(new KcsAPIDataAnalyzeFailedEventArgs(kcsapiurl, request, response, null));
                     break;
                     // throw new NotImplementedException(kcsapiurl);
             }
@@ -306,6 +307,13 @@ namespace KanColleLib
         public event KcsAPIDataAnalyzeFailedEventHandler KcsAPIDataAnalyzeFailed;
         public delegate void KcsAPIDataAnalyzeFailedEventHandler(object sender, KcsAPIDataAnalyzeFailedEventArgs e);
         protected virtual void OnKcsAPIDataAnalyzeFailed(KcsAPIDataAnalyzeFailedEventArgs e) { if (KcsAPIDataAnalyzeFailed != null) { KcsAPIDataAnalyzeFailed(this, e); } }
+
+        /// <summary>
+        /// 未知の艦これのAPIデータを受信した際に発生します。
+        /// </summary>
+        public event UnknownKcsAPIDataReceivedEventHandler UnknownKcsAPIDataReceived;
+        public delegate void UnknownKcsAPIDataReceivedEventHandler(object sender, KcsAPIDataAnalyzeFailedEventArgs e);
+        protected virtual void OnUnknownKcsAPIDataReceived(KcsAPIDataAnalyzeFailedEventArgs e) { if (UnknownKcsAPIDataReceived != null) { UnknownKcsAPIDataReceived(this, e); } }
 
         #endregion
 

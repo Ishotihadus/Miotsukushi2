@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Miotsukushi.Model
 {
-    class ExList<T>
+    class ExList<T> : IEnumerable<T>
     {
         List<T> list;
 
@@ -41,7 +41,24 @@ namespace Miotsukushi.Model
             return list.RemoveAll(match);
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var item in list)
+                yield return item;
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
         public event EventHandler ItemAdded;
         protected virtual void OnItemAdded(EventArgs e) { if (ItemAdded != null) { ItemAdded(this, e); } }
+
     }
 }

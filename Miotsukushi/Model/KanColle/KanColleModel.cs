@@ -35,6 +35,7 @@ namespace Miotsukushi.Model.KanColle
 
             kclib.GameStart += (_, __) => OnGameStart(new System.EventArgs());
             kclib.KcsAPIDataAnalyzeFailed += (_, e) => OnAPIAnalyzeError(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
+            kclib.UnknownKcsAPIDataReceived += (_, e) => OnUnknownAPIReceived(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
             kclib.GetFiddlerLogString += (_, e) => OnGetFiddlerLog(new StringEventArgs(e.logtext));
 
             kclib.GetStart2 += kclib_GetStart2;
@@ -71,10 +72,7 @@ namespace Miotsukushi.Model.KanColle
         void kclib_GetReqkousyouCreateitem(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.CreateitemRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Createitem> response)
         {
             if (response.data.slot_item != null)
-            {
                 slotdata.Add(new SlotData() { id = response.data.slot_item.id, itemid = response.data.slot_item.slotitem_id });
-                basicdata.now_equipment_number = slotdata.Count;
-            }
 
             var args = new CreateItemEventArgs() { success = response.data.create_flag };
             if (response.data.create_flag)
@@ -223,6 +221,14 @@ namespace Miotsukushi.Model.KanColle
         void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<object> response)
         {
             DestroyShip(request.ship_id);
+
+            // 艦隊にその艦娘がいたら削除
+            foreach(var fleet in fleetdata)
+            {
+                int rplidx = fleet.ships.IndexOf(request.ship_id);
+                if (rplidx != -1)
+                    fleet.ships.RemoveAt(rplidx);
+            }
         }
 
         void kclib_GetGetmemberNdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.NDock> response)
@@ -233,6 +239,13 @@ namespace Miotsukushi.Model.KanColle
         void kclib_GetReqkousyouGetship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.GetshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Getship> response)
         {
             AppendKDockValue(response.data.kdock);
+            foreach(var item in response.data.slotitem)
+            {
+                if (!slotdata.Any(_ => _.id == item.id))
+                {
+                    slotdata.Add(new SlotData() { id = item.id, itemid = item.slotitem_id });
+                }
+            }
             AppendShipData(response.data.ship);
         }
 
@@ -404,7 +417,7 @@ namespace Miotsukushi.Model.KanColle
         }
 
         /// <summary>
-        /// 指定されたIDの艦をリストから削除します。（同時に装備も削除したいけどとりあえず保留）
+        /// 指定されたIDの艦をリストから削除する
         /// </summary>
         /// <param name="ship"></param>
         void DestroyShip(int id)
@@ -412,9 +425,27 @@ namespace Miotsukushi.Model.KanColle
             var deletelist = (from _ in shipdata where _.shipid == id select _).ToList();
             foreach (var item in deletelist)
             {
+                foreach(var slot in item.Slots)
+                {
+                    DestroyItem(slot);
+                }
                 shipdata.Remove(item);
             }
         }
+
+        /// <summary>
+        /// 指定されたスロットIDの装備をリストから削除する
+        /// 見つからなければ何もしない
+        /// </summary>
+        /// <param name="id"></param>
+        void DestroyItem(int id)
+        {
+            var deletelist = (from _ in slotdata where _.id == id select _).ToList();
+            foreach (var item in deletelist)
+                slotdata.Remove(item);
+        }
+
+        
 
         int initializecount = 0;
         int initializecountflag = 5;
@@ -477,6 +508,10 @@ namespace Miotsukushi.Model.KanColle
         public event APIAnalyzeErrorEventHandler APIAnalyzeError;
         public delegate void APIAnalyzeErrorEventHandler(object sender, APIAnalyzeErrorEventArgs e);
         protected virtual void OnAPIAnalyzeError(APIAnalyzeErrorEventArgs e) { if (APIAnalyzeError != null) { APIAnalyzeError(this, e); } }
+
+        public event UnknownAPIReceivedEventHandler UnknownAPIReceived;
+        public delegate void UnknownAPIReceivedEventHandler(object sender, APIAnalyzeErrorEventArgs e);
+        protected virtual void OnUnknownAPIReceived(APIAnalyzeErrorEventArgs e) { if (UnknownAPIReceived != null) { UnknownAPIReceived(this, e); } }
 
         /// <summary>
         /// FiddlerのLogを取得した際に呼び出されます

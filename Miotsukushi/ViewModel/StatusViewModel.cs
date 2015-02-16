@@ -46,6 +46,9 @@ namespace Miotsukushi.ViewModel
                         case "Notify":
                             StatusAlertBackground = System.Windows.Media.Brushes.DodgerBlue;
                             break;
+                        case "Info":
+                            StatusAlertBackground = System.Windows.Media.Brushes.SeaGreen;
+                            break;
                         case "Error":
                             StatusAlertBackground = System.Windows.Media.Brushes.Crimson;
                             break;
@@ -121,6 +124,12 @@ namespace Miotsukushi.ViewModel
                     StatusAlertTitle = "Error";
                     StatusAlertText = e.kcsapiurl + " の解析に失敗しました。";
                 };
+
+            model.UnknownAPIReceived += (_, e) =>
+            {
+                StatusAlertTitle = "Info";
+                StatusAlertText = "未知のAPI " + e.kcsapiurl + " を受信しました。";
+            };
 
             model.GetFiddlerLog += (_, e) =>
                 {
