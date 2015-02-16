@@ -62,7 +62,6 @@ namespace Miotsukushi.ViewModel
                             StatusAlertBackground = System.Windows.Media.Brushes.DarkMagenta;
                             break;
                     }
-
                     OnPropertyChanged(() => StatusAlertTitle);
                 }
             }
