@@ -34,40 +34,45 @@ namespace Miotsukushi.Tools
         {
             switch (equiptype)
             {
-                case 1: return Brushes.Salmon;
-                case 2: return Brushes.Tomato;
-                case 3: return Brushes.Crimson;
-                case 4: return Brushes.Yellow;
-                case 5: return Brushes.SteelBlue;
-                case 6: return Brushes.ForestGreen;
-                case 7: return Brushes.IndianRed;
-                case 8: return Brushes.CornflowerBlue;
-                case 9: return Brushes.Gold;
-                case 10: return Brushes.Honeydew;
-                case 11: return Brushes.MintCream;
-                case 12: return Brushes.Goldenrod;
-                case 13: return Brushes.Goldenrod;
-                case 14: return Brushes.SkyBlue;
-                case 15: return Brushes.PowderBlue;
-                case 16: return Brushes.LightGreen;
-                case 17: return Brushes.Gold;
-                case 18: return Brushes.MediumSeaGreen;
-                case 19: return Brushes.Tomato;
-                case 20: return Brushes.White;
-                case 21: return Brushes.PaleGreen;
-                case 22: return Brushes.SteelBlue;
-                case 23: return Brushes.Gainsboro;
-                case 24: return Brushes.OliveDrab;
-                case 25: return Brushes.LimeGreen;
-                case 26: return Brushes.LightSkyBlue;
-                case 27: return Brushes.MediumPurple;
-                case 28: return Brushes.MediumPurple;
-                case 29: return Brushes.DarkOrange;
-                case 30: return Brushes.DarkGray;
-                case 31: return Brushes.HotPink;
-                case 32: return Brushes.SteelBlue;
-                case 33: return Brushes.Orange;
-                default: return Brushes.White;
+                case 1: return new SolidColorBrush(Color.FromRgb(209, 91, 91)); // 小口径主砲
+                case 2: return new SolidColorBrush(Color.FromRgb(204, 61, 61)); // 中口径主砲
+                case 3: return new SolidColorBrush(Color.FromRgb(194, 34, 34)); // 大口径主砲
+                case 4: return new SolidColorBrush(Color.FromRgb(255, 234, 0)); // 副砲
+                case 5: return new SolidColorBrush(Color.FromRgb(88, 135, 171)); // 魚雷
+                case 6: return new SolidColorBrush(Color.FromRgb(102, 204, 119)); // 艦上戦闘機
+                case 7: return new SolidColorBrush(Color.FromRgb(243, 109, 109)); // 艦上爆撃機
+                case 8: return new SolidColorBrush(Color.FromRgb(101, 188, 255)); // 艦上攻撃機
+                case 9: return new SolidColorBrush(Color.FromRgb(255, 192, 0)); // 艦上偵察機
+                case 10: return new SolidColorBrush(Color.FromRgb(140, 200, 150)); // 水上偵察機
+                case 11: return new SolidColorBrush(Color.FromRgb(140, 200, 150)); // 水上爆撃機
+                case 12: return new SolidColorBrush(Color.FromRgb(229, 152, 53)); // 小型電探
+                case 13: return new SolidColorBrush(Color.FromRgb(229, 152, 53)); // 大型電探
+                case 14: return new SolidColorBrush(Color.FromRgb(90, 171, 184)); // ソナー
+                case 15: return new SolidColorBrush(Color.FromRgb(127, 204, 216)); // 爆雷
+                case 16: return new SolidColorBrush(Color.FromRgb(154, 127, 175)); // 追加装甲
+                case 17: return new SolidColorBrush(Color.FromRgb(255, 196, 77)); // 機関部強化
+                case 18: return new SolidColorBrush(Color.FromRgb(96, 190, 113)); // 対空強化弾
+                case 19: return new SolidColorBrush(Color.FromRgb(209, 91, 91)); // 対艦強化弾
+                case 20: return new SolidColorBrush(Color.FromRgb(218, 200, 176)); // VT信管
+                case 21: return new SolidColorBrush(Color.FromRgb(102, 203, 119)); // 対空機銃
+                case 22: return new SolidColorBrush(Color.FromRgb(88, 135, 171)); // 特殊潜航艇（甲標的）
+                case 23: return new SolidColorBrush(Color.FromRgb(255, 255, 255)); // 応急修理要員
+                case 24: return new SolidColorBrush(Color.FromRgb(154, 165, 93)); // 上陸用舟艇
+                case 25: return new SolidColorBrush(Color.FromRgb(102, 204, 119)); // オートジャイロ
+                case 26: return new SolidColorBrush(Color.FromRgb(127, 204, 216)); // 対潜哨戒機
+                case 27: return new SolidColorBrush(Color.FromRgb(154, 127, 175)); // 追加装甲（中型）
+                case 28: return new SolidColorBrush(Color.FromRgb(154, 127, 175)); // 追加装甲（大型）
+                case 29: return new SolidColorBrush(Color.FromRgb(231, 107, 25)); // 探照灯
+                case 30: return new SolidColorBrush(Color.FromRgb(163, 163, 163)); // 簡易輸送部材
+                case 31: return new SolidColorBrush(Color.FromRgb(176, 157, 127)); // 艦艇修理施設
+                case 32: return new SolidColorBrush(Color.FromRgb(88, 135, 171)); // 潜水艦魚雷
+                case 33: return new SolidColorBrush(Color.FromRgb(255, 155, 0)); // 照明弾
+                case 34: return new SolidColorBrush(Color.FromRgb(200, 170, 255)); // 司令部施設
+                case 35: return new SolidColorBrush(Color.FromRgb(205, 162, 105)); // 航空要員
+                case 36: return new SolidColorBrush(Color.FromRgb(137, 154, 77)); // 高射装置
+                case 37: return new SolidColorBrush(Color.FromRgb(255, 54, 54)); // 対地装備
+                case 38: return new SolidColorBrush(Color.FromRgb(194, 34, 34)); // 大口径主砲(II)
+                default: return Brushes.Transparent;
             }
         }
 
