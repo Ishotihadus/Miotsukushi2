@@ -56,6 +56,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CoreAudio">
+      <HintPath>\\vmware-host\Shared Folders\書類\APIs\CoreAudio.dll</HintPath>
+    </Reference>
     <Reference Include="FiddlerCore4, Version=4.4.8.4, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\APIs\FiddlerCoreAPI\DotNet4\FiddlerCore4.dll</HintPath>
@@ -109,6 +112,8 @@
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\DateTimeConverter.cs" />
     <Compile Include="Converter\TotalTimeConverter.cs" />
+    <Compile Include="Model\Audio\VolumeChangedEventArgs.cs" />
+    <Compile Include="Model\Audio\VolumeModel.cs" />
     <Compile Include="Model\ExList.cs" />
     <Compile Include="Model\KanColle\AdmiralRank.cs" />
     <Compile Include="Model\KanColle\BasicData.cs" />
@@ -144,6 +149,7 @@
     </Compile>
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\WindowCommandsViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\DetailInfoPanelViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Fleets\FleetsCollectionViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Fleets\FleetViewModel.cs" />
@@ -202,6 +208,10 @@
     <Compile Include="View\WindowParts\WebView.xaml.cs">
       <DependentUpon>WebView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\CommonParts\ShipParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -295,6 +305,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -307,6 +318,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,11 +11,13 @@ namespace Miotsukushi.Model
     {
         public TimerModel timerModel { get; private set; }
         public KanColleModel kancolleModel { get; private set; }
+        public Audio.VolumeModel volumeModel { get; private set; }
 
         private MainModel()
         {
             timerModel = new TimerModel();
             kancolleModel = new KanColleModel();
+            volumeModel = new Audio.VolumeModel();
         }
 
         #region インスタンス単一化

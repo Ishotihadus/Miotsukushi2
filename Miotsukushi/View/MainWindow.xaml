@@ -6,7 +6,25 @@
         x:Class="Miotsukushi.View.MainWindow"
         xmlns:vm="clr-namespace:Miotsukushi.ViewModel"
         Title="MainWindow" Height="850" Width="1550" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" ResizeMode="CanResizeWithGrip">
-	<Grid>
+    
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands DataContext="{Binding Commands}">
+            <ToggleButton IsChecked="{Binding Mute}" IsEnabled="{Binding VolumeEnabled}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform"
+                         Visual="{StaticResource appbar_sound_mute}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </ToggleButton>
+            <Slider Width="75" VerticalAlignment="Center" Margin="5,0" Maximum="1" LargeChange="0.5" SmallChange="0.05" Value="{Binding Volume}" IsEnabled="{Binding VolumeEnabled}"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition/>
