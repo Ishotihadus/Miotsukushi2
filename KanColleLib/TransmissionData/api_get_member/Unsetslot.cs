@@ -8,7 +8,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 {
     public class Unsetslot
     {
-        Dictionary<string, List<int>> unsetslots;
+        public Dictionary<string, List<int>> unsetslots;
 
         public static Unsetslot fromDynamic(dynamic json)
         {
@@ -17,17 +17,17 @@ namespace KanColleLib.TransmissionData.api_get_member
 
             foreach (KeyValuePair<string, dynamic> item in json)
             {
-                try
+                if(item.Value is double)
+                {
+                    // -1
+                    unsetslot.unsetslots.Add(item.Key, new List<int>());
+                }
+                else
                 {
                     List<int> values = new List<int>();
                     foreach (var value in item.Value)
                         values.Add((int)value);
                     unsetslot.unsetslots.Add(item.Key, values);
-                }
-                catch
-                {
-                    // 明示的にnullを追加しておく
-                    unsetslot.unsetslots.Add(item.Key, null);
                 }
             }
 
