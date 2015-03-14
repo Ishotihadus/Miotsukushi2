@@ -137,7 +137,7 @@ namespace Miotsukushi.ViewModel
                 {
                     StatusText = "準備完了";
                     StatusAlertTitle = "Notify";
-                    StatusAlertText = "艦これが起動しました。サーバーは " + model.serverinfo.GetServerName() ?? "（不明）" + " です。";
+                    StatusAlertText = "艦これが起動しました。サーバーは " + (model.serverinfo.GetServerName() ?? "（不明）") + " です。";
                 };
 
             model.APIAnalyzeError += (_, e) =>

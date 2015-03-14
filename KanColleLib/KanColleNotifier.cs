@@ -258,6 +258,18 @@ namespace KanColleLib
                 case "api_req_nyukyo/start":
                     OnGetReqnyukyoStart(new TransmissionRequest.api_req_nyukyo.StartRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
+                case "api_req_quest/clearitemget":
+                    if (json.api_data())
+                        OnGetReqquestClearitemget(new TransmissionRequest.api_req_quest.ClearitemgetRequest(request), Svdata<TransmissionData.api_req_quest.Clearitemget>.fromDynamic(json, TransmissionData.api_req_quest.Clearitemget.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
+                case "api_req_quest/start":
+                    OnGetReqquestStart(new TransmissionRequest.api_req_quest.StartRequest(request), Svdata<object>.fromDynamic(json, null));
+                    break;
+                case "api_req_quest/stop":
+                    OnGetReqquestStop(new TransmissionRequest.api_req_quest.StopRequest(request), Svdata<object>.fromDynamic(json, null));
+                    break;
                 case "api_start2":
                     if (json.api_data())
                         OnGetStart2(new RequestBase(request), Svdata<TransmissionData.api_start2.Start2>.fromDynamic(json, TransmissionData.api_start2.Start2.fromDynamic(json.api_data)));
@@ -549,11 +561,33 @@ namespace KanColleLib
         protected virtual void OnGetReqnyukyoStart(TransmissionRequest.api_req_nyukyo.StartRequest request, Svdata<object> response) { if (GetReqnyukyoStart != null) GetReqnyukyoStart(this, request, response); }
 
         /// <summary>
+        /// api_req_quest/clearitemget を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqquestClearitemgetEventHandler GetReqquestClearitemget;
+        public delegate void GetReqquestClearitemgetEventHandler(object sender, TransmissionRequest.api_req_quest.ClearitemgetRequest request, Svdata<TransmissionData.api_req_quest.Clearitemget> response);
+        protected virtual void OnGetReqquestClearitemget(TransmissionRequest.api_req_quest.ClearitemgetRequest request, Svdata<TransmissionData.api_req_quest.Clearitemget> response) { if (GetReqquestClearitemget != null) GetReqquestClearitemget(this, request, response); }
+
+        /// <summary>
+        /// api_req_quest/start を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqquestStartEventHandler GetReqquestStart;
+        public delegate void GetReqquestStartEventHandler(object sender, TransmissionRequest.api_req_quest.StartRequest request, Svdata<object> response);
+        protected virtual void OnGetReqquestStart(TransmissionRequest.api_req_quest.StartRequest request, Svdata<object> response) { if (GetReqquestStart != null) GetReqquestStart(this, request, response); }
+
+        /// <summary>
+        /// api_req_quest/stop を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqquestStopEventHandler GetReqquestStop;
+        public delegate void GetReqquestStopEventHandler(object sender, TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response);
+        protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { if (GetReqquestStop != null) GetReqquestStop(this, request, response); }
+
+        /// <summary>
         /// api_start2 を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetStart2EventHandler GetStart2;
         public delegate void GetStart2EventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_start2.Start2> response);
         protected virtual void OnGetStart2(RequestBase request, Svdata<TransmissionData.api_start2.Start2> response) { if (GetStart2 != null) GetStart2(this, request, response); }
+
 
         #endregion
 

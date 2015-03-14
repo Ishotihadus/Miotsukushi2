@@ -69,9 +69,9 @@ api_req_nyukyo/start,ReqnyukyoStart,TransmissionRequest.api_req_nyukyo.StartRequ
 #api_req_practice/battle
 #api_req_practice/battle_result
 #api_req_practice/midnight_battle
-#api_req_quest/clearitemget
-#api_req_quest/start
-#api_req_quest/stop
+api_req_quest/clearitemget,ReqquestClearitemget,TransmissionRequest.api_req_quest.ClearitemgetRequest,TransmissionData.api_req_quest.Clearitemget
+api_req_quest/start,ReqquestStart,TransmissionRequest.api_req_quest.StartRequest,object
+api_req_quest/stop,ReqquestStop,TransmissionRequest.api_req_quest.StopRequest,object
 #api_req_ranking/getlist
 #api_req_sortie/battle
 #api_req_sortie/battleresult

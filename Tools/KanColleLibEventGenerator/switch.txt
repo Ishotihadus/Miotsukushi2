@@ -166,6 +166,18 @@ break;
 case "api_req_nyukyo/start":
 OnGetReqnyukyoStart(new TransmissionRequest.api_req_nyukyo.StartRequest(request), Svdata<object>.fromDynamic(json, null));
 break;
+case "api_req_quest/clearitemget":
+if(json.api_data())
+OnGetReqquestClearitemget(new TransmissionRequest.api_req_quest.ClearitemgetRequest(request), Svdata<TransmissionData.api_req_quest.Clearitemget>.fromDynamic(json, TransmissionData.api_req_quest.Clearitemget.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_quest/start":
+OnGetReqquestStart(new TransmissionRequest.api_req_quest.StartRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_quest/stop":
+OnGetReqquestStop(new TransmissionRequest.api_req_quest.StopRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
 case "api_start2":
 if(json.api_data())
 OnGetStart2(new RequestBase(request), Svdata<TransmissionData.api_start2.Start2>.fromDynamic(json, TransmissionData.api_start2.Start2.fromDynamic(json.api_data)));

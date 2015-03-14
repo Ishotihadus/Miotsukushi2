@@ -114,6 +114,8 @@
     <Compile Include="TransmissionData\api_req_mission\ReturnInstruction.cs" />
     <Compile Include="TransmissionData\api_req_mission\Start.cs" />
     <Compile Include="TransmissionData\api_req_mission\values\GetItemValue.cs" />
+    <Compile Include="TransmissionData\api_req_quest\BonusValue.cs" />
+    <Compile Include="TransmissionData\api_req_quest\Clearitemget.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstBGM.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstFurniture.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstFurnituregraph.cs" />
@@ -152,6 +154,9 @@
     <Compile Include="TransmissionRequest\api_req_mission\StartRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_nyukyo\SpeedchangeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_nyukyo\StartRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_quest\ClearitemgetRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_quest\StartRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_quest\StopRequest.cs" />
     <Compile Include="TransmissionRequest\RequestBase.cs" />
     <Compile Include="TransmissionRequest\RequestDecorder.cs" />
   </ItemGroup>
