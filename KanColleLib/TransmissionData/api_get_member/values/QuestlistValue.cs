@@ -21,7 +21,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         /// <summary>
         /// タイプ?
-        /// 1:無期限 2,4,5:デイリー 3:ウィークリーとささやかれている
+        /// 1:無期限 2,4,5:デイリー 3:ウィークリー 6:マンスリーとささやかれている
         /// </summary>
         public int type;
 

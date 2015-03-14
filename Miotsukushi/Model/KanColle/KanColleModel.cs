@@ -26,6 +26,7 @@ namespace Miotsukushi.Model.KanColle
         public ExList<KDockData> kdockdata = new ExList<KDockData>();
         public ExList<NDockData> ndockdata = new ExList<NDockData>();
         public BasicData basicdata = new BasicData();
+        public QuestData questdata = new QuestData();
 
         public KanColleModel()
         {
@@ -55,9 +56,15 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
             kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
             kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
+            kclib.GetGetmemberQuestlist += Kclib_GetGetmemberQuestlist;
 
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
+        }
+
+        private void Kclib_GetGetmemberQuestlist(object sender, KanColleLib.TransmissionRequest.api_get_member.QuestlistRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Questlist> response)
+        {
+            questdata.SetQuestList(response.data);
         }
 
         private void Kclib_GameStart(object sender, KanColleLib.EventArgs.GameStartEventArgs e)

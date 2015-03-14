@@ -133,6 +133,7 @@
     <Compile Include="Model\KanColle\MissionData.cs" />
     <Compile Include="Model\KanColle\NDockData.cs" />
     <Compile Include="Model\KanColle\NDockStatus.cs" />
+    <Compile Include="Model\KanColle\QuestData.cs" />
     <Compile Include="Model\KanColle\ServerInfo.cs" />
     <Compile Include="Model\KanColle\ShipData.cs" />
     <Compile Include="Model\KanColle\ShiptypeData.cs" />
