@@ -9,6 +9,8 @@ namespace Miotsukushi.ViewModel
 {
     class StatusViewModel : ViewModelBase
     {
+        Random random = new Random();
+
         private string _StatusText = "";
         public string StatusText
         {
@@ -77,6 +79,7 @@ namespace Miotsukushi.ViewModel
 
             set
             {
+                StatusCode = random.Next().ToString();
                 if (_StatusAlertText != value)
                 {
                     _StatusAlertText = value;
@@ -103,6 +106,25 @@ namespace Miotsukushi.ViewModel
             }
         }
 
+        private string _StatusCode;
+        public string StatusCode
+        {
+            get
+            {
+                return _StatusCode;
+            }
+
+            set
+            {
+                if (_StatusCode != value)
+                {
+                    _StatusCode = value;
+                    OnPropertyChanged(() => StatusCode);
+                }
+            }
+        }
+
+
         KanColleModel model;
 
         public StatusViewModel()
@@ -115,7 +137,7 @@ namespace Miotsukushi.ViewModel
                 {
                     StatusText = "準備完了";
                     StatusAlertTitle = "Notify";
-                    StatusAlertText = "艦これが起動しました。";
+                    StatusAlertText = "艦これが起動しました。サーバーは " + model.serverinfo.GetServerName() ?? "（不明）" + " です。";
                 };
 
             model.APIAnalyzeError += (_, e) =>

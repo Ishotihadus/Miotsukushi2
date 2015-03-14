@@ -63,6 +63,16 @@ namespace Miotsukushi.View.WindowParts
             set { SetValue(AlertBGBrushProperty, value); }
         }
 
+        public static readonly DependencyProperty StatusCodeProperty = DependencyProperty.Register("StatusCode", typeof(string), typeof(StatusBar), null);
+
+        [Description("ステータスコード"), Category("共通"), DefaultValue("StatusCode")]
+        [BindableAttribute(true)]
+        public string StatusCode
+        {
+            get { return (string)GetValue(StatusCodeProperty); }
+            set { SetValue(StatusCodeProperty, value); }
+        }
+
         #endregion
 
         public StatusBar()
@@ -71,7 +81,7 @@ namespace Miotsukushi.View.WindowParts
 
             // DependencyPropertyの変更通知を受け取る
             // なんかもうちょっとこうスマートな方法はないんかいな
-            var dpd = DependencyPropertyDescriptor.FromProperty(AlertTextProperty, typeof(StatusBar));
+            var dpd = DependencyPropertyDescriptor.FromProperty(StatusCodeProperty, typeof(StatusBar));
             dpd.AddValueChanged(this, (s, e) => OnAlertTextChangedEvent());
 		}
 
