@@ -14,6 +14,7 @@ namespace Miotsukushi.Model.KanColle
     class KanColleModel
     {
         KanColleNotifier kclib;
+        public ServerInfo serverinfo = new ServerInfo();
         public Dictionary<int, CharacterData> charamaster = new Dictionary<int,CharacterData>();
         public Dictionary<int, ShiptypeData> shiptypemaster = new Dictionary<int,ShiptypeData>();
         public Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
@@ -33,7 +34,7 @@ namespace Miotsukushi.Model.KanColle
 
             kclib = new KanColleNotifier(true);
 
-            kclib.GameStart += (_, __) => OnGameStart(new System.EventArgs());
+            kclib.GameStart += Kclib_GameStart;
             kclib.KcsAPIDataAnalyzeFailed += (_, e) => OnAPIAnalyzeError(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
             kclib.UnknownKcsAPIDataReceived += (_, e) => OnUnknownAPIReceived(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
             kclib.GetFiddlerLogString += (_, e) => OnGetFiddlerLog(new StringEventArgs(e.logtext));
@@ -57,6 +58,13 @@ namespace Miotsukushi.Model.KanColle
 
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
+        }
+
+        private void Kclib_GameStart(object sender, KanColleLib.EventArgs.GameStartEventArgs e)
+        {
+            serverinfo.SetServerAddress(e.main2Dadress);
+            System.Diagnostics.Debug.WriteLine("Server: " + serverinfo.address.ToString() + "（" + (serverinfo.GetServerName() ?? "不明") + "）");
+            OnGameStart(new System.EventArgs());
         }
 
         void slotdata_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

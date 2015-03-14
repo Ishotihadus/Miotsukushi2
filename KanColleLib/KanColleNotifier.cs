@@ -36,7 +36,7 @@ namespace KanColleLib
             string kcsapiurl = null;
 
             if (oSession.fullUrl.IndexOf("kcs/mainD2.swf") != -1)
-                OnGameStart(new System.EventArgs());
+                OnGameStart(new GameStartEventArgs() { main2Dadress = oSession.fullUrl });
 
             int kcsapiindex = oSession.fullUrl.IndexOf("/kcsapi/");
             if (kcsapiindex != -1)
@@ -295,8 +295,9 @@ namespace KanColleLib
         /// <summary>
         /// ゲームが開始された際に発生します。
         /// </summary>
-        public event EventHandler GameStart;
-        protected virtual void OnGameStart(System.EventArgs e) { if (GameStart != null) { GameStart(this, e); } }
+        public event GameStartEventHandler GameStart;
+        public delegate void GameStartEventHandler(object sender, GameStartEventArgs e);
+        protected virtual void OnGameStart(GameStartEventArgs e) { if (GameStart != null) { GameStart(this, e); } }
 
         /// <summary>
         /// 艦これのAPIからデータを受信した際に発生します。

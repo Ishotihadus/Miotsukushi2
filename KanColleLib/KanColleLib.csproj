@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DynamicJson.cs" />
+    <Compile Include="EventArgs\GameStartEventArgs.cs" />
     <Compile Include="EventArgs\GetFiddlerLogStringEventArgs.cs" />
     <Compile Include="EventArgs\GetKcsAPIDataEventArgs.cs" />
     <Compile Include="EventArgs\GetSessionDataEventArgs.cs" />
