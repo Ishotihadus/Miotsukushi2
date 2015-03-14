@@ -63,6 +63,10 @@ namespace KanColleLib
                 {
                     // throw new KanColleLibException(string.Format("Session Response Analyze Error: {0}", kcsapiurl), e);
                     OnKcsAPIDataAnalyzeFailed(new KcsAPIDataAnalyzeFailedEventArgs(kcsapiurl, request, response, e));
+                    System.Diagnostics.Debug.WriteLine("----------------------");
+                    System.Diagnostics.Debug.WriteLine("KanColleLibException: Session Response Analyze Error: " + kcsapiurl);
+                    System.Diagnostics.Debug.WriteLine(e);
+                    System.Diagnostics.Debug.WriteLine("Response: " + response);
                 }
                 OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
 

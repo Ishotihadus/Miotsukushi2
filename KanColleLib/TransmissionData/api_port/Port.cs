@@ -15,7 +15,12 @@ namespace KanColleLib.TransmissionData.api_port
         public Ship2 ship;
         public Basic basic;
         public Log log;
-        public bool combined_flag;
+
+        /// <summary>
+        /// 連合艦隊のフラグ
+        /// 0:通常艦隊 1:連合艦隊機動部隊 2:連合艦隊水上部隊
+        /// </summary>
+        public int combined_flag;
 
         /// <summary>
         /// 母港BGMID
@@ -32,7 +37,10 @@ namespace KanColleLib.TransmissionData.api_port
             port.ship = Ship2.fromDynamic(json.api_ship);
             port.basic = Basic.fromDynamic(json.api_basic);
             port.log = Log.fromDynamic(json.api_log);
-            port.combined_flag = (int)json.api_combined_flag == 1;
+            if (json.api_combined_flag())
+                port.combined_flag = (int)json.api_combined_flag;
+            else
+                port.combined_flag = 0;
             port.p_bgm_id = (int)json.api_p_bgm_id;
 
             return port;

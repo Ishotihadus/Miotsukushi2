@@ -111,6 +111,8 @@
     <Compile Include="Converter\BooleanToVisibilityReverseConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\DateTimeConverter.cs" />
+    <Compile Include="Converter\IntegerConverter.cs" />
+    <Compile Include="Converter\IntegerToVisibilityConverter.cs" />
     <Compile Include="Converter\TotalTimeConverter.cs" />
     <Compile Include="Model\Audio\VolumeChangedEventArgs.cs" />
     <Compile Include="Model\Audio\VolumeModel.cs" />

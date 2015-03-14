@@ -99,9 +99,10 @@ namespace Miotsukushi.View.CommonParts
             }
         }
 
-		public SlotView()
+        public SlotView()
 		{
 			this.InitializeComponent();
+            
 		}
 	}
 }
