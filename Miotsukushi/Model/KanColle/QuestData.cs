@@ -9,7 +9,7 @@ namespace Miotsukushi.Model.KanColle
 
     class QuestData
     {
-        public struct Quest
+        public class Quest
         {
             public int id;
             public int progress;
@@ -69,6 +69,8 @@ namespace Miotsukushi.Model.KanColle
 #if DEBUG
             PrintDebugQuestList();
 #endif
+
+            OnQuestChange(new System.EventArgs());
         }
 
 
@@ -121,6 +123,9 @@ namespace Miotsukushi.Model.KanColle
             }
             
         }
+
+        public event EventHandler QuestChange;
+        protected virtual void OnQuestChange(System.EventArgs e) { if (QuestChange != null) { QuestChange(this, e); } }
     }
 
     

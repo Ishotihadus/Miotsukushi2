@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Miotsukushi.View.WindowParts.EasyInfoParts.QuestItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.EasyInfoParts"
+	        xmlns:Converter="clr-namespace:Miotsukushi.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="180">
+    <UserControl.Resources>
+        <Converter:BooleanToVisibilityReverseConverter x:Key="BooleanToVisibilityReverseConverter"/>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Border BorderThickness="1" BorderBrush="{Binding BorderBrush, Mode=OneWay}">
+        <Grid x:Name="LayoutRoot" ToolTip="{Binding Description}">
+            <Grid x:Name="grid" Visibility="{Binding DetailVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Viewbox VerticalAlignment="Top" StretchDirection="DownOnly" HorizontalAlignment="Left" Stretch="Fill" Margin="5,5,5,0">
+                    <TextBlock><Run FontSize="15" Text="{Binding Name}"/></TextBlock>
+                </Viewbox>
+                <TextBlock HorizontalAlignment="Left" Margin="5,0,0,8" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding Category}"/><Run Text=" "/><Run Text="{Binding Type}"/></TextBlock>
+                <TextBlock HorizontalAlignment="Right" Margin="0,0,5,8" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding ProgressText}"/></TextBlock>
+                <ProgressBar Margin="0" VerticalAlignment="Bottom" Height="3" Value="{Binding ProgressValue, Mode=OneWay}" Maximum="1"/>
+            </Grid>
+            <Grid Visibility="{Binding DetailVisibility, Converter={StaticResource BooleanToVisibilityReverseConverter}}">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Message, Mode=OneWay}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

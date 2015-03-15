@@ -5,39 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Miotsukushi.ViewModel.EasyInfoPanel"
              xmlns:EasyInfoParts="clr-namespace:Miotsukushi.View.WindowParts.EasyInfoParts" 
+             xmlns:Converter="clr-namespace:Miotsukushi.Converter" 
              x:Class="Miotsukushi.View.WindowParts.EasyInformationPanel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Converter:BooleanToVisibilityReverseConverter x:Key="BooleanToVisibilityReverseConverter"/>
+        <DataTemplate x:Key="DataTemplate1">
+            <EasyInfoParts:QuestItem HorizontalAlignment="Stretch" Height="50" Margin="1" />
+        </DataTemplate>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <vm:EasyInfoPanelViewModel />
     </UserControl.DataContext>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1*"/>
-			<ColumnDefinition Width="1*"/>
-			<ColumnDefinition Width="1*"/>
-			<ColumnDefinition Width="1*"/>
-		</Grid.ColumnDefinitions>
-		<GroupBox Header="{Binding EasyInfoPanelTitle_Expedition, Mode=OneWay, Source={StaticResource resources}}" Margin="5" VerticalAlignment="Top">
-			<ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
+    <UniformGrid Columns="4" Rows="1">
+        <GroupBox Header="{Binding EasyInfoPanelTitle_Expedition, Mode=OneWay, Source={StaticResource resources}}" Margin="5" VerticalAlignment="Top">
+            <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
                 <StackPanel DataContext="{Binding ExpeditionCollection}">
-					<EasyInfoParts:ExpeditionItem DataContext="{Binding [0]}" Margin="1"/>
-					<EasyInfoParts:ExpeditionItem DataContext="{Binding [1]}" Margin="1"/>
-					<EasyInfoParts:ExpeditionItem DataContext="{Binding [2]}" Margin="1"/>
-				</StackPanel>
-			</ScrollViewer>
-		</GroupBox>
-		<GroupBox Header="{Binding EasyInfoPanelTitle_BuildingDock, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="1" VerticalAlignment="Top">
-			<ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
+                    <EasyInfoParts:ExpeditionItem DataContext="{Binding [0]}" Margin="1"/>
+                    <EasyInfoParts:ExpeditionItem DataContext="{Binding [1]}" Margin="1"/>
+                    <EasyInfoParts:ExpeditionItem DataContext="{Binding [2]}" Margin="1"/>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+        <GroupBox Header="{Binding EasyInfoPanelTitle_BuildingDock, Mode=OneWay, Source={StaticResource resources}}" Margin="5" VerticalAlignment="Top">
+            <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
                 <StackPanel DataContext="{Binding ConstructionCollection}">
-					<EasyInfoParts:ConstructionItem DataContext="{Binding [0]}" Margin="1"/>
-					<EasyInfoParts:ConstructionItem DataContext="{Binding [1]}" Margin="1"/>
-					<EasyInfoParts:ConstructionItem DataContext="{Binding [2]}" Margin="1"/>
-					<EasyInfoParts:ConstructionItem DataContext="{Binding [3]}" Margin="1"/>
-				</StackPanel>
-			</ScrollViewer>
-		</GroupBox>
-        <GroupBox Header="{Binding EasyInfoPanelTitle_RepairDock, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="2" VerticalAlignment="Top">
+                    <EasyInfoParts:ConstructionItem DataContext="{Binding [0]}" Margin="1"/>
+                    <EasyInfoParts:ConstructionItem DataContext="{Binding [1]}" Margin="1"/>
+                    <EasyInfoParts:ConstructionItem DataContext="{Binding [2]}" Margin="1"/>
+                    <EasyInfoParts:ConstructionItem DataContext="{Binding [3]}" Margin="1"/>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+        <GroupBox Header="{Binding EasyInfoPanelTitle_RepairDock, Mode=OneWay, Source={StaticResource resources}}" Margin="5" VerticalAlignment="Top">
             <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
                 <StackPanel DataContext="{Binding DockingCollection}">
                     <EasyInfoParts:DockingItem DataContext="{Binding [0]}" Margin="1"/>
@@ -47,7 +49,15 @@
                 </StackPanel>
             </ScrollViewer>
         </GroupBox>
-        <GroupBox Header="{Binding EasyInfoPanelTitle_Quests, Mode=OneWay, Source={StaticResource resources}}" Margin="5" Grid.Column="3" VerticalAlignment="Top"/>
-            
-	</Grid>
+        <GroupBox Header="{Binding EasyInfoPanelTitle_Quests, Mode=OneWay, Source={StaticResource resources}}" Margin="5" VerticalAlignment="Top" DataContext="{Binding QuestCollection}">
+            <Grid>
+                <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" Visibility="{Binding QuestListVisibility, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                    <ItemsControl ItemsSource="{Binding Quests}" ItemTemplate="{DynamicResource DataTemplate1}"/>
+                </ScrollViewer>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="任務が取得されていません。任務を表示するにはゲーム内で任務（クエスト）画面を開いてください。" Margin="5,15" Visibility="{Binding QuestListVisibility, Converter={StaticResource BooleanToVisibilityReverseConverter}, Mode=OneWay}"/>
+
+            </Grid>
+        </GroupBox>
+
+    </UniformGrid>
 </UserControl>

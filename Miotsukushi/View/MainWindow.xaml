@@ -37,7 +37,7 @@
 
         <WindowParts:StatusBar Margin="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding StatusText}" AlertText="{Binding StatusAlertText}" AlertTitle="{Binding StatusAlertTitle}" StatusCode="{Binding StatusCode}"  AlertBGBrush="{Binding StatusAlertBackground}" DataContext="{Binding Status}" />
         <WindowParts:WebView HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="800"/>
-		<WindowParts:EasyInformationPanel Margin="0" Grid.Row="1"/>
+		<WindowParts:EasyInformationPanel Margin="0" Grid.Row="1" Width="800"/>
 		<WindowParts:InformationPanel Grid.Column="1" Grid.RowSpan="2"/>
 		<WindowParts:DetailInformationPanel Grid.Column="1" Grid.RowSpan="2"/>
 

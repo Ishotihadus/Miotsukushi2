@@ -153,6 +153,8 @@
     </Compile>
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\QuestCollectionViewModel.cs" />
+    <Compile Include="ViewModel\EasyInfoPanel\QuestViewModel.cs" />
     <Compile Include="ViewModel\WindowCommandsViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\DetailInfoPanelViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Fleets\FleetsCollectionViewModel.cs" />
@@ -199,6 +201,9 @@
     </Compile>
     <Compile Include="View\WindowParts\EasyInfoParts\DockingItem.xaml.cs">
       <DependentUpon>DockingItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\EasyInfoParts\QuestItem.xaml.cs">
+      <DependentUpon>QuestItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowParts\EasyInformationPanel.xaml.cs">
       <DependentUpon>EasyInformationPanel.xaml</DependentUpon>
@@ -268,6 +273,10 @@
     <Page Include="View\WindowParts\EasyInfoParts\DockingItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WindowParts\EasyInfoParts\QuestItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WindowParts\EasyInformationPanel.xaml">
       <SubType>Designer</SubType>
