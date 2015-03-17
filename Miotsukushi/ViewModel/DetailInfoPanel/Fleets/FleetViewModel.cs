@@ -14,26 +14,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         private int id;
         private KanColleModel model;
 
-        private ObservableCollection<ShipViewModel> _Ships = new ObservableCollection<ShipViewModel>();
-        public ObservableCollection<ShipViewModel> Ships
-        {
-            get
-            {
-                return _Ships;
-            }
-
-            set
-            {
-                if (_Ships != value)
-                {
-                    _Ships = value;
-                    OnPropertyChanged("Ships");
-                }
-            }
-        }
+        public ObservableCollection<ShipViewModel> Ships { get; set; }
 
         public FleetViewModel(int id)
         {
+            Ships = new ObservableCollection<ShipViewModel>();
+            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Ships, new object());
+
             this.id = id;
             model = Model.MainModel.Current.kancolleModel;
             model.fleetdata.ItemAdded += fleetdata_ItemAdded;
@@ -50,35 +37,31 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 
         void ships_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            // なんかしらないけどUIスレッドとは別のところでObservableCollectionを死ぬとか云々
-            App.Current.Dispatcher.BeginInvoke((Action)delegate
+            switch (e.Action)
             {
-                switch (e.Action)
-                {
-                    case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                        if (e.NewItems.Count > 0)
-                            Ships.Insert(e.NewStartingIndex, new ShipViewModel(model.fleetdata[id].ships[e.NewStartingIndex]));
-                        break;
-                    case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
-                        Ships.Move(e.OldStartingIndex, e.NewStartingIndex);
-                        break;
-                    case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                        Ships.RemoveAt(e.OldStartingIndex);
-                        break;
-                    case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-                        Ships[e.OldStartingIndex] = new ShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
-                        break;
-                    case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                        for (int i = 0; i < model.fleetdata[id].ships.Count; i++)
-                        {
-                            if (i < Ships.Count)
-                                Ships[i] = new ShipViewModel(model.fleetdata[id].ships[i]);
-                            else
-                                Ships.Add(new ShipViewModel(model.fleetdata[id].ships[i]));
-                        }
-                        break;
-                }
-            });
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    if (e.NewItems.Count > 0)
+                        Ships.Insert(e.NewStartingIndex, new ShipViewModel(model.fleetdata[id].ships[e.NewStartingIndex]));
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    Ships.Move(e.OldStartingIndex, e.NewStartingIndex);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    Ships.RemoveAt(e.OldStartingIndex);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    Ships[e.OldStartingIndex] = new ShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    for (int i = 0; i < model.fleetdata[id].ships.Count; i++)
+                    {
+                        if (i < Ships.Count)
+                            Ships[i] = new ShipViewModel(model.fleetdata[id].ships[i]);
+                        else
+                            Ships.Add(new ShipViewModel(model.fleetdata[id].ships[i]));
+                    }
+                    break;
+            }
         }
     }
 }
