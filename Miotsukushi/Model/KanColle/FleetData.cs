@@ -29,6 +29,45 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+        private int _FlagShipLevel;
+        public int FlagShipLevel
+        {
+            get
+            {
+                return _FlagShipLevel;
+            }
+
+            set
+            {
+                if (_FlagShipLevel != value)
+                {
+                    _FlagShipLevel = value;
+                    OnPropertyChanged(() => FlagShipLevel);
+                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の旗艦レベルが{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
+        private int _SumShipLevel;
+        public int SumShipLevel
+        {
+            get
+            {
+                return _SumShipLevel;
+            }
+
+            set
+            {
+                if (_SumShipLevel != value)
+                {
+                    _SumShipLevel = value;
+                    OnPropertyChanged(() => SumShipLevel);
+                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の合計レベルが{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
+
         #endregion
 
         public ObservableCollection<int> ships = new ObservableCollection<int>();
@@ -74,6 +113,33 @@ namespace Miotsukushi.Model.KanColle
                 ChangeMissionStatus((int)data.mission[0], (int)data.mission[1], data.mission[2]);
             else
                 ChangeMissionStatus(-1, -1, -1);
+
+            Recalc();
+        }
+
+        /// <summary>
+        /// 合計レベルとかの計算
+        /// </summary>
+        public void Recalc()
+        {
+            var model = MainModel.Current.kancolleModel;
+
+            if (ships.Count > 0)
+            {
+                var flagship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[0]);
+                FlagShipLevel = flagship != null ? flagship.level : 0;
+            }
+            else
+                FlagShipLevel = 0;
+
+            int _sumshiplevel = 0;
+            foreach (var shipid in ships)
+            {
+                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == shipid);
+                if (ship != null)
+                    _sumshiplevel += ship.level;
+            }
+            SumShipLevel = _sumshiplevel;
         }
 
         public void ChangeMissionStatus(int status, int id, long time)
