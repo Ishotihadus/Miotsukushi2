@@ -55,7 +55,7 @@ namespace Miotsukushi.Model
         public int RemoveAll(Predicate<T> match)
         {
             int ret = list.RemoveAll(match);
-            OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Reset, -1));
+            OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Removed, -1));
             return ret;
         }
 
@@ -86,7 +86,7 @@ namespace Miotsukushi.Model
     {
         public enum ChangeTypeEnum
         {
-            Added, Removed, Replaced, Cleared, Reset
+            Added, Removed, Replaced
         };
 
         public int ChangedIndex;
