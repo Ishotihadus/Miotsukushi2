@@ -388,10 +388,16 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Missions
         void initialize()
         {
             // 初期化
-            DeckName = fleet.name;
+            DeckName = fleet.DeckName;
 
-            fleet.FleetNameChanged += (_, __) => { DeckName = fleet.name; };
+            fleet.PropertyChanged += Fleet_PropertyChanged;
             fleet.ships.CollectionChanged += Ships_CollectionChanged;
+        }
+
+        private void Fleet_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "DeckName")
+                DeckName = fleet.DeckName;
         }
 
         void AppendParameters()

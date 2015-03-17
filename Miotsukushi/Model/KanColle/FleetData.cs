@@ -7,36 +7,35 @@ using System.Collections.ObjectModel;
 
 namespace Miotsukushi.Model.KanColle
 {
-    class FleetData
+    class FleetData : NotifyModelBase
     {
-        private string _name;
-        public string name
+        #region プロパティ定義
+
+        private string _DeckName;
+        public string DeckName
         {
             get
             {
-                return _name;
+                return _DeckName;
             }
+
             set
             {
-                if (_name != value)
+                if (_DeckName != value)
                 {
-                    _name = value;
-                    OnFleetNameChanged(new System.EventArgs());
+                    _DeckName = value;
+                    OnPropertyChanged(() => DeckName);
                 }
             }
         }
+
+        #endregion
 
         public ObservableCollection<int> ships = new ObservableCollection<int>();
 
         public FleetExpeditionStatus expedition_status;
         public DateTime expedition_backtime;
         public int expedition_id;
-
-        /// <summary>
-        /// 艦隊名が変更されたときに呼び出されます
-        /// </summary>
-        public event EventHandler FleetNameChanged;
-        protected virtual void OnFleetNameChanged(System.EventArgs e) { if (FleetNameChanged != null) { FleetNameChanged(this, e); } }
 
         /// <summary>
         /// 遠征の情報が変更されたときに呼び出されます
@@ -46,7 +45,7 @@ namespace Miotsukushi.Model.KanColle
 
         public void FromDeckValue(KanColleLib.TransmissionData.api_get_member.values.DeckValue data)
         {
-            name = data.name;
+            DeckName = data.name;
 
             for (int i = 0; i < data.ship.Length; i++)
             {

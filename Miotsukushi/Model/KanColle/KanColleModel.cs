@@ -57,9 +57,16 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
             kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
             kclib.GetGetmemberQuestlist += Kclib_GetGetmemberQuestlist;
+            kclib.GetReqmemberUpdatedeckname += Kclib_GetReqmemberUpdatedeckname;
 
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
+        }
+
+        private void Kclib_GetReqmemberUpdatedeckname(object sender, KanColleLib.TransmissionRequest.api_req_member.UpdatedecknameRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        {
+            if (request.deck_id <= fleetdata.Count && request.deck_id > 1)
+                fleetdata[request.deck_id - 1].DeckName = request.name;
         }
 
         private void Kclib_GetGetmemberQuestlist(object sender, KanColleLib.TransmissionRequest.api_get_member.QuestlistRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Questlist> response)
