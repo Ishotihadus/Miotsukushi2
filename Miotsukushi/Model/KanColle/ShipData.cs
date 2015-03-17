@@ -296,6 +296,10 @@ namespace Miotsukushi.Model.KanColle
         public ObservableCollection<int> OnSlotCount = new ObservableCollection<int>();
 
         private int _air_mastery;
+
+        /// <summary>
+        /// 制空値
+        /// </summary>
         public int air_mastery
         {
             get
@@ -313,8 +317,12 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
-        // 火力
+
         private int _fire_power;
+
+        /// <summary>
+        /// 火力
+        /// </summary>
         public int fire_power
         {
             get
@@ -332,8 +340,12 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
-        // 装甲
+
         private int _armor;
+
+        /// <summary>
+        /// 装甲
+        /// </summary>
         public int armor
         {
             get
@@ -351,8 +363,12 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
-        // 雷装
+
         private int _torpedo;
+
+        /// <summary>
+        /// 雷装
+        /// </summary>
         public int torpedo
         {
             get
@@ -370,8 +386,12 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
-        // 回避
+
         private int _evasion;
+
+        /// <summary>
+        /// 回避
+        /// </summary>
         public int evasion
         {
             get
@@ -389,7 +409,12 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+
         private int _anti_air;
+
+        /// <summary>
+        /// 対空
+        /// </summary>
         public int anti_air
         {
             get
@@ -407,7 +432,12 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+
         private int _anti_submarine;
+
+        /// <summary>
+        /// 対潜
+        /// </summary>
         public int anti_submarine
         {
             get
@@ -425,8 +455,12 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
-        // 索敵
+
         private int _reconnaissance;
+
+        /// <summary>
+        /// 索敵
+        /// </summary>
         public int reconnaissance
         {
             get
@@ -446,6 +480,10 @@ namespace Miotsukushi.Model.KanColle
 
 
         private int _luck;
+
+        /// <summary>
+        /// 運
+        /// </summary>
         public int luck
         {
             get

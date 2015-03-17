@@ -135,6 +135,52 @@ namespace Miotsukushi.Model.KanColle
         }
 
 
+        private double _OkinoshimaSearchParameter;
+        /// <summary>
+        /// いわゆる2-5式
+        /// </summary>
+        public double OkinoshimaSearchParameter
+        {
+            get
+            {
+                return _OkinoshimaSearchParameter;
+            }
+
+            set
+            {
+                if (_OkinoshimaSearchParameter != value)
+                {
+                    _OkinoshimaSearchParameter = value;
+                    OnPropertyChanged(() => OkinoshimaSearchParameter);
+                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の2-5索敵値が{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
+
+        private double _OkinoshimaSearchParameterError;
+        /// <summary>
+        /// いわゆる2-5式のエラー
+        /// </summary>
+        public double OkinoshimaSearchParameterError
+        {
+            get
+            {
+                return _OkinoshimaSearchParameterError;
+            }
+
+            set
+            {
+                if (_OkinoshimaSearchParameterError != value)
+                {
+                    _OkinoshimaSearchParameterError = value;
+                    OnPropertyChanged(() => OkinoshimaSearchParameterError);
+                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の2-5索敵値の誤差が{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
+
 
         #endregion
 
@@ -196,17 +242,24 @@ namespace Miotsukushi.Model.KanColle
             int _sumairmastery = 0;
             int _drumcount = 0;
             int _drumshipcount = 0;
+            double _okinoshimaparameter = 0;
+            double _okinoshimaerror = 0;
             for (int i = 0; i < ships.Count; i++)
             {
                 var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
                 if (ship != null)
                 {
                     _sumshiplevel += ship.level;
-                    _sumairmastery += KanColleTools.ShipAirMastery(ship);
+                    _sumairmastery += ship.air_mastery;
                     int thisdrumcount = KanColleTools.ShipDrumCount(ship);
                     _drumcount += thisdrumcount;
                     if (thisdrumcount > 0)
                         ++_drumshipcount;
+                    double thisokinoshimaparameter;
+                    double thisokinoshimaerror;
+                    KanColleTools.ShipOkinoshimaSearchParameter(ship, out thisokinoshimaparameter, out thisokinoshimaerror);
+                    _okinoshimaparameter += thisokinoshimaparameter;
+                    _okinoshimaerror += thisokinoshimaerror;
                 }
                 if (i == 0)
                     if (ship != null)
@@ -218,6 +271,8 @@ namespace Miotsukushi.Model.KanColle
             SumAirMastery = _sumairmastery;
             DrumCount = _drumcount;
             DrumShipCount = _drumshipcount;
+            OkinoshimaSearchParameter = _okinoshimaparameter - 0.6142467 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
+            OkinoshimaSearchParameterError = _okinoshimaerror + 0.03692224 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
         }
 
         public void ChangeMissionStatus(int status, int id, long time)

@@ -366,7 +366,8 @@ namespace Miotsukushi.Model.KanColle
                     {
                         name = item.name,
                         type_equiptype = item.type[2],
-                        taiku = item.tyku
+                        anti_air = item.tyku,
+                        reconnaissance = item.saku
                     });
                 }
                 InitializeConfirm();

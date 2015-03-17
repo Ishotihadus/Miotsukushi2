@@ -87,7 +87,7 @@ namespace Miotsukushi.Tools
                 case 7:
                 case 8:
                 case 11:
-                    return (int)Math.Floor(slot.iteminfo.taiku * Math.Sqrt(onslot));
+                    return (int)Math.Floor(slot.iteminfo.anti_air * Math.Sqrt(onslot));
                 default:
                     return 0;
             }
@@ -128,6 +128,98 @@ namespace Miotsukushi.Tools
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// 2-5式（秋）の各艦パラメータ。艦隊のパラメータはこれの合計から司令部レベルの5の倍数切り上げの0.61倍を引いたものになる。
+        /// 零式観戦21型（熟練）、三式指揮連絡機、熟練艦載機整備員、艦隊司令部施設などにかかる係数は不明なので0になっている。
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        public static void ShipOkinoshimaSearchParameter(Model.KanColle.ShipData ship, out double parameter, out double error)
+        {
+            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+                ship == null || ship.Slots == null || ship.OnSlotCount == null)
+            {
+                parameter = 0;
+                error = 0;
+                return;
+            }
+
+            /*
+
+                索敵スコア[小数点第2位を四捨五入]
+            = 艦上爆撃機 × (1.0376255 ± 0.09650285)
+            + 艦上攻撃機 × (1.3677954 ± 0.10863618)
+            + 艦上偵察機 × (1.6592780 ± 0.09760553)
+            + 水上偵察機 × (2.0000000 ± 0.08662294)
+            + 水上爆撃機 × (1.7787282 ± 0.09177225)
+            + 小型電探 × (1.0045358 ± 0.04927736)
+            + 大型電探 × (0.9906638 ± 0.04912215)
+            + 探照灯 × (0.9067950 ± 0.06582838)
+            + √(各艦毎の素索敵) × (1.6841056 ± 0.07815942)
+            + (司令部レベルを5の倍数に切り上げ) × (-0.6142467 ± 0.03692224)
+
+            http://ch.nicovideo.jp/biikame/blomaga/ar663428
+
+                */
+
+            double ret = 0;
+            double err = 0;
+            int sosakuteki = ship.reconnaissance;
+
+            for (int i = 0; i < ship.Slots.Count; i++)
+            {
+                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
+                if (slotmodel != null && slotmodel.iteminfo != null)
+                {
+                    sosakuteki -= slotmodel.iteminfo.reconnaissance;
+                    double coef = 0;
+                    double errcoef = 0;
+                    switch(slotmodel.iteminfo.type_equiptype)
+                    {
+                        case 7: // 艦上爆撃機 1.04
+                            coef = 1.0376255;
+                            errcoef = 0.09650285;
+                            break;
+                        case 8: // 艦上攻撃機 1.37
+                            coef = 1.3677954;
+                            errcoef = 0.10863618;
+                            break;
+                        case 9: // 艦上偵察機 1.66
+                            coef = 1.6592780;
+                            errcoef = 0.09760553;
+                            break;
+                        case 10: // 水上偵察機 2.00
+                            coef = 2;
+                            errcoef = 0.08662294;
+                            break;
+                        case 11: // 水上爆撃機 1.78
+                            coef = 1.7787282;
+                            errcoef = 0.09177225;
+                            break;
+                        case 12: // 小型電探 1
+                            coef = 1.0045358;
+                            errcoef = 0.04927736;
+                            break;
+                        case 13: // 大型電探 0.99
+                            coef = 0.9906638;
+                            errcoef = 0.04912215;
+                            break;
+                        case 29: // 探照灯 0.91
+                            coef = 0.91;
+                            errcoef = 0.06582838;
+                            break;
+                    }
+                    ret += coef * slotmodel.iteminfo.reconnaissance;
+                    err += errcoef * slotmodel.iteminfo.reconnaissance;
+                }
+            }
+            ret += Math.Sqrt(sosakuteki) * 1.6841056;
+            err += Math.Sqrt(sosakuteki) * 0.07815942;
+
+            parameter = ret;
+            error = err;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Miotsukushi.Model.KanColle
     {
         public string name;
         public int type_equiptype;
-        public int taiku;
+        public int anti_air;
+        public int reconnaissance;
     }
 }
