@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using Miotsukushi.Tools;
 
 namespace Miotsukushi.Model.KanColle
 {
@@ -37,7 +38,7 @@ namespace Miotsukushi.Model.KanColle
                 return _FlagShipLevel;
             }
 
-            set
+            private set
             {
                 if (_FlagShipLevel != value)
                 {
@@ -56,7 +57,7 @@ namespace Miotsukushi.Model.KanColle
                 return _SumShipLevel;
             }
 
-            set
+            private set
             {
                 if (_SumShipLevel != value)
                 {
@@ -66,6 +67,73 @@ namespace Miotsukushi.Model.KanColle
                 }
             }
         }
+
+        private int _SumAirMastery;
+        /// <summary>
+        /// 制空値の合計
+        /// </summary>
+        public int SumAirMastery
+        {
+            get
+            {
+                return _SumAirMastery;
+            }
+
+            private set
+            {
+                if (_SumAirMastery != value)
+                {
+                    _SumAirMastery = value;
+                    OnPropertyChanged(() => SumAirMastery);
+                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の合計制空値が{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
+        private int _DrumCount;
+        /// <summary>
+        /// ドラム缶数の合計
+        /// </summary>
+        public int DrumCount
+        {
+            get
+            {
+                return _DrumCount;
+            }
+
+            private set
+            {
+                if (_DrumCount != value)
+                {
+                    _DrumCount = value;
+                    OnPropertyChanged(() => DrumCount);
+                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の合計ドラム缶数が{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
+        private int _DrumShipCount;
+        /// <summary>
+        /// ドラム缶積載艦数
+        /// </summary>
+        public int DrumShipCount
+        {
+            get
+            {
+                return _DrumShipCount;
+            }
+
+            private set
+            {
+                if (_DrumShipCount != value)
+                {
+                    _DrumShipCount = value;
+                    OnPropertyChanged(() => DrumShipCount);
+                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」のドラム缶積載艦数が{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
 
 
         #endregion
@@ -124,22 +192,32 @@ namespace Miotsukushi.Model.KanColle
         {
             var model = MainModel.Current.kancolleModel;
 
-            if (ships.Count > 0)
-            {
-                var flagship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[0]);
-                FlagShipLevel = flagship != null ? flagship.level : 0;
-            }
-            else
-                FlagShipLevel = 0;
-
             int _sumshiplevel = 0;
-            foreach (var shipid in ships)
+            int _sumairmastery = 0;
+            int _drumcount = 0;
+            int _drumshipcount = 0;
+            for (int i = 0; i < ships.Count; i++)
             {
-                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == shipid);
+                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
                 if (ship != null)
+                {
                     _sumshiplevel += ship.level;
+                    _sumairmastery += KanColleTools.ShipAirMastery(ship);
+                    int thisdrumcount = KanColleTools.ShipDrumCount(ship);
+                    _drumcount += thisdrumcount;
+                    if (thisdrumcount > 0)
+                        ++_drumshipcount;
+                }
+                if (i == 0)
+                    if (ship != null)
+                        FlagShipLevel = ship.level;
+                    else
+                        FlagShipLevel = 0;
             }
             SumShipLevel = _sumshiplevel;
+            SumAirMastery = _sumairmastery;
+            DrumCount = _drumcount;
+            DrumShipCount = _drumshipcount;
         }
 
         public void ChangeMissionStatus(int status, int id, long time)

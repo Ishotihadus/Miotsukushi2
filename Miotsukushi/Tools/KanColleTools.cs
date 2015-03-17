@@ -111,5 +111,23 @@ namespace Miotsukushi.Tools
 
             return ret;
         }
+
+        public static int ShipDrumCount(Model.KanColle.ShipData ship)
+        {
+            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+                ship == null || ship.Slots == null || ship.OnSlotCount == null)
+                return 0;
+
+            int ret = 0;
+
+            for (int i = 0; i < ship.Slots.Count; i++)
+            {
+                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
+                if (slotmodel != null && slotmodel.itemid == 75)
+                    ++ret;
+            }
+
+            return ret;
+        }
     }
 }

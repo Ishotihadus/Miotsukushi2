@@ -151,29 +151,21 @@ namespace Miotsukushi.Model.KanColle
         {
             if (request.id - 1 < fleetdata.Count)
             {
-                bool flagshipchanged = false;
-                bool sumlevelchanged = false;
                 if (request.ship_id == -2)
                 {
                     // 旗艦以外全部解除
                     int removecount = fleetdata[request.id - 1].ships.Count - 1;
                     for (int i = 0; i < removecount; i++)
                         fleetdata[request.id - 1].ships.RemoveAt(1);
-                    sumlevelchanged = true;
                 }
                 else if (request.ship_id == -1)
                 {
                     // その艦をはずす
                     fleetdata[request.id - 1].ships.RemoveAt(request.ship_idx);
-                    if (request.ship_idx == 0)
-                        flagshipchanged = true;
-                    sumlevelchanged = true;
                 }
                 else
                 {
                     int replaceindex = fleetdata[request.id - 1].ships.IndexOf(request.ship_id);
-                    if (request.ship_idx == 0 || replaceindex == 0)
-                        flagshipchanged = true;
 
                     if (replaceindex != -1)
                     {
@@ -194,7 +186,6 @@ namespace Miotsukushi.Model.KanColle
                     }
                     else
                     {
-                        sumlevelchanged = true;
                         int replaceshipid;
 
                         if (fleetdata[request.id - 1].ships.Count > request.ship_idx)
@@ -222,44 +213,13 @@ namespace Miotsukushi.Model.KanColle
                                     fleetdata[i].ships.RemoveAt(rplidx);
                                 else
                                     fleetdata[i].ships[rplidx] = replaceshipid;
-
-                                int _sumlevel = 0;
-                                for (int j = 0; j < fleetdata[i].ships.Count; j++)
-                                {
-                                    var ship = shipdata.FirstOrDefault(_ => _.shipid == fleetdata[i].ships[j]);
-                                    if (ship != null)
-                                    {
-                                        _sumlevel += ship.level;
-                                        if (j == 0)
-                                            fleetdata[i].FlagShipLevel = ship.level;
-                                    }
-                                }
-                                fleetdata[i].SumShipLevel = _sumlevel;
+                                fleetdata[i].Recalc();
                                 break;
                             }
                         }
                     }
                 }
-
-                if (flagshipchanged)
-                {
-                    var flagship = shipdata.FirstOrDefault(_ => _.shipid == fleetdata[request.id - 1].ships[0]);
-                    if (flagship != null)
-                        fleetdata[request.id - 1].FlagShipLevel = flagship.level;
-                    else
-                        fleetdata[request.id - 1].FlagShipLevel = 0;
-                }
-                if(sumlevelchanged)
-                {
-                    int _sumlevel = 0;
-                    foreach(var shipid in fleetdata[request.id - 1].ships)
-                    {
-                        var ship = shipdata.FirstOrDefault(_ => _.shipid == shipid);
-                        if (ship != null)
-                            _sumlevel += ship.level;
-                    }
-                    fleetdata[request.id - 1].SumShipLevel = _sumlevel;
-                }
+                fleetdata[request.id - 1].Recalc();
             }
         }
 
@@ -439,6 +399,8 @@ namespace Miotsukushi.Model.KanColle
                 {
                     AppendShipData(ship);
                 }
+                foreach (var deck in fleetdata)
+                    deck.Recalc();
             });
         }
 
