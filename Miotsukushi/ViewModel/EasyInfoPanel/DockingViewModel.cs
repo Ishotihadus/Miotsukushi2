@@ -175,18 +175,18 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             this.id = id;
             model = Model.MainModel.Current.kancolleModel;
             model.InitializeComplete += model_InitializeComplete;
-            model.ndockdata.ItemAdded += ndockdata_ItemAdded;
+            model.ndockdata.ExListChanged += Ndockdata_ExListChanged;
             Model.MainModel.Current.timerModel.TimerElapsed += timerModel_TimerElapsed;
         }
 
-        void ndockdata_ItemAdded(object sender, EventArgs e)
+        private void Ndockdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
         {
-            if(model.ndockdata.Count > id)
+            if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == id)
             {
+                model.ndockdata.ExListChanged -= Ndockdata_ExListChanged;
                 model.ndockdata[id].NDockChanged += DockingViewModel_NDockChanged;
                 UpdateBorderBrush();
                 OnPropertyChanged("");
-                model.ndockdata.ItemAdded -= ndockdata_ItemAdded;
             }
         }
 

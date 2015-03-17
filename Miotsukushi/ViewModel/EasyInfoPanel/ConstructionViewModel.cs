@@ -186,23 +186,23 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             this.id = id;
             model = Model.MainModel.Current.kancolleModel;
             model.InitializeComplete += model_InitializeComplete;
-            model.kdockdata.ItemAdded += kdockdata_ItemAdded;
+            model.kdockdata.ExListChanged += Kdockdata_ExListChanged;
             Model.MainModel.Current.timerModel.TimerElapsed += timerModel_TimerElapsed;
+        }
+
+        private void Kdockdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
+        {
+            if (e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == id)
+            {
+                model.kdockdata.ExListChanged -= Kdockdata_ExListChanged;
+                model.kdockdata[id].PropertyChanged += ConstructionViewModel_PropertyChanged;
+                all_update();
+            }
         }
 
         void model_InitializeComplete(object sender, EventArgs e)
         {
             all_update();
-        }
-
-        void kdockdata_ItemAdded(object sender, EventArgs e)
-        {
-            if (model.kdockdata.Count > id)
-            {
-                model.kdockdata[id].PropertyChanged += ConstructionViewModel_PropertyChanged;
-                model.kdockdata.ItemAdded -= kdockdata_ItemAdded;
-                all_update();
-            }
         }
 
         void ConstructionViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

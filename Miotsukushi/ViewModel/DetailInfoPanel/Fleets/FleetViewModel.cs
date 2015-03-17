@@ -23,15 +23,15 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 
             this.id = id;
             model = Model.MainModel.Current.kancolleModel;
-            model.fleetdata.ItemAdded += fleetdata_ItemAdded;
+            model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
         }
 
-        void fleetdata_ItemAdded(object sender, EventArgs e)
+        private void Fleetdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
         {
-            if (model.fleetdata.Count > id)
+            if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == id)
             {
                 model.fleetdata[id].ships.CollectionChanged += ships_CollectionChanged;
-                model.fleetdata.ItemAdded -= fleetdata_ItemAdded;
+                model.fleetdata.ExListChanged -= Fleetdata_ExListChanged;
             }
         }
 
