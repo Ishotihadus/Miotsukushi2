@@ -140,7 +140,7 @@ namespace Miotsukushi.Tools
         public static void ShipOkinoshimaSearchParameter(Model.KanColle.ShipData ship, out double parameter, out double error)
         {
             if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
-                ship == null || ship.Slots == null || ship.OnSlotCount == null)
+                ship == null || ship.Slots == null)
             {
                 parameter = 0;
                 error = 0;
@@ -222,5 +222,191 @@ namespace Miotsukushi.Tools
             parameter = ret;
             error = err;
         }
+
+
+        public static void ShipAbility(Model.KanColle.ShipData ship, out bool daycutin, out bool dayren, out bool nightcutin, out bool nightren)
+        {
+            daycutin = false;
+            dayren = false;
+            nightcutin = false;
+            nightren = false;
+
+            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+                ship == null || ship.Slots == null || ship.OnSlotCount == null)
+                return;
+
+            int planecount = 0; // 偵察機・爆撃機スロット数
+            int mainguncount = 0; // 主砲数
+            int subguncount = 0; // 副砲数
+            int apacount = 0; // 徹甲弾数
+            int radarcount = 0; // 電探数
+            int torpedocount = 0; // 魚雷数
+
+
+            int length = Math.Min(ship.Slots.Count, ship.OnSlotCount.Count);
+
+            for (int i = 0; i < length; i++)
+            {
+                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
+                if (slotmodel != null && slotmodel.iteminfo != null)
+                {
+                    switch (slotmodel.iteminfo.type_equiptype)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 38:
+                            // 主砲
+                            ++mainguncount;
+                            break;
+                        case 4:
+                            // 副砲
+                            ++subguncount;
+                            break;
+                        case 5:
+                        case 32:
+                            // 魚雷
+                            ++torpedocount;
+                            break;
+                        case 10:
+                        case 11:
+                            // 偵察機・爆撃機
+                            planecount += ship.OnSlotCount[i];
+                            break;
+                        case 12:
+                        case 13:
+                            // 電探
+                            ++radarcount;
+                            break;
+                        case 19:
+                            // 対艦強化弾 = 徹甲弾
+                            ++apacount;
+                            break;
+                    }
+                }
+            }
+
+            // 弾着観測射撃
+            // 最低条件: 水上偵察機・水上爆撃機が1スロット以上
+            // 連撃: 主砲2副砲0徹甲弾1電探0/主砲1副砲1徹甲弾1電探0/主砲1副砲1徹甲弾0電探1/主砲1以上副砲1以上
+            dayren = planecount > 0 && ((mainguncount >= 1 && subguncount >= 1) || (mainguncount == 2 && subguncount == 0 && apacount == 1 && radarcount == 0));
+            // カットイン: 主砲2以上
+            daycutin = planecount > 0 && mainguncount >= 2;
+
+            // 夜戦
+            // 連撃: 主砲2副砲0魚雷0/主砲1副砲1以上魚雷0/主砲0副砲2以上魚雷1以下
+            nightren = ((mainguncount == 2 && subguncount == 0) || (mainguncount == 1 && subguncount >= 1) && torpedocount == 0) ||
+                (mainguncount == 0 && subguncount >= 2 && torpedocount <= 1);
+            // カットイン: 魚雷2以上/主砲3以上/主砲2副砲1以上/主砲2(副砲0)魚雷1/主砲1魚雷1
+            nightcutin = torpedocount >= 2 || mainguncount >= 3 || (mainguncount == 2 && (subguncount >= 1 || torpedocount == 1)) ||
+                (mainguncount == 1 && torpedocount == 1);
+        }
+
+        /// <summary>
+        /// 対空カットイン
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        public static bool ShipAntiAirCutinAbility(Model.KanColle.ShipData ship)
+        {
+            // パターンが多い
+            // 2015年3月13日メンテ現在
+
+            // 1. 高角砲 高射装置
+            // 2. 25mm三連装機銃集中配備 対空機銃 対空電探
+            // 3. 10cm高角砲+高射装置 対空電探
+            // 4. 12.7cm高角砲+高射装置 対空電探
+            // 5. 大口径主砲 高射装置 三式弾
+            // 秋月（改）: 高角砲 （任意の）電探or高角砲
+            // 摩耶改二: 高角砲 25mm三連装機銃集中配備
+
+            // 高角砲: icontype==16
+            // 高射装置: equiptype==36
+            // 対空機銃: equiptype==21
+            // 任意の電探: equiptype==12or13
+            // 対空電探: equiptype==12or13 && nameに「対空」が含まれる
+            // 大口径主砲: equiptype==3or38
+            // 三式弾: equiptype==18
+
+            // 25mm三連装機銃集中配備 131
+            // 10cm高角砲+高射装置 122
+            // 12.7cm高角砲+高射装置 130
+
+            // 秋月 421
+            // 秋月改 330
+            // 摩耶改二 428
+
+            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+                ship == null || ship.Slots == null)
+                return false;
+
+            int anti_air_gun = 0; // 高角砲
+            int hacs = 0; // 高射装置
+            int machinegun = 0; // 対空機銃
+            int radar = 0;
+            int anti_air_radar = 0;
+            int big_main_gun = 0;
+            int san_shiki = 0;
+            int twenty_five_mm_triple_machinegun = 0;
+            int ten_cm_anti_air_gun_with_hacs = 0;
+            int twelve_point_seven_cm_air_gun_with_hacs = 0;
+
+            for (int i = 0; i < ship.Slots.Count; i++)
+            {
+                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
+                var iteminfo = slotmodel.iteminfo;
+                if (slotmodel != null && iteminfo != null)
+                {
+                    switch (iteminfo.type_equiptype)
+                    {
+                        case 36:
+                            ++hacs;
+                            break;
+                        case 21:
+                            ++anti_air_gun;
+                            break;
+                        case 12:
+                        case 13:
+                            ++radar;
+                            if (iteminfo.name.IndexOf("対空") != -1)
+                                ++anti_air_radar;
+                            break;
+                        case 3:
+                        case 38:
+                            ++big_main_gun;
+                            break;
+                        case 18:
+                            ++san_shiki;
+                            break;
+                    }
+
+                    if (iteminfo.type_icontype == 16)
+                        ++anti_air_gun;
+
+                    switch(slotmodel.itemid)
+                    {
+                        case 131:
+                            ++twenty_five_mm_triple_machinegun;
+                            break;
+                        case 122:
+                            ++ten_cm_anti_air_gun_with_hacs;
+                            break;
+                        case 130:
+                            ++twelve_point_seven_cm_air_gun_with_hacs;
+                            break;
+                    }
+                }
+            }
+
+            return
+                (anti_air_gun >= 1 && hacs >= 1) ||
+                (twenty_five_mm_triple_machinegun >= 1 && machinegun >= 2 && anti_air_radar >= 1) ||
+                (ten_cm_anti_air_gun_with_hacs >= 1 && anti_air_radar >= 1) ||
+                (twelve_point_seven_cm_air_gun_with_hacs >= 1 && anti_air_radar >= 1) ||
+                (big_main_gun >= 1 && hacs >= 1 && san_shiki >= 1) ||
+                ((ship.characterid == 421 || ship.characterid == 330) && anti_air_gun >= 1 && (radar >= 1 || anti_air_gun >= 2)) ||
+                (ship.characterid == 428 && anti_air_gun >= 2 && twenty_five_mm_triple_machinegun >= 1);
+        }
+
     }
 }

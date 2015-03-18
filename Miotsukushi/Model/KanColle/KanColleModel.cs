@@ -365,7 +365,10 @@ namespace Miotsukushi.Model.KanColle
                     slotitemmaster.Add(item.id, new ItemData()
                     {
                         name = item.name,
+                        type = item.type,
+                        type_cardtype = item.type[1],
                         type_equiptype = item.type[2],
+                        type_icontype = item.type[3],
                         anti_air = item.tyku,
                         reconnaissance = item.saku
                     });
