@@ -16,7 +16,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
         private int _DeckID;
 
         /// <summary>
-        /// 艦隊ID
+        /// 艦隊ID（index, 0から）
         /// </summary>
         public int DeckID
         {
@@ -30,10 +30,17 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
                 if (_DeckID != value)
                 {
                     _DeckID = value;
+                    ID = value + 1;
                     OnPropertyChanged(() => DeckID);
+                    OnPropertyChanged(() => ID);
                 }
             }
         }
+
+        /// <summary>
+        /// 艦隊の番号（1から）
+        /// </summary>
+        public int ID { get; set; } = 1;
 
 
         private string _DeckName;
@@ -198,10 +205,11 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
 
 
 
-        private int _Status;
+        private int _Status = -3;
 
         /// <summary>
         /// 遠征のステータス
+        /// -3:未取得 -2:未開放 -1:不明
         /// 0:母港にいる 1:遠征中 2:遠征完了 3:遠征強制帰投中 4:遠征中（1分未満） 5:遠征強制帰投中（1分未満）
         /// </summary>
         public int Status
@@ -216,10 +224,24 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
                 if (_Status != value)
                 {
                     _Status = value;
+                    DetailVisibility = value >= 1;
+                    switch(value)
+                    {
+                        case -3: Message = "読み込まれていません"; break;
+                        case -2: Message = "艦隊が未開放です"; break;
+                        case -1: Message = "不明"; break;
+                        case 0: Message = "母港で待機中です"; break;
+                    }
+
                     OnPropertyChanged(() => Status);
+                    OnPropertyChanged(() => DetailVisibility);
                 }
             }
         }
+
+        public bool DetailVisibility { get; set; }
+
+        public string Message { get; set; } = "読み込まれていません";
 
 
         private int _ExpeditionID;
@@ -404,7 +426,19 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
             this.DeckID = DeckID;
             model = Miotsukushi.Model.MainModel.Current.kancolleModel;
             model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
+            model.InitializeComplete += Model_InitializeComplete;
             Miotsukushi.Model.MainModel.Current.timerModel.TimerElapsed += TimerModel_TimerElapsed;
+        }
+
+        private void Model_InitializeComplete(object sender, EventArgs e)
+        {
+            if(model.fleetdata.Count <= DeckID)
+            {
+                // 艦隊が未開放
+                Status = -2;
+            }
+
+            model.InitializeComplete -= Model_InitializeComplete;
         }
 
         private void TimerModel_TimerElapsed(object sender, EventArgs e)
@@ -456,7 +490,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
                         Status = 3;
                         break;
                     default:
-                        Status = 0;
+                        Status = -1;
                         break;
                 }
 
