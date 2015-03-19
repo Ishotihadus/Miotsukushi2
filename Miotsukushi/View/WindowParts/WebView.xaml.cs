@@ -42,15 +42,22 @@ namespace Miotsukushi.View.WindowParts
                 return;
             }
 
-            mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
-            if (htmlDoc != null)
+            try
             {
-                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.left='-50px'");
-                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.top='-16px'");
-                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.zIndex='1024'");
-                htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.position='fixed'");
-                htmlDoc.parentWindow.execScript("document.body.style.overflow ='hidden'");
-                htmlDoc.parentWindow.scrollTo(0, 0);
+                mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
+                if (htmlDoc != null)
+                {
+                    htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.left='-50px'");
+                    htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.top='-16px'");
+                    htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.zIndex='1024'");
+                    htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.position='fixed'");
+                    htmlDoc.parentWindow.execScript("document.body.style.overflow ='hidden'");
+                    htmlDoc.parentWindow.scrollTo(0, 0);
+                }
+            }
+            catch (System.Runtime.InteropServices.COMException exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
             }
         }
 

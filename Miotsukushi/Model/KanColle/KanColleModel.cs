@@ -30,7 +30,8 @@ namespace Miotsukushi.Model.KanColle
 
         public KanColleModel()
         {
-            KanColleNotifier.FiddlerStartup();
+            int port = KanColleNotifier.FiddlerStartup();
+            System.Diagnostics.Debug.WriteLine("Port:" + port);
             KanColleNotifier.FiddlerSetWinInetProxy();
             
 
