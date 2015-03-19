@@ -10,5 +10,7 @@ namespace Miotsukushi.Model.KanColle
     {
         public string name;
         public int time_minute;
+        public string details;
+        public int maparea_id;
     }
 }

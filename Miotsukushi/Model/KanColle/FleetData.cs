@@ -217,20 +217,69 @@ namespace Miotsukushi.Model.KanColle
         }
 
 
+        private FleetExpeditionStatus _ExpeditionStatus;
+        public FleetExpeditionStatus ExpeditionStatus
+        {
+            get
+            {
+                return _ExpeditionStatus;
+            }
+
+            set
+            {
+                if (_ExpeditionStatus != value)
+                {
+                    _ExpeditionStatus = value;
+                    OnPropertyChanged(() => ExpeditionStatus);
+                }
+            }
+        }
+
+
+        private DateTime _ExpeditionBacktime;
+        public DateTime ExpeditionBacktime
+        {
+            get
+            {
+                return _ExpeditionBacktime;
+            }
+
+            set
+            {
+                if (_ExpeditionBacktime != value)
+                {
+                    _ExpeditionBacktime = value;
+                    OnPropertyChanged(() => ExpeditionBacktime);
+                }
+            }
+        }
+
+        private int _ExpeditionID;
+        public int ExpeditionID
+        {
+            get
+            {
+                return _ExpeditionID;
+            }
+
+            set
+            {
+                if (_ExpeditionID != value)
+                {
+                    _ExpeditionID = value;
+                    OnPropertyChanged(() => ExpeditionID);
+                }
+            }
+        }
+
+
+
+
 
         #endregion
 
         public ObservableCollection<int> ships = new ObservableCollection<int>();
 
-        public FleetExpeditionStatus expedition_status;
-        public DateTime expedition_backtime;
-        public int expedition_id;
-
-        /// <summary>
-        /// 遠征の情報が変更されたときに呼び出されます
-        /// </summary>
-        public event EventHandler FleetMissionChanged;
-        protected virtual void OnFleetMissionChanged(System.EventArgs e) { if (FleetMissionChanged != null) { FleetMissionChanged(this, e); } }
 
         public void FromDeckValue(KanColleLib.TransmissionData.api_get_member.values.DeckValue data)
         {
@@ -319,36 +368,14 @@ namespace Miotsukushi.Model.KanColle
 
         public void ChangeMissionStatus(int status, int id, long time)
         {
-            bool missionchanged = false;
-
-            FleetExpeditionStatus _st =
+            ExpeditionStatus =
                 status == 0 ? FleetExpeditionStatus.at_home :
                 status == 1 ? FleetExpeditionStatus.on_expedition :
                 status == 2 ? FleetExpeditionStatus.expedition_complete :
                 status == 3 ? FleetExpeditionStatus.force_backing :
                 FleetExpeditionStatus.unknown;
-            if (_st != expedition_status)
-            {
-                missionchanged = true;
-                expedition_status = _st;
-            }
-
-            int _id = id;
-            if (_id != expedition_id)
-            {
-                missionchanged = true;
-                expedition_id = _id;
-            }
-
-            DateTime _tm = Miotsukushi.Tools.TimeParser.ParseTimeFromLong(time);
-            if (_tm != expedition_backtime)
-            {
-                missionchanged = true;
-                expedition_backtime = _tm;
-            }
-
-            if (missionchanged)
-                OnFleetMissionChanged(new System.EventArgs());
+            ExpeditionID = id;
+            ExpeditionBacktime = Miotsukushi.Tools.TimeParser.ParseTimeFromLong(time);
         }
     }
 }

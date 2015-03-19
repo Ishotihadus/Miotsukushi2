@@ -174,6 +174,29 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
         }
 
 
+        private int _RemainExpeditionCount;
+
+        /// <summary>
+        /// 遠征の残り回数
+        /// </summary>
+        public int RemainExpeditionCount
+        {
+            get
+            {
+                return _RemainExpeditionCount;
+            }
+
+            set
+            {
+                if (_RemainExpeditionCount != value)
+                {
+                    _RemainExpeditionCount = value;
+                    OnPropertyChanged(() => RemainExpeditionCount);
+                }
+            }
+        }
+
+
 
         private int _Status;
 
@@ -199,24 +222,24 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
         }
 
 
-        private int _MissionID;
+        private int _ExpeditionID;
 
         /// <summary>
         /// 遠征ID
         /// </summary>
-        public int MissionID
+        public int ExpeditionID
         {
             get
             {
-                return _MissionID;
+                return _ExpeditionID;
             }
 
             set
             {
-                if (_MissionID != value)
+                if (_ExpeditionID != value)
                 {
-                    _MissionID = value;
-                    OnPropertyChanged(() => MissionID);
+                    _ExpeditionID = value;
+                    OnPropertyChanged(() => ExpeditionID);
                 }
             }
         }
@@ -245,24 +268,24 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
         }
 
 
-        private string _MissionName;
+        private string _ExpeditionName;
 
         /// <summary>
         /// 遠征名
         /// </summary>
-        public string MissionName
+        public string ExpeditionName
         {
             get
             {
-                return _MissionName;
+                return _ExpeditionName;
             }
 
             set
             {
-                if (_MissionName != value)
+                if (_ExpeditionName != value)
                 {
-                    _MissionName = value;
-                    OnPropertyChanged(() => MissionName);
+                    _ExpeditionName = value;
+                    OnPropertyChanged(() => ExpeditionName);
                 }
             }
         }
@@ -292,27 +315,31 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
 
 
 
-        private TimeSpan _MissionLength;
+        private TimeSpan _ExpeditionLength;
 
         /// <summary>
         /// 遠征時間
         /// </summary>
-        public TimeSpan MissionLength
+        public TimeSpan ExpeditionLength
         {
             get
             {
-                return _MissionLength;
+                return _ExpeditionLength;
             }
 
             set
             {
-                if (_MissionLength != value)
+                if (_ExpeditionLength != value)
                 {
-                    _MissionLength = value;
-                    OnPropertyChanged(() => MissionLength);
+                    _ExpeditionLength = value;
+                    ExpeditionLengthMinutes = value.TotalMinutes;
+                    OnPropertyChanged(() => ExpeditionLength);
+                    OnPropertyChanged(() => ExpeditionLengthMinutes);
                 }
             }
         }
+
+        public double ExpeditionLengthMinutes { get; set; }
 
 
         private TimeSpan _RemainLength;
@@ -332,10 +359,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
                 if (_RemainLength != value)
                 {
                     _RemainLength = value;
+                    RemainLengthMinutes = value.TotalMinutes;
                     OnPropertyChanged(() => RemainLength);
+                    OnPropertyChanged(() => RemainLengthMinutes);
                 }
             }
         }
+
+        public double RemainLengthMinutes { get; set; }
 
 
         private DateTime _CompleteTime;
@@ -373,6 +404,26 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
             this.DeckID = DeckID;
             model = Miotsukushi.Model.MainModel.Current.kancolleModel;
             model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
+            Miotsukushi.Model.MainModel.Current.timerModel.TimerElapsed += TimerModel_TimerElapsed;
+        }
+
+        private void TimerModel_TimerElapsed(object sender, EventArgs e)
+        {
+            RemainLength = CompleteTime > DateTime.Now ? CompleteTime - DateTime.Now : TimeSpan.Zero;
+            if (RemainLengthMinutes < 1)
+            {
+                if (Status == 1)
+                    Status = 4;
+                else if (Status == 3)
+                    Status = 5;
+            }
+            else
+            {
+                if (Status == 4)
+                    Status = 1;
+                else if (Status == 5)
+                    Status = 3;
+            }
         }
 
         private void Fleetdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
@@ -381,33 +432,133 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
             {
                 model.fleetdata.ExListChanged -= Fleetdata_ExListChanged;
                 fleet = model.fleetdata[DeckID];
-                initialize();
+
+                DeckName = fleet.DeckName;
+                FlagShipLevel = fleet.FlagShipLevel;
+                SumShipLevel = fleet.SumShipLevel;
+                DrumCount = fleet.DrumCount;
+                DrumShipCount = fleet.DrumShipCount;
+                MinCond = fleet.MinCond;
+                RemainExpeditionCount = fleet.RemainExpeditionCount;
+
+                switch (fleet.ExpeditionStatus)
+                {
+                    case FleetExpeditionStatus.at_home:
+                        Status = 0;
+                        break;
+                    case FleetExpeditionStatus.on_expedition:
+                        Status = 1;
+                        break;
+                    case FleetExpeditionStatus.expedition_complete:
+                        Status = 2;
+                        break;
+                    case FleetExpeditionStatus.force_backing:
+                        Status = 3;
+                        break;
+                    default:
+                        Status = 0;
+                        break;
+                }
+
+                if (Status >= 1)
+                {
+                    ExpeditionID = fleet.ExpeditionID;
+                    ExpeditionLength = TimeSpan.FromMinutes(model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].time_minute : 0);
+                    ExpeditionName = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].name : "不明";
+                    AreaName = (model.missionmaster.ContainsKey(ExpeditionID) && model.mapareamaster.ContainsKey(model.missionmaster[ExpeditionID].maparea_id) ?
+                        model.mapareamaster[model.missionmaster[ExpeditionID].maparea_id].name : "不明");
+                    Description = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].details : "不明";
+                    CompleteTime = fleet.ExpeditionBacktime;
+                    RemainLength = CompleteTime > DateTime.Now ? CompleteTime - DateTime.Now : TimeSpan.Zero;
+                    if (RemainLengthMinutes < 1)
+                        if (Status == 1)
+                            Status = 4;
+                        else if (Status == 3)
+                            Status = 5;
+                }
+
+                fleet.PropertyChanged += Fleet_PropertyChanged;
             }
-        }
-
-        void initialize()
-        {
-            // 初期化
-            DeckName = fleet.DeckName;
-
-            fleet.PropertyChanged += Fleet_PropertyChanged;
-            fleet.ships.CollectionChanged += Ships_CollectionChanged;
         }
 
         private void Fleet_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "DeckName")
-                DeckName = fleet.DeckName;
-        }
-
-        void AppendParameters()
-        {
-
-        }
-
-        private void Ships_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
+            switch(e.PropertyName)
+            {
+                case "DeckName":
+                    DeckName = fleet.DeckName;
+                    break;
+                case "FlagShipLevel":
+                    FlagShipLevel = fleet.FlagShipLevel;
+                    break;
+                case "SumShipLevel":
+                    SumShipLevel = fleet.SumShipLevel;
+                    break;
+                case "DrumCount":
+                    DrumCount = fleet.DrumCount;
+                    break;
+                case "DrumShipCount":
+                    DrumShipCount = fleet.DrumShipCount;
+                    break;
+                case "MinCond":
+                    MinCond = fleet.MinCond;
+                    break;
+                case "RemainExpeditionCount":
+                    RemainExpeditionCount = fleet.RemainExpeditionCount;
+                    break;
+                case "ExpeditionStatus":
+                    switch (fleet.ExpeditionStatus)
+                    {
+                        case FleetExpeditionStatus.at_home:
+                            Status = 0;
+                            break;
+                        case FleetExpeditionStatus.on_expedition:
+                            if (RemainLengthMinutes < 1)
+                                Status = 4;
+                            else
+                                Status = 1;
+                            break;
+                        case FleetExpeditionStatus.expedition_complete:
+                            Status = 2;
+                            break;
+                        case FleetExpeditionStatus.force_backing:
+                            if (RemainLengthMinutes < 1)
+                                Status = 5;
+                            else
+                                Status = 3;
+                            break;
+                        default:
+                            Status = 0;
+                            break;
+                    }
+                    break;
+                case "ExpeditionID":
+                    ExpeditionID = fleet.ExpeditionID;
+                    ExpeditionLength = TimeSpan.FromMinutes(model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].time_minute : 0);
+                    ExpeditionName = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].name : "不明";
+                    AreaName = (model.missionmaster.ContainsKey(ExpeditionID) && model.mapareamaster.ContainsKey(model.missionmaster[ExpeditionID].maparea_id) ?
+                        model.mapareamaster[model.missionmaster[ExpeditionID].maparea_id].name : "不明");
+                    Description = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].details : "不明";
+                    break;
+                case "ExpeditionBacktime":
+                    CompleteTime = fleet.ExpeditionBacktime;
+                    RemainLength = CompleteTime > DateTime.Now ? CompleteTime - DateTime.Now : TimeSpan.Zero;
+                    if (RemainLengthMinutes < 1)
+                    {
+                        if (Status == 1)
+                            Status = 4;
+                        else if (Status == 3)
+                            Status = 5;
+                    }
+                    else
+                    {
+                        if (Status == 4)
+                            Status = 1;
+                        else if (Status == 5)
+                            Status = 3;
+                    }
+                    break;
+            }
         }
     }
 }

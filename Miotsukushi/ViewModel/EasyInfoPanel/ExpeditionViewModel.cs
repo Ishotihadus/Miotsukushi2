@@ -10,199 +10,308 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 {
     class ExpeditionViewModel : ViewModelBase
     {
-        int id;
         KanColleModel model;
 
         #region プロパティ定義
 
+        private int _ID;
         public int ID
         {
             get
             {
-                return id + 1;
+                return _ID;
+            }
+
+            set
+            {
+                if (_ID != value)
+                {
+                    _ID = value;
+                    OnPropertyChanged(() => ID);
+                }
             }
         }
 
+
+
+        private string _MissionName;
         public string MissionName
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id)
-                    if (model.missionmaster.ContainsKey(model.fleetdata[id].expedition_id))
-                        return model.missionmaster[model.fleetdata[id].expedition_id].name;
-                    else
-                        return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
-                else
-                    return null;
+                return _MissionName;
+            }
+
+            set
+            {
+                if (_MissionName != value)
+                {
+                    _MissionName = value;
+                    OnPropertyChanged(() => MissionName);
+                }
             }
         }
 
+
+        private TimeSpan _RemainTime;
         public TimeSpan RemainTime
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id)
-                    return model.fleetdata[id].expedition_backtime - DateTime.Now;
-                else
-                    return new TimeSpan();
+                return _RemainTime;
+            }
+
+            set
+            {
+                if (_RemainTime != value)
+                {
+                    _RemainTime = value;
+                    OnPropertyChanged(() => RemainTime);
+                }
             }
         }
 
+
+        private DateTime _CompleteTime;
         public DateTime CompleteTime
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id)
-                    return model.fleetdata[id].expedition_backtime;
-                else
-                    return new DateTime();
+                return _CompleteTime;
+            }
+
+            set
+            {
+                if (_CompleteTime != value)
+                {
+                    _CompleteTime = value;
+                    OnPropertyChanged(() => CompleteTime);
+                }
             }
         }
 
+
+
+        private double _ProgressValue;
         public double ProgressValue
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id && model.missionmaster.ContainsKey(model.fleetdata[id].expedition_id))
-                    return (double)model.missionmaster[model.fleetdata[id].expedition_id].time_minute - RemainTime.TotalMinutes;
-                else
-                    return 0;
+                return _ProgressValue;
+            }
+
+            set
+            {
+                if (_ProgressValue != value)
+                {
+                    _ProgressValue = value;
+                    OnPropertyChanged(() => ProgressValue);
+                }
             }
         }
 
+
+        private double _ProgressMax;
         public double ProgressMax
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id && model.missionmaster.ContainsKey(model.fleetdata[id].expedition_id))
-                    return model.missionmaster[model.fleetdata[id].expedition_id].time_minute;
-                else
-                    return 0;
+                return _ProgressMax;
+            }
+
+            set
+            {
+                if (_ProgressMax != value)
+                {
+                    _ProgressMax = value;
+                    OnPropertyChanged(() => ProgressMax);
+                }
             }
         }
 
+
+
+        private string _Message;
         public string Message
         {
             get
             {
-                if (model.fleetdata != null)
-                    if (model.fleetdata.Count > id)
-                        switch (model.fleetdata[id].expedition_status)
-                        {
-                            case FleetExpeditionStatus.unknown:
-                                return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
-                            case FleetExpeditionStatus.at_home:
-                                return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_AtHome");
-                            default:
-                                return null;
-                        }
-                    else if (model.fleetdata.Count > 0)
-                        return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotOpened");
-                    else
-                        return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotLoaded");
-                else
-                    return Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotLoaded");
+                return _Message;
+            }
+
+            set
+            {
+                if (_Message != value)
+                {
+                    _Message = value;
+                    OnPropertyChanged(() => Message);
+                }
             }
         }
 
+
+        private bool _DetailVisibility;
         public bool DetailVisibility
         {
             get
             {
-                if (model.fleetdata != null && model.fleetdata.Count > id)
-                    switch (model.fleetdata[id].expedition_status)
-                    {
-                        case FleetExpeditionStatus.on_expedition:
-                        case FleetExpeditionStatus.force_backing:
-                        case FleetExpeditionStatus.expedition_complete:
-                            return true;
-                        default:
-                            return false;
-                    }
-                else
-                    return false;
+                return _DetailVisibility;
+            }
+
+            set
+            {
+                if (_DetailVisibility != value)
+                {
+                    _DetailVisibility = value;
+                    OnPropertyChanged(() => DetailVisibility);
+                }
             }
         }
 
-        private Brush _BorderBrush = Brushes.Gray;
 
+        private Brush _BorderBrush = Brushes.Gray;
         public Brush BorderBrush
         {
             get
             {
                 return _BorderBrush;
             }
+
+            set
+            {
+                if (_BorderBrush != value)
+                {
+                    _BorderBrush = value;
+                    OnPropertyChanged(() => BorderBrush);
+                }
+            }
         }
+
 
         #endregion
 
+
+        FleetData fleet;
+
         public ExpeditionViewModel(int id)
         {
-            this.id = id;
+            this.ID = id + 1;
             model = Model.MainModel.Current.kancolleModel;
             model.InitializeComplete += model_InitializeComplete;
+            model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
             Model.MainModel.Current.timerModel.TimerElapsed += timerModel_TimerElapsed;
+
+            DetailVisibility = false;
+            Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotLoaded");
+        }
+
+        private void Fleetdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
+        {
+            if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == ID - 1)
+            {
+                model.fleetdata.ExListChanged -= Fleetdata_ExListChanged;
+                fleet = model.fleetdata[ID - 1];
+                fleet.PropertyChanged += Fleet_PropertyChanged;
+
+                if (fleet.ExpeditionStatus == FleetExpeditionStatus.unknown)
+                {
+                    DetailVisibility = false;
+                    Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
+                }
+                else if (fleet.ExpeditionStatus == FleetExpeditionStatus.at_home)
+                {
+                    DetailVisibility = false;
+                    Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_AtHome");
+                }
+                else
+                {
+                    MissionName = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
+                    CompleteTime = fleet.ExpeditionBacktime;
+                    RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
+                    ProgressValue = RemainTime.TotalMinutes;
+                    ProgressMax = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].time_minute : 0;
+                }
+                UpdateBorderBrush();
+            }
+        }
+
+        private void Fleet_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "ExpeditionStatus":
+                    if (fleet.ExpeditionStatus == FleetExpeditionStatus.unknown || fleet.ExpeditionStatus == FleetExpeditionStatus.at_home)
+                        DetailVisibility = false;
+                    else
+                        DetailVisibility = true;
+                    UpdateBorderBrush();
+                    break;
+                case "ExpeditionID":
+                    MissionName = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
+                    CompleteTime = fleet.ExpeditionBacktime;
+                    RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
+                    ProgressValue = RemainTime.TotalMinutes;
+                    ProgressMax = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].time_minute : 0;
+                    break;
+                case "ExpeditionBacktime":
+                    CompleteTime = fleet.ExpeditionBacktime;
+                    RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
+                    ProgressValue = RemainTime.TotalMinutes;
+                    break;
+            }
         }
 
         void timerModel_TimerElapsed(object sender, EventArgs e)
         {
-            OnPropertyChanged(() => RemainTime);
-            OnPropertyChanged(() => ProgressValue);
+            RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
+            ProgressValue = RemainTime.TotalMinutes;
             UpdateBorderBrush();
         }
 
         void model_InitializeComplete(object sender, EventArgs e)
         {
-            if (model.fleetdata != null && model.fleetdata.Count > id)
-                model.fleetdata[id].FleetMissionChanged += ExpeditionViewModel_FleetMissionChanged;
-            UpdateBorderBrush();
-            OnPropertyChanged("");
-        }
-
-        void ExpeditionViewModel_FleetMissionChanged(object sender, EventArgs e)
-        {
-            UpdateBorderBrush();
-            OnPropertyChanged("");
+            if (model.fleetdata.Count <= ID - 1)
+            {
+                Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotOpened");
+                DetailVisibility = false;
+                UpdateBorderBrush();
+            }
+            model.InitializeComplete -= model_InitializeComplete;
         }
 
         void UpdateBorderBrush()
         {
-            var nowbrush = GetBorderBrush();
-            if (_BorderBrush != nowbrush)
-            {
-                _BorderBrush = nowbrush;
-                OnPropertyChanged(() => BorderBrush);
-            }
-        }
-
-        Brush GetBorderBrush()
-        {
-            if (model.fleetdata != null && model.fleetdata.Count > id)
-                switch (model.fleetdata[id].expedition_status)
+            if (model.fleetdata == null || model.fleetdata.Count <= ID - 1)
+                BorderBrush = Brushes.Gray;
+            else
+                switch(fleet.ExpeditionStatus)
                 {
                     case FleetExpeditionStatus.at_home:
-                        return Brushes.SpringGreen;
+                        BorderBrush =  Brushes.SpringGreen;
+                        break;
                     case FleetExpeditionStatus.on_expedition:
                         if (RemainTime.TotalMinutes < 0)
-                            return Brushes.OrangeRed;
+                            BorderBrush = Brushes.OrangeRed;
                         else if (RemainTime.TotalMinutes < 1)
-                            return Brushes.DarkOrange;
+                            BorderBrush = Brushes.DarkOrange;
                         else
-                            return Brushes.SlateBlue;
+                            BorderBrush = Brushes.SlateBlue;
+                        break;
                     case FleetExpeditionStatus.force_backing:
                         if (RemainTime.TotalMinutes < 0)
-                            return Brushes.OrangeRed;
+                            BorderBrush = Brushes.OrangeRed;
                         else if (RemainTime.TotalMinutes < 1)
-                            return Brushes.Chocolate;
+                            BorderBrush = Brushes.Chocolate;
                         else
-                            return Brushes.Crimson;
+                            BorderBrush = Brushes.Crimson;
+                        break;
                     case FleetExpeditionStatus.expedition_complete:
-                        return Brushes.OrangeRed;
+                        BorderBrush = Brushes.OrangeRed;
+                        break;
                     default:
-                        return Brushes.Gray;
+                        BorderBrush = Brushes.Gray;
+                        break;
                 }
-            else
-                return Brushes.Gray;
         }
 
     }

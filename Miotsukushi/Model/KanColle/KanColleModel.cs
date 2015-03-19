@@ -20,6 +20,7 @@ namespace Miotsukushi.Model.KanColle
         public Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
         public Dictionary<int, ItemData> slotitemmaster = new Dictionary<int, ItemData>();
         public Dictionary<int, ItemEquipTypeData> slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
+        public Dictionary<int, MapAreaData> mapareamaster = new Dictionary<int, MapAreaData>();
         public ObservableCollection<SlotData> slotdata = new ObservableCollection<SlotData>();
         public ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
         public ExList<FleetData> fleetdata = new ExList<FleetData>();
@@ -350,7 +351,9 @@ namespace Miotsukushi.Model.KanColle
                     missionmaster.Add(mission.id, new MissionData()
                     {
                         name = mission.name,
-                        time_minute = mission.time
+                        time_minute = mission.time,
+                        details = mission.details,
+                        maparea_id = mission.maparea_id
                     });
                 }
                 System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_mission");
@@ -385,6 +388,19 @@ namespace Miotsukushi.Model.KanColle
                     {
                         name = item.name,
                         typebrush = KanColleTools.GetSlotItemEquipTypeBrush(item.id)
+                    });
+                }
+            });
+
+            await Task.Run(() =>
+            {
+                mapareamaster = new Dictionary<int, MapAreaData>();
+                foreach (var item in response.data.mst_maparea)
+                {
+                    mapareamaster.Add(item.id, new MapAreaData()
+                    {
+                        name = item.name,
+                        type = item.type
                     });
                 }
             });
