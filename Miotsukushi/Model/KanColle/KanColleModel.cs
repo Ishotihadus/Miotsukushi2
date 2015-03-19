@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KanColleLib;
-using Fiddler;
 using Miotsukushi.Tools;
 using Miotsukushi.Model.KanColle.EventArgs;
 
@@ -31,8 +30,9 @@ namespace Miotsukushi.Model.KanColle
 
         public KanColleModel()
         {
-            FiddlerApplication.Startup(0, FiddlerCoreStartupFlags.ChainToUpstreamGateway);
-            URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}", FiddlerApplication.oProxy.ListenPort), "<local>");
+            KanColleNotifier.FiddlerStartup();
+            KanColleNotifier.FiddlerSetWinInetProxy();
+            
 
             kclib = new KanColleNotifier(true);
 

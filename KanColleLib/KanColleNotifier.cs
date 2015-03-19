@@ -14,6 +14,7 @@ namespace KanColleLib
     {
         List<double> processingcode = new List<double>();
         Random random = new Random();
+        OutProxySettings proxy = new OutProxySettings();
 
         public KanColleNotifier(bool isAsync)
         {
@@ -21,8 +22,40 @@ namespace KanColleLib
                 FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete_Async;
             else
                 FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
+            FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
             FiddlerApplication.AfterSessionComplete += (oSession) => OnGetSessionData(new GetSessionDataEventArgs() { session = oSession });
             FiddlerApplication.Log.OnLogString += (sender, e) => OnGetFiddlerLogString(new GetFiddlerLogStringEventArgs() { logtext = e.LogString });
+        }
+
+        private void FiddlerApplication_BeforeRequest(Session oSession)
+        {
+            if (proxy.enabled)
+                oSession["X-OverrideGateway"] = proxy.GetGatewayString();
+        }
+
+        public static int FiddlerStartup(int iListenPort=0)
+        {
+            Fiddler.FiddlerApplication.Startup(iListenPort, Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway);
+            int port = Fiddler.FiddlerApplication.oProxy.ListenPort;
+            return port;
+        }
+
+        public static void FiddlerSetWinInetProxy()
+        {
+            Fiddler.URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}", Fiddler.FiddlerApplication.oProxy.ListenPort), "<local>");
+        }
+
+        public void SetUpstreamProxy(ProxyType type, string server, int port)
+        {
+            proxy.type = type;
+            proxy.servername = server;
+            proxy.port = port;
+            proxy.enabled = true;
+        }
+
+        public void DisableUpstreamProxy()
+        {
+            proxy.enabled = false;
         }
 
         async void FiddlerApplication_AfterSessionComplete_Async(Session oSession)

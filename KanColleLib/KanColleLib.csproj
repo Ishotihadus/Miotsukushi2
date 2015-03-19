@@ -71,6 +71,7 @@
     <Compile Include="EventArgs\KcsAPIDataAnalyzeFailedEventArgs.cs" />
     <Compile Include="KanColleLibException.cs" />
     <Compile Include="KanColleNotifier.cs" />
+    <Compile Include="OutProxySettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransmissionData\api_get_member\Basic.cs" />
     <Compile Include="TransmissionData\api_get_member\Deck.cs" />

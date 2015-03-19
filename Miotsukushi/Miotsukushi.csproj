@@ -59,10 +59,6 @@
     <Reference Include="CoreAudio">
       <HintPath>\\vmware-host\Shared Folders\書類\APIs\CoreAudio.dll</HintPath>
     </Reference>
-    <Reference Include="FiddlerCore4, Version=4.4.8.4, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\APIs\FiddlerCoreAPI\DotNet4\FiddlerCore4.dll</HintPath>
-    </Reference>
     <Reference Include="MahApps.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MahApps.Metro.1.0.0.0\lib\net45\MahApps.Metro.dll</HintPath>
