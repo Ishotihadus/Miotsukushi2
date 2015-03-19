@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Miotsukushi.Model.KanColle;
 
-namespace Miotsukushi.ViewModel.DetailInfoPanel.Missions
+namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
 {
-    class MissionFleetViewModel : ViewModelBase
+    class ExpeditionFleetViewModel : ViewModelBase
     {
         KanColleModel model;
 
@@ -368,7 +368,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Missions
         /// インスタンスの生成
         /// </summary>
         /// <param name="DeckID">艦隊インデックス。第1艦隊なら0で。</param>
-        public MissionFleetViewModel(int DeckID)
+        public ExpeditionFleetViewModel(int DeckID)
         {
             this.DeckID = DeckID;
             model = Miotsukushi.Model.MainModel.Current.kancolleModel;
