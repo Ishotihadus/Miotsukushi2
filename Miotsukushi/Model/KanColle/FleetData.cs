@@ -44,7 +44,6 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _FlagShipLevel = value;
                     OnPropertyChanged(() => FlagShipLevel);
-                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の旗艦レベルが{1}になったぞ。", DeckName, value));
                 }
             }
         }
@@ -63,7 +62,6 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _SumShipLevel = value;
                     OnPropertyChanged(() => SumShipLevel);
-                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の合計レベルが{1}になったぞ。", DeckName, value));
                 }
             }
         }
@@ -85,7 +83,6 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _SumAirMastery = value;
                     OnPropertyChanged(() => SumAirMastery);
-                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の合計制空値が{1}になったぞ。", DeckName, value));
                 }
             }
         }
@@ -107,7 +104,6 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _DrumCount = value;
                     OnPropertyChanged(() => DrumCount);
-                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の合計ドラム缶数が{1}になったぞ。", DeckName, value));
                 }
             }
         }
@@ -129,7 +125,6 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _DrumShipCount = value;
                     OnPropertyChanged(() => DrumShipCount);
-                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」のドラム缶積載艦数が{1}になったぞ。", DeckName, value));
                 }
             }
         }
@@ -152,7 +147,6 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _OkinoshimaSearchParameter = value;
                     OnPropertyChanged(() => OkinoshimaSearchParameter);
-                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の2-5索敵値が{1}になったぞ。", DeckName, value));
                 }
             }
         }
@@ -175,7 +169,49 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _OkinoshimaSearchParameterError = value;
                     OnPropertyChanged(() => OkinoshimaSearchParameterError);
-                    System.Diagnostics.Debug.WriteLine(string.Format("艦隊「{0}」の2-5索敵値の誤差が{1}になったぞ。", DeckName, value));
+                }
+            }
+        }
+
+        private int _MinCond;
+        /// <summary>
+        /// 最小Cond値（なお1回の遠征で減るCondは3）
+        /// </summary>
+        public int MinCond
+        {
+            get
+            {
+                return _MinCond;
+            }
+
+            set
+            {
+                if (_MinCond != value)
+                {
+                    _MinCond = value;
+                    OnPropertyChanged(() => MinCond);
+                    RemainExpeditionCount = (value >= 50) ? (value - 49) / 3 + 1 : 0;
+                }
+            }
+        }
+
+        private int _RemainExpeditionCount;
+        /// <summary>
+        /// 同一編成キラ付けなしで全艦キラキラ遠征に出せる回数
+        /// </summary>
+        public int RemainExpeditionCount
+        {
+            get
+            {
+                return _RemainExpeditionCount;
+            }
+
+            set
+            {
+                if (_RemainExpeditionCount != value)
+                {
+                    _RemainExpeditionCount = value;
+                    OnPropertyChanged(() => RemainExpeditionCount);
                 }
             }
         }
@@ -244,6 +280,7 @@ namespace Miotsukushi.Model.KanColle
             int _drumshipcount = 0;
             double _okinoshimaparameter = 0;
             double _okinoshimaerror = 0;
+            int? _mincond = null;
             for (int i = 0; i < ships.Count; i++)
             {
                 var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
@@ -266,6 +303,9 @@ namespace Miotsukushi.Model.KanColle
                         FlagShipLevel = ship.level;
                     else
                         FlagShipLevel = 0;
+
+                if (!_mincond.HasValue || _mincond > ship.condition)
+                    _mincond = ship.condition;
             }
             SumShipLevel = _sumshiplevel;
             SumAirMastery = _sumairmastery;
@@ -273,6 +313,8 @@ namespace Miotsukushi.Model.KanColle
             DrumShipCount = _drumshipcount;
             OkinoshimaSearchParameter = _okinoshimaparameter - 0.6142467 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
             OkinoshimaSearchParameterError = _okinoshimaerror + 0.03692224 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
+
+            MinCond = _mincond ?? 0;
         }
 
         public void ChangeMissionStatus(int status, int id, long time)
