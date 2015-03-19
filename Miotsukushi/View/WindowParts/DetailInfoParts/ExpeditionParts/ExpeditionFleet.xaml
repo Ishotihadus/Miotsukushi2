@@ -1,0 +1,32 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.ExpeditionParts"
+             xmlns:Converter="clr-namespace:Miotsukushi.Converter" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.ExpeditionParts.ExpeditionFleet"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <StackPanel Margin="5">
+        <TextBlock TextWrapping="Wrap" Margin="5"><Run Text="第"/><Run Text="{Binding ID}"/><Run Text="艦隊"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Text="{Binding DeckName}" Margin="5" FontSize="14.667"/>
+        <TextBlock TextWrapping="Wrap" Text="{Binding Message}" Margin="5" FontSize="14.667"/>
+        <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+        <TextBlock TextWrapping="Wrap" Margin="5"><Run Text="旗艦Lv. "/><Run Text="{Binding FlagShipLevel}"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5"><Run Text="艦隊合計Lv. "/><Run Text="{Binding SumShipLevel}"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5"><Run Text="ドラム缶 "/><Run Text="{Binding DrumCount}"/><Run Text="個 / "/><Run Text="{Binding DrumShipCount}"/><Run Text="隻"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5"><Run Text="最小Cond "/><Run Text="{Binding MinCond}"/><Run Text=" （遠征 "/><Run Text="{Binding RemainExpeditionCount}"/><Run Text=" 回分）"/></TextBlock>
+        <StackPanel Visibility="{Binding DetailVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding AreaName}" Margin="5"/>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="#" /><Run Text="{Binding ExpeditionID}" /><Run Text=" " /><Run Text="{Binding ExpeditionName}" /></TextBlock>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Margin="5"/>
+            <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="帰投予定 "/><Run Text="{Binding CompleteTime}"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="残り "/><Run Text="{Binding RemainLength,StringFormat=h\\:mm\\:ss}"/></TextBlock>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -86,6 +86,10 @@
 			<TabItem Header="第4艦隊">
 				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[3]}"/>
 			</TabItem>
+			<TabItem Header="遠征">
+				<DetailInfoParts:Expedition DataContext="{Binding ExpeditionCollection}"/>
+			</TabItem>
+            
 		</Custom:MetroTabControl>
 		
 	</Grid>

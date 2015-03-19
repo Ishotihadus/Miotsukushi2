@@ -228,8 +228,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                     MissionName = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                     CompleteTime = fleet.ExpeditionBacktime;
                     RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
-                    ProgressValue = RemainTime.TotalMinutes;
                     ProgressMax = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].time_minute : 0;
+                    ProgressValue = ProgressMax - RemainTime.TotalMinutes;
                 }
                 UpdateBorderBrush();
             }
@@ -240,8 +240,16 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             switch(e.PropertyName)
             {
                 case "ExpeditionStatus":
-                    if (fleet.ExpeditionStatus == FleetExpeditionStatus.unknown || fleet.ExpeditionStatus == FleetExpeditionStatus.at_home)
+                    if (fleet.ExpeditionStatus == FleetExpeditionStatus.unknown)
+                    {
                         DetailVisibility = false;
+                        Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
+                    }
+                    else if(fleet.ExpeditionStatus == FleetExpeditionStatus.at_home)
+                    {
+                        DetailVisibility = false;
+                        Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_AtHome");
+                    }
                     else
                         DetailVisibility = true;
                     UpdateBorderBrush();
@@ -250,13 +258,13 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                     MissionName = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                     CompleteTime = fleet.ExpeditionBacktime;
                     RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
-                    ProgressValue = RemainTime.TotalMinutes;
                     ProgressMax = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].time_minute : 0;
+                    ProgressValue = ProgressMax - RemainTime.TotalMinutes;
                     break;
                 case "ExpeditionBacktime":
                     CompleteTime = fleet.ExpeditionBacktime;
                     RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
-                    ProgressValue = RemainTime.TotalMinutes;
+                    ProgressValue = ProgressMax - RemainTime.TotalMinutes;
                     break;
             }
         }
@@ -264,7 +272,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         void timerModel_TimerElapsed(object sender, EventArgs e)
         {
             RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
-            ProgressValue = RemainTime.TotalMinutes;
+            ProgressValue = ProgressMax - RemainTime.TotalMinutes;
             UpdateBorderBrush();
         }
 

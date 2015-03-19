@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetCollectionViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestCollectionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestViewModel.cs" />
@@ -179,6 +180,12 @@
     </Compile>
     <Compile Include="View\CommonParts\SlotView.xaml.cs">
       <DependentUpon>SlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\Expedition.xaml.cs">
+      <DependentUpon>Expedition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\ExpeditionParts\ExpeditionFleet.xaml.cs">
+      <DependentUpon>ExpeditionFleet.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowParts\DetailInfoParts\Fleet.xaml.cs">
       <DependentUpon>Fleet.xaml</DependentUpon>
@@ -244,6 +251,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\WindowParts\DetailInfoParts\Expedition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\ExpeditionParts\ExpeditionFleet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\WindowParts\DetailInfoParts\Fleet.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

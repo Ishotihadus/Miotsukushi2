@@ -227,14 +227,34 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
                     DetailVisibility = value >= 1;
                     switch(value)
                     {
-                        case -3: Message = "読み込まれていません"; break;
-                        case -2: Message = "艦隊が未開放です"; break;
-                        case -1: Message = "不明"; break;
-                        case 0: Message = "母港で待機中です"; break;
+                        case -3:
+                            Message = "読み込まれていません";
+                            break;
+                        case -2:
+                            Message = "艦隊が未開放です";
+                            break;
+                        case -1:
+                            Message = "不明";
+                            break;
+                        case 0:
+                            Message = "母港で待機中です";
+                            break;
+                        case 1:
+                        case 4:
+                            Message = "遠征中です";
+                            break;
+                        case 2:
+                            Message = "遠征が完了しています";
+                            break;
+                        case 3:
+                        case 5:
+                            Message = "遠征から強制帰投中です";
+                            break;
                     }
 
                     OnPropertyChanged(() => Status);
                     OnPropertyChanged(() => DetailVisibility);
+                    OnPropertyChanged(() => Message);
                 }
             }
         }
