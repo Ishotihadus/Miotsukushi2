@@ -26,8 +26,8 @@
 
 ## 開発環境
 
-* Windows 8 Pro x64
-* Visual Studio Professional 2013
+* Windows 10 Pro x64
+* Visual Studio Professional 2015
 
 ## 使用ライブラリ
 
