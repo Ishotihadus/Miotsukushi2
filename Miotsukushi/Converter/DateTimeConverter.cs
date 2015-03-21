@@ -14,7 +14,7 @@ namespace Miotsukushi.Converter
         {
             if (value == null)
             {
-                return "?";
+                return "";
             }
             else if (value is DateTime)
             {
@@ -23,7 +23,7 @@ namespace Miotsukushi.Converter
                 if(t.Date == DateTime.Today)
                     return t.ToString("HH:mm:ss");
                 else
-                    return t.ToString("MM/dd HH:mm:ss");
+                    return t.ToString("MM-dd HH:mm:ss");
             }
             else
             {

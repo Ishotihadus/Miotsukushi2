@@ -9,6 +9,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Converter:DateTimeConverter x:Key="DateTimeConverter"/>
+        <Converter:TotalTimeConverter x:Key="TotalTimeConverter"/>
     </UserControl.Resources>
     <StackPanel Margin="5">
         <TextBlock TextWrapping="Wrap" Margin="5"><Run Text="第"/><Run Text="{Binding ID}"/><Run Text="艦隊"/></TextBlock>
@@ -25,8 +27,8 @@
             <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="#" /><Run Text="{Binding ExpeditionID}" /><Run Text=" " /><Run Text="{Binding ExpeditionName}" /></TextBlock>
             <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Margin="5"/>
             <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
-            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="帰投予定 "/><Run Text="{Binding CompleteTime}"/></TextBlock>
-            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="残り "/><Run Text="{Binding RemainLength,StringFormat=h\\:mm\\:ss}"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="帰投予定 "/><Run Text="{Binding CompleteTime,Converter={StaticResource DateTimeConverter}}"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14.667"><Run Text="残り "/><Run Text="{Binding RemainLength,Converter={StaticResource TotalTimeConverter}}"/></TextBlock>
         </StackPanel>
     </StackPanel>
 </UserControl>
