@@ -83,6 +83,7 @@
     <Compile Include="TransmissionData\api_get_member\Questlist.cs" />
     <Compile Include="TransmissionData\api_get_member\Ship2.cs" />
     <Compile Include="TransmissionData\api_get_member\Ship3.cs" />
+    <Compile Include="TransmissionData\api_get_member\ShipDeck.cs" />
     <Compile Include="TransmissionData\api_get_member\SlotItem.cs" />
     <Compile Include="TransmissionData\api_get_member\Unsetslot.cs" />
     <Compile Include="TransmissionData\api_get_member\values\DeckValue.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="TransmissionRequest\api_get_member\QuestlistRequest.cs" />
     <Compile Include="TransmissionRequest\api_get_member\Ship2Request.cs" />
     <Compile Include="TransmissionRequest\api_get_member\Ship3Request.cs" />
+    <Compile Include="TransmissionRequest\api_get_member\ShipDeckRequest.cs" />
     <Compile Include="TransmissionRequest\api_port\PortRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\ChangeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />

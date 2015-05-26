@@ -11,7 +11,8 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            test_req_quest();
+            // test_get_member();
+            test_request();
         }
 
         
@@ -47,6 +48,12 @@ namespace KanColleLibTest
 
             string api_changedeckname = "api%5Fname=%E9%9B%BB%E7%A3%81%E6%B0%97%E5%AD%A6&api%5Fdeck%5Fid=3&api%5Fverno=1&api%5Fname%5Fid=127435660&api%5Ftoken=xxx";
             var changedeckname = new KanColleLib.TransmissionRequest.api_req_member.UpdatedecknameRequest(api_changedeckname);
+
+            string api_ship_deck = "api%5Fdeck%5Frid=1&api%5Fverno=1&api%5Ftoken=166f039095f84ef4c969a09210ae46b346ca790f";
+            var shipdeck = new KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest(api_ship_deck);
+
+            string api_ship_deck2 = "api%5Fdeck%5Frid=1,2&api%5Fverno=1&api%5Ftoken=166f039095f84ef4c969a09210ae46b346ca790f";
+            var shipdeck2 = new KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest(api_ship_deck2);
         }
 
         static void test_start2()
@@ -104,6 +111,9 @@ namespace KanColleLibTest
 
             string api_questlist = System.IO.File.ReadAllText("api_get_member/questlist.txt");
             var questlist = KanColleLib.TransmissionData.api_get_member.Questlist.fromDynamic(DynamicJson.Parse(api_questlist).api_data);
+            
+            string api_ship_deck = System.IO.File.ReadAllText("api_get_member/ship_deck.txt");
+            var ship_deck = KanColleLib.TransmissionData.api_get_member.ShipDeck.fromDynamic(DynamicJson.Parse(api_ship_deck).api_data);
         }
 
         static void test_port()

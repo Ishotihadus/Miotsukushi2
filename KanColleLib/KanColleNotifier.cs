@@ -195,6 +195,12 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_get_member/ship_deck":
+                    if (json.api_data())
+                        OnGetGetmemberShipDeck(new TransmissionRequest.api_get_member.ShipDeckRequest(request), Svdata<TransmissionData.api_get_member.ShipDeck>.fromDynamic(json, TransmissionData.api_get_member.ShipDeck.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_get_member/slot_item":
                     if (json.api_data())
                         OnGetGetmemberSlotItem(new RequestBase(request), Svdata<TransmissionData.api_get_member.SlotItem>.fromDynamic(json, TransmissionData.api_get_member.SlotItem.fromDynamic(json.api_data)));
@@ -452,6 +458,13 @@ namespace KanColleLib
         public event GetGetmemberShip3EventHandler GetGetmemberShip3;
         public delegate void GetGetmemberShip3EventHandler(object sender, TransmissionRequest.api_get_member.Ship3Request request, Svdata<TransmissionData.api_get_member.Ship3> response);
         protected virtual void OnGetGetmemberShip3(TransmissionRequest.api_get_member.Ship3Request request, Svdata<TransmissionData.api_get_member.Ship3> response) { if (GetGetmemberShip3 != null) GetGetmemberShip3(this, request, response); }
+
+        /// <summary>
+        /// api_get_member/ship_deck を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetGetmemberShipDeckEventHandler GetGetmemberShipDeck;
+        public delegate void GetGetmemberShipDeckEventHandler(object sender, TransmissionRequest.api_get_member.ShipDeckRequest request, Svdata<TransmissionData.api_get_member.ShipDeck> response);
+        protected virtual void OnGetGetmemberShipDeck(TransmissionRequest.api_get_member.ShipDeckRequest request, Svdata<TransmissionData.api_get_member.ShipDeck> response) { if (GetGetmemberShipDeck != null) GetGetmemberShipDeck(this, request, response); }
 
         /// <summary>
         /// api_get_member/slot_item を受信して解析に成功した際に呼び出されます

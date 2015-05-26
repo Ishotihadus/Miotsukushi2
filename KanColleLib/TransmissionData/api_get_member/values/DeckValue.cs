@@ -48,7 +48,10 @@ namespace KanColleLib.TransmissionData.api_get_member.values
         {
             DeckValue deck = new DeckValue();
 
-            deck.member_id = (int)json.api_member_id;
+            if (json.api_member_id is double)
+                deck.member_id = (int)json.api_member_id;
+            else
+                deck.member_id = int.Parse(json.api_member_id);
             deck.id = (int)json.api_id;
             deck.name = json.api_name as string;
             deck.name_id = json.api_name_id as string;
