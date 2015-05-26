@@ -266,6 +266,9 @@ namespace Miotsukushi.Model.KanColle
         }
 
 
+        /// <summary>
+        /// 資源最大値
+        /// </summary>
         public int resource_cap
         {
             get
@@ -275,6 +278,10 @@ namespace Miotsukushi.Model.KanColle
         }
 
         private int _instant_repair;
+
+        /// <summary>
+        /// 高速修復材
+        /// </summary>
         public int instant_repair
         {
             get
@@ -293,6 +300,10 @@ namespace Miotsukushi.Model.KanColle
         }
 
         private int _instant_construction;
+
+        /// <summary>
+        /// 高速建造材
+        /// </summary>
         public int instant_construction
         {
             get
@@ -311,6 +322,10 @@ namespace Miotsukushi.Model.KanColle
         }
 
         private int _development_material;
+
+        /// <summary>
+        /// 開発資材
+        /// </summary>
         public int development_material
         {
             get
@@ -329,6 +344,10 @@ namespace Miotsukushi.Model.KanColle
         }
 
         private int _furniture_coin;
+
+        /// <summary>
+        /// 家具コイン
+        /// </summary>
         public int furniture_coin
         {
             get
@@ -347,6 +366,10 @@ namespace Miotsukushi.Model.KanColle
         }
 
         private int _modding_material;
+
+        /// <summary>
+        /// 改修資材
+        /// </summary>
         public int modding_material
         {
             get
@@ -406,6 +429,40 @@ namespace Miotsukushi.Model.KanColle
                         break;
                     case 8:
                         modding_material = m.value;
+                        break;
+                }
+            }
+        }
+
+        public void FromMaterialArray(int[] material)
+        {
+            for (int i = 0; i < material.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        fuel = material[i];
+                        break;
+                    case 1:
+                        ammo = material[i];
+                        break;
+                    case 2:
+                        steel = material[i];
+                        break;
+                    case 3:
+                        bauxite = material[i];
+                        break;
+                    case 4:
+                        instant_construction = material[i];
+                        break;
+                    case 5:
+                        instant_repair = material[i];
+                        break;
+                    case 6:
+                        development_material = material[i];
+                        break;
+                    case 7:
+                        modding_material = material[i];
                         break;
                 }
             }

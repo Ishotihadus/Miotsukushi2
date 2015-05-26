@@ -61,9 +61,33 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetGetmemberQuestlist += Kclib_GetGetmemberQuestlist;
             kclib.GetReqmemberUpdatedeckname += Kclib_GetReqmemberUpdatedeckname;
             kclib.GetGetmemberShipDeck += Kclib_GetGetmemberShipDeck;
+            kclib.GetReqhokyuCharge += Kclib_GetReqhokyuCharge;
 
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
+        }
+
+        private void Kclib_GetReqhokyuCharge(object sender, KanColleLib.TransmissionRequest.api_req_hokyu.ChargeRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_hokyu.Charge> response)
+        {
+            basicdata.FromMaterialArray(response.data.material);
+            foreach(var ship in response.data.ship)
+            {
+                for (int i = 0; i < shipdata.Count; i++)
+                {
+                    if (shipdata[i].shipid == ship.id)
+                    {
+                        shipdata[i].fuel = ship.fuel;
+                        shipdata[i].ammo = ship.bull;
+                        for (int j = 0; j < ship.onslot.Length; j++)
+                        {
+                            if (shipdata[i].OnSlotCount.Count > j)
+                                shipdata[i].OnSlotCount[j] = ship.onslot[j];
+                            else
+                                shipdata[i].OnSlotCount.Add(ship.onslot[j]);
+                        }
+                    }
+                }
+            }
         }
 
         private void Kclib_GetGetmemberShipDeck(object sender, KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.ShipDeck> response)
