@@ -74,6 +74,7 @@ namespace Miotsukushi.Tools
                 case 38: return new SolidColorBrush(Color.FromRgb(194, 34, 34)); // 大口径主砲(II)
                 case 39: return new SolidColorBrush(Color.FromRgb(191, 235, 159)); // 水上艦要員
                 case 40: return new SolidColorBrush(Color.FromRgb(90, 171, 184)); // 大型ソナー
+                case 41: return new SolidColorBrush(Color.FromRgb(140, 205, 155)); // 大型飛行艇
                 default: return Brushes.Transparent;
             }
         }
