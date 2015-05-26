@@ -714,4 +714,46 @@
   <data name="ShipType_練習巡洋艦" xml:space="preserve">
     <value>Training Cruiser</value>
   </data>
+  <data name="ShipName_伊吹" xml:space="preserve">
+    <value>Ibuki</value>
+  </data>
+  <data name="ShipName_夏潮" xml:space="preserve">
+    <value>Natsushio</value>
+  </data>
+  <data name="ShipName_夕月" xml:space="preserve">
+    <value>Yuzuki</value>
+  </data>
+  <data name="ShipName_山風" xml:space="preserve">
+    <value>Yamakaze</value>
+  </data>
+  <data name="ShipName_嵐" xml:space="preserve">
+    <value>Arashi</value>
+  </data>
+  <data name="ShipName_早潮" xml:space="preserve">
+    <value>Hayashio</value>
+  </data>
+  <data name="ShipName_水無月" xml:space="preserve">
+    <value>Minazuki</value>
+  </data>
+  <data name="ShipName_江風" xml:space="preserve">
+    <value>Kawakaze</value>
+  </data>
+  <data name="ShipName_海風" xml:space="preserve">
+    <value>Umikaze</value>
+  </data>
+  <data name="ShipName_秋津洲" xml:space="preserve">
+    <value>Akitsushima</value>
+  </data>
+  <data name="ShipName_萩風" xml:space="preserve">
+    <value>Hagikaze</value>
+  </data>
+  <data name="ShipName_葛城" xml:space="preserve">
+    <value>Katsuragi</value>
+  </data>
+  <data name="ShipName_親潮" xml:space="preserve">
+    <value>Oyashio</value>
+  </data>
+  <data name="ShipName_高波" xml:space="preserve">
+    <value>Takanami</value>
+  </data>
 </root>
