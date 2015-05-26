@@ -277,7 +277,7 @@ namespace Miotsukushi.Model.KanColle
             basicdata.max_equipment = response.data.max_slotitem;
         }
 
-        void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Destroyship> response)
         {
             DestroyShip(request.ship_id);
 
@@ -288,6 +288,8 @@ namespace Miotsukushi.Model.KanColle
                 if (rplidx != -1)
                     fleet.ships.RemoveAt(rplidx);
             }
+
+            basicdata.FromMaterialArray(response.data.material);
         }
 
         void kclib_GetGetmemberNdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.NDock> response)

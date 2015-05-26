@@ -253,7 +253,7 @@ namespace KanColleLib
                     OnGetReqkousyouCreateshipSpeedchange(new TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
                 case "api_req_kousyou/destroyship":
-                    OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<object>.fromDynamic(json, null));
+                    OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Destroyship>.fromDynamic(json, TransmissionData.api_req_kousyou.Destroyship.fromDynamic(json.api_data)));
                     break;
                 case "api_req_kousyou/getship":
                     if (json.api_data())
@@ -551,8 +551,8 @@ namespace KanColleLib
         /// api_req_kousyou/destroyship を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkousyouDestroyshipEventHandler GetReqkousyouDestroyship;
-        public delegate void GetReqkousyouDestroyshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<object> response);
-        protected virtual void OnGetReqkousyouDestroyship(TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<object> response) { if (GetReqkousyouDestroyship != null) GetReqkousyouDestroyship(this, request, response); }
+        public delegate void GetReqkousyouDestroyshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<TransmissionData.api_req_kousyou.Destroyship> response);
+        protected virtual void OnGetReqkousyouDestroyship(TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<TransmissionData.api_req_kousyou.Destroyship> response) { if (GetReqkousyouDestroyship != null) GetReqkousyouDestroyship(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/getship を受信して解析に成功した際に呼び出されます
