@@ -17,6 +17,9 @@ namespace Miotsukushi
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            // GPUによるハードウェアアクセラレーションを無効化する
+            // あとから設定で変えられるようにしよう
+            System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
 #if DEBUG
             SetCurrentCulture("en-US");
 #endif
