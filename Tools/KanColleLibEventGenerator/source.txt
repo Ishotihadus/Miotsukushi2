@@ -26,12 +26,15 @@ api_port/port,PortPort,TransmissionRequest.api_port.PortRequest,TransmissionData
 #api_req_combined_battle/airbattle
 #api_req_combined_battle/battle
 #api_req_combined_battle/battleresult
+#api_req_combined_battle/battle_water
 #api_req_combined_battle/goback_port
 #api_req_combined_battle/midnight_battle
 #api_req_combined_battle/sp_midnight
 #api_req_furniture/buy
 #api_req_furniture/change
+#api_req_furniture/music_list
 #api_req_furniture/music_play
+#api_req_furniture/set_portbgm
 api_req_hensei/change,ReqhenseiChange,TransmissionRequest.api_req_hensei.ChangeRequest,object
 api_req_hensei/combined,ReqhenseiCombined,RequestBase,TransmissionData.api_req_hensei.Combined
 api_req_hensei/lock,ReqhenseiLock,TransmissionRequest.api_req_hensei.LockRequest,TransmissionData.api_req_hensei.Lock
@@ -74,6 +77,7 @@ api_req_quest/clearitemget,ReqquestClearitemget,TransmissionRequest.api_req_ques
 api_req_quest/start,ReqquestStart,TransmissionRequest.api_req_quest.StartRequest,object
 api_req_quest/stop,ReqquestStop,TransmissionRequest.api_req_quest.StopRequest,object
 #api_req_ranking/getlist
+#api_req_sortie/airbattle
 #api_req_sortie/battle
 #api_req_sortie/battleresult
 api_start2,Start2,RequestBase,TransmissionData.api_start2.Start2
