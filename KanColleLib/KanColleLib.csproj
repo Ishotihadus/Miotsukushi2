@@ -111,6 +111,15 @@
     <Compile Include="TransmissionData\api_req_kousyou\Getship.cs" />
     <Compile Include="TransmissionData\api_req_kousyou\values\CreateitemValue.cs" />
     <Compile Include="TransmissionData\api_req_kousyou\values\GetshipSlotitemValue.cs" />
+    <Compile Include="TransmissionData\api_req_map\Next.cs" />
+    <Compile Include="TransmissionData\api_req_map\Start.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\EnemyValue.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\EventmapValue.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\HappeningValue.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\ItemgetEoValue.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\ItemgetValue.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\NextCellData.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\SelectRouteValue.cs" />
     <Compile Include="TransmissionData\api_req_member\GetIncentive.cs" />
     <Compile Include="TransmissionData\api_req_mission\Result.cs" />
     <Compile Include="TransmissionData\api_req_mission\ReturnInstruction.cs" />
@@ -150,6 +159,8 @@
     <Compile Include="TransmissionRequest\api_req_kousyou\CreateshipSpeedchangeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kousyou\DestroyshipRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kousyou\GetshipRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_map\NextRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_map\StartRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_member\UpdatecommentRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_member\UpdatedecknameRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_mission\ResultRequest.cs" />

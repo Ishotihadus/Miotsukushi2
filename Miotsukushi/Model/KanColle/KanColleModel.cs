@@ -90,14 +90,14 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
-        private void Kclib_GetGetmemberShipDeck(object sender, KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.ShipDeck> response)
+        private async void Kclib_GetGetmemberShipDeck(object sender, KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.ShipDeck> response)
         {
             foreach(var deck in response.data.deck_data)
             {
                 fleetdata[deck.id - 1].FromDeckValue(deck);
             }
 
-            AppendShipDataFromList(response.data.ship_data);
+            await AppendShipDataFromList(response.data.ship_data);
         }
 
         private void Kclib_GetReqmemberUpdatedeckname(object sender, KanColleLib.TransmissionRequest.api_req_member.UpdatedecknameRequest request, KanColleLib.TransmissionData.Svdata<object> response)

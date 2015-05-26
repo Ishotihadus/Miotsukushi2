@@ -116,7 +116,7 @@ namespace KanColleLib.TransmissionData.api_req_map.values
         /// </summary>
         public int? get_eo_rate;
 
-        internal static NextCellData _fromDynamic(dynamic json)
+        public static NextCellData fromDynamic(dynamic json)
         {
             var ret = new NextCellData();
 

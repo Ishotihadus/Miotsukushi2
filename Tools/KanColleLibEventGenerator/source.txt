@@ -54,8 +54,8 @@ api_req_kousyou/createship_speedchange,ReqkousyouCreateshipSpeedchange,Transmiss
 api_req_kousyou/destroyship,ReqkousyouDestroyship,TransmissionRequest.api_req_kousyou.DestroyshipRequest,object
 api_req_kousyou/getship,ReqkousyouGetship,TransmissionRequest.api_req_kousyou.GetshipRequest,TransmissionData.api_req_kousyou.Getship
 #api_req_kousyou/open_new_dock
-#api_req_map/next
-#api_req_map/start
+api_req_map/next,ReqmapNext,TransmissionRequest.api_req_map.NextRequest,TransmissionData.api_req_map.Next
+api_req_map/start,ReqmapStart,TransmissionRequest.api_req_map.StartRequest,TransmissionData.api_req_map.Start
 api_req_member/get_incentive,ReqmemberGetIncentive,RequestBase,TransmissionData.api_req_member.GetIncentive
 #api_req_member/get_practice_enemyinfo
 #api_req_member/itemuse

@@ -261,6 +261,18 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_req_map/next":
+                    if (json.api_data())
+                        OnGetReqmapNext(new TransmissionRequest.api_req_map.NextRequest(request), Svdata<TransmissionData.api_req_map.Next>.fromDynamic(json, TransmissionData.api_req_map.Next.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
+                case "api_req_map/start":
+                    if (json.api_data())
+                        OnGetReqmapStart(new TransmissionRequest.api_req_map.StartRequest(request), Svdata<TransmissionData.api_req_map.Start>.fromDynamic(json, TransmissionData.api_req_map.Start.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_req_member/get_incentive":
                     if (json.api_data())
                         OnGetReqmemberGetIncentive(new RequestBase(request), Svdata<TransmissionData.api_req_member.GetIncentive>.fromDynamic(json, TransmissionData.api_req_member.GetIncentive.fromDynamic(json.api_data)));
@@ -315,7 +327,6 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
-
 
                 default:
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
@@ -549,6 +560,20 @@ namespace KanColleLib
         public event GetReqkousyouGetshipEventHandler GetReqkousyouGetship;
         public delegate void GetReqkousyouGetshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.GetshipRequest request, Svdata<TransmissionData.api_req_kousyou.Getship> response);
         protected virtual void OnGetReqkousyouGetship(TransmissionRequest.api_req_kousyou.GetshipRequest request, Svdata<TransmissionData.api_req_kousyou.Getship> response) { if (GetReqkousyouGetship != null) GetReqkousyouGetship(this, request, response); }
+
+        /// <summary>
+        /// api_req_map/next を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqmapNextEventHandler GetReqmapNext;
+        public delegate void GetReqmapNextEventHandler(object sender, TransmissionRequest.api_req_map.NextRequest request, Svdata<TransmissionData.api_req_map.Next> response);
+        protected virtual void OnGetReqmapNext(TransmissionRequest.api_req_map.NextRequest request, Svdata<TransmissionData.api_req_map.Next> response) { if (GetReqmapNext != null) GetReqmapNext(this, request, response); }
+
+        /// <summary>
+        /// api_req_map/start を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqmapStartEventHandler GetReqmapStart;
+        public delegate void GetReqmapStartEventHandler(object sender, TransmissionRequest.api_req_map.StartRequest request, Svdata<TransmissionData.api_req_map.Start> response);
+        protected virtual void OnGetReqmapStart(TransmissionRequest.api_req_map.StartRequest request, Svdata<TransmissionData.api_req_map.Start> response) { if (GetReqmapStart != null) GetReqmapStart(this, request, response); }
 
         /// <summary>
         /// api_req_member/get_incentive を受信して解析に成功した際に呼び出されます

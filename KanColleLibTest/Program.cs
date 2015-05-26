@@ -12,11 +12,10 @@ namespace KanColleLibTest
         static void Main(string[] args)
         {
             // test_get_member();
-            test_request();
+            // test_request();
+            test_req_map();
         }
-
         
-
         static void test_request()
         {
             string api_mapcell_request = "api%5Fmapinfo%5Fno=5&api%5Fmaparea%5Fid=27&api%5Fverno=1&api%5Ftoken=xxx";
@@ -169,6 +168,15 @@ namespace KanColleLibTest
         {
             string api_clearitemget = System.IO.File.ReadAllText("api_req_quest/clearitemget.txt");
             var clearitemget = KanColleLib.TransmissionData.api_req_quest.Clearitemget.fromDynamic(DynamicJson.Parse(api_clearitemget).api_data);
+        }
+
+        static void test_req_map()
+        {
+            string api_start = System.IO.File.ReadAllText("api_req_map/start.txt");
+            var start = KanColleLib.TransmissionData.api_req_map.Start.fromDynamic(DynamicJson.Parse(api_start).api_data);
+
+            string api_next = System.IO.File.ReadAllText("api_req_map/next.txt");
+            var next = KanColleLib.TransmissionData.api_req_map.Start.fromDynamic(DynamicJson.Parse(api_next).api_data);
         }
     }
 }

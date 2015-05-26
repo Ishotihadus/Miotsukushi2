@@ -7,11 +7,16 @@ using KanColleLib.TransmissionData.api_req_map.values;
 
 namespace KanColleLib.TransmissionData.api_req_map
 {
-    public class Start : NextCellData
+    public class Start
     {
+        public NextCellData next_cell_data;
+
         public static Start fromDynamic(dynamic json)
         {
-            return _fromDynamic(json);
+            return new Start()
+            {
+                next_cell_data = NextCellData.fromDynamic(json)
+            };
         }
     }
 }

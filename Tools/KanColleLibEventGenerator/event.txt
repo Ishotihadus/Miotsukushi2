@@ -84,6 +84,13 @@ public delegate void GetGetmemberShip3EventHandler(object sender, TransmissionRe
 protected virtual void OnGetGetmemberShip3(TransmissionRequest.api_get_member.Ship3Request request, Svdata<TransmissionData.api_get_member.Ship3> response) { if (GetGetmemberShip3 != null) GetGetmemberShip3(this, request, response); }
 
 /// <summary>
+/// api_get_member/ship_deck を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetGetmemberShipDeckEventHandler GetGetmemberShipDeck;
+public delegate void GetGetmemberShipDeckEventHandler(object sender, TransmissionRequest.api_get_member.ShipDeckRequest request, Svdata<TransmissionData.api_get_member.ShipDeck> response);
+protected virtual void OnGetGetmemberShipDeck(TransmissionRequest.api_get_member.ShipDeckRequest request, Svdata<TransmissionData.api_get_member.ShipDeck> response) { if (GetGetmemberShipDeck != null) GetGetmemberShipDeck(this, request, response); }
+
+/// <summary>
 /// api_get_member/slot_item を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetGetmemberSlotItemEventHandler GetGetmemberSlotItem;
@@ -166,6 +173,20 @@ protected virtual void OnGetReqkousyouDestroyship(TransmissionRequest.api_req_ko
 public event GetReqkousyouGetshipEventHandler GetReqkousyouGetship;
 public delegate void GetReqkousyouGetshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.GetshipRequest request, Svdata<TransmissionData.api_req_kousyou.Getship> response);
 protected virtual void OnGetReqkousyouGetship(TransmissionRequest.api_req_kousyou.GetshipRequest request, Svdata<TransmissionData.api_req_kousyou.Getship> response) { if (GetReqkousyouGetship != null) GetReqkousyouGetship(this, request, response); }
+
+/// <summary>
+/// api_req_map/next を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqmapNextEventHandler GetReqmapNext;
+public delegate void GetReqmapNextEventHandler(object sender, TransmissionRequest.api_req_map.NextRequest request, Svdata<TransmissionData.api_req_map.Next> response);
+protected virtual void OnGetReqmapNext(TransmissionRequest.api_req_map.NextRequest request, Svdata<TransmissionData.api_req_map.Next> response) { if (GetReqmapNext != null) GetReqmapNext(this, request, response); }
+
+/// <summary>
+/// api_req_map/start を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqmapStartEventHandler GetReqmapStart;
+public delegate void GetReqmapStartEventHandler(object sender, TransmissionRequest.api_req_map.StartRequest request, Svdata<TransmissionData.api_req_map.Start> response);
+protected virtual void OnGetReqmapStart(TransmissionRequest.api_req_map.StartRequest request, Svdata<TransmissionData.api_req_map.Start> response) { if (GetReqmapStart != null) GetReqmapStart(this, request, response); }
 
 /// <summary>
 /// api_req_member/get_incentive を受信して解析に成功した際に呼び出されます

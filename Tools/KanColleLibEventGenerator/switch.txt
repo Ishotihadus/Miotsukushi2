@@ -70,6 +70,12 @@ OnGetGetmemberShip3(new TransmissionRequest.api_get_member.Ship3Request(request)
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_get_member/ship_deck":
+if(json.api_data())
+OnGetGetmemberShipDeck(new TransmissionRequest.api_get_member.ShipDeckRequest(request), Svdata<TransmissionData.api_get_member.ShipDeck>.fromDynamic(json, TransmissionData.api_get_member.ShipDeck.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_get_member/slot_item":
 if(json.api_data())
 OnGetGetmemberSlotItem(new RequestBase(request), Svdata<TransmissionData.api_get_member.SlotItem>.fromDynamic(json, TransmissionData.api_get_member.SlotItem.fromDynamic(json.api_data)));
@@ -127,6 +133,18 @@ break;
 case "api_req_kousyou/getship":
 if(json.api_data())
 OnGetReqkousyouGetship(new TransmissionRequest.api_req_kousyou.GetshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Getship>.fromDynamic(json, TransmissionData.api_req_kousyou.Getship.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_map/next":
+if(json.api_data())
+OnGetReqmapNext(new TransmissionRequest.api_req_map.NextRequest(request), Svdata<TransmissionData.api_req_map.Next>.fromDynamic(json, TransmissionData.api_req_map.Next.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_map/start":
+if(json.api_data())
+OnGetReqmapStart(new TransmissionRequest.api_req_map.StartRequest(request), Svdata<TransmissionData.api_req_map.Start>.fromDynamic(json, TransmissionData.api_req_map.Start.fromDynamic(json.api_data)));
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
