@@ -32,7 +32,8 @@ namespace Miotsukushi.Model.KanColle
             { IPAddress.Parse("125.6.189.247"), "宿毛湾泊地" },
             { IPAddress.Parse("203.104.209.23"), "鹿屋基地" },
             { IPAddress.Parse("203.104.209.39"), "岩川基地" },
-            { IPAddress.Parse("203.104.209.55"), "佐伯湾泊地" }
+            { IPAddress.Parse("203.104.209.55"), "佐伯湾泊地" },
+            { IPAddress.Parse("203.104.209.102"), "柱島泊地" }
         };
 
         public IPAddress address;
