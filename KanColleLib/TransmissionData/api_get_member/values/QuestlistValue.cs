@@ -58,6 +58,11 @@ namespace KanColleLib.TransmissionData.api_get_member.values
         /// </summary>
         public int progress_flag;
 
+        /// <summary>
+        /// 不明
+        /// </summary>
+        public int invalid_flag;
+
         public static QuestlistValue fromDynamic(dynamic json)
         {
             return new QuestlistValue()
@@ -70,7 +75,8 @@ namespace KanColleLib.TransmissionData.api_get_member.values
                 detail = json.api_detail as string,
                 get_material = json.api_get_material.Deserialize<int[]>(),
                 bonus_flag = (int)json.api_bonus_flag,
-                progress_flag = (int)json.api_progress_flag
+                progress_flag = (int)json.api_progress_flag,
+                invalid_flag = (int)json.api_invalid_flag
             };
         }
     }
