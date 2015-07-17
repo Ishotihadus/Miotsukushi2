@@ -116,6 +116,11 @@ namespace KanColleLib.TransmissionData.api_req_map.values
         /// </summary>
         public int? get_eo_rate;
 
+        /// <summary>
+        /// 索敵関係?
+        /// </summary>
+        public AirsearchValue airsearch;
+
         public static NextCellData fromDynamic(dynamic json)
         {
             var ret = new NextCellData();
@@ -141,8 +146,13 @@ namespace KanColleLib.TransmissionData.api_req_map.values
             ret.itemget_eo_comment = json.api_itemget_eo_comment() ? ItemgetEoValue.fromDynamic(json.api_itemget_eo_comment) : null;
             ret.itemget_eo_result = json.api_itemget_eo_result() ? ItemgetEoValue.fromDynamic(json.api_itemget_eo_result) : null;
             ret.get_eo_rate = json.api_get_eo_rate() ? (int)json.api_get_eo_rate : (int?)null;
+            ret.airsearch = json.api_airsearch() ? AirsearchValue.fromDynamic(json.api_airsearch) : null;
 
             return ret;
         }
+
+        // svdata={"api_result":1,"api_result_msg":"\u6210\u529f","api_data":{"api_rashin_flg":1,"api_rashin_id":4,"api_maparea_id":1,"api_mapinfo_no":1,"api_no":2,
+        // "api_color_no":4,"api_event_id":4,"api_event_kind":1,"api_next":0,"api_bosscell_no":3,"api_bosscomp":1,"api_comment_kind":0,"api_production_kind":0,
+        // "api_airsearch":{"api_plane_type":0,"api_result":0}}}
     }
 }

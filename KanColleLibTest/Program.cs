@@ -13,8 +13,8 @@ namespace KanColleLibTest
         {
             // test_get_member();
             // test_request();
-            // test_req_map();
-            test_start2();
+            test_req_map();
+            // test_start2();
         }
         
         static void test_request()

@@ -113,6 +113,7 @@
     <Compile Include="TransmissionData\api_req_kousyou\values\GetshipSlotitemValue.cs" />
     <Compile Include="TransmissionData\api_req_map\Next.cs" />
     <Compile Include="TransmissionData\api_req_map\Start.cs" />
+    <Compile Include="TransmissionData\api_req_map\values\AirsearchValue.cs" />
     <Compile Include="TransmissionData\api_req_map\values\EnemyValue.cs" />
     <Compile Include="TransmissionData\api_req_map\values\EventmapValue.cs" />
     <Compile Include="TransmissionData\api_req_map\values\HappeningValue.cs" />
