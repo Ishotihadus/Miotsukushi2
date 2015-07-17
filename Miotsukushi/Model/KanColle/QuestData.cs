@@ -66,15 +66,15 @@ namespace Miotsukushi.Model.KanColle
 
             AppendExecutingQuest();
 
-
-            // PrintDebugQuestList();
+#if DEBUG
+            PrintDebugQuestList();
+#endif
 
 
             OnQuestChange(new System.EventArgs());
         }
 
-
-        /* 
+#if DEBUG
         void PrintDebugQuestList()
         {
             for (int i = 0; i < pages.Count; i++)
@@ -105,8 +105,7 @@ namespace Miotsukushi.Model.KanColle
                     System.Diagnostics.Debug.WriteLine(" And other " + (exec_count.Value - executingquest.Count) + " unknown quest(s).");
             }
         }
-
-        */
+#endif
 
         void AppendExecutingQuest()
         {
