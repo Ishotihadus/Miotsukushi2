@@ -34,7 +34,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         {
             get
             {
-                return _ShipType;
+                return Tools.ResourceStringGetter.GetShipTypeNameResourceString(_ShipType);
             }
 
             set
@@ -52,7 +52,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         {
             get
             {
-                return _ShipName;
+                return Tools.ResourceStringGetter.GetShipNameResourceString(_ShipName);
             }
 
             set
