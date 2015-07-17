@@ -27,6 +27,11 @@ namespace KanColleLib.TransmissionData.api_port
         /// </summary>
         public int p_bgm_id;
 
+        /// <summary>
+        /// 同時遂行可能任務数
+        /// </summary>
+        public int parallel_quest_count;
+
         public static Port fromDynamic(dynamic json)
         {
             Port port = new Port();
@@ -42,6 +47,7 @@ namespace KanColleLib.TransmissionData.api_port
             else
                 port.combined_flag = 0;
             port.p_bgm_id = (int)json.api_p_bgm_id;
+            port.parallel_quest_count = (int)json.api_parallel_quest_count;
 
             return port;
         }
