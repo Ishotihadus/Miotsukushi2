@@ -141,7 +141,6 @@
     <Compile Include="TransmissionData\api_start2\start2\MstShipgraph.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstSlotitem.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstSlotitemEquiptype.cs" />
-    <Compile Include="TransmissionData\api_start2\start2\MstSlotitemgraph.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstStype.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstUseitem.cs" />
     <Compile Include="TransmissionData\Svdata.cs" />

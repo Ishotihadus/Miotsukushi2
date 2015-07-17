@@ -45,9 +45,9 @@ namespace Miotsukushi.Model.KanColle
                 name = data.name,
                 name_yomi = data.yomi,
                 shiptype = data.stype,
-                buildingtime = data.buildtime,
-                fuel_max = data.fuel_max,
-                ammo_max = data.bull_max,
+                buildingtime = data.buildtime.HasValue ? data.buildtime.Value : 0,
+                fuel_max = data.fuel_max.HasValue ? data.fuel_max.Value : 0,
+                ammo_max = data.bull_max.HasValue ? data.bull_max.Value : 0,
             };
         }
     }

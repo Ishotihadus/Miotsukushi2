@@ -17,7 +17,6 @@ namespace KanColleLib.TransmissionData.api_start2
         public List<MstSlotitemEquiptype> mst_slotitem_equiptype;
         public List<MstStype> mst_stype;
         public List<MstSlotitem> mst_slotitem;
-        public List<MstSlotitemgraph> mst_slotitemgraph;
         public List<MstFurniture> mst_furniture;
         public List<MstFurnituregraph> mst_furnituregraph;
         public List<MstUseitem> mst_useitem;
@@ -59,10 +58,6 @@ namespace KanColleLib.TransmissionData.api_start2
             start2.mst_slotitem = new List<MstSlotitem>();
             foreach (var data in json.api_mst_slotitem)
                 start2.mst_slotitem.Add(MstSlotitem.fromDynamic(data));
-
-            start2.mst_slotitemgraph = new List<MstSlotitemgraph>();
-            foreach (var data in json.api_mst_slotitemgraph)
-                start2.mst_slotitemgraph.Add(MstSlotitemgraph.fromDynamic(data));
 
             start2.mst_furniture = new List<MstFurniture>();
             foreach (var data in json.api_mst_furniture)

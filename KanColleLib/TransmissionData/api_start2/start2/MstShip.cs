@@ -19,7 +19,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// <summary>
         /// 艦種図鑑番号
         /// </summary>
-        public int sortno;
+        public int? sortno;
 
         /// <summary>
         /// 艦名
@@ -39,12 +39,12 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// <summary>
         /// 改造Lv
         /// </summary>
-        public int afterlv;
+        public int? afterlv;
 
         /// <summary>
         /// 改造後艦種ID
         /// </summary>
-        public int aftershipid;
+        public int? aftershipid;
 
         /// <summary>
         /// 耐久/HP（初期値/最大値）
@@ -82,17 +82,17 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// 0（不動）も実装されてはいるが表示には用いられない
         /// 参照: Core.swf/action/common/util/Util.as - public static function getSpeedLevel(param1:int) : int
         /// </summary>
-        public int soku;
+        public int? soku;
 
         /// <summary>
         /// 射程距離
         /// </summary>
-        public int leng;
+        public int? leng;
 
         /// <summary>
         /// スロット数
         /// </summary>
-        public int slot_num;
+        public int? slot_num;
 
         /// <summary>
         /// 最大搭載数
@@ -102,7 +102,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// <summary>
         /// 建造時間（分）
         /// </summary>
-        public int buildtime;
+        public int? buildtime;
 
         /// <summary>
         /// 解体時の純資源（燃料/弾薬/鋼材/ボーキ）
@@ -117,7 +117,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// <summary>
         /// 背景画像/レアリティ
         /// </summary>
-        public int backs;
+        public int? backs;
 
         /// <summary>
         /// 入手時メッセージ
@@ -127,59 +127,59 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// <summary>
         /// 改造に必要な燃料
         /// </summary>
-        public int afterfuel;
+        public int? afterfuel;
 
         /// <summary>
         /// 改造に必要な弾薬
         /// </summary>
-        public int afterbull;
+        public int? afterbull;
 
         /// <summary>
         /// 燃料最大値
         /// </summary>
-        public int fuel_max;
+        public int? fuel_max;
 
         /// <summary>
         /// 弾薬最大値
         /// </summary>
-        public int bull_max;
+        public int? bull_max;
 
         /// <summary>
         /// ボイスの有無のフラグ
         /// </summary>
-        public int voicef;
+        public int? voicef;
 
         public static MstShip fromDynamic(dynamic json)
         {
             MstShip ship = new MstShip();
 
             ship.id = (int)json.api_id;
-            ship.sortno = (int)json.api_sortno;
+            ship.sortno = json.api_sortno() ? (int)json.api_sortno : (int?)null;
             ship.name = json.api_name as string;
             ship.yomi = json.api_yomi as string;
             ship.stype = (int)json.api_stype;
-            ship.afterlv = (int)json.api_afterlv;
-            ship.aftershipid = int.Parse(json.api_aftershipid as string);
-            ship.taik = json.api_taik.Deserialize<int[]>();
-            ship.souk = json.api_souk.Deserialize<int[]>();
-            ship.houg = json.api_houg.Deserialize<int[]>();
-            ship.raig = json.api_raig.Deserialize<int[]>();
-            ship.tyku = json.api_tyku.Deserialize<int[]>();
-            ship.luck = json.api_luck.Deserialize<int[]>();
-            ship.soku = (int)json.api_soku;
-            ship.leng = (int)json.api_leng;
-            ship.slot_num = (int)json.api_slot_num;
-            ship.maxeq = json.api_maxeq.Deserialize<int[]>();
-            ship.buildtime = (int)json.api_buildtime;
-            ship.broken = json.api_broken.Deserialize<int[]>();
-            ship.powup = json.api_powup.Deserialize<int[]>();
-            ship.backs = (int)json.api_backs;
-            ship.getmes = json.api_getmes as string;
-            ship.afterfuel = (int)json.api_afterfuel;
-            ship.afterbull = (int)json.api_afterbull;
-            ship.fuel_max = (int)json.api_fuel_max;
-            ship.bull_max = (int)json.api_bull_max;
-            ship.voicef = (int)json.api_voicef;
+            ship.afterlv = json.api_afterlv() ? (int)json.api_afterlv : (int?)null;
+            ship.aftershipid = json.api_aftershipid() ? int.Parse(json.api_aftershipid as string) : (int?)null;
+            ship.taik = json.api_taik() ? json.api_taik.Deserialize<int[]>() : null;
+            ship.souk = json.api_souk() ? json.api_souk.Deserialize<int[]>() : null;
+            ship.houg = json.api_houg() ? json.api_houg.Deserialize<int[]>() : null;
+            ship.raig = json.api_raig() ? json.api_raig.Deserialize<int[]>() : null;
+            ship.tyku = json.api_tyku() ? json.api_tyku.Deserialize<int[]>() : null;
+            ship.luck = json.api_luck() ? json.api_luck.Deserialize<int[]>() : null;
+            ship.soku = json.api_soku() ? (int)json.api_soku : (int?)null;
+            ship.leng = json.api_leng() ? (int)json.api_leng : (int?)null;
+            ship.slot_num = json.api_slot_num() ? (int)json.api_slot_num : (int?)null;
+            ship.maxeq = json.api_maxeq() ? json.api_maxeq.Deserialize<int[]>() : null;
+            ship.buildtime = json.api_buildtime() ? (int)json.api_buildtime : (int?)null;
+            ship.broken = json.api_broken() ? json.api_broken.Deserialize<int[]>() : null;
+            ship.powup = json.api_powup() ? json.api_powup.Deserialize<int[]>() : null;
+            ship.backs = json.api_backs() ? (int)json.api_backs : (int?)null;
+            ship.getmes = json.api_getmes() ? json.api_getmes as string : null;
+            ship.afterfuel = json.api_afterfuel() ? (int)json.api_afterfuel : (int?)null;
+            ship.afterbull = json.api_afterbull() ? (int)json.api_afterbull : (int?)null;
+            ship.fuel_max = json.api_fuel_max() ? (int)json.api_fuel_max : (int?)null;
+            ship.bull_max = json.api_bull_max() ? (int)json.api_bull_max : (int?)null;
+            ship.voicef = json.api_voicef() ? (int)json.api_voicef : (int?)null;
 
             return ship;
         }
@@ -197,5 +197,8 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         // "api_id":1,"api_sortno":31,"api_name":"睦月","api_yomi":"むつき","api_stype":2,"api_afterlv":20,"api_aftershipid":"254","api_taik":[13,24],"api_souk":[5,18],"api_houg":[6,29],"api_raig":[18,59],
         // "api_tyku":[7,29],"api_luck":[12,49],"api_soku":10,"api_leng":1,"api_slot_num":2,"api_maxeq":[0,0,0,0,0],"api_buildtime":18,"api_broken":[1,1,4,0],"api_powup":[1,1,0,0],"api_backs":3,
         // "api_getmes":"睦月です。<br>はりきって、まいりましょー！","api_afterfuel":100,"api_afterbull":100,"api_fuel_max":15,"api_bull_max":15,"api_voicef":0
+
+        // 2015年7月17日のメンテで敵艦情報が減少
+        // 
     }
 }
