@@ -98,6 +98,7 @@ namespace KanColleLib.TransmissionData.api_req_map.values
 
         /// <summary>
         /// 敵艦隊情報
+        /// 2015年7月17日のメンテに伴って削除？
         /// </summary>
         public EnemyValue enemy;
         
