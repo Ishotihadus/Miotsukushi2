@@ -44,7 +44,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         private void Questdata_QuestChange(object sender, EventArgs e)
         {
-            Quests.Clear();
+            while(Quests.Count > 0)
+                Quests.RemoveAt(0);
             foreach(var quest in model.questdata.executingquest)
             {
                 Quests.Add(new QuestViewModel(quest));
