@@ -88,6 +88,8 @@ namespace KanColleLib
                 string request = oSession.GetRequestBodyAsString();
                 string response = oSession.GetResponseBodyAsString();
 
+                OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
+
                 try
                 {
                     RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
@@ -101,7 +103,6 @@ namespace KanColleLib
                     System.Diagnostics.Debug.WriteLine(e);
                     System.Diagnostics.Debug.WriteLine("Response: " + response);
                 }
-                OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
 
                 processingcode.RemoveAt(0);
             }

@@ -33,9 +33,9 @@ namespace Miotsukushi.Model.KanColle
             int port = KanColleNotifier.FiddlerStartup();
             System.Diagnostics.Debug.WriteLine("Port:" + port);
             KanColleNotifier.FiddlerSetWinInetProxy();
-            
 
             kclib = new KanColleNotifier(true);
+            new PacketSaver(kclib);
 
             kclib.GameStart += Kclib_GameStart;
             kclib.KcsAPIDataAnalyzeFailed += (_, e) => OnAPIAnalyzeError(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
