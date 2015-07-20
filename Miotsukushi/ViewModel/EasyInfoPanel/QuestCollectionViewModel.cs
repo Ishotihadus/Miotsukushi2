@@ -44,16 +44,48 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         private void Questdata_QuestChange(object sender, EventArgs e)
         {
-            while(Quests.Count > 0)
-                Quests.RemoveAt(0);
-            foreach(var quest in model.questdata.executingquest)
+            for (int i = 0; i < model.questdata.executingquest.Count; i++)
             {
-                Quests.Add(new QuestViewModel(quest));
+                var quest = model.questdata.executingquest[i];
+                if (Quests.Count <= i)
+                {
+                    Quests.Add(new QuestViewModel(quest));
+                }
+                else if(!Quests[i].DetailVisibility)
+                {
+                    Quests[i] = new QuestViewModel(quest);
+                }
+                else if(Quests[i].ID != quest.id)
+                {
+                    Quests.Insert(i, new QuestViewModel(quest));
+                }
             }
-            for (int i = 0; i < model.questdata.exec_count - model.questdata.executingquest.Count; i++)
+
+            for (int i = model.questdata.executingquest.Count; i < Quests.Count; i++)
+            {
+                if (Quests[i].DetailVisibility)
+                {
+                    Quests.RemoveAt(i);
+                    --i;
+                }
+            }
+
+            int nullcount = (from _ in Quests where !_.DetailVisibility select _).Count();
+
+            while (nullcount < model.questdata.exec_count - model.questdata.executingquest.Count)
             {
                 Quests.Add(new QuestViewModel(null));
+                ++nullcount;
             }
+
+            while (nullcount > model.questdata.exec_count - model.questdata.executingquest.Count)
+            {
+                var nl = Quests.FirstOrDefault(_ => !_.DetailVisibility);
+                if (nl != null)
+                    Quests.Remove(nl);
+                --nullcount;
+            }
+            
             QuestListVisibility = true;
         }
     }

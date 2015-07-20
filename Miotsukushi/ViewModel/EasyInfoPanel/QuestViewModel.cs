@@ -47,6 +47,24 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             }
         }
 
+        private int _ID;
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+
+            set
+            {
+                if (_ID != value)
+                {
+                    _ID = value;
+                    OnPropertyChanged(() => ID);
+                }
+            }
+        }
+
         private string _Name;
         public string Name
         {
@@ -197,6 +215,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             else
             {
                 DetailVisibility = true;
+                ID = quest.id;
                 Name = quest.name;
                 Description = quest.description;
 
