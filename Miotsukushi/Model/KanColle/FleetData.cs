@@ -190,7 +190,7 @@ namespace Miotsukushi.Model.KanColle
                 {
                     _MinCond = value;
                     OnPropertyChanged(() => MinCond);
-                    RemainExpeditionCount = (value >= 50) ? (value - 49) / 3 + 1 : 0;
+                    RemainExpeditionCount = (value >= 50) ? (value - 50) / 3 + 1 : 0;
                 }
             }
         }
