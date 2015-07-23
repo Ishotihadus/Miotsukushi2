@@ -59,6 +59,10 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                 {
                     Quests.Insert(i, new QuestViewModel(quest));
                 }
+                else
+                {
+                    Quests[i] = new QuestViewModel(quest);
+                }
             }
 
             for (int i = model.questdata.executingquest.Count; i < Quests.Count; i++)
