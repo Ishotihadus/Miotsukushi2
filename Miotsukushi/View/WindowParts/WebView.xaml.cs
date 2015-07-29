@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Miotsukushi.View.WindowParts
 {
@@ -42,6 +43,8 @@ namespace Miotsukushi.View.WindowParts
                 return;
             }
 
+
+
             try
             {
                 mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
@@ -59,24 +62,38 @@ namespace Miotsukushi.View.WindowParts
             {
                 System.Diagnostics.Debug.WriteLine(exception);
             }
+
+            BrowserZoom();
+
         }
 
-        /// <summary>
-        /// ブラウザを指定位置にスクロールしてスクロールバーを消去します
-        /// </summary>
-        /// <param name="x">スクロール先のx座標</param>
-        /// <param name="y">スクロール先のy座標</param>
-        public void BrowserScroll(int x, int y)
+        [ComImport, Guid("6d5140c1-7436-11ce-8034-00aa006009fa"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IServiceProvider
         {
-            if (!CheckAccess())
-            {
-                Dispatcher.Invoke(() => BrowserScroll(x, y));
-                return;
-            }
+            [return: MarshalAs(UnmanagedType.IUnknown)]
+            object QueryService(ref Guid guidService, ref Guid riid);
+        }
 
-            mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
-            if (htmlDoc != null) htmlDoc.parentWindow.scrollTo(x, y);
-            htmlDoc.parentWindow.execScript("document.body.style.overflow ='hidden'");
+        private static readonly Guid SID_SWebBrowserApp = new Guid("0002DF05-0000-0000-C000-000000000046");
+
+        /// <summary>
+        /// DPIを算出して自動でズームする
+        /// </summary>
+        public void BrowserZoom()
+        {
+            var systemXDPI = webBrowser.InvokeScript("eval", new object[] { "window.screen.systemXDPI" });
+            if (systemXDPI is int)
+            {
+                int scale = (int)systemXDPI * 100 / 96;
+                scale *= scale / 100;
+
+                Guid serviceGuid = SID_SWebBrowserApp;
+                Guid iid = typeof(SHDocVw.IWebBrowser2).GUID;
+                SHDocVw.IWebBrowser2 webBrowser2 = (SHDocVw.IWebBrowser2)((IServiceProvider)webBrowser.Document).QueryService(ref serviceGuid, ref iid);
+                object pvaIn = scale;
+
+                webBrowser2.ExecWB(SHDocVw.OLECMDID.OLECMDID_OPTICAL_ZOOM, SHDocVw.OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
+            }
         }
 
         /// <summary>
