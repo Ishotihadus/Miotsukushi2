@@ -27,7 +27,7 @@
 ## 開発環境
 
 * Windows 10 Pro x64
-* Visual Studio Professional 2015
+* Visual Studio 2015 Enterprise
 
 ## 使用ライブラリ
 
