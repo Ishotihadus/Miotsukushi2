@@ -11,11 +11,11 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            // test_get_member();
+            test_get_member();
             // test_request();
             // test_req_map();
             // test_start2();
-            test_req_sortie();
+            // test_req_sortie();
         }
         
         static void test_request()
@@ -115,6 +115,9 @@ namespace KanColleLibTest
             
             string api_ship_deck = System.IO.File.ReadAllText("api_get_member/ship_deck.txt");
             var ship_deck = KanColleLib.TransmissionData.api_get_member.ShipDeck.fromDynamic(DynamicJson.Parse(api_ship_deck).api_data);
+            
+            string api_useitem = System.IO.File.ReadAllText("api_get_member/useitem.txt");
+            var useitem = KanColleLib.TransmissionData.api_get_member.Useitem.fromDynamic(DynamicJson.Parse(api_useitem).api_data);
         }
 
         static void test_port()

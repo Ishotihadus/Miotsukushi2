@@ -19,7 +19,7 @@ api_get_member/ship_deck,GetmemberShipDeck,TransmissionRequest.api_get_member.Sh
 api_get_member/slot_item,GetmemberSlotItem,RequestBase,TransmissionData.api_get_member.SlotItem
 #api_get_member/sortie_conditions
 api_get_member/unsetslot,GetmemberUnsetslot,RequestBase,TransmissionData.api_get_member.Unsetslot
-#api_get_member/useitem
+api_get_member/useitem,GetmemberUseitem,RequestBase,TransmissionData.api_get_member.Useitem
 api_port/port,PortPort,TransmissionRequest.api_port.PortRequest,TransmissionData.api_port.Port
 #api_req_battle_midnight/battle
 #api_req_battle_midnight/sp_midnight
@@ -79,5 +79,5 @@ api_req_quest/stop,ReqquestStop,TransmissionRequest.api_req_quest.StopRequest,ob
 #api_req_ranking/getlist
 #api_req_sortie/airbattle
 #api_req_sortie/battle
-#api_req_sortie/battleresult
+api_req_sortie/battleresult,ReqsortieBattleresult,RequestBase,TransmissionData.api_req_sortie.Battleresult
 api_start2,Start2,RequestBase,TransmissionData.api_start2.Start2
