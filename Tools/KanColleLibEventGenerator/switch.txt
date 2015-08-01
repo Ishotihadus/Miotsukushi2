@@ -88,6 +88,12 @@ OnGetGetmemberUnsetslot(new RequestBase(request), Svdata<TransmissionData.api_ge
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_get_member/useitem":
+if(json.api_data())
+OnGetGetmemberUseitem(new RequestBase(request), Svdata<TransmissionData.api_get_member.Useitem>.fromDynamic(json, TransmissionData.api_get_member.Useitem.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_port/port":
 if(json.api_data())
 OnGetPortPort(new TransmissionRequest.api_port.PortRequest(request), Svdata<TransmissionData.api_port.Port>.fromDynamic(json, TransmissionData.api_port.Port.fromDynamic(json.api_data)));
@@ -128,7 +134,10 @@ case "api_req_kousyou/createship_speedchange":
 OnGetReqkousyouCreateshipSpeedchange(new TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest(request), Svdata<object>.fromDynamic(json, null));
 break;
 case "api_req_kousyou/destroyship":
-OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<object>.fromDynamic(json, null));
+if(json.api_data())
+OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Destroyship>.fromDynamic(json, TransmissionData.api_req_kousyou.Destroyship.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
 case "api_req_kousyou/getship":
 if(json.api_data())
@@ -195,6 +204,12 @@ OnGetReqquestStart(new TransmissionRequest.api_req_quest.StartRequest(request), 
 break;
 case "api_req_quest/stop":
 OnGetReqquestStop(new TransmissionRequest.api_req_quest.StopRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_sortie/battleresult":
+if(json.api_data())
+OnGetReqsortieBattleresult(new RequestBase(request), Svdata<TransmissionData.api_req_sortie.Battleresult>.fromDynamic(json, TransmissionData.api_req_sortie.Battleresult.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
 case "api_start2":
 if(json.api_data())

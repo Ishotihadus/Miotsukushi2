@@ -105,6 +105,13 @@ public delegate void GetGetmemberUnsetslotEventHandler(object sender, RequestBas
 protected virtual void OnGetGetmemberUnsetslot(RequestBase request, Svdata<TransmissionData.api_get_member.Unsetslot> response) { if (GetGetmemberUnsetslot != null) GetGetmemberUnsetslot(this, request, response); }
 
 /// <summary>
+/// api_get_member/useitem を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetGetmemberUseitemEventHandler GetGetmemberUseitem;
+public delegate void GetGetmemberUseitemEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Useitem> response);
+protected virtual void OnGetGetmemberUseitem(RequestBase request, Svdata<TransmissionData.api_get_member.Useitem> response) { if (GetGetmemberUseitem != null) GetGetmemberUseitem(this, request, response); }
+
+/// <summary>
 /// api_port/port を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetPortPortEventHandler GetPortPort;
@@ -164,8 +171,8 @@ protected virtual void OnGetReqkousyouCreateshipSpeedchange(TransmissionRequest.
 /// api_req_kousyou/destroyship を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetReqkousyouDestroyshipEventHandler GetReqkousyouDestroyship;
-public delegate void GetReqkousyouDestroyshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<object> response);
-protected virtual void OnGetReqkousyouDestroyship(TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<object> response) { if (GetReqkousyouDestroyship != null) GetReqkousyouDestroyship(this, request, response); }
+public delegate void GetReqkousyouDestroyshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<TransmissionData.api_req_kousyou.Destroyship> response);
+protected virtual void OnGetReqkousyouDestroyship(TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<TransmissionData.api_req_kousyou.Destroyship> response) { if (GetReqkousyouDestroyship != null) GetReqkousyouDestroyship(this, request, response); }
 
 /// <summary>
 /// api_req_kousyou/getship を受信して解析に成功した際に呼び出されます
@@ -264,6 +271,13 @@ protected virtual void OnGetReqquestStart(TransmissionRequest.api_req_quest.Star
 public event GetReqquestStopEventHandler GetReqquestStop;
 public delegate void GetReqquestStopEventHandler(object sender, TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response);
 protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { if (GetReqquestStop != null) GetReqquestStop(this, request, response); }
+
+/// <summary>
+/// api_req_sortie/battleresult を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqsortieBattleresultEventHandler GetReqsortieBattleresult;
+public delegate void GetReqsortieBattleresultEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_sortie.Battleresult> response);
+protected virtual void OnGetReqsortieBattleresult(RequestBase request, Svdata<TransmissionData.api_req_sortie.Battleresult> response) { if (GetReqsortieBattleresult != null) GetReqsortieBattleresult(this, request, response); }
 
 /// <summary>
 /// api_start2 を受信して解析に成功した際に呼び出されます

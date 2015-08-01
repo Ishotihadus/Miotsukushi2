@@ -214,6 +214,12 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_get_member/useitem":
+                    if (json.api_data())
+                        OnGetGetmemberUseitem(new RequestBase(request), Svdata<TransmissionData.api_get_member.Useitem>.fromDynamic(json, TransmissionData.api_get_member.Useitem.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_port/port":
                     if (json.api_data())
                         OnGetPortPort(new TransmissionRequest.api_port.PortRequest(request), Svdata<TransmissionData.api_port.Port>.fromDynamic(json, TransmissionData.api_port.Port.fromDynamic(json.api_data)));
@@ -254,7 +260,10 @@ namespace KanColleLib
                     OnGetReqkousyouCreateshipSpeedchange(new TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
                 case "api_req_kousyou/destroyship":
-                    OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Destroyship>.fromDynamic(json, TransmissionData.api_req_kousyou.Destroyship.fromDynamic(json.api_data)));
+                    if (json.api_data())
+                        OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Destroyship>.fromDynamic(json, TransmissionData.api_req_kousyou.Destroyship.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
                 case "api_req_kousyou/getship":
                     if (json.api_data())
@@ -322,12 +331,19 @@ namespace KanColleLib
                 case "api_req_quest/stop":
                     OnGetReqquestStop(new TransmissionRequest.api_req_quest.StopRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
+                case "api_req_sortie/battleresult":
+                    if (json.api_data())
+                        OnGetReqsortieBattleresult(new RequestBase(request), Svdata<TransmissionData.api_req_sortie.Battleresult>.fromDynamic(json, TransmissionData.api_req_sortie.Battleresult.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_start2":
                     if (json.api_data())
                         OnGetStart2(new RequestBase(request), Svdata<TransmissionData.api_start2.Start2>.fromDynamic(json, TransmissionData.api_start2.Start2.fromDynamic(json.api_data)));
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+
 
                 default:
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
@@ -386,6 +402,7 @@ namespace KanColleLib
         #endregion
 
         #region 受信URLごとのイベント定義（自動処理）
+
 
         /// <summary>
         /// api_get_member/basic を受信して解析に成功した際に呼び出されます
@@ -491,6 +508,13 @@ namespace KanColleLib
         public event GetGetmemberUnsetslotEventHandler GetGetmemberUnsetslot;
         public delegate void GetGetmemberUnsetslotEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Unsetslot> response);
         protected virtual void OnGetGetmemberUnsetslot(RequestBase request, Svdata<TransmissionData.api_get_member.Unsetslot> response) { if (GetGetmemberUnsetslot != null) GetGetmemberUnsetslot(this, request, response); }
+
+        /// <summary>
+        /// api_get_member/useitem を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetGetmemberUseitemEventHandler GetGetmemberUseitem;
+        public delegate void GetGetmemberUseitemEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Useitem> response);
+        protected virtual void OnGetGetmemberUseitem(RequestBase request, Svdata<TransmissionData.api_get_member.Useitem> response) { if (GetGetmemberUseitem != null) GetGetmemberUseitem(this, request, response); }
 
         /// <summary>
         /// api_port/port を受信して解析に成功した際に呼び出されます
@@ -652,6 +676,13 @@ namespace KanColleLib
         public event GetReqquestStopEventHandler GetReqquestStop;
         public delegate void GetReqquestStopEventHandler(object sender, TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response);
         protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { if (GetReqquestStop != null) GetReqquestStop(this, request, response); }
+
+        /// <summary>
+        /// api_req_sortie/battleresult を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqsortieBattleresultEventHandler GetReqsortieBattleresult;
+        public delegate void GetReqsortieBattleresultEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_sortie.Battleresult> response);
+        protected virtual void OnGetReqsortieBattleresult(RequestBase request, Svdata<TransmissionData.api_req_sortie.Battleresult> response) { if (GetReqsortieBattleresult != null) GetReqsortieBattleresult(this, request, response); }
 
         /// <summary>
         /// api_start2 を受信して解析に成功した際に呼び出されます
