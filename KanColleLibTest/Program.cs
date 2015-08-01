@@ -13,8 +13,9 @@ namespace KanColleLibTest
         {
             // test_get_member();
             // test_request();
-            test_req_map();
+            // test_req_map();
             // test_start2();
+            test_req_sortie();
         }
         
         static void test_request()
@@ -178,6 +179,13 @@ namespace KanColleLibTest
 
             string api_next = System.IO.File.ReadAllText("api_req_map/next.txt");
             var next = KanColleLib.TransmissionData.api_req_map.Start.fromDynamic(DynamicJson.Parse(api_next).api_data);
+        }
+
+        static void test_req_sortie()
+        {
+            string api_battleresult = System.IO.File.ReadAllText("api_req_sortie/battleresult.txt");
+            var battleresult = KanColleLib.TransmissionData.api_req_sortie.Battleresult.fromDynamic(DynamicJson.Parse(api_battleresult).api_data);
+
         }
     }
 }

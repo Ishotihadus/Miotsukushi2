@@ -128,6 +128,12 @@
     <Compile Include="TransmissionData\api_req_mission\values\GetItemValue.cs" />
     <Compile Include="TransmissionData\api_req_quest\BonusValue.cs" />
     <Compile Include="TransmissionData\api_req_quest\Clearitemget.cs" />
+    <Compile Include="TransmissionData\api_req_sortie\Battleresult.cs" />
+    <Compile Include="TransmissionData\api_req_sortie\values\EnemyInfoValue.cs" />
+    <Compile Include="TransmissionData\api_req_sortie\values\GetEventitemValue.cs" />
+    <Compile Include="TransmissionData\api_req_sortie\values\GetShipValue.cs" />
+    <Compile Include="TransmissionData\api_req_sortie\values\GetSlotitemValue.cs" />
+    <Compile Include="TransmissionData\api_req_sortie\values\GetUseitemValue.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstBGM.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstFurniture.cs" />
     <Compile Include="TransmissionData\api_start2\start2\MstFurnituregraph.cs" />
