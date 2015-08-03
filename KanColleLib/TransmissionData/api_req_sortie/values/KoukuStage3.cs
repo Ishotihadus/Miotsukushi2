@@ -49,5 +49,20 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// 敵艦隊の受けたダメージ（1から始まる）
         /// </summary>
         public double[] edam;
+
+        public static KoukuStage3 fromDynamic(dynamic json)
+        {
+            return new KoukuStage3()
+            {
+                frai_flag = ((int[])(json.api_frai_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                erai_flag = ((int[])(json.api_erai_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                fbak_flag = ((int[])(json.api_fbak_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                ebak_flag = ((int[])(json.api_ebak_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                fcl_flag = json.api_fcl_flag.Deserialize<int[]>(),
+                ecl_flag = json.api_ecl_flag.Deserialize<int[]>(),
+                fdam = json.api_fdam.Deserialize<double[]>(),
+                edam = json.api_edam.Deserialize<double[]>(),
+            };
+        }
     }
 }

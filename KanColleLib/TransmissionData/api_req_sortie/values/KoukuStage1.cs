@@ -39,5 +39,18 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// 自艦隊、敵艦隊がそれぞれ触接に用いた艦載機の種類
         /// </summary>
         public int[] touch_plane;
+
+        public static KoukuStage1 fromDynamic(dynamic json)
+        {
+            return new KoukuStage1()
+            {
+                f_count = (int)json.api_f_count,
+                f_lostcount = (int)json.api_f_lostcount,
+                e_count = (int)json.api_e_count,
+                e_lostcount = (int)json.api_e_lostcount,
+                disp_seiku = (int)json.api_disp_seiku,
+                touch_plane = json.api_touch_plane.Deserialize<int[]>()
+            };
+        }
     }
 }

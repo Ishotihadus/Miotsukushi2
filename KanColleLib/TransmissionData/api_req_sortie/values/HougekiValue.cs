@@ -43,5 +43,44 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// ダメージ情報（0から始まるインデックス）
         /// </summary>
         public int[][] damage;
+
+        public static int[] DynamicParseArrayOnce(dynamic json)
+        {
+            var list = new List<int>();
+            int i = 0;
+            foreach (var data in json)
+            {
+                if (i != 0)
+                    list.Add((int)data);
+                ++i;
+            }
+            return list.ToArray();
+        }
+
+        public static int[][] DynamicParseArrayTwice(dynamic json)
+        {
+            var list = new List<int[]>();
+            int i = 0;
+            foreach(var data in json)
+            {
+                if (i != 0)
+                    list.Add(data.Deserialize<int[]>());
+                ++i;
+            }
+            return list.ToArray();
+        }
+
+        public static HougekiValue fromDynamic(dynamic json)
+        {
+            return new HougekiValue()
+            {
+                at_list = DynamicParseArrayOnce(json.api_at_list),
+                at_type = DynamicParseArrayOnce(json.api_at_type),
+                df_list = DynamicParseArrayTwice(json.api_df_list),
+                si_list = DynamicParseArrayTwice(json.api_si_list),
+                cl_list = DynamicParseArrayTwice(json.api_cl_list),
+                damage = DynamicParseArrayTwice(json.api_damage)
+            };
+        }
     }
 }

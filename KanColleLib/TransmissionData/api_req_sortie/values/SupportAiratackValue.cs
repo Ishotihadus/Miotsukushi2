@@ -51,11 +51,26 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// <summary>
         /// 敵艦隊の航空機発艦元（なければ[-1]が入る）
         /// </summary>
-        public int[] plane_from;
+        public int[][] plane_from;
 
         public SupportAiratackStage1 stage1;
         public SupportAiratackStage2 stage2;
         public SupportAiratackStage3 stage3;
+
+        public static SupportAiratackValue fromDynamic(dynamic json)
+        {
+            return new SupportAiratackValue()
+            {
+                deck_id = (int)json.api_deck_id,
+                ship_id = json.api_ship_id.Deserialize<int[]>(),
+                undressing_flag = ((int[])(json.api_undressing_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                stage_flag = ((int[])(json.api_stage_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                plane_from = json.api_plane_from.Deserialize<int[][]>(),
+                stage1 = json.api_stage1() && json.api_stage1 != null ? SupportAiratackStage1.fromDynamic(json.api_stage1) : null,
+                stage2 = json.api_stage2() && json.api_stage2 != null ? SupportAiratackStage2.fromDynamic(json.api_stage2) : null,
+                stage3 = json.api_stage3() && json.api_stage3 != null ? SupportAiratackStage3.fromDynamic(json.api_stage3) : null
+            };
+        }
     }
 
     public class SupportAiratackStage1
@@ -64,12 +79,32 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         public int f_lostcount;
         public int e_count;
         public int e_lostcount;
+
+        public static SupportAiratackStage1 fromDynamic(dynamic json)
+        {
+            return new SupportAiratackStage1()
+            {
+                f_count = (int)json.api_f_count,
+                f_lostcount = (int)json.api_f_lostcount,
+                e_count = (int)json.api_e_count,
+                e_lostcount = (int)json.api_e_lostcount
+            };
+        }
     }
 
     public class SupportAiratackStage2
     {
         public int f_count;
         public int f_lostcount;
+
+        public static SupportAiratackStage2 fromDynamic(dynamic json)
+        {
+            return new SupportAiratackStage2()
+            {
+                f_count = (int)json.api_f_count,
+                f_lostcount = (int)json.api_f_lostcount
+            };
+        }
     }
 
     public class SupportAiratackStage3
@@ -93,5 +128,16 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// 敵艦隊の受けたダメージ（1から始まる）
         /// </summary>
         public double[] edam;
+
+        public static SupportAiratackStage3 fromDynamic(dynamic json)
+        {
+            return new SupportAiratackStage3()
+            {
+                erai_flag = ((int[])(json.api_erai_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                ebak_flag = ((int[])(json.api_ebak_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                ecl_flag = json.api_ecl_flag.Deserialize<int[]>(),
+                edam = json.api_edam.Deserialize<double[]>()
+            };
+        }
     }
 }

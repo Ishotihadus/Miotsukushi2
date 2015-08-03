@@ -14,11 +14,22 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// 航空機を飛ばせる艦の一覧
         /// いない場合は [-1] が格納される
         /// </summary>
-        public int[] plane_from;
+        public int[][] plane_from;
 
         public KoukuStage1 stage1;
         public KoukuStage2 stage2;
         public KoukuStage3 stage3;
+
+        public static KoukuValue fromDynamic(dynamic json)
+        {
+            return new KoukuValue()
+            {
+                plane_from = json.api_plane_from.Deserialize<int[][]>(),
+                stage1 = json.api_stage1() && json.api_stage1 != null ? KoukuStage1.fromDynamic(json.api_stage1) : null,
+                stage2 = json.api_stage2() && json.api_stage2 != null ? KoukuStage1.fromDynamic(json.api_stage1) : null,
+                stage3 = json.api_stage3() && json.api_stage3 != null ? KoukuStage1.fromDynamic(json.api_stage1) : null,
+            };
+        }
 
     }
 }

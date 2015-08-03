@@ -49,5 +49,20 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// 敵艦隊が与えるダメージのクリティカルフラグ
         /// </summary>
         public int[] ecl;
+
+        public static RaigekiValue fromDynamic(dynamic json)
+        {
+            return new RaigekiValue()
+            {
+                frai = json.api_frai.Deserialize<int[]>(),
+                erai = json.api_erai.Deserialize<int[]>(),
+                fdam = json.api_fdam.Deserialize<double[]>(),
+                edam = json.api_edam.Deserialize<double[]>(),
+                fydam = json.api_fydam.Deserialize<int[]>(),
+                eydam = json.api_eydam.Deserialize<int[]>(),
+                fcl = json.api_fcl.Deserialize<int[]>(),
+                ecl = json.api_ecl.Deserialize<int[]>()
+            };
+        }
     }
 }

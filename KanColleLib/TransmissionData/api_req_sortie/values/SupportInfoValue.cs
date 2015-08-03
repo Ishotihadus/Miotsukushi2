@@ -19,5 +19,14 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// 砲撃・雷撃支援
         /// </summary>
         public SupportHouraiValue support_hourai;
+
+        public static SupportInfoValue fromDynamic(dynamic json)
+        {
+            return new SupportInfoValue()
+            {
+                support_airatack = json.api_support_airatack() && json.api_support_airatack != null ? SupportAiratackValue.fromDynamic(json.api_support_airatack) : null,
+                support_hourai = json.api_support_hourai() && json.api_support_hourai != null ? SupportHouraiValue.fromDynamic(json.api_support_hourai) : null
+            };
+        }
     }
 }

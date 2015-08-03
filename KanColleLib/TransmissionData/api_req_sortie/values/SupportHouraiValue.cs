@@ -43,5 +43,16 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// </summary>
         public double[] damage;
 
+        public static SupportHouraiValue fromDynamic(dynamic json)
+        {
+            return new SupportHouraiValue()
+            {
+                deck_id = (int)json.api_deck_id,
+                ship_id = json.api_ship_id.Deserialize<int[]>(),
+                undressing_flag = ((int[])(json.api_undressing_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
+                cl_list = json.api_cl_list.Deserialize<int[]>(),
+                damage = json.api_damage.Deserialize<double[]>()
+            };
+        }
     }
 }

@@ -31,8 +31,18 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         public int kind;
 
         /// <summary>
-        /// 使用した装備
+        /// 使用した装備（インデックスは0から）
         /// </summary>
         public int[] use_items;
+
+        public static KoukuStage2AirFire fromDynamic(dynamic json)
+        {
+            return new KoukuStage2AirFire()
+            {
+                idx = (int)json.api_idx,
+                kind = (int)json.api_kind,
+                use_items = json.api_use_items.Deserialize<int[]>()
+            };
+        }
     }
 }

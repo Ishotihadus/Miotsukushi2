@@ -117,6 +117,36 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         /// </summary>
         public RaigekiValue raigeki;
 
+        public static Battle fromDynamic(dynamic json)
+        {
+            return new Battle()
+            {
+                dock_id = (int)json.api_dock_id,
+                ship_ke = json.api_ship_ke.Deserialize<int[]>(),
+                ship_lv = json.api_ship_lv.Deserialize<int[]>(),
+                nowhps = json.api_nowhps.Deserialize<int[]>(),
+                maxhps = json.api_maxhps.Deserialize<int[]>(),
+                midnight_flag = (int)json.api_midnight_flag == 1,
+                eSlot = json.api_eSlot.Deserialize<int[][]>(),
+                eKyouka = json.api_eKyouka.Deserialize<int[][]>(),
+                fParam = json.api_fParam.Deserialize<int[][]>(),
+                eParam = json.api_eParam.Deserialize<int[][]>(),
+                search = json.api_search.Deserialize<int[]>(),
+                formation = json.api_formation.Deserialize<int[]>(),
+                stage_flag = json.api_stage_flag.Deserialize<int[]>(),
+                kouku = json.api_kouku() && json.api_kouku != null ? KoukuValue.fromDynamic(json.api_kouku) : null,
+                support_flag = (int)json.api_support_flag,
+                support_info = json.api_support_info() && json.api_support_info != null ? SupportInfoValue.fromDynamic(json.api_support_info) : null,
+                opening_flag = (int)json.api_opening_flag == 1,
+                opening_atack = json.api_opening_atack() && json.api_opening_atack != null ? RaigekiValue.fromDynamic(json.api_opening_atack) : null,
+                hourai_flag = json.api_hourai_flag.Deserialize<int[]>(),
+                hougeki1 = json.api_hougeki1() && json.api_hougeki1 != null ? HougekiValue.fromDynamic(json.api_hougeki1) : null,
+                hougeki2 = json.api_hougeki2() && json.api_hougeki2 != null ? HougekiValue.fromDynamic(json.api_hougeki2) : null,
+                hougeki3 = json.api_hougeki3() && json.api_hougeki3 != null ? HougekiValue.fromDynamic(json.api_hougeki3) : null,
+                raigeki = json.api_raigeki() && json.api_raigeki != null ? RaigekiValue.fromDynamic(json.api_raigeki) : null
+            };
+        }
+
 
         // {"api_result":1,"api_result_msg":"\u6210\u529f","api_data":{"api_dock_id":1,"api_ship_ke":[-1,501,-1,-1,-1,-1,-1],"api_ship_lv":[-1,1,-1,-1,-1,-1,-1],
         // "api_nowhps":[-1,32,-1,-1,-1,-1,-1,20,-1,-1,-1,-1,-1],"api_maxhps":[-1,32,-1,-1,-1,-1,-1,20,-1,-1,-1,-1,-1],"api_midnight_flag":0,
