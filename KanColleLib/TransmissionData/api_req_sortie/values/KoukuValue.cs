@@ -26,8 +26,8 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
             {
                 plane_from = json.api_plane_from.Deserialize<int[][]>(),
                 stage1 = json.api_stage1() && json.api_stage1 != null ? KoukuStage1.fromDynamic(json.api_stage1) : null,
-                stage2 = json.api_stage2() && json.api_stage2 != null ? KoukuStage1.fromDynamic(json.api_stage1) : null,
-                stage3 = json.api_stage3() && json.api_stage3 != null ? KoukuStage1.fromDynamic(json.api_stage1) : null,
+                stage2 = json.api_stage2() && json.api_stage2 != null ? KoukuStage2.fromDynamic(json.api_stage2) : null,
+                stage3 = json.api_stage3() && json.api_stage3 != null ? KoukuStage3.fromDynamic(json.api_stage3) : null,
             };
         }
 
