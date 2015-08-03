@@ -11,11 +11,12 @@ namespace KanColleLibTest
     {
         static void Main(string[] args)
         {
-            test_get_member();
+            // test_get_member();
             // test_request();
             // test_req_map();
             // test_start2();
             // test_req_sortie();
+            test_battle();
         }
         
         static void test_request()
@@ -189,6 +190,21 @@ namespace KanColleLibTest
             string api_battleresult = System.IO.File.ReadAllText("api_req_sortie/battleresult.txt");
             var battleresult = KanColleLib.TransmissionData.api_req_sortie.Battleresult.fromDynamic(DynamicJson.Parse(api_battleresult).api_data);
 
+        }
+
+        static void test_battle()
+        {
+            var hougeki = KanColleLib.TransmissionData.api_req_sortie.values.HougekiValue.fromDynamic(DynamicJson.Parse("{\"api_at_list\":[-1,2,9,1,12,4,11,3,8,7,5],\"api_at_type\":[-1,0,0,2,0,0,0,2,0,0,0],\"api_df_list\":[-1,[11],[4],[9,9],[3],[8],[5],[12,12],[6],[1],[8]],\"api_si_list\":[-1,[9],[509],[9,9],[502],[6],[502],[50,6],[-1],[-1],[-1]],\"api_cl_list\":[-1,[0],[2],[2,2],[1],[1],[0],[1,1],[1],[0],[0]],\"api_damage\":[-1,[0],[33],[139,143],[3.1],[9],[0.1],[59,72],[2],[0],[0]]}"));
+
+            var koukustage1 = KanColleLib.TransmissionData.api_req_sortie.values.KoukuStage1.fromDynamic(DynamicJson.Parse("{\"api_f_count\":95,\"api_f_lostcount\":0,\"api_e_count\":176,\"api_e_lostcount\":49,\"api_disp_seiku\":1,\"api_touch_plane\":[93,-1]}"));
+            var koukustage2 = KanColleLib.TransmissionData.api_req_sortie.values.KoukuStage2.fromDynamic(DynamicJson.Parse("{\"api_f_count\":66,\"api_f_lostcount\":1,\"api_e_count\":20,\"api_e_lostcount\":13,\"api_air_fire\":{\"api_idx\":3,\"api_kind\":5,\"api_use_items\":[122,122,32]}}"));
+            var koukustage3 = KanColleLib.TransmissionData.api_req_sortie.values.KoukuStage3.fromDynamic(DynamicJson.Parse("{\"api_frai_flag\":[-1,0,1,0,0,1,0],\"api_erai_flag\":[-1,0,0,0,1,1,0],\"api_fbak_flag\":[-1,1,0,0,1,1,0],\"api_ebak_flag\":[-1,0,0,0,0,0,0],\"api_fcl_flag\":[-1,0,0,0,0,0,0],\"api_ecl_flag\":[-1,0,0,0,0,0,0],\"api_fdam\":[-1,0,0,0,0,5,0],\"api_edam\":[-1,0,0,0,73,0,0]}"));
+            var koukuvalue = KanColleLib.TransmissionData.api_req_sortie.values.KoukuValue.fromDynamic(DynamicJson.Parse("{\"api_plane_from\":[[5,6],[7,8]],\"api_stage1\":{\"api_f_count\":95,\"api_f_lostcount\":0,\"api_e_count\":176,\"api_e_lostcount\":49,\"api_disp_seiku\":1,\"api_touch_plane\":[93,-1]},\"api_stage2\":{\"api_f_count\":29,\"api_f_lostcount\":2,\"api_e_count\":93,\"api_e_lostcount\":35},\"api_stage3\":{\"api_frai_flag\":[-1,0,1,0,0,1,0],\"api_erai_flag\":[-1,0,0,0,1,1,0],\"api_fbak_flag\":[-1,1,0,0,1,1,0],\"api_ebak_flag\":[-1,0,0,0,0,0,0],\"api_fcl_flag\":[-1,0,0,0,0,0,0],\"api_ecl_flag\":[-1,0,0,0,0,0,0],\"api_fdam\":[-1,0,0,0,0,5,0],\"api_edam\":[-1,0,0,0,73,0,0]}}"));
+
+            var raigeki = KanColleLib.TransmissionData.api_req_sortie.values.RaigekiValue.fromDynamic(DynamicJson.Parse("{\"api_frai\":[-1,0,0,1,0,0,0],\"api_erai\":[-1,0,0,0,0,0,0],\"api_fdam\":[-1,0,0,0,0,0,0],\"api_edam\":[-1,8,0,0,0,0,0],\"api_fydam\":[-1,0,0,8,0,0,0],\"api_eydam\":[-1,0,0,0,0,0,0],\"api_fcl\":[-1,0,0,1,0,0,0],\"api_ecl\":[-1,0,0,0,0,0,0]}"));
+
+            var supportairatack = KanColleLib.TransmissionData.api_req_sortie.values.SupportAiratackValue.fromDynamic(DynamicJson.Parse("{\"api_deck_id\":4,\"api_ship_id\":[134,7122,19742,18959,7028,0],\"api_undressing_flag\":[0,0,0,0,0,0],\"api_stage_flag\":[1,1,1],\"api_plane_from\":[[-1]],\"api_stage1\":{\"api_f_count\":58,\"api_f_lostcount\":0,\"api_e_count\":0,\"api_e_lostcount\":0},\"api_stage2\":{\"api_f_count\":58,\"api_f_lostcount\":3},\"api_stage3\":{\"api_erai_flag\":[-1,0,1,0,0,0,1],\"api_ebak_flag\":[-1,0,1,1,0,0,0],\"api_ecl_flag\":[-1,0,0,0,0,0,0],\"api_edam\":[-1,0,6,0,0,0,0]}}"));
+            var supporthouraiatack = KanColleLib.TransmissionData.api_req_sortie.values.SupportHouraiValue.fromDynamic(DynamicJson.Parse("{\"api_deck_id\":3,\"api_ship_id\":[3906,51,14896,14898,14895,0],\"api_undressing_flag\":[0,0,0,0,0,0],\"api_cl_list\":[-1,0,0,1,0,0,0],\"api_damage\":[-1,0,0,10,0,0,0]}"));
         }
     }
 }
