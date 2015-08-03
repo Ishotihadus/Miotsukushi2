@@ -76,7 +76,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         /// <summary>
         /// 航空戦のステージがそれぞれあるかどうかのフラグ
         /// </summary>
-        public int[] stage_flag;
+        public bool[] stage_flag;
 
         /// <summary>
         /// 航空戦の情報
@@ -133,13 +133,13 @@ namespace KanColleLib.TransmissionData.api_req_sortie
                 eParam = json.api_eParam.Deserialize<int[][]>(),
                 search = json.api_search.Deserialize<int[]>(),
                 formation = json.api_formation.Deserialize<int[]>(),
-                stage_flag = json.api_stage_flag.Deserialize<int[]>(),
+                stage_flag = ((int[])(json.api_stage_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
                 kouku = json.api_kouku() && json.api_kouku != null ? KoukuValue.fromDynamic(json.api_kouku) : null,
                 support_flag = (int)json.api_support_flag,
                 support_info = json.api_support_info() && json.api_support_info != null ? SupportInfoValue.fromDynamic(json.api_support_info) : null,
                 opening_flag = (int)json.api_opening_flag == 1,
                 opening_atack = json.api_opening_atack() && json.api_opening_atack != null ? RaigekiValue.fromDynamic(json.api_opening_atack) : null,
-                hourai_flag = json.api_hourai_flag.Deserialize<int[]>(),
+                hourai_flag = ((int[])(json.api_hourai_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
                 hougeki1 = json.api_hougeki1() && json.api_hougeki1 != null ? HougekiValue.fromDynamic(json.api_hougeki1) : null,
                 hougeki2 = json.api_hougeki2() && json.api_hougeki2 != null ? HougekiValue.fromDynamic(json.api_hougeki2) : null,
                 hougeki3 = json.api_hougeki3() && json.api_hougeki3 != null ? HougekiValue.fromDynamic(json.api_hougeki3) : null,
