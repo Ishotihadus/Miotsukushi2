@@ -527,8 +527,6 @@ namespace Miotsukushi.Model.KanColle
                 slotdata.Remove(item);
         }
 
-        
-
         int initializecount = 0;
         int initializecountflag = 5;
 

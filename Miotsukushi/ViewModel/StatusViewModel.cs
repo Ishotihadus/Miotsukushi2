@@ -163,6 +163,8 @@ namespace Miotsukushi.ViewModel
                     StatusAlertTitle = e.success ? "Success" : "Failed";
                     StatusAlertText = (e.name ?? "（不明）") + " の開発に" + (e.success ? "成功" : "失敗") + "しました。"; 
                 };
+
+            
         }
     }
 }
