@@ -273,6 +273,13 @@ public delegate void GetReqquestStopEventHandler(object sender, TransmissionRequ
 protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { if (GetReqquestStop != null) GetReqquestStop(this, request, response); }
 
 /// <summary>
+/// api_req_sortie/battle を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqsortieBattleEventHandler GetReqsortieBattle;
+public delegate void GetReqsortieBattleEventHandler(object sender, TransmissionRequest.api_req_sortie.BattleRequest request, Svdata<TransmissionData.api_req_sortie.Battle> response);
+protected virtual void OnGetReqsortieBattle(TransmissionRequest.api_req_sortie.BattleRequest request, Svdata<TransmissionData.api_req_sortie.Battle> response) { if (GetReqsortieBattle != null) GetReqsortieBattle(this, request, response); }
+
+/// <summary>
 /// api_req_sortie/battleresult を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetReqsortieBattleresultEventHandler GetReqsortieBattleresult;

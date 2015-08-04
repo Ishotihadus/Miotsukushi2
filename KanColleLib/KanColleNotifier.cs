@@ -331,6 +331,12 @@ namespace KanColleLib
                 case "api_req_quest/stop":
                     OnGetReqquestStop(new TransmissionRequest.api_req_quest.StopRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
+                case "api_req_sortie/battle":
+                    if (json.api_data())
+                        OnGetReqsortieBattle(new TransmissionRequest.api_req_sortie.BattleRequest(request), Svdata<TransmissionData.api_req_sortie.Battle>.fromDynamic(json, TransmissionData.api_req_sortie.Battle.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_req_sortie/battleresult":
                     if (json.api_data())
                         OnGetReqsortieBattleresult(new RequestBase(request), Svdata<TransmissionData.api_req_sortie.Battleresult>.fromDynamic(json, TransmissionData.api_req_sortie.Battleresult.fromDynamic(json.api_data)));
@@ -676,6 +682,13 @@ namespace KanColleLib
         public event GetReqquestStopEventHandler GetReqquestStop;
         public delegate void GetReqquestStopEventHandler(object sender, TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response);
         protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { if (GetReqquestStop != null) GetReqquestStop(this, request, response); }
+
+        /// <summary>
+        /// api_req_sortie/battle を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqsortieBattleEventHandler GetReqsortieBattle;
+        public delegate void GetReqsortieBattleEventHandler(object sender, TransmissionRequest.api_req_sortie.BattleRequest request, Svdata<TransmissionData.api_req_sortie.Battle> response);
+        protected virtual void OnGetReqsortieBattle(TransmissionRequest.api_req_sortie.BattleRequest request, Svdata<TransmissionData.api_req_sortie.Battle> response) { if (GetReqsortieBattle != null) GetReqsortieBattle(this, request, response); }
 
         /// <summary>
         /// api_req_sortie/battleresult を受信して解析に成功した際に呼び出されます

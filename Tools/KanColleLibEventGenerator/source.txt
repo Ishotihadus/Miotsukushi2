@@ -78,6 +78,6 @@ api_req_quest/start,ReqquestStart,TransmissionRequest.api_req_quest.StartRequest
 api_req_quest/stop,ReqquestStop,TransmissionRequest.api_req_quest.StopRequest,object
 #api_req_ranking/getlist
 #api_req_sortie/airbattle
-#api_req_sortie/battle
+api_req_sortie/battle,ReqsortieBattle,TransmissionRequest.api_req_sortie.BattleRequest,TransmissionData.api_req_sortie.Battle
 api_req_sortie/battleresult,ReqsortieBattleresult,RequestBase,TransmissionData.api_req_sortie.Battleresult
 api_start2,Start2,RequestBase,TransmissionData.api_start2.Start2
