@@ -190,6 +190,7 @@
     <Compile Include="TransmissionRequest\api_req_quest\ClearitemgetRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_quest\StartRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_quest\StopRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_sortie\BattleRequest.cs" />
     <Compile Include="TransmissionRequest\RequestBase.cs" />
     <Compile Include="TransmissionRequest\RequestDecorder.cs" />
   </ItemGroup>
