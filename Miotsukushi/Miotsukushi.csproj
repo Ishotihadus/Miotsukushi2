@@ -133,6 +133,8 @@
     <Compile Include="Model\ExList.cs" />
     <Compile Include="Model\KanColle\AdmiralRank.cs" />
     <Compile Include="Model\KanColle\BasicData.cs" />
+    <Compile Include="Model\KanColle\BattleModels\BattleModel.cs" />
+    <Compile Include="Model\KanColle\BattleModels\EventArgs\GetBattleResultEventArgs.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
     <Compile Include="Model\KanColle\EventArgs\APIAnalyzeErrorEventArgs.cs" />
     <Compile Include="Model\KanColle\EventArgs\CreateItemEventArgs.cs" />

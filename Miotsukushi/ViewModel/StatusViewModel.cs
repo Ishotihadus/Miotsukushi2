@@ -55,9 +55,11 @@ namespace Miotsukushi.ViewModel
                             StatusAlertBackground = System.Windows.Media.Brushes.Crimson;
                             break;
                         case "Success":
+                        case "Win":
                             StatusAlertBackground = System.Windows.Media.Brushes.RoyalBlue;
                             break;
                         case "Failed":
+                        case "Lose":
                             StatusAlertBackground = System.Windows.Media.Brushes.LightCoral;
                             break;
                         default:
@@ -164,7 +166,30 @@ namespace Miotsukushi.ViewModel
                     StatusAlertText = (e.name ?? "（不明）") + " の開発に" + (e.success ? "成功" : "失敗") + "しました。"; 
                 };
 
-            
+            model.battlemodel.GetBattleResult += (_, e) =>
+                {
+                    bool win = false;
+                    string rankname = "";
+                    switch (e.rank)
+                    {
+                        case "S":
+                        case "A":
+                        case "B":
+                            win = true;
+                            break;
+                    }
+                    switch (e.rank)
+                    {
+                        case "B":
+                        case "C":
+                            rankname = "戦術的";
+                            break;
+                    }
+
+                    rankname += (win ? "勝利" : "敗北") + e.rank;
+                    StatusAlertTitle = win ? "Win" : "Lose";
+                    StatusAlertText = rankname + "。ドロップ艦は" + (e.has_get_ship ? " " + e.get_ship_name + " です。" : "ありません。");
+                };
         }
     }
 }
