@@ -15,7 +15,8 @@
     <StackPanel>
         <TextBlock TextWrapping="Wrap" Text="第1艦隊" Margin="5,5,5,0"/>
         <TextBlock TextWrapping="Wrap" Text="ぱぴぷぺぽぱぴぷぺぽ" FontSize="15" Margin="5,5,5,0"/>
-        <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 未補給の艦がいます!"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 入渠中の艦がいます!"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 未補給の艦がいます!"/>
         <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red"><Run Text="⚠ "/><Run Text="疲労中"/><Run Text="の艦がいます!"/></TextBlock>
         <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
         <TextBlock TextWrapping="Wrap" Text="合計Lv. 25" Margin="5,0"/>

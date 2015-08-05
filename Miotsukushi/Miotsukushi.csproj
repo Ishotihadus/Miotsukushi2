@@ -172,6 +172,8 @@
     <Compile Include="Tools\TimeParser.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetCollectionViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetsSummaryViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetSummaryViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestCollectionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestViewModel.cs" />
     <Compile Include="ViewModel\WindowCommandsViewModel.cs" />

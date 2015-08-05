@@ -272,9 +272,23 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+        private int _DockingShipsCount;
+        public int DockingShipsCount
+        {
+            get
+            {
+                return _DockingShipsCount;
+            }
 
-
-
+            set
+            {
+                if (_DockingShipsCount != value)
+                {
+                    _DockingShipsCount = value;
+                    OnPropertyChanged(() => DockingShipsCount);
+                }
+            }
+        }
 
         #endregion
 
@@ -364,6 +378,14 @@ namespace Miotsukushi.Model.KanColle
             OkinoshimaSearchParameterError = _okinoshimaerror + 0.03692224 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
 
             MinCond = _mincond ?? 0;
+
+            ChangeNDockStatus();
+        }
+
+        public void ChangeNDockStatus()
+        {
+            var model = MainModel.Current.kancolleModel;
+            DockingShipsCount = model.ndockdata.Count(_ => ships.Contains(_.shipid));
         }
 
         public void ChangeMissionStatus(int status, int id, long time)

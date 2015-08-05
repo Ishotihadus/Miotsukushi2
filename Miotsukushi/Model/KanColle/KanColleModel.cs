@@ -548,6 +548,9 @@ namespace Miotsukushi.Model.KanColle
                     ndockdata.Add(new NDockData());
                 ndockdata[i].FromNDockValue(data.ndocks[i]);
             }
+
+            foreach (var fleet in fleetdata)
+                fleet.ChangeNDockStatus();
         }
 
         void AppendKDockValue(KanColleLib.TransmissionData.api_get_member.KDock data)
