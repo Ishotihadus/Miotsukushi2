@@ -23,6 +23,11 @@ namespace Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts
         public FleetsSummary()
         {
             InitializeComponent();
+            try
+            {
+                DataContext = new ViewModel.DetailInfoPanel.GeneralParts.FleetsSummaryViewModel();
+            }
+            catch { }
         }
     }
 }

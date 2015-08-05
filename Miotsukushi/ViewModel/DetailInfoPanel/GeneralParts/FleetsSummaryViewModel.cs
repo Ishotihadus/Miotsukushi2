@@ -8,7 +8,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
 {
     class FleetsSummaryViewModel : ViewModelBase
     {
-        public FleetSummaryViewModel[] FleetSummaryViewModel = { new GeneralParts.FleetSummaryViewModel(0), new GeneralParts.FleetSummaryViewModel(1),
-            new GeneralParts.FleetSummaryViewModel(2), new GeneralParts.FleetSummaryViewModel(3)};
+        private FleetSummaryViewModel[] _FleetSummaryViewModel = { new GeneralParts.FleetSummaryViewModel(0), new GeneralParts.FleetSummaryViewModel(1),
+            new GeneralParts.FleetSummaryViewModel(2), new GeneralParts.FleetSummaryViewModel(3) };
+
+        public FleetSummaryViewModel[] FleetSummaryViewModel { get { return _FleetSummaryViewModel; } }
     }
 }

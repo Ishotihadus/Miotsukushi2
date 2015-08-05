@@ -258,6 +258,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             SumAirMastery = fleet.SumAirMastery;
             SumReconnaissance = (int)fleet.OkinoshimaSearchParameter;
             SumShipLevel = fleet.SumShipLevel;
+            DrumShipCount = fleet.DrumShipCount;
+            DrumCount = fleet.DrumCount;
         }
 
         private void FleetSummaryViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -281,6 +283,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     break;
                 case "SumShipLevel":
                     SumShipLevel = fleet.SumShipLevel;
+                    break;
+                case "DrumShipCount":
+                    DrumShipCount = fleet.DrumShipCount;
+                    break;
+                case "DrumCount":
+                    DrumCount = fleet.DrumCount;
                     break;
             }
         }

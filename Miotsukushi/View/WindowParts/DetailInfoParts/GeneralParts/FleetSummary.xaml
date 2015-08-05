@@ -4,25 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts"
-             xmlns:FleetParts="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummary"
+             xmlns:FleetParts="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts" xmlns:Converter="clr-namespace:Miotsukushi.Converter" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummary"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="138">
     <UserControl.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <DataTemplate x:Key="DataTemplate1">
             <local:Ship Margin="0,3"/>
         </DataTemplate>
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock TextWrapping="Wrap" Text="第1艦隊" Margin="5,5,5,0"/>
-        <TextBlock TextWrapping="Wrap" Text="ぱぴぷぺぽぱぴぷぺぽ" FontSize="15" Margin="5,5,5,0"/>
-        <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 入渠中の艦がいます!"/>
-        <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 未補給の艦がいます!"/>
-        <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red"><Run Text="⚠ "/><Run Text="疲労中"/><Run Text="の艦がいます!"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,5,5,0"><Run Text="第"/><Run Text="{Binding ID, Mode=OneWay}"/><Run Text="艦隊"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Text="{Binding DeckName}" FontSize="15" Margin="5,5,5,0"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 入渠中の艦がいます!" Visibility="{Binding HasDockingShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 未補給の艦がいます!" Visibility="{Binding HasUnsuppliedShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 疲労中の艦がいます!" Visibility="{Binding HasTiredShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
-        <TextBlock TextWrapping="Wrap" Text="合計Lv. 25" Margin="5,0"/>
-        <TextBlock TextWrapping="Wrap" Text="ドラム缶: 5個 / 3隻" Margin="5,3,5,0"/>
-        <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="制空"/><Run Text=": "/><Run Text="137"/></TextBlock>
-        <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="索敵"/><Run Text=": "/><Run Text="29"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,0"><Run Text="合計Lv. "/><Run Text="{Binding SumShipLevel}"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="ドラム缶: "/><Run Text="{Binding DrumCount}"/><Run Text="個 / "/><Run Text="{Binding DrumShipCount}"/><Run Text="隻"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="制空: "/><Run Text="{Binding SumAirMastery}"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="索敵: "/><Run Text="{Binding SumReconnaissance}"/></TextBlock>
         <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
         <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" Margin="5,0"/>
     </StackPanel>

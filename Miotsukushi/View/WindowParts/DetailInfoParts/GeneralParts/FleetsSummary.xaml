@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="554">
     <UniformGrid Columns="4" Rows="1">
-        <local:FleetSummary/>
-        <local:FleetSummary/>
-        <local:FleetSummary/>
-        <local:FleetSummary/>
+        <local:FleetSummary DataContext="{Binding FleetSummaryViewModel[0]}"/>
+        <local:FleetSummary DataContext="{Binding FleetSummaryViewModel[1]}"/>
+        <local:FleetSummary DataContext="{Binding FleetSummaryViewModel[2]}"/>
+        <local:FleetSummary DataContext="{Binding FleetSummaryViewModel[3]}"/>
     </UniformGrid>
 </UserControl>
