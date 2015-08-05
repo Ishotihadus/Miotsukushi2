@@ -215,6 +215,15 @@
     <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\Basic.xaml.cs">
       <DependentUpon>Basic.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetsSummary.xaml.cs">
+      <DependentUpon>FleetsSummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetSummary.xaml.cs">
+      <DependentUpon>FleetSummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\Ship.xaml.cs">
+      <DependentUpon>Ship.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowParts\DetailInformationPanel.xaml.cs">
       <DependentUpon>DetailInformationPanel.xaml</DependentUpon>
     </Compile>
@@ -290,6 +299,18 @@
     <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\Basic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetsSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\Ship.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WindowParts\DetailInformationPanel.xaml">
       <Generator>MSBuild:Compile</Generator>

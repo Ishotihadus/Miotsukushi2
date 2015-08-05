@@ -10,11 +10,14 @@
 	x:Name="UserControl"
 	d:DesignWidth="566" d:DesignHeight="768">
 
-	<ScrollViewer x:Name="LayoutRoot" VerticalScrollBarVisibility="Auto">
-		<StackPanel Orientation="Vertical">
-			<Expander Header="司令部情報" Margin="0" VerticalAlignment="Top" IsExpanded="True">
-				<GeneralParts:Basic />
-			</Expander>
-		</StackPanel>
-	</ScrollViewer>
+    <ScrollViewer x:Name="LayoutRoot" VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical">
+            <Expander Header="司令部情報" Margin="0" VerticalAlignment="Top" IsExpanded="True">
+                <GeneralParts:Basic />
+            </Expander>
+            <Expander Header="艦隊概要" Margin="0,10,0,0" IsExpanded="True">
+                <GeneralParts:FleetsSummary/>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
