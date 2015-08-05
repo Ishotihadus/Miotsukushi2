@@ -23,6 +23,11 @@ namespace Miotsukushi.View.WindowParts
         public EasyInformationPanel()
         {
             InitializeComponent();
+            try
+            {
+                this.DataContext = new ViewModel.EasyInfoPanel.EasyInfoPanelViewModel();
+            }
+            catch { }
         }
     }
 }

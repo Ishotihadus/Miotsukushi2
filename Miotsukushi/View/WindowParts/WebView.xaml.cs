@@ -27,7 +27,11 @@ namespace Miotsukushi.View.WindowParts
             InitializeComponent();
             BrowserSupressScriptError();
 
-            Model.MainModel.Current.kancolleModel.GameStart += kancolleModel_GameStart; // ゆるせ、後で何とかする
+            try
+            {
+                Model.MainModel.Current.kancolleModel.GameStart += kancolleModel_GameStart; // ゆるせ、後で何とかする
+            }
+            catch { }
         }
 
         /// <summary>

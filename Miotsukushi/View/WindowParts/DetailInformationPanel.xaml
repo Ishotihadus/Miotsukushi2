@@ -75,7 +75,7 @@
 				<DetailInfoParts:General/>
 			</TabItem>
 			<TabItem Header="第1艦隊">
-				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[0]}"/>
+                <DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[0]}"/>
 			</TabItem>
 			<TabItem Header="第2艦隊">
 				<DetailInfoParts:Fleet DataContext="{Binding FleetsCollection[1]}"/>
