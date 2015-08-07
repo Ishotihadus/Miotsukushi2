@@ -1,10 +1,19 @@
-﻿<UserControl x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummaryShip"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts"
+             xmlns:Converter="clr-namespace:Miotsukushi.Converter" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummaryShip"
              mc:Ignorable="d" d:DesignWidth="128">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Converter:IsKirakiraVisibilityConverter x:Key="IsKirakiraVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <StackPanel>
         <DockPanel>
             <TextBlock TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center"><Run Text="Lv. "/><Run Text="{Binding ShipLevel}"/></TextBlock>
@@ -14,11 +23,17 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock TextWrapping="Wrap" Margin="0" d:LayoutOverrides="Width" HorizontalAlignment="Left"><Run Text="Cd. "/><Run Text="{Binding Cond}"/></TextBlock>
-            <ProgressBar Grid.Column="1" Height="3" Margin="0,0,0,5" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
-            <ProgressBar Grid.Column="1" Height="3" Margin="0,5,0,0" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,0,11.366,0" d:LayoutOverrides="Width"><Run Text="Cd. "/><Run Text="{Binding Cond}"/></TextBlock>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Fill="#FFFFB900" Visibility="{Binding Cond, Converter={StaticResource IsKirakiraVisibilityConverter}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_star_invincible}" Stretch="Uniform" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <ProgressBar Grid.Column="2" Height="3" Margin="0,3.98,0,8.98" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
+            <ProgressBar Grid.Column="2" Height="3" Margin="0,8.98,0,3.98" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
         </Grid>
     </StackPanel>
 </UserControl>
