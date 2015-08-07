@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
                 <ResourceDictionary Source="/Miotsukushi;component/Resources/MetroProgressBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <Converter:IsKirakiraVisibilityConverter x:Key="IsKirakiraVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -24,7 +25,7 @@
             <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="35"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock TextWrapping="Wrap" Margin="0,0,11.366,0" d:LayoutOverrides="Width"><Run Text="Cd. "/><Run Text="{Binding Cond}"/></TextBlock>
@@ -35,6 +36,11 @@
             </Rectangle>
             <ProgressBar Grid.Column="2" Height="3" Margin="0,3.98,0,8.98" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
             <ProgressBar Grid.Column="2" Height="3" Margin="0,8.98,0,3.98" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Fill="#FFFF28A7" Margin="18,0,0,0" Visibility="{Binding HasDameCon, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_lifesaver}" Stretch="Uniform" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
         </Grid>
 
     </StackPanel>

@@ -190,6 +190,25 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             }
         }
 
+        private bool _HasDameCon;
+        public bool HasDameCon
+        {
+            get
+            {
+                return _HasDameCon;
+            }
+
+            set
+            {
+                if (_HasDameCon != value)
+                {
+                    _HasDameCon = value;
+                    OnPropertyChanged("HasDameCon");
+                }
+            }
+        }
+
+
         public FleetSummaryShipViewModel(int shipid)
         {
             model = Model.MainModel.Current.kancolleModel;
@@ -199,8 +218,15 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                 charaid = shipdata.characterid;
                 character_initialize();
                 initialize();
+                damecon_append();
                 shipdata.PropertyChanged += shipdata_PropertyChanged;
+                shipdata.Slots.CollectionChanged += Slots_CollectionChanged;
             }
+        }
+
+        private void Slots_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            damecon_append();
         }
 
 
@@ -295,6 +321,21 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     ammo_append();
                     break;
             }
+        }
+
+        void damecon_append()
+        {
+            bool _hasdamecon = false;
+            foreach(var slot in shipdata.Slots)
+            {
+                var item = model.slotdata.FirstOrDefault(_ => _.id == slot);
+                if (item != null && item.iteminfo != null && item.iteminfo.type_equiptype == 23)
+                {
+                    _hasdamecon = true;
+                    break;
+                }
+            }
+            HasDameCon = _hasdamecon;
         }
     }
 }
