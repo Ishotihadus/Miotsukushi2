@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="128">
     <StackPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center"><Run Text="Lv. "/><Run Text="{Binding Level}"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center"><Run Text="Lv. "/><Run Text="{Binding ShipLevel}"/></TextBlock>
             <TextBlock TextWrapping="Wrap" Text="{Binding ShipName}"/>
         </DockPanel>
         <ProgressBar Height="3" Value="{Binding HpNow}" Maximum="{Binding HpMax}"/>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
 {
@@ -223,9 +224,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             }
         }
 
+        public ObservableCollection<FleetSummaryShipViewModel> Ships { get; set; }
+
 
         public FleetSummaryViewModel(int id)
         {
+            Ships = new ObservableCollection<FleetSummaryShipViewModel>();
+            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Ships, new object());
+
             model = Miotsukushi.Model.MainModel.Current.kancolleModel;
             
             this.id = id;
@@ -247,6 +253,36 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                 fleet = model.fleetdata[id];
                 ViewModelInitialize();
                 model.fleetdata[id].PropertyChanged += FleetSummaryViewModel_PropertyChanged;
+                model.fleetdata[id].ships.CollectionChanged += Ships_CollectionChanged;
+            }
+        }
+
+        private void Ships_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    if (e.NewItems.Count > 0)
+                        Ships.Insert(e.NewStartingIndex, new FleetSummaryShipViewModel(model.fleetdata[id].ships[e.NewStartingIndex]));
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    Ships.Move(e.OldStartingIndex, e.NewStartingIndex);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    Ships.RemoveAt(e.OldStartingIndex);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    Ships[e.OldStartingIndex] = new FleetSummaryShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    for (int i = 0; i < model.fleetdata[id].ships.Count; i++)
+                    {
+                        if (i < Ships.Count)
+                            Ships[i] = new FleetSummaryShipViewModel(model.fleetdata[id].ships[i]);
+                        else
+                            Ships.Add(new FleetSummaryShipViewModel(model.fleetdata[id].ships[i]));
+                    }
+                    break;
             }
         }
 

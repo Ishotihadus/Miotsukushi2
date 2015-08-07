@@ -26,6 +26,6 @@
         <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="制空: "/><Run Text="{Binding SumAirMastery}"/></TextBlock>
         <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="索敵: "/><Run Text="{Binding SumReconnaissance}"/></TextBlock>
         <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
-        <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" Margin="5,0"/>
+        <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" Margin="5,0" ItemsSource="{Binding Ships}"/>
     </StackPanel>
 </UserControl>
