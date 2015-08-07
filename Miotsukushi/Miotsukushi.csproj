@@ -125,6 +125,7 @@
     <Compile Include="Converter\BooleanToVisibilityReverseConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\DateTimeConverter.cs" />
+    <Compile Include="Converter\HPStatusColorConverter.cs" />
     <Compile Include="Converter\IntegerConverter.cs" />
     <Compile Include="Converter\IntegerToVisibilityConverter.cs" />
     <Compile Include="Converter\IsKirakiraVisibilityConverter.cs" />
@@ -259,6 +260,10 @@
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\MetroProgressBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CommonParts\ShipParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>

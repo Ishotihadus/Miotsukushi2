@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts"
-             xmlns:Converter="clr-namespace:Miotsukushi.Converter" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummaryShip"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummaryShip" xmlns:Converter="clr-namespace:Miotsukushi.Converter"
              mc:Ignorable="d" d:DesignWidth="128">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/Miotsukushi;component/Resources/MetroProgressBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Converter:IsKirakiraVisibilityConverter x:Key="IsKirakiraVisibilityConverter"/>
         </ResourceDictionary>
@@ -19,8 +20,8 @@
             <TextBlock TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center"><Run Text="Lv. "/><Run Text="{Binding ShipLevel}"/></TextBlock>
             <TextBlock TextWrapping="Wrap" Text="{Binding ShipName}"/>
         </DockPanel>
-        <ProgressBar Height="3" Value="{Binding HpNow}" Maximum="{Binding HpMax}"/>
-        <Grid>
+        <Custom:MetroProgressBar Height="3" Value="{Binding HpNow}" Maximum="{Binding HpMax}" MinHeight="0" Style="{StaticResource HpProgressBarStyle}" />
+            <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="20"/>
@@ -35,5 +36,6 @@
             <ProgressBar Grid.Column="2" Height="3" Margin="0,3.98,0,8.98" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
             <ProgressBar Grid.Column="2" Height="3" Margin="0,8.98,0,3.98" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
         </Grid>
+
     </StackPanel>
 </UserControl>
