@@ -22,12 +22,12 @@
         <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 入渠中の艦がいます!" Visibility="{Binding HasDockingShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 未補給の艦がいます!" Visibility="{Binding HasUnsuppliedShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 疲労中の艦がいます!" Visibility="{Binding HasTiredShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+        <Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
         <TextBlock TextWrapping="Wrap" Margin="5,0"><Run Text="合計Lv. "/><Run Text="{Binding SumShipLevel}"/></TextBlock>
         <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="ドラム缶: "/><Run Text="{Binding DrumCount}"/><Run Text="個 / "/><Run Text="{Binding DrumShipCount}"/><Run Text="隻"/></TextBlock>
         <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="制空: "/><Run Text="{Binding SumAirMastery}"/></TextBlock>
         <TextBlock TextWrapping="Wrap" Margin="5,3,5,0"><Run Text="索敵: "/><Run Text="{Binding SumReconnaissance}"/></TextBlock>
-        <Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+        <Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
         <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" Margin="5,0" ItemsSource="{Binding Ships}"/>
     </StackPanel>
 </UserControl>

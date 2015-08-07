@@ -17,7 +17,7 @@
 	<StackPanel x:Name="LayoutRoot">
 		<TextBlock TextWrapping="Wrap" Text="{Binding ShipType}" Margin="5,5,5,2"/>
 		<TextBlock TextWrapping="Wrap" Text="{Binding ShipName}" Margin="5,0" FontSize="15"/>
-		<Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+		<Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
 		<TextBlock TextWrapping="Wrap" Margin="5,0"><Run Text="Lv. "/><Run Text="{Binding ShipLevel}"/></TextBlock>
 		<TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="next: "/><Run Text="{Binding ExpToNextLv}"/></TextBlock>
 		<ProgressBar Height="3" Margin="5,0,5,5" Value="{Binding ExpPercentage}"/>
@@ -29,9 +29,9 @@
 		<TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="弾薬: "/><Run Text="{Binding AmmoNow}"/><Run Text="/"/><Run Text="{Binding AmmoMax}"/></TextBlock>
 		<ProgressBar Height="3" Margin="5,0,5,3" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
 		<ProgressBar Height="3" Margin="5,0,5,3" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
-		<Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+		<Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
 		<ItemsControl Margin="5,0" ItemTemplate="{DynamicResource SlotItemTemplate}" ItemsSource="{Binding Slots}" MinHeight="90"/>
-		<Rectangle Height="0.5" Margin="5" Fill="{DynamicResource GrayBrush1}"/>
+		<Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
 		<CommonParts:ShipParameterView Margin="5,3,5,8" ParameterName="制空" ParameterValue="{Binding AirMastery}"/>
 		<CommonParts:ShipParameterView Margin="5,3" ParameterName="火力" ParameterValue="{Binding Firepower}"/>
 		<CommonParts:ShipParameterView Margin="5,3" ParameterName="装甲" ParameterValue="{Binding Armor}"/>
