@@ -290,7 +290,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         {
             DeckName = fleet.DeckName;
             HasDockingShip = fleet.DockingShipsCount > 0;
-            HasTiredShip = fleet.MinCond < 40;
+            HasTiredShip = fleet.MinCond < 40 && fleet.ships.Count > 0;
             SumAirMastery = fleet.SumAirMastery;
             SumReconnaissance = (int)fleet.OkinoshimaSearchParameter;
             SumShipLevel = fleet.SumShipLevel;
@@ -309,7 +309,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     HasDockingShip = fleet.DockingShipsCount > 0;
                     break;
                 case "MinCond":
-                    HasTiredShip = fleet.MinCond < 40;
+                    HasTiredShip = fleet.MinCond < 40 && fleet.ships.Count > 0;
                     break;
                 case "SumAirMastery":
                     SumAirMastery = fleet.SumAirMastery;
