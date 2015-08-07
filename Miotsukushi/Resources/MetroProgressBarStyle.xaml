@@ -28,5 +28,10 @@
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource Gray6}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>
