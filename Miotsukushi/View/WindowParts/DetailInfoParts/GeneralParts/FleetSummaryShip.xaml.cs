@@ -18,9 +18,9 @@ namespace Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts
     /// <summary>
     /// Ship.xaml の相互作用ロジック
     /// </summary>
-    public partial class Ship : UserControl
+    public partial class FleetSummaryShip : UserControl
     {
-        public Ship()
+        public FleetSummaryShip()
         {
             InitializeComponent();
         }

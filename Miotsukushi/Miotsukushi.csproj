@@ -173,6 +173,7 @@
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetCollectionViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetsSummaryViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetSummaryShipViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetSummaryViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestCollectionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestViewModel.cs" />
@@ -223,8 +224,8 @@
     <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetSummary.xaml.cs">
       <DependentUpon>FleetSummary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\Ship.xaml.cs">
-      <DependentUpon>Ship.xaml</DependentUpon>
+    <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetSummaryShip.xaml.cs">
+      <DependentUpon>FleetSummaryShip.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowParts\DetailInformationPanel.xaml.cs">
       <DependentUpon>DetailInformationPanel.xaml</DependentUpon>
@@ -310,7 +311,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\Ship.xaml">
+    <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetSummaryShip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts"
-             xmlns:FleetParts="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts" xmlns:Converter="clr-namespace:Miotsukushi.Converter" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummary"
+             xmlns:FleetParts="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts" xmlns:Converter="clr-namespace:Miotsukushi.Converter"
+             x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts.FleetSummary"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="138">
     <UserControl.Resources>
         <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <DataTemplate x:Key="DataTemplate1">
-            <local:Ship Margin="0,3"/>
+            <local:FleetSummaryShip Margin="0,3"/>
         </DataTemplate>
     </UserControl.Resources>
     <StackPanel>
