@@ -15,9 +15,7 @@
     </UserControl.Resources>
     <StackPanel>
         <TextBlock TextWrapping="Wrap" Margin="5,5,5,0"><Run Text="第"/><Run Text="{Binding ID, Mode=OneWay}"/><Run Text="艦隊"/></TextBlock>
-        <Viewbox Margin="5,5,5,0" HorizontalAlignment="Left" Stretch="Fill" StretchDirection="DownOnly">
-            <TextBlock TextWrapping="Wrap" Text="{Binding DeckName}" FontSize="15"/>
-        </Viewbox>
+        <TextBlock TextWrapping="Wrap" Text="{Binding DeckName}" FontSize="14.667"/>
         <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 入渠中の艦がいます!" Visibility="{Binding HasDockingShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 未補給の艦がいます!" Visibility="{Binding HasUnsuppliedShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <TextBlock TextWrapping="Wrap" Margin="5,1,5,0" Background="#7FF3FF00" Foreground="Red" Text="⚠ 疲労中の艦がいます!" Visibility="{Binding HasTiredShip, Converter={StaticResource BooleanToVisibilityConverter}}"/>
