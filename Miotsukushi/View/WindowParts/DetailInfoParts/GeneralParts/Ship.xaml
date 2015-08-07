@@ -4,21 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.GeneralParts"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="128">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Viewbox Margin="0,0,40,0" VerticalAlignment="Top" StretchDirection="DownOnly" Stretch="Fill" d:LayoutOverrides="Width" Grid.ColumnSpan="2" HorizontalAlignment="Left">
-            <TextBlock TextWrapping="Wrap" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Text="五月雨"/>
-        </Viewbox>
-        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"><Run Text="Lv. "/><Run Text="25"/></TextBlock>
-        <ProgressBar Margin="0,17.355,0,0" VerticalAlignment="Top" Height="3" Grid.ColumnSpan="2"/>
-        <TextBlock TextWrapping="Wrap" Text="Cd. 47" VerticalAlignment="Top" Margin="0,20.355,15.182,0" d:LayoutOverrides="Width"/>
-        <ProgressBar Margin="0,23.96,0,0" VerticalAlignment="Top" Height="3.465" Grid.Column="1"/>
-        <ProgressBar Margin="0,30.215,0,0" VerticalAlignment="Top" Height="3.465" Grid.Column="1"/>
-
-    </Grid>
+             mc:Ignorable="d" d:DesignWidth="128">
+    <StackPanel>
+        <DockPanel>
+            <TextBlock TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center"><Run Text="Lv. "/><Run Text="{Binding Level}"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" Text="{Binding ShipName}"/>
+        </DockPanel>
+        <ProgressBar Height="3" Value="{Binding HpNow}" Maximum="{Binding HpMax}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock TextWrapping="Wrap" Margin="0" d:LayoutOverrides="Width" HorizontalAlignment="Left"><Run Text="Cd. "/><Run Text="{Binding Cond}"/></TextBlock>
+            <ProgressBar Grid.Column="1" Height="3" Margin="0,0,0,5" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
+            <ProgressBar Grid.Column="1" Height="3" Margin="0,5,0,0" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
+        </Grid>
+    </StackPanel>
 </UserControl>
