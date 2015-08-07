@@ -4,7 +4,16 @@
                     xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:Converter="clr-namespace:Miotsukushi.Converter">
     <Converter:HPStatusColorConverter x:Key="HPStatusColorConverter"/>
-    <Style TargetType="Custom:MetroProgressBar" x:Key="HpProgressBarStyle">
+    <Converter:FuelAmmoStatusColorConverter x:Key="FuelAmmoStatusColorConverter"/>
+    <Style TargetType="Custom:MetroProgressBar" x:Key="BaseStyle">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource Gray6}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="MinHeight" Value="0"></Setter>
+    </Style>
+    <Style TargetType="Custom:MetroProgressBar" x:Key="HpProgressBarStyle" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <LinearGradientBrush EndPoint="0.5,1.2" StartPoint="0.5,-0.2">
@@ -28,9 +37,29 @@
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background">
+    </Style>
+    <Style TargetType="Custom:MetroProgressBar" x:Key="FuelAmmoProgressBarStyle" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource Gray6}"/>
+                <LinearGradientBrush EndPoint="0.5,1.2" StartPoint="0.5,-0.2">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="-90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Offset="1">
+                        <GradientStop.Color>
+                            <MultiBinding Converter="{StaticResource FuelAmmoStatusColorConverter}">
+                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type Custom:MetroProgressBar}}" Path="Value" Mode="OneWay"/>
+                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type Custom:MetroProgressBar}}" Path="Maximum" Mode="OneWay"/>
+                            </MultiBinding>
+                        </GradientStop.Color>
+                    </GradientStop>
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
             </Setter.Value>
         </Setter>
     </Style>

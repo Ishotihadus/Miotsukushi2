@@ -21,7 +21,7 @@
             <TextBlock TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center"><Run Text="Lv. "/><Run Text="{Binding ShipLevel}"/></TextBlock>
             <TextBlock TextWrapping="Wrap" Text="{Binding ShipName}"/>
         </DockPanel>
-        <Custom:MetroProgressBar Height="3" Value="{Binding HpNow}" Maximum="{Binding HpMax}" MinHeight="0" Style="{StaticResource HpProgressBarStyle}" />
+        <Custom:MetroProgressBar Height="3" Value="{Binding HpNow}" Maximum="{Binding HpMax}" Style="{StaticResource HpProgressBarStyle}" />
             <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -34,8 +34,8 @@
                     <VisualBrush Visual="{StaticResource appbar_star_invincible}" Stretch="Uniform" />
                 </Rectangle.OpacityMask>
             </Rectangle>
-            <ProgressBar Grid.Column="2" Height="3" Margin="0,3.98,0,8.98" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
-            <ProgressBar Grid.Column="2" Height="3" Margin="0,8.98,0,3.98" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
+            <Custom:MetroProgressBar Grid.Column="2" Height="3" Margin="0,0,0,6" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}" Style="{StaticResource FuelAmmoProgressBarStyle}"/>
+            <Custom:MetroProgressBar Grid.Column="2" Height="3" Margin="0,6,0,0" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}" Style="{StaticResource FuelAmmoProgressBarStyle}"/>
             <Rectangle Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Fill="#FFFF28A7" Margin="18,0,0,0" Visibility="{Binding HasDameCon, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Rectangle.OpacityMask>
                     <VisualBrush Visual="{StaticResource appbar_lifesaver}" Stretch="Uniform" />
