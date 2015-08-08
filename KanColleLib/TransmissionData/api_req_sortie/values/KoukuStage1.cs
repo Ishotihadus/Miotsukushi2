@@ -31,7 +31,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         public int e_lostcount;
 
         /// <summary>
-        /// 制空状態（1:確保　2:優勢　3:均衡もしくは劣勢　4:喪失）
+        /// 制空状態（0:均衡　1:確保　2:優勢　3:劣勢　4:喪失）
         /// </summary>
         public int disp_seiku;
 
