@@ -9,9 +9,11 @@ namespace KanColleLib.TransmissionData.api_req_member
     public class GetIncentive
     {
         /// <summary>
-        /// 不明
+        /// もらえる褒章の個数
         /// </summary>
         public int count;
+
+        // api_item があるという噂
 
         public static GetIncentive fromDynamic(dynamic json)
         {
