@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KanColleLib.TransmissionData.api_req_sortie.values;
+using KanColleLib.TransmissionData.api_req_battle_midnight.values;
 
 namespace KanColleLib.TransmissionData.api_req_battle_midnight
 {
@@ -47,12 +47,12 @@ namespace KanColleLib.TransmissionData.api_req_battle_midnight
         /// <summary>
         /// 自艦隊パラメータ（火力/雷装/対空/装甲の順、インデックスは0から、なければ0）
         /// </summary>
-        public int[] fParam;
+        public int[][] fParam;
 
         /// <summary>
         /// 敵艦隊パラメータ（火力/雷装/対空/装甲の順、インデックスは0から、なければ0）
         /// </summary>
-        public int[] eParam;
+        public int[][] eParam;
 
         /// <summary>
         /// 触接機のID

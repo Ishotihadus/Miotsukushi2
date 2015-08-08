@@ -104,6 +104,8 @@
     <Compile Include="TransmissionData\api_port\Log.cs" />
     <Compile Include="TransmissionData\api_port\Port.cs" />
     <Compile Include="TransmissionData\api_port\values\LogValue.cs" />
+    <Compile Include="TransmissionData\api_req_battle_midnight\Battle.cs" />
+    <Compile Include="TransmissionData\api_req_battle_midnight\values\HougekiValue.cs" />
     <Compile Include="TransmissionData\api_req_hensei\Combined.cs" />
     <Compile Include="TransmissionData\api_req_hensei\Lock.cs" />
     <Compile Include="TransmissionData\api_req_hokyu\Charge.cs" />
