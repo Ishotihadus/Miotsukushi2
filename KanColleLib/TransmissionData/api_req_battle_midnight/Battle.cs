@@ -14,26 +14,59 @@ namespace KanColleLib.TransmissionData.api_req_battle_midnight
         /// </summary>
         public int deck_id;
 
+        /// <summary>
+        /// 夜戦開始時のHP（1から6が自艦隊、7から12が敵艦隊）
+        /// </summary>
         public int[] nowhps;
 
+        /// <summary>
+        /// 敵艦ID（インデックスは1から）
+        /// </summary>
         public int[] ship_ke;
 
+        /// <summary>
+        /// 敵艦レベル（インデックスは1から）
+        /// </summary>
         public int[] ship_lv;
 
+        /// <summary>
+        /// 最大HP（1から6が自艦隊、7から12が敵艦隊）
+        /// </summary>
         public int[] maxhps;
 
+        /// <summary>
+        /// 敵のスロット情報（インデックスはともに0から、なければ-1）
+        /// </summary>
         public int[][] eSlot;
 
+        /// <summary>
+        /// 敵の改装情報（インデックスはともに0から、なければ0）
+        /// </summary>
         public int[][] eKyouka;
 
+        /// <summary>
+        /// 自艦隊パラメータ（火力/雷装/対空/装甲の順、インデックスは0から、なければ0）
+        /// </summary>
         public int[] fParam;
 
+        /// <summary>
+        /// 敵艦隊パラメータ（火力/雷装/対空/装甲の順、インデックスは0から、なければ0）
+        /// </summary>
         public int[] eParam;
 
+        /// <summary>
+        /// 触接機のID
+        /// </summary>
         public int[] touch_plane;
 
+        /// <summary>
+        /// 照明弾の発射艦（1-6）
+        /// </summary>
         public int[] flare_pos;
 
+        /// <summary>
+        /// 砲雷撃戦の情報
+        /// </summary>
         public HougekiValue hougeki;
 
         public static Battle fromDynamic(dynamic json)
