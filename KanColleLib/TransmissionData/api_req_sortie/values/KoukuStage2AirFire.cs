@@ -26,7 +26,9 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// 7　高角砲/高射装置/電探
         /// 8　高角砲+高射装置/電探
         /// 9　高角砲/高射装置
-        /// 11 高角砲/摩耶機銃?
+        /// 10　高角砲/集中機銃/電探
+        /// 11　高角砲/集中機銃
+        /// 12　集中機銃/機銃/電探
         /// </summary>
         public int kind;
 

@@ -18,9 +18,8 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
 
         /// <summary>
         /// 攻撃の種類（0から始まるインデックス）
-        /// 昼戦なら 0:通常砲撃 1:レーザー攻撃 2:AOS連撃 3～6:AOSカットイン
-        /// 夜戦なら 0:通常砲撃 1:連撃 2～5:カットイン
-        /// thanks to: http://www.ptt.cc/bbs/KanColle/M.1398354350.A.489.html
+        /// 0:通常　1:レーザー攻撃　2:連撃　3:カットイン(主砲/副砲)　4:カットイン(主砲/電探)　5:カットイン(主砲/徹甲)　6:カットイン(主砲/主砲)　7:空撃　8:爆雷攻撃　9:雷撃　10:ロケット砲撃
+        /// 7以上は通常はクライアント側で判別
         /// </summary>
         public int[] at_type;
 
