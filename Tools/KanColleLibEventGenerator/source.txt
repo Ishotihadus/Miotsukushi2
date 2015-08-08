@@ -21,7 +21,7 @@ api_get_member/slot_item,GetmemberSlotItem,RequestBase,TransmissionData.api_get_
 api_get_member/unsetslot,GetmemberUnsetslot,RequestBase,TransmissionData.api_get_member.Unsetslot
 api_get_member/useitem,GetmemberUseitem,RequestBase,TransmissionData.api_get_member.Useitem
 api_port/port,PortPort,TransmissionRequest.api_port.PortRequest,TransmissionData.api_port.Port
-#api_req_battle_midnight/battle
+api_req_battle_midnight/battle,ReqbattlemidnightBattle,TransmissionRequest.api_req_battle_midnight.BattleRequest,TransmissionData.api_req_battle_midnight.Battle
 #api_req_battle_midnight/sp_midnight
 #api_req_combined_battle/airbattle
 #api_req_combined_battle/battle

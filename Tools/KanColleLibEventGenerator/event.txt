@@ -119,6 +119,13 @@ public delegate void GetPortPortEventHandler(object sender, TransmissionRequest.
 protected virtual void OnGetPortPort(TransmissionRequest.api_port.PortRequest request, Svdata<TransmissionData.api_port.Port> response) { if (GetPortPort != null) GetPortPort(this, request, response); }
 
 /// <summary>
+/// api_req_battle_midnight/battle を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqbattlemidnightBattleEventHandler GetReqbattlemidnightBattle;
+public delegate void GetReqbattlemidnightBattleEventHandler(object sender, TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response);
+protected virtual void OnGetReqbattlemidnightBattle(TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response) { if (GetReqbattlemidnightBattle != null) GetReqbattlemidnightBattle(this, request, response); }
+
+/// <summary>
 /// api_req_hensei/change を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetReqhenseiChangeEventHandler GetReqhenseiChange;

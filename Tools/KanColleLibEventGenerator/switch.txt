@@ -100,6 +100,12 @@ OnGetPortPort(new TransmissionRequest.api_port.PortRequest(request), Svdata<Tran
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_req_battle_midnight/battle":
+if(json.api_data())
+OnGetReqbattlemidnightBattle(new TransmissionRequest.api_req_battle_midnight.BattleRequest(request), Svdata<TransmissionData.api_req_battle_midnight.Battle>.fromDynamic(json, TransmissionData.api_req_battle_midnight.Battle.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_req_hensei/change":
 OnGetReqhenseiChange(new TransmissionRequest.api_req_hensei.ChangeRequest(request), Svdata<object>.fromDynamic(json, null));
 break;

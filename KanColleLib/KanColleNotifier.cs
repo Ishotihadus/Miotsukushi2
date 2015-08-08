@@ -226,6 +226,12 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_req_battle_midnight/battle":
+                    if (json.api_data())
+                        OnGetReqbattlemidnightBattle(new TransmissionRequest.api_req_battle_midnight.BattleRequest(request), Svdata<TransmissionData.api_req_battle_midnight.Battle>.fromDynamic(json, TransmissionData.api_req_battle_midnight.Battle.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_req_hensei/change":
                     OnGetReqhenseiChange(new TransmissionRequest.api_req_hensei.ChangeRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
@@ -349,8 +355,6 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
-
-
                 default:
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
                     System.Diagnostics.Debug.WriteLine("RESPONSE BODY: " + response);
@@ -408,7 +412,6 @@ namespace KanColleLib
         #endregion
 
         #region 受信URLごとのイベント定義（自動処理）
-
 
         /// <summary>
         /// api_get_member/basic を受信して解析に成功した際に呼び出されます
@@ -528,6 +531,13 @@ namespace KanColleLib
         public event GetPortPortEventHandler GetPortPort;
         public delegate void GetPortPortEventHandler(object sender, TransmissionRequest.api_port.PortRequest request, Svdata<TransmissionData.api_port.Port> response);
         protected virtual void OnGetPortPort(TransmissionRequest.api_port.PortRequest request, Svdata<TransmissionData.api_port.Port> response) { if (GetPortPort != null) GetPortPort(this, request, response); }
+
+        /// <summary>
+        /// api_req_battle_midnight/battle を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqbattlemidnightBattleEventHandler GetReqbattlemidnightBattle;
+        public delegate void GetReqbattlemidnightBattleEventHandler(object sender, TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response);
+        protected virtual void OnGetReqbattlemidnightBattle(TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response) { if (GetReqbattlemidnightBattle != null) GetReqbattlemidnightBattle(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/change を受信して解析に成功した際に呼び出されます
@@ -703,7 +713,6 @@ namespace KanColleLib
         public event GetStart2EventHandler GetStart2;
         public delegate void GetStart2EventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_start2.Start2> response);
         protected virtual void OnGetStart2(RequestBase request, Svdata<TransmissionData.api_start2.Start2> response) { if (GetStart2 != null) GetStart2(this, request, response); }
-
 
         #endregion
 
