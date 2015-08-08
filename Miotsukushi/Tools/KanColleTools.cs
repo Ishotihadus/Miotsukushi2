@@ -410,5 +410,15 @@ namespace Miotsukushi.Tools
                 (ship.characterid == 428 && anti_air_gun >= 2 && twenty_five_mm_triple_machinegun >= 1);
         }
 
+        /// <summary>
+        /// 旗艦庇い発動かどうか
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <returns></returns>
+        public static bool IsFlagShipProtect(double damage)
+        {
+            return (damage - Math.Floor(damage)) > 0.09;
+        }
+
     }
 }

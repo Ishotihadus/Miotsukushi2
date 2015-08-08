@@ -20,6 +20,18 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             this.kclib = kclib;
 
             kclib.GetReqsortieBattleresult += Kclib_GetReqsortieBattleresult;
+            kclib.GetReqsortieBattle += Kclib_GetReqsortieBattle;
+            kclib.GetReqbattlemidnightBattle += Kclib_GetReqbattlemidnightBattle;
+        }
+
+        private void Kclib_GetReqbattlemidnightBattle(object sender, KanColleLib.TransmissionRequest.api_req_battle_midnight.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_battle_midnight.Battle> response)
+        {
+            var result = BattleAnalyzer.AnalyzeNormalNightBattle(response.data);
+        }
+
+        private void Kclib_GetReqsortieBattle(object sender, KanColleLib.TransmissionRequest.api_req_sortie.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_sortie.Battle> response)
+        {
+            var result = BattleAnalyzer.AnalyzeNormalBattle(response.data);
         }
 
         private void Kclib_GetReqsortieBattleresult(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_sortie.Battleresult> response)
@@ -31,6 +43,8 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 get_ship_name = response.data.get_ship != null ? response.data.get_ship.ship_name : ""
             });
         }
+
+        
 
         /// <summary>
         /// 戦闘の結果を取得した際に呼び出されます
