@@ -8,10 +8,29 @@ namespace KanColleLib.TransmissionData.api_req_map.values
 {
     public class HappeningValue
     {
+        /// <summary>
+        /// 1
+        /// </summary>
         public int type;
+
+        /// <summary>
+        /// 量
+        /// </summary>
         public int count;
+
+        /// <summary>
+        /// 4
+        /// </summary>
         public int usemst;
+
+        /// <summary>
+        /// 資源ID 1:燃料 2:弾薬 3:鋼材 4:ボーキサイト
+        /// </summary>
         public int mst_id;
+
+        /// <summary>
+        /// 電探による回避があったか
+        /// </summary>
         public bool dentan;
 
         public static HappeningValue fromDynamic(dynamic json)

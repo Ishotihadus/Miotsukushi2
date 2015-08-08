@@ -50,7 +50,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         public int[] get_ship_exp;
 
         /// <summary>
-        /// 獲得前の経験値，次のレベルに達する経験値の組（インデックスは0から）
+        /// 獲得前の経験値，次のレベルに達する経験値の組, （レベルアップした場合）その次のレベルに達する経験値, （以下同様）（インデックスは0から）
         /// </summary>
         public int[][] get_exp_lvup;
 
@@ -60,7 +60,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         public int dests;
 
         /// <summary>
-        /// 全敵艦を倒したか
+        /// 旗艦撃沈フラグ
         /// </summary>
         public bool destsf;
 
@@ -88,15 +88,15 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         /// 初めてクリアしたか
         /// </summary>
         public bool first_clear;
-        
+
         /// <summary>
-        /// ?
+        /// 航空偵察作戦報酬獲得フラグ　0:なし 1:獲得
         /// </summary>
         public int mapcell_incentive;
 
         /// <summary>
         /// ドロップフラグ
-        /// 0:?　1:艦娘　2:?
+        /// 0:アイテム　1:艦娘　2:装備
         /// </summary>
         public bool[] get_flag;
 
@@ -118,7 +118,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         /// <summary>
         /// イベントかどうか? イベントドロップがあるかどうか?（未確認）
         /// </summary>
-        public bool get_eventflag;
+        public bool? get_eventflag;
 
         /// <summary>
         /// イベントドロップ
@@ -126,12 +126,12 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         public List<GetEventitemValue> get_eventitem;
 
         /// <summary>
-        /// 1-6系
+        /// 獲得戦果
         /// </summary>
-        public int get_exmap_rate;
+        public string get_exmap_rate;
 
         /// <summary>
-        /// 1-6系
+        /// 取得アイテムID
         /// </summary>
         public int get_exmap_useitem_id;
 
@@ -160,7 +160,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie
             ret.get_ship = json.api_get_ship() ? GetShipValue.fromDynamic(json.api_get_ship) : null;
             ret.get_slotitem = json.api_get_slotitem() ? GetSlotitemValue.fromDynamic(json.api_get_slotitem) : null;
             ret.get_useitem = json.api_get_useitem() ? GetUseitemValue.fromDynamic(json.api_get_useitem) : null;
-            ret.get_eventflag = (int)json.api_get_eventflag == 1;
+            ret.get_eventflag = json.api_get_eventflag() ? (int)json.api_get_eventflag == 1 : (bool?)null;
 
             if (!json.api_get_eventitem())
                 ret.get_eventitem = null;
@@ -174,8 +174,8 @@ namespace KanColleLib.TransmissionData.api_req_sortie
                     ret.get_eventitem.Add(GetEventitemValue.fromDynamic(json.api_get_eventitem));
             }
 
-            ret.get_exmap_rate = (int)json.api_get_exmap_rate;
-            ret.get_exmap_useitem_id = (int)json.api_get_exmap_useitem_id;
+            ret.get_exmap_rate = json.api_get_exmap_rate is string ? json.api_get_exmap_rate as string : ((int)json.api_get_exmap_rate).ToString();
+            ret.get_exmap_useitem_id = json.api_get_exmap_useitem_id is string ? int.Parse(json.api_get_exmap_useitem_id as string) : (int)json.api_get_exmap_useitem_id;
 
             return ret;
         }

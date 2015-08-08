@@ -14,7 +14,8 @@ namespace KanColleLib.TransmissionData.api_req_map.values
         public bool rashin_flg;
 
         /// <summary>
-        /// 羅針盤娘ID?
+        /// 羅針盤娘ID
+        /// 0:なし　1:眠そう　2:桃の髪飾り　3:ひよこ　4:魔法使い
         /// </summary>
         public int rashin_id;
 
@@ -46,6 +47,8 @@ namespace KanColleLib.TransmissionData.api_req_map.values
 
         /// <summary>
         /// 0:戦闘なし　1:昼戦　2:夜戦　3:夜昼戦　4:連合艦隊航空戦　6:能動分岐
+        /// event_id=6のときは0:気のせいだった　1:敵影を見ず　2:能動分岐
+        /// event_id=7のときは0:航空偵察　4:航空戦
         /// </summary>
         public int event_kind;
 
@@ -103,22 +106,22 @@ namespace KanColleLib.TransmissionData.api_req_map.values
         public EnemyValue enemy;
         
         /// <summary>
-        /// 1-6　入手アイテム情報
+        /// 船団護衛成功マスのときの獲得資源情報
         /// </summary>
         public ItemgetEoValue itemget_eo_comment;
 
         /// <summary>
-        /// わからん
+        /// 船団護衛成功マスのときの獲得アイテム情報
         /// </summary>
         public ItemgetEoValue itemget_eo_result;
 
         /// <summary>
-        /// これもわからん
+        /// 船団護衛成功マスのときの獲得結果
         /// </summary>
         public int? get_eo_rate;
 
         /// <summary>
-        /// 索敵関係?
+        /// 航空偵察マス情報
         /// </summary>
         public AirsearchValue airsearch;
 

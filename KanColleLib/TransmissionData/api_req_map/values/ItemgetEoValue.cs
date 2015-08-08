@@ -8,8 +8,20 @@ namespace KanColleLib.TransmissionData.api_req_map.values
 {
     public class ItemgetEoValue
     {
+        /// <summary>
+        /// 4: 資源
+        /// 5: 普通のアイテム
+        /// </summary>
         public int usemst;
+
+        /// <summary>
+        /// もらえる資源のID
+        /// </summary>
         public int id;
+
+        /// <summary>
+        /// 個数
+        /// </summary>
         public int getcount;
 
         public static ItemgetEoValue fromDynamic(dynamic json)

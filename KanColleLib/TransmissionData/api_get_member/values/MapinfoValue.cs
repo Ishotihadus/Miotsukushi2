@@ -45,12 +45,19 @@ namespace KanColleLib.TransmissionData.api_get_member.values
             /// </summary>
             public int state;
 
+            /// <summary>
+            /// 作戦難易度
+            /// 0:未設定　1:丙　2:乙　3:甲
+            /// </summary>
+            public int? selected_rank;
+
             public static Eventmap fromDynamic(dynamic json)
             {
                 Eventmap eventmap = new Eventmap();
                 eventmap.now_maphp = (int)json.api_now_maphp;
                 eventmap.max_maphp = (int)json.api_max_maphp;
                 eventmap.state = (int)json.api_state;
+                eventmap.selected_rank = json.api_selected_rank() ? (int)json.api_selected_rank : (int?)null;
                 return eventmap;
             }
         }

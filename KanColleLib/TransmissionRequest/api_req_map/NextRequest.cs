@@ -8,6 +8,10 @@ namespace KanColleLib.TransmissionRequest.api_req_map
 {
     public class NextRequest : RequestBase
     {
+        /// <summary>
+        /// 旗艦大破進撃の時のフラグ
+        /// 0:ふつう　1:ダメコン使用　2:ダメコン女神使用
+        /// </summary>
         public int recovery_type;
 
         /// <summary>
