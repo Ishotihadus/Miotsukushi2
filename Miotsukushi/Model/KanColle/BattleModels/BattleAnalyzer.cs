@@ -521,7 +521,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 hougekiphase.phase_name = "夜戦";
                 ret.phases.Add(hougekiphase);
             }
-            CalcGauge(friendship, enemyship, out ret.friend_gauge, out ret.enemy_gauge);
+            CalcGauge(ret.friend, ret.enemy, out ret.friend_gauge, out ret.enemy_gauge);
 
 #if DEBUG
             EventArgsDebugOutput(ret);
