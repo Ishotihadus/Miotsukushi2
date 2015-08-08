@@ -44,7 +44,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         /// </summary>
         public int[][] damage;
 
-        public static int[] DynamicParseArrayOnce(dynamic json)
+        static int[] DynamicParseArrayOnce(dynamic json)
         {
             var list = new List<int>();
             int i = 0;
@@ -57,7 +57,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
             return list.ToArray();
         }
 
-        public static int[][] DynamicParseArrayTwice(dynamic json)
+        static int[][] DynamicParseArrayTwice(dynamic json)
         {
             var list = new List<int[]>();
             int i = 0;
