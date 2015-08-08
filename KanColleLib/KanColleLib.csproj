@@ -172,6 +172,7 @@
     <Compile Include="TransmissionRequest\api_get_member\Ship3Request.cs" />
     <Compile Include="TransmissionRequest\api_get_member\ShipDeckRequest.cs" />
     <Compile Include="TransmissionRequest\api_port\PortRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_battle_midnight\BattleRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\ChangeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hokyu\ChargeRequest.cs" />
