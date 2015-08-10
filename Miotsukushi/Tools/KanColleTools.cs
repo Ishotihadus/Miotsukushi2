@@ -79,6 +79,55 @@ namespace Miotsukushi.Tools
             }
         }
 
+        public static Color GetSlotItemEquipTypeColor(int equiptype)
+        {
+            switch (equiptype)
+            {
+                case 1: return Color.FromRgb(209, 91, 91); // 小口径主砲
+                case 2: return Color.FromRgb(204, 61, 61); // 中口径主砲
+                case 3: return Color.FromRgb(194, 34, 34); // 大口径主砲
+                case 4: return Color.FromRgb(255, 234, 0); // 副砲
+                case 5: return Color.FromRgb(88, 135, 171); // 魚雷
+                case 6: return Color.FromRgb(102, 204, 119); // 艦上戦闘機
+                case 7: return Color.FromRgb(243, 109, 109); // 艦上爆撃機
+                case 8: return Color.FromRgb(101, 188, 255); // 艦上攻撃機
+                case 9: return Color.FromRgb(255, 192, 0); // 艦上偵察機
+                case 10: return Color.FromRgb(140, 200, 150); // 水上偵察機
+                case 11: return Color.FromRgb(140, 200, 150); // 水上爆撃機
+                case 12: return Color.FromRgb(229, 152, 53); // 小型電探
+                case 13: return Color.FromRgb(229, 152, 53); // 大型電探
+                case 14: return Color.FromRgb(90, 171, 184); // ソナー
+                case 15: return Color.FromRgb(127, 204, 216); // 爆雷
+                case 16: return Color.FromRgb(154, 127, 175); // 追加装甲
+                case 17: return Color.FromRgb(255, 196, 77); // 機関部強化
+                case 18: return Color.FromRgb(96, 190, 113); // 対空強化弾
+                case 19: return Color.FromRgb(209, 91, 91); // 対艦強化弾
+                case 20: return Color.FromRgb(218, 200, 176); // VT信管
+                case 21: return Color.FromRgb(102, 203, 119); // 対空機銃
+                case 22: return Color.FromRgb(88, 135, 171); // 特殊潜航艇（甲標的）
+                case 23: return Color.FromRgb(255, 255, 255); // 応急修理要員
+                case 24: return Color.FromRgb(154, 165, 93); // 上陸用舟艇
+                case 25: return Color.FromRgb(102, 204, 119); // オートジャイロ
+                case 26: return Color.FromRgb(127, 204, 216); // 対潜哨戒機
+                case 27: return Color.FromRgb(154, 127, 175); // 追加装甲（中型）
+                case 28: return Color.FromRgb(154, 127, 175); // 追加装甲（大型）
+                case 29: return Color.FromRgb(231, 107, 25); // 探照灯
+                case 30: return Color.FromRgb(163, 163, 163); // 簡易輸送部材
+                case 31: return Color.FromRgb(176, 157, 127); // 艦艇修理施設
+                case 32: return Color.FromRgb(88, 135, 171); // 潜水艦魚雷
+                case 33: return Color.FromRgb(255, 155, 0); // 照明弾
+                case 34: return Color.FromRgb(200, 170, 255); // 司令部施設
+                case 35: return Color.FromRgb(205, 162, 105); // 航空要員
+                case 36: return Color.FromRgb(137, 154, 77); // 高射装置
+                case 37: return Color.FromRgb(255, 54, 54); // 対地装備
+                case 38: return Color.FromRgb(194, 34, 34); // 大口径主砲(II)
+                case 39: return Color.FromRgb(191, 235, 159); // 水上艦要員
+                case 40: return Color.FromRgb(90, 171, 184); // 大型ソナー
+                case 41: return Color.FromRgb(140, 205, 155); // 大型飛行艇
+                default: return Colors.Transparent;
+            }
+        }
+
         public static int SlotAirMastery(Model.KanColle.SlotData slot, int onslot)
         {
             if (slot.iteminfo == null)

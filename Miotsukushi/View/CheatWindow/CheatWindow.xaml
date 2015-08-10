@@ -1,0 +1,26 @@
+﻿<Controls:MetroWindow
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Miotsukushi.View.CheatWindow"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:Components="clr-namespace:Miotsukushi.View.CheatWindow.Components" x:Class="Miotsukushi.View.CheatWindow.CheatWindow"
+        mc:Ignorable="d"
+        Title="CheatWindow" Height="485.844" Width="564.286" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" ResizeMode="CanResizeWithGrip">
+
+    <TabControl Margin="0" TabStripPlacement="Left">
+        <TabControl.Resources>
+            <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+                <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="18"/>
+            </Style>
+        </TabControl.Resources>
+        <TabItem Header="艦娘マスタ情報">
+            <Components:ShipMasterList/>
+        </TabItem>
+        <TabItem Header="装備マスタ情報">
+            <Components:ItemMasterList/>
+        </TabItem>
+    </TabControl>
+</Controls:MetroWindow>

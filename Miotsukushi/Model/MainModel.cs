@@ -13,6 +13,29 @@ namespace Miotsukushi.Model
         public KanColleModel kancolleModel { get; private set; }
         public Audio.VolumeModel volumeModel { get; private set; }
 
+        private View.CheatWindow.CheatWindow _cheat_window;
+
+        public void OpenCheatWindow()
+        {
+            if (_cheat_window != null && _cheat_window.IsVisible)
+                _cheat_window.Activate();
+            else
+            {
+                if (_cheat_window == null)
+                {
+                    _cheat_window = new View.CheatWindow.CheatWindow();
+                    _cheat_window.Closing += _cheat_window_Closing;
+                }
+                _cheat_window.Show();
+            }
+        }
+
+        private void _cheat_window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            _cheat_window.Hide();
+        }
+
         private MainModel()
         {
             timerModel = new TimerModel();
@@ -62,6 +85,9 @@ namespace Miotsukushi.Model
             {
                 // Free any other managed objects here.
                 //
+                _cheat_window.Closing -= _cheat_window_Closing;
+                _cheat_window.Close();
+                _cheat_window = null;
             }
 
             // Free any unmanaged objects here.

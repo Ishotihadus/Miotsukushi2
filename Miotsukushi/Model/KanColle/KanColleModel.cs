@@ -29,6 +29,7 @@ namespace Miotsukushi.Model.KanColle
         public QuestData questdata = new QuestData();
 
         public BattleModels.BattleModel battlemodel;
+        public bool initializeCompleted = false;
 
         public KanColleModel()
         {
@@ -363,6 +364,10 @@ namespace Miotsukushi.Model.KanColle
         void kclib_GetStart2(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_start2.Start2> response)
         {
             charamaster = response.data.mst_ship.ToDictionary(_ => _.id, _ => CharacterData.fromKanColleLib(_));
+            foreach (var s in response.data.mst_shipgraph)
+                if(charamaster.ContainsKey(s.id))
+                    charamaster[s.id].resource_id = s.filename;
+
             shiptypemaster = response.data.mst_stype.ToDictionary(_ => _.id, _ => new ShiptypeData() { name = _.name });
 
             missionmaster = response.data.mst_mission.ToDictionary(_ => _.id,
@@ -382,8 +387,16 @@ namespace Miotsukushi.Model.KanColle
                     type_cardtype = _.type[1],
                     type_equiptype = _.type[2],
                     type_icontype = _.type[3],
+                    firepower = _.houg,
+                    torpedo = _.raig,
+                    bombing = _.baku,
                     anti_air = _.tyku,
-                    reconnaissance = _.saku
+                    anti_submarines = _.tais,
+                    reconnaissance = _.saku,
+                    hit_rate = _.houm,
+                    evasion = _.houk,
+                    armor = _.souk,
+                    range = _.leng
                 });
 
             slotitem_equiptypemaster = response.data.mst_slotitem_equiptype.ToDictionary(_ => _.id,
@@ -487,7 +500,10 @@ namespace Miotsukushi.Model.KanColle
         {
             ++initializecount;
             if (initializecountflag == initializecount)
+            {
                 OnInitializeComplete(new System.EventArgs());
+                initializeCompleted = true;
+            }
         }
 
         void AppendNDockValue(KanColleLib.TransmissionData.api_get_member.NDock data)

@@ -9,6 +9,15 @@
     
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands DataContext="{Binding Commands}">
+            <Button Command="{Binding OpenCheatWindowCommand}">
+                <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform"
+                         Visual="{StaticResource appbar_devcenter}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
             <ToggleButton IsChecked="{Binding Mute}" IsEnabled="{Binding VolumeEnabled}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20"
