@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Miotsukushi.Model;
 using Miotsukushi.Model.Audio;
+using Microsoft.Practices.Prism.Commands;
 
 namespace Miotsukushi.ViewModel
 {
@@ -68,6 +69,18 @@ namespace Miotsukushi.ViewModel
             }
         }
 
+        private DelegateCommand _OpenCheatWindowCommand;
+        public DelegateCommand OpenCheatWindowCommand
+        {
+            get
+            {
+                if (_OpenCheatWindowCommand == null)
+                {
+                    _OpenCheatWindowCommand = new DelegateCommand(() => MainModel.Current.OpenCheatWindow(), () => true);
+                }
+                return _OpenCheatWindowCommand;
+            }
+        }
 
         public WindowCommandsViewModel()
         {
@@ -88,5 +101,7 @@ namespace Miotsukushi.ViewModel
             Volume = e.newvolume;
             Mute = e.newmute;
         }
+
+
     }
 }

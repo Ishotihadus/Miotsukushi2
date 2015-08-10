@@ -200,6 +200,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\CheatWindow\CheatWindow.xaml.cs">
+      <DependentUpon>CheatWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CommonParts\ShipParameterView.xaml.cs">
       <DependentUpon>ShipParameterView.xaml</DependentUpon>
     </Compile>
@@ -265,6 +268,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\MetroProgressBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheatWindow\CheatWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
