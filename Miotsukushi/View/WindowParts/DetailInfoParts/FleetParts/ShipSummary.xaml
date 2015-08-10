@@ -10,7 +10,7 @@
 	x:Name="UserControl" d:DesignWidth="150" d:DesignHeight="800">
 	<UserControl.Resources>
 		<DataTemplate x:Key="SlotItemTemplate">
-			<CommonParts:SlotView ItemTypeBrush="{Binding ItemTypeBrush}" ItemTypeName="{Binding ItemType}" ItemName="{Binding ItemName}" IsSlotEmpty="{Binding IsEmpty}" OnSlotCount="{Binding OnSlotCount}"/>
+			<CommonParts:SlotView ItemTypeColor="{Binding ItemTypeColor}" ItemTypeName="{Binding ItemType}" ItemName="{Binding ItemName}" IsSlotEmpty="{Binding IsEmpty}" OnSlotCount="{Binding OnSlotCount}"/>
 		</DataTemplate>
 	</UserControl.Resources>
 

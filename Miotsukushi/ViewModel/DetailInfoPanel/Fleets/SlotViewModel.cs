@@ -13,20 +13,20 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 
         #region プロパティ定義
 
-        private Brush _ItemTypeBrush;
-        public Brush ItemTypeBrush
+        private Color _ItemTypeColor;
+        public Color ItemTypeColor
         {
             get
             {
-                return _ItemTypeBrush;
+                return _ItemTypeColor;
             }
 
             set
             {
-                if (_ItemTypeBrush != value)
+                if (_ItemTypeColor != value)
                 {
-                    _ItemTypeBrush = value;
-                    OnPropertyChanged("ItemTypeBrush");
+                    _ItemTypeColor = value;
+                    OnPropertyChanged(() => ItemTypeColor);
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 if (_ItemType != value)
                 {
                     _ItemType = value;
-                    OnPropertyChanged("ItemType");
+                    OnPropertyChanged(() => ItemType);
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 if (_ItemName != value)
                 {
                     _ItemName = value;
-                    OnPropertyChanged("ItemName");
+                    OnPropertyChanged(() => ItemName);
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 if (_IsEmpty != value)
                 {
                     _IsEmpty = value;
-                    OnPropertyChanged("IsEmpty");
+                    OnPropertyChanged(() => IsEmpty);
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 if (_OnSlotCount != value)
                 {
                     _OnSlotCount = value;
-                    OnPropertyChanged("OnSlotCount");
+                    OnPropertyChanged(() => OnSlotCount);
                 }
             }
         }

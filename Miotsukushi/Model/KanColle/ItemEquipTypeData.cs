@@ -9,6 +9,6 @@ namespace Miotsukushi.Model.KanColle
     class ItemEquipTypeData
     {
         public string name;
-        public System.Windows.Media.Brush typebrush;
+        public System.Windows.Media.Color typecolor;
     }
 }

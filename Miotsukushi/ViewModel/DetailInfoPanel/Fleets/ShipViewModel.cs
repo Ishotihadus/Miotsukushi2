@@ -484,7 +484,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                                 var slotitemdata = slotmodel.iteminfo;
                                 if (slotitemdata != null)
                                 {
-                                    Slots[i].ItemTypeBrush = Tools.KanColleTools.GetSlotItemEquipTypeBrush(slotitemdata.type_equiptype);
+                                    Slots[i].ItemTypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(slotitemdata.type_equiptype);
                                     Slots[i].ItemName = slotitemdata.name;
                                     if (model.slotitem_equiptypemaster.ContainsKey(slotitemdata.type_equiptype))
                                         Slots[i].ItemType = model.slotitem_equiptypemaster[slotitemdata.type_equiptype].name;
@@ -493,14 +493,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                                 }
                                 else
                                 {
-                                    Slots[i].ItemTypeBrush = System.Windows.Media.Brushes.Transparent;
+                                    Slots[i].ItemTypeColor = System.Windows.Media.Colors.Transparent;
                                     Slots[i].ItemName = "不明";
                                     Slots[i].ItemType = "不明";
                                 }
                             }
                             else
                             {
-                                Slots[i].ItemTypeBrush = System.Windows.Media.Brushes.Transparent;
+                                Slots[i].ItemTypeColor = System.Windows.Media.Colors.Transparent;
                                 Slots[i].ItemName = "不明";
                                 Slots[i].ItemType = "不明";
                             }

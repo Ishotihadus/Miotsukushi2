@@ -403,7 +403,7 @@ namespace Miotsukushi.Model.KanColle
                 _ => new ItemEquipTypeData()
                 {
                     name = _.name,
-                    typebrush = KanColleTools.GetSlotItemEquipTypeBrush(_.id)
+                    typecolor = KanColleTools.GetSlotItemEquipTypeColor(_.id)
                 });
 
             mapareamaster = response.data.mst_maparea.ToDictionary(_ => _.id,

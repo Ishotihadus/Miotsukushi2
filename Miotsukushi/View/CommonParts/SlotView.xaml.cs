@@ -19,19 +19,19 @@ namespace Miotsukushi.View.CommonParts
 	/// </summary>
 	public partial class SlotView : UserControl
 	{
-        public static readonly DependencyProperty ItemTypeBrushProperty = DependencyProperty.Register("ItemTypeBrush", typeof(Brush), typeof(SlotView));
+        public static readonly DependencyProperty ItemTypeColorProperty = DependencyProperty.Register("ItemTypeColor", typeof(Color), typeof(SlotView));
 
         [Description("装備の種類の色"), Category("みおつくし")]
         [BindableAttribute(true)]
-        public Brush ItemTypeBrush
+        public Color ItemTypeColor
         {
             get
             {
-                return GetValue(ItemTypeBrushProperty) as Brush;
+                return (Color)GetValue(ItemTypeColorProperty);
             }
             set
             {
-                SetValue(ItemTypeBrushProperty, value);
+                SetValue(ItemTypeColorProperty, value);
             }
         }
 
