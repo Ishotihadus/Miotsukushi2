@@ -89,8 +89,17 @@
 			<TabItem Header="遠征">
 				<DetailInfoParts:Expedition DataContext="{Binding ExpeditionCollection}"/>
 			</TabItem>
-            
-		</Custom:MetroTabControl>
+            <TabItem/>
+            <TabItem/>
+            <TabItem/>
+            <TabItem/>
+            <TabItem Header="出撃総合">
+            </TabItem>
+            <TabItem/>
+            <TabItem/>
+            <TabItem/>
+            <TabItem/>
+        </Custom:MetroTabControl>
 		
 	</Grid>
 </UserControl>
