@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Miotsukushi.View.CheatWindow.Components.ItemMasterList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Miotsukushi.View.CheatWindow.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid IsReadOnly="True" ItemsSource="{Binding ItemList, Mode=OneWay}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="名前" Binding="{Binding Name}"/>
+                <DataGridTemplateColumn Header="種類" SortMemberPath="EquiptypeID">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock><Run Text="■"><Run.Foreground><SolidColorBrush Color="{Binding EquiptypeColor}"/></Run.Foreground></Run><Run Text=" "/><Run Text="{Binding Equiptype}"/></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="火力" Binding="{Binding Firepower, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="雷装" Binding="{Binding Torpedo, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="爆装" Binding="{Binding Bombing, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="対空" Binding="{Binding AntiAir, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="対潜" Binding="{Binding AntiSubmarines, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="索敵" Binding="{Binding Reconnaissance, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="命中" Binding="{Binding HitRate, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="回避" Binding="{Binding Evasion, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="装甲" Binding="{Binding Armor, StringFormat={}{0:+#;-#}}"/>
+                <DataGridTextColumn Header="射程" Binding="{Binding Range}" SortMemberPath="RangeInt"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

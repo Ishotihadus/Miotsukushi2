@@ -387,8 +387,16 @@ namespace Miotsukushi.Model.KanColle
                     type_cardtype = _.type[1],
                     type_equiptype = _.type[2],
                     type_icontype = _.type[3],
+                    firepower = _.houg,
+                    torpedo = _.raig,
+                    bombing = _.baku,
                     anti_air = _.tyku,
-                    reconnaissance = _.saku
+                    anti_submarines = _.tais,
+                    reconnaissance = _.saku,
+                    hit_rate = _.houm,
+                    evasion = _.houk,
+                    armor = _.souk,
+                    range = _.leng
                 });
 
             slotitem_equiptypemaster = response.data.mst_slotitem_equiptype.ToDictionary(_ => _.id,

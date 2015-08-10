@@ -19,5 +19,8 @@
         <TabItem Header="艦娘マスタ情報">
             <Components:ShipMasterList/>
         </TabItem>
+        <TabItem Header="装備マスタ情報">
+            <Components:ItemMasterList/>
+        </TabItem>
     </TabControl>
 </Controls:MetroWindow>
