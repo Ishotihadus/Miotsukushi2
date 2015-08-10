@@ -75,6 +75,10 @@ namespace Miotsukushi.Tools
                 case 39: return Color.FromRgb(191, 235, 159); // 水上艦要員
                 case 40: return Color.FromRgb(90, 171, 184); // 大型ソナー
                 case 41: return Color.FromRgb(140, 205, 155); // 大型飛行艇
+                case 42: return Color.FromRgb(231, 107, 25); // 大型探照灯
+                case 43: return Color.FromRgb(44, 58, 59); // 戦闘糧食
+                case 44: return Color.FromRgb(96, 196, 157); // 補給物資
+                case 93: return Color.FromRgb(229, 152, 53); // 大型電探(II)
                 default: return Colors.Transparent;
             }
         }
