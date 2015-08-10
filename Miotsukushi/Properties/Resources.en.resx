@@ -759,4 +759,13 @@
   <data name="ShipName_速吸" xml:space="preserve">
     <value>Hayasui</value>
   </data>
+  <data name="ShipName_瑞穂" xml:space="preserve">
+    <value>Mizuho</value>
+  </data>
+  <data name="ShipName_風雲" xml:space="preserve">
+    <value>Kazagumo</value>
+  </data>
+  <data name="ShipType_給油艦" xml:space="preserve">
+    <value>Replenishment Oiler</value>
+  </data>
 </root>
