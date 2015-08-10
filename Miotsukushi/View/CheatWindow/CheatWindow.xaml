@@ -5,9 +5,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Miotsukushi.View.CheatWindow"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="CheatWindow" Height="300" Width="300" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" ResizeMode="CanResizeWithGrip">
-    <Grid>
-        
-    </Grid>
+        Title="CheatWindow" Height="485.844" Width="564.286" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" ResizeMode="CanResizeWithGrip">
+
+    <TabControl Margin="0" TabStripPlacement="Left">
+        <TabControl.Resources>
+            <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+                <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="18"/>
+            </Style>
+        </TabControl.Resources>
+        <TabItem Header="マップ一覧">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+        <TabItem Header="艦娘マスタ情報">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+    </TabControl>
 </Controls:MetroWindow>
