@@ -7,7 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
-        <DataGrid Margin="0"/>
+        <DataGrid IsReadOnly="True" ItemsSource="{Binding ShipList, Mode=OneWay}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="艦名" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="よみ" Binding="{Binding Yomi}"/>
+                <DataGridTextColumn Header="艦種" Binding="{Binding ShipType}" SortMemberPath="ShipTypeID"/>
+                <DataGridTextColumn Header="艦種ID" Binding="{Binding ShipTypeID}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="リソースID" Binding="{Binding ResourceID}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>

@@ -23,6 +23,12 @@ namespace Miotsukushi.View.CheatWindow.Components
         public ShipMasterList()
         {
             InitializeComponent();
+
+            try
+            {
+                DataContext = new ViewModel.CheatWindow.ShipMasterListViewModel();
+            }
+            catch { }
         }
     }
 }

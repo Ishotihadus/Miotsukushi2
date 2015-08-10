@@ -38,6 +38,8 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         public int ammo_max;
 
+        public string resource_id;
+
         public static CharacterData fromKanColleLib(KanColleLib.TransmissionData.api_start2.start2.MstShip data)
         {
             return new CharacterData()

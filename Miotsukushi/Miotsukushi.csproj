@@ -176,6 +176,7 @@
     </Compile>
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetCollectionViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetsSummaryViewModel.cs" />
