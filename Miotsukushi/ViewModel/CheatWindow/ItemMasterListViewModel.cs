@@ -15,6 +15,7 @@ namespace Miotsukushi.ViewModel.CheatWindow
         public ItemMasterListViewModel()
         {
             ItemList = new ObservableCollection<ItemMasterItem>();
+            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ItemList, new object());
             var kcmodel = Model.MainModel.Current.kancolleModel;
             if (kcmodel.initializeCompleted)
                 MakeTable();

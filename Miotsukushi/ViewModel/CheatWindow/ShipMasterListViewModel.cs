@@ -14,6 +14,7 @@ namespace Miotsukushi.ViewModel.CheatWindow
         public ShipMasterListViewModel()
         {
             ShipList = new ObservableCollection<ShipMasterItem>();
+            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipList, new object());
             var kcmodel = Model.MainModel.Current.kancolleModel;
             if (kcmodel.initializeCompleted)
                 MakeTable();
