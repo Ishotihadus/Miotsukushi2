@@ -93,14 +93,14 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
-        private async void Kclib_GetGetmemberShipDeck(object sender, KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.ShipDeck> response)
+        private void Kclib_GetGetmemberShipDeck(object sender, KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.ShipDeck> response)
         {
             foreach(var deck in response.data.deck_data)
             {
                 fleetdata[deck.id - 1].FromDeckValue(deck);
             }
 
-            await AppendShipDataFromList(response.data.ship_data);
+            AppendShipDataFromList(response.data.ship_data);
         }
 
         private void Kclib_GetReqmemberUpdatedeckname(object sender, KanColleLib.TransmissionRequest.api_req_member.UpdatedecknameRequest request, KanColleLib.TransmissionData.Svdata<object> response)
@@ -340,111 +340,97 @@ namespace Miotsukushi.Model.KanColle
             AppendDeckValue(response.data);
         }
 
-        async void kclib_GetGetmemberShip3(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship3Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship3> response)
+        void kclib_GetGetmemberShip3(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship3Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship3> response)
         {
-            await AppendShipDataFromList(response.data.ship_data.ships);
+            AppendShipDataFromList(response.data.ship_data.ships);
         }
 
-        async void kclib_GetGetmemberShip2(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship2Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship2> response)
+        void kclib_GetGetmemberShip2(object sender, KanColleLib.TransmissionRequest.api_get_member.Ship2Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Ship2> response)
         {
-            await AppendShipDataFromList(response.data.ships);
+            AppendShipDataFromList(response.data.ships);
         }
 
-        async void kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
+        void kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
         {
             basicdata.FromMaterial(response.data.material);
-            await AppendShipDataFromList(response.data.ship.ships);
-            await DeleteShipDataFromList(response.data.ship.ships);
+            AppendShipDataFromList(response.data.ship.ships);
+            DeleteShipDataFromList(response.data.ship.ships);
             AppendDeckValue(response.data.deck_port);
             AppendNDockValue(response.data.ndock);
             InitializeConfirm();
         }
 
-        async void kclib_GetStart2(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_start2.Start2> response)
+        void kclib_GetStart2(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_start2.Start2> response)
         {
-            await Task.Run(() =>
+            charamaster = new Dictionary<int, CharacterData>();
+            foreach (var chara in response.data.mst_ship)
             {
-                charamaster = new Dictionary<int, CharacterData>();
-                foreach (var chara in response.data.mst_ship)
-                {
-                    charamaster.Add(chara.id, CharacterData.fromKanColleLib(chara));
-                }
-                System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_ship");
-                InitializeConfirm();
-            });
-
-            await Task.Run(() =>
+                charamaster.Add(chara.id, CharacterData.fromKanColleLib(chara));
+            }
+            
+            shiptypemaster = new Dictionary<int, ShiptypeData>();
+            foreach (var stype in response.data.mst_stype)
             {
-                shiptypemaster = new Dictionary<int, ShiptypeData>();
-                foreach (var stype in response.data.mst_stype)
-                {
-                    shiptypemaster.Add(stype.id, new ShiptypeData() { name = stype.name });
-                }
-                System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_stype");
-                InitializeConfirm();
-            });
-
-            await Task.Run(() =>
+                shiptypemaster.Add(stype.id, new ShiptypeData() { name = stype.name });
+            }
+            
+            missionmaster = new Dictionary<int, MissionData>();
+            foreach (var mission in response.data.mst_mission)
             {
-                missionmaster = new Dictionary<int, MissionData>();
-                foreach (var mission in response.data.mst_mission)
+                missionmaster.Add(mission.id, new MissionData()
                 {
-                    missionmaster.Add(mission.id, new MissionData()
-                    {
-                        name = mission.name,
-                        time_minute = mission.time,
-                        details = mission.details,
-                        maparea_id = mission.maparea_id
-                    });
-                }
-                System.Diagnostics.Debug.WriteLine("Get: api_start2/mst_mission");
-                InitializeConfirm();
-            });
-
-            await Task.Run(() =>
+                    name = mission.name,
+                    time_minute = mission.time,
+                    details = mission.details,
+                    maparea_id = mission.maparea_id
+                });
+            }
+            
+            slotitemmaster = new Dictionary<int, ItemData>();
+            foreach (var item in response.data.mst_slotitem)
             {
-                slotitemmaster = new Dictionary<int, ItemData>();
-                foreach (var item in response.data.mst_slotitem)
+                slotitemmaster.Add(item.id, new ItemData()
                 {
-                    slotitemmaster.Add(item.id, new ItemData()
-                    {
-                        name = item.name,
-                        type = item.type[0],
-                        type_cardtype = item.type[1],
-                        type_equiptype = item.type[2],
-                        type_icontype = item.type[3],
-                        anti_air = item.tyku,
-                        reconnaissance = item.saku
-                    });
-                }
-                InitializeConfirm();
-            });
-
-            await Task.Run(() =>
+                    name = item.name,
+                    type = item.type[0],
+                    type_cardtype = item.type[1],
+                    type_equiptype = item.type[2],
+                    type_icontype = item.type[3],
+                    anti_air = item.tyku,
+                    reconnaissance = item.saku
+                });
+            }
+            
+            slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
+            foreach (var item in response.data.mst_slotitem_equiptype)
             {
-                slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
-                foreach (var item in response.data.mst_slotitem_equiptype)
+                slotitem_equiptypemaster.Add(item.id, new ItemEquipTypeData()
                 {
-                    slotitem_equiptypemaster.Add(item.id, new ItemEquipTypeData()
-                    {
-                        name = item.name,
-                        typebrush = KanColleTools.GetSlotItemEquipTypeBrush(item.id)
-                    });
-                }
-            });
-
-            await Task.Run(() =>
+                    name = item.name,
+                    typebrush = KanColleTools.GetSlotItemEquipTypeBrush(item.id)
+                });
+            }
+            
+            mapareamaster = new Dictionary<int, MapAreaData>();
+            foreach (var item in response.data.mst_maparea)
             {
-                mapareamaster = new Dictionary<int, MapAreaData>();
-                foreach (var item in response.data.mst_maparea)
+                mapareamaster.Add(item.id, new MapAreaData()
                 {
-                    mapareamaster.Add(item.id, new MapAreaData()
-                    {
-                        name = item.name,
-                        type = item.type
-                    });
-                }
-            });
+                    name = item.name,
+                    type = item.type
+                });
+            }
+            
+            mapareamaster = new Dictionary<int, MapAreaData>();
+            foreach (var item in response.data.mst_maparea)
+            {
+                mapareamaster.Add(item.id, new MapAreaData()
+                {
+                    name = item.name,
+                    type = item.type
+                });
+            }
+            InitializeConfirm();
         }
 
         /// <summary>
@@ -452,17 +438,14 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         /// <param name="shiplist"></param>
         /// <returns></returns>
-        async Task AppendShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> shiplist)
+        void AppendShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> shiplist)
         {
-            await Task.Run(() =>
+            foreach (var ship in shiplist)
             {
-                foreach (var ship in shiplist)
-                {
-                    AppendShipData(ship);
-                }
-                foreach (var deck in fleetdata)
-                    deck.Recalc();
-            });
+                AppendShipData(ship);
+            }
+            foreach (var deck in fleetdata)
+                deck.Recalc();
         }
 
         void AppendShipData(KanColleLib.TransmissionData.api_get_member.values.ShipValue ship)
@@ -489,16 +472,13 @@ namespace Miotsukushi.Model.KanColle
         /// 与えられたリストの艦を削除するわけではない
         /// </summary>
         /// <param name="existshiplist"></param>
-        async Task DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
+        void DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
         {
-            await Task.Run(() =>
+            var deletelist = (from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _).ToList();
+            foreach (var item in deletelist)
             {
-                var deletelist = (from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _).ToList();
-                foreach (var item in deletelist)
-                {
-                    shipdata.Remove(item);
-                }
-            });
+                shipdata.Remove(item);
+            }
         }
 
         /// <summary>
