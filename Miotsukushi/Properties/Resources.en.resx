@@ -756,4 +756,7 @@
   <data name="ShipName_高波" xml:space="preserve">
     <value>Takanami</value>
   </data>
+  <data name="ShipName_速吸" xml:space="preserve">
+    <value>Hayasui</value>
+  </data>
 </root>
