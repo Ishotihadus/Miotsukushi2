@@ -362,74 +362,44 @@ namespace Miotsukushi.Model.KanColle
 
         void kclib_GetStart2(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_start2.Start2> response)
         {
-            charamaster = new Dictionary<int, CharacterData>();
-            foreach (var chara in response.data.mst_ship)
-            {
-                charamaster.Add(chara.id, CharacterData.fromKanColleLib(chara));
-            }
-            
-            shiptypemaster = new Dictionary<int, ShiptypeData>();
-            foreach (var stype in response.data.mst_stype)
-            {
-                shiptypemaster.Add(stype.id, new ShiptypeData() { name = stype.name });
-            }
-            
-            missionmaster = new Dictionary<int, MissionData>();
-            foreach (var mission in response.data.mst_mission)
-            {
-                missionmaster.Add(mission.id, new MissionData()
+            charamaster = response.data.mst_ship.ToDictionary(_ => _.id, _ => CharacterData.fromKanColleLib(_));
+            shiptypemaster = response.data.mst_stype.ToDictionary(_ => _.id, _ => new ShiptypeData() { name = _.name });
+
+            missionmaster = response.data.mst_mission.ToDictionary(_ => _.id,
+                _ => new MissionData()
                 {
-                    name = mission.name,
-                    time_minute = mission.time,
-                    details = mission.details,
-                    maparea_id = mission.maparea_id
+                    name = _.name,
+                    time_minute = _.time,
+                    details = _.details,
+                    maparea_id = _.maparea_id
                 });
-            }
-            
-            slotitemmaster = new Dictionary<int, ItemData>();
-            foreach (var item in response.data.mst_slotitem)
-            {
-                slotitemmaster.Add(item.id, new ItemData()
+
+            slotitemmaster = response.data.mst_slotitem.ToDictionary(_ => _.id,
+                _ => new ItemData()
                 {
-                    name = item.name,
-                    type = item.type[0],
-                    type_cardtype = item.type[1],
-                    type_equiptype = item.type[2],
-                    type_icontype = item.type[3],
-                    anti_air = item.tyku,
-                    reconnaissance = item.saku
+                    name = _.name,
+                    type = _.type[0],
+                    type_cardtype = _.type[1],
+                    type_equiptype = _.type[2],
+                    type_icontype = _.type[3],
+                    anti_air = _.tyku,
+                    reconnaissance = _.saku
                 });
-            }
-            
-            slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
-            foreach (var item in response.data.mst_slotitem_equiptype)
-            {
-                slotitem_equiptypemaster.Add(item.id, new ItemEquipTypeData()
+
+            slotitem_equiptypemaster = response.data.mst_slotitem_equiptype.ToDictionary(_ => _.id,
+                _ => new ItemEquipTypeData()
                 {
-                    name = item.name,
-                    typebrush = KanColleTools.GetSlotItemEquipTypeBrush(item.id)
+                    name = _.name,
+                    typebrush = KanColleTools.GetSlotItemEquipTypeBrush(_.id)
                 });
-            }
-            
-            mapareamaster = new Dictionary<int, MapAreaData>();
-            foreach (var item in response.data.mst_maparea)
-            {
-                mapareamaster.Add(item.id, new MapAreaData()
+
+            mapareamaster = response.data.mst_maparea.ToDictionary(_ => _.id,
+                _ => new MapAreaData()
                 {
-                    name = item.name,
-                    type = item.type
+                    name = _.name,
+                    type = _.type
                 });
-            }
             
-            mapareamaster = new Dictionary<int, MapAreaData>();
-            foreach (var item in response.data.mst_maparea)
-            {
-                mapareamaster.Add(item.id, new MapAreaData()
-                {
-                    name = item.name,
-                    type = item.type
-                });
-            }
             InitializeConfirm();
         }
 
@@ -511,7 +481,7 @@ namespace Miotsukushi.Model.KanColle
         }
 
         int initializecount = 0;
-        int initializecountflag = 5;
+        int initializecountflag = 2;
 
         void InitializeConfirm()
         {
