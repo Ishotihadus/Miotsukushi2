@@ -16,11 +16,8 @@
                 <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="18"/>
             </Style>
         </TabControl.Resources>
-        <TabItem Header="マップ一覧">
-            <Components:ShipMasterList/>
-        </TabItem>
         <TabItem Header="艦娘マスタ情報">
-            <Grid Background="#FFE5E5E5"/>
+            <Components:ShipMasterList/>
         </TabItem>
     </TabControl>
 </Controls:MetroWindow>
