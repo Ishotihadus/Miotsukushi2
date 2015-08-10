@@ -32,7 +32,9 @@ namespace Miotsukushi.ViewModel.CheatWindow
                     ShipType = kcmodel.shiptypemaster.ContainsKey(c.Value.shiptype) ? kcmodel.shiptypemaster[c.Value.shiptype].name : "不明",
                     ShipTypeID = c.Value.shiptype,
                     Yomi = c.Value.name_yomi,
-                    ResourceID = c.Value.resource_id
+                    ResourceID = c.Value.resource_id,
+                    AfterShipLv = c.Value.aftership_lv,
+                    AfterShipName = c.Value.aftership_id.HasValue ? kcmodel.charamaster[c.Value.aftership_id.Value].name : null
                 });
         }
     }
@@ -152,6 +154,43 @@ namespace Miotsukushi.ViewModel.CheatWindow
             }
         }
 
+
+        private int? _AfterShipLv;
+        public int? AfterShipLv
+        {
+            get
+            {
+                return _AfterShipLv;
+            }
+
+            set
+            {
+                if (_AfterShipLv != value)
+                {
+                    _AfterShipLv = value;
+                    OnPropertyChanged(() => AfterShipLv);
+                }
+            }
+        }
+
+
+        private string _AfterShipName;
+        public string AfterShipName
+        {
+            get
+            {
+                return _AfterShipName;
+            }
+
+            set
+            {
+                if (_AfterShipName != value)
+                {
+                    _AfterShipName = value;
+                    OnPropertyChanged(() => AfterShipName);
+                }
+            }
+        }
 
     }
 }

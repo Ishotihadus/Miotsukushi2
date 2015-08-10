@@ -14,6 +14,8 @@
                 <DataGridTextColumn Header="よみ" Binding="{Binding Yomi}"/>
                 <DataGridTextColumn Header="艦種" Binding="{Binding ShipType}" SortMemberPath="ShipTypeID"/>
                 <DataGridTextColumn Header="艦種ID" Binding="{Binding ShipTypeID}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="改造Lv" Binding="{Binding AfterShipLv}"/>
+                <DataGridTextColumn Header="改造後" Binding="{Binding AfterShipName}"/>
                 <DataGridTextColumn Header="リソースID" Binding="{Binding ResourceID}"/>
             </DataGrid.Columns>
         </DataGrid>
