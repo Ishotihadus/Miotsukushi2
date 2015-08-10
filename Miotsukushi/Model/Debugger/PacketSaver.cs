@@ -26,6 +26,27 @@ namespace Miotsukushi.Model.KanColle
             this.kclib = kclib;
             kclib.GetKcsAPIData += Kclib_GetKcsAPIData;
             kclib.GetFiddlerLogString += Kclib_GetFiddlerLogString;
+            kclib.KcsAPIDataAnalyzeFailed += Kclib_KcsAPIDataAnalyzeFailed;
+        }
+
+        private void Kclib_KcsAPIDataAnalyzeFailed(object sender, KanColleLib.EventArgs.KcsAPIDataAnalyzeFailedEventArgs e)
+        {
+            ++packet_counter;
+
+            if (!enable)
+                return;
+
+            DirectoryConfirm();
+
+            using (StreamWriter sw = new StreamWriter(filename, true))
+            {
+                sw.WriteLine("================== !!! Error !!! ==================");
+                sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
+                sw.WriteLine("URL: " + e.kcsapiurl);
+                sw.WriteLine("Exception: " + e.originalexception.Message);
+                sw.WriteLine("Source: " + e.originalexception.Source);
+                sw.WriteLine(e.originalexception.StackTrace);
+            }
         }
 
         private void DirectoryConfirm()
