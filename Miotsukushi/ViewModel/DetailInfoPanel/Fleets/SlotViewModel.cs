@@ -10,6 +10,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
     class SlotViewModel : ViewModelBase
     {
         public int slotid;
+        public Model.KanColle.SlotData slotmodel;
 
         #region プロパティ定義
 
@@ -103,7 +104,75 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             }
         }
 
+        private int? _alv;
+        public int? alv
+        {
+            get
+            {
+                return _alv;
+            }
+
+            set
+            {
+                if (_alv != value)
+                {
+                    _alv = value;
+                    OnPropertyChanged(() => alv);
+                }
+            }
+        }
+
 
         #endregion
+
+        public SlotViewModel(int slotid)
+        {
+            var model = Model.MainModel.Current.kancolleModel;
+            this.slotid = slotid;
+
+            slotmodel = model.slotdata.FirstOrDefault(_ => _.id == slotid);
+
+            if (slotmodel == null)
+            {
+                IsEmpty = true;
+                ItemName = "空き";
+                alv = null;
+                ItemType = "空き";
+                ItemTypeColor = System.Windows.Media.Colors.Transparent;
+            }
+            else
+            {
+                alv = slotmodel.alv;
+
+                var slotitemdata = slotmodel.iteminfo;
+                if (slotitemdata != null)
+                {
+                    ItemTypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(slotitemdata.type_equiptype);
+                    ItemName = slotitemdata.name;
+                    if (model.slotitem_equiptypemaster.ContainsKey(slotitemdata.type_equiptype))
+                        ItemType = model.slotitem_equiptypemaster[slotitemdata.type_equiptype].name;
+                    else
+                        ItemType = "不明";
+                }
+                else
+                {
+                    ItemTypeColor = System.Windows.Media.Colors.Transparent;
+                    ItemName = "不明";
+                    ItemType = "不明";
+                }
+
+                slotmodel.PropertyChanged += Slotmodel_PropertyChanged;
+            }
+        }
+
+        private void Slotmodel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "alv":
+                    alv = slotmodel.alv;
+                    break;
+            }
+        }
     }
 }

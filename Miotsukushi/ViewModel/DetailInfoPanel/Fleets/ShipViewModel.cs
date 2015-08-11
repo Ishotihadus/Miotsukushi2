@@ -419,6 +419,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         public ShipViewModel(int shipid)
         {
             Slots = new ObservableCollection<SlotViewModel>();
+            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Slots, new object());
             model = Model.MainModel.Current.kancolleModel;
             this.shipid = shipid;
             if (shipdata != null)
@@ -426,7 +427,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 charaid = shipdata.characterid;
                 character_initialize();
                 initialize();
-                SlotAppend();
                 shipdata.PropertyChanged += shipdata_PropertyChanged;
                 shipdata.Slots.CollectionChanged += Slots_CollectionChanged;
                 shipdata.OnSlotCount.CollectionChanged += OnSlotCount_CollectionChanged;
@@ -436,78 +436,57 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         // 仮実装
         void OnSlotCount_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            App.Current.Dispatcher.BeginInvoke((Action)delegate
+            for (int i = 0; i < shipdata.OnSlotCount.Count; i++)
             {
-                for (int i = 0; i < shipdata.OnSlotCount.Count; i++)
-                {
-                    if (i < Slots.Count)
-                        Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
-                }
-            });
+                if (i < Slots.Count)
+                    Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
+            }
         }
 
         // 仮実装
         void Slots_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            SlotAppend();
+            if (shipdata == null)
+                return;
+
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    if (e.NewItems.Count > 0)
+                    {
+                        var slotid = shipdata.Slots[e.NewStartingIndex];
+                        Slots.Insert(e.NewStartingIndex, new SlotViewModel(slotid));
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    // たぶん起きない
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    Slots.RemoveAt(e.OldStartingIndex);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    Slots[e.OldStartingIndex] = new SlotViewModel(shipdata.Slots[e.NewStartingIndex]);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    // たぶん起きない
+                    break;
+            }
+
+            OnSlotCountAppend();
         }
 
-        void SlotAppend()
+        void OnSlotCountAppend()
         {
-            App.Current.Dispatcher.BeginInvoke((Action)delegate
-            {
-                if (shipdata == null)
-                    return;
+            if (shipdata == null)
+                return;
 
-                for (int i = 0; i < shipdata.Slots.Count; i++)
-                {
-                    if (i >= Slots.Count)
-                    {
-                        Slots.Add(new SlotViewModel() { slotid = -1, IsEmpty = true, ItemName = "空き" });
-                        if (shipdata.OnSlotCount.Count > i)
-                            Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
-                    }
-                    if (Slots[i].slotid != shipdata.Slots[i])
-                    {
-                        Slots[i].slotid = shipdata.Slots[i];
-                        if (Slots[i].slotid == -1)
-                        {
-                            Slots[i].IsEmpty = true;
-                            Slots[i].ItemName = "空き";
-                        }
-                        else
-                        {
-                            Slots[i].IsEmpty = false;
-                            var slotmodel = model.slotdata.FirstOrDefault(_ => _.id == Slots[i].slotid);
-                            if (slotmodel != null)
-                            {
-                                var slotitemdata = slotmodel.iteminfo;
-                                if (slotitemdata != null)
-                                {
-                                    Slots[i].ItemTypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(slotitemdata.type_equiptype);
-                                    Slots[i].ItemName = slotitemdata.name;
-                                    if (model.slotitem_equiptypemaster.ContainsKey(slotitemdata.type_equiptype))
-                                        Slots[i].ItemType = model.slotitem_equiptypemaster[slotitemdata.type_equiptype].name;
-                                    else
-                                        Slots[i].ItemType = "不明";
-                                }
-                                else
-                                {
-                                    Slots[i].ItemTypeColor = System.Windows.Media.Colors.Transparent;
-                                    Slots[i].ItemName = "不明";
-                                    Slots[i].ItemType = "不明";
-                                }
-                            }
-                            else
-                            {
-                                Slots[i].ItemTypeColor = System.Windows.Media.Colors.Transparent;
-                                Slots[i].ItemName = "不明";
-                                Slots[i].ItemType = "不明";
-                            }
-                        }
-                    }
-                }
-            });
+            for (int i = 0; i < shipdata.OnSlotCount.Count; i++)
+            {
+                if (i < Slots.Count)
+                    Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
+                else
+                    Slots.Add(new SlotViewModel(-1) { OnSlotCount = shipdata.OnSlotCount[i] });
+            }
         }
 
         void shipdata_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -629,6 +608,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             Luck = shipdata.luck;
             fuel_append();
             ammo_append();
+
+            foreach (var id in shipdata.Slots)
+                Slots.Add(new SlotViewModel(id));
+            OnSlotCountAppend();
         }
 
         void fuel_append()
