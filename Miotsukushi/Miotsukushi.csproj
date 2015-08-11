@@ -128,8 +128,12 @@
     <Compile Include="Converter\FuelAmmoStatusColorConverter.cs" />
     <Compile Include="Converter\HPStatusColorConverter.cs" />
     <Compile Include="Converter\IntegerConverter.cs" />
+    <Compile Include="Converter\IntegerEqualityConverter.cs" />
+    <Compile Include="Converter\IntegerEqualityToVisibilityConverter.cs" />
     <Compile Include="Converter\IntegerToVisibilityConverter.cs" />
     <Compile Include="Converter\IsKirakiraVisibilityConverter.cs" />
+    <Compile Include="Converter\NullConverter.cs" />
+    <Compile Include="Converter\NullToVisibilityConverter.cs" />
     <Compile Include="Converter\TotalTimeConverter.cs" />
     <Compile Include="Model\Audio\VolumeChangedEventArgs.cs" />
     <Compile Include="Model\Audio\VolumeModel.cs" />
