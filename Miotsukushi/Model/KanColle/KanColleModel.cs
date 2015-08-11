@@ -180,7 +180,12 @@ namespace Miotsukushi.Model.KanColle
                 {
                     if (!slotdata.Any(_ => _.id == item.id))
                     {
-                        slotdata.Add(new SlotData() { id = item.id, itemid = item.slotitem_id });
+                        slotdata.Add(new SlotData() { id = item.id, itemid = item.slotitem_id, alv = item.alv });
+                    }
+                    else
+                    {
+                        var s = slotdata.First(_ => _.id == item.id);
+                        s.alv = item.alv;
                     }
                 }
 

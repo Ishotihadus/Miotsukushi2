@@ -6,10 +6,33 @@ using System.Threading.Tasks;
 
 namespace Miotsukushi.Model.KanColle
 {
-    class SlotData
+    class SlotData : NotifyModelBase
     {
         public int id;
         public int itemid;
+
+        private int? _alv;
+
+        /// <summary>
+        /// 艦載機熟練度
+        /// </summary>
+        public int? alv
+        {
+            get
+            {
+                return _alv;
+            }
+
+            set
+            {
+                if (_alv != value)
+                {
+                    _alv = value;
+                    OnPropertyChanged(() => alv);
+                }
+            }
+        }
+
 
         /// <summary>
         /// 装備アイテムの情報を直接取得する
