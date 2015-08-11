@@ -7,7 +7,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:Converter="clr-namespace:Miotsukushi.Converter" x:Class="Miotsukushi.View.CommonParts.SlotItemALVView"
              mc:Ignorable="d" 
-             d:DesignHeight="16" d:DesignWidth="8" Width="8" Height="16">
+             d:DesignHeight="16" d:DesignWidth="8" Width="10" Height="18">
     <UserControl.Resources>
         <System:Int32 x:Key="Int0">0</System:Int32>
         <System:Int32 x:Key="Int1">1</System:Int32>
@@ -34,7 +34,7 @@
                         <Setter.Value>
                             <TransformGroup>
                                 <ScaleTransform/>
-                                <SkewTransform AngleX="3"/>
+                                <SkewTransform AngleX="7"/>
                                 <RotateTransform/>
                                 <TranslateTransform/>
                             </TransformGroup>
@@ -81,8 +81,8 @@
             <Rectangle Margin="0,0,3,0" HorizontalAlignment="Center" Style="{StaticResource BlueLineStyle}"/>
         </Grid>
         <Grid Visibility="{Binding ItemALLevel, Converter={StaticResource IntegerEqualityToVisibilityConverter}, ConverterParameter={StaticResource Int3}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotItemALVView}}}">
-            <Rectangle Margin="5,0,0,0" HorizontalAlignment="Center" Style="{StaticResource BlueLineStyle}"/>
-            <Rectangle Margin="0,0,5,0" HorizontalAlignment="Center" Style="{StaticResource BlueLineStyle}"/>
+            <Rectangle Margin="6,0,0,0" HorizontalAlignment="Center" Style="{StaticResource BlueLineStyle}"/>
+            <Rectangle Margin="0,0,6,0" HorizontalAlignment="Center" Style="{StaticResource BlueLineStyle}"/>
             <Rectangle Margin="0" HorizontalAlignment="Center" Style="{StaticResource BlueLineStyle}"/>
         </Grid>
         <Grid Visibility="{Binding ItemALLevel, Converter={StaticResource IntegerEqualityToVisibilityConverter}, ConverterParameter={StaticResource Int4}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotItemALVView}}}">
@@ -93,8 +93,8 @@
             <Rectangle Margin="0,0,3,0" HorizontalAlignment="Center" Style="{StaticResource YellowLineStyle}"/>
         </Grid>
         <Grid Visibility="{Binding ItemALLevel, Converter={StaticResource IntegerEqualityToVisibilityConverter}, ConverterParameter={StaticResource Int6}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotItemALVView}}}">
-            <Rectangle Margin="5,0,0,0" HorizontalAlignment="Center" Style="{StaticResource YellowLineStyle}"/>
-            <Rectangle Margin="0,0,5,0" HorizontalAlignment="Center" Style="{StaticResource YellowLineStyle}"/>
+            <Rectangle Margin="6,0,0,0" HorizontalAlignment="Center" Style="{StaticResource YellowLineStyle}"/>
+            <Rectangle Margin="0,0,6,0" HorizontalAlignment="Center" Style="{StaticResource YellowLineStyle}"/>
             <Rectangle Margin="0" HorizontalAlignment="Center" Style="{StaticResource YellowLineStyle}"/>
         </Grid>
         <Grid Visibility="{Binding ItemALLevel, Converter={StaticResource IntegerEqualityToVisibilityConverter}, ConverterParameter={StaticResource Int7}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotItemALVView}}}">
@@ -102,10 +102,10 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Rectangle Margin="3.5,0,0,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineStyle}"/>
-            <Rectangle Margin="0,0,3.5,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineStyle}"/>
-            <Rectangle Margin="3.5,0,0,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineReverseStyle}" Grid.Row="1"/>
-            <Rectangle Margin="0,0,3.5,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineReverseStyle}" Grid.Row="1"/>
+            <Rectangle Margin="4,0,0,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineStyle}"/>
+            <Rectangle Margin="0,0,4,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineStyle}"/>
+            <Rectangle Margin="4,0,0,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineReverseStyle}" Grid.Row="1"/>
+            <Rectangle Margin="0,0,4,0" HorizontalAlignment="Center" Style="{StaticResource OverYellowLineReverseStyle}" Grid.Row="1"/>
         </Grid>
     </Grid>
 </UserControl>
