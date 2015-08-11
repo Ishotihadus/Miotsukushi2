@@ -40,6 +40,28 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             }
         }
 
+        private bool _HasTaihaShip;
+
+        /// <summary>
+        /// 大破中の艦娘がいるか
+        /// </summary>
+        public bool HasTaihaShip
+        {
+            get
+            {
+                return _HasTaihaShip;
+            }
+
+            set
+            {
+                if (_HasTaihaShip != value)
+                {
+                    _HasTaihaShip = value;
+                    OnPropertyChanged(() => HasTaihaShip);
+                }
+            }
+        }
+
 
         private bool _HasDockingShip;
 
@@ -289,6 +311,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         private void ViewModelInitialize()
         {
             DeckName = fleet.DeckName;
+            HasTaihaShip = fleet.HasTaihaShip;
             HasDockingShip = fleet.DockingShipsCount > 0;
             HasTiredShip = fleet.MinCond < 40 && fleet.ships.Count > 0;
             SumAirMastery = fleet.SumAirMastery;
@@ -325,6 +348,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     break;
                 case "DrumCount":
                     DrumCount = fleet.DrumCount;
+                    break;
+                case "HasTaihaShip":
+                    HasTaihaShip = fleet.HasTaihaShip;
                     break;
             }
         }
