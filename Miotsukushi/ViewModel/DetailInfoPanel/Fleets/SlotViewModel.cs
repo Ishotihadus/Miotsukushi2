@@ -104,20 +104,20 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             }
         }
 
-        private int? _alv;
-        public int? alv
+        private int? _ALV;
+        public int? ALV
         {
             get
             {
-                return _alv;
+                return _ALV;
             }
 
             set
             {
-                if (_alv != value)
+                if (_ALV != value)
                 {
-                    _alv = value;
-                    OnPropertyChanged(() => alv);
+                    _ALV = value;
+                    OnPropertyChanged(() => ALV);
                 }
             }
         }
@@ -136,13 +136,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             {
                 IsEmpty = true;
                 ItemName = "空き";
-                alv = null;
+                ALV = null;
                 ItemType = "空き";
                 ItemTypeColor = System.Windows.Media.Colors.Transparent;
             }
             else
             {
-                alv = slotmodel.alv;
+                ALV = slotmodel.alv;
 
                 var slotitemdata = slotmodel.iteminfo;
                 if (slotitemdata != null)
@@ -170,7 +170,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             switch(e.PropertyName)
             {
                 case "alv":
-                    alv = slotmodel.alv;
+                    ALV = slotmodel.alv;
                     break;
             }
         }
