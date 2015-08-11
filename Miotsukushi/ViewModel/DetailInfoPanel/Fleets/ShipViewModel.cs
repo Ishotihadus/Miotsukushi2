@@ -449,30 +449,33 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             if (shipdata == null)
                 return;
 
-            switch (e.Action)
+            System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                    if (e.NewItems.Count > 0)
-                    {
-                        var slotid = shipdata.Slots[e.NewStartingIndex];
-                        Slots.Insert(e.NewStartingIndex, new SlotViewModel(slotid));
-                    }
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
-                    // たぶん起きない
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                    Slots.RemoveAt(e.OldStartingIndex);
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-                    Slots[e.OldStartingIndex] = new SlotViewModel(shipdata.Slots[e.NewStartingIndex]);
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                    // たぶん起きない
-                    break;
-            }
+                switch (e.Action)
+                {
+                    case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                        if (e.NewItems.Count > 0)
+                        {
+                            var slotid = shipdata.Slots[e.NewStartingIndex];
+                            Slots.Insert(e.NewStartingIndex, new SlotViewModel(slotid));
+                        }
+                        break;
+                    case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                        // たぶん起きない
+                        break;
+                    case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                        Slots.RemoveAt(e.OldStartingIndex);
+                        break;
+                    case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                        Slots[e.OldStartingIndex] = new SlotViewModel(shipdata.Slots[e.NewStartingIndex]);
+                        break;
+                    case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                        // たぶん起きない
+                        break;
+                }
 
-            OnSlotCountAppend();
+                OnSlotCountAppend();
+            }));
         }
 
         void OnSlotCountAppend()
