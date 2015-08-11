@@ -28,6 +28,11 @@ namespace KanColleLib.TransmissionData.api_get_member.values
         /// </summary>
         public int level;
 
+        /// <summary>
+        /// 艦載機熟練度
+        /// </summary>
+        public int? alv;
+
         public static SlotItemValue fromDynamic(dynamic json)
         {
             SlotItemValue slotitem = new SlotItemValue();
@@ -36,6 +41,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
             slotitem.slotitem_id = (int)json.api_slotitem_id;
             slotitem.locked = (int)json.api_locked == 1;
             slotitem.level = (int)json.api_level;
+            slotitem.alv = json.api_alv() ? (int)json.api_alv : (int?)null;
 
             return slotitem;
         }
