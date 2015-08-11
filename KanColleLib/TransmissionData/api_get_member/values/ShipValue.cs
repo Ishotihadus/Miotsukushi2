@@ -198,7 +198,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
             ship.lucky = json.api_lucky.Deserialize<int[]>();
             ship.locked = (int)json.api_locked == 1;
             ship.locked_equip = (int)json.api_locked_equip == 1;
-            ship.sally_area = json.api_sally_area ? (int)json.api_sally_area : (int?)null;
+            ship.sally_area = json.api_sally_area() ? (int)json.api_sally_area : (int?)null;
             ship.slot_ex = (int)json.api_slot_ex;
 
             return ship;
