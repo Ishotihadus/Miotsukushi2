@@ -312,6 +312,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         {
             DeckName = fleet.DeckName;
             HasTaihaShip = fleet.HasTaihaShip;
+            HasUnsuppliedShip = fleet.HasUnsuppliedShip;
             HasDockingShip = fleet.DockingShipsCount > 0;
             HasTiredShip = fleet.MinCond < 40 && fleet.ships.Count > 0;
             SumAirMastery = fleet.SumAirMastery;
@@ -351,6 +352,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     break;
                 case "HasTaihaShip":
                     HasTaihaShip = fleet.HasTaihaShip;
+                    break;
+                case "HasUnsuppliedShip":
+                    HasUnsuppliedShip = fleet.HasUnsuppliedShip;
                     break;
             }
         }
