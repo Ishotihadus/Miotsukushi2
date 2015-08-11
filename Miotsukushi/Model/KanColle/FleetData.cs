@@ -385,7 +385,6 @@ namespace Miotsukushi.Model.KanColle
             double _okinoshimaerror = 0;
             int? _mincond = null;
             bool _hastaihaship = false;
-            bool _hasunsuppliedship = false;
             for (int i = 0; i < ships.Count; i++)
             {
                 var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
@@ -404,8 +403,6 @@ namespace Miotsukushi.Model.KanColle
                     _okinoshimaerror += thisokinoshimaerror;
                     _hastaihaship = _hastaihaship || (ship.hp_now <= ship.hp_max * 0.25);
 
-                    if(ship.characterinfo != null)
-                        _hasunsuppliedship = _hasunsuppliedship || ship.fuel != ship.characterinfo.fuel_max || ship.ammo != ship.characterinfo.ammo_max;
                 }
                 if (i == 0)
                     if (ship != null)
@@ -425,9 +422,9 @@ namespace Miotsukushi.Model.KanColle
 
             MinCond = _mincond ?? 0;
             HasTaihaShip = _hastaihaship;
-            HasUnsuppliedShip = _hasunsuppliedship;
 
             ChangeNDockStatus();
+            ChangeSupplyStatus();
         }
 
         public void ChangeNDockStatus()
@@ -446,6 +443,24 @@ namespace Miotsukushi.Model.KanColle
                 FleetExpeditionStatus.unknown;
             ExpeditionID = id;
             ExpeditionBacktime = Miotsukushi.Tools.TimeParser.ParseTimeFromLong(time);
+        }
+
+        public void ChangeSupplyStatus()
+        {
+            var model = MainModel.Current.kancolleModel;
+            bool _hasunsuppliedship = false;
+
+            for (int i = 0; i < ships.Count; i++)
+            {
+                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
+                if (ship != null)
+                {
+                    if (ship.characterinfo != null)
+                        _hasunsuppliedship = _hasunsuppliedship || ship.fuel != ship.characterinfo.fuel_max || ship.ammo != ship.characterinfo.ammo_max;
+                }
+            }
+
+            HasUnsuppliedShip = _hasunsuppliedship;
         }
     }
 }

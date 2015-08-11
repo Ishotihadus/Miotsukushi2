@@ -76,22 +76,29 @@ namespace Miotsukushi.Model.KanColle
             basicdata.FromMaterialArray(response.data.material);
             foreach(var ship in response.data.ship)
             {
-                for (int i = 0; i < shipdata.Count; i++)
+                var s = shipdata.FirstOrDefault(_ => _.shipid == ship.id);
+                if (s != null)
                 {
-                    if (shipdata[i].shipid == ship.id)
+                    s.fuel = ship.fuel;
+                    s.ammo = ship.bull;
+                    for (int j = 0; j < ship.onslot.Length; j++)
                     {
-                        shipdata[i].fuel = ship.fuel;
-                        shipdata[i].ammo = ship.bull;
-                        for (int j = 0; j < ship.onslot.Length; j++)
-                        {
-                            if (shipdata[i].OnSlotCount.Count > j)
-                                shipdata[i].OnSlotCount[j] = ship.onslot[j];
-                            else
-                                shipdata[i].OnSlotCount.Add(ship.onslot[j]);
-                        }
+                        if (s.OnSlotCount.Count > j)
+                            s.OnSlotCount[j] = ship.onslot[j];
+                        else
+                            s.OnSlotCount.Add(ship.onslot[j]);
                     }
                 }
             }
+
+            // 1艦隊の中でしか一気に補給できないことを利用する
+            if(response.data.ship.Count > 0)
+                foreach(var fleet in fleetdata)
+                    if(fleet.ships.Contains(response.data.ship[0].id))
+                    {
+                        fleet.ChangeSupplyStatus();
+                        break;
+                    }
         }
 
         private void Kclib_GetGetmemberShipDeck(object sender, KanColleLib.TransmissionRequest.api_get_member.ShipDeckRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.ShipDeck> response)
