@@ -405,7 +405,7 @@ namespace Miotsukushi.Model.KanColle
                     _hastaihaship = _hastaihaship || (ship.hp_now <= ship.hp_max * 0.25);
 
                     if(ship.characterinfo != null)
-                        _hasunsuppliedship = _hasunsuppliedship || (ship.fuel != ship.characterinfo.fuel_max) || (ship.ammo != ship.characterinfo.ammo_max);
+                        _hasunsuppliedship = _hasunsuppliedship || ship.fuel != ship.characterinfo.fuel_max || ship.ammo != ship.characterinfo.ammo_max;
                 }
                 if (i == 0)
                     if (ship != null)
@@ -425,6 +425,7 @@ namespace Miotsukushi.Model.KanColle
 
             MinCond = _mincond ?? 0;
             HasTaihaShip = _hastaihaship;
+            HasUnsuppliedShip = _hasunsuppliedship;
 
             ChangeNDockStatus();
         }
