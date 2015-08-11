@@ -19,6 +19,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Rectangle Margin="3" Width="12" Height="12" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="{Binding ItemTypeName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}" Visibility="{Binding IsSlotEmpty, Converter={StaticResource BooleanToVisibilityReverseConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}" Stroke="Black">
             <Rectangle.Fill>
@@ -27,9 +28,11 @@
         </Rectangle>
         <Rectangle Margin="3" Width="12" Height="12" VerticalAlignment="Center" HorizontalAlignment="Center" Stroke="{DynamicResource GrayBrush1}"/>
         <Viewbox Grid.Column="1" Margin="0,3,3,3" HorizontalAlignment="Left" StretchDirection="DownOnly" Stretch="Fill">
-        	<TextBlock Text="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}"/>
+            <TextBlock Text="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}"/>
         </Viewbox>
-        <Rectangle Grid.Column="2" Fill="{DynamicResource GrayBrush1}" HorizontalAlignment="Center" Height="15" Margin="0" VerticalAlignment="Center" Width="1" Visibility="{Binding OnSlotCount, Converter={StaticResource IntegerToVisibilityConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}"/>
-        <TextBlock Grid.Column="3" HorizontalAlignment="Left" Margin="3" Text="{Binding OnSlotCount, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}" VerticalAlignment="Top" Visibility="{Binding OnSlotCount, Converter={StaticResource IntegerToVisibilityConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}"/>
+        <local:SlotItemALVView Grid.Column="2" Margin="1,0" ItemALLevel="{Binding ItemALLevel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}" Visibility="{Binding ItemALLevel, Converter={StaticResource IntegerToVisibilityConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}"/>
+        <Rectangle Grid.Column="3" Fill="{DynamicResource GrayBrush1}" HorizontalAlignment="Center" Height="15" Margin="0" VerticalAlignment="Center" Width="1" Visibility="{Binding OnSlotCount, Converter={StaticResource IntegerToVisibilityConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}"/>
+        <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin="3" Text="{Binding OnSlotCount, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}" VerticalAlignment="Top" Visibility="{Binding OnSlotCount, Converter={StaticResource IntegerToVisibilityConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SlotView}}}"/>
+        
     </Grid>
 </UserControl>

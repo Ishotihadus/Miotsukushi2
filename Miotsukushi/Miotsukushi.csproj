@@ -214,6 +214,9 @@
     <Compile Include="View\CommonParts\ShipParameterView.xaml.cs">
       <DependentUpon>ShipParameterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CommonParts\SlotItemALVView.xaml.cs">
+      <DependentUpon>SlotItemALVView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CommonParts\SlotView.xaml.cs">
       <DependentUpon>SlotView.xaml</DependentUpon>
     </Compile>
@@ -294,6 +297,10 @@
     <Page Include="View\CommonParts\ShipParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CommonParts\SlotItemALVView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CommonParts\SlotView.xaml">
       <Generator>MSBuild:Compile</Generator>

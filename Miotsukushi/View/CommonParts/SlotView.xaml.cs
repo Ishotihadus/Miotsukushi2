@@ -99,6 +99,22 @@ namespace Miotsukushi.View.CommonParts
             }
         }
 
+        public static readonly DependencyProperty ItemALLevelProperty = DependencyProperty.Register("ItemALLevel", typeof(int), typeof(SlotView));
+
+        [Description("艦載機熟練度"), Category("みおつくし")]
+        [BindableAttribute(true)]
+        public int ItemALLevel
+        {
+            get
+            {
+                return (int)GetValue(ItemALLevelProperty);
+            }
+            set
+            {
+                SetValue(ItemALLevelProperty, value);
+            }
+        }
+
         public SlotView()
 		{
 			this.InitializeComponent();
