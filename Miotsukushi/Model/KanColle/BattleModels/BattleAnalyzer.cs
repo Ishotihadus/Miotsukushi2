@@ -80,16 +80,17 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     foreach (var slot in shipdata.Slots)
                     {
                         var slotdata = kcmodel.slotdata.FirstOrDefault(_ => _.id == slot);
-                        if (slotdata.itemid == 42)
-                        {
-                            ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Normal;
-                            break;
-                        }
-                        else if (slotdata.itemid == 43)
-                        {
-                            ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Goddess;
-                            break;
-                        }
+                        if(slotdata != null)
+                            if (slotdata.itemid == 42)
+                            {
+                                ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Normal;
+                                break;
+                            }
+                            else if (slotdata.itemid == 43)
+                            {
+                                ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Goddess;
+                                break;
+                            }
                     }
                 }
             }
