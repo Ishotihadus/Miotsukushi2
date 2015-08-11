@@ -43,9 +43,11 @@ api_req_hokyu/charge,ReqhokyuCharge,TransmissionRequest.api_req_hokyu.ChargeRequ
 #api_req_init/nickname
 #api_req_kaisou/lock
 #api_req_kaisou/marriage
+#api_req_kaisou/open_exslot
 #api_req_kaisou/powerup
 api_req_kaisou/remodeling,ReqkaisouRemodeling,TransmissionRequest.api_req_kaisou.RemodelingRequest,object
 #api_req_kaisou/slotset
+#api_req_kaisou/slotset_ex
 #api_req_kaisou/unsetslot_all
 api_req_kousyou/createitem,ReqkousyouCreateitem,TransmissionRequest.api_req_kousyou.CreateitemRequest,TransmissionData.api_req_kousyou.Createitem
 api_req_kousyou/createship,ReqkousyouCreateship,TransmissionRequest.api_req_kousyou.CreateshipRequest,object
@@ -56,6 +58,7 @@ api_req_kousyou/getship,ReqkousyouGetship,TransmissionRequest.api_req_kousyou.Ge
 #api_req_kousyou/open_new_dock
 api_req_map/next,ReqmapNext,TransmissionRequest.api_req_map.NextRequest,TransmissionData.api_req_map.Next
 api_req_map/start,ReqmapStart,TransmissionRequest.api_req_map.StartRequest,TransmissionData.api_req_map.Start
+#api_req_map/select_eventmap_rank
 api_req_member/get_incentive,ReqmemberGetIncentive,RequestBase,TransmissionData.api_req_member.GetIncentive
 #api_req_member/get_practice_enemyinfo
 #api_req_member/itemuse
