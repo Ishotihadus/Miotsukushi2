@@ -44,7 +44,7 @@ api_req_hokyu/charge,ReqhokyuCharge,TransmissionRequest.api_req_hokyu.ChargeRequ
 #api_req_kaisou/lock
 #api_req_kaisou/marriage
 #api_req_kaisou/powerup
-#api_req_kaisou/remodeling
+api_req_kaisou/remodeling,ReqkaisouRemodeling,TransmissionRequest.api_req_kaisou.RemodelingRequest,object
 #api_req_kaisou/slotset
 #api_req_kaisou/unsetslot_all
 api_req_kousyou/createitem,ReqkousyouCreateitem,TransmissionRequest.api_req_kousyou.CreateitemRequest,TransmissionData.api_req_kousyou.Createitem

@@ -176,6 +176,7 @@
     <Compile Include="TransmissionRequest\api_req_hensei\ChangeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hokyu\ChargeRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_kaisou\RemodelingRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kousyou\CreateitemRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kousyou\CreateshipRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kousyou\CreateshipSpeedchangeRequest.cs" />

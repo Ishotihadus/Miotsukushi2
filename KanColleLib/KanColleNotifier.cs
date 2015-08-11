@@ -253,6 +253,9 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_req_kaisou/remodeling":
+                    OnGetReqkaisouRemodeling(new TransmissionRequest.api_req_kaisou.RemodelingRequest(request), Svdata<object>.fromDynamic(json, null));
+                    break;
                 case "api_req_kousyou/createitem":
                     if (json.api_data())
                         OnGetReqkousyouCreateitem(new TransmissionRequest.api_req_kousyou.CreateitemRequest(request), Svdata<TransmissionData.api_req_kousyou.Createitem>.fromDynamic(json, TransmissionData.api_req_kousyou.Createitem.fromDynamic(json.api_data)));
@@ -566,6 +569,13 @@ namespace KanColleLib
         public event GetReqhokyuChargeEventHandler GetReqhokyuCharge;
         public delegate void GetReqhokyuChargeEventHandler(object sender, TransmissionRequest.api_req_hokyu.ChargeRequest request, Svdata<TransmissionData.api_req_hokyu.Charge> response);
         protected virtual void OnGetReqhokyuCharge(TransmissionRequest.api_req_hokyu.ChargeRequest request, Svdata<TransmissionData.api_req_hokyu.Charge> response) { if (GetReqhokyuCharge != null) GetReqhokyuCharge(this, request, response); }
+
+        /// <summary>
+        /// api_req_kaisou/remodeling を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqkaisouRemodelingEventHandler GetReqkaisouRemodeling;
+        public delegate void GetReqkaisouRemodelingEventHandler(object sender, TransmissionRequest.api_req_kaisou.RemodelingRequest request, Svdata<object> response);
+        protected virtual void OnGetReqkaisouRemodeling(TransmissionRequest.api_req_kaisou.RemodelingRequest request, Svdata<object> response) { if (GetReqkaisouRemodeling != null) GetReqkaisouRemodeling(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/createitem を受信して解析に成功した際に呼び出されます
