@@ -153,10 +153,17 @@ namespace KanColleLib.TransmissionData.api_get_member.values
         /// 装備がロックされているか（未使用）
         /// </summary>
         public bool locked_equip;
+        
+        /// <summary>
+        /// お札
+        /// </summary>
+        public int? sally_area;
 
-        // 【夏イベ】出撃作戦番号（以降削除の可能性あるのでちゃんと確認するべし）
-        // 実装がなくなりました。
-        // public int sally_area;
+        /// <summary>
+        /// 増設スロットに入る装備
+        /// 0:増設されていない　-1:増設されているが装備されていない
+        /// </summary>
+        public int slot_ex;
 
         public static ShipValue fromDynamic(dynamic json)
         {
@@ -191,7 +198,8 @@ namespace KanColleLib.TransmissionData.api_get_member.values
             ship.lucky = json.api_lucky.Deserialize<int[]>();
             ship.locked = (int)json.api_locked == 1;
             ship.locked_equip = (int)json.api_locked_equip == 1;
-            // ship.sally_area = (int)json.api_sally_area;
+            ship.sally_area = json.api_sally_area ? (int)json.api_sally_area : (int?)null;
+            ship.slot_ex = (int)json.api_slot_ex;
 
             return ship;
         }
