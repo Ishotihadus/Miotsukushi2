@@ -85,9 +85,12 @@ namespace Miotsukushi.Model
             {
                 // Free any other managed objects here.
                 //
-                _cheat_window.Closing -= _cheat_window_Closing;
-                _cheat_window.Close();
-                _cheat_window = null;
+                if (_cheat_window != null)
+                {
+                    _cheat_window.Closing -= _cheat_window_Closing;
+                    _cheat_window.Close();
+                    _cheat_window = null;
+                }
             }
 
             // Free any unmanaged objects here.
