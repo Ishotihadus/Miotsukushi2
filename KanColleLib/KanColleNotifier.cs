@@ -90,6 +90,9 @@ namespace KanColleLib
 
                 OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
 
+#if DEBUG
+                RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+#else
                 try
                 {
                     RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
@@ -103,7 +106,7 @@ namespace KanColleLib
                     System.Diagnostics.Debug.WriteLine(e);
                     System.Diagnostics.Debug.WriteLine("Response: " + response);
                 }
-
+#endif
                 processingcode.RemoveAt(0);
             }
         }
@@ -368,7 +371,7 @@ namespace KanColleLib
         }
 
 
-        #region 通常イベント定義
+#region 通常イベント定義
 
         /// <summary>
         /// FiddlerがAfterSessionCompleteからデータを取り出した際に発生します。
@@ -412,9 +415,9 @@ namespace KanColleLib
         public delegate void UnknownKcsAPIDataReceivedEventHandler(object sender, KcsAPIDataAnalyzeFailedEventArgs e);
         protected virtual void OnUnknownKcsAPIDataReceived(KcsAPIDataAnalyzeFailedEventArgs e) { if (UnknownKcsAPIDataReceived != null) { UnknownKcsAPIDataReceived(this, e); } }
 
-        #endregion
+#endregion
 
-        #region 受信URLごとのイベント定義（自動処理）
+#region 受信URLごとのイベント定義（自動処理）
 
         /// <summary>
         /// api_get_member/basic を受信して解析に成功した際に呼び出されます
@@ -724,7 +727,7 @@ namespace KanColleLib
         public delegate void GetStart2EventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_start2.Start2> response);
         protected virtual void OnGetStart2(RequestBase request, Svdata<TransmissionData.api_start2.Start2> response) { if (GetStart2 != null) GetStart2(this, request, response); }
 
-        #endregion
+#endregion
 
     }
 }
