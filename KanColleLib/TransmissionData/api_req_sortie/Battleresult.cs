@@ -167,7 +167,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie
             else
             {
                 ret.get_eventitem = new List<GetEventitemValue>();
-                if (json.api_get_eventitem.IsArray())
+                if (json.api_get_eventitem.IsArray)
                     foreach (var data in json.api_get_eventitem)
                         ret.get_eventitem.Add(GetEventitemValue.fromDynamic(data));
                 else
