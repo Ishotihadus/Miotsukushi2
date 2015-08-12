@@ -9,7 +9,9 @@
              d:DesignHeight="300" d:DesignWidth="550">
     <UserControl.Resources>
         <DataTemplate x:Key="DataTemplate1">
-            <BattleParts:BattleShipView Margin="3,2"/>
+            <Border Padding="0" BorderBrush="{DynamicResource GrayBrush5}" Margin="1" BorderThickness="0,0,1,1">
+                <BattleParts:BattleShipView Margin="1,1,4,3"/>
+            </Border>
         </DataTemplate>
     </UserControl.Resources>
     <StackPanel d:LayoutOverrides="Height">

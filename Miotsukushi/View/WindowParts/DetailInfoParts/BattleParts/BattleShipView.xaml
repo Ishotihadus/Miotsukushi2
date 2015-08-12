@@ -16,8 +16,8 @@
     </UserControl.Resources>
     <StackPanel>
         <DockPanel>
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" DockPanel.Dock="Right"><Run Text="{Binding AfterHP}"/><Run Text=" "/><Run Text="{Binding MaxHP}"/></TextBlock>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="{Binding ShipName}"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0" DockPanel.Dock="Right"><Run Text="{Binding AfterHP, StringFormat={}{0:#;'0'}}"/><Run Text="/"/><Run Text="{Binding MaxHP}"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding ShipName}" FontSize="14.667"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
         </DockPanel>
         <Controls:MetroProgressBar Height="3" Value="{Binding AfterHP}" Maximum="{Binding MaxHP}" Style="{StaticResource HpProgressBarStyle}" Margin="0,3"/>
         <UniformGrid Columns="2">
