@@ -95,7 +95,9 @@
             <TabItem/>
             <TabItem Header="出撃総合">
             </TabItem>
-            <TabItem Header="戦闘総合"/>
+            <TabItem Header="戦闘総合">
+                <DetailInfoParts:Battle/>
+            </TabItem>
             <TabItem/>
             <TabItem/>
             <TabItem/>

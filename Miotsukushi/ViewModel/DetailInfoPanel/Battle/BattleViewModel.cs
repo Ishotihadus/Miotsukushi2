@@ -116,6 +116,44 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
             }
         }
 
+        private double _GaugeMe;
+        public double GaugeMe
+        {
+            get
+            {
+                return _GaugeMe;
+            }
+
+            set
+            {
+                if (_GaugeMe != value)
+                {
+                    _GaugeMe = value;
+                    OnPropertyChanged(() => GaugeMe);
+                }
+            }
+        }
+
+        private double _GaugeEnemy;
+        public double GaugeEnemy
+        {
+            get
+            {
+                return _GaugeEnemy;
+            }
+
+            set
+            {
+                if (_GaugeEnemy != value)
+                {
+                    _GaugeEnemy = value;
+                    OnPropertyChanged(() => GaugeEnemy);
+                }
+            }
+        }
+
+
+
 
         public BattleViewModel()
         {
@@ -129,7 +167,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
             FormationEnemy = FormationString(e.enemy_formation);
             AirMasteryStatus = AirMasteryString(e.air_mastery);
             CrossingStatus = CrossingString(e.crossing_type);
-
+            GaugeMe = e.friend_gauge * 100;
+            GaugeEnemy = e.enemy_gauge * 100;
         }
 
         private string FormationString(Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation formation)

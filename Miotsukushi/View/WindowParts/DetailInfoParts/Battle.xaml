@@ -18,6 +18,17 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding AirMasteryStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding CrossingStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
         </UniformGrid>
+        <UniformGrid Columns="3" Margin="0,2">
+            <Grid>
+                <ProgressBar Height="Auto" Margin="5,0" Maximum="100" Value="{Binding GaugeMe}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GaugeMe, StringFormat={}{0:N0}%}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White"/>
+            </Grid>
+            <TextBlock TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <Grid>
+                <ProgressBar Height="Auto" Margin="5,0" Maximum="100" Value="{Binding GaugeEnemy}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GaugeEnemy, StringFormat={}{0:N0}%}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White"/>
+            </Grid>
+        </UniformGrid>
         <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
     </StackPanel>
 </UserControl>
