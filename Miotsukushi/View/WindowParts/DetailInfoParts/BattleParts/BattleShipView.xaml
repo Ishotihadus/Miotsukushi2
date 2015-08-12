@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.BattleParts.BattleShipView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.BattleParts"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="150">
+    <StackPanel>
+        <DockPanel>
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="57/72" VerticalAlignment="Top" Margin="0" DockPanel.Dock="Right"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="三隈改"/><Run Text=" "/><Run Text="Lv.50"/></TextBlock>
+        </DockPanel>
+        <Controls:MetroProgressBar/>
+        <UniformGrid Columns="2">
+            <TextBlock TextWrapping="Wrap" Text="与ダメ: 57"/>
+            <TextBlock TextWrapping="Wrap" Text="被ダメ: 96"/>
+        </UniformGrid>
+        <UniformGrid Columns="4">
+            <TextBlock TextWrapping="Wrap" Text="15" HorizontalAlignment="Center" Foreground="#FFFF5353"/>
+            <TextBlock TextWrapping="Wrap" Text="30" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
+            <TextBlock TextWrapping="Wrap" Text="15" HorizontalAlignment="Center" Foreground="#FF37B848"/>
+            <TextBlock TextWrapping="Wrap" Text="30" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

@@ -228,6 +228,9 @@
     <Compile Include="View\WindowParts\DetailInfoParts\Battle.xaml.cs">
       <DependentUpon>Battle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\BattleParts\BattleShipView.xaml.cs">
+      <DependentUpon>BattleShipView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowParts\DetailInfoParts\Expedition.xaml.cs">
       <DependentUpon>Expedition.xaml</DependentUpon>
     </Compile>
@@ -328,6 +331,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\WindowParts\DetailInfoParts\Battle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\BattleParts\BattleShipView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
