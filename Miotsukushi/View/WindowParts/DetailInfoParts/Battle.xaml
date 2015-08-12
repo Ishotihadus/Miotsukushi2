@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.Battle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="550">
+    <StackPanel d:LayoutOverrides="Height">
+        <TextBlock TextWrapping="Wrap" Text="3-5 なんとか海域  セル 8" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4"/>
+        <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
+        <UniformGrid Columns="3" Margin="0,2">
+            <TextBlock TextWrapping="Wrap" Text="第一警戒航行序列" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="陣形" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="単縦陣" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+        </UniformGrid>
+        <UniformGrid Columns="3" Margin="0,2">
+            <TextBlock TextWrapping="Wrap" Text="索敵成功 艦載機全機帰還" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="索敵" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="索敵成功 艦載機全機帰還" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+        </UniformGrid>
+        <UniformGrid Columns="2" Margin="0,2">
+            <TextBlock TextWrapping="Wrap" Text="制空権確保" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="T字有利" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+        </UniformGrid>
+        <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
+    </StackPanel>
+</UserControl>

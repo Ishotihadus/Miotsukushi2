@@ -224,6 +224,9 @@
     <Compile Include="View\CommonParts\SlotView.xaml.cs">
       <DependentUpon>SlotView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\Battle.xaml.cs">
+      <DependentUpon>Battle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowParts\DetailInfoParts\Expedition.xaml.cs">
       <DependentUpon>Expedition.xaml</DependentUpon>
     </Compile>
@@ -323,6 +326,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\WindowParts\DetailInfoParts\Battle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\WindowParts\DetailInfoParts\Expedition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

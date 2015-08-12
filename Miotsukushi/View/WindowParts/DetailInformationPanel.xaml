@@ -95,7 +95,7 @@
             <TabItem/>
             <TabItem Header="出撃総合">
             </TabItem>
-            <TabItem/>
+            <TabItem Header="戦闘総合"/>
             <TabItem/>
             <TabItem/>
             <TabItem/>
