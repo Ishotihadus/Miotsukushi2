@@ -56,7 +56,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         /// <param name="maxhps">svdataのmaxhpsそのまま</param>
         /// <param name="nowhps">svdataのnowhpsそのまま</param>
         /// <returns></returns>
-        private static List<BattleAnalyzedEventArgs.Ship> GetFriendshipList(int dock_id, int[] maxhps, int[] nowhps)
+        private static List<BattleAnalyzedEventArgs.Ship> GetFriendshipList(int dock_id, int[] maxhps, int[] nowhps, int[][] fParam)
         {
             var kcmodel = MainModel.Current.kancolleModel;
 
@@ -66,6 +66,12 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             for (int i = 0; i < friendship.Count; i++)
             {
                 var ship = friendship[i];
+
+                ship.fire_power = fParam[i][0];
+                ship.torpedo = fParam[i][1];
+                ship.anti_air = fParam[i][2];
+                ship.armor = fParam[i][3];
+
                 var shipdata = kcmodel.shipdata.FirstOrDefault(_ => _.shipid == ship.original_id);
                 if (shipdata != null && shipdata.characterinfo != null)
                 {
@@ -97,7 +103,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             return friendship;
         }
 
-        private static List<BattleAnalyzedEventArgs.Ship> GetEnemyshipList(int[] ship_ke, int[] ship_lv, int[] maxhps, int[] nowhps)
+        private static List<BattleAnalyzedEventArgs.Ship> GetEnemyshipList(int[] ship_ke, int[] ship_lv, int[] maxhps, int[] nowhps, int[][] eParam)
         {
             var kcmodel = MainModel.Current.kancolleModel;
 
@@ -108,6 +114,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             for (int i = 0; i < enemyship.Count; i++)
             {
                 var ship = enemyship[i];
+                ship.fire_power = eParam[i][0];
+                ship.torpedo = eParam[i][1];
+                ship.anti_air = eParam[i][2];
+                ship.armor = eParam[i][3];
+
                 if (kcmodel.charamaster.ContainsKey(ship.character_id))
                 {
                     var charadata = kcmodel.charamaster[ship.character_id];
@@ -378,7 +389,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             ret.phases = new List<BattleAnalyzedEventArgs.Phase>();
 
             // 自艦隊の情報
-            var friendship = GetFriendshipList(data.dock_id, data.maxhps, data.nowhps);
+            var friendship = GetFriendshipList(data.dock_id, data.maxhps, data.nowhps, data.fParam);
             ret.friend = friendship;
 
             // 敵艦隊の情報

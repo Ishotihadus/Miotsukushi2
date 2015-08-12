@@ -148,6 +148,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             /// ダメコンを使ったか
             /// </summary>
             public bool use_damecon;
+
+            public int fire_power;
+            public int torpedo;
+            public int anti_air;
+            public int armor;
         }
 
         /// <summary>
