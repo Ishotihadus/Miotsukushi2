@@ -182,6 +182,7 @@
     <Compile Include="Tools\TimeParser.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleShipViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetCollectionViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetViewModel.cs" />

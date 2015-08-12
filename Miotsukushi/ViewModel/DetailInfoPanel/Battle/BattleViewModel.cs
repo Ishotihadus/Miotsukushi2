@@ -152,8 +152,41 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
             }
         }
 
+        private List<BattleShipViewModel> _ShipsMe;
+        public List<BattleShipViewModel> ShipsMe
+        {
+            get
+            {
+                return _ShipsMe;
+            }
 
+            set
+            {
+                if (_ShipsMe != value)
+                {
+                    _ShipsMe = value;
+                    OnPropertyChanged(() => ShipsMe);
+                }
+            }
+        }
+        
+        private List<BattleShipViewModel> _ShipsEnemy;
+        public List<BattleShipViewModel> ShipsEnemy
+        {
+            get
+            {
+                return _ShipsEnemy;
+            }
 
+            set
+            {
+                if (_ShipsEnemy != value)
+                {
+                    _ShipsEnemy = value;
+                    OnPropertyChanged(() => ShipsEnemy);
+                }
+            }
+        }
 
         public BattleViewModel()
         {
@@ -169,6 +202,44 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
             CrossingStatus = CrossingString(e.crossing_type);
             GaugeMe = e.friend_gauge * 100;
             GaugeEnemy = e.enemy_gauge * 100;
+
+            var me_list = new List<BattleShipViewModel>();
+            foreach(var ship in e.friend)
+            {
+                me_list.Add(new BattleShipViewModel()
+                {
+                    ShipName = ship.name,
+                    ShipLevel = ship.level,
+                    MaxHP = ship.max_hp,
+                    AfterHP = ship.after_hp,
+                    SumAttack = ship.sum_attack, 
+                    SumDamage = ship.before_hp - ship.after_hp,
+                    Firepower = ship.fire_power,
+                    Torpedo = ship.torpedo,
+                    AntiAir = ship.anti_air,
+                    Armor = ship.armor
+                });
+            }
+            ShipsMe = me_list;
+
+            var enemy_list = new List<BattleShipViewModel>();
+            foreach (var ship in e.enemy)
+            {
+                enemy_list.Add(new BattleShipViewModel()
+                {
+                    ShipName = ship.name,
+                    ShipLevel = ship.level,
+                    MaxHP = ship.max_hp,
+                    AfterHP = ship.after_hp,
+                    SumAttack = ship.sum_attack,
+                    SumDamage = ship.before_hp - ship.after_hp,
+                    Firepower = ship.fire_power,
+                    Torpedo = ship.torpedo,
+                    AntiAir = ship.anti_air,
+                    Armor = ship.armor
+                });
+            }
+            ShipsEnemy = enemy_list;
         }
 
         private string FormationString(Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation formation)
