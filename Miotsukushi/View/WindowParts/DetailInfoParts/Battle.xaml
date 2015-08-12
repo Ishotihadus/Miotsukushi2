@@ -10,18 +10,13 @@
         <TextBlock TextWrapping="Wrap" Text="3-5 なんとか海域  セル 8" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4"/>
         <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
         <UniformGrid Columns="3" Margin="0,2">
-            <TextBlock TextWrapping="Wrap" Text="第一警戒航行序列" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding FormationMe}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
             <TextBlock TextWrapping="Wrap" Text="陣形" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" Text="単縦陣" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-        </UniformGrid>
-        <UniformGrid Columns="3" Margin="0,2">
-            <TextBlock TextWrapping="Wrap" Text="索敵成功 艦載機全機帰還" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" Text="索敵" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" Text="索敵成功 艦載機全機帰還" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding FormationEnemy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
         </UniformGrid>
         <UniformGrid Columns="2" Margin="0,2">
-            <TextBlock TextWrapping="Wrap" Text="制空権確保" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" Text="T字有利" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding AirMasteryStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding CrossingStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
         </UniformGrid>
         <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
     </StackPanel>

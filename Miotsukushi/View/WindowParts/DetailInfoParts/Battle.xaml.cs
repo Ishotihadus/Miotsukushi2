@@ -23,6 +23,12 @@ namespace Miotsukushi.View.WindowParts.DetailInfoParts
         public Battle()
         {
             InitializeComponent();
+
+            try
+            {
+                DataContext = new ViewModel.DetailInfoPanel.Battle.BattleViewModel();
+            }
+            catch { }
         }
     }
 }
