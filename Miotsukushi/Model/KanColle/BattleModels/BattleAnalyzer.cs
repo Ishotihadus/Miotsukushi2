@@ -296,6 +296,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     };
                     phase.attacks.Add(attack);
                     attack.target_ship.after_hp -= attack.damage;
+                    attack.origin_ship.sum_attack += attack.damage;
                 }
             }
 
@@ -312,6 +313,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     };
                     phase.attacks.Add(attack);
                     attack.target_ship.after_hp -= attack.damage;
+                    attack.origin_ship.sum_attack += attack.damage;
                 }
             }
 
@@ -353,6 +355,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                         };
                         phase.attacks.Add(attack);
                         attack.target_ship.after_hp -= attack.damage;
+                        attack.origin_ship.sum_attack += attack.damage;
 
                         if (to <= 6)
                         {
@@ -505,6 +508,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                         };
                         phase.attacks.Add(attack);
                         attack.target_ship.after_hp -= attack.damage;
+                        attack.origin_ship.sum_attack += attack.damage;
 
                         if (to <= 6)
                         {

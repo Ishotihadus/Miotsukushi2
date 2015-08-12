@@ -153,6 +153,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             public int torpedo;
             public int anti_air;
             public int armor;
+
+            /// <summary>
+            /// 与えたダメージの合計
+            /// </summary>
+            public int sum_attack;
         }
 
         /// <summary>
