@@ -12,6 +12,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Miotsukushi;component/Resources/MetroProgressBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="DataTemplate1">
+                <Rectangle Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="{DynamicResource GrayBrush1}" Margin="5,3"/>
+            </DataTemplate>
+            <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+                <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
@@ -29,6 +35,7 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding Torpedo}" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding AntiAir}" HorizontalAlignment="Center" Foreground="#FF37B848"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding Armor}" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}"/>
         </UniformGrid>
     </StackPanel>
 </UserControl>
