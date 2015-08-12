@@ -7,21 +7,28 @@
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="60" d:DesignWidth="150">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Miotsukushi;component/Resources/MetroProgressBarStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <StackPanel>
         <DockPanel>
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="57/72" VerticalAlignment="Top" Margin="0" DockPanel.Dock="Right"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="三隈改"/><Run Text=" "/><Run Text="Lv.50"/></TextBlock>
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" DockPanel.Dock="Right"><Run Text="{Binding AfterHP}"/><Run Text=" "/><Run Text="{Binding MaxHP}"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="{Binding ShipName}"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
         </DockPanel>
-        <Controls:MetroProgressBar/>
+        <Controls:MetroProgressBar Height="3" Value="{Binding AfterHP}" Maximum="{Binding MaxHP}" Style="{StaticResource HpProgressBarStyle}" Margin="0,3"/>
         <UniformGrid Columns="2">
-            <TextBlock TextWrapping="Wrap" Text="与ダメ: 57"/>
-            <TextBlock TextWrapping="Wrap" Text="被ダメ: 96"/>
+            <TextBlock TextWrapping="Wrap"><Run Text="与ダメ: "/><Run Text="{Binding SumAttack}"/></TextBlock>
+            <TextBlock TextWrapping="Wrap"><Run Text="被ダメ: "/><Run Text="{Binding SumDamage}"/></TextBlock>
         </UniformGrid>
         <UniformGrid Columns="4">
-            <TextBlock TextWrapping="Wrap" Text="15" HorizontalAlignment="Center" Foreground="#FFFF5353"/>
-            <TextBlock TextWrapping="Wrap" Text="30" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
-            <TextBlock TextWrapping="Wrap" Text="15" HorizontalAlignment="Center" Foreground="#FF37B848"/>
-            <TextBlock TextWrapping="Wrap" Text="30" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Firepower}" HorizontalAlignment="Center" Foreground="#FFFF5353"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Torpedo}" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding AntiAir}" HorizontalAlignment="Center" Foreground="#FF37B848"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Armor}" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
         </UniformGrid>
     </StackPanel>
 </UserControl>

@@ -37,9 +37,9 @@
         </UniformGrid>
         <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
         <UniformGrid Columns="3" Margin="0,2">
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsMe}"/>
             <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}"/>
-            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}"/>
-            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}"/>
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsEnemy}"/>
         </UniformGrid>
     </StackPanel>
 </UserControl>
