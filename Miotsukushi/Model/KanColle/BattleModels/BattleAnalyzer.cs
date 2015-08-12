@@ -393,7 +393,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             ret.friend = friendship;
 
             // 敵艦隊の情報
-            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps);
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam);
             ret.enemy = enemyship;
 
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
