@@ -217,7 +217,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                     Firepower = ship.fire_power,
                     Torpedo = ship.torpedo,
                     AntiAir = ship.anti_air,
-                    Armor = ship.armor
+                    Armor = ship.armor,
+                    Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
+                    {
+                        ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
+                        ItemTypeColor = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.kancolleModel.slotitemmaster[_].type_equiptype) : System.Windows.Media.Colors.Transparent
+                    }).ToList())
                 });
             }
             ShipsMe = me_list;
@@ -236,7 +241,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                     Firepower = ship.fire_power,
                     Torpedo = ship.torpedo,
                     AntiAir = ship.anti_air,
-                    Armor = ship.armor
+                    Armor = ship.armor,
+                    Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
+                    {
+                        ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
+                        ItemTypeColor = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.kancolleModel.slotitemmaster[_].type_equiptype) : System.Windows.Media.Colors.Transparent
+                    }).ToList())
                 });
             }
             ShipsEnemy = enemy_list;

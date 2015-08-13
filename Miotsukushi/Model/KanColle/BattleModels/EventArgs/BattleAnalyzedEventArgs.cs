@@ -158,6 +158,12 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             /// 与えたダメージの合計
             /// </summary>
             public int sum_attack;
+
+            /// <summary>
+            /// スロット情報
+            /// -1は未装備
+            /// </summary>
+            public int[] slot;
         }
 
         /// <summary>

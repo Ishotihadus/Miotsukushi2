@@ -18,5 +18,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
         public int Torpedo { get; set; }
         public int AntiAir { get; set; }
         public int Armor { get; set; }
+        public List<BattleShipSlotViewModel> Slot { get; set; }
+
+        public class BattleShipSlotViewModel
+        {
+            public System.Windows.Media.Color ItemTypeColor { get; set; }
+            public string ItemName { get; set; }
+        }
     }
 }
