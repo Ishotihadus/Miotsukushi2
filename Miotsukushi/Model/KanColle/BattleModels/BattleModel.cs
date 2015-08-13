@@ -27,11 +27,13 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         private void Kclib_GetReqbattlemidnightBattle(object sender, KanColleLib.TransmissionRequest.api_req_battle_midnight.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_battle_midnight.Battle> response)
         {
             var result = BattleAnalyzer.AnalyzeNormalNightBattle(response.data);
+            OnBattleAnalyzed(result);
         }
 
         private void Kclib_GetReqsortieBattle(object sender, KanColleLib.TransmissionRequest.api_req_sortie.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_sortie.Battle> response)
         {
             var result = BattleAnalyzer.AnalyzeNormalBattle(response.data);
+            OnBattleAnalyzed(result);
         }
 
         private void Kclib_GetReqsortieBattleresult(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_sortie.Battleresult> response)
@@ -44,7 +46,12 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             });
         }
 
-        
+        /// <summary>
+        /// 戦闘が解析された際に呼び出されます
+        /// </summary>
+        public event BattleAnalyzedEventHandler BattleAnalyzed;
+        public delegate void BattleAnalyzedEventHandler(object sender, BattleAnalyzedEventArgs e);
+        protected virtual void OnBattleAnalyzed(BattleAnalyzedEventArgs e) { if (BattleAnalyzed != null) { BattleAnalyzed(this, e); } }
 
         /// <summary>
         /// 戦闘の結果を取得した際に呼び出されます

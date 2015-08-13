@@ -56,7 +56,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         /// <param name="maxhps">svdataのmaxhpsそのまま</param>
         /// <param name="nowhps">svdataのnowhpsそのまま</param>
         /// <returns></returns>
-        private static List<BattleAnalyzedEventArgs.Ship> GetFriendshipList(int dock_id, int[] maxhps, int[] nowhps)
+        private static List<BattleAnalyzedEventArgs.Ship> GetFriendshipList(int dock_id, int[] maxhps, int[] nowhps, int[][] fParam)
         {
             var kcmodel = MainModel.Current.kancolleModel;
 
@@ -66,6 +66,12 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             for (int i = 0; i < friendship.Count; i++)
             {
                 var ship = friendship[i];
+
+                ship.fire_power = fParam[i][0];
+                ship.torpedo = fParam[i][1];
+                ship.anti_air = fParam[i][2];
+                ship.armor = fParam[i][3];
+
                 var shipdata = kcmodel.shipdata.FirstOrDefault(_ => _.shipid == ship.original_id);
                 if (shipdata != null && shipdata.characterinfo != null)
                 {
@@ -77,10 +83,17 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     ship.before_hp = nowhps[i + 1];
                     ship.after_hp = ship.before_hp;
                     ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.None;
-                    foreach (var slot in shipdata.Slots)
+                    ship.slot = new int[shipdata.characterinfo.slot_count];
+                    for (int j = 0; j < ship.slot.Length; j++)
                     {
-                        var slotdata = kcmodel.slotdata.FirstOrDefault(_ => _.id == slot);
-                        if(slotdata != null)
+                        ship.slot[j] = -1;
+                    }
+                    for (int j = 0; j < shipdata.Slots.Count; j++)
+                    {
+                        var slotdata = kcmodel.slotdata.FirstOrDefault(_ => _.id == shipdata.Slots[j]);
+                        if (slotdata != null)
+                        {
+                            ship.slot[j] = slotdata.itemid;
                             if (slotdata.itemid == 42)
                             {
                                 ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Normal;
@@ -91,13 +104,14 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                                 ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Goddess;
                                 break;
                             }
+                        }
                     }
                 }
             }
             return friendship;
         }
 
-        private static List<BattleAnalyzedEventArgs.Ship> GetEnemyshipList(int[] ship_ke, int[] ship_lv, int[] maxhps, int[] nowhps)
+        private static List<BattleAnalyzedEventArgs.Ship> GetEnemyshipList(int[] ship_ke, int[] ship_lv, int[] maxhps, int[] nowhps, int[][] eParam, int[][] eSlot)
         {
             var kcmodel = MainModel.Current.kancolleModel;
 
@@ -108,6 +122,12 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             for (int i = 0; i < enemyship.Count; i++)
             {
                 var ship = enemyship[i];
+                ship.fire_power = eParam[i][0];
+                ship.torpedo = eParam[i][1];
+                ship.anti_air = eParam[i][2];
+                ship.armor = eParam[i][3];
+                
+
                 if (kcmodel.charamaster.ContainsKey(ship.character_id))
                 {
                     var charadata = kcmodel.charamaster[ship.character_id];
@@ -119,6 +139,15 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     ship.max_hp = maxhps[i + 7];
                     ship.before_hp = nowhps[i + 7];
                     ship.after_hp = ship.before_hp;
+                    ship.slot = new int[charadata.slot_count];
+                    for (int j = 0; j < ship.slot.Length; j++)
+                    {
+                        ship.slot[j] = -1;
+                    }
+                    for (int j = 0; j < eSlot[i].Length && j < ship.slot.Length ; j++)
+                    {
+                        ship.slot[j] = eSlot[i][j];
+                    }
                 }
             }
             return enemyship;
@@ -285,6 +314,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     };
                     phase.attacks.Add(attack);
                     attack.target_ship.after_hp -= attack.damage;
+                    attack.origin_ship.sum_attack += attack.damage;
                 }
             }
 
@@ -301,6 +331,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     };
                     phase.attacks.Add(attack);
                     attack.target_ship.after_hp -= attack.damage;
+                    attack.origin_ship.sum_attack += attack.damage;
                 }
             }
 
@@ -342,6 +373,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                         };
                         phase.attacks.Add(attack);
                         attack.target_ship.after_hp -= attack.damage;
+                        attack.origin_ship.sum_attack += attack.damage;
 
                         if (to <= 6)
                         {
@@ -378,11 +410,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             ret.phases = new List<BattleAnalyzedEventArgs.Phase>();
 
             // 自艦隊の情報
-            var friendship = GetFriendshipList(data.dock_id, data.maxhps, data.nowhps);
+            var friendship = GetFriendshipList(data.dock_id, data.maxhps, data.nowhps, data.fParam);
             ret.friend = friendship;
 
             // 敵艦隊の情報
-            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps);
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
             ret.enemy = enemyship;
 
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
@@ -494,6 +526,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                         };
                         phase.attacks.Add(attack);
                         attack.target_ship.after_hp -= attack.damage;
+                        attack.origin_ship.sum_attack += attack.damage;
 
                         if (to <= 6)
                         {
