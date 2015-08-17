@@ -11,7 +11,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         // http://ai.2ch.sc/test/read.cgi/gameswf/1418029405/674
 
         /// <summary>
-        /// 対空砲火をした艦
+        /// 対空砲火をした艦（0から?　連合艦隊であれば11まで?）
         /// </summary>
         public int idx;
 
