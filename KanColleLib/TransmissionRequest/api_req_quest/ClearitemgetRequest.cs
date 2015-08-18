@@ -9,11 +9,6 @@ namespace KanColleLib.TransmissionRequest.api_req_quest
     public class ClearitemgetRequest : RequestBase
     {
         /// <summary>
-        /// bot対策用パラメータ
-        /// </summary>
-        public int quest;
-
-        /// <summary>
         /// 達成した任務のID
         /// </summary>
         public int quest_id;
@@ -21,7 +16,6 @@ namespace KanColleLib.TransmissionRequest.api_req_quest
         public ClearitemgetRequest(string request)
             : base(request)
         {
-            quest = int.Parse(_Get_Request("api_quest"));
             quest_id = int.Parse(_Get_Request("api_quest_id"));
         }
     }
