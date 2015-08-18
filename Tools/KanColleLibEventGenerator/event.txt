@@ -126,6 +126,41 @@ public delegate void GetReqbattlemidnightBattleEventHandler(object sender, Trans
 protected virtual void OnGetReqbattlemidnightBattle(TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response) { if (GetReqbattlemidnightBattle != null) GetReqbattlemidnightBattle(this, request, response); }
 
 /// <summary>
+/// api_req_combined_battle/airbattle を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqcombinedbattleAirbattleEventHandler GetReqcombinedbattleAirbattle;
+public delegate void GetReqcombinedbattleAirbattleEventHandler(object sender, TransmissionRequest.api_req_combined_battle.AirbattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Airbattle> response);
+protected virtual void OnGetReqcombinedbattleAirbattle(TransmissionRequest.api_req_combined_battle.AirbattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Airbattle> response) { if (GetReqcombinedbattleAirbattle != null) GetReqcombinedbattleAirbattle(this, request, response); }
+
+/// <summary>
+/// api_req_combined_battle/battle を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqcombinedbattleBattleEventHandler GetReqcombinedbattleBattle;
+public delegate void GetReqcombinedbattleBattleEventHandler(object sender, TransmissionRequest.api_req_combined_battle.BattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Battle> response);
+protected virtual void OnGetReqcombinedbattleBattle(TransmissionRequest.api_req_combined_battle.BattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Battle> response) { if (GetReqcombinedbattleBattle != null) GetReqcombinedbattleBattle(this, request, response); }
+
+/// <summary>
+/// api_req_combined_battle/battleresult を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqcombinedbattleBattleresultEventHandler GetReqcombinedbattleBattleresult;
+public delegate void GetReqcombinedbattleBattleresultEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_combined_battle.Battleresult> response);
+protected virtual void OnGetReqcombinedbattleBattleresult(RequestBase request, Svdata<TransmissionData.api_req_combined_battle.Battleresult> response) { if (GetReqcombinedbattleBattleresult != null) GetReqcombinedbattleBattleresult(this, request, response); }
+
+/// <summary>
+/// api_req_combined_battle/battle_water を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqcombinedbattleBattlewaterEventHandler GetReqcombinedbattleBattlewater;
+public delegate void GetReqcombinedbattleBattlewaterEventHandler(object sender, TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response);
+protected virtual void OnGetReqcombinedbattleBattlewater(TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response) { if (GetReqcombinedbattleBattlewater != null) GetReqcombinedbattleBattlewater(this, request, response); }
+
+/// <summary>
+/// api_req_combined_battle/midnight_battle を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqcombinedbattleMidnightbattleEventHandler GetReqcombinedbattleMidnightbattle;
+public delegate void GetReqcombinedbattleMidnightbattleEventHandler(object sender, TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, Svdata<TransmissionData.api_req_combined_battle.MidnightBattle> response);
+protected virtual void OnGetReqcombinedbattleMidnightbattle(TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, Svdata<TransmissionData.api_req_combined_battle.MidnightBattle> response) { if (GetReqcombinedbattleMidnightbattle != null) GetReqcombinedbattleMidnightbattle(this, request, response); }
+
+/// <summary>
 /// api_req_hensei/change を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetReqhenseiChangeEventHandler GetReqhenseiChange;
@@ -180,6 +215,13 @@ protected virtual void OnGetReqkousyouCreateship(TransmissionRequest.api_req_kou
 public event GetReqkousyouCreateshipSpeedchangeEventHandler GetReqkousyouCreateshipSpeedchange;
 public delegate void GetReqkousyouCreateshipSpeedchangeEventHandler(object sender, TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest request, Svdata<object> response);
 protected virtual void OnGetReqkousyouCreateshipSpeedchange(TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest request, Svdata<object> response) { if (GetReqkousyouCreateshipSpeedchange != null) GetReqkousyouCreateshipSpeedchange(this, request, response); }
+
+/// <summary>
+/// api_req_kousyou/destroyitem2 を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqkousyouDestroyitem2EventHandler GetReqkousyouDestroyitem2;
+public delegate void GetReqkousyouDestroyitem2EventHandler(object sender, TransmissionRequest.api_req_kousyou.Destroyitem2Request request, Svdata<TransmissionData.api_req_kousyou.Destroyitem2> response);
+protected virtual void OnGetReqkousyouDestroyitem2(TransmissionRequest.api_req_kousyou.Destroyitem2Request request, Svdata<TransmissionData.api_req_kousyou.Destroyitem2> response) { if (GetReqkousyouDestroyitem2 != null) GetReqkousyouDestroyitem2(this, request, response); }
 
 /// <summary>
 /// api_req_kousyou/destroyship を受信して解析に成功した際に呼び出されます

@@ -106,6 +106,36 @@ OnGetReqbattlemidnightBattle(new TransmissionRequest.api_req_battle_midnight.Bat
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_req_combined_battle/airbattle":
+if(json.api_data())
+OnGetReqcombinedbattleAirbattle(new TransmissionRequest.api_req_combined_battle.AirbattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.Airbattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.Airbattle.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_combined_battle/battle":
+if(json.api_data())
+OnGetReqcombinedbattleBattle(new TransmissionRequest.api_req_combined_battle.BattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.Battle>.fromDynamic(json, TransmissionData.api_req_combined_battle.Battle.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_combined_battle/battleresult":
+if(json.api_data())
+OnGetReqcombinedbattleBattleresult(new RequestBase(request), Svdata<TransmissionData.api_req_combined_battle.Battleresult>.fromDynamic(json, TransmissionData.api_req_combined_battle.Battleresult.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_combined_battle/battle_water":
+if(json.api_data())
+OnGetReqcombinedbattleBattlewater(new TransmissionRequest.api_req_combined_battle.BattleWaterRequest(request), Svdata<TransmissionData.api_req_combined_battle.BattleWater>.fromDynamic(json, TransmissionData.api_req_combined_battle.BattleWater.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_combined_battle/midnight_battle":
+if(json.api_data())
+OnGetReqcombinedbattleMidnightbattle(new TransmissionRequest.api_req_combined_battle.MidnightBattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.MidnightBattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.MidnightBattle.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_req_hensei/change":
 OnGetReqhenseiChange(new TransmissionRequest.api_req_hensei.ChangeRequest(request), Svdata<object>.fromDynamic(json, null));
 break;
@@ -141,6 +171,12 @@ OnGetReqkousyouCreateship(new TransmissionRequest.api_req_kousyou.CreateshipRequ
 break;
 case "api_req_kousyou/createship_speedchange":
 OnGetReqkousyouCreateshipSpeedchange(new TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest(request), Svdata<object>.fromDynamic(json, null));
+break;
+case "api_req_kousyou/destroyitem2":
+if(json.api_data())
+OnGetReqkousyouDestroyitem2(new TransmissionRequest.api_req_kousyou.Destroyitem2Request(request), Svdata<TransmissionData.api_req_kousyou.Destroyitem2>.fromDynamic(json, TransmissionData.api_req_kousyou.Destroyitem2.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
 case "api_req_kousyou/destroyship":
 if(json.api_data())
