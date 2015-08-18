@@ -46,29 +46,45 @@ namespace Miotsukushi.Model.KanColle
             kclib.UnknownKcsAPIDataReceived += (_, e) => OnUnknownAPIReceived(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
             kclib.GetFiddlerLogString += (_, e) => OnGetFiddlerLog(new StringEventArgs(e.logtext));
 
-            kclib.GetStart2 += kclib_GetStart2;
-            kclib.GetPortPort += kclib_GetPortPort;
             kclib.GetGetmemberBasic += kclib_GetGetmemberBasic;
+            kclib.GetGetmemberDeck += kclib_GetGetmemberDeck;
+            kclib.GetGetmemberKdock += kclib_GetGetmemberKdock;
+            kclib.GetGetmemberMaterial += kclib_GetGetmemberMaterial;
+            kclib.GetGetmemberNdock += kclib_GetGetmemberNdock;
+            kclib.GetGetmemberQuestlist += Kclib_GetGetmemberQuestlist;
             kclib.GetGetmemberShip2 += kclib_GetGetmemberShip2;
             kclib.GetGetmemberShip3 += kclib_GetGetmemberShip3;
-            kclib.GetGetmemberDeck += kclib_GetGetmemberDeck;
-            kclib.GetReqmissionStart += kclib_GetReqmissionStart;
-            kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
-            kclib.GetGetmemberKdock += kclib_GetGetmemberKdock;
-            kclib.GetReqkousyouGetship += kclib_GetReqkousyouGetship;
-            kclib.GetGetmemberNdock += kclib_GetGetmemberNdock;
-            kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
-            kclib.GetGetmemberMaterial += kclib_GetGetmemberMaterial;
-            kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
-            kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
-            kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
-            kclib.GetGetmemberQuestlist += Kclib_GetGetmemberQuestlist;
-            kclib.GetReqmemberUpdatedeckname += Kclib_GetReqmemberUpdatedeckname;
             kclib.GetGetmemberShipDeck += Kclib_GetGetmemberShipDeck;
+            kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
+            kclib.GetPortPort += kclib_GetPortPort;
+            kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
             kclib.GetReqhokyuCharge += Kclib_GetReqhokyuCharge;
+            kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
+            kclib.GetReqkousyouDestroyitem2 += Kclib_GetReqkousyouDestroyitem2;
+            kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
+            kclib.GetReqkousyouGetship += kclib_GetReqkousyouGetship;
+            kclib.GetReqmemberUpdatedeckname += Kclib_GetReqmemberUpdatedeckname;
+            kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
+            kclib.GetReqmissionStart += kclib_GetReqmissionStart;
+            kclib.GetStart2 += kclib_GetStart2;
 
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
+        }
+
+        private void Kclib_GetReqkousyouDestroyitem2(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.Destroyitem2Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Destroyitem2> response)
+        {
+            foreach (var i in request.slotitem_ids)
+            {
+                var s = slotdata.FirstOrDefault(_ => _.id == i);
+                if (s != null)
+                    slotdata.Remove(s);
+            }
+
+            basicdata.fuel += response.data.get_material[0];
+            basicdata.ammo += response.data.get_material[1];
+            basicdata.steel += response.data.get_material[2];
+            basicdata.bauxite += response.data.get_material[3];
         }
 
         private void Kclib_GetReqhokyuCharge(object sender, KanColleLib.TransmissionRequest.api_req_hokyu.ChargeRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_hokyu.Charge> response)
