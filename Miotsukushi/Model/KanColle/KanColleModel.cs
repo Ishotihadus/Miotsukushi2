@@ -66,10 +66,42 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetReqmemberUpdatedeckname += Kclib_GetReqmemberUpdatedeckname;
             kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
             kclib.GetReqmissionStart += kclib_GetReqmissionStart;
+            kclib.GetReqnyukyoSpeedchange += Kclib_GetReqnyukyoSpeedchange;
+            kclib.GetReqnyukyoStart += Kclib_GetReqnyukyoStart;
             kclib.GetStart2 += kclib_GetStart2;
 
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
+        }
+
+        private void Kclib_GetReqnyukyoSpeedchange(object sender, KanColleLib.TransmissionRequest.api_req_nyukyo.SpeedchangeRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        {
+            var shipid = ndockdata[request.ndock_id - 1].shipid;
+            ndockdata[request.ndock_id - 1].status = NDockStatus.Empty;
+
+            var ship = shipdata.FirstOrDefault(_ => _.shipid == shipid);
+            if (ship != null)
+            {
+                ship.hp_now = ship.hp_max;
+                ship.ndock_time = TimeSpan.Zero;
+                if (ship.condition < 40)
+                    ship.condition = 40;
+            }
+        }
+
+        private void Kclib_GetReqnyukyoStart(object sender, KanColleLib.TransmissionRequest.api_req_nyukyo.StartRequest request, KanColleLib.TransmissionData.Svdata<object> response)
+        {
+            if(request.highspeed)
+            {
+                var ship = shipdata.FirstOrDefault(_ => _.shipid == request.ship_id);
+                if(ship != null)
+                {
+                    ship.hp_now = ship.hp_max;
+                    ship.ndock_time = TimeSpan.Zero;
+                    if (ship.condition < 40)
+                        ship.condition = 40;
+                }
+            }
         }
 
         private void Kclib_GetReqkousyouDestroyitem2(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.Destroyitem2Request request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Destroyitem2> response)
