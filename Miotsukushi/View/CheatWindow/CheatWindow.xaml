@@ -22,5 +22,8 @@
         <TabItem Header="装備マスタ情報">
             <Components:ItemMasterList/>
         </TabItem>
+        <TabItem Header="デバッガ">
+            <Components:Debugger/>
+        </TabItem>
     </TabControl>
 </Controls:MetroWindow>
