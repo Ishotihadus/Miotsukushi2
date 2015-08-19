@@ -29,6 +29,7 @@ namespace Miotsukushi.Model.KanColle
         public QuestData questdata = new QuestData();
 
         public BattleModels.BattleModel battlemodel;
+        public DebuggerModel debuggermodel;
         public bool initializeCompleted = false;
 
         public KanColleModel()
@@ -40,6 +41,7 @@ namespace Miotsukushi.Model.KanColle
             kclib = new KanColleNotifier(true);
             new PacketSaver(kclib);
             battlemodel = new BattleModels.BattleModel(this, kclib);
+            debuggermodel = new DebuggerModel(kclib);
 
             kclib.GameStart += Kclib_GameStart;
             kclib.KcsAPIDataAnalyzeFailed += (_, e) => OnAPIAnalyzeError(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));

@@ -146,6 +146,7 @@
     <Compile Include="Model\KanColle\BattleModels\EventArgs\BattleAnalyzedEventArgs.cs" />
     <Compile Include="Model\KanColle\BattleModels\EventArgs\GetBattleResultEventArgs.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
+    <Compile Include="Model\KanColle\DebuggerModel.cs" />
     <Compile Include="Model\KanColle\EventArgs\APIAnalyzeErrorEventArgs.cs" />
     <Compile Include="Model\KanColle\EventArgs\CreateItemEventArgs.cs" />
     <Compile Include="Model\KanColle\EventArgs\StringEventArgs.cs" />
@@ -180,6 +181,7 @@
     </Compile>
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\CheatWindow\DebuggerViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleShipViewModel.cs" />

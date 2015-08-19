@@ -48,7 +48,7 @@ namespace Miotsukushi.Model.KanColle
 
         public string GetServerNameFromAddress(IPAddress address)
         {
-            if (address_dic.ContainsKey(address))
+            if (address != null && address_dic.ContainsKey(address))
                 return address_dic[address];
             else
                 return null;

@@ -8,13 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <DockPanel>
-        <Button Content="Raise Event" Width="150" DockPanel.Dock="Bottom" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,5,5"/>
+        <Button Command="{Binding RaiseEventCommand}" Content="Raise Event" Width="150" DockPanel.Dock="Bottom" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,5,5"/>
         <DockPanel DockPanel.Dock="Top">
             <StackPanel DockPanel.Dock="Top">
-                <TextBox Controls:TextBoxHelper.Watermark="api_get_member/questlist" Margin="5" />
-                <TextBox Controls:TextBoxHelper.Watermark="api%5Fpage%5Fno=1&amp;api%5Ftoken=xxx&amp;api%5Fverno=1" Margin="5" />
+                <TextBox Text="{Binding Kcsapiurl, Mode=TwoWay}" Controls:TextBoxHelper.Watermark="api_get_member/questlist" Margin="5" />
+                <TextBox Text="{Binding Request, Mode=TwoWay}" Controls:TextBoxHelper.Watermark="api%5Fpage%5Fno=1&amp;api%5Ftoken=xxx&amp;api%5Fverno=1" Margin="5" />
             </StackPanel>
-            <TextBox Controls:TextBoxHelper.Watermark="svdata={&quot;api_result&quot;:1,&quot;api_result_msg&quot;:&quot;\u6210\u529f&quot;,&quot;api_data&quot;:{...}}" Margin="5" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+            <TextBox Text="{Binding Response, Mode=TwoWay}" Controls:TextBoxHelper.Watermark="svdata={&quot;api_result&quot;:1,&quot;api_result_msg&quot;:&quot;\u6210\u529f&quot;,&quot;api_data&quot;:{...}}" Margin="5" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
         </DockPanel>
     </DockPanel>
 </UserControl>
