@@ -20,6 +20,7 @@ namespace Miotsukushi.Model.KanColle
         public Dictionary<int, ItemData> slotitemmaster = new Dictionary<int, ItemData>();
         public Dictionary<int, ItemEquipTypeData> slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
         public Dictionary<int, MapAreaData> mapareamaster = new Dictionary<int, MapAreaData>();
+        public Dictionary<int, MapInfoData> mapinfomaster = new Dictionary<int, MapInfoData>();
         public ObservableCollection<SlotData> slotdata = new ObservableCollection<SlotData>();
         public ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
         public ExList<FleetData> fleetdata = new ExList<FleetData>();
@@ -473,6 +474,12 @@ namespace Miotsukushi.Model.KanColle
                 {
                     name = _.name,
                     type = _.type
+                });
+
+            mapinfomaster = response.data.mst_mapinfo.ToDictionary(_ => _.id,
+                _ => new MapInfoData()
+                {
+                    name = _.name
                 });
             
             InitializeConfirm();

@@ -14,6 +14,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         KanColleModel original_model;
         KanColleNotifier kclib;
 
+        public int area_id;
+        public int map_id;
+        public string map_name;
+        public int cell_id;
+
         public BattleModel(KanColleModel original_model, KanColleNotifier kclib)
         {
             this.original_model = original_model;
@@ -28,6 +33,27 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
             kclib.GetReqsortieBattleresult += Kclib_GetReqsortieBattleresult;
             kclib.GetReqcombinedbattleBattleresult += Kclib_GetReqcombinedbattleBattleresult;
+
+            kclib.GetReqmapStart += Kclib_GetReqmapStart;
+            kclib.GetReqmapNext += Kclib_GetReqmapNext;
+        }
+
+        void NextCellDataAppend(KanColleLib.TransmissionData.api_req_map.values.NextCellData next_cell_data)
+        {
+            area_id = next_cell_data.maparea_id;
+            map_id = next_cell_data.mapinfo_no;
+            map_name = original_model.mapinfomaster.ContainsKey(area_id * 10 + map_id) ? original_model.mapinfomaster[area_id * 10 + map_id].name : "不明";
+            cell_id = next_cell_data.no;
+        }
+
+        private void Kclib_GetReqmapNext(object sender, KanColleLib.TransmissionRequest.api_req_map.NextRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_map.Next> response)
+        {
+            NextCellDataAppend(response.data.next_cell_data);
+        }
+
+        private void Kclib_GetReqmapStart(object sender, KanColleLib.TransmissionRequest.api_req_map.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_map.Start> response)
+        {
+            NextCellDataAppend(response.data.next_cell_data);
         }
 
         private void Kclib_GetReqcombinedbattleMidnightbattle(object sender, KanColleLib.TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.MidnightBattle> response)

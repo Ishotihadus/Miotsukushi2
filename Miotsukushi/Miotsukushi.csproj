@@ -158,6 +158,7 @@
     <Compile Include="Model\KanColle\KDockData.cs" />
     <Compile Include="Model\KanColle\KDockStatus.cs" />
     <Compile Include="Model\KanColle\MapAreaData.cs" />
+    <Compile Include="Model\KanColle\MapInfoData.cs" />
     <Compile Include="Model\KanColle\MissionData.cs" />
     <Compile Include="Model\KanColle\NDockData.cs" />
     <Compile Include="Model\KanColle\NDockStatus.cs" />
