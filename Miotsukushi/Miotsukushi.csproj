@@ -146,6 +146,7 @@
     <Compile Include="Model\KanColle\BattleModels\EventArgs\BattleAnalyzedEventArgs.cs" />
     <Compile Include="Model\KanColle\BattleModels\EventArgs\GetBattleResultEventArgs.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
+    <Compile Include="Model\KanColle\DebuggerModel.cs" />
     <Compile Include="Model\KanColle\EventArgs\APIAnalyzeErrorEventArgs.cs" />
     <Compile Include="Model\KanColle\EventArgs\CreateItemEventArgs.cs" />
     <Compile Include="Model\KanColle\EventArgs\StringEventArgs.cs" />
@@ -180,6 +181,7 @@
     </Compile>
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="ViewModel\CheatWindow\DebuggerViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleShipViewModel.cs" />
@@ -210,6 +212,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CheatWindow\CheatWindow.xaml.cs">
       <DependentUpon>CheatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheatWindow\Components\Debugger.xaml.cs">
+      <DependentUpon>Debugger.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CheatWindow\Components\ItemMasterList.xaml.cs">
       <DependentUpon>ItemMasterList.xaml</DependentUpon>
@@ -295,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CheatWindow\CheatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheatWindow\Components\Debugger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

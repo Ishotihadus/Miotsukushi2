@@ -111,6 +111,17 @@ namespace KanColleLib
             }
         }
 
+        /// <summary>
+        /// デバッグ用に受信したかのように強制的にイベントを発生させる
+        /// </summary>
+        /// <param name="kcsapiurl"></param>
+        /// <param name="request"></param>
+        /// <param name="response">svdata=を含んだ状態でのレスポンス</param>
+        public void ForceRaiseEvent(string kcsapiurl, string request, string response)
+        {
+            RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+        }
+
         void RaiseEventFromKcsAPISessions(string kcsapiurl, string request, string response)
         {
             dynamic json = null;
@@ -208,6 +219,12 @@ namespace KanColleLib
                 case "api_get_member/slot_item":
                     if (json.api_data())
                         OnGetGetmemberSlotItem(new RequestBase(request), Svdata<TransmissionData.api_get_member.SlotItem>.fromDynamic(json, TransmissionData.api_get_member.SlotItem.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
+                case "api_get_member/sortie_conditions":
+                    if (json.api_data())
+                        OnGetGetmemberSortieConditions(new RequestBase(request), Svdata<TransmissionData.api_get_member.SortieConditions>.fromDynamic(json, TransmissionData.api_get_member.SortieConditions.fromDynamic(json.api_data)));
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
@@ -451,9 +468,9 @@ namespace KanColleLib
         public delegate void UnknownKcsAPIDataReceivedEventHandler(object sender, KcsAPIDataAnalyzeFailedEventArgs e);
         protected virtual void OnUnknownKcsAPIDataReceived(KcsAPIDataAnalyzeFailedEventArgs e) { if (UnknownKcsAPIDataReceived != null) { UnknownKcsAPIDataReceived(this, e); } }
 
-#endregion
+        #endregion
 
-#region 受信URLごとのイベント定義（自動処理）
+        #region 受信URLごとのイベント定義（自動処理）
 
         /// <summary>
         /// api_get_member/basic を受信して解析に成功した際に呼び出されます
@@ -552,6 +569,13 @@ namespace KanColleLib
         public event GetGetmemberSlotItemEventHandler GetGetmemberSlotItem;
         public delegate void GetGetmemberSlotItemEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.SlotItem> response);
         protected virtual void OnGetGetmemberSlotItem(RequestBase request, Svdata<TransmissionData.api_get_member.SlotItem> response) { if (GetGetmemberSlotItem != null) GetGetmemberSlotItem(this, request, response); }
+
+        /// <summary>
+        /// api_get_member/sortie_conditions を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetGetmemberSortieConditionsEventHandler GetGetmemberSortieConditions;
+        public delegate void GetGetmemberSortieConditionsEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.SortieConditions> response);
+        protected virtual void OnGetGetmemberSortieConditions(RequestBase request, Svdata<TransmissionData.api_get_member.SortieConditions> response) { if (GetGetmemberSortieConditions != null) GetGetmemberSortieConditions(this, request, response); }
 
         /// <summary>
         /// api_get_member/unsetslot を受信して解析に成功した際に呼び出されます
@@ -805,7 +829,7 @@ namespace KanColleLib
         public delegate void GetStart2EventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_start2.Start2> response);
         protected virtual void OnGetStart2(RequestBase request, Svdata<TransmissionData.api_start2.Start2> response) { if (GetStart2 != null) GetStart2(this, request, response); }
 
-#endregion
+        #endregion
 
     }
 }

@@ -8,7 +8,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Components="clr-namespace:Miotsukushi.View.CheatWindow.Components" x:Class="Miotsukushi.View.CheatWindow.CheatWindow"
         mc:Ignorable="d"
-        Title="CheatWindow" Height="485.844" Width="564.286" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" ResizeMode="CanResizeWithGrip">
+        Title="CheatWindow" Height="700" Width="900" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" ResizeMode="CanResizeWithGrip">
 
     <TabControl Margin="0" TabStripPlacement="Left">
         <TabControl.Resources>
@@ -21,6 +21,9 @@
         </TabItem>
         <TabItem Header="装備マスタ情報">
             <Components:ItemMasterList/>
+        </TabItem>
+        <TabItem Header="デバッガ">
+            <Components:Debugger/>
         </TabItem>
     </TabControl>
 </Controls:MetroWindow>
