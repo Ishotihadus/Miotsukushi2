@@ -96,7 +96,7 @@ namespace Miotsukushi.ViewModel.CheatWindow
             {
                 if (_RaiseEventFromFileCommand == null)
                 {
-                    _RaiseEventFromFileCommand = new DelegateCommand(() => Model.MainModel.Current.kancolleModel.debuggermodel.RaiseEventFromFile(),
+                    _RaiseEventFromFileCommand = new DelegateCommand(() => Model.MainModel.Current.kancolleModel.debuggermodel.RaiseEventFromFileAsync(),
                         () => true);
                 }
                 return _RaiseEventFromFileCommand;

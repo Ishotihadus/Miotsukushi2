@@ -51,5 +51,10 @@ namespace Miotsukushi.Model.KanColle
                 }
             }
         }
+
+        public async void RaiseEventFromFileAsync()
+        {
+            await Task.Run(new Action(() => RaiseEventFromFile()));
+        }
     }
 }
