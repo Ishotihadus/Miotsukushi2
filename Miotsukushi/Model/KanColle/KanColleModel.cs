@@ -73,7 +73,7 @@ namespace Miotsukushi.Model.KanColle
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
         }
-
+        
         private void Kclib_GetReqnyukyoSpeedchange(object sender, KanColleLib.TransmissionRequest.api_req_nyukyo.SpeedchangeRequest request, KanColleLib.TransmissionData.Svdata<object> response)
         {
             var shipid = ndockdata[request.ndock_id - 1].shipid;

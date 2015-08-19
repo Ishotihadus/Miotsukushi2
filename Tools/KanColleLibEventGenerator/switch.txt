@@ -82,6 +82,12 @@ OnGetGetmemberSlotItem(new RequestBase(request), Svdata<TransmissionData.api_get
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_get_member/sortie_conditions":
+if(json.api_data())
+OnGetGetmemberSortieConditions(new RequestBase(request), Svdata<TransmissionData.api_get_member.SortieConditions>.fromDynamic(json, TransmissionData.api_get_member.SortieConditions.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_get_member/unsetslot":
 if(json.api_data())
 OnGetGetmemberUnsetslot(new RequestBase(request), Svdata<TransmissionData.api_get_member.Unsetslot>.fromDynamic(json, TransmissionData.api_get_member.Unsetslot.fromDynamic(json.api_data)));

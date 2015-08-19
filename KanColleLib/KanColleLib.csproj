@@ -85,6 +85,7 @@
     <Compile Include="TransmissionData\api_get_member\Ship3.cs" />
     <Compile Include="TransmissionData\api_get_member\ShipDeck.cs" />
     <Compile Include="TransmissionData\api_get_member\SlotItem.cs" />
+    <Compile Include="TransmissionData\api_get_member\SortieConditions.cs" />
     <Compile Include="TransmissionData\api_get_member\Unsetslot.cs" />
     <Compile Include="TransmissionData\api_get_member\Useitem.cs" />
     <Compile Include="TransmissionData\api_get_member\values\DeckValue.cs" />

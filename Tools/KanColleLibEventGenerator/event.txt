@@ -98,6 +98,13 @@ public delegate void GetGetmemberSlotItemEventHandler(object sender, RequestBase
 protected virtual void OnGetGetmemberSlotItem(RequestBase request, Svdata<TransmissionData.api_get_member.SlotItem> response) { if (GetGetmemberSlotItem != null) GetGetmemberSlotItem(this, request, response); }
 
 /// <summary>
+/// api_get_member/sortie_conditions を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetGetmemberSortieConditionsEventHandler GetGetmemberSortieConditions;
+public delegate void GetGetmemberSortieConditionsEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.SortieConditions> response);
+protected virtual void OnGetGetmemberSortieConditions(RequestBase request, Svdata<TransmissionData.api_get_member.SortieConditions> response) { if (GetGetmemberSortieConditions != null) GetGetmemberSortieConditions(this, request, response); }
+
+/// <summary>
 /// api_get_member/unsetslot を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetGetmemberUnsetslotEventHandler GetGetmemberUnsetslot;
