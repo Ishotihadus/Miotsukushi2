@@ -8,6 +8,80 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
 {
     class BattleViewModel : ViewModelBase
     {
+        private int _AreaID;
+        public int AreaID
+        {
+            get
+            {
+                return _AreaID;
+            }
+
+            set
+            {
+                if (_AreaID != value)
+                {
+                    _AreaID = value;
+                    OnPropertyChanged(() => AreaID);
+                }
+            }
+        }
+
+        private int _MapID;
+        public int MapID
+        {
+            get
+            {
+                return _MapID;
+            }
+
+            set
+            {
+                if (_MapID != value)
+                {
+                    _MapID = value;
+                    OnPropertyChanged(() => MapID);
+                }
+            }
+        }
+
+        private string _MapName;
+        public string MapName
+        {
+            get
+            {
+                return _MapName;
+            }
+
+            set
+            {
+                if (_MapName != value)
+                {
+                    _MapName = value;
+                    OnPropertyChanged(() => MapName);
+                }
+            }
+        }
+
+        private int _CellID;
+        public int CellID
+        {
+            get
+            {
+                return _CellID;
+            }
+
+            set
+            {
+                if (_CellID != value)
+                {
+                    _CellID = value;
+                    OnPropertyChanged(() => CellID);
+                }
+            }
+        }
+
+
+
         private string _FormationMe;
         public string FormationMe
         {
@@ -214,6 +288,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
 
         private void Battlemodel_BattleAnalyzed(object sender, Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs e)
         {
+            var battlemodel = Model.MainModel.Current.kancolleModel.battlemodel;
+            AreaID = battlemodel.area_id;
+            MapID = battlemodel.map_id;
+            MapName = battlemodel.map_name;
+            CellID = battlemodel.cell_id;
+
             FormationMe = FormationString(e.friend_formation);
             FormationEnemy = FormationString(e.enemy_formation);
             AirMasteryStatus = AirMasteryString(e.air_mastery);
