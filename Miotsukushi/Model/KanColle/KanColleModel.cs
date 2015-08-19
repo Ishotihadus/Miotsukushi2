@@ -479,7 +479,9 @@ namespace Miotsukushi.Model.KanColle
             mapinfomaster = response.data.mst_mapinfo.ToDictionary(_ => _.id,
                 _ => new MapInfoData()
                 {
-                    name = _.name
+                    name = _.name,
+                    area_id = _.maparea_id,
+                    map_id = _.no
                 });
             
             InitializeConfirm();

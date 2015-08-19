@@ -64,7 +64,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
         /// <summary>
         /// 単独艦隊、連合艦隊でそれぞれ出撃可能か
         /// </summary>
-        public bool[] sally_flag;
+        public int[] sally_flag;
 
         public static MstMapinfo fromDynamic(dynamic json)
         {
@@ -80,10 +80,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
             mapinfo.item = json.api_item.Deserialize<int[]>();
             mapinfo.max_maphp = json.api_max_maphp == null ? (int?)null : (int)json.api_max_maphp;
             mapinfo.required_defeat_count = json.api_required_defeat_count == null ? (int?)null : (int)json.api_required_defeat_count;
-            int[] sally_flag = json.api_sally_flag.Deserialize<int[]>();
-            mapinfo.sally_flag = new bool[sally_flag.Length];
-            for (int i = 0; i < sally_flag.Length; i++)
-                mapinfo.sally_flag[i] = sally_flag[i] == 1;
+            mapinfo.sally_flag = json.api_sally_flag.Deserialize<int[]>();
 
             return mapinfo;
         }

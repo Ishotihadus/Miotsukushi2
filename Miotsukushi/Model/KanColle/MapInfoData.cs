@@ -9,5 +9,7 @@ namespace Miotsukushi.Model.KanColle
     class MapInfoData
     {
         public string name;
+        public int area_id;
+        public int map_id;
     }
 }
