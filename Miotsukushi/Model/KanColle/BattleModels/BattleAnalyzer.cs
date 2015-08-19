@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Miotsukushi.Model.KanColle.BattleModels.EventArgs;
 using api_req_sortie = KanColleLib.TransmissionData.api_req_sortie;
 using api_req_battle_midnight = KanColleLib.TransmissionData.api_req_battle_midnight;
+using api_req_combined_battle = KanColleLib.TransmissionData.api_req_combined_battle;
 
 namespace Miotsukushi.Model.KanColle.BattleModels
 {
@@ -173,7 +174,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         }
 
         /// <summary>
-        /// 航空戦の解析（非連合艦隊戦）
+        /// 航空戦ステージ3の解析（非連合艦隊戦）
         /// </summary>
         /// <param name="data"></param>
         /// <param name="ret"></param>
@@ -396,9 +397,13 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             friendgauge = 1 - (double)enemyship.Sum(_ => Math.Max(_.after_hp, 0)) / enemyship.Sum(_ => _.before_hp);
             enemygauge = 1 - (double)friendship.Sum(_ => Math.Max(_.after_hp, 0)) / friendship.Sum(_ => _.before_hp);
 
-            // ダメコン発動時にゲージが負になる場合がある
-            if (friendgauge < 0)
-                friendgauge = 0;
+            // 0を切ってしまうかもしれない
+            friendgauge = Math.Max(friendgauge, 0);
+            enemygauge = Math.Max(enemygauge, 0);
+
+            // 1を超えてしまうかもしれない
+            friendgauge = Math.Min(friendgauge, 1);
+            enemygauge = Math.Min(enemygauge, 1);
         }
 
         public static BattleAnalyzedEventArgs AnalyzeNormalBattle(api_req_sortie.Battle data)
@@ -560,6 +565,201 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 #if DEBUG
             EventArgsDebugOutput(ret);
 #endif
+
+            return ret;
+        }
+
+        
+        private static BattleAnalyzedEventArgs.Phase GetCombinedAirBattleStage3Phase
+            (api_req_sortie.values.KoukuStage3 stage3, api_req_combined_battle.values.KoukuStage3Combined stage3_combined,
+            List<BattleAnalyzedEventArgs.Ship> friendship, List<BattleAnalyzedEventArgs.Ship> combinedship, List<BattleAnalyzedEventArgs.Ship> enemyship)
+        {
+            var phase = new BattleAnalyzedEventArgs.AllOverPhase() { phase_name = "航空戦" };
+
+            for (int i = 1; i < stage3.edam.Length; i++)
+            {
+                if (stage3.erai_flag[i] || stage3.ebak_flag[i])
+                {
+                    phase.attackee.Add(new BattleAnalyzedEventArgs.Phase.Attack()
+                    {
+                        target_ship = enemyship[i - 1],
+                        damage = (int)stage3.edam[i],
+                        flag_ship_protect = Tools.KanColleTools.IsFlagShipProtect(stage3.edam[i]),
+                        type = stage3.ecl_flag[i]
+                    });
+                    enemyship[i - 1].after_hp -= (int)stage3.edam[i];
+                }
+            }
+
+            for (int i = 1; i < stage3.fdam.Length; i++)
+            {
+                if (stage3.frai_flag[i] || stage3.fbak_flag[i])
+                {
+                    phase.attackee.Add(new BattleAnalyzedEventArgs.Phase.Attack()
+                    {
+                        target_ship = friendship[i - 1],
+                        damage = (int)stage3.fdam[i],
+                        flag_ship_protect = Tools.KanColleTools.IsFlagShipProtect(stage3.fdam[i]),
+                        type = stage3.fcl_flag[i]
+                    });
+                    friendship[i - 1].after_hp -= (int)stage3.fdam[i];
+                }
+            }
+
+            for (int i = 0; i < stage3_combined.fdam.Length; i++)
+            {
+                if (stage3_combined.frai_flag[i] || stage3_combined.fbak_flag[i])
+                {
+                    phase.attackee.Add(new BattleAnalyzedEventArgs.Phase.Attack()
+                    {
+                        target_ship = combinedship[i - 1],
+                        damage = (int)stage3_combined.fdam[i],
+                        flag_ship_protect = Tools.KanColleTools.IsFlagShipProtect(stage3_combined.fdam[i]),
+                        type = stage3_combined.fcl_flag[i]
+                    });
+                    combinedship[i - 1].after_hp -= (int)stage3_combined.fdam[i];
+                }
+            }
+
+            foreach (var ship in friendship)
+            {
+                var damecondata = DameConCheck(ship);
+                if (damecondata != null)
+                    phase.damecon.Add(damecondata);
+            }
+
+            foreach (var ship in combinedship)
+            {
+                var damecondata = DameConCheck(ship);
+                if (damecondata != null)
+                    phase.damecon.Add(damecondata);
+            }
+
+            if (phase.attackee.Count > 0)
+                return phase;
+            else
+                return null;
+        }
+        private static void CalcGaugeCombined(List<BattleAnalyzedEventArgs.Ship> friendship, List<BattleAnalyzedEventArgs.Ship> combinedship, List<BattleAnalyzedEventArgs.Ship> enemyship, out double friendgauge, out double enemygauge)
+        {
+            friendgauge = 1 - (double)enemyship.Sum(_ => Math.Max(_.after_hp, 0)) / enemyship.Sum(_ => _.before_hp);
+            enemygauge = 1 - (double)(friendship.Sum(_ => Math.Max(_.after_hp, 0)) + combinedship.Sum(_ => Math.Max(_.after_hp, 0))) / (friendship.Sum(_ => _.before_hp) + combinedship.Sum(_ => _.before_hp));
+
+            // 0を切ってしまうかもしれない
+            friendgauge = Math.Max(friendgauge, 0);
+            enemygauge = Math.Max(enemygauge, 0);
+
+            // 1を超えてしまうかもしれない
+            friendgauge = Math.Min(friendgauge, 1);
+            enemygauge = Math.Min(enemygauge, 1);
+        }
+
+        /// <summary>
+        /// 連合艦隊機動部隊通常戦
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static BattleAnalyzedEventArgs AnalyzeAirCombinedNormalBattle(api_req_combined_battle.Battle data)
+        {
+            var ret = new BattleAnalyzedEventArgs();
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.normal;
+            ret.is_combined_battle = true;
+            ret.phases = new List<BattleAnalyzedEventArgs.Phase>();
+
+            // 自艦隊
+            var friendship = GetFriendshipList(1, data.maxhps, data.nowhps, data.fParam);
+            ret.friend = friendship;
+
+            // 随伴艦隊
+            var combinedship = GetFriendshipList(2, data.maxhps_combined, data.nowhps_combined, data.fParam_combined);
+            ret.friend_combined = combinedship;
+
+            // 敵艦隊
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+
+            ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
+            ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
+            ret.crossing_type = (BattleAnalyzedEventArgs.CrossingType)data.formation[2];
+
+            // 航空戦フェイズ
+            if (data.stage_flag[0])
+                GetAirBattleStage1Phase(data.kouku.stage1, out ret.air_mastery);
+
+            if (data.stage_flag[2])
+            {
+                var kouku_stage2_phase = GetCombinedAirBattleStage3Phase(data.kouku.stage3, data.kouku.stage3_combined, friendship, combinedship, enemyship);
+                if (kouku_stage2_phase != null)
+                    ret.phases.Add(kouku_stage2_phase);
+            }
+            
+            // 支援艦隊フェイズ
+            var support_phase = GetSupportPhase(data.support_flag, data.support_info, enemyship);
+            if (support_phase != null)
+                ret.phases.Add(support_phase);
+
+            // 開幕雷撃フェイズ
+            if (data.opening_flag)
+            {
+                var opening_phase = GetRaigekiPhase(data.opening_atack, combinedship, enemyship);
+                if (opening_phase != null)
+                {
+                    opening_phase.phase_name = "開幕雷撃";
+                    ret.phases.Add(opening_phase);
+                }
+            }
+
+            // 第2艦隊砲撃戦
+            if (data.hourai_flag[0])
+            {
+                var hougeki_phase = GetHougekiPhase(data.hougeki1, combinedship, enemyship);
+                if (hougeki_phase != null)
+                {
+                    hougeki_phase.phase_name = "砲撃戦（随伴艦隊）";
+                    ret.phases.Add(hougeki_phase);
+                }
+            }
+
+            // 雷撃戦
+            if (data.hourai_flag[1])
+            {
+                var raigeki_phase = GetRaigekiPhase(data.raigeki, combinedship, enemyship);
+                if (raigeki_phase != null)
+                {
+                    raigeki_phase.phase_name = "雷撃戦";
+                    ret.phases.Add(raigeki_phase);
+                }
+            }
+
+            // 第1艦隊砲撃戦（1巡目）
+            if (data.hourai_flag[2])
+            {
+                var hougeki_phase = GetHougekiPhase(data.hougeki2, friendship, enemyship);
+                if (hougeki_phase != null)
+                {
+                    hougeki_phase.phase_name = "砲撃戦（本隊1巡目）";
+                    ret.phases.Add(hougeki_phase);
+                }
+            }
+
+            // 第1艦隊砲撃戦（2巡目）
+            if (data.hourai_flag[3])
+            {
+                var hougeki_phase = GetHougekiPhase(data.hougeki3, friendship, enemyship);
+                if (hougeki_phase != null)
+                {
+                    hougeki_phase.phase_name = "砲撃戦（本隊2巡目）";
+                    ret.phases.Add(hougeki_phase);
+                }
+            }
+
+            CalcGaugeCombined(friendship, combinedship, enemyship, out ret.friend_gauge, out ret.enemy_gauge);
+
+#if DEBUG
+            EventArgsDebugOutput(ret);
+#endif
+            if (data.midnight_flag)
+                day_battle = ret;
 
             return ret;
         }
