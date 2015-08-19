@@ -677,6 +677,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
             // 敵艦隊
             var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+            ret.enemy = enemyship;
 
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
             ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
@@ -787,6 +788,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
             // 敵艦隊
             var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+            ret.enemy = enemyship;
 
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
             ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
@@ -897,6 +899,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
             // 敵艦隊
             var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+            ret.enemy = enemyship;
 
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
             ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
