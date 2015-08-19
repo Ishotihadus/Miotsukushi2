@@ -169,7 +169,25 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                 }
             }
         }
-        
+
+        private List<BattleShipViewModel> _ShipsCombined;
+        public List<BattleShipViewModel> ShipsCombined
+        {
+            get
+            {
+                return _ShipsCombined;
+            }
+
+            set
+            {
+                if (_ShipsCombined != value)
+                {
+                    _ShipsCombined = value;
+                    OnPropertyChanged(() => ShipsCombined);
+                }
+            }
+        }
+
         private List<BattleShipViewModel> _ShipsEnemy;
         public List<BattleShipViewModel> ShipsEnemy
         {
@@ -250,6 +268,35 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                 });
             }
             ShipsEnemy = enemy_list;
+
+            if (e.is_combined_battle)
+            {
+                var combined_list = new List<BattleShipViewModel>();
+                foreach (var ship in e.friend_combined)
+                {
+                    combined_list.Add(new BattleShipViewModel()
+                    {
+                        ShipName = ship.name,
+                        ShipLevel = ship.level,
+                        MaxHP = ship.max_hp,
+                        AfterHP = ship.after_hp,
+                        SumAttack = ship.sum_attack,
+                        SumDamage = ship.before_hp - ship.after_hp,
+                        Firepower = ship.fire_power,
+                        Torpedo = ship.torpedo,
+                        AntiAir = ship.anti_air,
+                        Armor = ship.armor,
+                        Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
+                        {
+                            ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
+                            ItemTypeColor = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.kancolleModel.slotitemmaster[_].type_equiptype) : System.Windows.Media.Colors.Transparent
+                        }).ToList())
+                    });
+                }
+                ShipsCombined = combined_list;
+            }
+            else
+                ShipsCombined = new List<BattleShipViewModel>();
         }
 
         private string FormationString(Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation formation)

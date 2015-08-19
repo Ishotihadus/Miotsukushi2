@@ -846,6 +846,15 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 System.Diagnostics.Debug.WriteLine(ship.name + " Lv." + ship.level + " - " + ship.before_hp + " -> " + Math.Max(ship.after_hp, 0) + " / " + ship.max_hp);
             }
 
+            if(eventargs.is_combined_battle)
+            {
+                System.Diagnostics.Debug.WriteLine("[ 随伴艦隊 ]");
+                foreach (var ship in eventargs.friend_combined)
+                {
+                    System.Diagnostics.Debug.WriteLine(ship.name + " Lv." + ship.level + " - " + ship.before_hp + " -> " + Math.Max(ship.after_hp, 0) + " / " + ship.max_hp);
+                }
+            }
+
             System.Diagnostics.Debug.WriteLine("[ 敵艦隊 ]");
             foreach (var ship in eventargs.enemy)
             {
