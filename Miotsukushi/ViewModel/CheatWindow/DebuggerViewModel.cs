@@ -89,6 +89,20 @@ namespace Miotsukushi.ViewModel.CheatWindow
             }
         }
 
+        private DelegateCommand _RaiseEventFromFileCommand;
+        public DelegateCommand RaiseEventFromFileCommand
+        {
+            get
+            {
+                if (_RaiseEventFromFileCommand == null)
+                {
+                    _RaiseEventFromFileCommand = new DelegateCommand(() => Model.MainModel.Current.kancolleModel.debuggermodel.RaiseEventFromFile(),
+                        () => true);
+                }
+                return _RaiseEventFromFileCommand;
+            }
+        }
+
         public DebuggerViewModel()
         {
             Kcsapiurl = "";
