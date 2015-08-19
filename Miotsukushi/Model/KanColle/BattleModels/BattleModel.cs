@@ -19,10 +19,35 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             this.original_model = original_model;
             this.kclib = kclib;
 
-            kclib.GetReqsortieBattleresult += Kclib_GetReqsortieBattleresult;
+            kclib.GetReqcombinedbattleAirbattle += Kclib_GetReqcombinedbattleAirbattle;
+            kclib.GetReqcombinedbattleBattle += Kclib_GetReqcombinedbattleBattle;
+            kclib.GetReqcombinedbattleBattlewater += Kclib_GetReqcombinedbattleBattlewater;
+            kclib.GetReqcombinedbattleMidnightbattle += Kclib_GetReqcombinedbattleMidnightbattle;
             kclib.GetReqsortieBattle += Kclib_GetReqsortieBattle;
             kclib.GetReqbattlemidnightBattle += Kclib_GetReqbattlemidnightBattle;
+
+            kclib.GetReqsortieBattleresult += Kclib_GetReqsortieBattleresult;
             kclib.GetReqcombinedbattleBattleresult += Kclib_GetReqcombinedbattleBattleresult;
+        }
+
+        private void Kclib_GetReqcombinedbattleMidnightbattle(object sender, KanColleLib.TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.MidnightBattle> response)
+        {
+            OnBattleAnalyzed(BattleAnalyzer.AnalyzeCombinedNormalNightBattle(response.data));
+        }
+
+        private void Kclib_GetReqcombinedbattleBattlewater(object sender, KanColleLib.TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.BattleWater> response)
+        {
+            OnBattleAnalyzed(BattleAnalyzer.AnalyzeWaterCombinedNormalBattle(response.data));
+        }
+
+        private void Kclib_GetReqcombinedbattleBattle(object sender, KanColleLib.TransmissionRequest.api_req_combined_battle.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.Battle> response)
+        {
+            OnBattleAnalyzed(BattleAnalyzer.AnalyzeAirCombinedNormalBattle(response.data));
+        }
+
+        private void Kclib_GetReqcombinedbattleAirbattle(object sender, KanColleLib.TransmissionRequest.api_req_combined_battle.AirbattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.Airbattle> response)
+        {
+            OnBattleAnalyzed(BattleAnalyzer.AnalyzeAirCombinedAirBattle(response.data));
         }
 
         private void Kclib_GetReqbattlemidnightBattle(object sender, KanColleLib.TransmissionRequest.api_req_battle_midnight.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_battle_midnight.Battle> response)
