@@ -764,6 +764,204 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             return ret;
         }
 
+        /// <summary>
+        /// 連合艦隊水上部隊通常戦
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static BattleAnalyzedEventArgs AnalyzeWaterCombinedNormalBattle(api_req_combined_battle.BattleWater data)
+        {
+            var ret = new BattleAnalyzedEventArgs();
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.normal_water;
+            ret.is_combined_battle = true;
+            ret.phases = new List<BattleAnalyzedEventArgs.Phase>();
+
+            // 自艦隊
+            var friendship = GetFriendshipList(1, data.maxhps, data.nowhps, data.fParam);
+            ret.friend = friendship;
+
+            // 随伴艦隊
+            var combinedship = GetFriendshipList(2, data.maxhps_combined, data.nowhps_combined, data.fParam_combined);
+            ret.friend_combined = combinedship;
+
+            // 敵艦隊
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+
+            ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
+            ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
+            ret.crossing_type = (BattleAnalyzedEventArgs.CrossingType)data.formation[2];
+
+            // 航空戦フェイズ
+            if (data.stage_flag[0])
+                GetAirBattleStage1Phase(data.kouku.stage1, out ret.air_mastery);
+
+            if (data.stage_flag[2])
+            {
+                var kouku_stage2_phase = GetCombinedAirBattleStage3Phase(data.kouku.stage3, data.kouku.stage3_combined, friendship, combinedship, enemyship);
+                if (kouku_stage2_phase != null)
+                    ret.phases.Add(kouku_stage2_phase);
+            }
+
+            // 支援艦隊フェイズ
+            var support_phase = GetSupportPhase(data.support_flag, data.support_info, enemyship);
+            if (support_phase != null)
+                ret.phases.Add(support_phase);
+
+            // 開幕雷撃フェイズ
+            if (data.opening_flag)
+            {
+                var opening_phase = GetRaigekiPhase(data.opening_atack, combinedship, enemyship);
+                if (opening_phase != null)
+                {
+                    opening_phase.phase_name = "開幕雷撃";
+                    ret.phases.Add(opening_phase);
+                }
+            }
+
+            // 第1艦隊砲撃戦（1巡目）
+            if (data.hourai_flag[0])
+            {
+                var hougeki_phase = GetHougekiPhase(data.hougeki1, friendship, enemyship);
+                if (hougeki_phase != null)
+                {
+                    hougeki_phase.phase_name = "砲撃戦（本隊1巡目）";
+                    ret.phases.Add(hougeki_phase);
+                }
+            }
+
+            // 第1艦隊砲撃戦（2巡目）
+            if (data.hourai_flag[1])
+            {
+                var hougeki_phase = GetHougekiPhase(data.hougeki2, friendship, enemyship);
+                if (hougeki_phase != null)
+                {
+                    hougeki_phase.phase_name = "砲撃戦（本隊2巡目）";
+                    ret.phases.Add(hougeki_phase);
+                }
+            }
+
+            // 第2艦隊砲撃戦
+            if (data.hourai_flag[2])
+            {
+                var hougeki_phase = GetHougekiPhase(data.hougeki3, combinedship, enemyship);
+                if (hougeki_phase != null)
+                {
+                    hougeki_phase.phase_name = "砲撃戦（随伴艦隊）";
+                    ret.phases.Add(hougeki_phase);
+                }
+            }
+
+            // 雷撃戦
+            if (data.hourai_flag[3])
+            {
+                var raigeki_phase = GetRaigekiPhase(data.raigeki, combinedship, enemyship);
+                if (raigeki_phase != null)
+                {
+                    raigeki_phase.phase_name = "雷撃戦";
+                    ret.phases.Add(raigeki_phase);
+                }
+            }
+
+            CalcGaugeCombined(friendship, combinedship, enemyship, out ret.friend_gauge, out ret.enemy_gauge);
+
+#if DEBUG
+            EventArgsDebugOutput(ret);
+#endif
+            if (data.midnight_flag)
+                day_battle = ret;
+
+            return ret;
+        }
+
+        /// <summary>
+        /// 連合艦隊機動部隊航空戦
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static BattleAnalyzedEventArgs AnalyzeAirCombinedAirBattle(api_req_combined_battle.Airbattle data)
+        {
+            var ret = new BattleAnalyzedEventArgs();
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.normal_air;
+            ret.is_combined_battle = true;
+            ret.phases = new List<BattleAnalyzedEventArgs.Phase>();
+
+            // 自艦隊
+            var friendship = GetFriendshipList(1, data.maxhps, data.nowhps, data.fParam);
+            ret.friend = friendship;
+
+            // 随伴艦隊
+            var combinedship = GetFriendshipList(2, data.maxhps_combined, data.nowhps_combined, data.fParam_combined);
+            ret.friend_combined = combinedship;
+
+            // 敵艦隊
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+
+            ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
+            ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
+            ret.crossing_type = (BattleAnalyzedEventArgs.CrossingType)data.formation[2];
+
+            // 航空戦フェイズ
+            if (data.stage_flag[0])
+                GetAirBattleStage1Phase(data.kouku.stage1, out ret.air_mastery);
+
+            if (data.stage_flag[2])
+            {
+                var kouku_stage2_phase = GetCombinedAirBattleStage3Phase(data.kouku.stage3, data.kouku.stage3_combined, friendship, combinedship, enemyship);
+                if (kouku_stage2_phase != null)
+                    ret.phases.Add(kouku_stage2_phase);
+            }
+
+            // 支援艦隊フェイズ
+            var support_phase = GetSupportPhase(data.support_flag, data.support_info, enemyship);
+            if (support_phase != null)
+                ret.phases.Add(support_phase);
+
+            // 第2航空戦フェイズ
+            if (data.stage_flag2[2])
+            {
+                var kouku_stage2_phase2 = GetCombinedAirBattleStage3Phase(data.kouku2.stage3, data.kouku2.stage3_combined, friendship, combinedship, enemyship);
+                if (kouku_stage2_phase2 != null)
+                    ret.phases.Add(kouku_stage2_phase2);
+            }
+
+            CalcGaugeCombined(friendship, combinedship, enemyship, out ret.friend_gauge, out ret.enemy_gauge);
+
+#if DEBUG
+            EventArgsDebugOutput(ret);
+#endif
+            if (data.midnight_flag)
+                day_battle = ret;
+
+            return ret;
+        }
+
+        /// <summary>
+        /// 連合艦隊通常夜戦
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static BattleAnalyzedEventArgs AnalyzeCombinedNormalNightBattle(api_req_combined_battle.MidnightBattle data)
+        {
+            var ret = day_battle;
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.normal_midnight;
+            var hougekiphase = GetHougekiPhase(data.hougeki, ret.friend_combined, ret.enemy);
+            if (hougekiphase != null)
+            {
+                hougekiphase.phase_name = "夜戦（随伴艦隊）";
+                ret.phases.Add(hougekiphase);
+            }
+            CalcGaugeCombined(ret.friend, ret.friend_combined, ret.enemy, out ret.friend_gauge, out ret.enemy_gauge);
+
+#if DEBUG
+            EventArgsDebugOutput(ret);
+#endif
+
+            return ret;
+        }
+
 
 #if DEBUG
 
