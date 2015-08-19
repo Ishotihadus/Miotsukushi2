@@ -111,6 +111,17 @@ namespace KanColleLib
             }
         }
 
+        /// <summary>
+        /// デバッグ用に受信したかのように強制的にイベントを発生させる
+        /// </summary>
+        /// <param name="kcsapiurl"></param>
+        /// <param name="request"></param>
+        /// <param name="response">svdata=を含んだ状態でのレスポンス</param>
+        public void ForceRaiseEvent(string kcsapiurl, string request, string response)
+        {
+            RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+        }
+
         void RaiseEventFromKcsAPISessions(string kcsapiurl, string request, string response)
         {
             dynamic json = null;
