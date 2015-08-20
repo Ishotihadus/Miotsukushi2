@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Miotsukushi.View.CheatWindow.Components.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Miotsukushi.View.CheatWindow.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+    <StackPanel>
+        <Expander Header="デザイン" IsExpanded="True">
+            <StackPanel>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="テーマ" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Grid.Column="1" ItemsSource="{Binding Themes}" SelectedIndex="{Binding ThemeSelectedIndex, Mode=TwoWay}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="アクセントカラー" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Grid.Column="1" ItemsSource="{Binding AccentColors}" SelectedIndex="{Binding AccentColorSelectedIndex, Mode=TwoWay}"/>
+                </Grid>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>

@@ -13,6 +13,8 @@ namespace Miotsukushi.Model
         public KanColleModel kancolleModel { get; private set; }
         public Audio.VolumeModel volumeModel { get; private set; }
 
+        public ThemeModel themeModel { get; private set; }
+
         private View.CheatWindow.CheatWindow _cheat_window;
 
         public void OpenCheatWindow()
@@ -41,6 +43,7 @@ namespace Miotsukushi.Model
             timerModel = new TimerModel();
             kancolleModel = new KanColleModel();
             volumeModel = new Audio.VolumeModel();
+            themeModel = new ThemeModel();
         }
 
         #region スクリーンショット

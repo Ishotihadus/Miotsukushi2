@@ -170,6 +170,7 @@
     <Compile Include="Model\KanColle\SlotData.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\NotifyModelBase.cs" />
+    <Compile Include="Model\ThemeModel.cs" />
     <Compile Include="Model\TimerModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -185,6 +186,7 @@
     <Compile Include="Tools\TimeParser.cs" />
     <Compile Include="ViewModel\CheatWindow\DebuggerViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
+    <Compile Include="ViewModel\CheatWindow\SettingsViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleShipViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleViewModel.cs" />
@@ -220,6 +222,9 @@
     </Compile>
     <Compile Include="View\CheatWindow\Components\ItemMasterList.xaml.cs">
       <DependentUpon>ItemMasterList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheatWindow\Components\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CheatWindow\Components\ShipMasterList.xaml.cs">
       <DependentUpon>ShipMasterList.xaml</DependentUpon>
@@ -310,6 +315,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CheatWindow\Components\ItemMasterList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheatWindow\Components\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
