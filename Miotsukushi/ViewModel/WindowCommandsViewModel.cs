@@ -82,6 +82,21 @@ namespace Miotsukushi.ViewModel
             }
         }
 
+
+        private DelegateCommand _SaveSSCommand;
+        public DelegateCommand SaveSSCommand
+        {
+            get
+            {
+                if (_SaveSSCommand == null)
+                {
+                    _SaveSSCommand = new DelegateCommand(() => MainModel.Current.RaiseSaveSS(), () => true);
+                }
+                return _SaveSSCommand;
+            }
+        }
+
+
         public WindowCommandsViewModel()
         {
             volumemodel = MainModel.Current.volumeModel;

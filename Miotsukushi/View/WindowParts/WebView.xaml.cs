@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Miotsukushi.View.WindowParts
 {
@@ -25,13 +16,26 @@ namespace Miotsukushi.View.WindowParts
         public WebView()
         {
             InitializeComponent();
-            BrowserSupressScriptError();
 
             try
             {
                 Model.MainModel.Current.kancolleModel.GameStart += kancolleModel_GameStart; // ゆるせ、後で何とかする
+                Model.MainModel.Current.SaveSSCommandRaised += (o, e) => SaveScreenShot(e.filename);
             }
             catch { }
+
+            // 起動時の処理（ズームおよびスクリプトエラーの抑制）
+            bool rendered = false;
+            webBrowser.Loaded += (o, e) =>
+                System.Windows.PresentationSource.FromVisual((Visual)o).ContentRendered += (sender, args) =>
+                {
+                    if (!rendered)
+                    {
+                        BrowserSupressScriptError();
+                        BrowserZoom();
+                    }
+                    rendered = true;
+                };
         }
 
         /// <summary>
@@ -46,9 +50,7 @@ namespace Miotsukushi.View.WindowParts
                 Dispatcher.Invoke(() => kancolleModel_GameStart(sender, e));
                 return;
             }
-
-
-
+            
             try
             {
                 mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
@@ -67,7 +69,6 @@ namespace Miotsukushi.View.WindowParts
                 System.Diagnostics.Debug.WriteLine(exception);
             }
 
-            BrowserZoom();
 
         }
 
@@ -85,19 +86,21 @@ namespace Miotsukushi.View.WindowParts
         /// </summary>
         public void BrowserZoom()
         {
-            var systemXDPI = webBrowser.InvokeScript("eval", new object[] { "window.screen.systemXDPI" });
-            if (systemXDPI is int)
-            {
-                int scale = (int)systemXDPI * 100 / 96;
-                scale *= scale / 100;
+            var desktop = System.Drawing.Graphics.FromHwnd(((System.Windows.Interop.HwndSource)System.Windows.Interop.HwndSource.FromVisual(this)).Handle);
+            var dpiX = desktop.DpiX;
+            var dpiY = desktop.DpiY;
 
-                Guid serviceGuid = SID_SWebBrowserApp;
-                Guid iid = typeof(SHDocVw.IWebBrowser2).GUID;
-                SHDocVw.IWebBrowser2 webBrowser2 = (SHDocVw.IWebBrowser2)((IServiceProvider)webBrowser.Document).QueryService(ref serviceGuid, ref iid);
-                object pvaIn = scale;
+            var scalefactor_x = dpiX / 96;
+            var scalefactor_y = dpiX / 96;
 
-                webBrowser2.ExecWB(SHDocVw.OLECMDID.OLECMDID_OPTICAL_ZOOM, SHDocVw.OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
-            }
+            int scale = (int)(scalefactor_x * scalefactor_x * 100);
+
+            Guid serviceGuid = SID_SWebBrowserApp;
+            Guid iid = typeof(SHDocVw.IWebBrowser2).GUID;
+            SHDocVw.IWebBrowser2 webBrowser2 = (SHDocVw.IWebBrowser2)((IServiceProvider)webBrowser.Document).QueryService(ref serviceGuid, ref iid);
+            object pvaIn = scale;
+
+            webBrowser2.ExecWB(SHDocVw.OLECMDID.OLECMDID_OPTICAL_ZOOM, SHDocVw.OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
         }
 
         /// <summary>
@@ -141,6 +144,41 @@ namespace Miotsukushi.View.WindowParts
             var axIWebBrowser2 = typeof(WebBrowser).GetProperty("AxIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
             var comObj = axIWebBrowser2.GetValue(webBrowser, null);
             comObj.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, comObj, new object[] { true });
+        }
+
+        /// <summary>
+        /// スクリーンショットを保存します
+        /// </summary>
+        /// <param name="filename"></param>
+        public void SaveScreenShot(string filename)
+        {
+            var dg = VisualTreeHelper.GetDrawing(webBrowser);
+            var width = webBrowser.ActualWidth;
+            var height = webBrowser.ActualHeight;
+            
+            var desktop = System.Drawing.Graphics.FromHwnd(((System.Windows.Interop.HwndSource)System.Windows.Interop.HwndSource.FromVisual(this)).Handle);
+            var dpiX = desktop.DpiX;
+            var dpiY = desktop.DpiY;
+
+            var scalefactor_x = dpiX / 96;
+            var scalefactor_y = dpiX / 96;
+
+            var dv = new DrawingVisual();
+            using (var dc = dv.RenderOpen())
+            {
+                dc.DrawDrawing(dg);
+            }
+            
+            var bitmap = new RenderTargetBitmap((int)(width * scalefactor_x), (int)(height * scalefactor_y), dpiX, dpiY, PixelFormats.Pbgra32);
+            bitmap.Render(dv);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            using (var stream = new FileStream(filename, FileMode.Create))
+            {
+                encoder.Save(stream);
+            }
+            
         }
     }
 }
