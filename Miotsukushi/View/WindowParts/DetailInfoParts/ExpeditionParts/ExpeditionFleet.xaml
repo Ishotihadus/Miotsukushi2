@@ -11,6 +11,9 @@
         <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Converter:DateTimeConverter x:Key="DateTimeConverter"/>
         <Converter:TotalTimeConverter x:Key="TotalTimeConverter"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
     </UserControl.Resources>
     <StackPanel Margin="5">
         <TextBlock TextWrapping="Wrap" Margin="5"><Run Text="第"/><Run Text="{Binding ID}"/><Run Text="艦隊"/></TextBlock>

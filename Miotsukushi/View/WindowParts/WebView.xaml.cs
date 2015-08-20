@@ -86,7 +86,7 @@ namespace Miotsukushi.View.WindowParts
         /// </summary>
         public void BrowserZoom()
         {
-            var desktop = System.Drawing.Graphics.FromHwnd(((System.Windows.Interop.HwndSource)System.Windows.Interop.HwndSource.FromVisual(this)).Handle);
+            var desktop = System.Drawing.Graphics.FromHwnd(((System.Windows.Interop.HwndSource)System.Windows.PresentationSource.FromVisual(this)).Handle);
             var dpiX = desktop.DpiX;
             var dpiY = desktop.DpiY;
 
@@ -156,7 +156,7 @@ namespace Miotsukushi.View.WindowParts
             var width = webBrowser.ActualWidth;
             var height = webBrowser.ActualHeight;
             
-            var desktop = System.Drawing.Graphics.FromHwnd(((System.Windows.Interop.HwndSource)System.Windows.Interop.HwndSource.FromVisual(this)).Handle);
+            var desktop = System.Drawing.Graphics.FromHwnd(((System.Windows.Interop.HwndSource)System.Windows.PresentationSource.FromVisual(this)).Handle);
             var dpiX = desktop.DpiX;
             var dpiY = desktop.DpiY;
 

@@ -13,6 +13,9 @@
                 <BattleParts:BattleShipView Margin="1,1,4,3"/>
             </Border>
         </DataTemplate>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
     </UserControl.Resources>
     <StackPanel d:LayoutOverrides="Height">
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4" FontSize="16"><Run Text="{Binding AreaID}"/><Run Text="-"/><Run Text="{Binding MapID}"/><Run Text=" "/><Run Text="{Binding MapName}"/><Run Text="  セル "/><Run Text="{Binding CellID}"/></TextBlock>
