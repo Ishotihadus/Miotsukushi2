@@ -63,14 +63,14 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-		<ListView x:Name="listView" Margin="5" VerticalAlignment="Top" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" Style="{DynamicResource ListViewStyle1}" ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding TabTitle}" SelectedIndex="0">
+		<ListView x:Name="listView" Margin="5" VerticalAlignment="Top" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" Style="{DynamicResource ListViewStyle1}" ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding TabTitle}" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
 			<ListView.Resources>
 				<Style TargetType="{x:Type GridViewColumnHeader}">
 					<Setter Property="Visibility" Value="Collapsed" />
 				</Style>
 			</ListView.Resources>
 		</ListView>
-		<Custom:MetroTabControl Margin="5" Grid.Row="1" ItemContainerStyle="{DynamicResource TabItemStyle1}" SelectedIndex="{Binding SelectedIndex, ElementName=listView}">
+		<Custom:MetroTabControl Margin="5" Grid.Row="1" ItemContainerStyle="{DynamicResource TabItemStyle1}" SelectedIndex="{Binding SelectedIndex, ElementName=listView, Mode=TwoWay}">
 			<TabItem Header="総合">
 				<DetailInfoParts:General/>
 			</TabItem>

@@ -8,15 +8,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel
 {
     class DetailInfoPanelViewModel : ViewModelBase
     {
-        public List<string> TabTitle { get; private set; }
-
-        public Fleets.FleetsCollectionViewModel FleetsCollection { get; private set; } = new Fleets.FleetsCollectionViewModel();
-
-        public Expedition.ExpeditionFleetCollectionViewModel ExpeditionCollection { get; private set; } = new Expedition.ExpeditionFleetCollectionViewModel();
-
-        public DetailInfoPanelViewModel()
-        {
-            TabTitle = new List<string>()
+        public List<string> TabTitle { get; private set; } = new List<string>()
             {
                 "総合",
                 "第1艦隊",
@@ -34,6 +26,37 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel
                 "戦闘結果",
                 "マップ詳細"
             };
+
+
+        private int _SelectedIndex;
+        public int SelectedIndex
+        {
+            get
+            {
+                return _SelectedIndex;
+            }
+
+            set
+            {
+                if (_SelectedIndex != value)
+                {
+                    _SelectedIndex = value;
+                    OnPropertyChanged(() => SelectedIndex);
+                }
+            }
+        }
+
+
+        public Fleets.FleetsCollectionViewModel FleetsCollection { get; private set; } = new Fleets.FleetsCollectionViewModel();
+
+        public Expedition.ExpeditionFleetCollectionViewModel ExpeditionCollection { get; private set; } = new Expedition.ExpeditionFleetCollectionViewModel();
+
+        public DetailInfoPanelViewModel()
+        {
+            SelectedIndex = 0;
+
+            // タブ移動の設定
+            Model.MainModel.Current.kancolleModel.battlemodel.BattleAnalyzed += (_, __) => SelectedIndex = 11;
         }
     }
 }
