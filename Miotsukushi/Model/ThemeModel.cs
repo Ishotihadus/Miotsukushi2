@@ -31,6 +31,7 @@ namespace Miotsukushi.Model
                     _selected_theme = value;
                     ThemeManager.ChangeAppStyle(App.Current, accents[_selected_accent], themes[value]);
                     Properties.Settings.Default.Theme = theme_name[value];
+                    Properties.Settings.Default.Save();
                 }
             }
         }
@@ -47,6 +48,7 @@ namespace Miotsukushi.Model
                     _selected_accent = value;
                     ThemeManager.ChangeAppStyle(App.Current, accents[value], themes[_selected_theme]);
                     Properties.Settings.Default.AccentColor = accent_name[value];
+                    Properties.Settings.Default.Save();
                 }
             }
         }
