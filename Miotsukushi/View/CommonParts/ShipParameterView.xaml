@@ -4,21 +4,26 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:Miotsukushi.View.CommonParts"
+	xmlns:Converter="clr-namespace:Miotsukushi.Converter"
 	mc:Ignorable="d"
 	x:Class="Miotsukushi.View.CommonParts.ShipParameterView"
 	x:Name="UserControl"
 	d:DesignWidth="70">
 
-	<Border CornerRadius="1" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+    <UserControl.Resources>
+        <Converter:BackgroundToForegroundConverter x:Key="BackgroundToForegroundConverter"/>
+    </UserControl.Resources>
 
-		<Grid x:Name="LayoutRoot">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<Rectangle Fill="{DynamicResource AccentColorBrush}" Margin="0"/>
-			<TextBlock HorizontalAlignment="Center" Margin="2,1" Text="{Binding ParameterName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center" Foreground="{DynamicResource WhiteBrush}"/>
-			<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="2,1" Text="{Binding ParameterValue, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center"/>
-		</Grid>
-	</Border>
+    <Border CornerRadius="1" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+
+        <Grid x:Name="LayoutRoot">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="rectangle" Fill="{DynamicResource AccentColorBrush}" Margin="0"/>
+            <TextBlock HorizontalAlignment="Center" Margin="2,1" Text="{Binding ParameterName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center" Foreground="{Binding Fill, Converter={StaticResource BackgroundToForegroundConverter}, ElementName=rectangle}"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="2,1" Text="{Binding ParameterValue, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ShipParameterView}}}" VerticalAlignment="Center"/>
+        </Grid>
+    </Border>
 </UserControl>

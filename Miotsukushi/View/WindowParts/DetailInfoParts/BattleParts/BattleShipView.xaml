@@ -22,6 +22,9 @@
             <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
                 <StackPanel Orientation="Horizontal"/>
             </ItemsPanelTemplate>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
