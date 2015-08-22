@@ -17,34 +17,36 @@
             <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
         </Style>
     </UserControl.Resources>
-    <StackPanel d:LayoutOverrides="Height">
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4" FontSize="16"><Run Text="{Binding AreaID}"/><Run Text="-"/><Run Text="{Binding MapID}"/><Run Text=" "/><Run Text="{Binding MapName}"/><Run Text="  セル "/><Run Text="{Binding CellID}"/></TextBlock>
-        <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
-        <UniformGrid Columns="3" Margin="0,2">
-            <TextBlock TextWrapping="Wrap" Text="{Binding FormationMe}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" Text="陣形" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding FormationEnemy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-        </UniformGrid>
-        <UniformGrid Columns="2" Margin="0,2">
-            <TextBlock TextWrapping="Wrap" Text="{Binding AirMasteryStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding CrossingStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-        </UniformGrid>
-        <UniformGrid Columns="3" Margin="0,2">
-            <Grid>
-                <ProgressBar Height="Auto" Margin="5,0" Maximum="100" Value="{Binding GaugeMe}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GaugeMe, StringFormat=\{0:N0\}%}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White"/>
-            </Grid>
-            <TextBlock TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
-            <Grid>
-                <ProgressBar Height="Auto" Margin="5,0" Maximum="100" Value="{Binding GaugeEnemy}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GaugeEnemy, StringFormat=\{0:N0\}%}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White"/>
-            </Grid>
-        </UniformGrid>
-        <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
-        <UniformGrid Columns="3" Margin="0,2">
-            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsMe}" Margin="5,0"/>
-            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsCombined}" Margin="5,0"/>
-            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsEnemy}" Margin="5,0"/>
-        </UniformGrid>
-    </StackPanel>
+    <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4" FontSize="16"><Run Text="{Binding AreaID}"/><Run Text="-"/><Run Text="{Binding MapID}"/><Run Text=" "/><Run Text="{Binding MapName}"/><Run Text="  セル "/><Run Text="{Binding CellID}"/></TextBlock>
+            <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
+            <UniformGrid Columns="3" Margin="0,2">
+                <TextBlock TextWrapping="Wrap" Text="{Binding FormationMe}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="陣形" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding FormationEnemy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            </UniformGrid>
+            <UniformGrid Columns="2" Margin="0,2">
+                <TextBlock TextWrapping="Wrap" Text="{Binding AirMasteryStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding CrossingStatus}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+            </UniformGrid>
+            <UniformGrid Columns="3" Margin="0,2">
+                <Grid>
+                    <ProgressBar Height="Auto" Margin="5,0" Maximum="100" Value="{Binding GaugeMe}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding GaugeMe, StringFormat=\{0:N0\}%}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <TextBlock TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2" TextAlignment="Center"/>
+                <Grid>
+                    <ProgressBar Height="Auto" Margin="5,0" Maximum="100" Value="{Binding GaugeEnemy}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding GaugeEnemy, StringFormat=\{0:N0\}%}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+            </UniformGrid>
+            <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
+            <UniformGrid Columns="3" Margin="0,2">
+                <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsMe}" Margin="5,0"/>
+                <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsCombined}" Margin="5,0"/>
+                <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsEnemy}" Margin="5,0"/>
+            </UniformGrid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
