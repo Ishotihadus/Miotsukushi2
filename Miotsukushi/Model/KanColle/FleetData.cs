@@ -384,7 +384,6 @@ namespace Miotsukushi.Model.KanColle
             double _okinoshimaparameter = 0;
             double _okinoshimaerror = 0;
             int? _mincond = null;
-            bool _hastaihaship = false;
             for (int i = 0; i < ships.Count; i++)
             {
                 var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
@@ -401,7 +400,6 @@ namespace Miotsukushi.Model.KanColle
                     KanColleTools.ShipOkinoshimaSearchParameter(ship, out thisokinoshimaparameter, out thisokinoshimaerror);
                     _okinoshimaparameter += thisokinoshimaparameter;
                     _okinoshimaerror += thisokinoshimaerror;
-                    _hastaihaship = _hastaihaship || (ship.hp_now <= ship.hp_max * 0.25);
 
                 }
                 if (i == 0)
@@ -421,7 +419,6 @@ namespace Miotsukushi.Model.KanColle
             OkinoshimaSearchParameterError = _okinoshimaerror + 0.03692224 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
 
             MinCond = _mincond ?? 0;
-            HasTaihaShip = _hastaihaship;
 
             ChangeNDockStatus();
             ChangeSupplyStatus();
@@ -431,6 +428,19 @@ namespace Miotsukushi.Model.KanColle
         {
             var model = MainModel.Current.kancolleModel;
             DockingShipsCount = model.ndockdata.Count(_ => ships.Contains(_.shipid));
+
+            bool _hastaihaship = false;
+            for (int i = 0; i < ships.Count; i++)
+            {
+                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
+                if (ship != null && ship.hp_now <= ship.hp_max * 0.25)
+                {
+                    _hastaihaship = true;
+                    break;
+                }
+            }
+
+            HasTaihaShip = _hastaihaship;
         }
 
         public void ChangeMissionStatus(int status, int id, long time)
