@@ -139,6 +139,7 @@
     <Compile Include="Converter\TotalTimeConverter.cs" />
     <Compile Include="Model\Audio\VolumeChangedEventArgs.cs" />
     <Compile Include="Model\Audio\VolumeModel.cs" />
+    <Compile Include="Model\BrowserModel.cs" />
     <Compile Include="Model\Debugger\PacketSaver.cs" />
     <Compile Include="Model\ExList.cs" />
     <Compile Include="Model\KanColle\AdmiralRank.cs" />

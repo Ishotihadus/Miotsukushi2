@@ -9,6 +9,15 @@
     
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands DataContext="{Binding Commands}">
+            <Button Command="{Binding BrowserRefreshCommand}">
+                <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform"
+                         Visual="{StaticResource appbar_refresh}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
             <Button Command="{Binding SaveSSCommand}">
                 <Rectangle Width="20" Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">

@@ -21,7 +21,8 @@ namespace Miotsukushi.View.WindowParts
             try
             {
                 Model.MainModel.Current.kancolleModel.GameStart += kancolleModel_GameStart; // ゆるせ、後で何とかする
-                Model.MainModel.Current.SaveSSCommandRaised += (o, e) => SaveScreenShot(e.filename);
+                Model.MainModel.Current.browserModel.SaveSSCommandRaised += (o, e) => SaveScreenShot(e.filename);
+                Model.MainModel.Current.browserModel.BrowserRefreshCommandRaised += (o, e) => BrowserRefresh();
             }
             catch { }
 

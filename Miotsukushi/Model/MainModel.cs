@@ -15,6 +15,8 @@ namespace Miotsukushi.Model
 
         public ThemeModel themeModel { get; private set; }
 
+        public BrowserModel browserModel { get; private set; }
+
         private View.CheatWindow.CheatWindow _cheat_window;
 
         public void OpenCheatWindow()
@@ -44,31 +46,8 @@ namespace Miotsukushi.Model
             kancolleModel = new KanColleModel();
             volumeModel = new Audio.VolumeModel();
             themeModel = new ThemeModel();
+            browserModel = new BrowserModel();
         }
-
-        #region スクリーンショット
-
-        public class SaveSSCommandRaisedEventArgs : System.EventArgs
-        {
-            public string filename;
-
-            public SaveSSCommandRaisedEventArgs(string filename)
-            {
-                this.filename = filename;
-            }
-        }
-
-        public void RaiseSaveSS()
-        {
-            var filename = "ss\\ss_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png";
-            OnSaveSSCommandRaised(new SaveSSCommandRaisedEventArgs(filename));
-        }
-
-        public event SaveSSCommandRaisedEventHandler SaveSSCommandRaised;
-        public delegate void SaveSSCommandRaisedEventHandler(object sender, SaveSSCommandRaisedEventArgs e);
-        protected virtual void OnSaveSSCommandRaised(SaveSSCommandRaisedEventArgs e) { if (SaveSSCommandRaised != null) { SaveSSCommandRaised(this, e); } }
-
-        #endregion
 
         #region インスタンス単一化
 

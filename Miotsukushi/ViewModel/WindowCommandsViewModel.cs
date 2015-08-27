@@ -90,12 +90,22 @@ namespace Miotsukushi.ViewModel
             {
                 if (_SaveSSCommand == null)
                 {
-                    _SaveSSCommand = new DelegateCommand(() => MainModel.Current.RaiseSaveSS(), () => true);
+                    _SaveSSCommand = new DelegateCommand(() => MainModel.Current.browserModel.RaiseSaveSS(), () => true);
                 }
                 return _SaveSSCommand;
             }
         }
 
+        private DelegateCommand _BrowserRefreshCommand;
+        public DelegateCommand BrowserRefreshCommand
+        {
+            get
+            {
+                if (_BrowserRefreshCommand == null)
+                    _BrowserRefreshCommand = new DelegateCommand(() => MainModel.Current.browserModel.BrowserRefresh(), () => true);
+                return _BrowserRefreshCommand;
+            }
+        }
 
         public WindowCommandsViewModel()
         {
