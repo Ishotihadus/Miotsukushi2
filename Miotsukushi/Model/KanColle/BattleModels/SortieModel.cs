@@ -16,6 +16,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
         public MapModel now_map;
         public CellModel now_cell;
+        public int sortiing_deck;
 
         public SortieModel(KanColleModel original_model, KanColleNotifier kclib)
         {
@@ -35,6 +36,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
         private void Kclib_GetReqmapStart(object sender, KanColleLib.TransmissionRequest.api_req_map.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_map.Start> response)
         {
+            sortiing_deck = request.deck_id;
             var map = from _ in mapmodels where _.Value.maparea_id == request.maparea_id && _.Value.map_no == request.mapinfo_no select _;
             if (map.Count() > 0)
                 now_map = map.First().Value;

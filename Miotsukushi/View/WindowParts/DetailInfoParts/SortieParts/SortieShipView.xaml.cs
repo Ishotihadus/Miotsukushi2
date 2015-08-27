@@ -13,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Miotsukushi.View.WindowParts.DetailInfoParts
+namespace Miotsukushi.View.WindowParts.DetailInfoParts.SortieParts
 {
     /// <summary>
-    /// Sortie.xaml の相互作用ロジック
+    /// SortieShipView.xaml の相互作用ロジック
     /// </summary>
-    public partial class Sortie : UserControl
+    public partial class SortieShipView : UserControl
     {
-        public Sortie()
+        public SortieShipView()
         {
             InitializeComponent();
-
-            try
-            {
-                DataContext = new ViewModel.DetailInfoPanel.Sortie.SortieViewModel();
-            }
-            catch { }
         }
     }
 }

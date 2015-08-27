@@ -199,6 +199,8 @@
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetsSummaryViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetSummaryShipViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\GeneralParts\FleetSummaryViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\Sortie\SortieShipViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\Sortie\SortieViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestCollectionViewModel.cs" />
     <Compile Include="ViewModel\EasyInfoPanel\QuestViewModel.cs" />
     <Compile Include="ViewModel\WindowCommandsViewModel.cs" />
@@ -277,6 +279,9 @@
     </Compile>
     <Compile Include="View\WindowParts\DetailInfoParts\Sortie.xaml.cs">
       <DependentUpon>Sortie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\SortieParts\SortieShipView.xaml.cs">
+      <DependentUpon>SortieShipView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowParts\DetailInformationPanel.xaml.cs">
       <DependentUpon>DetailInformationPanel.xaml</DependentUpon>
@@ -403,6 +408,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WindowParts\DetailInfoParts\Sortie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\SortieParts\SortieShipView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
