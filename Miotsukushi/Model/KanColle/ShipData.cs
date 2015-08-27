@@ -528,7 +528,7 @@ namespace Miotsukushi.Model.KanColle
                 OnSlotCount.Add(0);
 
             while (OnSlotCount.Count > data.slotnum)
-                OnSlotCount.Remove(Slots.Count - 1);
+                OnSlotCount.RemoveAt(OnSlotCount.Count - 1);
 
             for (int i = 0; i < data.slotnum; i++)
             {
