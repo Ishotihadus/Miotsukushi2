@@ -135,6 +135,7 @@
     <Compile Include="TransmissionData\api_req_map\values\NextCellData.cs" />
     <Compile Include="TransmissionData\api_req_map\values\SelectRouteValue.cs" />
     <Compile Include="TransmissionData\api_req_member\GetIncentive.cs" />
+    <Compile Include="TransmissionData\api_req_member\values\ItemValue.cs" />
     <Compile Include="TransmissionData\api_req_mission\Result.cs" />
     <Compile Include="TransmissionData\api_req_mission\ReturnInstruction.cs" />
     <Compile Include="TransmissionData\api_req_mission\Start.cs" />
