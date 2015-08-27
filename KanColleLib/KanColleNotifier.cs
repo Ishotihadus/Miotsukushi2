@@ -287,7 +287,7 @@ namespace KanColleLib
                     break;
                 case "api_req_hensei/combined":
                     if (json.api_data())
-                        OnGetReqhenseiCombined(new RequestBase(request), Svdata<TransmissionData.api_req_hensei.Combined>.fromDynamic(json, TransmissionData.api_req_hensei.Combined.fromDynamic(json.api_data)));
+                        OnGetReqhenseiCombined(new TransmissionRequest.api_req_hensei.CombinedRequest(request), Svdata<TransmissionData.api_req_hensei.Combined>.fromDynamic(json, TransmissionData.api_req_hensei.Combined.fromDynamic(json.api_data)));
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
@@ -651,8 +651,8 @@ namespace KanColleLib
         /// api_req_hensei/combined を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhenseiCombinedEventHandler GetReqhenseiCombined;
-        public delegate void GetReqhenseiCombinedEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_hensei.Combined> response);
-        protected virtual void OnGetReqhenseiCombined(RequestBase request, Svdata<TransmissionData.api_req_hensei.Combined> response) { if (GetReqhenseiCombined != null) GetReqhenseiCombined(this, request, response); }
+        public delegate void GetReqhenseiCombinedEventHandler(object sender, TransmissionRequest.api_req_hensei.CombinedRequest request, Svdata<TransmissionData.api_req_hensei.Combined> response);
+        protected virtual void OnGetReqhenseiCombined(TransmissionRequest.api_req_hensei.CombinedRequest request, Svdata<TransmissionData.api_req_hensei.Combined> response) { if (GetReqhenseiCombined != null) GetReqhenseiCombined(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/lock を受信して解析に成功した際に呼び出されます

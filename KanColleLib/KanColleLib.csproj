@@ -187,6 +187,7 @@
     <Compile Include="TransmissionRequest\api_req_combined_battle\BattleWaterRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_combined_battle\BattleRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\ChangeRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_hensei\CombinedRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hokyu\ChargeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kaisou\RemodelingRequest.cs" />

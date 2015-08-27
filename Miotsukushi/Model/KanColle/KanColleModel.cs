@@ -33,6 +33,7 @@ namespace Miotsukushi.Model.KanColle
         public BattleModels.SortieModel sortiemodel;
         public DebuggerModel debuggermodel;
         public bool initializeCompleted = false;
+        public int combined_flag = 0;
 
         public KanColleModel()
         {
@@ -63,6 +64,7 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
             kclib.GetPortPort += kclib_GetPortPort;
             kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
+            kclib.GetReqhenseiCombined += Kclib_GetReqhenseiCombined;
             kclib.GetReqhokyuCharge += Kclib_GetReqhokyuCharge;
             kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
             kclib.GetReqkousyouDestroyitem2 += Kclib_GetReqkousyouDestroyitem2;
@@ -78,7 +80,12 @@ namespace Miotsukushi.Model.KanColle
             shipdata.CollectionChanged += shipdata_CollectionChanged;
             slotdata.CollectionChanged += slotdata_CollectionChanged;
         }
-        
+
+        private void Kclib_GetReqhenseiCombined(object sender, KanColleLib.TransmissionRequest.api_req_hensei.CombinedRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_hensei.Combined> response)
+        {
+            combined_flag = request.combined_type;
+        }
+
         private void Kclib_GetReqnyukyoSpeedchange(object sender, KanColleLib.TransmissionRequest.api_req_nyukyo.SpeedchangeRequest request, KanColleLib.TransmissionData.Svdata<object> response)
         {
             var shipid = ndockdata[request.ndock_id - 1].shipid;
@@ -423,6 +430,7 @@ namespace Miotsukushi.Model.KanColle
             DeleteShipDataFromList(response.data.ship.ships);
             AppendDeckValue(response.data.deck_port);
             AppendNDockValue(response.data.ndock);
+            combined_flag = response.data.combined_flag;
             InitializeConfirm();
         }
 

@@ -147,7 +147,7 @@ OnGetReqhenseiChange(new TransmissionRequest.api_req_hensei.ChangeRequest(reques
 break;
 case "api_req_hensei/combined":
 if(json.api_data())
-OnGetReqhenseiCombined(new RequestBase(request), Svdata<TransmissionData.api_req_hensei.Combined>.fromDynamic(json, TransmissionData.api_req_hensei.Combined.fromDynamic(json.api_data)));
+OnGetReqhenseiCombined(new TransmissionRequest.api_req_hensei.CombinedRequest(request), Svdata<TransmissionData.api_req_hensei.Combined>.fromDynamic(json, TransmissionData.api_req_hensei.Combined.fromDynamic(json.api_data)));
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;

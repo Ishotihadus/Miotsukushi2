@@ -178,8 +178,8 @@ protected virtual void OnGetReqhenseiChange(TransmissionRequest.api_req_hensei.C
 /// api_req_hensei/combined を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetReqhenseiCombinedEventHandler GetReqhenseiCombined;
-public delegate void GetReqhenseiCombinedEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_hensei.Combined> response);
-protected virtual void OnGetReqhenseiCombined(RequestBase request, Svdata<TransmissionData.api_req_hensei.Combined> response) { if (GetReqhenseiCombined != null) GetReqhenseiCombined(this, request, response); }
+public delegate void GetReqhenseiCombinedEventHandler(object sender, TransmissionRequest.api_req_hensei.CombinedRequest request, Svdata<TransmissionData.api_req_hensei.Combined> response);
+protected virtual void OnGetReqhenseiCombined(TransmissionRequest.api_req_hensei.CombinedRequest request, Svdata<TransmissionData.api_req_hensei.Combined> response) { if (GetReqhenseiCombined != null) GetReqhenseiCombined(this, request, response); }
 
 /// <summary>
 /// api_req_hensei/lock を受信して解析に成功した際に呼び出されます
