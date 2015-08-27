@@ -145,8 +145,11 @@
     <Compile Include="Model\KanColle\BasicData.cs" />
     <Compile Include="Model\KanColle\BattleModels\BattleAnalyzer.cs" />
     <Compile Include="Model\KanColle\BattleModels\BattleModel.cs" />
+    <Compile Include="Model\KanColle\BattleModels\CellModel.cs" />
     <Compile Include="Model\KanColle\BattleModels\EventArgs\BattleAnalyzedEventArgs.cs" />
     <Compile Include="Model\KanColle\BattleModels\EventArgs\GetBattleResultEventArgs.cs" />
+    <Compile Include="Model\KanColle\BattleModels\MapModel.cs" />
+    <Compile Include="Model\KanColle\BattleModels\SortieModel.cs" />
     <Compile Include="Model\KanColle\CharacterData.cs" />
     <Compile Include="Model\KanColle\DebuggerModel.cs" />
     <Compile Include="Model\KanColle\EventArgs\APIAnalyzeErrorEventArgs.cs" />

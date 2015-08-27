@@ -481,7 +481,13 @@ namespace Miotsukushi.Model.KanColle
                 {
                     name = _.name,
                     area_id = _.maparea_id,
-                    map_id = _.no
+                    map_id = _.no,
+                    map_level = _.level,
+                    opename = _.opetext,
+                    ope_info = _.infotext,
+                    defeat_type = _.required_defeat_count.HasValue ? MapInfoData.MapDefeatType.count_of_defeat :
+                                _.max_maphp.HasValue ? MapInfoData.MapDefeatType.max_hp : MapInfoData.MapDefeatType.normal,
+                    defeat_count = _.required_defeat_count.HasValue ? _.required_defeat_count.Value : 1
                 });
             
             InitializeConfirm();

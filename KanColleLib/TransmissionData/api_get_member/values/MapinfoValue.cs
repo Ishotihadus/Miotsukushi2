@@ -91,5 +91,6 @@ namespace KanColleLib.TransmissionData.api_get_member.values
         // {"api_id":11,"api_cleared":1,"api_exboss_flag":0}
         // {"api_id":55,"api_cleared":0,"api_exboss_flag":1,"api_defeat_count":0}
         // {"api_id":271,"api_cleared":1,"api_eventmap":{"api_now_maphp":0,"api_max_maphp":528,"api_state":2},"api_exboss_flag":0}
+        // {"api_id":316,"api_cleared":0,"api_eventmap":{"api_now_maphp":486,"api_max_maphp":2700,"api_state":1,"api_selected_rank":2},"api_exboss_flag":0}
     }
 }

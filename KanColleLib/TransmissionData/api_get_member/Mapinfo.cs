@@ -9,7 +9,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 {
     public class Mapinfo
     {
-        List<MapinfoValue> mapinfos;
+        public List<MapinfoValue> mapinfos;
 
         public static Mapinfo fromDynamic(dynamic json)
         {

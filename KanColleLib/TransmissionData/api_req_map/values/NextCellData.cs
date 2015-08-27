@@ -46,7 +46,7 @@ namespace KanColleLib.TransmissionData.api_req_map.values
         public int event_id;
 
         /// <summary>
-        /// 0:戦闘なし　1:昼戦　2:夜戦　3:夜昼戦　4:連合艦隊航空戦　6:能動分岐
+        /// 0:戦闘なし　1:昼戦　2:夜戦　3:夜昼戦　4:航空戦　6:能動分岐
         /// event_id=6のときは0:気のせいだった　1:敵影を見ず　2:能動分岐
         /// event_id=7のときは0:航空偵察　4:航空戦
         /// </summary>
