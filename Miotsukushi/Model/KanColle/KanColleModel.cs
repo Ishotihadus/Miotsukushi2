@@ -99,6 +99,10 @@ namespace Miotsukushi.Model.KanColle
                 if (ship.condition < 40)
                     ship.condition = 40;
             }
+
+            foreach (var fleet in fleetdata)
+                if(fleet.ships.Contains(shipid))
+                    fleet.ChangeNDockStatus();
         }
 
         private void Kclib_GetReqnyukyoStart(object sender, KanColleLib.TransmissionRequest.api_req_nyukyo.StartRequest request, KanColleLib.TransmissionData.Svdata<object> response)
@@ -113,6 +117,10 @@ namespace Miotsukushi.Model.KanColle
                     if (ship.condition < 40)
                         ship.condition = 40;
                 }
+
+                foreach (var fleet in fleetdata)
+                    if (fleet.ships.Contains(request.ship_id))
+                        fleet.ChangeNDockStatus();
             }
         }
 
