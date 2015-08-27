@@ -518,42 +518,27 @@ namespace Miotsukushi.Model.KanColle
             ammo = data.bull;
             ndock_time = TimeSpan.FromMilliseconds(data.ndock_time);
 
+            while(Slots.Count < data.slotnum)
+                Slots.Add(-1);
+
+            while(Slots.Count > data.slotnum)
+                Slots.RemoveAt(Slots.Count - 1);
+
+            while (OnSlotCount.Count < data.slotnum)
+                OnSlotCount.Add(0);
+
+            while (OnSlotCount.Count > data.slotnum)
+                OnSlotCount.Remove(Slots.Count - 1);
+
             for (int i = 0; i < data.slotnum; i++)
             {
                 int slot = data.slot.Length > i ? data.slot[i] : -1;
-                if (Slots.Count > i)
-                {
-                    if (Slots[i] != slot)
-                        Slots[i] = slot;
-                }
-                else
-                {
-                    Slots.Add(slot);
-                }
+                if (Slots[i] != slot)
+                    Slots[i] = slot;
 
                 int onslotcount = data.onslot.Length > i ? data.onslot[i] : 0;
-                if (OnSlotCount.Count > i)
-                {
-                    if (OnSlotCount[i] != onslotcount)
-                        OnSlotCount[i] = onslotcount;
-                }
-                else
-                {
-                    OnSlotCount.Add(onslotcount);
-                }
-                    
-            }
-
-            int slotovercount = Slots.Count - data.slotnum;
-            for (int i = 0; i < slotovercount; i++)
-            {
-                Slots.RemoveAt(Slots.Count - 1);
-            }
-
-            int onslotcountovercount = OnSlotCount.Count - data.slotnum;
-            for (int i = 0; i < onslotcountovercount; i++)
-            {
-                OnSlotCount.RemoveAt(Slots.Count - 1);
+                if (OnSlotCount[i] != onslotcount)
+                    OnSlotCount[i] = onslotcount;
             }
 
             air_mastery = Tools.KanColleTools.ShipAirMastery(this);
