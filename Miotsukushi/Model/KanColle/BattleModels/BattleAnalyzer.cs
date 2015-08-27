@@ -268,6 +268,8 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     phase = new BattleAnalyzedEventArgs.AllOverPhase();
                     for (int i = 1; i < stage.damage.Length; i++)
                     {
+                        if (i > enemyship.Count)
+                            break;
                         if (stage.damage[i] >= 0)
                         {
                             phase.attackee.Add(new BattleAnalyzedEventArgs.Phase.Attack()
