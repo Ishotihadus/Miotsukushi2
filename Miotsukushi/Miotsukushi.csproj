@@ -275,6 +275,9 @@
     <Compile Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetSummaryShip.xaml.cs">
       <DependentUpon>FleetSummaryShip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\Sortie.xaml.cs">
+      <DependentUpon>Sortie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowParts\DetailInformationPanel.xaml.cs">
       <DependentUpon>DetailInformationPanel.xaml</DependentUpon>
     </Compile>
@@ -396,6 +399,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WindowParts\DetailInfoParts\GeneralParts\FleetSummaryShip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\Sortie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
