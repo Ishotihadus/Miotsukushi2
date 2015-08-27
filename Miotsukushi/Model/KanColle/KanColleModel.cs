@@ -30,6 +30,7 @@ namespace Miotsukushi.Model.KanColle
         public QuestData questdata = new QuestData();
 
         public BattleModels.BattleModel battlemodel;
+        public BattleModels.SortieModel sortiemodel;
         public DebuggerModel debuggermodel;
         public bool initializeCompleted = false;
 
@@ -42,6 +43,7 @@ namespace Miotsukushi.Model.KanColle
             kclib = new KanColleNotifier(true);
             new PacketSaver(kclib);
             battlemodel = new BattleModels.BattleModel(this, kclib);
+            sortiemodel = new BattleModels.SortieModel(this, kclib);
             debuggermodel = new DebuggerModel(kclib);
 
             kclib.GameStart += Kclib_GameStart;

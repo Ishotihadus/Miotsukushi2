@@ -71,7 +71,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     }
                     break;
                 case 6: // 気のせいだった or 能動分岐
-                    switch(cell.event_id)
+                    switch(cell.event_kind)
                     {
                         case 0:
                         case 1:
@@ -88,7 +88,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     }
                     break;
                 case 7: // 航空戦
-                    switch(cell.event_id)
+                    switch(cell.event_kind)
                     {
                         case 0: // 航空偵察
                             now_cell.cell_type = CellModel.CellType.air_search;
@@ -107,7 +107,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 case 4: // 通常戦闘
                 case 5: // ボス戦闘
                 default:
-                    switch (cell.event_id)
+                    switch (cell.event_kind)
                     {
                         case 0: // 戦闘なし
                             now_cell.cell_type = CellModel.CellType.no_battle;
@@ -176,6 +176,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     m.now_hp = map.eventmap.now_maphp;
                     m.selected_rank = map.eventmap.selected_rank;
                 }
+                mapmodels.Add(map.id, m);
             }
 
             OnGetMapInfo(new System.EventArgs());
