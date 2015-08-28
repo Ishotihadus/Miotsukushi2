@@ -261,6 +261,11 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                         CellInfo = "不明";
                         break;
                 }
+
+                if(cellinfo.is_boss_battle)
+                {
+                    CellInfo += "（ボス戦）";
+                }
             }
         }
 
