@@ -16,7 +16,7 @@
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="DataTemplate2">
-            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,3" Text="{Binding}"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3" Text="{Binding}" Foreground="{DynamicResource BlackBrush}"/>
         </DataTemplate>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
