@@ -18,6 +18,8 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         public CellModel now_cell;
         public int sortiing_deck;
 
+        public bool on_sortiing = false;
+
         public SortieModel(KanColleModel original_model, KanColleNotifier kclib)
         {
             this.original_model = original_model;
@@ -26,6 +28,16 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             kclib.GetGetmemberMapinfo += Kclib_GetGetmemberMapinfo;
             kclib.GetReqmapStart += Kclib_GetReqmapStart;
             kclib.GetReqmapNext += Kclib_GetReqmapNext;
+            kclib.GetPortPort += Kclib_GetPortPort;
+        }
+
+        private void Kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
+        {
+            if(on_sortiing)
+            {
+                OnGoBackPort(new System.EventArgs());
+                on_sortiing = false;
+            }
         }
 
         private void Kclib_GetReqmapNext(object sender, KanColleLib.TransmissionRequest.api_req_map.NextRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_map.Next> response)
@@ -36,6 +48,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
         private void Kclib_GetReqmapStart(object sender, KanColleLib.TransmissionRequest.api_req_map.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_map.Start> response)
         {
+            on_sortiing = true;
             sortiing_deck = request.deck_id;
             var map = from _ in mapmodels where _.Value.maparea_id == request.maparea_id && _.Value.map_no == request.mapinfo_no select _;
             if (map.Count() > 0)
@@ -201,5 +214,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         /// </summary>
         public event EventHandler CellAdvanced;
         protected virtual void OnCellAdvanced(System.EventArgs e) { if (CellAdvanced != null) { CellAdvanced(this, e); } }
+        
+        /// <summary>
+        /// 戦闘が終了し母港に帰投した際に呼び出されます
+        /// </summary>
+        public event EventHandler GoBackPort;
+        protected virtual void OnGoBackPort(System.EventArgs e) { if (GoBackPort != null) { GoBackPort(this, e); } }
     }
 }
