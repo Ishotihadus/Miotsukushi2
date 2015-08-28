@@ -472,11 +472,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         // 仮実装
         void OnSlotCount_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < shipdata.OnSlotCount.Count; i++)
-            {
-                if (i < Slots.Count)
-                    Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
-            }
+            OnSlotCountAppend();
         }
 
         // 仮実装
@@ -523,8 +519,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             {
                 if (i < Slots.Count)
                     Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
-                else
-                    Slots.Add(new SlotViewModel(-1) { OnSlotCount = shipdata.OnSlotCount[i] });
             }
         }
 
