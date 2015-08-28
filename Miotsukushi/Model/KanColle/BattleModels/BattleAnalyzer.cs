@@ -83,7 +83,6 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     ship.max_hp = maxhps[i + 1];
                     ship.before_hp = nowhps[i + 1];
                     ship.after_hp = ship.before_hp;
-                    ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.None;
                     ship.slot = new int[shipdata.characterinfo.slot_count];
                     for (int j = 0; j < ship.slot.Length; j++)
                     {
@@ -93,14 +92,30 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     {
                         var slotdata = kcmodel.slotdata.FirstOrDefault(_ => _.id == shipdata.Slots[j]);
                         if (slotdata != null)
-                        {
                             ship.slot[j] = slotdata.itemid;
+                    }
+
+                    ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.None;
+                    if(shipdata.ExSlotOpened)
+                    {
+                        var slotdata = kcmodel.slotdata.FirstOrDefault(_ => _.id == shipdata.ExSlot);
+                        if (slotdata != null)
                             if (slotdata.itemid == 42)
+                                ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Normal;
+                            else if (slotdata.itemid == 43)
+                                ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Goddess;
+                    }
+
+                    if(ship.damecontype == BattleAnalyzedEventArgs.Ship.DameConType.None)
+                    {
+                        foreach (var slot in ship.slot)
+                        {
+                            if (slot == 42)
                             {
                                 ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Normal;
                                 break;
                             }
-                            else if (slotdata.itemid == 43)
+                            else if (slot == 43)
                             {
                                 ship.damecontype = BattleAnalyzedEventArgs.Ship.DameConType.Goddess;
                                 break;
