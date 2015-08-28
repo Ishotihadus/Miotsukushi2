@@ -1,13 +1,15 @@
-﻿<UserControl x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.Sortie"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts"
              xmlns:SortieParts="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.SortieParts" 
+             xmlns:Converter="clr-namespace:Miotsukushi.Converter" x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.Sortie" 
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <UserControl.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <DataTemplate x:Key="DataTemplate1">
             <Border Padding="0" BorderBrush="{DynamicResource GrayBrush5}" Margin="1" BorderThickness="0,0,1,1">
                 <SortieParts:SortieShipView Margin="1,1,4,3"/>
@@ -16,14 +18,15 @@
         <DataTemplate x:Key="DataTemplate2">
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,3" Text="{Binding}"/>
         </DataTemplate>
-        <Style TargetType="TextBlock">
+        <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
         </Style>
     </UserControl.Resources>
     <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4" FontSize="16"><Run Text="{Binding AreaID}"/><Run Text="-"/><Run Text="{Binding MapID}"/><Run Text=" "/><Run Text="{Binding MapName}"/><Run Text="  セル "/><Run Text="{Binding CellID}"/></TextBlock>
-            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3" Text="{Binding CellInfo}"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3" Text="{Binding CellInfo}" FontSize="13.333"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3" Background="#7FF3FF00" Foreground="Red" Text="⚠ 出撃艦隊に大破中の艦娘がいます! 十分に注意して進撃を行ってください!" FontWeight="Bold" Visibility="{Binding HasTaihaShip, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="13.333"/>
             <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
             <UniformGrid Columns="3" Margin="0,2">
                 <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsSource="{Binding ShipsMe}" Margin="5,0"/>

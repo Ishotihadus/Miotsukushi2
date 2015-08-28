@@ -135,6 +135,45 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             }
         }
 
+
+        private bool _OnSortie = false;
+        public bool OnSortie
+        {
+            get
+            {
+                return _OnSortie;
+            }
+
+            set
+            {
+                if (_OnSortie != value)
+                {
+                    _OnSortie = value;
+                    OnPropertyChanged(() => OnSortie);
+                }
+            }
+        }
+
+        private bool _HasTaihaShip = false;
+        public bool HasTaihaShip
+        {
+            get
+            {
+                return _HasTaihaShip;
+            }
+
+            set
+            {
+                if (_HasTaihaShip != value)
+                {
+                    _HasTaihaShip = value;
+                    OnPropertyChanged(() => HasTaihaShip);
+                }
+            }
+        }
+
+
+
         public ObservableCollection<SortieShipViewModel> ShipsMe { get; set; } = new ObservableCollection<SortieShipViewModel>();
 
         public ObservableCollection<SortieShipViewModel> ShipsCombined { get; set; } = new ObservableCollection<SortieShipViewModel>();
@@ -146,9 +185,19 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             var kcmodel = Model.MainModel.Current.kancolleModel;
             kcmodel.sortiemodel.SortieStarted += Sortiemodel_SortieStarted;
             kcmodel.sortiemodel.CellAdvanced += Sortiemodel_CellAdvanced;
+            kcmodel.sortiemodel.GoBackPort += Sortiemodel_GoBackPort;
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsMe, new object());
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsCombined, new object());
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Comments, new object());
+        }
+
+        private void Sortiemodel_GoBackPort(object sender, EventArgs e)
+        {
+            OnSortie = false;
+            ShipsMe.Clear();
+            ShipsCombined.Clear();
+            sortiing_deck.PropertyChanged -= Sortiing_deck_PropertyChanged;
+            sortiing_deck_combined.PropertyChanged -= Sortiing_deck_combined_PropertyChanged;
         }
 
         void CellAppend()
@@ -218,6 +267,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             CellAppend();
         }
 
+        Model.KanColle.FleetData sortiing_deck;
+        Model.KanColle.FleetData sortiing_deck_combined;
+
         private void Sortiemodel_SortieStarted(object sender, EventArgs e)
         {
             var kcmodel = Model.MainModel.Current.kancolleModel;
@@ -250,13 +302,41 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             CellAppend();
 
             ShipsMe.Clear();
+            sortiing_deck = kcmodel.fleetdata[kcmodel.sortiemodel.sortiing_deck - 1];
+            sortiing_deck.PropertyChanged += Sortiing_deck_PropertyChanged;
             foreach (var ship in kcmodel.fleetdata[kcmodel.sortiemodel.sortiing_deck - 1].ships)
                 ShipsMe.Add(new SortieShipViewModel(kcmodel.shipdata.FirstOrDefault(_ => _.shipid == ship)));
 
             ShipsCombined.Clear();
-            if(kcmodel.combined_flag > 0 && kcmodel.sortiemodel.sortiing_deck == 1)
+            if (kcmodel.combined_flag > 0 && kcmodel.sortiemodel.sortiing_deck == 1)
+            {
+                sortiing_deck_combined = kcmodel.fleetdata[1];
                 foreach (var ship in kcmodel.fleetdata[1].ships)
                     ShipsCombined.Add(new SortieShipViewModel(kcmodel.shipdata.FirstOrDefault(_ => _.shipid == ship)));
+                sortiing_deck_combined.PropertyChanged += Sortiing_deck_combined_PropertyChanged;
+            }
+            else
+            {
+                sortiing_deck_combined = null;
+            }
+
+            OnSortie = true;
+        }
+
+        private void Sortiing_deck_combined_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "HasTaihaShip")
+            {
+                HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
+            }
+        }
+
+        private void Sortiing_deck_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "HasTaihaShip")
+            {
+                HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
+            }
         }
     }
 }
