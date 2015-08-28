@@ -320,21 +320,33 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                 case "ammo":
                     ammo_append();
                     break;
+                case "ExSlot":
+                    damecon_append();
+                    break;
             }
         }
 
         void damecon_append()
         {
             bool _hasdamecon = false;
-            foreach(var slot in shipdata.Slots)
+
+            var exitem = model.slotdata.FirstOrDefault(_ => _.id == shipdata.ExSlot);
+            if (exitem != null && exitem.iteminfo != null && exitem.iteminfo.type_equiptype == 23)
             {
-                var item = model.slotdata.FirstOrDefault(_ => _.id == slot);
-                if (item != null && item.iteminfo != null && item.iteminfo.type_equiptype == 23)
-                {
-                    _hasdamecon = true;
-                    break;
-                }
+                _hasdamecon = true;
             }
+
+            if(!_hasdamecon)
+                foreach (var slot in shipdata.Slots)
+                {
+                    var item = model.slotdata.FirstOrDefault(_ => _.id == slot);
+                    if (item != null && item.iteminfo != null && item.iteminfo.type_equiptype == 23)
+                    {
+                        _hasdamecon = true;
+                        break;
+                    }
+                }
+            
             HasDameCon = _hasdamecon;
         }
     }

@@ -414,6 +414,42 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             }
         }
 
+        private bool _ExSlotOpened;
+        public bool ExSlotOpened
+        {
+            get
+            {
+                return _ExSlotOpened;
+            }
+
+            set
+            {
+                if (_ExSlotOpened != value)
+                {
+                    _ExSlotOpened = value;
+                    OnPropertyChanged(() => ExSlotOpened);
+                }
+            }
+        }
+
+        private SlotViewModel _ExSlot;
+        public SlotViewModel ExSlot
+        {
+            get
+            {
+                return _ExSlot;
+            }
+
+            set
+            {
+                if (_ExSlot != value)
+                {
+                    _ExSlot = value;
+                    OnPropertyChanged(() => ExSlot);
+                }
+            }
+        }
+
         #endregion
 
         public ShipViewModel(int shipid)
@@ -561,6 +597,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                 case "luck":
                     Luck = shipdata.luck;
                     break;
+                case "ExSlotOpened":
+                    ExSlotOpened = shipdata.ExSlotOpened;
+                    break;
+                case "ExSlot":
+                    make_exslot_viewmodel();
+                    break;
             }
         }
 
@@ -609,6 +651,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             AntiSubmarine = shipdata.anti_submarine;
             Reconnaissance = shipdata.reconnaissance;
             Luck = shipdata.luck;
+            ExSlotOpened = shipdata.ExSlotOpened;
+            make_exslot_viewmodel();
             fuel_append();
             ammo_append();
 
@@ -645,6 +689,11 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             Tools.KanColleTools.ShipResource(ShipLevel, shipdata.ammo, ammo_max, out real_ammo_now, out real_ammo_max);
             AmmoNow = real_ammo_now;
             AmmoMax = real_ammo_max;
+        }
+
+        void make_exslot_viewmodel()
+        {
+            ExSlot = new SlotViewModel(shipdata.ExSlot);
         }
     }
 }

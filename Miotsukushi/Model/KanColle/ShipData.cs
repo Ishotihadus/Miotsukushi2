@@ -501,6 +501,51 @@ namespace Miotsukushi.Model.KanColle
             }
         }
 
+
+        private bool _ExSlotOpened;
+        /// <summary>
+        /// 穴が開いているか
+        /// </summary>
+        public bool ExSlotOpened
+        {
+            get
+            {
+                return _ExSlotOpened;
+            }
+
+            set
+            {
+                if (_ExSlotOpened != value)
+                {
+                    _ExSlotOpened = value;
+                    OnPropertyChanged(() => ExSlotOpened);
+                }
+            }
+        }
+        
+        private int _ExSlot;
+        /// <summary>
+        /// 穴に入ってる装備
+        /// </summary>
+        public int ExSlot
+        {
+            get
+            {
+                return _ExSlot;
+            }
+
+            set
+            {
+                if (_ExSlot != value)
+                {
+                    _ExSlot = value;
+                    OnPropertyChanged(() => ExSlot);
+                }
+            }
+        }
+
+
+
         #endregion
 
         public void FromKanColleLib(KanColleLib.TransmissionData.api_get_member.values.ShipValue data)
@@ -550,6 +595,9 @@ namespace Miotsukushi.Model.KanColle
             anti_submarine = data.taisen[0];
             reconnaissance = data.sakuteki[0];
             luck = data.lucky[0];
+
+            ExSlotOpened = data.slot_ex != 0;
+            ExSlot = data.slot_ex;
         }
     }
 }

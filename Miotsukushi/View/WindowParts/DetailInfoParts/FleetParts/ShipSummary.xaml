@@ -5,41 +5,48 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 	xmlns:CommonParts="clr-namespace:Miotsukushi.View.CommonParts"
+	xmlns:Converter="clr-namespace:Miotsukushi.Converter"
+	xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts"
 	mc:Ignorable="d"
 	x:Class="Miotsukushi.View.WindowParts.DetailInfoParts.FleetParts.ShipSummary"
 	x:Name="UserControl" d:DesignWidth="150" d:DesignHeight="800">
-	<UserControl.Resources>
-		<DataTemplate x:Key="SlotItemTemplate">
-			<CommonParts:SlotView ItemTypeColor="{Binding ItemTypeColor}" ItemTypeName="{Binding ItemType}" ItemName="{Binding ItemName}" IsSlotEmpty="{Binding IsEmpty}" OnSlotCount="{Binding OnSlotCount}" ItemALLevel="{Binding ALV}"/>
-		</DataTemplate>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <DataTemplate x:Key="SlotItemTemplate">
+            <CommonParts:SlotView ItemTypeColor="{Binding ItemTypeColor}" ItemTypeName="{Binding ItemType}" ItemName="{Binding ItemName}" IsSlotEmpty="{Binding IsEmpty}" OnSlotCount="{Binding OnSlotCount}" ItemALLevel="{Binding ALV}"/>
+        </DataTemplate>
+    </UserControl.Resources>
 
-	<StackPanel x:Name="LayoutRoot">
-		<TextBlock TextWrapping="Wrap" Text="{Binding ShipType}" Margin="5,5,5,2"/>
-		<TextBlock TextWrapping="Wrap" Text="{Binding ShipName}" Margin="5,0" FontSize="15"/>
-		<Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
-		<TextBlock TextWrapping="Wrap" Margin="5,0"><Run Text="Lv. "/><Run Text="{Binding ShipLevel}"/></TextBlock>
-		<TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="next: "/><Run Text="{Binding ExpToNextLv}"/></TextBlock>
-		<ProgressBar Height="3" Margin="5,0,5,5" Value="{Binding ExpPercentage}"/>
-		<TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="HP: "/><Run Text="{Binding HpNow}"/><Run Text="/"/><Run Text="{Binding HpMax}"/></TextBlock>
-		<ProgressBar Height="3" Margin="5,0,5,5" Maximum="{Binding HpMax}" Value="{Binding HpNow}"/>
-		<TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="Cond: "/><Run Text="{Binding Cond}"/></TextBlock>
-		<ProgressBar Height="3" Margin="5,0,5,5" Value="{Binding Cond}"/>
-		<TextBlock TextWrapping="Wrap" Margin="5,0"><Run Text="燃料: "/><Run Text="{Binding FuelNow}"/><Run Text="/"/><Run Text="{Binding FuelMax}"/></TextBlock>
-		<TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="弾薬: "/><Run Text="{Binding AmmoNow}"/><Run Text="/"/><Run Text="{Binding AmmoMax}"/></TextBlock>
-		<ProgressBar Height="3" Margin="5,0,5,3" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
-		<ProgressBar Height="3" Margin="5,0,5,3" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
-		<Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
-		<ItemsControl Margin="5,0" ItemTemplate="{DynamicResource SlotItemTemplate}" ItemsSource="{Binding Slots}" MinHeight="90"/>
-		<Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
-		<CommonParts:ShipParameterView Margin="5,3,5,8" ParameterName="制空" ParameterValue="{Binding AirMastery}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="火力" ParameterValue="{Binding Firepower}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="装甲" ParameterValue="{Binding Armor}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="雷装" ParameterValue="{Binding Torpedo}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="回避" ParameterValue="{Binding Evasion}"/>
-		<CommonParts:ShipParameterView Margin="5,3" ParameterName="対空" ParameterValue="{Binding AntiAir}"/>
+    <StackPanel x:Name="LayoutRoot">
+        <TextBlock TextWrapping="Wrap" Text="{Binding ShipType}" Margin="5,5,5,2"/>
+        <TextBlock TextWrapping="Wrap" Text="{Binding ShipName}" Margin="5,0" FontSize="15"/>
+        <Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,0"><Run Text="Lv. "/><Run Text="{Binding ShipLevel}"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="next: "/><Run Text="{Binding ExpToNextLv}"/></TextBlock>
+        <ProgressBar Height="3" Margin="5,0,5,5" Value="{Binding ExpPercentage}"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="HP: "/><Run Text="{Binding HpNow}"/><Run Text="/"/><Run Text="{Binding HpMax}"/></TextBlock>
+        <ProgressBar Height="3" Margin="5,0,5,5" Maximum="{Binding HpMax}" Value="{Binding HpNow}"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="Cond: "/><Run Text="{Binding Cond}"/></TextBlock>
+        <ProgressBar Height="3" Margin="5,0,5,5" Value="{Binding Cond}"/>
+        <TextBlock TextWrapping="Wrap" Margin="5,0"><Run Text="燃料: "/><Run Text="{Binding FuelNow}"/><Run Text="/"/><Run Text="{Binding FuelMax}"/></TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,0,5,2"><Run Text="弾薬: "/><Run Text="{Binding AmmoNow}"/><Run Text="/"/><Run Text="{Binding AmmoMax}"/></TextBlock>
+        <ProgressBar Height="3" Margin="5,0,5,3" Maximum="{Binding FuelMax}" Value="{Binding FuelNow}"/>
+        <ProgressBar Height="3" Margin="5,0,5,3" Maximum="{Binding AmmoMax}" Value="{Binding AmmoNow}"/>
+        <Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
+        <ItemsControl Margin="5,0" ItemTemplate="{DynamicResource SlotItemTemplate}" ItemsSource="{Binding Slots}" MinHeight="90"/>
+        <Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}"/>
+        <Grid Margin="5,-1" Visibility="{Binding ExSlotOpened, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <CommonParts:SlotView DataContext="{Binding ExSlot}" ItemTypeColor="{Binding ItemTypeColor}" ItemTypeName="{Binding ItemType}" ItemName="{Binding ItemName}" IsSlotEmpty="{Binding IsEmpty}" OnSlotCount="{Binding OnSlotCount}" ItemALLevel="{Binding ALV}"/>
+        </Grid>
+        <Rectangle Height="1" Margin="5" Fill="{DynamicResource GrayBrush2}" Visibility="{Binding ExSlotOpened, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <CommonParts:ShipParameterView Margin="5,3,5,8" ParameterName="制空" ParameterValue="{Binding AirMastery}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="火力" ParameterValue="{Binding Firepower}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="装甲" ParameterValue="{Binding Armor}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="雷装" ParameterValue="{Binding Torpedo}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="回避" ParameterValue="{Binding Evasion}"/>
+        <CommonParts:ShipParameterView Margin="5,3" ParameterName="対空" ParameterValue="{Binding AntiAir}"/>
         <CommonParts:ShipParameterView Margin="5,3" ParameterName="対潜" ParameterValue="{Binding AntiSubmarine}"/>
         <CommonParts:ShipParameterView Margin="5,3" ParameterName="索敵" ParameterValue="{Binding Reconnaissance}"/>
         <CommonParts:ShipParameterView Margin="5,3" ParameterName="運" ParameterValue="{Binding Luck}"/>
-	</StackPanel>
+    </StackPanel>
 </UserControl>
