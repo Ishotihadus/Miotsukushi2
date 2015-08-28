@@ -196,8 +196,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             OnSortie = false;
             ShipsMe.Clear();
             ShipsCombined.Clear();
-            sortiing_deck.PropertyChanged -= Sortiing_deck_PropertyChanged;
-            sortiing_deck_combined.PropertyChanged -= Sortiing_deck_combined_PropertyChanged;
+            if(sortiing_deck != null)
+                sortiing_deck.PropertyChanged -= Sortiing_deck_PropertyChanged;
+            if(sortiing_deck_combined != null)
+                sortiing_deck_combined.PropertyChanged -= Sortiing_deck_combined_PropertyChanged;
         }
 
         void CellAppend()
