@@ -49,6 +49,46 @@ namespace Miotsukushi.ViewModel.CheatWindow
             }
         }
 
+        private string _StatisticsDBToken;
+        public string StatisticsDBToken
+        {
+            get
+            {
+                return _StatisticsDBToken;
+            }
+
+            set
+            {
+                if (_StatisticsDBToken != value)
+                {
+                    _StatisticsDBToken = value;
+                    OnPropertyChanged(() => StatisticsDBToken);
+                    Properties.Settings.Default.StatisticsDBToken = value;
+                    Properties.Settings.Default.Save();
+                }
+            }
+        }
+
+        private bool _StatisticsSendingOn;
+        public bool StatisticsSendingOn
+        {
+            get
+            {
+                return _StatisticsSendingOn;
+            }
+
+            set
+            {
+                if (_StatisticsSendingOn != value)
+                {
+                    _StatisticsSendingOn = value;
+                    OnPropertyChanged(() => StatisticsSendingOn);
+                    Properties.Settings.Default.StatisticsSendingOn = value;
+                    Properties.Settings.Default.Save();
+                }
+            }
+        }
+
 
 
         public SettingsViewModel()
@@ -58,6 +98,8 @@ namespace Miotsukushi.ViewModel.CheatWindow
             AccentColors = model.themeModel.accent_name.ToList();
             ThemeSelectedIndex = model.themeModel.selected_theme;
             AccentColorSelectedIndex = model.themeModel.selected_accent;
+            StatisticsDBToken = Properties.Settings.Default.StatisticsDBToken;
+            StatisticsSendingOn = Properties.Settings.Default.StatisticsSendingOn;
         }
     }
 }

@@ -8,5 +8,11 @@
     <Setting Name="AccentColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">Purple</Value>
     </Setting>
+    <Setting Name="StatisticsDBToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="StatisticsSendingOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

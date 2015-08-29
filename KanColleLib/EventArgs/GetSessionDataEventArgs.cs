@@ -11,6 +11,23 @@ namespace KanColleLib.EventArgs
         /// <summary>
         /// Fiddlerから受け取ったSession
         /// </summary>
-        public Fiddler.Session session;
+        internal Fiddler.Session session;
+
+        public string fullUrl;
+
+        public string responseString;
+
+        public string requestString;
+
+        public string MIMEType;
+
+        public GetSessionDataEventArgs(Fiddler.Session session)
+        {
+            this.session = session;
+            fullUrl = session.fullUrl;
+            responseString = session.GetResponseBodyAsString();
+            requestString = session.GetRequestBodyAsString();
+            MIMEType = session.oResponse.MIMEType;
+        }
     }
 }

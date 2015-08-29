@@ -32,6 +32,7 @@ namespace Miotsukushi.Model.KanColle
         public BattleModels.BattleModel battlemodel;
         public BattleModels.SortieModel sortiemodel;
         public DebuggerModel debuggermodel;
+        public Plugins.StatisticsDBHelper statsticshelper;
         public bool initializeCompleted = false;
         public int combined_flag = 0;
 
@@ -43,6 +44,7 @@ namespace Miotsukushi.Model.KanColle
 
             kclib = new KanColleNotifier(true);
             new PacketSaver(kclib);
+            statsticshelper = new Plugins.StatisticsDBHelper(kclib);
             battlemodel = new BattleModels.BattleModel(this, kclib);
             sortiemodel = new BattleModels.SortieModel(this, kclib);
             debuggermodel = new DebuggerModel(kclib);

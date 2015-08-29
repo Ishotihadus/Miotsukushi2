@@ -23,7 +23,7 @@ namespace KanColleLib
             else
                 FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
-            FiddlerApplication.AfterSessionComplete += (oSession) => OnGetSessionData(new GetSessionDataEventArgs() { session = oSession });
+            FiddlerApplication.AfterSessionComplete += (oSession) => OnGetSessionData(new GetSessionDataEventArgs(oSession));
             FiddlerApplication.Log.OnLogString += (sender, e) => OnGetFiddlerLogString(new GetFiddlerLogStringEventArgs() { logtext = e.LogString });
         }
 

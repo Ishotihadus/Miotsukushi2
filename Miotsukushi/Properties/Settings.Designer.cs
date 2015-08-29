@@ -46,5 +46,29 @@ namespace Miotsukushi.Properties {
                 this["AccentColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StatisticsDBToken {
+            get {
+                return ((string)(this["StatisticsDBToken"]));
+            }
+            set {
+                this["StatisticsDBToken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StatisticsSendingOn {
+            get {
+                return ((bool)(this["StatisticsSendingOn"]));
+            }
+            set {
+                this["StatisticsSendingOn"] = value;
+            }
+        }
     }
 }
