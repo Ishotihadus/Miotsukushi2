@@ -23,7 +23,7 @@ namespace Miotsukushi.Converter
                 else if (nowhp <= maxhp * 0.5)
                     return Colors.DarkOrange;
                 else if (nowhp <= maxhp * 0.75)
-                    return Colors.Goldenrod;
+                    return Colors.Gold;
                 else
                     return Colors.MediumSeaGreen;
             else
