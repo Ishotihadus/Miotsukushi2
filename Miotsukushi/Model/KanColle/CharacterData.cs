@@ -58,6 +58,11 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         public int slot_count;
 
+        /// <summary>
+        /// 速度
+        /// </summary>
+        public int speed;
+
         public static CharacterData fromKanColleLib(KanColleLib.TransmissionData.api_start2.start2.MstShip data)
         {
             return new CharacterData()
@@ -70,7 +75,8 @@ namespace Miotsukushi.Model.KanColle
                 ammo_max = data.bull_max.HasValue ? data.bull_max.Value : 0,
                 aftership_lv = data.afterlv.HasValue && data.afterlv.Value != 0 ? data.afterlv.Value : (int?)null,
                 aftership_id = data.aftershipid.HasValue && data.afterlv.Value != 0 ? data.aftershipid.Value : (int?)null,
-                slot_count = data.slot_num.HasValue ? data.slot_num.Value : 0
+                slot_count = data.slot_num.HasValue ? data.slot_num.Value : 0,
+                speed = data.soku.HasValue ? data.soku.Value : 0
             };
         }
     }

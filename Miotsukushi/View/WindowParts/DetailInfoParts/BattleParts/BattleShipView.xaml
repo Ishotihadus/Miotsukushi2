@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts.BattleParts"
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Converter="clr-namespace:Miotsukushi.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="60" d:DesignWidth="150">
     <UserControl.Resources>
@@ -25,11 +26,36 @@
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
             </Style>
+            <Converter:HPStatusTextConverter x:Key="HPStatusTextConverter"/>
+            <Converter:HPStatusColorConverter x:Key="HPStatusColorConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
         <DockPanel>
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0" DockPanel.Dock="Right"><Run Text="{Binding AfterHP, StringFormat={}{0:#;'0'}}"/><Run Text="/"/><Run Text="{Binding MaxHP}"/></TextBlock>
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0" DockPanel.Dock="Right">
+                <Run Text="{Binding AfterHP, StringFormat={}{0:#;'0'}}"/><Run Text="/"/><Run Text="{Binding MaxHP}"/>
+                <Run Text=" "/>
+                <Run>
+                    <Run.Text>
+                        <MultiBinding Converter="{StaticResource HPStatusTextConverter}">
+                            <Binding Path="AfterHP" Mode="OneWay"/>
+                            <Binding Path="MaxHP" Mode="OneWay"/>
+                            <Binding Path="Speed" Mode="OneWay"/>
+                            <Binding Path="IsFriend" Mode="OneWay"/>
+                        </MultiBinding>
+                    </Run.Text>
+                </Run>
+                <TextBlock.Foreground>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource HPStatusColorConverter}">
+                                <Binding Path="AfterHP" Mode="OneWay"/>
+                                <Binding Path="MaxHP" Mode="OneWay"/>
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding ShipName}" FontSize="14.667"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
         </DockPanel>
         <Controls:MetroProgressBar Height="3" Value="{Binding AfterHP}" Maximum="{Binding MaxHP}" Style="{StaticResource HpProgressBarStyle}" Margin="0,3"/>

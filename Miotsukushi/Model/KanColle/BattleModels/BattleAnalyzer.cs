@@ -83,6 +83,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     ship.max_hp = maxhps[i + 1];
                     ship.before_hp = nowhps[i + 1];
                     ship.after_hp = ship.before_hp;
+                    ship.speed = shipdata.characterinfo.speed;
                     ship.slot = new int[shipdata.characterinfo.slot_count];
                     for (int j = 0; j < ship.slot.Length; j++)
                     {
@@ -155,7 +156,10 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     ship.max_hp = maxhps[i + 7];
                     ship.before_hp = nowhps[i + 7];
                     ship.after_hp = ship.before_hp;
+                    ship.speed = charadata.speed;
+
                     ship.slot = new int[charadata.slot_count];
+                    
                     for (int j = 0; j < ship.slot.Length; j++)
                     {
                         ship.slot[j] = -1;

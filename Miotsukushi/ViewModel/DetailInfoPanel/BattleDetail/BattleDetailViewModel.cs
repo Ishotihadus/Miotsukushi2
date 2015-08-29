@@ -13,17 +13,34 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
     {
         public class PhaseViewModel : ViewModelBase
         {
+
             public class AttackViewModel
             {
+                public class ShipViewModel
+                {
+                    public string Name { get; set; }
+
+                    public int MaxHP { get; set; }
+
+                    public int Speed { get; set; }
+
+                    public bool IsFriend { get; set; }
+
+                    public override string ToString()
+                    {
+                        return Name;
+                    }
+                }
+
                 /// <summary>
                 /// 攻撃する艦
                 /// </summary>
-                public string ShipFrom { get; set; }
+                public ShipViewModel ShipFrom { get; set; }
 
                 /// <summary>
                 /// 攻撃される艦
                 /// </summary>
-                public string ShipTo { get; set; }
+                public ShipViewModel ShipTo { get; set; }
 
                 /// <summary>
                 /// ダメージの量
@@ -34,11 +51,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
                 /// 攻撃された艦の後のHP
                 /// </summary>
                 public int ShipToAfterHP { get; set; }
-
-                /// <summary>
-                /// 攻撃された艦のMaxHP
-                /// </summary>
-                public int ShipToMaxHP { get; set; }
             }
 
             private string _PhaseName;
@@ -105,16 +117,54 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
             kcmodel.battlemodel.BattleAnalyzed += Battlemodel_BattleAnalyzed;
         }
 
+        readonly static PhaseViewModel.AttackViewModel.ShipViewModel dameconvm = new PhaseViewModel.AttackViewModel.ShipViewModel()
+        {
+            Name = "ダメコン発動"
+        };
+
+        readonly static PhaseViewModel.AttackViewModel.ShipViewModel damecongoddessvm = new PhaseViewModel.AttackViewModel.ShipViewModel()
+        {
+            Name = "ダメコン女神発動"
+        };
+
         private void Battlemodel_BattleAnalyzed(object sender, BattleAnalyzedEventArgs e)
         {
             var ships = new Dictionary<BattleAnalyzedEventArgs.Ship, int>();
+            var shipsvm = new Dictionary<BattleAnalyzedEventArgs.Ship, PhaseViewModel.AttackViewModel.ShipViewModel>();
             foreach (var ship in e.friend)
+            {
                 ships.Add(ship, ship.before_hp);
+                shipsvm.Add(ship, new PhaseViewModel.AttackViewModel.ShipViewModel()
+                {
+                    IsFriend = true,
+                    Name = ship.name,
+                    MaxHP = ship.max_hp,
+                    Speed = ship.speed
+                });
+            }
             if(e.friend_combined != null)
                 foreach (var ship in e.friend_combined)
+                {
                     ships.Add(ship, ship.before_hp);
+                    shipsvm.Add(ship, new PhaseViewModel.AttackViewModel.ShipViewModel()
+                    {
+                        IsFriend = true,
+                        Name = ship.name,
+                        MaxHP = ship.max_hp,
+                        Speed = ship.speed
+                    });
+                }
             foreach (var ship in e.enemy)
+            {
                 ships.Add(ship, ship.before_hp);
+                shipsvm.Add(ship, new PhaseViewModel.AttackViewModel.ShipViewModel()
+                {
+                    IsFriend = false,
+                    Name = ship.name,
+                    MaxHP = ship.max_hp,
+                    Speed = ship.speed
+                });
+            }
 
             var phases = new List<PhaseViewModel>();
             foreach(var phasem in e.phases)
@@ -130,10 +180,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
                         ships[attack.target_ship] -= attack.damage;
                         phasevm.Attacks.Add(new PhaseViewModel.AttackViewModel()
                         {
-                            ShipTo = attack.target_ship.name,
+                            ShipTo = shipsvm[attack.target_ship],
                             Damage = attack.damage,
-                            ShipToAfterHP = ships[attack.target_ship],
-                            ShipToMaxHP = attack.target_ship.max_hp
+                            ShipToAfterHP = ships[attack.target_ship]
                         });
                     }
                     foreach(var attack in phasem_r.damecon)
@@ -141,11 +190,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
                         ships[attack.target_ship] -= attack.damage;
                         phasevm.Attacks.Add(new PhaseViewModel.AttackViewModel()
                         {
-                            ShipFrom = attack.damecon_type == 2 ? "ダメコン女神発動" : "ダメコン発動",
-                            ShipTo = attack.target_ship.name,
+                            ShipFrom = attack.damecon_type == 2 ? damecongoddessvm : dameconvm,
+                            ShipTo = shipsvm[attack.target_ship],
                             Damage = attack.damage,
-                            ShipToAfterHP = ships[attack.target_ship],
-                            ShipToMaxHP = attack.target_ship.max_hp
+                            ShipToAfterHP = ships[attack.target_ship]
                         });
                     }
                 }
@@ -158,12 +206,11 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
                         
                         phasevm.Attacks.Add(new PhaseViewModel.AttackViewModel()
                         {
-                            ShipFrom = attack.damecon_type == 0 ? attack.origin_ship.name : 
-                                attack.damecon_type == 2 ? "ダメコン女神発動" : "ダメコン発動",
-                            ShipTo = attack.target_ship.name,
+                            ShipFrom = attack.damecon_type == 0 ? shipsvm[attack.origin_ship] : 
+                                attack.damecon_type == 2 ? damecongoddessvm : dameconvm,
+                            ShipTo = shipsvm[attack.target_ship],
                             Damage = attack.damage,
-                            ShipToAfterHP = ships[attack.target_ship],
-                            ShipToMaxHP = attack.target_ship.max_hp
+                            ShipToAfterHP = ships[attack.target_ship]
                         });
                     }
                 }

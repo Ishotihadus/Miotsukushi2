@@ -18,6 +18,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
         public int Torpedo { get; set; }
         public int AntiAir { get; set; }
         public int Armor { get; set; }
+        public int Speed { get; set; }
+        public bool IsFriend { get; set; }
         public List<BattleShipSlotViewModel> Slot { get; set; }
 
         public class BattleShipSlotViewModel

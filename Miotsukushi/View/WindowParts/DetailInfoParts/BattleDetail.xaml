@@ -9,6 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <Converter:HPStatusColorConverter x:Key="HPStatusColorConverter"/>
+        <Converter:HPStatusTextConverter x:Key="HPStatusTextConverter"/>
         <DataTemplate x:Key="DataTemplate1">
             <StackPanel d:DesignWidth="300">
                 <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="0,0,1,2" Margin="4,6,4,2">
@@ -17,18 +18,30 @@
                 <DataGrid IsReadOnly="True" ItemsSource="{Binding Attacks, Mode=OneWay}" AutoGenerateColumns="False" Margin="4,0,4,12" CanUserSortColumns="False" ColumnWidth="*">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="攻撃艦" Binding="{Binding ShipFrom}"/>
-                        <DataGridTextColumn Header="被攻撃艦" Binding="{Binding ShipTo}"/>
+                        <DataGridTextColumn Header="被攻撃艦" Binding="{Binding ShipTo.Name}"/>
                         <DataGridTextColumn Header="ダメージ量" Binding="{Binding Damage, StringFormat={}{0:#;'(+'#')';'miss'}}"/>
                         <DataGridTemplateColumn Header="後のHP" SortMemberPath="EquiptypeID">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock><Run Text="{Binding ShipToAfterHP, StringFormat={}{0:#;'0'}}"/><Run Text=" / "/><Run Text="{Binding ShipToMaxHP}"/>
+                                    <TextBlock><Run Text="{Binding ShipToAfterHP, StringFormat={}{0:#;'0'}}"/><Run Text=" / "/><Run Text="{Binding ShipTo.MaxHP}"/>
+                                        <Run Text=" ["/>
+                                        <Run>
+                                            <Run.Text>
+                                                <MultiBinding Converter="{StaticResource HPStatusTextConverter}">
+                                                    <Binding Path="ShipToAfterHP" Mode="OneWay"/>
+                                                    <Binding Path="ShipTo.MaxHP" Mode="OneWay"/>
+                                                    <Binding Path="ShipTo.Speed" Mode="OneWay"/>
+                                                    <Binding Path="ShipTo.IsFriend" Mode="OneWay"/>
+                                                </MultiBinding>
+                                            </Run.Text>
+                                        </Run>
+                                        <Run Text="]"/>
                                         <TextBlock.Foreground>
                                             <SolidColorBrush>
                                                 <SolidColorBrush.Color>
                                                     <MultiBinding Converter="{StaticResource HPStatusColorConverter}">
                                                         <Binding Path="ShipToAfterHP" Mode="OneWay"/>
-                                                        <Binding Path="ShipToMaxHP" Mode="OneWay"/>
+                                                        <Binding Path="ShipTo.MaxHP" Mode="OneWay"/>
                                                     </MultiBinding>
                                                 </SolidColorBrush.Color>
                                             </SolidColorBrush>

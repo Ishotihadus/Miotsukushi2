@@ -316,6 +316,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                     Torpedo = ship.torpedo,
                     AntiAir = ship.anti_air,
                     Armor = ship.armor,
+                    IsFriend = true,
+                    Speed = ship.speed,
                     Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                     {
                         ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
@@ -340,6 +342,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                     Torpedo = ship.torpedo,
                     AntiAir = ship.anti_air,
                     Armor = ship.armor,
+                    IsFriend = false,
+                    Speed = ship.speed,
                     Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                     {
                         ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
@@ -349,7 +353,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
             }
             ShipsEnemy = enemy_list;
 
-            if (e.is_combined_battle)
+            if (e.friend_combined != null)
             {
                 var combined_list = new List<BattleShipViewModel>();
                 foreach (var ship in e.friend_combined)
@@ -366,6 +370,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                         Torpedo = ship.torpedo,
                         AntiAir = ship.anti_air,
                         Armor = ship.armor,
+                        IsFriend = true,
+                        Speed = ship.speed,
                         Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                         {
                             ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",

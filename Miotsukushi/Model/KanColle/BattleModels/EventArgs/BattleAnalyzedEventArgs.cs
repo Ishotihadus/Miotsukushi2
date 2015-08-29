@@ -155,6 +155,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             public int armor;
 
             /// <summary>
+            /// 速度パラメータ
+            /// </summary>
+            public int speed;
+
+            /// <summary>
             /// 与えたダメージの合計
             /// </summary>
             public int sum_attack;
