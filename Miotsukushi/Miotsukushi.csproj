@@ -193,6 +193,7 @@
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\SettingsViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
+    <Compile Include="ViewModel\DetailInfoPanel\BattleDetail\BattleDetailViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleShipViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Expedition\ExpeditionFleetCollectionViewModel.cs" />
@@ -247,6 +248,9 @@
     </Compile>
     <Compile Include="View\WindowParts\DetailInfoParts\Battle.xaml.cs">
       <DependentUpon>Battle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WindowParts\DetailInfoParts\BattleDetail.xaml.cs">
+      <DependentUpon>BattleDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowParts\DetailInfoParts\BattleParts\BattleShipView.xaml.cs">
       <DependentUpon>BattleShipView.xaml</DependentUpon>
@@ -365,6 +369,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\WindowParts\DetailInfoParts\Battle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WindowParts\DetailInfoParts\BattleDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

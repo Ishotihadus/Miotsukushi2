@@ -22,7 +22,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel
                 "任務",
                 "出撃総合",
                 "戦闘総合",
-                "敵艦隊詳細",
+                "戦闘詳細解析",
                 "戦闘結果",
                 "マップ詳細"
             };
