@@ -200,6 +200,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                 sortiing_deck.PropertyChanged -= Sortiing_deck_PropertyChanged;
             if(sortiing_deck_combined != null)
                 sortiing_deck_combined.PropertyChanged -= Sortiing_deck_combined_PropertyChanged;
+            HasTaihaShip = false;
         }
 
         void CellAppend()
@@ -321,10 +322,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                 foreach (var ship in kcmodel.fleetdata[1].ships)
                     ShipsCombined.Add(new SortieShipViewModel(kcmodel.shipdata.FirstOrDefault(_ => _.shipid == ship)));
                 sortiing_deck_combined.PropertyChanged += Sortiing_deck_combined_PropertyChanged;
+
+                HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
             }
             else
             {
                 sortiing_deck_combined = null;
+                HasTaihaShip = sortiing_deck.HasTaihaShip;
             }
 
             OnSortie = true;
@@ -342,7 +346,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
         {
             if (e.PropertyName == "HasTaihaShip")
             {
-                HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
+                if (sortiing_deck_combined != null)
+                    HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
+                else
+                    HasTaihaShip = sortiing_deck.HasTaihaShip;
             }
         }
     }
