@@ -129,6 +129,7 @@
     <Compile Include="Converter\DateTimeConverter.cs" />
     <Compile Include="Converter\FuelAmmoStatusColorConverter.cs" />
     <Compile Include="Converter\HPStatusColorConverter.cs" />
+    <Compile Include="Converter\HPStatusTextConverter.cs" />
     <Compile Include="Converter\IntegerConverter.cs" />
     <Compile Include="Converter\IntegerEqualityConverter.cs" />
     <Compile Include="Converter\IntegerEqualityToVisibilityConverter.cs" />
