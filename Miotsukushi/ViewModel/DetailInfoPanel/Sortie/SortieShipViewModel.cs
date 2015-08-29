@@ -152,6 +152,43 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             }
         }
 
+        private int _Speed;
+        public int Speed
+        {
+            get
+            {
+                return _Speed;
+            }
+
+            set
+            {
+                if (_Speed != value)
+                {
+                    _Speed = value;
+                    OnPropertyChanged(() => Speed);
+                }
+            }
+        }
+
+        private bool _IsFriend;
+        public bool IsFriend
+        {
+            get
+            {
+                return _IsFriend;
+            }
+
+            set
+            {
+                if (_IsFriend != value)
+                {
+                    _IsFriend = value;
+                    OnPropertyChanged(() => IsFriend);
+                }
+            }
+        }
+
+
         public List<SortieShipSlotViewModel> Slot { get; set; }
 
         public class SortieShipSlotViewModel
@@ -165,6 +202,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
         public SortieShipViewModel(Model.KanColle.ShipData shipmodel)
         {
             this.shipmodel = shipmodel;
+            IsFriend = true; // 敵艦隊がここに現れることはないので
 
             if(shipmodel == null)
             {
@@ -182,6 +220,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             Torpedo = shipmodel.torpedo;
             AntiAir = shipmodel.anti_air;
             Armor = shipmodel.armor;
+            Speed = shipmodel.characterinfo != null ? shipmodel.characterinfo.speed : 0;
             SlotAppend();
             shipmodel.Slots.CollectionChanged += Slots_CollectionChanged;
         }
@@ -238,6 +277,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                     break;
                 case "characterid":
                     ShipName = shipmodel.characterinfo != null ? shipmodel.characterinfo.name : "不明";
+                    Speed = shipmodel.characterinfo != null ? shipmodel.characterinfo.speed : 0;
                     break;
                 case "hp_now":
                     NowHP = shipmodel.hp_now;
