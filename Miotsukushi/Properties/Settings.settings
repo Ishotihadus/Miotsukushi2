@@ -6,7 +6,7 @@
       <Value Profile="(Default)">BaseLight</Value>
     </Setting>
     <Setting Name="AccentColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Violet</Value>
+      <Value Profile="(Default)">Purple</Value>
     </Setting>
   </Settings>
 </SettingsFile>

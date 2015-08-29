@@ -37,7 +37,7 @@ namespace Miotsukushi.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Violet")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Purple")]
         public string AccentColor {
             get {
                 return ((string)(this["AccentColor"]));
