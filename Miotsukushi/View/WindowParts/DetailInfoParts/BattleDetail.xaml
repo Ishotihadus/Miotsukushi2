@@ -4,9 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Miotsukushi.View.WindowParts.DetailInfoParts"
+             xmlns:Converter="clr-namespace:Miotsukushi.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Converter:HPStatusColorConverter x:Key="HPStatusColorConverter"/>
+        <DataTemplate x:Key="DataTemplate1">
+            <StackPanel d:DesignWidth="300">
+                <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="0,0,1,2" Margin="4,6,4,2">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding PhaseName}" FontSize="13.333" Margin="3" HorizontalAlignment="Left" Foreground="{DynamicResource BlackBrush}" FontWeight="Bold"/>
+                </Border>
+                <DataGrid IsReadOnly="True" ItemsSource="{Binding Attacks, Mode=OneWay}" AutoGenerateColumns="False" Margin="4,0,4,12" CanUserSortColumns="False" ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="攻撃艦" Binding="{Binding ShipFrom}"/>
+                        <DataGridTextColumn Header="被攻撃艦" Binding="{Binding ShipTo}"/>
+                        <DataGridTextColumn Header="ダメージ量" Binding="{Binding Damage, StringFormat={}{0:#;'(+'#')';'miss'}}"/>
+                        <DataGridTemplateColumn Header="後のHP" SortMemberPath="EquiptypeID">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock><Run Text="{Binding ShipToAfterHP, StringFormat={}{0:#;'0'}}"/><Run Text=" / "/><Run Text="{Binding ShipToMaxHP}"/>
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush>
+                                                <SolidColorBrush.Color>
+                                                    <MultiBinding Converter="{StaticResource HPStatusColorConverter}">
+                                                        <Binding Path="ShipToAfterHP" Mode="OneWay"/>
+                                                        <Binding Path="ShipToMaxHP" Mode="OneWay"/>
+                                                    </MultiBinding>
+                                                </SolidColorBrush.Color>
+                                            </SolidColorBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
-        <ItemsControl/>
+        <ItemsControl ItemsSource="{Binding Phases}" ItemTemplate="{DynamicResource DataTemplate1}"/>
     </ScrollViewer>
 </UserControl>

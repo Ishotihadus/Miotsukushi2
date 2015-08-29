@@ -16,7 +16,7 @@ namespace Miotsukushi.Converter
             double maxhp;
 
             if (double.TryParse(values[0].ToString(), out nowhp) && double.TryParse(values[1].ToString(), out maxhp))
-                if (nowhp == 0)
+                if (nowhp <= 0)
                     return Colors.RoyalBlue;
                 else if (nowhp <= maxhp * 0.25)
                     return Colors.Crimson;
