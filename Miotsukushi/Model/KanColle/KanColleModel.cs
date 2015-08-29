@@ -303,7 +303,7 @@ namespace Miotsukushi.Model.KanColle
                         else
                         {
                             // なにもないところに宣言した場合
-                            fleetdata[request.id - 1].ships.RemoveAt(request.ship_idx);
+                            fleetdata[request.id - 1].ships.RemoveAt(replaceindex);
                             fleetdata[request.id - 1].ships.Add(request.ship_id);
                         }
                     }
