@@ -29,7 +29,7 @@ namespace Miotsukushi.Converter
                 else if (nowhp <= maxhp * 0.75)
                     return soku == 0 ? "混乱" : "小破";
                 else if (nowhp < maxhp)
-                    return "健全";
+                    return "健在";
                 else
                     return "無傷";
             else
