@@ -15,11 +15,31 @@ namespace Miotsukushi
     /// </summary>
     public partial class App : Application
     {
+        static App()
+        {
+#if DEBUG
+#else
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+#endif
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            // ハンドルされていない例外
+
+        }
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            // ハンドルされていない例外2
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // GPUによるハードウェアアクセラレーションを無効化する
-            // あとから設定で変えられるようにしよう
-            System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+#if DEBUG
+#else
+            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+#endif
+            
 #if DEBUG
             SetCurrentCulture("en-US");
 #endif
@@ -30,6 +50,7 @@ namespace Miotsukushi
             Window.Closed += Window_Closed;
             Window.Show();
         }
+
 
         private void SetCurrentCulture(string culname)
         {

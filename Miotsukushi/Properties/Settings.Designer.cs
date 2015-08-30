@@ -70,5 +70,17 @@ namespace Miotsukushi.Properties {
                 this["StatisticsSendingOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HardwareRendering {
+            get {
+                return ((bool)(this["HardwareRendering"]));
+            }
+            set {
+                this["HardwareRendering"] = value;
+            }
+        }
     }
 }

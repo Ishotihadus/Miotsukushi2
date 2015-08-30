@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <StackPanel>
-        <Expander Header="デザイン" IsExpanded="True">
+        <Expander Header="表示およびデザイン" IsExpanded="True">
             <StackPanel>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
@@ -25,6 +25,7 @@
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="アクセントカラー" VerticalAlignment="Center"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Grid.Column="1" ItemsSource="{Binding AccentColors}" SelectedIndex="{Binding AccentColorSelectedIndex, Mode=TwoWay}"/>
                 </Grid>
+                <CheckBox Margin="5" Content="ハードウェアレンダリングを強制的に無効化する" IsChecked="{Binding HardwareRenderingOn}" ToolTip="通常はオフにしてください。描画が極端に遅かったり描画が乱れたりするなどの問題が頻発する場合には、これをオンにすることで改善されるかもしれません。"/>
             </StackPanel>
         </Expander>
         <Expander Header="艦これ統計データベース" IsExpanded="True">

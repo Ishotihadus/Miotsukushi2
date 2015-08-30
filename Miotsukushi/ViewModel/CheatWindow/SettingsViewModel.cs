@@ -89,6 +89,29 @@ namespace Miotsukushi.ViewModel.CheatWindow
             }
         }
 
+        private bool _HardwareRenderingOn;
+        public bool HardwareRenderingOn
+        {
+            get
+            {
+                return _HardwareRenderingOn;
+            }
+
+            set
+            {
+                if (_HardwareRenderingOn != value)
+                {
+                    _HardwareRenderingOn = value;
+                    OnPropertyChanged(() => HardwareRenderingOn);
+                    Properties.Settings.Default.HardwareRendering = value;
+                    Properties.Settings.Default.Save();
+                    if (value)
+                        System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;
+                    else
+                        System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+                }
+            }
+        }
 
 
         public SettingsViewModel()
@@ -100,6 +123,7 @@ namespace Miotsukushi.ViewModel.CheatWindow
             AccentColorSelectedIndex = model.themeModel.selected_accent;
             StatisticsDBToken = Properties.Settings.Default.StatisticsDBToken;
             StatisticsSendingOn = Properties.Settings.Default.StatisticsSendingOn;
+            HardwareRenderingOn = Properties.Settings.Default.HardwareRendering;
         }
     }
 }
