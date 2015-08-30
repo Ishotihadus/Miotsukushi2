@@ -107,6 +107,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     {
                         case 0: // 航空偵察
                             now_cell.cell_type = CellModel.CellType.air_search;
+                            now_cell.cell_event_content_id = cell.airsearch != null ? cell.airsearch.result : 0;
                             break;
                         case 4: // 航空戦
                             now_cell.cell_type = CellModel.CellType.air_battle;
