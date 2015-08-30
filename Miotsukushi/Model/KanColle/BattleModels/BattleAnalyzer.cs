@@ -289,7 +289,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     {
                         if (i > enemyship.Count)
                             break;
-                        if (stage.damage[i] >= 0)
+                        if (stage.damage[i] >= 0 && enemyship[i - 1].after_hp > 0)
                         {
                             phase.attackee.Add(new BattleAnalyzedEventArgs.Phase.Attack()
                             {
