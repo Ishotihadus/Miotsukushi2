@@ -98,7 +98,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         public bool[] stage_flag2;
 
         /// <summary>
-        /// 航空戦の情報
+        /// 航空戦の情報（2巡目）
         /// </summary>
         public KoukuValue kouku2;
 
