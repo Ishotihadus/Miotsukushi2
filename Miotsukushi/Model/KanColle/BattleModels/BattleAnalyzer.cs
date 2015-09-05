@@ -1082,6 +1082,56 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             return ret;
         }
 
+        /// <summary>
+        /// 連合艦隊開幕夜戦
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static BattleAnalyzedEventArgs AnalyzeCombinedSpNightBattle(api_req_combined_battle.SpMidnight data)
+        {
+            var ret = new BattleAnalyzedEventArgs();
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.sp_midnight;
+            ret.is_combined_battle = true;
+            ret.phases = new List<BattleAnalyzedEventArgs.Phase>();
+
+            // 自艦隊
+            var friendship = GetFriendshipList(1, data.maxhps, data.nowhps, data.fParam);
+            ret.friend = friendship;
+
+            // 随伴艦隊
+            var combinedship = GetFriendshipList(2, data.maxhps_combined, data.nowhps_combined, data.fParam_combined);
+            ret.friend_combined = combinedship;
+
+            // 敵艦隊
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+            ret.enemy = enemyship;
+
+            // 護衛退避
+            AppendEscapes(friendship, data.escape_idx);
+            AppendEscapes(combinedship, data.escape_idx_combined);
+
+            ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
+            ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
+            ret.crossing_type = (BattleAnalyzedEventArgs.CrossingType)data.formation[2];
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.normal_midnight;
+            var hougekiphase = GetHougekiPhase(data.hougeki, ret.friend_combined, ret.enemy);
+            if (hougekiphase != null)
+            {
+                hougekiphase.phase_name = "夜戦（随伴艦隊）";
+                ret.phases.Add(hougekiphase);
+            }
+
+            CalcGaugeCombined(ret.friend, ret.friend_combined, ret.enemy, out ret.friend_gauge, out ret.enemy_gauge);
+
+#if DEBUG
+            EventArgsDebugOutput(ret);
+#endif
+
+            return ret;
+        }
+
 
 #if DEBUG
 

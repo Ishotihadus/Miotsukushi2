@@ -28,6 +28,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             kclib.GetReqcombinedbattleBattle += Kclib_GetReqcombinedbattleBattle;
             kclib.GetReqcombinedbattleBattlewater += Kclib_GetReqcombinedbattleBattlewater;
             kclib.GetReqcombinedbattleMidnightbattle += Kclib_GetReqcombinedbattleMidnightbattle;
+            kclib.GetReqcombinedbattleSpMidnight += Kclib_GetReqcombinedbattleSpMidnight;
             kclib.GetReqsortieAirbattle += Kclib_GetReqsortieAirbattle;
             kclib.GetReqsortieBattle += Kclib_GetReqsortieBattle;
             kclib.GetReqbattlemidnightBattle += Kclib_GetReqbattlemidnightBattle;
@@ -70,6 +71,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         private void Kclib_GetReqcombinedbattleBattle(object sender, KanColleLib.TransmissionRequest.api_req_combined_battle.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.Battle> response)
         {
             OnBattleAnalyzed(BattleAnalyzer.AnalyzeAirCombinedNormalBattle(response.data));
+        }
+
+        private void Kclib_GetReqcombinedbattleSpMidnight(object sender, KanColleLib.TransmissionRequest.api_req_combined_battle.SpMidnightRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.SpMidnight> response)
+        {
+            OnBattleAnalyzed(BattleAnalyzer.AnalyzeCombinedSpNightBattle(response.data));
         }
 
         private void Kclib_GetReqsortieAirbattle(object sender, KanColleLib.TransmissionRequest.api_req_sortie.AirbattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_sortie.Airbattle> response)
