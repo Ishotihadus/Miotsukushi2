@@ -43,12 +43,10 @@ namespace Miotsukushi
 #else
             DispatcherUnhandledException += App_DispatcherUnhandledException;
 #endif
-            
+
 #if DEBUG
             SetCurrentCulture("en-US");
 #endif
-            GetCurrentCulture();
-            System.Diagnostics.Debug.WriteLine(Tools.ResourceStringGetter.GetShipNameResourceString("天津風改二"));
             Model.MainModel.GetInstance();
             var Window = new View.MainWindow();
             Window.Closed += Window_Closed;
@@ -61,12 +59,6 @@ namespace Miotsukushi
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culname);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culname);
             Tools.ResourceStringGetter.culture = new CultureInfo(culname);
-        }
-
-        private void GetCurrentCulture()
-        {
-            System.Diagnostics.Debug.WriteLine("CurrentCulture: " + Thread.CurrentThread.CurrentCulture.Name);
-            System.Diagnostics.Debug.WriteLine("CurrentUICulture: " + Thread.CurrentThread.CurrentUICulture.Name);
         }
 
         /// <summary>

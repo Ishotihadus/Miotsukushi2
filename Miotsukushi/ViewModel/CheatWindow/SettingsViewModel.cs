@@ -89,23 +89,23 @@ namespace Miotsukushi.ViewModel.CheatWindow
             }
         }
 
-        private bool _HardwareRenderingOn;
-        public bool HardwareRenderingOn
+        private bool _SoftwareRendering = false;
+        public bool SoftwareRendering
         {
             get
             {
-                return _HardwareRenderingOn;
+                return _SoftwareRendering;
             }
 
             set
             {
-                if (_HardwareRenderingOn != value)
+                if (_SoftwareRendering != value)
                 {
-                    _HardwareRenderingOn = value;
-                    OnPropertyChanged(() => HardwareRenderingOn);
-                    Properties.Settings.Default.HardwareRendering = value;
+                    _SoftwareRendering = value;
+                    OnPropertyChanged(() => SoftwareRendering);
+                    Properties.Settings.Default.SoftwareRendering = value;
                     Properties.Settings.Default.Save();
-                    if (value)
+                    if (!value)
                         System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;
                     else
                         System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
@@ -123,7 +123,11 @@ namespace Miotsukushi.ViewModel.CheatWindow
             AccentColorSelectedIndex = model.themeModel.selected_accent;
             StatisticsDBToken = Properties.Settings.Default.StatisticsDBToken;
             StatisticsSendingOn = Properties.Settings.Default.StatisticsSendingOn;
-            HardwareRenderingOn = Properties.Settings.Default.HardwareRendering;
+            SoftwareRendering = Properties.Settings.Default.SoftwareRendering;
+            if(SoftwareRendering)
+                System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+            else
+                System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;
         }
     }
 }

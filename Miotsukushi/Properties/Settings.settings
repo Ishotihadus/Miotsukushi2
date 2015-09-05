@@ -14,7 +14,7 @@
     <Setting Name="StatisticsSendingOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="HardwareRendering" Type="System.Boolean" Scope="User">
+    <Setting Name="SoftwareRendering" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

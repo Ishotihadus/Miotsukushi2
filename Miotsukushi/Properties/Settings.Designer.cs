@@ -74,12 +74,12 @@ namespace Miotsukushi.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool HardwareRendering {
+        public bool SoftwareRendering {
             get {
-                return ((bool)(this["HardwareRendering"]));
+                return ((bool)(this["SoftwareRendering"]));
             }
             set {
-                this["HardwareRendering"] = value;
+                this["SoftwareRendering"] = value;
             }
         }
     }
