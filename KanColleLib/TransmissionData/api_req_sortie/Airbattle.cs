@@ -80,6 +80,17 @@ namespace KanColleLib.TransmissionData.api_req_sortie
         /// 航空戦の情報
         /// </summary>
         public KoukuValue kouku;
+        
+        /// <summary>
+        /// 支援艦隊のフラグ（0:なし 1:航空支援 2:砲撃支援 3:雷撃支援）
+        /// ただし現状支援が行えるような状況が存在しない
+        /// </summary>
+        public int support_flag;
+
+        /// <summary>
+        /// 支援の状況
+        /// </summary>
+        public SupportInfoValue support_info;
 
         /// <summary>
         /// 航空戦のステージがそれぞれあるかどうかのフラグ（2巡目）
@@ -109,6 +120,8 @@ namespace KanColleLib.TransmissionData.api_req_sortie
                 formation = json.api_formation.Deserialize<int[]>(),
                 stage_flag = ((int[])(json.api_stage_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
                 kouku = json.api_kouku() && json.api_kouku != null ? KoukuValue.fromDynamic(json.api_kouku) : null,
+                support_flag = json.api_support_flag() ? (int)json.api_support_flag : 0,
+                support_info = json.api_support_info() && json.api_support_info != null ? SupportInfoValue.fromDynamic(json.api_support_info) : null,
                 stage_flag2 = ((int[])(json.api_stage_flag2.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),
                 kouku2 = json.api_kouku2() && json.api_kouku2 != null ? KoukuValue.fromDynamic(json.api_kouku2) : null,
             };
