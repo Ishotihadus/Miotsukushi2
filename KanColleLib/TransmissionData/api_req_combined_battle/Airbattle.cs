@@ -76,6 +76,16 @@ namespace KanColleLib.TransmissionData.api_req_combined_battle
         public int[][] fParam_combined;
 
         /// <summary>
+        /// 退避艦一覧（主艦隊、1-6）　なければnull
+        /// </summary>
+        public int[] escape_idx;
+
+        /// <summary>
+        /// 退避艦一覧（随伴艦隊、1-6）　なければnull
+        /// </summary>
+        public int[] escape_idx_combined;
+
+        /// <summary>
         /// 索敵情報（自艦隊/敵艦隊の順、1:索敵成功全機帰還 2:索敵成功未帰還機あり 3:索敵失敗未帰還機あり 4:索敵失敗全機帰還 5:索敵成功索敵機使用せず 6:索敵失敗索敵機使用せず）
         /// </summary>
         public int[] search;
@@ -134,6 +144,8 @@ namespace KanColleLib.TransmissionData.api_req_combined_battle
                 fParam = json.api_fParam.Deserialize<int[][]>(),
                 eParam = json.api_eParam.Deserialize<int[][]>(),
                 fParam_combined = json.api_fParam_combined.Deserialize<int[][]>(),
+                escape_idx = json.api_escape_idx() ? json.api_escape_idx.Deserialize<int[]>() : null,
+                escape_idx_combined = json.api_escape_idx_combined() ? json.api_escape_idx_combined.Deserialize<int[]>() : null,
                 search = json.api_search.Deserialize<int[]>(),
                 formation = json.api_formation.Deserialize<int[]>(),
                 stage_flag = ((int[])(json.api_stage_flag.Deserialize<int[]>())).Select(_ => _ == 1).ToArray(),

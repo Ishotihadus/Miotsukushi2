@@ -70,6 +70,18 @@ namespace KanColleLib.TransmissionData.api_req_combined_battle
         public int[][] fParam_combined;
 
         /// <summary>
+        /// 退避艦一覧（主艦隊、1-6）　なければnull
+        /// （システム的にはいらないので存在するか要確認）
+        /// </summary>
+        public int[] escape_idx;
+
+        /// <summary>
+        /// 退避艦一覧（随伴艦隊、1-6）　なければnull
+        /// （システム的にはいらないので存在するか要確認）
+        /// </summary>
+        public int[] escape_idx_combined;
+
+        /// <summary>
         /// 触接機のID
         /// </summary>
         public int[] touch_plane;
@@ -103,6 +115,8 @@ namespace KanColleLib.TransmissionData.api_req_combined_battle
                 fParam = json.api_fParam.Deserialize<int[][]>(),
                 eParam = json.api_eParam.Deserialize<int[][]>(),
                 fParam_combined = json.api_fParam_combined.Deserialize<int[][]>(),
+                escape_idx = json.api_escape_idx() ? json.api_escape_idx.Deserialize<int[]>() : null,
+                escape_idx_combined = json.api_escape_idx_combined() ? json.api_escape_idx_combined.Deserialize<int[]>() : null,
                 touch_plane = json.api_touch_plane.Deserialize<int[]>(),
                 flare_pos = json.api_flare_pos.Deserialize<int[]>(),
                 hougeki = json.api_hougeki() && json.api_hougeki != null ? HougekiValue.fromDynamic(json.api_hougeki) : null
