@@ -325,9 +325,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                 }
 
                 if(mapinfo.required_defeat_count.HasValue)
-                    Comments.Add(string.Format("撃破回数: {0}/{1}", mapinfo.now_defeat_count.Value, mapinfo.required_defeat_count.Value));
-                if (mapinfo.max_hp.HasValue)
-                    Comments.Add(string.Format("マップHP: {0}/{1}", mapinfo.now_hp.Value, mapinfo.max_hp.Value));
+                    Comments.Add(string.Format("撃破回数: {0}/{1}", mapinfo.now_defeat_count.HasValue ? mapinfo.now_defeat_count.Value + "" : "-", mapinfo.required_defeat_count.Value));
+                if (mapinfo.max_hp.HasValue && mapinfo.now_hp.HasValue)
+                    Comments.Add(string.Format("マップHP: {0}/{1}", mapinfo.now_hp.HasValue ? mapinfo.now_hp.Value + "" : "-", mapinfo.max_hp.Value));
             }
             CellAppend();
 
