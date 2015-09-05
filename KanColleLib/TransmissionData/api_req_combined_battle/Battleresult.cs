@@ -131,6 +131,16 @@ namespace KanColleLib.TransmissionData.api_req_combined_battle
         /// </summary>
         public List<GetEventitemValue> get_eventitem;
 
+        /// <summary>
+        /// 退避情報があるか（?）（おそらく）退避できるか（?）
+        /// </summary>
+        public bool? escape_flag;
+
+        /// <summary>
+        /// 退避艦情報
+        /// </summary>
+        public values.EscapeValue escape;
+
         public static Battleresult fromDynamic(dynamic json)
         {
             var ret = new Battleresult();
@@ -170,7 +180,9 @@ namespace KanColleLib.TransmissionData.api_req_combined_battle
                 else
                     ret.get_eventitem.Add(GetEventitemValue.fromDynamic(json.api_get_eventitem));
             }
-            
+
+            ret.escape_flag = json.api_escape_flag() ? (int)json.api_escape_flag == 1 : (bool?)null;
+            ret.escape = json.api_escape() && json.api_escape != null ? values.EscapeValue.fromDynamic(json.api_escape) : null;
 
             return ret;
         }

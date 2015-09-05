@@ -113,6 +113,7 @@
     <Compile Include="TransmissionData\api_req_combined_battle\BattleWater.cs" />
     <Compile Include="TransmissionData\api_req_combined_battle\MidnightBattle.cs" />
     <Compile Include="TransmissionData\api_req_combined_battle\values\CombinedKoukuValue.cs" />
+    <Compile Include="TransmissionData\api_req_combined_battle\values\EscapeValue.cs" />
     <Compile Include="TransmissionData\api_req_combined_battle\values\KoukuStage3Combined.cs" />
     <Compile Include="TransmissionData\api_req_hensei\Combined.cs" />
     <Compile Include="TransmissionData\api_req_hensei\Lock.cs" />
