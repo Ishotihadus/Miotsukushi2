@@ -142,6 +142,7 @@
     <Compile Include="TransmissionData\api_req_mission\values\GetItemValue.cs" />
     <Compile Include="TransmissionData\api_req_quest\BonusValue.cs" />
     <Compile Include="TransmissionData\api_req_quest\Clearitemget.cs" />
+    <Compile Include="TransmissionData\api_req_sortie\Airbattle.cs" />
     <Compile Include="TransmissionData\api_req_sortie\Battle.cs" />
     <Compile Include="TransmissionData\api_req_sortie\Battleresult.cs" />
     <Compile Include="TransmissionData\api_req_sortie\values\EnemyInfoValue.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="TransmissionRequest\api_req_quest\ClearitemgetRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_quest\StartRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_quest\StopRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_sortie\AirbattleRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_sortie\BattleRequest.cs" />
     <Compile Include="TransmissionRequest\RequestBase.cs" />
     <Compile Include="TransmissionRequest\RequestDecorder.cs" />

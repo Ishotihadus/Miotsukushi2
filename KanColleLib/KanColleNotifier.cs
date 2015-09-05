@@ -396,6 +396,12 @@ namespace KanColleLib
                 case "api_req_quest/stop":
                     OnGetReqquestStop(new TransmissionRequest.api_req_quest.StopRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
+                case "api_req_sortie/airbattle":
+                    if (json.api_data())
+                        OnGetReqsortieAirbattle(new TransmissionRequest.api_req_sortie.AirbattleRequest(request), Svdata<TransmissionData.api_req_sortie.Airbattle>.fromDynamic(json, TransmissionData.api_req_sortie.Airbattle.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_req_sortie/battle":
                     if (json.api_data())
                         OnGetReqsortieBattle(new TransmissionRequest.api_req_sortie.BattleRequest(request), Svdata<TransmissionData.api_req_sortie.Battle>.fromDynamic(json, TransmissionData.api_req_sortie.Battle.fromDynamic(json.api_data)));
@@ -807,6 +813,13 @@ namespace KanColleLib
         public event GetReqquestStopEventHandler GetReqquestStop;
         public delegate void GetReqquestStopEventHandler(object sender, TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response);
         protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { if (GetReqquestStop != null) GetReqquestStop(this, request, response); }
+
+        /// <summary>
+        /// api_req_sortie/airbattle を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqsortieAirbattleEventHandler GetReqsortieAirbattle;
+        public delegate void GetReqsortieAirbattleEventHandler(object sender, TransmissionRequest.api_req_sortie.AirbattleRequest request, Svdata<TransmissionData.api_req_sortie.Airbattle> response);
+        protected virtual void OnGetReqsortieAirbattle(TransmissionRequest.api_req_sortie.AirbattleRequest request, Svdata<TransmissionData.api_req_sortie.Airbattle> response) { if (GetReqsortieAirbattle != null) GetReqsortieAirbattle(this, request, response); }
 
         /// <summary>
         /// api_req_sortie/battle を受信して解析に成功した際に呼び出されます

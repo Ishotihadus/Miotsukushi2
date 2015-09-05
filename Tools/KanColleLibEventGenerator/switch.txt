@@ -256,6 +256,12 @@ break;
 case "api_req_quest/stop":
 OnGetReqquestStop(new TransmissionRequest.api_req_quest.StopRequest(request), Svdata<object>.fromDynamic(json, null));
 break;
+case "api_req_sortie/airbattle":
+if(json.api_data())
+OnGetReqsortieAirbattle(new TransmissionRequest.api_req_sortie.AirbattleRequest(request), Svdata<TransmissionData.api_req_sortie.Airbattle>.fromDynamic(json, TransmissionData.api_req_sortie.Airbattle.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_req_sortie/battle":
 if(json.api_data())
 OnGetReqsortieBattle(new TransmissionRequest.api_req_sortie.BattleRequest(request), Svdata<TransmissionData.api_req_sortie.Battle>.fromDynamic(json, TransmissionData.api_req_sortie.Battle.fromDynamic(json.api_data)));
