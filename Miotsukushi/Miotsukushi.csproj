@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
+    <Compile Include="UnhandledExceptionRaisedEventArgs.cs" />
     <Compile Include="ViewModel\CheatWindow\DebuggerViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\SettingsViewModel.cs" />

@@ -26,11 +26,13 @@ namespace Miotsukushi
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             // ハンドルされていない例外
-
+            OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { exceptionObject = e.ExceptionObject });
         }
+
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             // ハンドルされていない例外2
+            OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { innerException = e.Exception });
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -74,5 +76,9 @@ namespace Miotsukushi
         {
             Model.MainModel.CurrentClose();
         }
+
+        public static event UnhandledExceptionRaisedEventHandler UnhandledExceptionRaised;
+        public delegate void UnhandledExceptionRaisedEventHandler(object sender, UnhandledExceptionRaisedEventArgs e);
+        protected static void OnUnhandledExceptionRaised(UnhandledExceptionRaisedEventArgs e) { if (UnhandledExceptionRaised != null) { UnhandledExceptionRaised(App.Current, e); } }
     }
 }
