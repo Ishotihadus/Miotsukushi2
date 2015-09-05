@@ -12,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Miotsukushi;component/Resources/MetroProgressBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <DataTemplate x:Key="DataTemplate1">
                 <Rectangle Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="{DynamicResource GrayBrush1}" Margin="5,3" ToolTip="{Binding ItemName}">
                     <Rectangle.Fill>
@@ -29,41 +30,41 @@
             <Converter:HPStatusColorConverter x:Key="HPStatusColorConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
-        <DockPanel>
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0" DockPanel.Dock="Right">
-                <Run Text="{Binding NowHP, StringFormat={}{0:#;'0'}}"/><Run Text="/"/><Run Text="{Binding MaxHP}"/>
-                <Run Text=" "/>
-                <Run>
-                    <Run.Text>
-                        <MultiBinding Converter="{StaticResource HPStatusTextConverter}">
-                            <Binding Path="NowHP" Mode="OneWay"/>
-                            <Binding Path="MaxHP" Mode="OneWay"/>
-                            <Binding Path="Speed" Mode="OneWay"/>
-                            <Binding Path="IsFriend" Mode="OneWay"/>
-                        </MultiBinding>
-                    </Run.Text>
-                </Run>
-                <TextBlock.Foreground>
-                    <SolidColorBrush>
-                        <SolidColorBrush.Color>
-                            <MultiBinding Converter="{StaticResource HPStatusColorConverter}">
-                                <Binding Path="NowHP" Mode="OneWay"/>
-                                <Binding Path="MaxHP" Mode="OneWay"/>
-                            </MultiBinding>
-                        </SolidColorBrush.Color>
-                    </SolidColorBrush>
-                </TextBlock.Foreground>
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding ShipName}" FontSize="14.667"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
-        </DockPanel>
-        <Controls:MetroProgressBar Height="3" Value="{Binding NowHP}" Maximum="{Binding MaxHP}" Style="{StaticResource HpProgressBarStyle}" Margin="0,3"/>
-        <UniformGrid Columns="4">
-            <TextBlock TextWrapping="Wrap" Text="{Binding Firepower}" HorizontalAlignment="Center" Foreground="#FFFF5353"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Torpedo}" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding AntiAir}" HorizontalAlignment="Center" Foreground="#FF37B848"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Armor}" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
-        </UniformGrid>
-        <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" ItemsSource="{Binding Slot}"/>
-    </StackPanel>
+    <Grid>
+        <Grid Panel.ZIndex="3" Visibility="{Binding IsGoBackPort, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Rectangle Fill="{DynamicResource WhiteColorBrush}" OpacityMask="#CC000000"/>
+            <TextBlock Text="退 避" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667" FontWeight="Bold"/>
+        </Grid>
+        <StackPanel>
+            <DockPanel>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0" DockPanel.Dock="Right">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush>
+                            <SolidColorBrush.Color>
+                                <MultiBinding Converter="{StaticResource HPStatusColorConverter}">
+                                    <Binding Path="NowHP" Mode="OneWay"/>
+                                    <Binding Path="MaxHP" Mode="OneWay"/>
+                                </MultiBinding>
+                            </SolidColorBrush.Color>
+                        </SolidColorBrush>
+                    </TextBlock.Foreground><Run Text="{Binding NowHP, StringFormat=\{0:#;\'0\'\}}"/><Run Text="/"/><Run Text="{Binding MaxHP}"/><Run Text=" "/><Run Text=" "/><Run Text=" "/><Run>
+    					<MultiBinding Converter="{StaticResource HPStatusTextConverter}">
+    						<Binding Path="NowHP" Mode="OneWay"/>
+    						<Binding Path="MaxHP" Mode="OneWay"/>
+    						<Binding Path="Speed" Mode="OneWay"/>
+    						<Binding Path="IsFriend" Mode="OneWay"/>
+    					</MultiBinding>
+    				</Run></TextBlock>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding ShipName}" FontSize="14.667"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
+            </DockPanel>
+            <Controls:MetroProgressBar Height="3" Value="{Binding NowHP}" Maximum="{Binding MaxHP}" Style="{StaticResource HpProgressBarStyle}" Margin="0,3"/>
+            <UniformGrid Columns="4">
+                <TextBlock TextWrapping="Wrap" Text="{Binding Firepower}" HorizontalAlignment="Center" Foreground="#FFFF5353"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Torpedo}" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding AntiAir}" HorizontalAlignment="Center" Foreground="#FF37B848"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Armor}" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
+            </UniformGrid>
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" ItemsSource="{Binding Slot}"/>
+        </StackPanel>
+    </Grid>
 </UserControl>
