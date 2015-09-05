@@ -161,6 +161,13 @@ public delegate void GetReqcombinedbattleBattlewaterEventHandler(object sender, 
 protected virtual void OnGetReqcombinedbattleBattlewater(TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response) { if (GetReqcombinedbattleBattlewater != null) GetReqcombinedbattleBattlewater(this, request, response); }
 
 /// <summary>
+/// api_req_combined_battle/goback_port を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqcombinedbattleGobackPortEventHandler GetReqcombinedbattleGobackPort;
+public delegate void GetReqcombinedbattleGobackPortEventHandler(object sender, RequestBase request, Svdata<object> response);
+protected virtual void OnGetReqcombinedbattleGobackPort(RequestBase request, Svdata<object> response) { if (GetReqcombinedbattleGobackPort != null) GetReqcombinedbattleGobackPort(this, request, response); }
+
+/// <summary>
 /// api_req_combined_battle/midnight_battle を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetReqcombinedbattleMidnightbattleEventHandler GetReqcombinedbattleMidnightbattle;

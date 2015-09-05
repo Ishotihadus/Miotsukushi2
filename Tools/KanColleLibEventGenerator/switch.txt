@@ -136,6 +136,9 @@ OnGetReqcombinedbattleBattlewater(new TransmissionRequest.api_req_combined_battl
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_req_combined_battle/goback_port":
+OnGetReqcombinedbattleGobackPort(new RequestBase(request), Svdata<object>.fromDynamic(json, null));
+break;
 case "api_req_combined_battle/midnight_battle":
 if(json.api_data())
 OnGetReqcombinedbattleMidnightbattle(new TransmissionRequest.api_req_combined_battle.MidnightBattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.MidnightBattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.MidnightBattle.fromDynamic(json.api_data)));

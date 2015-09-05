@@ -276,6 +276,9 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_req_combined_battle/goback_port":
+                    OnGetReqcombinedbattleGobackPort(new RequestBase(request), Svdata<object>.fromDynamic(json, null));
+                    break;
                 case "api_req_combined_battle/midnight_battle":
                     if (json.api_data())
                         OnGetReqcombinedbattleMidnightbattle(new TransmissionRequest.api_req_combined_battle.MidnightBattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.MidnightBattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.MidnightBattle.fromDynamic(json.api_data)));
@@ -638,6 +641,13 @@ namespace KanColleLib
         public event GetReqcombinedbattleBattlewaterEventHandler GetReqcombinedbattleBattlewater;
         public delegate void GetReqcombinedbattleBattlewaterEventHandler(object sender, TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response);
         protected virtual void OnGetReqcombinedbattleBattlewater(TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response) { if (GetReqcombinedbattleBattlewater != null) GetReqcombinedbattleBattlewater(this, request, response); }
+
+        /// <summary>
+        /// api_req_combined_battle/goback_port を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqcombinedbattleGobackPortEventHandler GetReqcombinedbattleGobackPort;
+        public delegate void GetReqcombinedbattleGobackPortEventHandler(object sender, RequestBase request, Svdata<object> response);
+        protected virtual void OnGetReqcombinedbattleGobackPort(RequestBase request, Svdata<object> response) { if (GetReqcombinedbattleGobackPort != null) GetReqcombinedbattleGobackPort(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/midnight_battle を受信して解析に成功した際に呼び出されます
