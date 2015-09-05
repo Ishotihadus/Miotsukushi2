@@ -343,8 +343,9 @@ namespace Miotsukushi.Model.KanColle
             {
                 if (data.ship[i] == -1)
                 {
-                    if (ships.Count > i)
+                    while (ships.Count > i)
                         ships.RemoveAt(i);
+                    break;
                 }
                 else
                 {
