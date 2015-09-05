@@ -188,24 +188,24 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             }
         }
 
-        private bool _IsGoBackPort;
+        private bool _IsEscaped;
 
         /// <summary>
         /// 退避済みかどうか
         /// </summary>
-        public bool IsGoBackPort
+        public bool IsEscaped
         {
             get
             {
-                return _IsGoBackPort;
+                return _IsEscaped;
             }
 
             set
             {
-                if (_IsGoBackPort != value)
+                if (_IsEscaped != value)
                 {
-                    _IsGoBackPort = value;
-                    OnPropertyChanged(() => IsGoBackPort);
+                    _IsEscaped = value;
+                    OnPropertyChanged(() => IsEscaped);
                 }
             }
         }

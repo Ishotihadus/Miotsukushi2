@@ -199,17 +199,17 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             for (int i = 0; i < ShipsMe.Count; i++)
             {
                 if (kcmodel.sortiemodel.goback_ships.Contains(i))
-                    ShipsMe[i].IsGoBackPort = true;
+                    ShipsMe[i].IsEscaped = true;
                 else
-                    ShipsMe[i].IsGoBackPort = false;
+                    ShipsMe[i].IsEscaped = false;
             }
 
             for(int i = 0; i < ShipsCombined.Count; i++)
             {
                 if (kcmodel.sortiemodel.goback_ships.Contains(i + 6))
-                    ShipsCombined[i].IsGoBackPort = true;
+                    ShipsCombined[i].IsEscaped = true;
                 else
-                    ShipsCombined[i].IsGoBackPort = false;
+                    ShipsCombined[i].IsEscaped = false;
             }
         }
 
