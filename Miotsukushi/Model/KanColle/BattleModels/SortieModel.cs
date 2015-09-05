@@ -20,6 +20,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
         public bool on_sortiing = false;
 
+        /// <summary>
+        /// 退避済みの艦（0-11）
+        /// </summary>
+        public List<int> goback_ships = new List<int>();
+
         public SortieModel(KanColleModel original_model, KanColleNotifier kclib)
         {
             this.original_model = original_model;
@@ -29,6 +34,40 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             kclib.GetReqmapStart += Kclib_GetReqmapStart;
             kclib.GetReqmapNext += Kclib_GetReqmapNext;
             kclib.GetPortPort += Kclib_GetPortPort;
+            kclib.GetReqcombinedbattleBattleresult += Kclib_GetReqcombinedbattleBattleresult;
+            kclib.GetReqcombinedbattleGobackPort += Kclib_GetReqcombinedbattleGobackPort;
+        }
+
+        /// <summary>
+        /// 前回の連合艦隊戦闘結果で送られてきたescape_idx（なければnull）
+        /// </summary>
+        public int[] escape_idx;
+
+        /// <summary>
+        /// 前回の連合艦隊戦闘結果で送られてきたtow_idx（なければnull）
+        /// </summary>
+        public int[] tow_idx;
+
+        private void Kclib_GetReqcombinedbattleGobackPort(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<object> response)
+        {
+            if (escape_idx != null && escape_idx.Length > 0)
+                goback_ships.Add(escape_idx[0] - 1);
+            if (tow_idx != null && tow_idx.Length > 0)
+                goback_ships.Add(tow_idx[0] - 1);
+        }
+
+        private void Kclib_GetReqcombinedbattleBattleresult(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.Battleresult> response)
+        {
+            if(response.data.escape == null)
+            {
+                escape_idx = null;
+                tow_idx = null;
+            }
+            else
+            {
+                escape_idx = response.data.escape.escape_idx;
+                tow_idx = response.data.escape.tow_idx;
+            }
         }
 
         private void Kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
@@ -50,6 +89,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             on_sortiing = true;
             sortiing_deck = request.deck_id;
+            goback_ships.Clear();
             var map = from _ in mapmodels where _.Value.maparea_id == request.maparea_id && _.Value.map_no == request.mapinfo_no select _;
             if (map.Count() > 0)
                 now_map = map.First().Value;
