@@ -27,6 +27,32 @@ namespace Miotsukushi.Model.KanColle
             kclib.GetKcsAPIData += Kclib_GetKcsAPIData;
             kclib.GetFiddlerLogString += Kclib_GetFiddlerLogString;
             kclib.KcsAPIDataAnalyzeFailed += Kclib_KcsAPIDataAnalyzeFailed;
+            ((App)App.Current).UnhandledExceptionRaised += PacketSaver_UnhandledExceptionRaised;
+        }
+
+        private void PacketSaver_UnhandledExceptionRaised(object sender, UnhandledExceptionRaisedEventArgs e)
+        {
+            ++packet_counter;
+
+            if (!enable)
+                return;
+
+            DirectoryConfirm();
+
+            using (StreamWriter sw = new StreamWriter(filename, true))
+            {
+                sw.WriteLine("================== !!! Unhandled Exception !!! ==================");
+                sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
+                sw.WriteLine("Type: " + e.exceptionType);
+                if (e.innerException != null)
+                {
+                    sw.WriteLine("Exception: " + e.innerException.Message);
+                    sw.WriteLine("Source: " + e.innerException.Source);
+                    sw.WriteLine(e.innerException.StackTrace);
+                }
+                if(e.exceptionObject != null)
+                    sw.WriteLine("Object: " + e.exceptionObject.ToString() + " (Type: " + e.exceptionObject.GetType().ToString() + ")");
+            }
         }
 
         private void Kclib_KcsAPIDataAnalyzeFailed(object sender, KanColleLib.EventArgs.KcsAPIDataAnalyzeFailedEventArgs e)

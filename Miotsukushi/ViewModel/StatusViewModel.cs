@@ -135,6 +135,12 @@ namespace Miotsukushi.ViewModel
 
             StatusText = "艦これの起動を待機しています...";
 
+            ((App)App.Current).UnhandledExceptionRaised += (_, e) =>
+                {
+                    StatusAlertTitle = "Error";
+                    StatusAlertText = "ハンドルされていない例外が発生しました。";
+                };
+
             model.InitializeComplete += (_, __) =>
                 {
                     StatusText = "準備完了";

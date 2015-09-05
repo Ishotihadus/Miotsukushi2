@@ -26,20 +26,22 @@ namespace Miotsukushi
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             // ハンドルされていない例外
-            OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { exceptionObject = e.ExceptionObject });
+            if(Current != null)
+                ((App)Current).OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { exceptionObject = e.ExceptionObject, exceptionType = "CurrentDomain_UnhandledException" });
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             // ハンドルされていない例外2
-            OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { innerException = e.Exception });
+            OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { innerException = e.Exception, exceptionType = "App_DispatcherUnhandledException" });
+            e.Handled = true; // 終了させない
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 #if DEBUG
 #else
-            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
 #endif
             
 #if DEBUG
@@ -77,8 +79,8 @@ namespace Miotsukushi
             Model.MainModel.CurrentClose();
         }
 
-        public static event UnhandledExceptionRaisedEventHandler UnhandledExceptionRaised;
+        public event UnhandledExceptionRaisedEventHandler UnhandledExceptionRaised;
         public delegate void UnhandledExceptionRaisedEventHandler(object sender, UnhandledExceptionRaisedEventArgs e);
-        protected static void OnUnhandledExceptionRaised(UnhandledExceptionRaisedEventArgs e) { if (UnhandledExceptionRaised != null) { UnhandledExceptionRaised(App.Current, e); } }
+        protected virtual void OnUnhandledExceptionRaised(UnhandledExceptionRaisedEventArgs e) { if (UnhandledExceptionRaised != null) { UnhandledExceptionRaised(App.Current, e); } }
     }
 }
