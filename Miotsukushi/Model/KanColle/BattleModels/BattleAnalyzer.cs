@@ -654,7 +654,24 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             return ret;
         }
 
-        
+        /// <summary>
+        /// 退避の是非をアップデート
+        /// </summary>
+        /// <param name="friendship"></param>
+        /// <param name="escape_idx"></param>
+        private static void AppendEscapes(List<BattleAnalyzedEventArgs.Ship> friendship, int[] escape_idx)
+        {
+            if (escape_idx == null)
+                foreach (var s in friendship)
+                    s.escaped = false;
+            else
+                for (int i = 0; i < friendship.Count; i++)
+                    if (escape_idx.Contains(i + 1))
+                        friendship[i].escaped = true;
+                    else
+                        friendship[i].escaped = false;
+        }
+
         private static BattleAnalyzedEventArgs.Phase GetCombinedAirBattleStage3Phase
             (api_req_sortie.values.KoukuStage3 stage3, api_req_combined_battle.values.KoukuStage3Combined stage3_combined,
             List<BattleAnalyzedEventArgs.Ship> friendship, List<BattleAnalyzedEventArgs.Ship> combinedship, List<BattleAnalyzedEventArgs.Ship> enemyship)
@@ -728,7 +745,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         private static void CalcGaugeCombined(List<BattleAnalyzedEventArgs.Ship> friendship, List<BattleAnalyzedEventArgs.Ship> combinedship, List<BattleAnalyzedEventArgs.Ship> enemyship, out double friendgauge, out double enemygauge)
         {
             friendgauge = 1 - (double)enemyship.Sum(_ => Math.Max(_.after_hp, 0)) / enemyship.Sum(_ => _.before_hp);
-            enemygauge = 1 - (double)(friendship.Sum(_ => Math.Max(_.after_hp, 0)) + combinedship.Sum(_ => Math.Max(_.after_hp, 0))) / (friendship.Sum(_ => _.before_hp) + combinedship.Sum(_ => _.before_hp));
+            enemygauge = 1 - (double)(friendship.Sum(_ => _.escaped ? 0 : Math.Max(_.after_hp, 0)) + combinedship.Sum(_ => _.escaped ? 0 : Math.Max(_.after_hp, 0))) / (friendship.Sum(_ => _.escaped ? 0 : _.before_hp) + combinedship.Sum(_ => _.escaped ? 0 : _.before_hp));
 
             // 0を切ってしまうかもしれない
             friendgauge = Math.Max(friendgauge, 0);
@@ -763,6 +780,10 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             // 敵艦隊
             var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
             ret.enemy = enemyship;
+
+            // 護衛退避
+            AppendEscapes(friendship, data.escape_idx);
+            AppendEscapes(combinedship, data.escape_idx_combined);
 
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
             ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
@@ -875,6 +896,10 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
             ret.enemy = enemyship;
 
+            // 護衛退避
+            AppendEscapes(friendship, data.escape_idx);
+            AppendEscapes(combinedship, data.escape_idx_combined);
+
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
             ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
             ret.crossing_type = (BattleAnalyzedEventArgs.CrossingType)data.formation[2];
@@ -985,6 +1010,10 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             // 敵艦隊
             var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
             ret.enemy = enemyship;
+
+            // 護衛退避
+            AppendEscapes(friendship, data.escape_idx);
+            AppendEscapes(combinedship, data.escape_idx_combined);
 
             ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
             ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];

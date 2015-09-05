@@ -21,6 +21,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
         public int Speed { get; set; }
         public bool IsFriend { get; set; }
         public List<BattleShipSlotViewModel> Slot { get; set; }
+        public bool IsEscaped { get; set; }
 
         public class BattleShipSlotViewModel
         {

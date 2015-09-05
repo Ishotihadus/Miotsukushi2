@@ -30,9 +30,14 @@
             <Converter:HPStatusColorConverter x:Key="HPStatusColorConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
-        <DockPanel>
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0" DockPanel.Dock="Right">
+    <Grid>
+        <Grid Panel.ZIndex="3" Visibility="{Binding IsEscaped, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Rectangle Fill="{DynamicResource WhiteColorBrush}" OpacityMask="#CC000000"/>
+            <TextBlock Text="退 避" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667" FontWeight="Bold"/>
+        </Grid>
+        <StackPanel>
+            <DockPanel>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0" DockPanel.Dock="Right">
                 <Run Text="{Binding AfterHP, StringFormat={}{0:#;'0'}}"/><Run Text="/"/><Run Text="{Binding MaxHP}"/>
                 <Run Text=" "/>
                 <Run>
@@ -45,30 +50,31 @@
                         </MultiBinding>
                     </Run.Text>
                 </Run>
-                <TextBlock.Foreground>
-                    <SolidColorBrush>
-                        <SolidColorBrush.Color>
-                            <MultiBinding Converter="{StaticResource HPStatusColorConverter}">
-                                <Binding Path="AfterHP" Mode="OneWay"/>
-                                <Binding Path="MaxHP" Mode="OneWay"/>
-                            </MultiBinding>
-                        </SolidColorBrush.Color>
-                    </SolidColorBrush>
-                </TextBlock.Foreground>
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding ShipName}" FontSize="14.667"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
-        </DockPanel>
-        <Controls:MetroProgressBar Height="3" Value="{Binding AfterHP}" Maximum="{Binding MaxHP}" Style="{StaticResource HpProgressBarStyle}" Margin="0,3"/>
-        <UniformGrid Columns="2">
-            <TextBlock TextWrapping="Wrap"><Run Text="与ダメ: "/><Run Text="{Binding SumAttack}"/></TextBlock>
-            <TextBlock TextWrapping="Wrap"><Run Text="被ダメ: "/><Run Text="{Binding SumDamage}"/></TextBlock>
-        </UniformGrid>
-        <UniformGrid Columns="4">
-            <TextBlock TextWrapping="Wrap" Text="{Binding Firepower}" HorizontalAlignment="Center" Foreground="#FFFF5353"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Torpedo}" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding AntiAir}" HorizontalAlignment="Center" Foreground="#FF37B848"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Armor}" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
-        </UniformGrid>
-        <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" ItemsSource="{Binding Slot}"/>
-    </StackPanel>
+                    <TextBlock.Foreground>
+                        <SolidColorBrush>
+                            <SolidColorBrush.Color>
+                                <MultiBinding Converter="{StaticResource HPStatusColorConverter}">
+                                    <Binding Path="AfterHP" Mode="OneWay"/>
+                                    <Binding Path="MaxHP" Mode="OneWay"/>
+                                </MultiBinding>
+                            </SolidColorBrush.Color>
+                        </SolidColorBrush>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Text="{Binding ShipName}" FontSize="14.667"/><Run Text=" Lv."/><Run Text="{Binding ShipLevel}"/></TextBlock>
+            </DockPanel>
+            <Controls:MetroProgressBar Height="3" Value="{Binding AfterHP}" Maximum="{Binding MaxHP}" Style="{StaticResource HpProgressBarStyle}" Margin="0,3"/>
+            <UniformGrid Columns="2">
+                <TextBlock TextWrapping="Wrap"><Run Text="与ダメ: "/><Run Text="{Binding SumAttack}"/></TextBlock>
+                <TextBlock TextWrapping="Wrap"><Run Text="被ダメ: "/><Run Text="{Binding SumDamage}"/></TextBlock>
+            </UniformGrid>
+            <UniformGrid Columns="4">
+                <TextBlock TextWrapping="Wrap" Text="{Binding Firepower}" HorizontalAlignment="Center" Foreground="#FFFF5353"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Torpedo}" HorizontalAlignment="Center" Foreground="#FF6277FF"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding AntiAir}" HorizontalAlignment="Center" Foreground="#FF37B848"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Armor}" HorizontalAlignment="Center" Foreground="#FFB043FB"/>
+            </UniformGrid>
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" ItemsSource="{Binding Slot}"/>
+        </StackPanel>
+    </Grid>
 </UserControl>

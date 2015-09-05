@@ -318,6 +318,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                     Armor = ship.armor,
                     IsFriend = true,
                     Speed = ship.speed,
+                    IsEscaped = ship.escaped,
                     Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                     {
                         ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
@@ -372,6 +373,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
                         Armor = ship.armor,
                         IsFriend = true,
                         Speed = ship.speed,
+                        IsEscaped = ship.escaped,
                         Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                         {
                             ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
