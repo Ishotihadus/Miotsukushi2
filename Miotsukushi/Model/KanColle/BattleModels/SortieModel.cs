@@ -23,7 +23,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         /// <summary>
         /// 退避済みの艦（0-11）
         /// </summary>
-        public List<int> goback_ships = new List<int>();
+        public ExList<int> goback_ships = new ExList<int>();
 
         public SortieModel(KanColleModel original_model, KanColleNotifier kclib)
         {

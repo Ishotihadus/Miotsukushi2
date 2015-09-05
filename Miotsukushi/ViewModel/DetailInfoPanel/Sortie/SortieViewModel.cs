@@ -186,9 +186,31 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             kcmodel.sortiemodel.SortieStarted += Sortiemodel_SortieStarted;
             kcmodel.sortiemodel.CellAdvanced += Sortiemodel_CellAdvanced;
             kcmodel.sortiemodel.GoBackPort += Sortiemodel_GoBackPort;
+            kcmodel.sortiemodel.goback_ships.ExListChanged += Goback_ships_ExListChanged;
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsMe, new object());
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsCombined, new object());
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Comments, new object());
+        }
+
+        private void Goback_ships_ExListChanged(object sender, Model.ExListChangedEventArgs e)
+        {
+            var kcmodel = Model.MainModel.Current.kancolleModel;
+
+            for (int i = 0; i < ShipsMe.Count; i++)
+            {
+                if (kcmodel.sortiemodel.goback_ships.Contains(i))
+                    ShipsMe[i].IsGoBackPort = true;
+                else
+                    ShipsMe[i].IsGoBackPort = false;
+            }
+
+            for(int i = 0; i < ShipsCombined.Count; i++)
+            {
+                if (kcmodel.sortiemodel.goback_ships.Contains(i + 6))
+                    ShipsCombined[i].IsGoBackPort = true;
+                else
+                    ShipsCombined[i].IsGoBackPort = false;
+            }
         }
 
         private void Sortiemodel_GoBackPort(object sender, EventArgs e)

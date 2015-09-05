@@ -188,6 +188,29 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             }
         }
 
+        private bool _IsGoBackPort;
+
+        /// <summary>
+        /// 退避済みかどうか
+        /// </summary>
+        public bool IsGoBackPort
+        {
+            get
+            {
+                return _IsGoBackPort;
+            }
+
+            set
+            {
+                if (_IsGoBackPort != value)
+                {
+                    _IsGoBackPort = value;
+                    OnPropertyChanged(() => IsGoBackPort);
+                }
+            }
+        }
+
+
 
         public List<SortieShipSlotViewModel> Slot { get; set; }
 

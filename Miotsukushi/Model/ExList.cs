@@ -59,6 +59,11 @@ namespace Miotsukushi.Model
             return ret;
         }
 
+        public int Clear()
+        {
+            return RemoveAll(_ => true);
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             foreach (var item in list)
