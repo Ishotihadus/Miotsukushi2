@@ -285,6 +285,12 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_req_combined_battle/sp_midnight":
+                    if (json.api_data())
+                        OnGetReqcombinedbattleSpMidnight(new TransmissionRequest.api_req_combined_battle.SpMidnightRequest(request), Svdata<TransmissionData.api_req_combined_battle.SpMidnight>.fromDynamic(json, TransmissionData.api_req_combined_battle.SpMidnight.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_req_hensei/change":
                     OnGetReqhenseiChange(new TransmissionRequest.api_req_hensei.ChangeRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
@@ -655,6 +661,13 @@ namespace KanColleLib
         public event GetReqcombinedbattleMidnightbattleEventHandler GetReqcombinedbattleMidnightbattle;
         public delegate void GetReqcombinedbattleMidnightbattleEventHandler(object sender, TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, Svdata<TransmissionData.api_req_combined_battle.MidnightBattle> response);
         protected virtual void OnGetReqcombinedbattleMidnightbattle(TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, Svdata<TransmissionData.api_req_combined_battle.MidnightBattle> response) { if (GetReqcombinedbattleMidnightbattle != null) GetReqcombinedbattleMidnightbattle(this, request, response); }
+
+        /// <summary>
+        /// api_req_combined_battle/sp_midnight を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqcombinedbattleSpMidnightEventHandler GetReqcombinedbattleSpMidnight;
+        public delegate void GetReqcombinedbattleSpMidnightEventHandler(object sender, TransmissionRequest.api_req_combined_battle.SpMidnightRequest request, Svdata<TransmissionData.api_req_combined_battle.SpMidnight> response);
+        protected virtual void OnGetReqcombinedbattleSpMidnight(TransmissionRequest.api_req_combined_battle.SpMidnightRequest request, Svdata<TransmissionData.api_req_combined_battle.SpMidnight> response) { if (GetReqcombinedbattleSpMidnight != null) GetReqcombinedbattleSpMidnight(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/change を受信して解析に成功した際に呼び出されます
