@@ -106,6 +106,7 @@
     <Compile Include="TransmissionData\api_port\Port.cs" />
     <Compile Include="TransmissionData\api_port\values\LogValue.cs" />
     <Compile Include="TransmissionData\api_req_battle_midnight\Battle.cs" />
+    <Compile Include="TransmissionData\api_req_battle_midnight\SpMidnight.cs" />
     <Compile Include="TransmissionData\api_req_battle_midnight\values\HougekiValue.cs" />
     <Compile Include="TransmissionData\api_req_combined_battle\Airbattle.cs" />
     <Compile Include="TransmissionData\api_req_combined_battle\Battleresult.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="TransmissionRequest\api_get_member\ShipDeckRequest.cs" />
     <Compile Include="TransmissionRequest\api_port\PortRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_battle_midnight\BattleRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_battle_midnight\SpMidnightRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_combined_battle\AirbattleRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_combined_battle\MidnightBattleRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_combined_battle\BattleWaterRequest.cs" />

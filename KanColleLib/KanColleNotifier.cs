@@ -252,6 +252,12 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_req_battle_midnight/sp_midnight":
+                    if (json.api_data())
+                        OnGetReqbattlemidnightSpMidnight(new TransmissionRequest.api_req_battle_midnight.SpMidnightRequest(request), Svdata<TransmissionData.api_req_battle_midnight.SpMidnight>.fromDynamic(json, TransmissionData.api_req_battle_midnight.SpMidnight.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_req_combined_battle/airbattle":
                     if (json.api_data())
                         OnGetReqcombinedbattleAirbattle(new TransmissionRequest.api_req_combined_battle.AirbattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.Airbattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.Airbattle.fromDynamic(json.api_data)));
@@ -619,6 +625,13 @@ namespace KanColleLib
         public event GetReqbattlemidnightBattleEventHandler GetReqbattlemidnightBattle;
         public delegate void GetReqbattlemidnightBattleEventHandler(object sender, TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response);
         protected virtual void OnGetReqbattlemidnightBattle(TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response) { if (GetReqbattlemidnightBattle != null) GetReqbattlemidnightBattle(this, request, response); }
+
+        /// <summary>
+        /// api_req_battle_midnight/sp_midnight を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqbattlemidnightSpMidnightEventHandler GetReqbattlemidnightSpMidnight;
+        public delegate void GetReqbattlemidnightSpMidnightEventHandler(object sender, TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, Svdata<TransmissionData.api_req_battle_midnight.SpMidnight> response);
+        protected virtual void OnGetReqbattlemidnightSpMidnight(TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, Svdata<TransmissionData.api_req_battle_midnight.SpMidnight> response) { if (GetReqbattlemidnightSpMidnight != null) GetReqbattlemidnightSpMidnight(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/airbattle を受信して解析に成功した際に呼び出されます

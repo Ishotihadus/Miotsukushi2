@@ -112,6 +112,12 @@ OnGetReqbattlemidnightBattle(new TransmissionRequest.api_req_battle_midnight.Bat
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_req_battle_midnight/sp_midnight":
+if(json.api_data())
+OnGetReqbattlemidnightSpMidnight(new TransmissionRequest.api_req_battle_midnight.SpMidnightRequest(request), Svdata<TransmissionData.api_req_battle_midnight.SpMidnight>.fromDynamic(json, TransmissionData.api_req_battle_midnight.SpMidnight.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_req_combined_battle/airbattle":
 if(json.api_data())
 OnGetReqcombinedbattleAirbattle(new TransmissionRequest.api_req_combined_battle.AirbattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.Airbattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.Airbattle.fromDynamic(json.api_data)));

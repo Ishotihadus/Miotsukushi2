@@ -133,6 +133,13 @@ public delegate void GetReqbattlemidnightBattleEventHandler(object sender, Trans
 protected virtual void OnGetReqbattlemidnightBattle(TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response) { if (GetReqbattlemidnightBattle != null) GetReqbattlemidnightBattle(this, request, response); }
 
 /// <summary>
+/// api_req_battle_midnight/sp_midnight を受信して解析に成功した際に呼び出されます
+/// </summary>
+public event GetReqbattlemidnightSpMidnightEventHandler GetReqbattlemidnightSpMidnight;
+public delegate void GetReqbattlemidnightSpMidnightEventHandler(object sender, TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, Svdata<TransmissionData.api_req_battle_midnight.SpMidnight> response);
+protected virtual void OnGetReqbattlemidnightSpMidnight(TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, Svdata<TransmissionData.api_req_battle_midnight.SpMidnight> response) { if (GetReqbattlemidnightSpMidnight != null) GetReqbattlemidnightSpMidnight(this, request, response); }
+
+/// <summary>
 /// api_req_combined_battle/airbattle を受信して解析に成功した際に呼び出されます
 /// </summary>
 public event GetReqcombinedbattleAirbattleEventHandler GetReqcombinedbattleAirbattle;
