@@ -32,6 +32,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             kclib.GetReqsortieAirbattle += Kclib_GetReqsortieAirbattle;
             kclib.GetReqsortieBattle += Kclib_GetReqsortieBattle;
             kclib.GetReqbattlemidnightBattle += Kclib_GetReqbattlemidnightBattle;
+            kclib.GetReqbattlemidnightSpMidnight += Kclib_GetReqbattlemidnightSpMidnight;
 
             kclib.GetReqsortieBattleresult += Kclib_GetReqsortieBattleresult;
             kclib.GetReqcombinedbattleBattleresult += Kclib_GetReqcombinedbattleBattleresult;
@@ -39,6 +40,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             kclib.GetReqmapStart += Kclib_GetReqmapStart;
             kclib.GetReqmapNext += Kclib_GetReqmapNext;
         }
+
 
         void NextCellDataAppend(KanColleLib.TransmissionData.api_req_map.values.NextCellData next_cell_data)
         {
@@ -92,6 +94,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             var result = BattleAnalyzer.AnalyzeNormalNightBattle(response.data);
             OnBattleAnalyzed(result);
+        }
+
+        private void Kclib_GetReqbattlemidnightSpMidnight(object sender, KanColleLib.TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_battle_midnight.SpMidnight> response)
+        {
+            OnBattleAnalyzed(BattleAnalyzer.AnalyzeNormalSpNightBattle(response.data));
         }
 
         private void Kclib_GetReqsortieBattle(object sender, KanColleLib.TransmissionRequest.api_req_sortie.BattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_sortie.Battle> response)

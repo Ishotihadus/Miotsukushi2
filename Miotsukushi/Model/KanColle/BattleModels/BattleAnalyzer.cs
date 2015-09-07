@@ -654,6 +654,42 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             return ret;
         }
 
+        public static BattleAnalyzedEventArgs AnalyzeNormalSpNightBattle(api_req_battle_midnight.SpMidnight data)
+        {
+            var ret = new BattleAnalyzedEventArgs();
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.sp_midnight;
+            ret.is_combined_battle = false;
+            ret.phases = new List<BattleAnalyzedEventArgs.Phase>();
+
+            // 自艦隊の情報
+            var friendship = GetFriendshipList(data.deck_id, data.maxhps, data.nowhps, data.fParam);
+            ret.friend = friendship;
+
+            // 敵艦隊の情報
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+            ret.enemy = enemyship;
+
+            ret.friend_formation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
+            ret.enemy_formation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
+            ret.crossing_type = (BattleAnalyzedEventArgs.CrossingType)data.formation[2];
+
+            ret.battle_type = BattleAnalyzedEventArgs.BattleType.normal_midnight;
+            var hougekiphase = GetHougekiPhase(data.hougeki, ret.friend, ret.enemy);
+            if (hougekiphase != null)
+            {
+                hougekiphase.phase_name = "夜戦";
+                ret.phases.Add(hougekiphase);
+            }
+            CalcGauge(ret.friend, ret.enemy, out ret.friend_gauge, out ret.enemy_gauge);
+
+#if DEBUG
+            EventArgsDebugOutput(ret);
+#endif
+
+            return ret;
+        }
+
         /// <summary>
         /// 退避の是非をアップデート
         /// </summary>
