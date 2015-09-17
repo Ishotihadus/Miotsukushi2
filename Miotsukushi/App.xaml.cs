@@ -26,13 +26,13 @@ namespace Miotsukushi
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             // ハンドルされていない例外
-            ((App) Current)?.OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { exceptionObject = e.ExceptionObject, exceptionType = "CurrentDomain_UnhandledException" });
+            ((App) Current)?.OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { ExceptionObject = e.ExceptionObject, ExceptionType = "CurrentDomain_UnhandledException" });
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             // ハンドルされていない例外2
-            OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { innerException = e.Exception, exceptionType = "App_DispatcherUnhandledException" });
+            OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { InnerException = e.Exception, ExceptionType = "App_DispatcherUnhandledException" });
             e.Handled = true; // 終了させない
         }
 

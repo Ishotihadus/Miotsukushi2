@@ -36,15 +36,15 @@ namespace Miotsukushi.Model.Debugger
             {
                 sw.WriteLine("================== !!! Unhandled Exception !!! ==================");
                 sw.WriteLine("No." + _packetCounter + "  " + DateTime.Now.ToString());
-                sw.WriteLine("Type: " + e.exceptionType);
-                if (e.innerException != null)
+                sw.WriteLine("Type: " + e.ExceptionType);
+                if (e.InnerException != null)
                 {
-                    sw.WriteLine("Exception: " + e.innerException.Message);
-                    sw.WriteLine("Source: " + e.innerException.Source);
-                    sw.WriteLine(e.innerException.StackTrace);
+                    sw.WriteLine("Exception: " + e.InnerException.Message);
+                    sw.WriteLine("Source: " + e.InnerException.Source);
+                    sw.WriteLine(e.InnerException.StackTrace);
                 }
-                if(e.exceptionObject != null)
-                    sw.WriteLine("Object: " + e.exceptionObject.ToString() + " (Type: " + e.exceptionObject.GetType().ToString() + ")");
+                if(e.ExceptionObject != null)
+                    sw.WriteLine("Object: " + e.ExceptionObject.ToString() + " (Type: " + e.ExceptionObject.GetType().ToString() + ")");
             }
         }
 

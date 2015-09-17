@@ -8,8 +8,8 @@ namespace Miotsukushi
 {
     public class UnhandledExceptionRaisedEventArgs : EventArgs
     {
-        public string exceptionType;
-        public Exception innerException;
-        public object exceptionObject;
+        public string ExceptionType;
+        public Exception InnerException;
+        public object ExceptionObject;
     }
 }
