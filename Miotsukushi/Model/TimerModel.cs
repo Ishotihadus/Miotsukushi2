@@ -1,21 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Timers;
 
 namespace Miotsukushi.Model
 {
-    class TimerModel
+    internal class TimerModel
     {
-        System.Timers.Timer timer;
         private double _timerinterval = 500.0;
+        private readonly Timer timer;
+
+        public TimerModel()
+        {
+            timer = new Timer(timerinterval);
+            timer.Elapsed += timer_Elapsed;
+            timer.Start();
+        }
+
         public double timerinterval
         {
-            get
-            {
-                return _timerinterval;
-            }
+            get { return _timerinterval; }
             set
             {
                 if (_timerinterval != value)
@@ -29,19 +31,19 @@ namespace Miotsukushi.Model
             }
         }
 
-        public TimerModel()
-        {
-            timer = new System.Timers.Timer(timerinterval);
-            timer.Elapsed += timer_Elapsed;
-            timer.Start();
-        }
-
-        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             OnTimerElapsed(new EventArgs());
         }
 
         public event EventHandler TimerElapsed;
-        protected virtual void OnTimerElapsed(EventArgs e) { if (TimerElapsed != null) { TimerElapsed(this, e); } }
+
+        protected virtual void OnTimerElapsed(EventArgs e)
+        {
+            if (TimerElapsed != null)
+            {
+                TimerElapsed(this, e);
+            }
+        }
     }
 }

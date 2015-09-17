@@ -46,7 +46,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstUseitem fromDynamic(dynamic json)
         {
-            MstUseitem useitem = new MstUseitem();
+            var useitem = new MstUseitem();
 
             useitem.id = (int)json.api_id;
             useitem.usetype = (int)json.api_usetype;

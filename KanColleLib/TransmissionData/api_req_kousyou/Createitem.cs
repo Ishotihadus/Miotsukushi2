@@ -47,7 +47,7 @@ namespace KanColleLib.TransmissionData.api_req_kousyou
 
         public static Createitem fromDynamic(dynamic json)
         {
-            Createitem createitem = new Createitem();
+            var createitem = new Createitem();
 
             createitem.create_flag = (int)json.api_create_flag == 1;
             createitem.shizai_flag = (int)json.api_shizai_flag == 1;

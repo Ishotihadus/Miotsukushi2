@@ -68,7 +68,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstMapinfo fromDynamic(dynamic json)
         {
-            MstMapinfo mapinfo = new MstMapinfo();
+            var mapinfo = new MstMapinfo();
 
             mapinfo.id = (int)json.api_id;
             mapinfo.maparea_id = (int)json.api_maparea_id;

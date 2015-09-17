@@ -34,7 +34,7 @@ namespace KanColleLib.TransmissionData.api_port
 
         public static Port fromDynamic(dynamic json)
         {
-            Port port = new Port();
+            var port = new Port();
 
             port.material = Material.fromDynamic(json.api_material);
             port.deck_port = Deck.fromDynamic(json.api_deck_port);

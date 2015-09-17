@@ -54,7 +54,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstFurniture fromDynamic(dynamic json)
         {
-            MstFurniture furniture = new MstFurniture();
+            var furniture = new MstFurniture();
 
             furniture.id = (int)json.api_id;
             furniture.type = (int)json.api_type;

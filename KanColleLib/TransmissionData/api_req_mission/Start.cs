@@ -20,7 +20,7 @@ namespace KanColleLib.TransmissionData.api_req_mission
 
         public static Start fromDynamic(dynamic json)
         {
-            Start start = new Start();
+            var start = new Start();
             start.complatetime = (long)json.api_complatetime;
             start.complatetime_str = json.api_complatetime_str as string;
 

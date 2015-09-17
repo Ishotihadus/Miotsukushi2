@@ -151,7 +151,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstShip fromDynamic(dynamic json)
         {
-            MstShip ship = new MstShip();
+            var ship = new MstShip();
 
             ship.id = (int)json.api_id;
             ship.sortno = json.api_sortno() ? (int)json.api_sortno : (int?)null;

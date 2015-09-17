@@ -12,7 +12,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Unsetslot fromDynamic(dynamic json)
         {
-            Unsetslot unsetslot = new Unsetslot();
+            var unsetslot = new Unsetslot();
             unsetslot.unsetslots = new Dictionary<string, List<int>>();
 
             foreach (KeyValuePair<string, dynamic> item in json)
@@ -24,7 +24,7 @@ namespace KanColleLib.TransmissionData.api_get_member
                 }
                 else
                 {
-                    List<int> values = new List<int>();
+                    var values = new List<int>();
                     foreach (var value in item.Value)
                         values.Add((int)value);
                     unsetslot.unsetslots.Add(item.Key, values);

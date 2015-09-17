@@ -170,7 +170,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Basic fromDynamic(dynamic json)
         {
-            Basic basic = new Basic();
+            var basic = new Basic();
 
             basic.member_id = int.Parse(json.api_member_id as string);
             basic.nickname = json.api_nickname as string;

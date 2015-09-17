@@ -146,7 +146,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstSlotitem fromDynamic(dynamic json)
         {
-            MstSlotitem slotitem = new MstSlotitem();
+            var slotitem = new MstSlotitem();
 
             slotitem.id = (int)json.api_id;
             slotitem.sortno = (int)json.api_sortno;

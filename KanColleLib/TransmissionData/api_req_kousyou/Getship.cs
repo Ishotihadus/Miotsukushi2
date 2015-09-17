@@ -38,7 +38,7 @@ namespace KanColleLib.TransmissionData.api_req_kousyou
 
         public static Getship fromDynamic(dynamic json)
         {
-            Getship getship = new Getship();
+            var getship = new Getship();
 
             getship.id = (int)json.api_id;
             getship.ship_id = (int)json.api_ship_id;

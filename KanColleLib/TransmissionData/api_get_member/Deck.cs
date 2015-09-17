@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Deck fromDynamic(dynamic json)
         {
-            Deck deck = new Deck();
+            var deck = new Deck();
 
             deck.decks = new List<DeckValue>();
             foreach (var data in json)

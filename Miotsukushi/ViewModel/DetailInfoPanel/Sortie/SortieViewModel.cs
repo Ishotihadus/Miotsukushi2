@@ -196,7 +196,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
         {
             var kcmodel = Model.MainModel.Current.kancolleModel;
 
-            for (int i = 0; i < ShipsMe.Count; i++)
+            for (var i = 0; i < ShipsMe.Count; i++)
             {
                 if (kcmodel.sortiemodel.goback_ships.Contains(i))
                     ShipsMe[i].IsEscaped = true;
@@ -204,7 +204,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                     ShipsMe[i].IsEscaped = false;
             }
 
-            for(int i = 0; i < ShipsCombined.Count; i++)
+            for(var i = 0; i < ShipsCombined.Count; i++)
             {
                 if (kcmodel.sortiemodel.goback_ships.Contains(i + 6))
                     ShipsCombined[i].IsEscaped = true;

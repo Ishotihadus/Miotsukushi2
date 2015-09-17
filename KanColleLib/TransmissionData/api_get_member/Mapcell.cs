@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Mapcell fromDynamic(dynamic json)
         {
-            Mapcell mapcell = new Mapcell();
+            var mapcell = new Mapcell();
 
             mapcell.mapcells = new List<MapcellValue>();
             foreach (var data in json)

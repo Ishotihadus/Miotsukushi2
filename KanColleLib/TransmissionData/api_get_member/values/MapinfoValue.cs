@@ -53,7 +53,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
             public static Eventmap fromDynamic(dynamic json)
             {
-                Eventmap eventmap = new Eventmap();
+                var eventmap = new Eventmap();
                 eventmap.now_maphp = (int)json.api_now_maphp;
                 eventmap.max_maphp = (int)json.api_max_maphp;
                 eventmap.state = (int)json.api_state;
@@ -69,7 +69,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static MapinfoValue fromDynamic(dynamic json)
         {
-            MapinfoValue mapinfo = new MapinfoValue();
+            var mapinfo = new MapinfoValue();
 
             mapinfo.id = (int)json.api_id;
             mapinfo.cleared = (int)json.api_cleared == 1;

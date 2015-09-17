@@ -66,7 +66,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static KDockValue fromDynamic(dynamic json)
         {
-            KDockValue kdock = new KDockValue();
+            var kdock = new KDockValue();
 
             kdock.member_id = (int)json.api_member_id;
             kdock.id = (int)json.api_id;

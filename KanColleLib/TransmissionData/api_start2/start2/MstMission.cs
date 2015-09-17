@@ -68,7 +68,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstMission fromDynamic(dynamic json)
         {
-            MstMission mission = new MstMission();
+            var mission = new MstMission();
 
             mission.id = (int)json.api_id;
             mission.maparea_id = (int)json.api_maparea_id;

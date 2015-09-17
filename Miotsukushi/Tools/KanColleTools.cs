@@ -24,7 +24,7 @@ namespace Miotsukushi.Tools
                     real_now = real_max;
                 else
                 {
-                    int decrease = Math.Max((int)Math.Floor((resource_max - resource_now) * 0.85), 1);
+                    var decrease = Math.Max((int)Math.Floor((resource_max - resource_now) * 0.85), 1);
                     real_now = real_max - decrease;
                 }
             }
@@ -106,10 +106,10 @@ namespace Miotsukushi.Tools
                 ship == null || ship.Slots == null || ship.OnSlotCount == null)
                 return 0;
 
-            int length = Math.Min(ship.Slots.Count, ship.OnSlotCount.Count);
-            int ret = 0;
+            var length = Math.Min(ship.Slots.Count, ship.OnSlotCount.Count);
+            var ret = 0;
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
                 if (slotmodel != null)
@@ -125,9 +125,9 @@ namespace Miotsukushi.Tools
                 ship == null || ship.Slots == null || ship.OnSlotCount == null)
                 return 0;
 
-            int ret = 0;
+            var ret = 0;
 
-            for (int i = 0; i < ship.Slots.Count; i++)
+            for (var i = 0; i < ship.Slots.Count; i++)
             {
                 var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
                 if (slotmodel != null && slotmodel.itemid == 75)
@@ -173,9 +173,9 @@ namespace Miotsukushi.Tools
 
             double ret = 0;
             double err = 0;
-            int sosakuteki = ship.reconnaissance;
+            var sosakuteki = ship.reconnaissance;
 
-            for (int i = 0; i < ship.Slots.Count; i++)
+            for (var i = 0; i < ship.Slots.Count; i++)
             {
                 var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
                 if (slotmodel != null && slotmodel.iteminfo != null)
@@ -241,17 +241,17 @@ namespace Miotsukushi.Tools
                 ship == null || ship.Slots == null || ship.OnSlotCount == null)
                 return;
 
-            int planecount = 0; // 偵察機・爆撃機スロット数
-            int mainguncount = 0; // 主砲数
-            int subguncount = 0; // 副砲数
-            int apacount = 0; // 徹甲弾数
-            int radarcount = 0; // 電探数
-            int torpedocount = 0; // 魚雷数
+            var planecount = 0; // 偵察機・爆撃機スロット数
+            var mainguncount = 0; // 主砲数
+            var subguncount = 0; // 副砲数
+            var apacount = 0; // 徹甲弾数
+            var radarcount = 0; // 電探数
+            var torpedocount = 0; // 魚雷数
 
 
-            int length = Math.Min(ship.Slots.Count, ship.OnSlotCount.Count);
+            var length = Math.Min(ship.Slots.Count, ship.OnSlotCount.Count);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
                 if (slotmodel != null && slotmodel.iteminfo != null)
@@ -346,18 +346,18 @@ namespace Miotsukushi.Tools
                 ship == null || ship.Slots == null)
                 return false;
 
-            int anti_air_gun = 0; // 高角砲
-            int hacs = 0; // 高射装置
-            int machinegun = 0; // 対空機銃
-            int radar = 0;
-            int anti_air_radar = 0;
-            int big_main_gun = 0;
-            int san_shiki = 0;
-            int twenty_five_mm_triple_machinegun = 0;
-            int ten_cm_anti_air_gun_with_hacs = 0;
-            int twelve_point_seven_cm_air_gun_with_hacs = 0;
+            var anti_air_gun = 0; // 高角砲
+            var hacs = 0; // 高射装置
+            var machinegun = 0; // 対空機銃
+            var radar = 0;
+            var anti_air_radar = 0;
+            var big_main_gun = 0;
+            var san_shiki = 0;
+            var twenty_five_mm_triple_machinegun = 0;
+            var ten_cm_anti_air_gun_with_hacs = 0;
+            var twelve_point_seven_cm_air_gun_with_hacs = 0;
 
-            for (int i = 0; i < ship.Slots.Count; i++)
+            for (var i = 0; i < ship.Slots.Count; i++)
             {
                 var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
                 var iteminfo = slotmodel.iteminfo;

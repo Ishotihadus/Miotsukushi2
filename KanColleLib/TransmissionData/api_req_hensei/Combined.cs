@@ -12,7 +12,7 @@ namespace KanColleLib.TransmissionData.api_req_hensei
 
         public static Combined fromDynamic(dynamic json)
         {
-            Combined combined = new Combined();
+            var combined = new Combined();
             combined.combined = (int)json.api_combined == 1;
             return combined;
         }

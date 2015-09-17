@@ -28,7 +28,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             if (ship.after_hp <= 0 && ship.damecontype != BattleAnalyzedEventArgs.Ship.DameConType.None)
             {
                 ship.use_damecon = true;
-                int recoverhp = 0;
+                var recoverhp = 0;
                 if (ship.damecontype == BattleAnalyzedEventArgs.Ship.DameConType.Goddess)
                 {
                     recoverhp = ship.max_hp - ship.after_hp;
@@ -64,7 +64,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             var friendship = new List<BattleAnalyzedEventArgs.Ship>();
             foreach (var ship in kcmodel.fleetdata[dock_id - 1].ships)
                 friendship.Add(new BattleAnalyzedEventArgs.Ship() { original_id = ship });
-            for (int i = 0; i < friendship.Count; i++)
+            for (var i = 0; i < friendship.Count; i++)
             {
                 var ship = friendship[i];
 
@@ -85,11 +85,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     ship.after_hp = ship.before_hp;
                     ship.speed = shipdata.characterinfo.speed;
                     ship.slot = new int[shipdata.characterinfo.slot_count];
-                    for (int j = 0; j < ship.slot.Length; j++)
+                    for (var j = 0; j < ship.slot.Length; j++)
                     {
                         ship.slot[j] = -1;
                     }
-                    for (int j = 0; j < shipdata.Slots.Count; j++)
+                    for (var j = 0; j < shipdata.Slots.Count; j++)
                     {
                         var slotdata = kcmodel.slotdata.FirstOrDefault(_ => _.id == shipdata.Slots[j]);
                         if (slotdata != null)
@@ -136,7 +136,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             foreach (var id in ship_ke)
                 if (id != -1)
                     enemyship.Add(new BattleAnalyzedEventArgs.Ship() { character_id = id });
-            for (int i = 0; i < enemyship.Count; i++)
+            for (var i = 0; i < enemyship.Count; i++)
             {
                 var ship = enemyship[i];
                 ship.fire_power = eParam[i][0];
@@ -160,11 +160,11 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
                     ship.slot = new int[charadata.slot_count];
                     
-                    for (int j = 0; j < ship.slot.Length; j++)
+                    for (var j = 0; j < ship.slot.Length; j++)
                     {
                         ship.slot[j] = -1;
                     }
-                    for (int j = 0; j < eSlot[i].Length && j < ship.slot.Length ; j++)
+                    for (var j = 0; j < eSlot[i].Length && j < ship.slot.Length ; j++)
                     {
                         ship.slot[j] = eSlot[i][j];
                     }
@@ -204,7 +204,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             var phase = new BattleAnalyzedEventArgs.AllOverPhase() { phase_name = "航空戦" };
             
-            for (int i = 1; i < stage3.edam.Length; i++)
+            for (var i = 1; i < stage3.edam.Length; i++)
             {
                 if (stage3.erai_flag[i] || stage3.ebak_flag[i])
                 {
@@ -219,7 +219,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 }
             }
 
-            for (int i = 1; i < stage3.fdam.Length; i++)
+            for (var i = 1; i < stage3.fdam.Length; i++)
             {
                 if (stage3.frai_flag[i] || stage3.fbak_flag[i])
                 {
@@ -266,7 +266,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 {
                     var stage = support_info.support_airatack.stage3;
                     phase = new BattleAnalyzedEventArgs.AllOverPhase();
-                    for (int i = 1; i < stage.edam.Length; i++)
+                    for (var i = 1; i < stage.edam.Length; i++)
                     {
                         if (stage.ebak_flag[i] || stage.erai_flag[i])
                         {
@@ -285,7 +285,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 {
                     var stage = support_info.support_hourai;
                     phase = new BattleAnalyzedEventArgs.AllOverPhase();
-                    for (int i = 1; i < stage.damage.Length; i++)
+                    for (var i = 1; i < stage.damage.Length; i++)
                     {
                         if (i > enemyship.Count)
                             break;
@@ -323,7 +323,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             var phase = new BattleAnalyzedEventArgs.InOrderPhase();
 
-            for (int i = 1; i < raigeki.frai.Length; i++)
+            for (var i = 1; i < raigeki.frai.Length; i++)
             {
                 if(raigeki.frai[i] >= 1 && raigeki.frai[i] <= 6)
                 {
@@ -340,7 +340,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 }
             }
 
-            for (int i = 1; i < raigeki.erai.Length; i++)
+            for (var i = 1; i < raigeki.erai.Length; i++)
             {
                 if (raigeki.erai[i] >= 1 && raigeki.erai[i] <= 6)
                 {
@@ -375,13 +375,13 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             var phase = new BattleAnalyzedEventArgs.InOrderPhase();
 
-            for (int i = 0; i < hougeki.at_list.Length; i++)
+            for (var i = 0; i < hougeki.at_list.Length; i++)
             {
-                int from = hougeki.at_list[i];
-                int type = hougeki.at_type[i];
-                for (int j = 0; j < hougeki.df_list[i].Length; j++)
+                var from = hougeki.at_list[i];
+                var type = hougeki.at_type[i];
+                for (var j = 0; j < hougeki.df_list[i].Length; j++)
                 {
-                    int to = hougeki.df_list[i][j];
+                    var to = hougeki.df_list[i][j];
                     double damage = hougeki.damage[i][j];
                     if(damage >= 0)
                     {
@@ -596,13 +596,13 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             var phase = new BattleAnalyzedEventArgs.InOrderPhase();
 
-            for (int i = 0; i < hougeki.at_list.Length; i++)
+            for (var i = 0; i < hougeki.at_list.Length; i++)
             {
-                int from = hougeki.at_list[i];
-                int type = hougeki.sp_list[i];
-                for (int j = 0; j < hougeki.df_list[i].Length; j++)
+                var from = hougeki.at_list[i];
+                var type = hougeki.sp_list[i];
+                for (var j = 0; j < hougeki.df_list[i].Length; j++)
                 {
-                    int to = hougeki.df_list[i][j];
+                    var to = hougeki.df_list[i][j];
                     double damage = hougeki.damage[i][j];
                     if (damage >= 0)
                     {
@@ -701,7 +701,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 foreach (var s in friendship)
                     s.escaped = false;
             else
-                for (int i = 0; i < friendship.Count; i++)
+                for (var i = 0; i < friendship.Count; i++)
                     if (escape_idx.Contains(i + 1))
                         friendship[i].escaped = true;
                     else
@@ -714,7 +714,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             var phase = new BattleAnalyzedEventArgs.AllOverPhase() { phase_name = "航空戦" };
 
-            for (int i = 1; i < stage3.edam.Length; i++)
+            for (var i = 1; i < stage3.edam.Length; i++)
             {
                 if (stage3.erai_flag[i] || stage3.ebak_flag[i])
                 {
@@ -729,7 +729,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 }
             }
 
-            for (int i = 1; i < stage3.fdam.Length; i++)
+            for (var i = 1; i < stage3.fdam.Length; i++)
             {
                 if (stage3.frai_flag[i] || stage3.fbak_flag[i])
                 {
@@ -744,7 +744,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 }
             }
 
-            for (int i = 0; i < stage3_combined.fdam.Length; i++)
+            for (var i = 0; i < stage3_combined.fdam.Length; i++)
             {
                 if (stage3_combined.frai_flag[i] || stage3_combined.fbak_flag[i])
                 {

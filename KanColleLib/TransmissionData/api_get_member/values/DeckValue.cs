@@ -46,7 +46,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static DeckValue fromDynamic(dynamic json)
         {
-            DeckValue deck = new DeckValue();
+            var deck = new DeckValue();
 
             if (json.api_member_id is double)
                 deck.member_id = (int)json.api_member_id;

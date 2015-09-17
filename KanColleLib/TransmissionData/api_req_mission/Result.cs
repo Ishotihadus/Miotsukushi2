@@ -90,7 +90,7 @@ namespace KanColleLib.TransmissionData.api_req_mission
 
         public static Result fromDynamic(dynamic json)
         {
-            Result result = new Result();
+            var result = new Result();
 
             result.ship_id = json.api_ship_id.Deserialize<int[]>();
             result.clear_result = (int)json.api_clear_result;

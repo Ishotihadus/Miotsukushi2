@@ -575,13 +575,13 @@ namespace Miotsukushi.Model.KanColle
             while (OnSlotCount.Count > data.slotnum)
                 OnSlotCount.RemoveAt(OnSlotCount.Count - 1);
 
-            for (int i = 0; i < data.slotnum; i++)
+            for (var i = 0; i < data.slotnum; i++)
             {
-                int slot = data.slot.Length > i ? data.slot[i] : -1;
+                var slot = data.slot.Length > i ? data.slot[i] : -1;
                 if (Slots[i] != slot)
                     Slots[i] = slot;
 
-                int onslotcount = data.onslot.Length > i ? data.onslot[i] : 0;
+                var onslotcount = data.onslot.Length > i ? data.onslot[i] : 0;
                 if (OnSlotCount[i] != onslotcount)
                     OnSlotCount[i] = onslotcount;
             }

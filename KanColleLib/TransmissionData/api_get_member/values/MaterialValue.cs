@@ -26,7 +26,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static MaterialValue fromDynamic(dynamic json)
         {
-            MaterialValue materialvalue = new MaterialValue();
+            var materialvalue = new MaterialValue();
             
             materialvalue.member_id = (int)json.api_member_id;
             materialvalue.id = (int)json.api_id;

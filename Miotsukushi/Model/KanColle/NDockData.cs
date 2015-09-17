@@ -16,7 +16,7 @@ namespace Miotsukushi.Model.KanColle
 
         public void FromNDockValue(KanColleLib.TransmissionData.api_get_member.values.NDockValue data)
         {
-            bool changed = false;
+            var changed = false;
 
             NDockStatus _status;
 

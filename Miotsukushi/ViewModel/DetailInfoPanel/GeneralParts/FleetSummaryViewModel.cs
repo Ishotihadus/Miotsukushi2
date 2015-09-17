@@ -297,7 +297,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     Ships[e.OldStartingIndex] = new FleetSummaryShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                    for (int i = 0; i < model.fleetdata[id].ships.Count; i++)
+                    for (var i = 0; i < model.fleetdata[id].ships.Count; i++)
                     {
                         if (i < Ships.Count)
                             Ships[i] = new FleetSummaryShipViewModel(model.fleetdata[id].ships[i]);

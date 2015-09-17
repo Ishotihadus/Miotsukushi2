@@ -54,7 +54,7 @@ namespace Miotsukushi.Model.Plugins
 
         private void Kclib_GetSessionData(object sender, KanColleLib.EventArgs.GetSessionDataEventArgs e)
         {
-            string token = Properties.Settings.Default.StatisticsDBToken;
+            var token = Properties.Settings.Default.StatisticsDBToken;
             if (Properties.Settings.Default.StatisticsSendingOn && token != "" && e.MIMEType == "text/plain" && url.Any(_ => e.fullUrl.IndexOf(_) != -1))
             {
                 try
@@ -65,32 +65,32 @@ namespace Miotsukushi.Model.Plugins
                     // svdata= は削除するとのこと（なんでや!）
                     var responseBody = e.responseString.Replace("svdata=", "");
 
-                    WebRequest req = WebRequest.Create("http://api.kancolle-db.net/2/");
+                    var req = WebRequest.Create("http://api.kancolle-db.net/2/");
                     req.Method = "POST";
                     req.ContentType = "application/x-www-form-urlencoded";
 
-                    Encoding enc = Encoding.GetEncoding("utf-8");
+                    var enc = Encoding.GetEncoding("utf-8");
 
                     // ポストデータは以下の通り
-                    string postdata =
+                    var postdata =
                           "token=" + HttpUtility.UrlEncode(Properties.Settings.Default.StatisticsDBToken) + "&"
                         + "agent=" + HttpUtility.UrlEncode(agent) + "&"
                         + "url=" + HttpUtility.UrlEncode(e.fullUrl) + "&"
                         + "requestbody=" + HttpUtility.UrlEncode(requestBody) + "&"
                         + "responsebody=" + HttpUtility.UrlEncode(responseBody);
-                    byte[] postDataBytes = Encoding.ASCII.GetBytes(postdata);
+                    var postDataBytes = Encoding.ASCII.GetBytes(postdata);
                     req.ContentLength = postDataBytes.Length;
 
-                    using (Stream reqStream = req.GetRequestStream())
+                    using (var reqStream = req.GetRequestStream())
                         reqStream.Write(postDataBytes, 0, postDataBytes.Length);
 
                     string response = null;
 
-                    WebResponse res = req.GetResponse();
-                    HttpWebResponse httpRes = (HttpWebResponse)res;
+                    var res = req.GetResponse();
+                    var httpRes = (HttpWebResponse)res;
 
-                    Stream resStream = res.GetResponseStream();
-                    using (StreamReader sr = new StreamReader(resStream, enc))
+                    var resStream = res.GetResponseStream();
+                    using (var sr = new StreamReader(resStream, enc))
                         response = sr.ReadToEnd();
                 }
                 catch

@@ -12,7 +12,7 @@ namespace KanColleLib.TransmissionData.api_port
 
         public static Log fromDynamic(dynamic json)
         {
-            Log log = new Log();
+            var log = new Log();
             log.logs = new List<values.LogValue>();
             foreach (var data in json)
                 log.logs.Add(values.LogValue.fromDynamic(data));

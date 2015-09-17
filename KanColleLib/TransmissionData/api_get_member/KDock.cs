@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static KDock fromDynamic(dynamic json)
         {
-            KDock kdock = new KDock();
+            var kdock = new KDock();
 
             kdock.kdocks = new List<KDockValue>();
             foreach (var data in json)

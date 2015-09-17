@@ -27,7 +27,7 @@ namespace Miotsukushi.View.WindowParts
             catch { }
 
             // 起動時の処理（ズームおよびスクリプトエラーの抑制）
-            bool rendered = false;
+            var rendered = false;
             webBrowser.LoadCompleted += (o, e) =>
             {
                 if (!rendered)
@@ -51,7 +51,7 @@ namespace Miotsukushi.View.WindowParts
             
             try
             {
-                mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
+                var htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
                 if (htmlDoc != null)
                 {
                     htmlDoc.parentWindow.execScript("document.getElementById('game_frame').style.left='-50px'");
@@ -93,16 +93,16 @@ namespace Miotsukushi.View.WindowParts
                 var scalefactor_x = dpiX / 96;
                 var scalefactor_y = dpiX / 96;
 
-                int scale = (int)(scalefactor_x * scalefactor_x * 100);
+                var scale = (int)(scalefactor_x * scalefactor_x * 100);
 
-                Guid serviceGuid = SID_SWebBrowserApp;
-                Guid iid = typeof(SHDocVw.IWebBrowser2).GUID;
-                SHDocVw.IWebBrowser2 webBrowser2 = (SHDocVw.IWebBrowser2)((IServiceProvider)webBrowser.Document).QueryService(ref serviceGuid, ref iid);
+                var serviceGuid = SID_SWebBrowserApp;
+                var iid = typeof(SHDocVw.IWebBrowser2).GUID;
+                var webBrowser2 = (SHDocVw.IWebBrowser2)((IServiceProvider)webBrowser.Document).QueryService(ref serviceGuid, ref iid);
                 object pvaIn = scale;
 
                 webBrowser2.ExecWB(SHDocVw.OLECMDID.OLECMDID_OPTICAL_ZOOM, SHDocVw.OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn);
 
-                mshtml.HTMLDocument htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
+                var htmlDoc = webBrowser.Document as mshtml.HTMLDocument;
                 if (htmlDoc != null)
                 {
                     htmlDoc.parentWindow.scrollTo(0, 0);

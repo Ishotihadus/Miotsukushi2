@@ -37,7 +37,7 @@ namespace KanColleLib.TransmissionData.api_start2
         /// <returns></returns>
         public static Start2 fromDynamic(dynamic json)
         {
-            Start2 start2 = new Start2();
+            var start2 = new Start2();
 
             start2.mst_ship = new List<MstShip>();
             foreach (var data in json.api_mst_ship)

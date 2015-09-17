@@ -174,8 +174,8 @@ namespace Miotsukushi.ViewModel
 
             model.battlemodel.GetBattleResult += (_, e) =>
                 {
-                    bool win = false;
-                    string rankname = "";
+                    var win = false;
+                    var rankname = "";
                     switch (e.rank)
                     {
                         case "S":

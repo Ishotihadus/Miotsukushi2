@@ -39,7 +39,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstMapBGM fromDynamic(dynamic json)
         {
-            MstMapBGM mapbgm = new MstMapBGM();
+            var mapbgm = new MstMapBGM();
 
             mapbgm.id = (int)json.api_id;
             mapbgm.maparea_id = (int)json.api_maparea_id;

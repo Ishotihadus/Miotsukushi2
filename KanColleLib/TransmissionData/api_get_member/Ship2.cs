@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Ship2 fromDynamic(dynamic json)
         {
-            Ship2 ship2 = new Ship2();
+            var ship2 = new Ship2();
 
             ship2.ships = new List<ShipValue>();
 

@@ -38,7 +38,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstStype fromDynamic(dynamic json)
         {
-            MstStype stype = new MstStype();
+            var stype = new MstStype();
 
             stype.id = (int)json.api_id;
             stype.sortno = (int)json.api_sortno;

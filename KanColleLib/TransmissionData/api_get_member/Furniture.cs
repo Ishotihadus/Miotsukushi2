@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Furniture fromDynamic(dynamic json)
         {
-            Furniture furniture = new Furniture();
+            var furniture = new Furniture();
             furniture.furnitures = new List<FurnitureValue>();
             foreach (var data in json)
                 furniture.furnitures.Add(FurnitureValue.fromDynamic(data));

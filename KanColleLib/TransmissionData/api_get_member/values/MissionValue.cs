@@ -21,7 +21,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static MissionValue fromDynamic(dynamic json)
         {
-            MissionValue mission = new MissionValue();
+            var mission = new MissionValue();
 
             mission.mission_id = (int)json.api_mission_id;
             mission.state = (int)json.api_state;

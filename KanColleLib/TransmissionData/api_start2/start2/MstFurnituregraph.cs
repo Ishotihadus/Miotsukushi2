@@ -41,7 +41,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstFurnituregraph fromDynamic(dynamic json)
         {
-            MstFurnituregraph furnituregraph = new MstFurnituregraph();
+            var furnituregraph = new MstFurnituregraph();
 
             furnituregraph.id = (int)json.api_id;
             furnituregraph.type = (int)json.api_type;

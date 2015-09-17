@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Mapinfo fromDynamic(dynamic json)
         {
-            Mapinfo mapinfo = new Mapinfo();
+            var mapinfo = new Mapinfo();
 
             mapinfo.mapinfos = new List<MapinfoValue>();
             foreach (var data in json)

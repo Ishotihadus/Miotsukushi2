@@ -20,7 +20,7 @@ namespace KanColleLib.TransmissionData.api_req_kousyou.values
 
         public static GetshipSlotitemValue fromDynamic(dynamic json)
         {
-            GetshipSlotitemValue slotitem = new GetshipSlotitemValue();
+            var slotitem = new GetshipSlotitemValue();
             slotitem.id = (int)json.api_id;
             slotitem.slotitem_id = (int)json.api_slotitem_id;
             return slotitem;

@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static NDock fromDynamic(dynamic json)
         {
-            NDock ndock = new NDock();
+            var ndock = new NDock();
             ndock.ndocks = new List<NDockValue>();
             foreach (var data in json)
                 ndock.ndocks.Add(NDockValue.fromDynamic(data));

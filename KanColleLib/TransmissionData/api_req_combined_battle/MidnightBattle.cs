@@ -98,7 +98,7 @@ namespace KanColleLib.TransmissionData.api_req_combined_battle
 
         public static MidnightBattle fromDynamic(dynamic json)
         {
-            int deck_id = 0;
+            var deck_id = 0;
             int.TryParse(json.api_deck_id as string, out deck_id);
 
             return new MidnightBattle()

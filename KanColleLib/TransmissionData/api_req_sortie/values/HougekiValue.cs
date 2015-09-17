@@ -46,7 +46,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         static int[] DynamicParseArrayOnce(dynamic json)
         {
             var list = new List<int>();
-            int i = 0;
+            var i = 0;
             foreach (var data in json)
             {
                 if (i != 0)
@@ -59,7 +59,7 @@ namespace KanColleLib.TransmissionData.api_req_sortie.values
         static int[][] DynamicParseArrayTwice(dynamic json)
         {
             var list = new List<int[]>();
-            int i = 0;
+            var i = 0;
             foreach(var data in json)
             {
                 if (i != 0)

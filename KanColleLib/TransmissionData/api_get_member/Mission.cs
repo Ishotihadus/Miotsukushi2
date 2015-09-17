@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Mission fromDynamic(dynamic json)
         {
-            Mission mission = new Mission();
+            var mission = new Mission();
             mission.missions = new List<MissionValue>();
             foreach (var data in json)
                 mission.missions.Add(MissionValue.fromDynamic(data));

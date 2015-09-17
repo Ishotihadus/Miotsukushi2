@@ -20,7 +20,7 @@ namespace KanColleLib.TransmissionData.api_req_kousyou.values
 
         public static CreateitemValue fromDynamic(dynamic json)
         {
-            CreateitemValue createitem = new CreateitemValue();
+            var createitem = new CreateitemValue();
             createitem.id = (int)json.api_id;
             createitem.slotitem_id = (int)json.api_slotitem_id;
             return createitem;

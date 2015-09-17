@@ -12,14 +12,14 @@ namespace KanColleLib.TransmissionRequest
         {
             var dic = new Dictionary<string, string>();
 
-            string[] split = str.Split('&');
-            foreach (string strval in split)
+            var split = str.Split('&');
+            foreach (var strval in split)
             {
-                int ind = strval.IndexOf('=');
+                var ind = strval.IndexOf('=');
                 if (ind == -1)
                     continue;
-                string key = DecodeString(strval.Substring(0, ind));
-                string value = DecodeString(strval.Substring(ind + 1));
+                var key = DecodeString(strval.Substring(0, ind));
+                var value = DecodeString(strval.Substring(ind + 1));
 
 
                 dic[key] = value;

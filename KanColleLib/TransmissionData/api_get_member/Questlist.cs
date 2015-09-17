@@ -40,7 +40,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Questlist fromDynamic(dynamic json)
         {
-            Questlist questlist = new Questlist()
+            var questlist = new Questlist()
             {
                 count = (int)json.api_count,
                 page_count = (int)json.api_page_count,

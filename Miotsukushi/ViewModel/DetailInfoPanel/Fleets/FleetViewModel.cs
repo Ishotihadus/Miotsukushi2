@@ -53,7 +53,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                     Ships[e.OldStartingIndex] = new ShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                    for (int i = 0; i < model.fleetdata[id].ships.Count; i++)
+                    for (var i = 0; i < model.fleetdata[id].ships.Count; i++)
                     {
                         if (i < Ships.Count)
                             Ships[i] = new ShipViewModel(model.fleetdata[id].ships[i]);

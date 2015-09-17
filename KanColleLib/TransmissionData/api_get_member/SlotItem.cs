@@ -13,7 +13,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static SlotItem fromDynamic(dynamic json)
         {
-            SlotItem slotitem = new SlotItem();
+            var slotitem = new SlotItem();
             slotitem.slotitems = new List<SlotItemValue>();
             foreach (var data in json)
                 slotitem.slotitems.Add(SlotItemValue.fromDynamic(data));

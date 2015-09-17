@@ -167,39 +167,40 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static ShipValue fromDynamic(dynamic json)
         {
-            ShipValue ship = new ShipValue();
-
-            ship.id = (int)json.api_id;
-            ship.sortno = (int)json.api_sortno;
-            ship.ship_id = (int)json.api_ship_id;
-            ship.lv = (int)json.api_lv;
-            ship.exp = json.api_exp.Deserialize<int[]>();
-            ship.nowhp = (int)json.api_nowhp;
-            ship.maxhp = (int)json.api_maxhp;
-            ship.leng = (int)json.api_leng;
-            ship.slot = json.api_slot.Deserialize<int[]>();
-            ship.onslot = json.api_onslot.Deserialize<int[]>();
-            ship.kyouka = json.api_kyouka.Deserialize<int[]>();
-            ship.backs = (int)json.api_backs;
-            ship.fuel = (int)json.api_fuel;
-            ship.bull = (int)json.api_bull;
-            ship.slotnum = (int)json.api_slotnum;
-            ship.ndock_time = (long)json.api_ndock_time;
-            ship.ndock_item = json.api_ndock_item.Deserialize<int[]>();
-            ship.srate = (int)json.api_srate;
-            ship.cond = (int)json.api_cond;
-            ship.karyoku = json.api_karyoku.Deserialize<int[]>();
-            ship.raisou = json.api_raisou.Deserialize<int[]>();
-            ship.taiku = json.api_taiku.Deserialize<int[]>();
-            ship.soukou = json.api_soukou.Deserialize<int[]>();
-            ship.kaihi = json.api_kaihi.Deserialize<int[]>();
-            ship.taisen = json.api_taisen.Deserialize<int[]>();
-            ship.sakuteki = json.api_sakuteki.Deserialize<int[]>();
-            ship.lucky = json.api_lucky.Deserialize<int[]>();
-            ship.locked = (int)json.api_locked == 1;
-            ship.locked_equip = (int)json.api_locked_equip == 1;
-            ship.sally_area = json.api_sally_area() ? (int)json.api_sally_area : (int?)null;
-            ship.slot_ex = (int)json.api_slot_ex;
+            var ship = new ShipValue
+            {
+                id = (int) json.api_id,
+                sortno = (int) json.api_sortno,
+                ship_id = (int) json.api_ship_id,
+                lv = (int) json.api_lv,
+                exp = json.api_exp.Deserialize<int[]>(),
+                nowhp = (int) json.api_nowhp,
+                maxhp = (int) json.api_maxhp,
+                leng = (int) json.api_leng,
+                slot = json.api_slot.Deserialize<int[]>(),
+                onslot = json.api_onslot.Deserialize<int[]>(),
+                kyouka = json.api_kyouka.Deserialize<int[]>(),
+                backs = (int) json.api_backs,
+                fuel = (int) json.api_fuel,
+                bull = (int) json.api_bull,
+                slotnum = (int) json.api_slotnum,
+                ndock_time = (long) json.api_ndock_time,
+                ndock_item = json.api_ndock_item.Deserialize<int[]>(),
+                srate = (int) json.api_srate,
+                cond = (int) json.api_cond,
+                karyoku = json.api_karyoku.Deserialize<int[]>(),
+                raisou = json.api_raisou.Deserialize<int[]>(),
+                taiku = json.api_taiku.Deserialize<int[]>(),
+                soukou = json.api_soukou.Deserialize<int[]>(),
+                kaihi = json.api_kaihi.Deserialize<int[]>(),
+                taisen = json.api_taisen.Deserialize<int[]>(),
+                sakuteki = json.api_sakuteki.Deserialize<int[]>(),
+                lucky = json.api_lucky.Deserialize<int[]>(),
+                locked = (int) json.api_locked == 1,
+                locked_equip = (int) json.api_locked_equip == 1,
+                sally_area = json.api_sally_area() ? (int) json.api_sally_area : (int?) null,
+                slot_ex = (int) json.api_slot_ex
+            };
 
             return ship;
         }

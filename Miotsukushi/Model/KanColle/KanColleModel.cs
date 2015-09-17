@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KanColleLib;
+using Miotsukushi.Model.Debugger;
 using Miotsukushi.Tools;
 using Miotsukushi.Model.KanColle.EventArgs;
 
@@ -38,7 +39,7 @@ namespace Miotsukushi.Model.KanColle
 
         public KanColleModel()
         {
-            int port = KanColleNotifier.FiddlerStartup();
+            var port = KanColleNotifier.FiddlerStartup();
             System.Diagnostics.Debug.WriteLine("Port:" + port);
             KanColleNotifier.FiddlerSetWinInetProxy();
 
@@ -151,7 +152,7 @@ namespace Miotsukushi.Model.KanColle
                 {
                     s.fuel = ship.fuel;
                     s.ammo = ship.bull;
-                    for (int j = 0; j < ship.onslot.Length; j++)
+                    for (var j = 0; j < ship.onslot.Length; j++)
                     {
                         if (s.OnSlotCount.Count > j)
                             s.OnSlotCount[j] = ship.onslot[j];
@@ -277,8 +278,8 @@ namespace Miotsukushi.Model.KanColle
                 if (request.ship_id == -2)
                 {
                     // 旗艦以外全部解除
-                    int removecount = fleetdata[request.id - 1].ships.Count - 1;
-                    for (int i = 0; i < removecount; i++)
+                    var removecount = fleetdata[request.id - 1].ships.Count - 1;
+                    for (var i = 0; i < removecount; i++)
                         fleetdata[request.id - 1].ships.RemoveAt(1);
                 }
                 else if (request.ship_id == -1)
@@ -288,7 +289,7 @@ namespace Miotsukushi.Model.KanColle
                 }
                 else
                 {
-                    int replaceindex = fleetdata[request.id - 1].ships.IndexOf(request.ship_id);
+                    var replaceindex = fleetdata[request.id - 1].ships.IndexOf(request.ship_id);
 
                     if (replaceindex != -1)
                     {
@@ -296,7 +297,7 @@ namespace Miotsukushi.Model.KanColle
                         if (fleetdata[request.id - 1].ships.Count > request.ship_idx)
                         {
                             // 他の艦との交代である場合
-                            int replaceshipid = fleetdata[request.id - 1].ships[request.ship_idx];
+                            var replaceshipid = fleetdata[request.id - 1].ships[request.ship_idx];
                             fleetdata[request.id - 1].ships[request.ship_idx] = request.ship_id;
                             fleetdata[request.id - 1].ships[replaceindex] = replaceshipid;
                         }
@@ -325,11 +326,11 @@ namespace Miotsukushi.Model.KanColle
                             fleetdata[request.id - 1].ships.Add(request.ship_id);
                         }
 
-                        for (int i = 0; i < fleetdata.Count; i++)
+                        for (var i = 0; i < fleetdata.Count; i++)
                         {
                             if (i == request.id - 1)
                                 continue;
-                            int rplidx = fleetdata[i].ships.IndexOf(request.ship_id);
+                            var rplidx = fleetdata[i].ships.IndexOf(request.ship_id);
                             if (rplidx != -1)
                             {
                                 if(replaceshipid == -1)
@@ -370,7 +371,7 @@ namespace Miotsukushi.Model.KanColle
             // 艦隊にその艦娘がいたら削除
             foreach(var fleet in fleetdata)
             {
-                int rplidx = fleet.ships.IndexOf(request.ship_id);
+                var rplidx = fleet.ships.IndexOf(request.ship_id);
                 if (rplidx != -1)
                     fleet.ships.RemoveAt(rplidx);
             }
@@ -530,8 +531,8 @@ namespace Miotsukushi.Model.KanColle
 
         void AppendShipData(KanColleLib.TransmissionData.api_get_member.values.ShipValue ship)
         {
-            bool is_found = false;
-            for (int i = 0; i < shipdata.Count; i++)
+            var is_found = false;
+            for (var i = 0; i < shipdata.Count; i++)
             {
                 if (shipdata[i].shipid == ship.id)
                 {
@@ -605,7 +606,7 @@ namespace Miotsukushi.Model.KanColle
 
         void AppendNDockValue(KanColleLib.TransmissionData.api_get_member.NDock data)
         {
-            for (int i = 0; i < data.ndocks.Count; i++)
+            for (var i = 0; i < data.ndocks.Count; i++)
             {
                 if (ndockdata.Count <= i)
                     ndockdata.Add(new NDockData());
@@ -618,7 +619,7 @@ namespace Miotsukushi.Model.KanColle
 
         void AppendKDockValue(KanColleLib.TransmissionData.api_get_member.KDock data)
         {
-            for (int i = 0; i < data.kdocks.Count; i++)
+            for (var i = 0; i < data.kdocks.Count; i++)
             {
                 if (kdockdata.Count <= i)
                     kdockdata.Add(new KDockData());
@@ -634,7 +635,7 @@ namespace Miotsukushi.Model.KanColle
                     fleetdata.Add(new FleetData());
                 while (fleetdata.Count > data.decks.Count)
                     fleetdata.RemoveAt(fleetdata.Count - 1);
-                for (int i = 0; i < fleetdata.Count; i++)
+                for (var i = 0; i < fleetdata.Count; i++)
                     fleetdata[i].FromDeckValue(data.decks[i]);
             }
         }

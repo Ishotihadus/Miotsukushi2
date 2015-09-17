@@ -22,7 +22,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static MapcellValue fromDynamic(dynamic json)
         {
-            MapcellValue mapcell = new MapcellValue();
+            var mapcell = new MapcellValue();
 
             mapcell.id = (int)json.api_id;
             mapcell.passed = (int)json.api_passed == 1;

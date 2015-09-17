@@ -77,7 +77,7 @@ namespace Miotsukushi.Model.Audio
             if (HasAudioSession)
                 return false;
 
-            for (int i = 0; i < sessions.Sessions.Count; i++)
+            for (var i = 0; i < sessions.Sessions.Count; i++)
             {
                 if (sessions.Sessions[i].GetProcessID == processid)
                 {

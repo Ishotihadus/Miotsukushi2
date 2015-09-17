@@ -36,7 +36,7 @@ namespace KanColleLib
         public static int FiddlerStartup(int iListenPort=0)
         {
             Fiddler.FiddlerApplication.Startup(iListenPort, Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway);
-            int port = Fiddler.FiddlerApplication.oProxy.ListenPort;
+            var port = Fiddler.FiddlerApplication.oProxy.ListenPort;
             return port;
         }
 
@@ -71,7 +71,7 @@ namespace KanColleLib
             if (oSession.fullUrl.IndexOf("kcs/mainD2.swf") != -1)
                 OnGameStart(new GameStartEventArgs() { main2Dadress = oSession.fullUrl });
 
-            int kcsapiindex = oSession.fullUrl.IndexOf("/kcsapi/");
+            var kcsapiindex = oSession.fullUrl.IndexOf("/kcsapi/");
             if (kcsapiindex != -1)
                 kcsapiurl = oSession.fullUrl.Substring(kcsapiindex + 8); // "/kcsapi/".Length
 
@@ -85,8 +85,8 @@ namespace KanColleLib
                     System.Threading.Thread.Sleep(1);
                 }
 
-                string request = oSession.GetRequestBodyAsString();
-                string response = oSession.GetResponseBodyAsString();
+                var request = oSession.GetRequestBodyAsString();
+                var response = oSession.GetResponseBodyAsString();
 
                 OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
 

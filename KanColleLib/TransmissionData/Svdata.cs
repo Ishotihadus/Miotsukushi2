@@ -14,7 +14,7 @@ namespace KanColleLib.TransmissionData
 
         public static Svdata<T> fromDynamic(dynamic json, T data)
         {
-            Svdata<T> header = new Svdata<T>();
+            var header = new Svdata<T>();
 
             header.result = (int)json.api_result;
             header.result_msg = json.api_result_msg as string;

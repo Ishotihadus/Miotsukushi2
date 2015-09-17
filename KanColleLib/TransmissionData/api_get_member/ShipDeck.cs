@@ -14,7 +14,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static ShipDeck fromDynamic(dynamic json)
         {
-            ShipDeck ret = new ShipDeck();
+            var ret = new ShipDeck();
 
             ret.deck_data = new List<DeckValue>();
             foreach (var data in json.api_deck_data)

@@ -36,7 +36,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static FurnitureValue fromDynamic(dynamic json)
         {
-            FurnitureValue furniture = new FurnitureValue();
+            var furniture = new FurnitureValue();
 
             furniture.member_id = (int)json.api_member_id;
             furniture.id = (int)json.api_id;

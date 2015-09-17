@@ -12,7 +12,7 @@ namespace KanColleLib.TransmissionData.api_req_mission
 
         public static ReturnInstruction fromDynamic(dynamic json)
         {
-            ReturnInstruction returninstruction = new ReturnInstruction();
+            var returninstruction = new ReturnInstruction();
             returninstruction.mission = json.api_mission.Deserialize<long[]>();
             return returninstruction;
         }

@@ -35,7 +35,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static SlotItemValue fromDynamic(dynamic json)
         {
-            SlotItemValue slotitem = new SlotItemValue();
+            var slotitem = new SlotItemValue();
 
             slotitem.id = (int)json.api_id;
             slotitem.slotitem_id = (int)json.api_slotitem_id;

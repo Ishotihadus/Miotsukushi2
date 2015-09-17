@@ -31,7 +31,7 @@ namespace KanColleLib.TransmissionData.api_port.values
 
         public static LogValue fromDynamic(dynamic json)
         {
-            LogValue log = new LogValue();
+            var log = new LogValue();
 
             log.no = (int)json.api_no;
             log.type = json.api_type as string;

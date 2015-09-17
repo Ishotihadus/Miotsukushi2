@@ -28,7 +28,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstSlotitemEquiptype fromDynamic(dynamic json)
         {
-            MstSlotitemEquiptype slotitem_equiptype = new MstSlotitemEquiptype();
+            var slotitem_equiptype = new MstSlotitemEquiptype();
 
             slotitem_equiptype.id = (int)json.api_id;
             slotitem_equiptype.name = json.api_name as string;

@@ -61,7 +61,7 @@ namespace KanColleLib.TransmissionData.api_get_member.values
 
         public static NDockValue fromDynamic(dynamic json)
         {
-            NDockValue ndock = new NDockValue();
+            var ndock = new NDockValue();
 
             ndock.member_id = (int)json.api_member_id;
             ndock.id = (int)json.api_id;

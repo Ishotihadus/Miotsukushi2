@@ -26,7 +26,7 @@ namespace KanColleLib.TransmissionData.api_req_map.values
 
         public static ItemgetEoValue fromDynamic(dynamic json)
         {
-            ItemgetEoValue ret = new ItemgetEoValue();
+            var ret = new ItemgetEoValue();
             ret.usemst = (int)json.api_usemst;
             ret.id = (int)json.api_id;
             ret.getcount = (int)json.api_getcount;

@@ -35,7 +35,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstShipgraph fromDynamic(dynamic json)
         {
-            MstShipgraph shipgraph = new MstShipgraph();
+            var shipgraph = new MstShipgraph();
 
             shipgraph.id = (int)json.api_id;
             shipgraph.sortno = (int)json.api_sortno;

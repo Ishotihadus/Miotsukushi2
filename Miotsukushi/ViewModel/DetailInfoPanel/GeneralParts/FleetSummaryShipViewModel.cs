@@ -261,7 +261,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
 
         void fuel_append()
         {
-            int fuel_max = 0;
+            var fuel_max = 0;
             if (model.charamaster.ContainsKey(charaid))
             {
                 fuel_max = model.charamaster[charaid].fuel_max;
@@ -276,7 +276,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
 
         void ammo_append()
         {
-            int ammo_max = 0;
+            var ammo_max = 0;
             if (model.charamaster.ContainsKey(charaid))
             {
                 ammo_max = model.charamaster[charaid].ammo_max;
@@ -328,7 +328,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
 
         void damecon_append()
         {
-            bool _hasdamecon = false;
+            var _hasdamecon = false;
 
             var exitem = model.slotdata.FirstOrDefault(_ => _.id == shipdata.ExSlot);
             if (exitem != null && exitem.iteminfo != null && exitem.iteminfo.type_equiptype == 23)

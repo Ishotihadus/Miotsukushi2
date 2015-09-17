@@ -28,7 +28,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstMaparea fromDynamic(dynamic json)
         {
-            MstMaparea maparea = new MstMaparea();
+            var maparea = new MstMaparea();
 
             maparea.id = (int)json.api_id;
             maparea.name = json.api_name as string;

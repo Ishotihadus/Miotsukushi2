@@ -71,7 +71,7 @@ namespace KanColleLib.TransmissionData.api_req_battle_midnight
 
         public static Battle fromDynamic(dynamic json)
         {
-            int deck_id = 0;
+            var deck_id = 0;
             int.TryParse(json.api_deck_id as string, out deck_id);
 
             return new Battle()

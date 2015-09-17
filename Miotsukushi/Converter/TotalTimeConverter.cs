@@ -14,7 +14,7 @@ namespace Miotsukushi.Converter
         {
             if (value is TimeSpan)
             {
-                TimeSpan t = (TimeSpan)value;
+                var t = (TimeSpan)value;
                 if (t.TotalHours < 0)
                     return "00:00";
                 else if (t.TotalHours < 1)

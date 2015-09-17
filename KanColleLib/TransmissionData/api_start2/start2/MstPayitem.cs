@@ -44,7 +44,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstPayitem fromDynamic(dynamic json)
         {
-            MstPayitem payitem = new MstPayitem();
+            var payitem = new MstPayitem();
 
             payitem.id = (int)json.api_id;
             payitem.type = (int)json.api_type;

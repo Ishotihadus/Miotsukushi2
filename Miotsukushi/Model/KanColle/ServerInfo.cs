@@ -63,7 +63,7 @@ namespace Miotsukushi.Model.KanColle
         {
             if (Regex.IsMatch(url, @"^(https?|ftp)://\d+\.\d+\.\d+\.\d+.*$"))
             {
-                string address = Regex.Match(url, @"\d+\.\d+\.\d+\.\d+").Value;
+                var address = Regex.Match(url, @"\d+\.\d+\.\d+\.\d+").Value;
                 return IPAddress.TryParse(address, out this.address);
             }
             else

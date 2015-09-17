@@ -44,7 +44,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         private void Questdata_QuestChange(object sender, EventArgs e)
         {
-            for (int i = 0; i < model.questdata.executingquest.Count; i++)
+            for (var i = 0; i < model.questdata.executingquest.Count; i++)
             {
                 var quest = model.questdata.executingquest[i];
                 if (Quests.Count <= i)
@@ -65,7 +65,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                 }
             }
 
-            for (int i = model.questdata.executingquest.Count; i < Quests.Count; i++)
+            for (var i = model.questdata.executingquest.Count; i < Quests.Count; i++)
             {
                 if (Quests[i].DetailVisibility)
                 {
@@ -74,7 +74,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                 }
             }
 
-            int nullcount = (from _ in Quests where !_.DetailVisibility select _).Count();
+            var nullcount = (from _ in Quests where !_.DetailVisibility select _).Count();
 
             while (nullcount < model.questdata.exec_count - model.questdata.executingquest.Count)
             {

@@ -49,7 +49,7 @@ namespace Miotsukushi.Model.KanColle
                     new Quest() { id = qdata.no, progress = qdata.progress_flag, state = qdata.state, name = qdata.title, description = qdata.detail, type = qdata.type, category = qdata.category });
             }
 
-            for (int i = questlist.disp_page - 2; i >= 0; i--)
+            for (var i = questlist.disp_page - 2; i >= 0; i--)
             {
                 // 自分の前のページの最後のidが自分の一番前より後の数字になっている
                 if (pages[i] != null && (pages[i].Count != 5 || pages[i][4].id >= pages[questlist.disp_page - 1][0].id))
@@ -58,7 +58,7 @@ namespace Miotsukushi.Model.KanColle
             }
 
             // 同様に、自分より後のページにある任務の最初のidが、今のページの一番最後の任務よりも小さい場合はおかしい
-            for (int i = questlist.disp_page; i < pages.Count; i++)
+            for (var i = questlist.disp_page; i < pages.Count; i++)
             {
                 if (pages[i] != null && (pages[i].Count == 0 || pages[i][0].id <= pages[questlist.disp_page - 1][questlist.list.Count - 1].id))
                     pages[i] = null;

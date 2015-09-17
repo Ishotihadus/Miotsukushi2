@@ -436,7 +436,7 @@ namespace Miotsukushi.Model.KanColle
 
         public void FromMaterialArray(int[] material)
         {
-            for (int i = 0; i < material.Length; i++)
+            for (var i = 0; i < material.Length; i++)
             {
                 switch (i)
                 {

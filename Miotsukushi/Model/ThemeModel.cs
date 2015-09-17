@@ -59,11 +59,11 @@ namespace Miotsukushi.Model
             themes = ThemeManager.AppThemes.ToArray();
 
             accent_name = new string[accents.Length];
-            for (int i = 0; i < accents.Length; i++)
+            for (var i = 0; i < accents.Length; i++)
                 accent_name[i] = accents[i].Name;
 
             theme_name = new string[themes.Length];
-            for (int i = 0; i < themes.Length; i++)
+            for (var i = 0; i < themes.Length; i++)
                 theme_name[i] = themes[i].Name;
 
             if (GetThemeIndex(Properties.Settings.Default.Theme) != -1 && GetAccentIndex(Properties.Settings.Default.AccentColor) != -1)
@@ -76,8 +76,8 @@ namespace Miotsukushi.Model
 
         public void ChangeStyle(string theme, string accent)
         {
-            int acc_index = GetAccentIndex(accent);
-            int thm_index = GetThemeIndex(theme);
+            var acc_index = GetAccentIndex(accent);
+            var thm_index = GetThemeIndex(theme);
 
             if (acc_index == -1)
                 throw new ArgumentException("accent");
@@ -90,7 +90,7 @@ namespace Miotsukushi.Model
 
         public int GetAccentIndex(string Accent)
         {
-            for (int i = 0; i < accent_name.Length; i++)
+            for (var i = 0; i < accent_name.Length; i++)
                 if (Accent == accent_name[i])
                     return i;
             return -1;
@@ -98,7 +98,7 @@ namespace Miotsukushi.Model
 
         public int GetThemeIndex(string Theme)
         {
-            for (int i = 0; i < theme_name.Length; i++)
+            for (var i = 0; i < theme_name.Length; i++)
                 if (Theme == theme_name[i])
                     return i;
             return -1;

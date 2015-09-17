@@ -30,7 +30,7 @@ namespace KanColleLib.TransmissionData.api_req_hokyu.values
 
         public static ShipValue fromDynamic(dynamic json)
         {
-            ShipValue ship = new ShipValue();
+            var ship = new ShipValue();
 
             ship.id = (int)json.api_id;
             ship.onslot = json.api_onslot.Deserialize<int[]>();

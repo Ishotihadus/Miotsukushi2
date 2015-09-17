@@ -25,7 +25,7 @@ namespace KanColleLib.TransmissionData.api_req_hokyu
 
         public static Charge fromDynamic(dynamic json)
         {
-            Charge charge = new Charge();
+            var charge = new Charge();
 
             charge.ship = new List<values.ShipValue>();
             foreach (var data in json.api_ship)

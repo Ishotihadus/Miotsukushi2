@@ -18,7 +18,7 @@ namespace Miotsukushi.Converter
             }
             else if (value is DateTime)
             {
-                DateTime t = (DateTime)value;
+                var t = (DateTime)value;
                 
                 if(t.Date == DateTime.Today)
                     return t.ToString("HH:mm:ss");

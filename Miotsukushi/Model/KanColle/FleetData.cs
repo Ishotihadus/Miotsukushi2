@@ -339,7 +339,7 @@ namespace Miotsukushi.Model.KanColle
         {
             DeckName = data.name;
 
-            for (int i = 0; i < data.ship.Length; i++)
+            for (var i = 0; i < data.ship.Length; i++)
             {
                 if (data.ship[i] == -1)
                 {
@@ -378,21 +378,21 @@ namespace Miotsukushi.Model.KanColle
         {
             var model = MainModel.Current.kancolleModel;
 
-            int _sumshiplevel = 0;
-            int _sumairmastery = 0;
-            int _drumcount = 0;
-            int _drumshipcount = 0;
+            var _sumshiplevel = 0;
+            var _sumairmastery = 0;
+            var _drumcount = 0;
+            var _drumshipcount = 0;
             double _okinoshimaparameter = 0;
             double _okinoshimaerror = 0;
             int? _mincond = null;
-            for (int i = 0; i < ships.Count; i++)
+            for (var i = 0; i < ships.Count; i++)
             {
                 var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
                 if (ship != null)
                 {
                     _sumshiplevel += ship.level;
                     _sumairmastery += ship.air_mastery;
-                    int thisdrumcount = KanColleTools.ShipDrumCount(ship);
+                    var thisdrumcount = KanColleTools.ShipDrumCount(ship);
                     _drumcount += thisdrumcount;
                     if (thisdrumcount > 0)
                         ++_drumshipcount;
@@ -430,8 +430,8 @@ namespace Miotsukushi.Model.KanColle
             var model = MainModel.Current.kancolleModel;
             DockingShipsCount = model.ndockdata.Count(_ => ships.Contains(_.shipid));
 
-            bool _hastaihaship = false;
-            for (int i = 0; i < ships.Count; i++)
+            var _hastaihaship = false;
+            for (var i = 0; i < ships.Count; i++)
             {
                 var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
                 if (ship != null && ship.hp_now <= ship.hp_max * 0.25)
@@ -459,9 +459,9 @@ namespace Miotsukushi.Model.KanColle
         public void ChangeSupplyStatus()
         {
             var model = MainModel.Current.kancolleModel;
-            bool _hasunsuppliedship = false;
+            var _hasunsuppliedship = false;
 
-            for (int i = 0; i < ships.Count; i++)
+            for (var i = 0; i < ships.Count; i++)
             {
                 var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
                 if (ship != null)

@@ -32,7 +32,7 @@ namespace KanColleLib.TransmissionRequest
         protected int? _Get_Request_int(string key)
         {
             int r;
-            string t = _Get_Request(key);
+            var t = _Get_Request(key);
             if (t != null && int.TryParse(t, out r))
                 return r;
             else
@@ -46,14 +46,14 @@ namespace KanColleLib.TransmissionRequest
         /// <returns></returns>
         protected int?[] _Get_Request_int_array(string key)
         {
-            string t = _Get_Request(key);
+            var t = _Get_Request(key);
             if (t == null)
                 return null;
 
-            string[] ts = t.Split(',');
-            int?[] i_array = new int?[ts.Length];
+            var ts = t.Split(',');
+            var i_array = new int?[ts.Length];
 
-            for (int i = 0; i < ts.Length; i++)
+            for (var i = 0; i < ts.Length; i++)
             {
                 int c;
                 if (int.TryParse(ts[i], out c))

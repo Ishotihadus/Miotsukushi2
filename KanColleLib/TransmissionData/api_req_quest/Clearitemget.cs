@@ -25,7 +25,7 @@ namespace KanColleLib.TransmissionData.api_req_quest
 
         public static Clearitemget fromDynamic(dynamic json)
         {
-            Clearitemget ret = new Clearitemget();
+            var ret = new Clearitemget();
             ret.material = json.api_material.Deserialize<int[]>();
             ret.bonus_count = (int)json.api_bounus_count;
             ret.bonus = new List<BonusValue>();

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KanColleLib;
-using Miotsukushi.Tools;
 using System.IO;
+using KanColleLib;
 
-namespace Miotsukushi.Model.KanColle
+namespace Miotsukushi.Model.Debugger
 {
     class PacketSaver
     {
@@ -39,7 +33,7 @@ namespace Miotsukushi.Model.KanColle
 
             DirectoryConfirm();
 
-            using (StreamWriter sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(filename, true))
             {
                 sw.WriteLine("================== !!! Unhandled Exception !!! ==================");
                 sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
@@ -64,7 +58,7 @@ namespace Miotsukushi.Model.KanColle
 
             DirectoryConfirm();
 
-            using (StreamWriter sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(filename, true))
             {
                 sw.WriteLine("================== !!! Error !!! ==================");
                 sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
@@ -92,7 +86,7 @@ namespace Miotsukushi.Model.KanColle
 
             DirectoryConfirm();
 
-            using (StreamWriter sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(filename, true))
             {
                 sw.WriteLine("================== Fiddler Log ==================");
                 sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
@@ -109,7 +103,7 @@ namespace Miotsukushi.Model.KanColle
 
             DirectoryConfirm();
 
-            using (StreamWriter sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(filename, true))
             {
                 sw.WriteLine("================== KcsAPI Data ==================");
                 sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());

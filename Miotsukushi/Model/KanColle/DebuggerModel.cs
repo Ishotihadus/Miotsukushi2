@@ -42,7 +42,7 @@ namespace Miotsukushi.Model.KanColle
             if (ofd.ShowDialog() == true)
             {
                 var lines = System.IO.File.ReadAllLines(ofd.FileName);
-                for (int i = 0; i < lines.Length / 3; i++)
+                for (var i = 0; i < lines.Length / 3; i++)
                 {
                     var url = lines[i * 3];
                     var req = lines[i * 3 + 1];

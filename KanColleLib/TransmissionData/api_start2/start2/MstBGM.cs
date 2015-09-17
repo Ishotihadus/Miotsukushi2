@@ -23,7 +23,7 @@ namespace KanColleLib.TransmissionData.api_start2.start2
 
         public static MstBGM fromDynamic(dynamic json)
         {
-            MstBGM bgm = new MstBGM();
+            var bgm = new MstBGM();
 
             bgm.id = (int)json.api_id;
             bgm.name = json.api_name;

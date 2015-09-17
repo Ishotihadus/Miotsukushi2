@@ -16,7 +16,7 @@ namespace KanColleLib.TransmissionData.api_get_member
 
         public static Material fromDynamic(dynamic json)
         {
-            Material material = new Material();
+            var material = new Material();
 
             material.materials = new List<MaterialValue>();
             foreach (var data in json)

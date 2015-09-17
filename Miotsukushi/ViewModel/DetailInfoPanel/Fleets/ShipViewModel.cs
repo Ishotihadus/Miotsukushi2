@@ -515,7 +515,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             if (shipdata == null)
                 return;
 
-            for (int i = 0; i < shipdata.OnSlotCount.Count; i++)
+            for (var i = 0; i < shipdata.OnSlotCount.Count; i++)
             {
                 if (i < Slots.Count)
                     Slots[i].OnSlotCount = shipdata.OnSlotCount[i];
@@ -657,7 +657,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 
         void fuel_append()
         {
-            int fuel_max = 0;
+            var fuel_max = 0;
             if (model.charamaster.ContainsKey(charaid))
             {
                 fuel_max = model.charamaster[charaid].fuel_max;
@@ -672,7 +672,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 
         void ammo_append()
         {
-            int ammo_max = 0;
+            var ammo_max = 0;
             if (model.charamaster.ContainsKey(charaid))
             {
                 ammo_max = model.charamaster[charaid].ammo_max;

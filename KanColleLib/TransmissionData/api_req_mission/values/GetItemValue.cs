@@ -14,7 +14,7 @@ namespace KanColleLib.TransmissionData.api_req_mission.values
 
         public static GetItemValue fromDynamic(dynamic json)
         {
-            GetItemValue getitem = new GetItemValue();
+            var getitem = new GetItemValue();
 
             getitem.useitem_id = (int)json.api_useitem_id;
             getitem.useitem_name = json.api_useitem_name as string;

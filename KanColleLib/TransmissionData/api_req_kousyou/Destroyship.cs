@@ -15,7 +15,7 @@ namespace KanColleLib.TransmissionData.api_req_kousyou
 
         public static Destroyship fromDynamic(dynamic json)
         {
-            Destroyship destroyship = new Destroyship();
+            var destroyship = new Destroyship();
             destroyship.material = json.api_material.Deserialize<int[]>();
             return destroyship;
         }

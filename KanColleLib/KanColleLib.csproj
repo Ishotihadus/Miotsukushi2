@@ -102,6 +102,7 @@
     <Compile Include="TransmissionData\api_get_member\values\ShipValue.cs" />
     <Compile Include="TransmissionData\api_get_member\values\SlotItemValue.cs" />
     <Compile Include="TransmissionData\api_get_member\values\UseitemValue.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\WarValue.cs" />
     <Compile Include="TransmissionData\api_port\Log.cs" />
     <Compile Include="TransmissionData\api_port\Port.cs" />
     <Compile Include="TransmissionData\api_port\values\LogValue.cs" />

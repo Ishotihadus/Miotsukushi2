@@ -36,7 +36,7 @@ namespace Miotsukushi.Model
 
         public bool Remove(T item)
         {
-            int index = list.IndexOf(item);
+            var index = list.IndexOf(item);
             if (index != -1)
             {
                 RemoveAt(index);
@@ -54,7 +54,7 @@ namespace Miotsukushi.Model
 
         public int RemoveAll(Predicate<T> match)
         {
-            int ret = list.RemoveAll(match);
+            var ret = list.RemoveAll(match);
             OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Removed, -1));
             return ret;
         }
