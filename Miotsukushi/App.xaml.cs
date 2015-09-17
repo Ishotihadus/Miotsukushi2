@@ -26,8 +26,7 @@ namespace Miotsukushi
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             // ハンドルされていない例外
-            if(Current != null)
-                ((App)Current).OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { exceptionObject = e.ExceptionObject, exceptionType = "CurrentDomain_UnhandledException" });
+            ((App) Current)?.OnUnhandledExceptionRaised(new UnhandledExceptionRaisedEventArgs() { exceptionObject = e.ExceptionObject, exceptionType = "CurrentDomain_UnhandledException" });
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -48,9 +47,9 @@ namespace Miotsukushi
             SetCurrentCulture("en-US");
 #endif
             Model.MainModel.GetInstance();
-            var Window = new View.MainWindow();
-            Window.Closed += Window_Closed;
-            Window.Show();
+            var window = new View.MainWindow();
+            window.Closed += Window_Closed;
+            window.Show();
         }
 
 
@@ -58,7 +57,7 @@ namespace Miotsukushi
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culname);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culname);
-            Tools.ResourceStringGetter.culture = new CultureInfo(culname);
+            Tools.ResourceStringGetter.Culture = new CultureInfo(culname);
         }
 
         /// <summary>

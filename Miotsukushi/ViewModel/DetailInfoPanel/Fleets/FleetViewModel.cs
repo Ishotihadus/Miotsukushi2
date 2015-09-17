@@ -22,16 +22,16 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Ships, new object());
 
             this.id = id;
-            model = Model.MainModel.Current.kancolleModel;
-            model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
+            model = Model.MainModel.Current.KancolleModel;
+            model.Fleetdata.ExListChanged += Fleetdata_ExListChanged;
         }
 
         private void Fleetdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
         {
             if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == id)
             {
-                model.fleetdata[id].ships.CollectionChanged += ships_CollectionChanged;
-                model.fleetdata.ExListChanged -= Fleetdata_ExListChanged;
+                model.Fleetdata[id].Ships.CollectionChanged += ships_CollectionChanged;
+                model.Fleetdata.ExListChanged -= Fleetdata_ExListChanged;
             }
         }
 
@@ -41,7 +41,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                     if (e.NewItems.Count > 0)
-                        Ships.Insert(e.NewStartingIndex, new ShipViewModel(model.fleetdata[id].ships[e.NewStartingIndex]));
+                        Ships.Insert(e.NewStartingIndex, new ShipViewModel(model.Fleetdata[id].Ships[e.NewStartingIndex]));
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
                     Ships.Move(e.OldStartingIndex, e.NewStartingIndex);
@@ -50,15 +50,15 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
                     Ships.RemoveAt(e.OldStartingIndex);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-                    Ships[e.OldStartingIndex] = new ShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
+                    Ships[e.OldStartingIndex] = new ShipViewModel(model.Fleetdata[id].Ships[e.OldStartingIndex]);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                    for (var i = 0; i < model.fleetdata[id].ships.Count; i++)
+                    for (var i = 0; i < model.Fleetdata[id].Ships.Count; i++)
                     {
                         if (i < Ships.Count)
-                            Ships[i] = new ShipViewModel(model.fleetdata[id].ships[i]);
+                            Ships[i] = new ShipViewModel(model.Fleetdata[id].Ships[i]);
                         else
-                            Ships.Add(new ShipViewModel(model.fleetdata[id].ships[i]));
+                            Ships.Add(new ShipViewModel(model.Fleetdata[id].Ships[i]));
                     }
                     break;
             }

@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Miotsukushi.Model.KanColle.EventArgs
 {
-    class APIAnalyzeErrorEventArgs : System.EventArgs
+    class ApiAnalyzeErrorEventArgs : System.EventArgs
     {
-        public string request;
-        public string response;
-        public string kcsapiurl;
+        public string Request;
+        public string Response;
+        public string Kcsapiurl;
 
-        public APIAnalyzeErrorEventArgs(string kcsapiurl, string request, string response)
+        public ApiAnalyzeErrorEventArgs(string kcsapiurl, string request, string response)
         {
-            this.request = request;
-            this.response = response;
-            this.kcsapiurl = kcsapiurl;
+            this.Request = request;
+            this.Response = response;
+            this.Kcsapiurl = kcsapiurl;
         }
     }
 }

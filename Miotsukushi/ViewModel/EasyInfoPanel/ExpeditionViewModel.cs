@@ -196,10 +196,10 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         public ExpeditionViewModel(int id)
         {
             this.ID = id + 1;
-            model = Model.MainModel.Current.kancolleModel;
+            model = Model.MainModel.Current.KancolleModel;
             model.InitializeComplete += model_InitializeComplete;
-            model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
-            Model.MainModel.Current.timerModel.TimerElapsed += timerModel_TimerElapsed;
+            model.Fleetdata.ExListChanged += Fleetdata_ExListChanged;
+            Model.MainModel.Current.TimerModel.TimerElapsed += timerModel_TimerElapsed;
 
             DetailVisibility = false;
             Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotLoaded");
@@ -209,26 +209,26 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == ID - 1)
             {
-                model.fleetdata.ExListChanged -= Fleetdata_ExListChanged;
-                fleet = model.fleetdata[ID - 1];
+                model.Fleetdata.ExListChanged -= Fleetdata_ExListChanged;
+                fleet = model.Fleetdata[ID - 1];
                 fleet.PropertyChanged += Fleet_PropertyChanged;
 
-                if (fleet.ExpeditionStatus == FleetExpeditionStatus.unknown)
+                if (fleet.ExpeditionStatus == FleetExpeditionStatus.Unknown)
                 {
                     DetailVisibility = false;
                     Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                 }
-                else if (fleet.ExpeditionStatus == FleetExpeditionStatus.at_home)
+                else if (fleet.ExpeditionStatus == FleetExpeditionStatus.AtHome)
                 {
                     DetailVisibility = false;
                     Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_AtHome");
                 }
                 else
                 {
-                    MissionName = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
+                    MissionName = model.Missionmaster.ContainsKey(fleet.ExpeditionId) ? model.Missionmaster[fleet.ExpeditionId].Name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                     CompleteTime = fleet.ExpeditionBacktime;
                     RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
-                    ProgressMax = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].time_minute : 0;
+                    ProgressMax = model.Missionmaster.ContainsKey(fleet.ExpeditionId) ? model.Missionmaster[fleet.ExpeditionId].TimeMinute : 0;
                     ProgressValue = ProgressMax - RemainTime.TotalMinutes;
                 }
                 UpdateBorderBrush();
@@ -240,12 +240,12 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             switch(e.PropertyName)
             {
                 case "ExpeditionStatus":
-                    if (fleet.ExpeditionStatus == FleetExpeditionStatus.unknown)
+                    if (fleet.ExpeditionStatus == FleetExpeditionStatus.Unknown)
                     {
                         DetailVisibility = false;
                         Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                     }
-                    else if(fleet.ExpeditionStatus == FleetExpeditionStatus.at_home)
+                    else if(fleet.ExpeditionStatus == FleetExpeditionStatus.AtHome)
                     {
                         DetailVisibility = false;
                         Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_AtHome");
@@ -254,11 +254,11 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                         DetailVisibility = true;
                     UpdateBorderBrush();
                     break;
-                case "ExpeditionID":
-                    MissionName = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
+                case "ExpeditionId":
+                    MissionName = model.Missionmaster.ContainsKey(fleet.ExpeditionId) ? model.Missionmaster[fleet.ExpeditionId].Name : Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_Unknown");
                     CompleteTime = fleet.ExpeditionBacktime;
                     RemainTime = DateTime.Now < CompleteTime ? CompleteTime - DateTime.Now : TimeSpan.Zero;
-                    ProgressMax = model.missionmaster.ContainsKey(fleet.ExpeditionID) ? model.missionmaster[fleet.ExpeditionID].time_minute : 0;
+                    ProgressMax = model.Missionmaster.ContainsKey(fleet.ExpeditionId) ? model.Missionmaster[fleet.ExpeditionId].TimeMinute : 0;
                     ProgressValue = ProgressMax - RemainTime.TotalMinutes;
                     break;
                 case "ExpeditionBacktime":
@@ -278,7 +278,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         void model_InitializeComplete(object sender, EventArgs e)
         {
-            if (model.fleetdata.Count <= ID - 1)
+            if (model.Fleetdata.Count <= ID - 1)
             {
                 Message = Tools.ResourceStringGetter.GetResourceString("ExpeditionStatus_NotOpened");
                 DetailVisibility = false;
@@ -289,15 +289,15 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         void UpdateBorderBrush()
         {
-            if (model.fleetdata == null || model.fleetdata.Count <= ID - 1)
+            if (model.Fleetdata == null || model.Fleetdata.Count <= ID - 1)
                 BorderBrush = Brushes.Gray;
             else
                 switch(fleet.ExpeditionStatus)
                 {
-                    case FleetExpeditionStatus.at_home:
+                    case FleetExpeditionStatus.AtHome:
                         BorderBrush =  Brushes.SpringGreen;
                         break;
-                    case FleetExpeditionStatus.on_expedition:
+                    case FleetExpeditionStatus.OnExpedition:
                         if (RemainTime.TotalMinutes < 0)
                             BorderBrush = Brushes.OrangeRed;
                         else if (RemainTime.TotalMinutes < 1)
@@ -305,7 +305,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                         else
                             BorderBrush = Brushes.SlateBlue;
                         break;
-                    case FleetExpeditionStatus.force_backing:
+                    case FleetExpeditionStatus.ForceBacking:
                         if (RemainTime.TotalMinutes < 0)
                             BorderBrush = Brushes.OrangeRed;
                         else if (RemainTime.TotalMinutes < 1)
@@ -313,7 +313,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                         else
                             BorderBrush = Brushes.Crimson;
                         break;
-                    case FleetExpeditionStatus.expedition_complete:
+                    case FleetExpeditionStatus.ExpeditionComplete:
                         BorderBrush = Brushes.OrangeRed;
                         break;
                     default:

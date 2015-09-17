@@ -37,16 +37,16 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             Quests = new ObservableCollection<QuestViewModel>();
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Quests, new object());
-            model = Miotsukushi.Model.MainModel.Current.kancolleModel;
-            model.questdata.QuestChange += Questdata_QuestChange;
+            model = Miotsukushi.Model.MainModel.Current.KancolleModel;
+            model.Questdata.QuestChange += Questdata_QuestChange;
             QuestListVisibility = false;
         }
 
         private void Questdata_QuestChange(object sender, EventArgs e)
         {
-            for (var i = 0; i < model.questdata.executingquest.Count; i++)
+            for (var i = 0; i < model.Questdata.Executingquest.Count; i++)
             {
-                var quest = model.questdata.executingquest[i];
+                var quest = model.Questdata.Executingquest[i];
                 if (Quests.Count <= i)
                 {
                     Quests.Add(new QuestViewModel(quest));
@@ -55,7 +55,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                 {
                     Quests[i] = new QuestViewModel(quest);
                 }
-                else if(Quests[i].ID != quest.id)
+                else if(Quests[i].ID != quest.Id)
                 {
                     Quests.Insert(i, new QuestViewModel(quest));
                 }
@@ -65,7 +65,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                 }
             }
 
-            for (var i = model.questdata.executingquest.Count; i < Quests.Count; i++)
+            for (var i = model.Questdata.Executingquest.Count; i < Quests.Count; i++)
             {
                 if (Quests[i].DetailVisibility)
                 {
@@ -76,13 +76,13 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
             var nullcount = (from _ in Quests where !_.DetailVisibility select _).Count();
 
-            while (nullcount < model.questdata.exec_count - model.questdata.executingquest.Count)
+            while (nullcount < model.Questdata.ExecCount - model.Questdata.Executingquest.Count)
             {
                 Quests.Add(new QuestViewModel(null));
                 ++nullcount;
             }
 
-            while (nullcount > model.questdata.exec_count - model.questdata.executingquest.Count)
+            while (nullcount > model.Questdata.ExecCount - model.Questdata.Executingquest.Count)
             {
                 var nl = Quests.FirstOrDefault(_ => !_.DetailVisibility);
                 if (nl != null)

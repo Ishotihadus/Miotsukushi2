@@ -8,11 +8,11 @@ namespace Miotsukushi.Model.KanColle.EventArgs
 {
     class StringEventArgs
     {
-        public string message;
+        public string Message;
 
         public StringEventArgs(string message)
         {
-            this.message = message;
+            this.Message = message;
         }
     }
 }

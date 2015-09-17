@@ -8,7 +8,7 @@ namespace Miotsukushi.Model.KanColle
 {
     class ItemEquipTypeData
     {
-        public string name;
-        public System.Windows.Media.Color typecolor;
+        public string Name;
+        public System.Windows.Media.Color Typecolor;
     }
 }

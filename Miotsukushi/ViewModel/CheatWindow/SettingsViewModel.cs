@@ -24,7 +24,7 @@ namespace Miotsukushi.ViewModel.CheatWindow
                 if (_ThemeSelectedIndex != value)
                 {
                     _ThemeSelectedIndex = value;
-                    Model.MainModel.Current.themeModel.selected_theme = value;
+                    Model.MainModel.Current.ThemeModel.SelectedTheme = value;
                     OnPropertyChanged(() => ThemeSelectedIndex);
                 }
             }
@@ -43,7 +43,7 @@ namespace Miotsukushi.ViewModel.CheatWindow
                 if (_AccentColorSelectedIndex != value)
                 {
                     _AccentColorSelectedIndex = value;
-                    Model.MainModel.Current.themeModel.selected_accent = value;
+                    Model.MainModel.Current.ThemeModel.SelectedAccent = value;
                     OnPropertyChanged(() => AccentColorSelectedIndex);
                 }
             }
@@ -117,10 +117,10 @@ namespace Miotsukushi.ViewModel.CheatWindow
         public SettingsViewModel()
         {
             var model = Model.MainModel.Current;
-            Themes = model.themeModel.theme_name.ToList();
-            AccentColors = model.themeModel.accent_name.ToList();
-            ThemeSelectedIndex = model.themeModel.selected_theme;
-            AccentColorSelectedIndex = model.themeModel.selected_accent;
+            Themes = model.ThemeModel.ThemeName.ToList();
+            AccentColors = model.ThemeModel.AccentName.ToList();
+            ThemeSelectedIndex = model.ThemeModel.SelectedTheme;
+            AccentColorSelectedIndex = model.ThemeModel.SelectedAccent;
             StatisticsDBToken = Properties.Settings.Default.StatisticsDBToken;
             StatisticsSendingOn = Properties.Settings.Default.StatisticsSendingOn;
             SoftwareRendering = Properties.Settings.Default.SoftwareRendering;

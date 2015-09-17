@@ -11,11 +11,11 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 海域名
         /// </summary>
-        public string name;
+        public string Name;
 
         /// <summary>
         /// 海域のタイプ（0が通常海域、1がイベント海域）
         /// </summary>
-        public int type;
+        public int Type;
     }
 }

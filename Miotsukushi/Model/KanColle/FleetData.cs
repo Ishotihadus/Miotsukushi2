@@ -12,61 +12,61 @@ namespace Miotsukushi.Model.KanColle
     {
         #region プロパティ定義
 
-        private string _DeckName;
+        private string _deckName;
         public string DeckName
         {
             get
             {
-                return _DeckName;
+                return _deckName;
             }
 
             set
             {
-                if (_DeckName != value)
+                if (_deckName != value)
                 {
-                    _DeckName = value;
+                    _deckName = value;
                     OnPropertyChanged(() => DeckName);
                 }
             }
         }
 
-        private int _FlagShipLevel;
+        private int _flagShipLevel;
         public int FlagShipLevel
         {
             get
             {
-                return _FlagShipLevel;
+                return _flagShipLevel;
             }
 
             private set
             {
-                if (_FlagShipLevel != value)
+                if (_flagShipLevel != value)
                 {
-                    _FlagShipLevel = value;
+                    _flagShipLevel = value;
                     OnPropertyChanged(() => FlagShipLevel);
                 }
             }
         }
 
-        private int _SumShipLevel;
+        private int _sumShipLevel;
         public int SumShipLevel
         {
             get
             {
-                return _SumShipLevel;
+                return _sumShipLevel;
             }
 
             private set
             {
-                if (_SumShipLevel != value)
+                if (_sumShipLevel != value)
                 {
-                    _SumShipLevel = value;
+                    _sumShipLevel = value;
                     OnPropertyChanged(() => SumShipLevel);
                 }
             }
         }
 
-        private int _SumAirMastery;
+        private int _sumAirMastery;
         /// <summary>
         /// 制空値の合計
         /// </summary>
@@ -74,20 +74,20 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _SumAirMastery;
+                return _sumAirMastery;
             }
 
             private set
             {
-                if (_SumAirMastery != value)
+                if (_sumAirMastery != value)
                 {
-                    _SumAirMastery = value;
+                    _sumAirMastery = value;
                     OnPropertyChanged(() => SumAirMastery);
                 }
             }
         }
 
-        private int _DrumCount;
+        private int _drumCount;
         /// <summary>
         /// ドラム缶数の合計
         /// </summary>
@@ -95,20 +95,20 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _DrumCount;
+                return _drumCount;
             }
 
             private set
             {
-                if (_DrumCount != value)
+                if (_drumCount != value)
                 {
-                    _DrumCount = value;
+                    _drumCount = value;
                     OnPropertyChanged(() => DrumCount);
                 }
             }
         }
 
-        private int _DrumShipCount;
+        private int _drumShipCount;
         /// <summary>
         /// ドラム缶積載艦数
         /// </summary>
@@ -116,21 +116,21 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _DrumShipCount;
+                return _drumShipCount;
             }
 
             private set
             {
-                if (_DrumShipCount != value)
+                if (_drumShipCount != value)
                 {
-                    _DrumShipCount = value;
+                    _drumShipCount = value;
                     OnPropertyChanged(() => DrumShipCount);
                 }
             }
         }
 
 
-        private double _OkinoshimaSearchParameter;
+        private double _okinoshimaSearchParameter;
         /// <summary>
         /// いわゆる2-5式
         /// </summary>
@@ -138,21 +138,21 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _OkinoshimaSearchParameter;
+                return _okinoshimaSearchParameter;
             }
 
             set
             {
-                if (_OkinoshimaSearchParameter != value)
+                if (_okinoshimaSearchParameter != value)
                 {
-                    _OkinoshimaSearchParameter = value;
+                    _okinoshimaSearchParameter = value;
                     OnPropertyChanged(() => OkinoshimaSearchParameter);
                 }
             }
         }
 
 
-        private double _OkinoshimaSearchParameterError;
+        private double _okinoshimaSearchParameterError;
         /// <summary>
         /// いわゆる2-5式のエラー
         /// </summary>
@@ -160,20 +160,20 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _OkinoshimaSearchParameterError;
+                return _okinoshimaSearchParameterError;
             }
 
             set
             {
-                if (_OkinoshimaSearchParameterError != value)
+                if (_okinoshimaSearchParameterError != value)
                 {
-                    _OkinoshimaSearchParameterError = value;
+                    _okinoshimaSearchParameterError = value;
                     OnPropertyChanged(() => OkinoshimaSearchParameterError);
                 }
             }
         }
 
-        private int _MinCond;
+        private int _minCond;
         /// <summary>
         /// 最小Cond値（なお1回の遠征で減るCondは3）
         /// </summary>
@@ -181,21 +181,21 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _MinCond;
+                return _minCond;
             }
 
             set
             {
-                if (_MinCond != value)
+                if (_minCond != value)
                 {
-                    _MinCond = value;
+                    _minCond = value;
                     OnPropertyChanged(() => MinCond);
                     RemainExpeditionCount = (value >= 50) ? (value - 50) / 3 + 1 : 0;
                 }
             }
         }
 
-        private int _RemainExpeditionCount;
+        private int _remainExpeditionCount;
         /// <summary>
         /// 同一編成キラ付けなしで全艦キラキラ遠征に出せる回数
         /// </summary>
@@ -203,126 +203,126 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _RemainExpeditionCount;
+                return _remainExpeditionCount;
             }
 
             set
             {
-                if (_RemainExpeditionCount != value)
+                if (_remainExpeditionCount != value)
                 {
-                    _RemainExpeditionCount = value;
+                    _remainExpeditionCount = value;
                     OnPropertyChanged(() => RemainExpeditionCount);
                 }
             }
         }
 
 
-        private FleetExpeditionStatus _ExpeditionStatus;
+        private FleetExpeditionStatus _expeditionStatus;
         public FleetExpeditionStatus ExpeditionStatus
         {
             get
             {
-                return _ExpeditionStatus;
+                return _expeditionStatus;
             }
 
             set
             {
-                if (_ExpeditionStatus != value)
+                if (_expeditionStatus != value)
                 {
-                    _ExpeditionStatus = value;
+                    _expeditionStatus = value;
                     OnPropertyChanged(() => ExpeditionStatus);
                 }
             }
         }
 
 
-        private DateTime _ExpeditionBacktime;
+        private DateTime _expeditionBacktime;
         public DateTime ExpeditionBacktime
         {
             get
             {
-                return _ExpeditionBacktime;
+                return _expeditionBacktime;
             }
 
             set
             {
-                if (_ExpeditionBacktime != value)
+                if (_expeditionBacktime != value)
                 {
-                    _ExpeditionBacktime = value;
+                    _expeditionBacktime = value;
                     OnPropertyChanged(() => ExpeditionBacktime);
                 }
             }
         }
 
-        private int _ExpeditionID;
-        public int ExpeditionID
+        private int _expeditionId;
+        public int ExpeditionId
         {
             get
             {
-                return _ExpeditionID;
+                return _expeditionId;
             }
 
             set
             {
-                if (_ExpeditionID != value)
+                if (_expeditionId != value)
                 {
-                    _ExpeditionID = value;
-                    OnPropertyChanged(() => ExpeditionID);
+                    _expeditionId = value;
+                    OnPropertyChanged(() => ExpeditionId);
                 }
             }
         }
 
-        private int _DockingShipsCount;
+        private int _dockingShipsCount;
         public int DockingShipsCount
         {
             get
             {
-                return _DockingShipsCount;
+                return _dockingShipsCount;
             }
 
             set
             {
-                if (_DockingShipsCount != value)
+                if (_dockingShipsCount != value)
                 {
-                    _DockingShipsCount = value;
+                    _dockingShipsCount = value;
                     OnPropertyChanged(() => DockingShipsCount);
                 }
             }
         }
 
 
-        private bool _HasTaihaShip;
+        private bool _hasTaihaShip;
         public bool HasTaihaShip
         {
             get
             {
-                return _HasTaihaShip;
+                return _hasTaihaShip;
             }
 
             set
             {
-                if (_HasTaihaShip != value)
+                if (_hasTaihaShip != value)
                 {
-                    _HasTaihaShip = value;
+                    _hasTaihaShip = value;
                     OnPropertyChanged(() => HasTaihaShip);
                 }
             }
         }
 
 
-        private bool _HasUnsuppliedShip;
+        private bool _hasUnsuppliedShip;
         public bool HasUnsuppliedShip
         {
             get
             {
-                return _HasUnsuppliedShip;
+                return _hasUnsuppliedShip;
             }
 
             set
             {
-                if (_HasUnsuppliedShip != value)
+                if (_hasUnsuppliedShip != value)
                 {
-                    _HasUnsuppliedShip = value;
+                    _hasUnsuppliedShip = value;
                     OnPropertyChanged(() => HasUnsuppliedShip);
                 }
             }
@@ -332,7 +332,7 @@ namespace Miotsukushi.Model.KanColle
 
         #endregion
 
-        public ObservableCollection<int> ships = new ObservableCollection<int>();
+        public ObservableCollection<int> Ships = new ObservableCollection<int>();
 
 
         public void FromDeckValue(KanColleLib.TransmissionData.api_get_member.values.DeckValue data)
@@ -343,22 +343,22 @@ namespace Miotsukushi.Model.KanColle
             {
                 if (data.ship[i] == -1)
                 {
-                    while (ships.Count > i)
-                        ships.RemoveAt(i);
+                    while (Ships.Count > i)
+                        Ships.RemoveAt(i);
                     break;
                 }
                 else
                 {
-                    if (i < ships.Count)
+                    if (i < Ships.Count)
                     {
-                        if (ships[i] != data.ship[i])
+                        if (Ships[i] != data.ship[i])
                         {
-                            ships[i] = data.ship[i];
+                            Ships[i] = data.ship[i];
                         }
                     }
                     else
                     {
-                        ships.Add(data.ship[i]);
+                        Ships.Add(data.ship[i]);
                     }
                 }
             }
@@ -376,50 +376,50 @@ namespace Miotsukushi.Model.KanColle
         /// </summary>
         public void Recalc()
         {
-            var model = MainModel.Current.kancolleModel;
+            var model = MainModel.Current.KancolleModel;
 
-            var _sumshiplevel = 0;
-            var _sumairmastery = 0;
-            var _drumcount = 0;
-            var _drumshipcount = 0;
-            double _okinoshimaparameter = 0;
-            double _okinoshimaerror = 0;
-            int? _mincond = null;
-            for (var i = 0; i < ships.Count; i++)
+            var sumshiplevel = 0;
+            var sumairmastery = 0;
+            var drumcount = 0;
+            var drumshipcount = 0;
+            double okinoshimaparameter = 0;
+            double okinoshimaerror = 0;
+            int? mincond = null;
+            for (var i = 0; i < Ships.Count; i++)
             {
-                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
+                var ship = model.Shipdata.FirstOrDefault(_ => _.Shipid == Ships[i]);
                 if (ship != null)
                 {
-                    _sumshiplevel += ship.level;
-                    _sumairmastery += ship.air_mastery;
+                    sumshiplevel += ship.Level;
+                    sumairmastery += ship.AirMastery;
                     var thisdrumcount = KanColleTools.ShipDrumCount(ship);
-                    _drumcount += thisdrumcount;
+                    drumcount += thisdrumcount;
                     if (thisdrumcount > 0)
-                        ++_drumshipcount;
+                        ++drumshipcount;
                     double thisokinoshimaparameter;
                     double thisokinoshimaerror;
                     KanColleTools.ShipOkinoshimaSearchParameter(ship, out thisokinoshimaparameter, out thisokinoshimaerror);
-                    _okinoshimaparameter += thisokinoshimaparameter;
-                    _okinoshimaerror += thisokinoshimaerror;
+                    okinoshimaparameter += thisokinoshimaparameter;
+                    okinoshimaerror += thisokinoshimaerror;
 
                 }
                 if (i == 0)
                     if (ship != null)
-                        FlagShipLevel = ship.level;
+                        FlagShipLevel = ship.Level;
                     else
                         FlagShipLevel = 0;
 
-                if (!_mincond.HasValue || _mincond > ship.condition)
-                    _mincond = ship.condition;
+                if (!mincond.HasValue || mincond > ship.Condition)
+                    mincond = ship.Condition;
             }
-            SumShipLevel = _sumshiplevel;
-            SumAirMastery = _sumairmastery;
-            DrumCount = _drumcount;
-            DrumShipCount = _drumshipcount;
-            OkinoshimaSearchParameter = _okinoshimaparameter - 0.6142467 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
-            OkinoshimaSearchParameterError = _okinoshimaerror + 0.03692224 * (int)((model.basicdata.admiral_level + 4) / 5) * 5;
+            SumShipLevel = sumshiplevel;
+            SumAirMastery = sumairmastery;
+            DrumCount = drumcount;
+            DrumShipCount = drumshipcount;
+            OkinoshimaSearchParameter = okinoshimaparameter - 0.6142467 * (int)((model.Basicdata.AdmiralLevel + 4) / 5) * 5;
+            OkinoshimaSearchParameterError = okinoshimaerror + 0.03692224 * (int)((model.Basicdata.AdmiralLevel + 4) / 5) * 5;
 
-            MinCond = _mincond ?? 0;
+            MinCond = mincond ?? 0;
 
             ChangeNDockStatus();
             ChangeSupplyStatus();
@@ -427,51 +427,51 @@ namespace Miotsukushi.Model.KanColle
 
         public void ChangeNDockStatus()
         {
-            var model = MainModel.Current.kancolleModel;
-            DockingShipsCount = model.ndockdata.Count(_ => ships.Contains(_.shipid));
+            var model = MainModel.Current.KancolleModel;
+            DockingShipsCount = model.Ndockdata.Count(_ => Ships.Contains(_.Shipid));
 
-            var _hastaihaship = false;
-            for (var i = 0; i < ships.Count; i++)
+            var hastaihaship = false;
+            for (var i = 0; i < Ships.Count; i++)
             {
-                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
-                if (ship != null && ship.hp_now <= ship.hp_max * 0.25)
+                var ship = model.Shipdata.FirstOrDefault(_ => _.Shipid == Ships[i]);
+                if (ship != null && ship.HpNow <= ship.HpMax * 0.25)
                 {
-                    _hastaihaship = true;
+                    hastaihaship = true;
                     break;
                 }
             }
 
-            HasTaihaShip = _hastaihaship;
+            HasTaihaShip = hastaihaship;
         }
 
         public void ChangeMissionStatus(int status, int id, long time)
         {
             ExpeditionStatus =
-                status == 0 ? FleetExpeditionStatus.at_home :
-                status == 1 ? FleetExpeditionStatus.on_expedition :
-                status == 2 ? FleetExpeditionStatus.expedition_complete :
-                status == 3 ? FleetExpeditionStatus.force_backing :
-                FleetExpeditionStatus.unknown;
-            ExpeditionID = id;
+                status == 0 ? FleetExpeditionStatus.AtHome :
+                status == 1 ? FleetExpeditionStatus.OnExpedition :
+                status == 2 ? FleetExpeditionStatus.ExpeditionComplete :
+                status == 3 ? FleetExpeditionStatus.ForceBacking :
+                FleetExpeditionStatus.Unknown;
+            ExpeditionId = id;
             ExpeditionBacktime = Miotsukushi.Tools.TimeParser.ParseTimeFromLong(time);
         }
 
         public void ChangeSupplyStatus()
         {
-            var model = MainModel.Current.kancolleModel;
-            var _hasunsuppliedship = false;
+            var model = MainModel.Current.KancolleModel;
+            var hasunsuppliedship = false;
 
-            for (var i = 0; i < ships.Count; i++)
+            for (var i = 0; i < Ships.Count; i++)
             {
-                var ship = model.shipdata.FirstOrDefault(_ => _.shipid == ships[i]);
+                var ship = model.Shipdata.FirstOrDefault(_ => _.Shipid == Ships[i]);
                 if (ship != null)
                 {
-                    if (ship.characterinfo != null)
-                        _hasunsuppliedship = _hasunsuppliedship || ship.fuel != ship.characterinfo.fuel_max || ship.ammo != ship.characterinfo.ammo_max;
+                    if (ship.Characterinfo != null)
+                        hasunsuppliedship = hasunsuppliedship || ship.Fuel != ship.Characterinfo.FuelMax || ship.Ammo != ship.Characterinfo.AmmoMax;
                 }
             }
 
-            HasUnsuppliedShip = _hasunsuppliedship;
+            HasUnsuppliedShip = hasunsuppliedship;
         }
     }
 }

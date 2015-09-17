@@ -8,14 +8,14 @@ namespace Miotsukushi.Model.KanColle
 {
     enum FleetExpeditionStatus
     {
-        unknown,
+        Unknown,
 
-        at_home,
+        AtHome,
 
-        on_expedition,
+        OnExpedition,
 
-        force_backing,
+        ForceBacking,
 
-        expedition_complete,
+        ExpeditionComplete,
     }
 }

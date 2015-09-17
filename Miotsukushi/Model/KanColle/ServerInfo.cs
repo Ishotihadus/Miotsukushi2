@@ -10,7 +10,7 @@ namespace Miotsukushi.Model.KanColle
 {
     class ServerInfo
     {
-        static readonly Dictionary<IPAddress, string> address_dic = new Dictionary<IPAddress, string>()
+        static readonly Dictionary<IPAddress, string> AddressDic = new Dictionary<IPAddress, string>()
         {
             { IPAddress.Parse("127.0.0.1"), "localhost" },
             { IPAddress.Parse("203.104.209.71"), "横須賀鎮守府" },
@@ -36,27 +36,25 @@ namespace Miotsukushi.Model.KanColle
             { IPAddress.Parse("203.104.209.102"), "柱島泊地" }
         };
 
-        public IPAddress address;
+        public IPAddress Address;
 
         public string GetServerNameFromString(string ipString)
         {
             IPAddress address;
-            if (!IPAddress.TryParse(ipString, out address))
-                return null;
-            return GetServerNameFromAddress(address);
+            return !IPAddress.TryParse(ipString, out address) ? null : GetServerNameFromAddress(address);
         }
 
         public string GetServerNameFromAddress(IPAddress address)
         {
-            if (address != null && address_dic.ContainsKey(address))
-                return address_dic[address];
+            if (address != null && AddressDic.ContainsKey(address))
+                return AddressDic[address];
             else
                 return null;
         }
 
         public string GetServerName()
         {
-            return GetServerNameFromAddress(address);
+            return GetServerNameFromAddress(Address);
         }
 
         public bool SetServerAddress(string url)
@@ -64,7 +62,7 @@ namespace Miotsukushi.Model.KanColle
             if (Regex.IsMatch(url, @"^(https?|ftp)://\d+\.\d+\.\d+\.\d+.*$"))
             {
                 var address = Regex.Match(url, @"\d+\.\d+\.\d+\.\d+").Value;
-                return IPAddress.TryParse(address, out this.address);
+                return IPAddress.TryParse(address, out this.Address);
             }
             else
             {

@@ -9,11 +9,11 @@ namespace Miotsukushi.Model.KanColle
 {
     class DebuggerModel
     {
-        KanColleNotifier kclib;
+        readonly KanColleNotifier _kclib;
 
         public DebuggerModel(KanColleNotifier kclib)
         {
-            this.kclib = kclib;
+            this._kclib = kclib;
         }
 
         public bool IsAvailable(string url, string req, string res)
@@ -21,11 +21,7 @@ namespace Miotsukushi.Model.KanColle
             if (url == null || req == null || res == null)
                 return false;
 
-            if (!res.StartsWith("svdata={"))
-                return false;
-            
-
-            return true;
+            return res.StartsWith("svdata={");
         }
 
         public void RaiseEvent(string url, string req, string res)
@@ -33,7 +29,7 @@ namespace Miotsukushi.Model.KanColle
             if (url == null || req == null || res == null)
                 return;
 
-            kclib.ForceRaiseEvent(url, req, res);
+            _kclib.ForceRaiseEvent(url, req, res);
         }
 
         public void RaiseEventFromFile()
@@ -54,7 +50,7 @@ namespace Miotsukushi.Model.KanColle
 
         public async void RaiseEventFromFileAsync()
         {
-            await Task.Run(new Action(() => RaiseEventFromFile()));
+            await Task.Run(new Action(RaiseEventFromFile));
         }
     }
 }

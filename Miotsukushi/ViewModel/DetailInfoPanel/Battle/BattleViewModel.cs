@@ -282,106 +282,106 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
 
         public BattleViewModel()
         {
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            kcmodel.battlemodel.BattleAnalyzed += Battlemodel_BattleAnalyzed;
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            kcmodel.Battlemodel.BattleAnalyzed += Battlemodel_BattleAnalyzed;
         }
 
         private void Battlemodel_BattleAnalyzed(object sender, Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs e)
         {
-            var battlemodel = Model.MainModel.Current.kancolleModel.battlemodel;
-            AreaID = battlemodel.area_id;
-            MapID = battlemodel.map_id;
-            MapName = battlemodel.map_name;
-            CellID = battlemodel.cell_id;
+            var battlemodel = Model.MainModel.Current.KancolleModel.Battlemodel;
+            AreaID = battlemodel.AreaId;
+            MapID = battlemodel.MapId;
+            MapName = battlemodel.MapName;
+            CellID = battlemodel.CellId;
 
-            FormationMe = FormationString(e.friend_formation);
-            FormationEnemy = FormationString(e.enemy_formation);
-            AirMasteryStatus = AirMasteryString(e.air_mastery);
+            FormationMe = FormationString(e.FriendFormation);
+            FormationEnemy = FormationString(e.EnemyFormation);
+            AirMasteryStatus = AirMasteryString(e.AirMastery);
             CrossingStatus = CrossingString(e.crossing_type);
-            GaugeMe = e.friend_gauge * 100;
-            GaugeEnemy = e.enemy_gauge * 100;
+            GaugeMe = e.FriendGauge * 100;
+            GaugeEnemy = e.EnemyGauge * 100;
 
             var me_list = new List<BattleShipViewModel>();
-            foreach(var ship in e.friend)
+            foreach(var ship in e.Friend)
             {
                 me_list.Add(new BattleShipViewModel()
                 {
-                    ShipName = ship.name,
-                    ShipLevel = ship.level,
-                    MaxHP = ship.max_hp,
-                    AfterHP = ship.after_hp,
-                    SumAttack = ship.sum_attack, 
-                    SumDamage = ship.before_hp - ship.after_hp,
-                    Firepower = ship.fire_power,
-                    Torpedo = ship.torpedo,
-                    AntiAir = ship.anti_air,
-                    Armor = ship.armor,
+                    ShipName = ship.Name,
+                    ShipLevel = ship.Level,
+                    MaxHP = ship.MaxHp,
+                    AfterHP = ship.AfterHp,
+                    SumAttack = ship.SumAttack, 
+                    SumDamage = ship.BeforeHp - ship.AfterHp,
+                    Firepower = ship.FirePower,
+                    Torpedo = ship.Torpedo,
+                    AntiAir = ship.AntiAir,
+                    Armor = ship.Armor,
                     IsFriend = true,
-                    Speed = ship.speed,
-                    IsEscaped = ship.escaped,
-                    Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
+                    Speed = ship.Speed,
+                    IsEscaped = ship.Escaped,
+                    Slot = (ship.Slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                     {
-                        ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
-                        ItemTypeColor = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.kancolleModel.slotitemmaster[_].type_equiptype) : System.Windows.Media.Colors.Transparent
+                        ItemName = Model.MainModel.Current.KancolleModel.Slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.KancolleModel.Slotitemmaster[_].Name : _ == -1 ? "空き" : "不明",
+                        ItemTypeColor = Model.MainModel.Current.KancolleModel.Slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.KancolleModel.Slotitemmaster[_].TypeEquiptype) : System.Windows.Media.Colors.Transparent
                     }).ToList())
                 });
             }
             ShipsMe = me_list;
 
             var enemy_list = new List<BattleShipViewModel>();
-            foreach (var ship in e.enemy)
+            foreach (var ship in e.Enemy)
             {
                 enemy_list.Add(new BattleShipViewModel()
                 {
-                    ShipName = ship.name,
-                    ShipLevel = ship.level,
-                    MaxHP = ship.max_hp,
-                    AfterHP = ship.after_hp,
-                    SumAttack = ship.sum_attack,
-                    SumDamage = ship.before_hp - ship.after_hp,
-                    Firepower = ship.fire_power,
-                    Torpedo = ship.torpedo,
-                    AntiAir = ship.anti_air,
-                    Armor = ship.armor,
+                    ShipName = ship.Name,
+                    ShipLevel = ship.Level,
+                    MaxHP = ship.MaxHp,
+                    AfterHP = ship.AfterHp,
+                    SumAttack = ship.SumAttack,
+                    SumDamage = ship.BeforeHp - ship.AfterHp,
+                    Firepower = ship.FirePower,
+                    Torpedo = ship.Torpedo,
+                    AntiAir = ship.AntiAir,
+                    Armor = ship.Armor,
                     IsFriend = false,
-                    Speed = ship.speed,
-                    Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
+                    Speed = ship.Speed,
+                    Slot = (ship.Slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                     {
-                        ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
-                        ItemTypeColor = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.kancolleModel.slotitemmaster[_].type_equiptype) : System.Windows.Media.Colors.Transparent
+                        ItemName = Model.MainModel.Current.KancolleModel.Slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.KancolleModel.Slotitemmaster[_].Name : _ == -1 ? "空き" : "不明",
+                        ItemTypeColor = Model.MainModel.Current.KancolleModel.Slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.KancolleModel.Slotitemmaster[_].TypeEquiptype) : System.Windows.Media.Colors.Transparent
                     }).ToList())
                 });
             }
             ShipsEnemy = enemy_list;
 
-            if (e.friend_combined != null)
+            if (e.FriendCombined != null)
             {
-                var combined_list = new List<BattleShipViewModel>();
-                foreach (var ship in e.friend_combined)
+                var combinedList = new List<BattleShipViewModel>();
+                foreach (var ship in e.FriendCombined)
                 {
-                    combined_list.Add(new BattleShipViewModel()
+                    combinedList.Add(new BattleShipViewModel()
                     {
-                        ShipName = ship.name,
-                        ShipLevel = ship.level,
-                        MaxHP = ship.max_hp,
-                        AfterHP = ship.after_hp,
-                        SumAttack = ship.sum_attack,
-                        SumDamage = ship.before_hp - ship.after_hp,
-                        Firepower = ship.fire_power,
-                        Torpedo = ship.torpedo,
-                        AntiAir = ship.anti_air,
-                        Armor = ship.armor,
+                        ShipName = ship.Name,
+                        ShipLevel = ship.Level,
+                        MaxHP = ship.MaxHp,
+                        AfterHP = ship.AfterHp,
+                        SumAttack = ship.SumAttack,
+                        SumDamage = ship.BeforeHp - ship.AfterHp,
+                        Firepower = ship.FirePower,
+                        Torpedo = ship.Torpedo,
+                        AntiAir = ship.AntiAir,
+                        Armor = ship.Armor,
                         IsFriend = true,
-                        Speed = ship.speed,
-                        IsEscaped = ship.escaped,
-                        Slot = (ship.slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
+                        Speed = ship.Speed,
+                        IsEscaped = ship.Escaped,
+                        Slot = (ship.Slot.Select(_ => new BattleShipViewModel.BattleShipSlotViewModel()
                         {
-                            ItemName = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.kancolleModel.slotitemmaster[_].name : _ == -1 ? "空き" : "不明",
-                            ItemTypeColor = Model.MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.kancolleModel.slotitemmaster[_].type_equiptype) : System.Windows.Media.Colors.Transparent
+                            ItemName = Model.MainModel.Current.KancolleModel.Slotitemmaster.ContainsKey(_) ? Model.MainModel.Current.KancolleModel.Slotitemmaster[_].Name : _ == -1 ? "空き" : "不明",
+                            ItemTypeColor = Model.MainModel.Current.KancolleModel.Slotitemmaster.ContainsKey(_) ? Tools.KanColleTools.GetSlotItemEquipTypeColor(Model.MainModel.Current.KancolleModel.Slotitemmaster[_].TypeEquiptype) : System.Windows.Media.Colors.Transparent
                         }).ToList())
                     });
                 }
-                ShipsCombined = combined_list;
+                ShipsCombined = combinedList;
             }
             else
                 ShipsCombined = new List<BattleShipViewModel>();
@@ -391,40 +391,40 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Battle
         {
             switch(formation)
             {
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.tanju: return "単縦陣";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.fukuju: return "複従陣";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.rinkei: return "輪形陣";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.teikei: return "梯形陣";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.tanou: return "単横陣";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.daiichikeikai: return "第一警戒航行序列";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.dainikeikai: return "第二警戒航行序列";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.daisankeikai: return "第三警戒航行序列";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.daiyonkeikai: return "第四警戒航行序列";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Tanju: return "単縦陣";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Fukuju: return "複従陣";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Rinkei: return "輪形陣";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Teikei: return "梯形陣";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Tanou: return "単横陣";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Daiichikeikai: return "第一警戒航行序列";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Dainikeikai: return "第二警戒航行序列";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Daisankeikai: return "第三警戒航行序列";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.Formation.Daiyonkeikai: return "第四警戒航行序列";
                 default: return "不明";
             }
         }
 
-        private string CrossingString(Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType crossing_type)
+        private string CrossingString(Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType crossingType)
         {
-            switch(crossing_type)
+            switch(crossingType)
             {
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.parallel: return "同航戦";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.anti_parallel: return "反航戦";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.cross_adv: return "T字有利";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.cross_disadv: return "T字不利";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.Parallel: return "同航戦";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.AntiParallel: return "反航戦";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.CrossAdv: return "T字有利";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.CrossingType.CrossDisadv: return "T字不利";
                 default: return "不明";
             }
         }
 
-        private string AirMasteryString(Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus air_mastery)
+        private string AirMasteryString(Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus airMastery)
         {
-            switch(air_mastery)
+            switch(airMastery)
             {
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.secure: return "制空権確保";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.superior: return "制空優勢";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.tie: return "制空均衡";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.inferior: return "制空劣勢";
-                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.lost: return "制空権喪失";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.Secure: return "制空権確保";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.Superior: return "制空優勢";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.Tie: return "制空均衡";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.Inferior: return "制空劣勢";
+                case Model.KanColle.BattleModels.EventArgs.BattleAnalyzedEventArgs.AirMasteryStatus.Lost: return "制空権喪失";
                 default: return "不明";
             }
         }

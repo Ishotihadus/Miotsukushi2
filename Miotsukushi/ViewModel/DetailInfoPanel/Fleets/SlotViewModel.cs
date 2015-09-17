@@ -127,10 +127,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
 
         public SlotViewModel(int slotid)
         {
-            var model = Model.MainModel.Current.kancolleModel;
+            var model = Model.MainModel.Current.KancolleModel;
             this.slotid = slotid;
 
-            slotmodel = model.slotdata.FirstOrDefault(_ => _.id == slotid);
+            slotmodel = model.Slotdata.FirstOrDefault(_ => _.Id == slotid);
 
             if (slotmodel == null)
             {
@@ -142,15 +142,15 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             }
             else
             {
-                ALV = slotmodel.alv.HasValue ? slotmodel.alv.Value : 0;
+                ALV = slotmodel.Alv.HasValue ? slotmodel.Alv.Value : 0;
 
-                var slotitemdata = slotmodel.iteminfo;
+                var slotitemdata = slotmodel.Iteminfo;
                 if (slotitemdata != null)
                 {
-                    ItemTypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(slotitemdata.type_equiptype);
-                    ItemName = slotitemdata.name;
-                    if (model.slotitem_equiptypemaster.ContainsKey(slotitemdata.type_equiptype))
-                        ItemType = model.slotitem_equiptypemaster[slotitemdata.type_equiptype].name;
+                    ItemTypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(slotitemdata.TypeEquiptype);
+                    ItemName = slotitemdata.Name;
+                    if (model.SlotitemEquiptypemaster.ContainsKey(slotitemdata.TypeEquiptype))
+                        ItemType = model.SlotitemEquiptypemaster[slotitemdata.TypeEquiptype].Name;
                     else
                         ItemType = "不明";
                 }
@@ -169,8 +169,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         {
             switch(e.PropertyName)
             {
-                case "alv":
-                    ALV = slotmodel.alv.HasValue ? slotmodel.alv.Value : 0;
+                case "Alv":
+                    ALV = slotmodel.Alv.HasValue ? slotmodel.Alv.Value : 0;
                     break;
             }
         }

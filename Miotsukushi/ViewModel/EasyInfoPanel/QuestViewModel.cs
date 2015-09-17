@@ -215,14 +215,14 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             else
             {
                 DetailVisibility = true;
-                ID = quest.id;
-                Name = quest.name;
-                Description = quest.description;
+                ID = quest.Id;
+                Name = quest.Name;
+                Description = quest.Description;
 
-                if(quest.category >= 1 && quest.category < category_str.Length)
+                if(quest.Category >= 1 && quest.Category < category_str.Length)
                 {
-                    Category = category_str[quest.category];
-                    BorderBrush = category_brush[quest.category];
+                    Category = category_str[quest.Category];
+                    BorderBrush = category_brush[quest.Category];
                 }
                 else
                 {
@@ -230,19 +230,19 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                     BorderBrush = category_brush[0];
                 }
 
-                if (quest.type >= 1 && quest.type < type_str.Length)
-                    Type = type_str[quest.type];
+                if (quest.Type >= 1 && quest.Type < type_str.Length)
+                    Type = type_str[quest.Type];
                 else
                     Type = type_str[0];
 
-                if(quest.state == 3)
+                if(quest.State == 3)
                 {
                     ProgressText = "達成";
                     ProgressValue = 1.0;
                 }
                 else
                 {
-                    switch(quest.progress)
+                    switch(quest.Progress)
                     {
                         case 1:
                             ProgressText = "50%";

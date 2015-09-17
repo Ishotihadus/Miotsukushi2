@@ -8,11 +8,11 @@ namespace Miotsukushi.Model.KanColle.EventArgs
 {
     class CreateItemEventArgs : System.EventArgs
     {
-        public string name;
-        public string type;
-        public int item_id;
-        public int type_id;
-        public int id;
-        public bool success;
+        public string Name;
+        public string Type;
+        public int ItemId;
+        public int TypeId;
+        public int Id;
+        public bool Success;
     }
 }

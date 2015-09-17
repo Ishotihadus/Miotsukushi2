@@ -56,10 +56,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel
             SelectedIndex = 0;
 
             // タブ移動の設定
-            Model.MainModel.Current.kancolleModel.battlemodel.BattleAnalyzed += (_, __) => SelectedIndex = 11;
-            Model.MainModel.Current.kancolleModel.sortiemodel.SortieStarted += (_, __) => SelectedIndex = 10;
-            Model.MainModel.Current.kancolleModel.sortiemodel.CellAdvanced += (_, __) => SelectedIndex = 10;
-            Model.MainModel.Current.kancolleModel.sortiemodel.GoBackPort += (_, __) => SelectedIndex = 0;
+            Model.MainModel.Current.KancolleModel.Battlemodel.BattleAnalyzed += (_, __) => SelectedIndex = 11;
+            Model.MainModel.Current.KancolleModel.Sortiemodel.SortieStarted += (_, __) => SelectedIndex = 10;
+            Model.MainModel.Current.KancolleModel.Sortiemodel.CellAdvanced += (_, __) => SelectedIndex = 10;
+            Model.MainModel.Current.KancolleModel.Sortiemodel.GoBackPort += (_, __) => SelectedIndex = 0;
         }
     }
 }

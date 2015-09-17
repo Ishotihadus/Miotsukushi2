@@ -9,44 +9,44 @@ namespace Miotsukushi.Model
 {
     class MainModel : IDisposable
     {
-        public TimerModel timerModel { get; private set; }
-        public KanColleModel kancolleModel { get; private set; }
-        public Audio.VolumeModel volumeModel { get; private set; }
+        public TimerModel TimerModel { get; private set; }
+        public KanColleModel KancolleModel { get; private set; }
+        public Audio.VolumeModel VolumeModel { get; private set; }
 
-        public ThemeModel themeModel { get; private set; }
+        public ThemeModel ThemeModel { get; private set; }
 
-        public BrowserModel browserModel { get; private set; }
+        public BrowserModel BrowserModel { get; private set; }
 
-        private View.CheatWindow.CheatWindow _cheat_window;
+        private View.CheatWindow.CheatWindow _cheatWindow;
 
         public void OpenCheatWindow()
         {
-            if (_cheat_window != null && _cheat_window.IsVisible)
-                _cheat_window.Activate();
+            if (_cheatWindow != null && _cheatWindow.IsVisible)
+                _cheatWindow.Activate();
             else
             {
-                if (_cheat_window == null)
+                if (_cheatWindow == null)
                 {
-                    _cheat_window = new View.CheatWindow.CheatWindow();
-                    _cheat_window.Closing += _cheat_window_Closing;
+                    _cheatWindow = new View.CheatWindow.CheatWindow();
+                    _cheatWindow.Closing += _cheat_window_Closing;
                 }
-                _cheat_window.Show();
+                _cheatWindow.Show();
             }
         }
 
         private void _cheat_window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
-            _cheat_window.Hide();
+            _cheatWindow.Hide();
         }
 
         private MainModel()
         {
-            timerModel = new TimerModel();
-            kancolleModel = new KanColleModel();
-            volumeModel = new Audio.VolumeModel();
-            themeModel = new ThemeModel();
-            browserModel = new BrowserModel();
+            TimerModel = new TimerModel();
+            KancolleModel = new KanColleModel();
+            VolumeModel = new Audio.VolumeModel();
+            ThemeModel = new ThemeModel();
+            BrowserModel = new BrowserModel();
         }
 
         #region インスタンス単一化
@@ -72,7 +72,7 @@ namespace Miotsukushi.Model
         #region Dispose
 
         // Flag: Has Dispose already been called?
-        bool disposed = false;
+        bool _disposed = false;
 
         // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()
@@ -84,24 +84,24 @@ namespace Miotsukushi.Model
         // Protected implementation of Dispose pattern.
         protected virtual void Dispose(bool disposing)
         {
-            if (disposed)
+            if (_disposed)
                 return;
 
             if (disposing)
             {
                 // Free any other managed objects here.
                 //
-                if (_cheat_window != null)
+                if (_cheatWindow != null)
                 {
-                    _cheat_window.Closing -= _cheat_window_Closing;
-                    _cheat_window.Close();
-                    _cheat_window = null;
+                    _cheatWindow.Closing -= _cheat_window_Closing;
+                    _cheatWindow.Close();
+                    _cheatWindow = null;
                 }
             }
 
             // Free any unmanaged objects here.
             //
-            disposed = true;
+            _disposed = true;
         }
 
         ~MainModel()

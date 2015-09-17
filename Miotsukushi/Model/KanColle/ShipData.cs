@@ -16,7 +16,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 艦娘ID（これが変わることはまずないはずだが……）
         /// </summary>
-        public int shipid
+        public int Shipid
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_shipid != value)
                 {
                     _shipid = value;
-                    OnPropertyChanged(() => shipid);
+                    OnPropertyChanged(() => Shipid);
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace Miotsukushi.Model.KanColle
         /// 艦のID
         /// 改造時とかに変わるかも
         /// </summary>
-        public int characterid
+        public int Characterid
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_characterid != value)
                 {
                     _characterid = value;
-                    OnPropertyChanged(() => characterid);
+                    OnPropertyChanged(() => Characterid);
                 }
             }
         }
@@ -60,13 +60,13 @@ namespace Miotsukushi.Model.KanColle
         /// 艦娘のキャラクター情報に直接アクセスする
         /// キャラクター情報がなければnullを返す
         /// </summary>
-        public CharacterData characterinfo
+        public CharacterData Characterinfo
         {
             get
             {
-                if (Model.MainModel.Current != null && Model.MainModel.Current.kancolleModel != null && Model.MainModel.Current.kancolleModel.charamaster != null &&
-                    Model.MainModel.Current.kancolleModel.charamaster.ContainsKey(characterid))
-                    return Model.MainModel.Current.kancolleModel.charamaster[characterid];
+                if (Model.MainModel.Current != null && Model.MainModel.Current.KancolleModel != null && Model.MainModel.Current.KancolleModel.Charamaster != null &&
+                    Model.MainModel.Current.KancolleModel.Charamaster.ContainsKey(Characterid))
+                    return Model.MainModel.Current.KancolleModel.Charamaster[Characterid];
                 else
                     return null;
             }
@@ -77,7 +77,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// レベル
         /// </summary>
-        public int level
+        public int Level
         {
             get
             {
@@ -89,117 +89,117 @@ namespace Miotsukushi.Model.KanColle
                 if (_level != value)
                 {
                     _level = value;
-                    OnPropertyChanged(() => level);
+                    OnPropertyChanged(() => Level);
                 }
             }
         }
 
-        private int _exp_total;
+        private int _expTotal;
         
         /// <summary>
         /// 累計経験値
         /// </summary>
-        public int exp_total
+        public int ExpTotal
         {
             get
             {
-                return _exp_total;
+                return _expTotal;
             }
 
             set
             {
-                if (_exp_total != value)
+                if (_expTotal != value)
                 {
-                    _exp_total = value;
-                    OnPropertyChanged(() => exp_total);
+                    _expTotal = value;
+                    OnPropertyChanged(() => ExpTotal);
                 }
             }
         }
 
-        private int _exp_to_next_lv;
+        private int _expToNextLv;
 
         /// <summary>
         /// 次のレベルまでの経験値
         /// </summary>
-        public int exp_to_next_lv
+        public int ExpToNextLv
         {
             get
             {
-                return _exp_to_next_lv;
+                return _expToNextLv;
             }
 
             set
             {
-                if (_exp_to_next_lv != value)
+                if (_expToNextLv != value)
                 {
-                    _exp_to_next_lv = value;
-                    OnPropertyChanged(() => exp_to_next_lv);
+                    _expToNextLv = value;
+                    OnPropertyChanged(() => ExpToNextLv);
                 }
             }
         }
 
-        private int _exp_percent_in_this_lv;
+        private int _expPercentInThisLv;
 
         /// <summary>
         /// 今のレベルでの経験値パーセント
         /// </summary>
-        public int exp_percent_in_this_lv
+        public int ExpPercentInThisLv
         {
             get
             {
-                return _exp_percent_in_this_lv;
+                return _expPercentInThisLv;
             }
 
             set
             {
-                if (_exp_percent_in_this_lv != value)
+                if (_expPercentInThisLv != value)
                 {
-                    _exp_percent_in_this_lv = value;
-                    OnPropertyChanged(() => exp_percent_in_this_lv);
+                    _expPercentInThisLv = value;
+                    OnPropertyChanged(() => ExpPercentInThisLv);
                 }
             }
         }
 
-        private int _hp_now;
+        private int _hpNow;
 
         /// <summary>
         /// 今のHP
         /// </summary>
-        public int hp_now
+        public int HpNow
         {
             get
             {
-                return _hp_now;
+                return _hpNow;
             }
 
             set
             {
-                if (_hp_now != value)
+                if (_hpNow != value)
                 {
-                    _hp_now = value;
-                    OnPropertyChanged(() => hp_now);
+                    _hpNow = value;
+                    OnPropertyChanged(() => HpNow);
                 }
             }
         }
 
-        private int _hp_max;
+        private int _hpMax;
 
         /// <summary>
         /// 最大HP
         /// </summary>
-        public int hp_max
+        public int HpMax
         {
             get
             {
-                return _hp_max;
+                return _hpMax;
             }
 
             set
             {
-                if (_hp_max != value)
+                if (_hpMax != value)
                 {
-                    _hp_max = value;
-                    OnPropertyChanged(() => hp_max);
+                    _hpMax = value;
+                    OnPropertyChanged(() => HpMax);
                 }
             }
         }
@@ -209,7 +209,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// コンディション
         /// </summary>
-        public int condition
+        public int Condition
         {
             get
             {
@@ -221,7 +221,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_condition != value)
                 {
                     _condition = value;
-                    OnPropertyChanged(() => condition);
+                    OnPropertyChanged(() => Condition);
                 }
             }
         }
@@ -231,7 +231,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 現在の燃料
         /// </summary>
-        public int fuel
+        public int Fuel
         {
             get
             {
@@ -243,7 +243,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_fuel != value)
                 {
                     _fuel = value;
-                    OnPropertyChanged(() => fuel);
+                    OnPropertyChanged(() => Fuel);
                 }
             }
         }
@@ -253,7 +253,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 現在の弾薬
         /// </summary>
-        public int ammo
+        public int Ammo
         {
             get
             {
@@ -265,29 +265,29 @@ namespace Miotsukushi.Model.KanColle
                 if (_ammo != value)
                 {
                     _ammo = value;
-                    OnPropertyChanged(() => ammo);
+                    OnPropertyChanged(() => Ammo);
                 }
             }
         }
 
-        private TimeSpan _ndock_time;
+        private TimeSpan _ndockTime;
 
         /// <summary>
         /// 入渠時間
         /// </summary>
-        public TimeSpan ndock_time
+        public TimeSpan NdockTime
         {
             get
             {
-                return _ndock_time;
+                return _ndockTime;
             }
 
             set
             {
-                if (_ndock_time != value)
+                if (_ndockTime != value)
                 {
-                    _ndock_time = value;
-                    OnPropertyChanged(() => ndock_time);
+                    _ndockTime = value;
+                    OnPropertyChanged(() => NdockTime);
                 }
             }
         }
@@ -295,47 +295,47 @@ namespace Miotsukushi.Model.KanColle
         public ObservableCollection<int> Slots = new ObservableCollection<int>();
         public ObservableCollection<int> OnSlotCount = new ObservableCollection<int>();
 
-        private int _air_mastery;
+        private int _airMastery;
 
         /// <summary>
         /// 制空値
         /// </summary>
-        public int air_mastery
+        public int AirMastery
         {
             get
             {
-                return _air_mastery;
+                return _airMastery;
             }
 
             set
             {
-                if (_air_mastery != value)
+                if (_airMastery != value)
                 {
-                    _air_mastery = value;
-                    OnPropertyChanged(() => air_mastery);
+                    _airMastery = value;
+                    OnPropertyChanged(() => AirMastery);
                 }
             }
         }
 
 
-        private int _fire_power;
+        private int _firePower;
 
         /// <summary>
         /// 火力
         /// </summary>
-        public int fire_power
+        public int FirePower
         {
             get
             {
-                return _fire_power;
+                return _firePower;
             }
 
             set
             {
-                if (_fire_power != value)
+                if (_firePower != value)
                 {
-                    _fire_power = value;
-                    OnPropertyChanged(() => fire_power);
+                    _firePower = value;
+                    OnPropertyChanged(() => FirePower);
                 }
             }
         }
@@ -346,7 +346,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 装甲
         /// </summary>
-        public int armor
+        public int Armor
         {
             get
             {
@@ -358,7 +358,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_armor != value)
                 {
                     _armor = value;
-                    OnPropertyChanged(() => armor);
+                    OnPropertyChanged(() => Armor);
                 }
             }
         }
@@ -369,7 +369,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 雷装
         /// </summary>
-        public int torpedo
+        public int Torpedo
         {
             get
             {
@@ -381,7 +381,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_torpedo != value)
                 {
                     _torpedo = value;
-                    OnPropertyChanged(() => torpedo);
+                    OnPropertyChanged(() => Torpedo);
                 }
             }
         }
@@ -392,7 +392,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 回避
         /// </summary>
-        public int evasion
+        public int Evasion
         {
             get
             {
@@ -404,53 +404,53 @@ namespace Miotsukushi.Model.KanColle
                 if (_evasion != value)
                 {
                     _evasion = value;
-                    OnPropertyChanged(() => evasion);
+                    OnPropertyChanged(() => Evasion);
                 }
             }
         }
 
 
-        private int _anti_air;
+        private int _antiAir;
 
         /// <summary>
         /// 対空
         /// </summary>
-        public int anti_air
+        public int AntiAir
         {
             get
             {
-                return _anti_air;
+                return _antiAir;
             }
 
             set
             {
-                if (_anti_air != value)
+                if (_antiAir != value)
                 {
-                    _anti_air = value;
-                    OnPropertyChanged(() => anti_air);
+                    _antiAir = value;
+                    OnPropertyChanged(() => AntiAir);
                 }
             }
         }
 
 
-        private int _anti_submarine;
+        private int _antiSubmarine;
 
         /// <summary>
         /// 対潜
         /// </summary>
-        public int anti_submarine
+        public int AntiSubmarine
         {
             get
             {
-                return _anti_submarine;
+                return _antiSubmarine;
             }
 
             set
             {
-                if (_anti_submarine != value)
+                if (_antiSubmarine != value)
                 {
-                    _anti_submarine = value;
-                    OnPropertyChanged(() => anti_submarine);
+                    _antiSubmarine = value;
+                    OnPropertyChanged(() => AntiSubmarine);
                 }
             }
         }
@@ -461,7 +461,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 索敵
         /// </summary>
-        public int reconnaissance
+        public int Reconnaissance
         {
             get
             {
@@ -473,7 +473,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_reconnaissance != value)
                 {
                     _reconnaissance = value;
-                    OnPropertyChanged(() => reconnaissance);
+                    OnPropertyChanged(() => Reconnaissance);
                 }
             }
         }
@@ -484,7 +484,7 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 運
         /// </summary>
-        public int luck
+        public int Luck
         {
             get
             {
@@ -496,13 +496,13 @@ namespace Miotsukushi.Model.KanColle
                 if (_luck != value)
                 {
                     _luck = value;
-                    OnPropertyChanged(() => luck);
+                    OnPropertyChanged(() => Luck);
                 }
             }
         }
 
 
-        private bool _ExSlotOpened;
+        private bool _exSlotOpened;
         /// <summary>
         /// 穴が開いているか
         /// </summary>
@@ -510,20 +510,20 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _ExSlotOpened;
+                return _exSlotOpened;
             }
 
             set
             {
-                if (_ExSlotOpened != value)
+                if (_exSlotOpened != value)
                 {
-                    _ExSlotOpened = value;
+                    _exSlotOpened = value;
                     OnPropertyChanged(() => ExSlotOpened);
                 }
             }
         }
         
-        private int _ExSlot;
+        private int _exSlot;
         /// <summary>
         /// 穴に入ってる装備
         /// </summary>
@@ -531,14 +531,14 @@ namespace Miotsukushi.Model.KanColle
         {
             get
             {
-                return _ExSlot;
+                return _exSlot;
             }
 
             set
             {
-                if (_ExSlot != value)
+                if (_exSlot != value)
                 {
-                    _ExSlot = value;
+                    _exSlot = value;
                     OnPropertyChanged(() => ExSlot);
                 }
             }
@@ -550,18 +550,18 @@ namespace Miotsukushi.Model.KanColle
 
         public void FromKanColleLib(KanColleLib.TransmissionData.api_get_member.values.ShipValue data)
         {
-            shipid = data.id;
-            characterid = data.ship_id;
-            level = data.lv;
-            exp_total = data.exp[0];
-            exp_to_next_lv = data.exp[1];
-            exp_percent_in_this_lv = data.exp[2];
-            hp_now = data.nowhp;
-            hp_max = data.maxhp;
-            condition = data.cond;
-            fuel = data.fuel;
-            ammo = data.bull;
-            ndock_time = TimeSpan.FromMilliseconds(data.ndock_time);
+            Shipid = data.id;
+            Characterid = data.ship_id;
+            Level = data.lv;
+            ExpTotal = data.exp[0];
+            ExpToNextLv = data.exp[1];
+            ExpPercentInThisLv = data.exp[2];
+            HpNow = data.nowhp;
+            HpMax = data.maxhp;
+            Condition = data.cond;
+            Fuel = data.fuel;
+            Ammo = data.bull;
+            NdockTime = TimeSpan.FromMilliseconds(data.ndock_time);
 
             while(Slots.Count < data.slotnum)
                 Slots.Add(-1);
@@ -586,15 +586,15 @@ namespace Miotsukushi.Model.KanColle
                     OnSlotCount[i] = onslotcount;
             }
 
-            air_mastery = Tools.KanColleTools.ShipAirMastery(this);
-            fire_power = data.karyoku[0];
-            armor = data.soukou[0];
-            torpedo = data.raisou[0];
-            evasion = data.kaihi[0];
-            anti_air = data.taiku[0];
-            anti_submarine = data.taisen[0];
-            reconnaissance = data.sakuteki[0];
-            luck = data.lucky[0];
+            AirMastery = Tools.KanColleTools.ShipAirMastery(this);
+            FirePower = data.karyoku[0];
+            Armor = data.soukou[0];
+            Torpedo = data.raisou[0];
+            Evasion = data.kaihi[0];
+            AntiAir = data.taiku[0];
+            AntiSubmarine = data.taisen[0];
+            Reconnaissance = data.sakuteki[0];
+            Luck = data.lucky[0];
 
             ExSlotOpened = data.slot_ex != 0;
             ExSlot = data.slot_ex;

@@ -8,11 +8,11 @@ namespace Miotsukushi.Model.KanColle
 {
     class NDockData
     {
-        public NDockStatus status;
+        public NDockStatus Status;
 
-        public int shipid;
+        public int Shipid;
 
-        public DateTime complete_time;
+        public DateTime CompleteTime;
 
         public void FromNDockValue(KanColleLib.TransmissionData.api_get_member.values.NDockValue data)
         {
@@ -36,23 +36,23 @@ namespace Miotsukushi.Model.KanColle
                     break;
             }
 
-            if (_status != status)
+            if (_status != Status)
             {
-                status = _status;
+                Status = _status;
                 changed = true;
             }
 
             var _shipid = data.ship_id;
-            if (_shipid != shipid)
+            if (_shipid != Shipid)
             {
-                shipid = _shipid;
+                Shipid = _shipid;
                 changed = true;
             }
 
-            var _comp_time = Tools.TimeParser.ParseTimeFromLong(data.complete_time);
-            if (_comp_time != complete_time)
+            var compTime = Tools.TimeParser.ParseTimeFromLong(data.complete_time);
+            if (compTime != CompleteTime)
             {
-                complete_time = _comp_time;
+                CompleteTime = compTime;
                 changed = true;
             }
 

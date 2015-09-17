@@ -16,8 +16,8 @@ namespace Miotsukushi.ViewModel.CheatWindow
         {
             ItemList = new ObservableCollection<ItemMasterItem>();
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ItemList, new object());
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            if (kcmodel.initializeCompleted)
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            if (kcmodel.InitializeCompleted)
                 MakeTable();
             else
                 kcmodel.InitializeComplete += (_, __) => MakeTable();
@@ -40,26 +40,26 @@ namespace Miotsukushi.ViewModel.CheatWindow
 
         private void MakeTable()
         {
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            foreach (var c in kcmodel.slotitemmaster)
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            foreach (var c in kcmodel.Slotitemmaster)
                 ItemList.Add(new ItemMasterItem()
                 {
                     ID = c.Key,
-                    Name = c.Value.name,
-                    EquiptypeID = c.Value.type_equiptype,
-                    Equiptype = kcmodel.slotitem_equiptypemaster.ContainsKey(c.Value.type_equiptype) ? kcmodel.slotitem_equiptypemaster[c.Value.type_equiptype].name : null,
-                    EquiptypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(c.Value.type_equiptype),
-                    Firepower = ZeroToNull(c.Value.firepower),
-                    Torpedo = ZeroToNull(c.Value.torpedo),
-                    Bombing = ZeroToNull(c.Value.bombing),
-                    AntiAir = ZeroToNull(c.Value.anti_air),
-                    AntiSubmarines = ZeroToNull(c.Value.anti_submarines),
-                    Reconnaissance = ZeroToNull(c.Value.reconnaissance),
-                    HitRate = ZeroToNull(c.Value.hit_rate),
-                    Evasion = ZeroToNull(c.Value.evasion),
-                    Armor = ZeroToNull(c.Value.armor),
-                    RangeInt = c.Value.range,
-                    Range = GetRangeStr(c.Value.range)
+                    Name = c.Value.Name,
+                    EquiptypeID = c.Value.TypeEquiptype,
+                    Equiptype = kcmodel.SlotitemEquiptypemaster.ContainsKey(c.Value.TypeEquiptype) ? kcmodel.SlotitemEquiptypemaster[c.Value.TypeEquiptype].Name : null,
+                    EquiptypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(c.Value.TypeEquiptype),
+                    Firepower = ZeroToNull(c.Value.Firepower),
+                    Torpedo = ZeroToNull(c.Value.Torpedo),
+                    Bombing = ZeroToNull(c.Value.Bombing),
+                    AntiAir = ZeroToNull(c.Value.AntiAir),
+                    AntiSubmarines = ZeroToNull(c.Value.AntiSubmarines),
+                    Reconnaissance = ZeroToNull(c.Value.Reconnaissance),
+                    HitRate = ZeroToNull(c.Value.HitRate),
+                    Evasion = ZeroToNull(c.Value.Evasion),
+                    Armor = ZeroToNull(c.Value.Armor),
+                    RangeInt = c.Value.Range,
+                    Range = GetRangeStr(c.Value.Range)
                 });
         }
     }

@@ -8,15 +8,15 @@ namespace Miotsukushi.Model.KanColle
 {
     class SlotData : NotifyModelBase
     {
-        public int id;
-        public int itemid;
+        public int Id;
+        public int Itemid;
 
         private int? _alv;
 
         /// <summary>
         /// 艦載機熟練度
         /// </summary>
-        public int? alv
+        public int? Alv
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_alv != value)
                 {
                     _alv = value;
-                    OnPropertyChanged(() => alv);
+                    OnPropertyChanged(() => Alv);
                 }
             }
         }
@@ -37,13 +37,13 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 装備アイテムの情報を直接取得する
         /// </summary>
-        public ItemData iteminfo
+        public ItemData Iteminfo
         {
             get
             {
-                if (MainModel.Current != null && MainModel.Current.kancolleModel != null && MainModel.Current.kancolleModel.slotitemmaster != null &&
-                    MainModel.Current.kancolleModel.slotitemmaster.ContainsKey(itemid))
-                    return MainModel.Current.kancolleModel.slotitemmaster[itemid];
+                if (MainModel.Current != null && MainModel.Current.KancolleModel != null && MainModel.Current.KancolleModel.Slotitemmaster != null &&
+                    MainModel.Current.KancolleModel.Slotitemmaster.ContainsKey(Itemid))
+                    return MainModel.Current.KancolleModel.Slotitemmaster[Itemid];
                 else
                     return null;
             }

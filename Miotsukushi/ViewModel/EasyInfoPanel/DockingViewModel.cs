@@ -19,12 +19,12 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.ndockdata != null && model.ndockdata.Count > id)
-                    if (model.charamaster != null && model.shipdata != null)
+                if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                    if (model.Charamaster != null && model.Shipdata != null)
                     {
-                        var index = model.shipdata.FirstOrDefault(_ => _.shipid == model.ndockdata[id].shipid);
-                        if(index != null && model.charamaster.ContainsKey(index.characterid))
-                            return Tools.ResourceStringGetter.GetShipNameResourceString(model.charamaster[index.characterid].name);
+                        var index = model.Shipdata.FirstOrDefault(_ => _.Shipid == model.Ndockdata[id].Shipid);
+                        if(index != null && model.Charamaster.ContainsKey(index.Characterid))
+                            return Tools.ResourceStringGetter.GetShipNameResourceString(model.Charamaster[index.Characterid].Name);
                         else
                             return Tools.ResourceStringGetter.GetResourceString("DockingStatus_Unknown");
                     }
@@ -39,12 +39,12 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.ndockdata != null && model.ndockdata.Count > id)
-                    if (model.charamaster != null && model.shipdata != null)
+                if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                    if (model.Charamaster != null && model.Shipdata != null)
                     {
-                        var index = model.shipdata.FirstOrDefault(_ => _.shipid == model.ndockdata[id].shipid);
+                        var index = model.Shipdata.FirstOrDefault(_ => _.Shipid == model.Ndockdata[id].Shipid);
                         if (index != null)
-                            return index.level + "";
+                            return index.Level + "";
                         else
                             return "?";
                     }
@@ -59,8 +59,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.ndockdata != null && model.ndockdata.Count > id)
-                    return model.ndockdata[id].complete_time - DateTime.Now;
+                if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                    return model.Ndockdata[id].CompleteTime - DateTime.Now;
                 else
                     return new TimeSpan();
             }
@@ -70,8 +70,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.ndockdata != null && model.ndockdata.Count > id)
-                    return model.ndockdata[id].complete_time;
+                if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                    return model.Ndockdata[id].CompleteTime;
                 else
                     return new DateTime();
             }
@@ -81,12 +81,12 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.ndockdata != null && model.ndockdata.Count > id)
-                    if (model.charamaster != null && model.shipdata != null)
+                if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                    if (model.Charamaster != null && model.Shipdata != null)
                     {
-                        var index = model.shipdata.FirstOrDefault(_ => _.shipid == model.ndockdata[id].shipid);
+                        var index = model.Shipdata.FirstOrDefault(_ => _.Shipid == model.Ndockdata[id].Shipid);
                         if (index != null)
-                            return (index.ndock_time - RemainTime).TotalSeconds;
+                            return (index.NdockTime - RemainTime).TotalSeconds;
                         else
                             return 0;
                     }
@@ -101,12 +101,12 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.ndockdata != null && model.ndockdata.Count > id)
-                    if (model.charamaster != null && model.shipdata != null)
+                if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                    if (model.Charamaster != null && model.Shipdata != null)
                     {
-                        var index = model.shipdata.FirstOrDefault(_ => _.shipid == model.ndockdata[id].shipid);
+                        var index = model.Shipdata.FirstOrDefault(_ => _.Shipid == model.Ndockdata[id].Shipid);
                         if (index != null)
-                            return index.ndock_time.TotalSeconds;
+                            return index.NdockTime.TotalSeconds;
                         else
                             return 0;
                     }
@@ -121,9 +121,9 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if(model.ndockdata != null)
-                    if(model.ndockdata.Count > id)
-                        switch (model.ndockdata[id].status)
+                if(model.Ndockdata != null)
+                    if(model.Ndockdata.Count > id)
+                        switch (model.Ndockdata[id].Status)
                         {
                             case NDockStatus.Unknown:
                                 return Tools.ResourceStringGetter.GetResourceString("DockingStatus_Unknown");
@@ -145,8 +145,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         {
             get
             {
-                if (model.ndockdata != null && model.ndockdata.Count > id)
-                    switch (model.ndockdata[id].status)
+                if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                    switch (model.Ndockdata[id].Status)
                     {
                         case NDockStatus.Docking:
                             return true;
@@ -173,18 +173,18 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         public DockingViewModel(int id)
         {
             this.id = id;
-            model = Model.MainModel.Current.kancolleModel;
+            model = Model.MainModel.Current.KancolleModel;
             model.InitializeComplete += model_InitializeComplete;
-            model.ndockdata.ExListChanged += Ndockdata_ExListChanged;
-            Model.MainModel.Current.timerModel.TimerElapsed += timerModel_TimerElapsed;
+            model.Ndockdata.ExListChanged += Ndockdata_ExListChanged;
+            Model.MainModel.Current.TimerModel.TimerElapsed += timerModel_TimerElapsed;
         }
 
         private void Ndockdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
         {
             if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == id)
             {
-                model.ndockdata.ExListChanged -= Ndockdata_ExListChanged;
-                model.ndockdata[id].NDockChanged += DockingViewModel_NDockChanged;
+                model.Ndockdata.ExListChanged -= Ndockdata_ExListChanged;
+                model.Ndockdata[id].NDockChanged += DockingViewModel_NDockChanged;
                 UpdateBorderBrush();
                 OnPropertyChanged("");
             }
@@ -220,8 +220,8 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         Brush GetBorderBrush()
         {
-            if (model.ndockdata != null && model.ndockdata.Count > id)
-                switch (model.ndockdata[id].status)
+            if (model.Ndockdata != null && model.Ndockdata.Count > id)
+                switch (model.Ndockdata[id].Status)
                 {
                     case NDockStatus.Empty:
                         return Brushes.SpringGreen;

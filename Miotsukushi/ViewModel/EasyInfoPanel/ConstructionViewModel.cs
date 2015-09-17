@@ -10,9 +10,9 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 {
     class ConstructionViewModel : ViewModelBase
     {
-        int id;
-        KanColleModel model;
-        static string unknown_text = Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
+        readonly int id;
+        readonly KanColleModel model;
+        static readonly string unknown_text = Tools.ResourceStringGetter.GetResourceString("ConstructionStatus_Unknown");
 
         #region プロパティ定義
 
@@ -184,18 +184,18 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
         public ConstructionViewModel(int id)
         {
             this.id = id;
-            model = Model.MainModel.Current.kancolleModel;
+            model = Model.MainModel.Current.KancolleModel;
             model.InitializeComplete += model_InitializeComplete;
-            model.kdockdata.ExListChanged += Kdockdata_ExListChanged;
-            Model.MainModel.Current.timerModel.TimerElapsed += timerModel_TimerElapsed;
+            model.Kdockdata.ExListChanged += Kdockdata_ExListChanged;
+            Model.MainModel.Current.TimerModel.TimerElapsed += timerModel_TimerElapsed;
         }
 
         private void Kdockdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
         {
             if (e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == id)
             {
-                model.kdockdata.ExListChanged -= Kdockdata_ExListChanged;
-                model.kdockdata[id].PropertyChanged += ConstructionViewModel_PropertyChanged;
+                model.Kdockdata.ExListChanged -= Kdockdata_ExListChanged;
+                model.Kdockdata[id].PropertyChanged += ConstructionViewModel_PropertyChanged;
                 all_update();
             }
         }
@@ -217,7 +217,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         void all_update()
         {
-            if (id >= model.kdockdata.Count)
+            if (id >= model.Kdockdata.Count)
             {
                 ShipType = unknown_text;
                 ShipName = unknown_text;
@@ -231,14 +231,14 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
             }
             else
             {
-                if (model.charamaster.ContainsKey(model.kdockdata[id].charaid))
+                if (model.Charamaster.ContainsKey(model.Kdockdata[id].Charaid))
                 {
-                    ShipName = Tools.ResourceStringGetter.GetShipNameResourceString(model.charamaster[model.kdockdata[id].charaid].name);
-                    if (model.shiptypemaster.ContainsKey(model.charamaster[model.kdockdata[id].charaid].shiptype))
-                        ShipType = Tools.ResourceStringGetter.GetShipTypeNameResourceString(model.shiptypemaster[model.charamaster[model.kdockdata[id].charaid].shiptype].name);
+                    ShipName = Tools.ResourceStringGetter.GetShipNameResourceString(model.Charamaster[model.Kdockdata[id].Charaid].Name);
+                    if (model.Shiptypemaster.ContainsKey(model.Charamaster[model.Kdockdata[id].Charaid].Shiptype))
+                        ShipType = Tools.ResourceStringGetter.GetShipTypeNameResourceString(model.Shiptypemaster[model.Charamaster[model.Kdockdata[id].Charaid].Shiptype].Name);
                     else
                         ShipType = unknown_text;
-                    ProgressMax = model.charamaster[model.kdockdata[id].charaid].buildingtime;
+                    ProgressMax = model.Charamaster[model.Kdockdata[id].Charaid].Buildingtime;
                 }
                 else
                 {
@@ -247,9 +247,9 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                     ProgressMax = 0;
                 }
 
-                CompleteTime = model.kdockdata[id].complete_time;
+                CompleteTime = model.Kdockdata[id].CompleteTime;
 
-                switch (model.kdockdata[id].status)
+                switch (model.Kdockdata[id].Status)
                 {
                     case KDockStatus.Building:
                         DetailVisibility = true;
@@ -281,7 +281,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
 
         void timer_update()
         {
-            if (id >= model.kdockdata.Count)
+            if (id >= model.Kdockdata.Count)
             {
                 RemainTime = new TimeSpan();
                 ProgressValue = 0;
@@ -295,7 +295,7 @@ namespace Miotsukushi.ViewModel.EasyInfoPanel
                     ProgressValue = ProgressMax - RemainTime.TotalMinutes;
                 }
 
-                switch (model.kdockdata[id].status)
+                switch (model.Kdockdata[id].Status)
                 {
                     case KDockStatus.Building:
                         if (RemainTime.TotalMinutes < 0)

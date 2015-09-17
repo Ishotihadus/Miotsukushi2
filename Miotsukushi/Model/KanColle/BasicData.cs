@@ -8,193 +8,193 @@ namespace Miotsukushi.Model.KanColle
 {
     class BasicData : NotifyModelBase
     {
-        private string _admiral_name;
-        public string admiral_name
+        private string _admiralName;
+        public string AdmiralName
         {
             get
             {
-                return _admiral_name;
+                return _admiralName;
             }
 
             set
             {
-                if (_admiral_name != value)
+                if (_admiralName != value)
                 {
-                    _admiral_name = value;
-                    OnPropertyChanged(() => admiral_name);
+                    _admiralName = value;
+                    OnPropertyChanged(() => AdmiralName);
                 }
             }
         }
 
-        private string _admiral_comment;
-        public string admiral_comment
+        private string _admiralComment;
+        public string AdmiralComment
         {
             get
             {
-                return _admiral_comment;
+                return _admiralComment;
             }
 
             set
             {
-                if (_admiral_comment != value)
+                if (_admiralComment != value)
                 {
-                    _admiral_comment = value;
-                    OnPropertyChanged(() => admiral_comment);
+                    _admiralComment = value;
+                    OnPropertyChanged(() => AdmiralComment);
                 }
             }
         }
 
-        private int _admiral_level;
-        public int admiral_level
+        private int _admiralLevel;
+        public int AdmiralLevel
         {
             get
             {
-                return _admiral_level;
+                return _admiralLevel;
             }
 
             set
             {
-                if (_admiral_level != value)
+                if (_admiralLevel != value)
                 {
-                    _admiral_level = value;
-                    OnPropertyChanged(() => admiral_level);
-                    OnPropertyChanged(() => resource_cap);
+                    _admiralLevel = value;
+                    OnPropertyChanged(() => AdmiralLevel);
+                    OnPropertyChanged(() => ResourceCap);
                 }
             }
         }
 
-        private int _admiral_exp;
-        public int admiral_exp
+        private int _admiralExp;
+        public int AdmiralExp
         {
             get
             {
-                return _admiral_exp;
+                return _admiralExp;
             }
 
             set
             {
-                if (_admiral_exp != value)
+                if (_admiralExp != value)
                 {
-                    _admiral_exp = value;
-                    OnPropertyChanged(() => admiral_exp);
+                    _admiralExp = value;
+                    OnPropertyChanged(() => AdmiralExp);
                 }
             }
         }
 
-        private AdmiralRank _admiral_rank;
-        public AdmiralRank admiral_rank
+        private AdmiralRank _admiralRank;
+        public AdmiralRank AdmiralRank
         {
             get
             {
-                return _admiral_rank;
+                return _admiralRank;
             }
 
             set
             {
-                if (_admiral_rank != value)
+                if (_admiralRank != value)
                 {
-                    _admiral_rank = value;
-                    OnPropertyChanged(() => admiral_rank);
+                    _admiralRank = value;
+                    OnPropertyChanged(() => AdmiralRank);
                 }
             }
         }
 
-        private int _max_ship;
-        public int max_ship
+        private int _maxShip;
+        public int MaxShip
         {
             get
             {
-                return _max_ship;
+                return _maxShip;
             }
 
             set
             {
-                if (_max_ship != value)
+                if (_maxShip != value)
                 {
-                    _max_ship = value;
-                    OnPropertyChanged(() => max_ship);
+                    _maxShip = value;
+                    OnPropertyChanged(() => MaxShip);
                     remaincount_append();
                 }
             }
         }
 
-        private int _max_equipment;
-        public int max_equipment
+        private int _maxEquipment;
+        public int MaxEquipment
         {
             get
             {
-                return _max_equipment;
+                return _maxEquipment;
             }
 
             set
             {
-                if (_max_equipment != value)
+                if (_maxEquipment != value)
                 {
-                    _max_equipment = value;
-                    OnPropertyChanged(() => max_equipment);
+                    _maxEquipment = value;
+                    OnPropertyChanged(() => MaxEquipment);
                     remaincount_append();
                 }
             }
         }
 
-        private int _now_ship_number;
-        public int now_ship_number
+        private int _nowShipNumber;
+        public int NowShipNumber
         {
             get
             {
-                return _now_ship_number;
+                return _nowShipNumber;
             }
 
             set
             {
-                if (_now_ship_number != value)
+                if (_nowShipNumber != value)
                 {
-                    _now_ship_number = value;
-                    OnPropertyChanged(() => now_ship_number);
+                    _nowShipNumber = value;
+                    OnPropertyChanged(() => NowShipNumber);
                     remaincount_append();
                 }
             }
         }
 
-        private int _now_equipment_number;
-        public int now_equipment_number
+        private int _nowEquipmentNumber;
+        public int NowEquipmentNumber
         {
             get
             {
-                return _now_equipment_number;
+                return _nowEquipmentNumber;
             }
 
             set
             {
-                if (_now_equipment_number != value)
+                if (_nowEquipmentNumber != value)
                 {
-                    _now_equipment_number = value;
-                    OnPropertyChanged(() => now_equipment_number);
+                    _nowEquipmentNumber = value;
+                    OnPropertyChanged(() => NowEquipmentNumber);
                     remaincount_append();
                 }
             }
         }
 
-        private int _remain_count;
-        public int remain_count
+        private int _remainCount;
+        public int RemainCount
         {
             get
             {
-                return _remain_count;
+                return _remainCount;
             }
 
             set
             {
-                if (_remain_count != value)
+                if (_remainCount != value)
                 {
-                    _remain_count = value;
-                    OnPropertyChanged(() => remain_count);
+                    _remainCount = value;
+                    OnPropertyChanged(() => RemainCount);
                 }
             }
         }
 
         private int _fuel;
-        public int fuel
+        public int Fuel
         {
             get
             {
@@ -206,13 +206,13 @@ namespace Miotsukushi.Model.KanColle
                 if (_fuel != value)
                 {
                     _fuel = value;
-                    OnPropertyChanged(() => fuel);
+                    OnPropertyChanged(() => Fuel);
                 }
             }
         }
 
         private int _ammo;
-        public int ammo
+        public int Ammo
         {
             get
             {
@@ -224,13 +224,13 @@ namespace Miotsukushi.Model.KanColle
                 if (_ammo != value)
                 {
                     _ammo = value;
-                    OnPropertyChanged(() => ammo);
+                    OnPropertyChanged(() => Ammo);
                 }
             }
         }
 
         private int _steel;
-        public int steel
+        public int Steel
         {
             get
             {
@@ -242,13 +242,13 @@ namespace Miotsukushi.Model.KanColle
                 if (_steel != value)
                 {
                     _steel = value;
-                    OnPropertyChanged(() => steel);
+                    OnPropertyChanged(() => Steel);
                 }
             }
         }
 
         private int _bauxite;
-        public int bauxite
+        public int Bauxite
         {
             get
             {
@@ -260,7 +260,7 @@ namespace Miotsukushi.Model.KanColle
                 if (_bauxite != value)
                 {
                     _bauxite = value;
-                    OnPropertyChanged(() => bauxite);
+                    OnPropertyChanged(() => Bauxite);
                 }
             }
         }
@@ -269,120 +269,120 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// 資源最大値
         /// </summary>
-        public int resource_cap
+        public int ResourceCap
         {
             get
             {
-                return admiral_level * 250 + 750;
+                return AdmiralLevel * 250 + 750;
             }
         }
 
-        private int _instant_repair;
+        private int _instantRepair;
 
         /// <summary>
         /// 高速修復材
         /// </summary>
-        public int instant_repair
+        public int InstantRepair
         {
             get
             {
-                return _instant_repair;
+                return _instantRepair;
             }
 
             set
             {
-                if (_instant_repair != value)
+                if (_instantRepair != value)
                 {
-                    _instant_repair = value;
-                    OnPropertyChanged(() => instant_repair);
+                    _instantRepair = value;
+                    OnPropertyChanged(() => InstantRepair);
                 }
             }
         }
 
-        private int _instant_construction;
+        private int _instantConstruction;
 
         /// <summary>
         /// 高速建造材
         /// </summary>
-        public int instant_construction
+        public int InstantConstruction
         {
             get
             {
-                return _instant_construction;
+                return _instantConstruction;
             }
 
             set
             {
-                if (_instant_construction != value)
+                if (_instantConstruction != value)
                 {
-                    _instant_construction = value;
-                    OnPropertyChanged(() => instant_construction);
+                    _instantConstruction = value;
+                    OnPropertyChanged(() => InstantConstruction);
                 }
             }
         }
 
-        private int _development_material;
+        private int _developmentMaterial;
 
         /// <summary>
         /// 開発資材
         /// </summary>
-        public int development_material
+        public int DevelopmentMaterial
         {
             get
             {
-                return _development_material;
+                return _developmentMaterial;
             }
 
             set
             {
-                if (_development_material != value)
+                if (_developmentMaterial != value)
                 {
-                    _development_material = value;
-                    OnPropertyChanged(() => development_material);
+                    _developmentMaterial = value;
+                    OnPropertyChanged(() => DevelopmentMaterial);
                 }
             }
         }
 
-        private int _furniture_coin;
+        private int _furnitureCoin;
 
         /// <summary>
         /// 家具コイン
         /// </summary>
-        public int furniture_coin
+        public int FurnitureCoin
         {
             get
             {
-                return _furniture_coin;
+                return _furnitureCoin;
             }
 
             set
             {
-                if (_furniture_coin != value)
+                if (_furnitureCoin != value)
                 {
-                    _furniture_coin = value;
-                    OnPropertyChanged(() => furniture_coin);
+                    _furnitureCoin = value;
+                    OnPropertyChanged(() => FurnitureCoin);
                 }
             }
         }
 
-        private int _modding_material;
+        private int _moddingMaterial;
 
         /// <summary>
         /// 改修資材
         /// </summary>
-        public int modding_material
+        public int ModdingMaterial
         {
             get
             {
-                return _modding_material;
+                return _moddingMaterial;
             }
 
             set
             {
-                if(_modding_material != value)
+                if(_moddingMaterial != value)
                 {
-                    _modding_material = value;
-                    OnPropertyChanged(() => modding_material);
+                    _moddingMaterial = value;
+                    OnPropertyChanged(() => ModdingMaterial);
                 }
             }
         }
@@ -392,11 +392,11 @@ namespace Miotsukushi.Model.KanColle
         {
             try
             {
-                admiral_rank = (AdmiralRank)rank;
+                AdmiralRank = (AdmiralRank)rank;
             }
             catch
             {
-                admiral_rank = AdmiralRank.Unknown;
+                AdmiralRank = AdmiralRank.Unknown;
             }
         }
 
@@ -407,28 +407,28 @@ namespace Miotsukushi.Model.KanColle
                 switch (m.id)
                 {
                     case 1:
-                        fuel = m.value;
+                        Fuel = m.value;
                         break;
                     case 2:
-                        ammo = m.value;
+                        Ammo = m.value;
                         break;
                     case 3:
-                        steel = m.value;
+                        Steel = m.value;
                         break;
                     case 4:
-                        bauxite = m.value;
+                        Bauxite = m.value;
                         break;
                     case 5:
-                        instant_construction = m.value;
+                        InstantConstruction = m.value;
                         break;
                     case 6:
-                        instant_repair = m.value;
+                        InstantRepair = m.value;
                         break;
                     case 7:
-                        development_material = m.value;
+                        DevelopmentMaterial = m.value;
                         break;
                     case 8:
-                        modding_material = m.value;
+                        ModdingMaterial = m.value;
                         break;
                 }
             }
@@ -441,28 +441,28 @@ namespace Miotsukushi.Model.KanColle
                 switch (i)
                 {
                     case 0:
-                        fuel = material[i];
+                        Fuel = material[i];
                         break;
                     case 1:
-                        ammo = material[i];
+                        Ammo = material[i];
                         break;
                     case 2:
-                        steel = material[i];
+                        Steel = material[i];
                         break;
                     case 3:
-                        bauxite = material[i];
+                        Bauxite = material[i];
                         break;
                     case 4:
-                        instant_construction = material[i];
+                        InstantConstruction = material[i];
                         break;
                     case 5:
-                        instant_repair = material[i];
+                        InstantRepair = material[i];
                         break;
                     case 6:
-                        development_material = material[i];
+                        DevelopmentMaterial = material[i];
                         break;
                     case 7:
-                        modding_material = material[i];
+                        ModdingMaterial = material[i];
                         break;
                 }
             }
@@ -470,9 +470,9 @@ namespace Miotsukushi.Model.KanColle
 
         private void remaincount_append()
         {
-            var shipremain = max_ship - now_ship_number;
-            var equipremain = (max_equipment + 3 - now_equipment_number) / 3;
-            remain_count = shipremain < equipremain ? shipremain : equipremain;
+            var shipremain = MaxShip - NowShipNumber;
+            var equipremain = (MaxEquipment + 3 - NowEquipmentNumber) / 3;
+            RemainCount = shipremain < equipremain ? shipremain : equipremain;
         }
     }
 }

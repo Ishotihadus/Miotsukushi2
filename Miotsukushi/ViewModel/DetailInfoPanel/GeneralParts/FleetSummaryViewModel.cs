@@ -254,28 +254,28 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             Ships = new ObservableCollection<FleetSummaryShipViewModel>();
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Ships, new object());
 
-            model = Miotsukushi.Model.MainModel.Current.kancolleModel;
+            model = Miotsukushi.Model.MainModel.Current.KancolleModel;
             
             this.id = id;
-            if(model.fleetdata.Count > id)
+            if(model.Fleetdata.Count > id)
             {
-                fleet = model.fleetdata[id];
+                fleet = model.Fleetdata[id];
                 ViewModelInitialize();
-                model.fleetdata[id].PropertyChanged += FleetSummaryViewModel_PropertyChanged;
+                model.Fleetdata[id].PropertyChanged += FleetSummaryViewModel_PropertyChanged;
             }
             else
-                model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
+                model.Fleetdata.ExListChanged += Fleetdata_ExListChanged;
         }
 
         private void Fleetdata_ExListChanged(object sender, Model.ExListChangedEventArgs e)
         {
             if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == id)
             {
-                model.fleetdata.ExListChanged -= Fleetdata_ExListChanged;
-                fleet = model.fleetdata[id];
+                model.Fleetdata.ExListChanged -= Fleetdata_ExListChanged;
+                fleet = model.Fleetdata[id];
                 ViewModelInitialize();
-                model.fleetdata[id].PropertyChanged += FleetSummaryViewModel_PropertyChanged;
-                model.fleetdata[id].ships.CollectionChanged += Ships_CollectionChanged;
+                model.Fleetdata[id].PropertyChanged += FleetSummaryViewModel_PropertyChanged;
+                model.Fleetdata[id].Ships.CollectionChanged += Ships_CollectionChanged;
             }
         }
 
@@ -285,7 +285,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                     if (e.NewItems.Count > 0)
-                        Ships.Insert(e.NewStartingIndex, new FleetSummaryShipViewModel(model.fleetdata[id].ships[e.NewStartingIndex]));
+                        Ships.Insert(e.NewStartingIndex, new FleetSummaryShipViewModel(model.Fleetdata[id].Ships[e.NewStartingIndex]));
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
                     Ships.Move(e.OldStartingIndex, e.NewStartingIndex);
@@ -294,15 +294,15 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     Ships.RemoveAt(e.OldStartingIndex);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-                    Ships[e.OldStartingIndex] = new FleetSummaryShipViewModel(model.fleetdata[id].ships[e.OldStartingIndex]);
+                    Ships[e.OldStartingIndex] = new FleetSummaryShipViewModel(model.Fleetdata[id].Ships[e.OldStartingIndex]);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                    for (var i = 0; i < model.fleetdata[id].ships.Count; i++)
+                    for (var i = 0; i < model.Fleetdata[id].Ships.Count; i++)
                     {
                         if (i < Ships.Count)
-                            Ships[i] = new FleetSummaryShipViewModel(model.fleetdata[id].ships[i]);
+                            Ships[i] = new FleetSummaryShipViewModel(model.Fleetdata[id].Ships[i]);
                         else
-                            Ships.Add(new FleetSummaryShipViewModel(model.fleetdata[id].ships[i]));
+                            Ships.Add(new FleetSummaryShipViewModel(model.Fleetdata[id].Ships[i]));
                     }
                     break;
             }
@@ -314,7 +314,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             HasTaihaShip = fleet.HasTaihaShip;
             HasUnsuppliedShip = fleet.HasUnsuppliedShip;
             HasDockingShip = fleet.DockingShipsCount > 0;
-            HasTiredShip = fleet.MinCond < 40 && fleet.ships.Count > 0;
+            HasTiredShip = fleet.MinCond < 40 && fleet.Ships.Count > 0;
             SumAirMastery = fleet.SumAirMastery;
             SumReconnaissance = (int)fleet.OkinoshimaSearchParameter;
             SumShipLevel = fleet.SumShipLevel;
@@ -333,7 +333,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                     HasDockingShip = fleet.DockingShipsCount > 0;
                     break;
                 case "MinCond":
-                    HasTiredShip = fleet.MinCond < 40 && fleet.ships.Count > 0;
+                    HasTiredShip = fleet.MinCond < 40 && fleet.Ships.Count > 0;
                     break;
                 case "SumAirMastery":
                     SumAirMastery = fleet.SumAirMastery;

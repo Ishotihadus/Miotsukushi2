@@ -11,13 +11,13 @@ using System.Web;
 
 namespace Miotsukushi.Model.Plugins
 {
-    class StatisticsDBHelper
+    class StatisticsDbHelper
     {
-        KanColleNotifier kclib;
+        KanColleNotifier _kclib;
 
-        readonly string agent = "zF5wd8DwGUTpXbPprprG";
+        readonly string _agent = "zF5wd8DwGUTpXbPprprG";
 
-        readonly string[] url =
+        readonly string[] _url =
         {
             "api_port/port",
             "api_get_member/ship2",
@@ -46,16 +46,16 @@ namespace Miotsukushi.Model.Plugins
             "api_req_combined_battle/sp_midnight"
         };
 
-        public StatisticsDBHelper(KanColleNotifier kclib)
+        public StatisticsDbHelper(KanColleNotifier kclib)
         {
-            this.kclib = kclib;
+            this._kclib = kclib;
             kclib.GetSessionData += Kclib_GetSessionData;
         }
 
         private void Kclib_GetSessionData(object sender, KanColleLib.EventArgs.GetSessionDataEventArgs e)
         {
             var token = Properties.Settings.Default.StatisticsDBToken;
-            if (Properties.Settings.Default.StatisticsSendingOn && token != "" && e.MIMEType == "text/plain" && url.Any(_ => e.fullUrl.IndexOf(_) != -1))
+            if (Properties.Settings.Default.StatisticsSendingOn && token != "" && e.MIMEType == "text/plain" && _url.Any(_ => e.fullUrl.IndexOf(_) != -1))
             {
                 try
                 {
@@ -74,7 +74,7 @@ namespace Miotsukushi.Model.Plugins
                     // ポストデータは以下の通り
                     var postdata =
                           "token=" + HttpUtility.UrlEncode(Properties.Settings.Default.StatisticsDBToken) + "&"
-                        + "agent=" + HttpUtility.UrlEncode(agent) + "&"
+                        + "agent=" + HttpUtility.UrlEncode(_agent) + "&"
                         + "url=" + HttpUtility.UrlEncode(e.fullUrl) + "&"
                         + "requestbody=" + HttpUtility.UrlEncode(requestBody) + "&"
                         + "responsebody=" + HttpUtility.UrlEncode(responseBody);

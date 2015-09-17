@@ -378,28 +378,28 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
 
         public BasicPanelViewModel()
         {
-            model = Model.MainModel.Current.kancolleModel;
-            model.basicdata.PropertyChanged += basicdata_PropertyChanged;
+            model = Model.MainModel.Current.KancolleModel;
+            model.Basicdata.PropertyChanged += basicdata_PropertyChanged;
         }
 
         void basicdata_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case "admiral_name":
-                    AdmiralName = model.basicdata.admiral_name;
+                case "AdmiralName":
+                    AdmiralName = model.Basicdata.AdmiralName;
                     break;
-                case "admiral_comment":
-                    AdmiralComment = model.basicdata.admiral_comment;
+                case "AdmiralComment":
+                    AdmiralComment = model.Basicdata.AdmiralComment;
                     break;
-                case "admiral_level":
-                    AdmiralLevel = model.basicdata.admiral_level;
+                case "AdmiralLevel":
+                    AdmiralLevel = model.Basicdata.AdmiralLevel;
                     break;
-                case "admiral_exp":
-                    AdmiralExp = model.basicdata.admiral_exp;
+                case "AdmiralExp":
+                    AdmiralExp = model.Basicdata.AdmiralExp;
                     break;
-                case "admiral_rank":
-                    switch (model.basicdata.admiral_rank)
+                case "AdmiralRank":
+                    switch (model.Basicdata.AdmiralRank)
                     {
                         case Model.KanColle.AdmiralRank.MarshalAdmiral:
                             AdmiralRank = "元帥";
@@ -433,50 +433,50 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
                             break;
                     }
                     break;
-                case "max_ship":
-                    ShipMax = model.basicdata.max_ship;
+                case "MaxShip":
+                    ShipMax = model.Basicdata.MaxShip;
                     break;
-                case "max_equipment":
-                    ItemMax = model.basicdata.max_equipment + 3;
+                case "MaxEquipment":
+                    ItemMax = model.Basicdata.MaxEquipment + 3;
                     break;
-                case "now_ship_number":
-                    ShipCount = model.basicdata.now_ship_number;
+                case "NowShipNumber":
+                    ShipCount = model.Basicdata.NowShipNumber;
                     break;
-                case "now_equipment_number":
-                    ItemCount = model.basicdata.now_equipment_number;
+                case "NowEquipmentNumber":
+                    ItemCount = model.Basicdata.NowEquipmentNumber;
                     break;
-                case "remain_count":
-                    RemainCount = model.basicdata.remain_count;
+                case "RemainCount":
+                    RemainCount = model.Basicdata.RemainCount;
                     break;
-                case "fuel":
-                    Fuel = model.basicdata.fuel;
+                case "Fuel":
+                    Fuel = model.Basicdata.Fuel;
                     break;
-                case "ammo":
-                    Ammo = model.basicdata.ammo;
+                case "Ammo":
+                    Ammo = model.Basicdata.Ammo;
                     break;
-                case "steel":
-                    Steel = model.basicdata.steel;
+                case "Steel":
+                    Steel = model.Basicdata.Steel;
                     break;
-                case "bauxite":
-                    Bauxite = model.basicdata.bauxite;
+                case "Bauxite":
+                    Bauxite = model.Basicdata.Bauxite;
                     break;
-                case "resource_cap":
-                    ResourceCap = model.basicdata.resource_cap;
+                case "ResourceCap":
+                    ResourceCap = model.Basicdata.ResourceCap;
                     break;
-                case "instant_repair":
-                    Bucket = model.basicdata.instant_repair;
+                case "InstantRepair":
+                    Bucket = model.Basicdata.InstantRepair;
                     break;
-                case "instant_construction":
-                    Burner = model.basicdata.instant_construction;
+                case "InstantConstruction":
+                    Burner = model.Basicdata.InstantConstruction;
                     break;
-                case "development_material":
-                    DevKit = model.basicdata.development_material;
+                case "DevelopmentMaterial":
+                    DevKit = model.Basicdata.DevelopmentMaterial;
                     break;
-                case "furniture_coin":
-                    FurnitureCoin = model.basicdata.furniture_coin;
+                case "FurnitureCoin":
+                    FurnitureCoin = model.Basicdata.FurnitureCoin;
                     break;
-                case "modding_material":
-                    RevAmp = model.basicdata.modding_material;
+                case "ModdingMaterial":
+                    RevAmp = model.Basicdata.ModdingMaterial;
                     break;
             }
         }

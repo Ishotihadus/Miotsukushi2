@@ -9,12 +9,12 @@ namespace Miotsukushi.Model.Audio
 {
     class VolumeModel
     {
-        MMDeviceEnumerator deviceenum;
-        MMDevice activedevice;
-        AudioSessionManager2 sessions;
-        AudioSessionControl2 session;
+        MMDeviceEnumerator _deviceenum;
+        MMDevice _activedevice;
+        AudioSessionManager2 _sessions;
+        AudioSessionControl2 _session;
 
-        int processid;
+        int _processid;
 
         public bool HasAudioSession { get; private set; }
 
@@ -27,7 +27,7 @@ namespace Miotsukushi.Model.Audio
                 if(_volume != value && HasAudioSession)
                 {
                     _volume = value;
-                    session.SimpleAudioVolume.MasterVolume = (float)value;
+                    _session.SimpleAudioVolume.MasterVolume = (float)value;
                 }
             }
         }
@@ -41,33 +41,33 @@ namespace Miotsukushi.Model.Audio
                 if (_mute != value && HasAudioSession)
                 {
                     _mute = value;
-                    session.SimpleAudioVolume.Mute = value;
+                    _session.SimpleAudioVolume.Mute = value;
                 }
             }
         }
 
         public VolumeModel()
         {
-            processid = System.Diagnostics.Process.GetCurrentProcess().Id;
+            _processid = System.Diagnostics.Process.GetCurrentProcess().Id;
             HasAudioSession = false;
 
-            deviceenum = new MMDeviceEnumerator();
-            activedevice = deviceenum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            _deviceenum = new MMDeviceEnumerator();
+            _activedevice = _deviceenum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
 
-            sessions = activedevice.AudioSessionManager2;
+            _sessions = _activedevice.AudioSessionManager2;
 
             if(!StartupManager())
-                sessions.OnSessionCreated += sessions_OnSessionCreated;
+                _sessions.OnSessionCreated += sessions_OnSessionCreated;
         }
 
         void sessions_OnSessionCreated(object sender, CoreAudio.Interfaces.IAudioSessionControl2 newSession)
         {
             uint newpid;
             newSession.GetProcessId(out newpid);
-            if(newpid == processid)
+            if(newpid == _processid)
             {
                 // 自分のプロセスができた
-                sessions.RefreshSessions();
+                _sessions.RefreshSessions();
                 StartupManager();
             }
         }
@@ -77,20 +77,20 @@ namespace Miotsukushi.Model.Audio
             if (HasAudioSession)
                 return false;
 
-            for (var i = 0; i < sessions.Sessions.Count; i++)
+            for (var i = 0; i < _sessions.Sessions.Count; i++)
             {
-                if (sessions.Sessions[i].GetProcessID == processid)
+                if (_sessions.Sessions[i].GetProcessID == _processid)
                 {
                     HasAudioSession = true;
-                    session = sessions.Sessions[i];
+                    _session = _sessions.Sessions[i];
                     break;
                 }
             }
             if (HasAudioSession)
             {
-                session.OnSimpleVolumeChanged += session_OnSimpleVolumeChanged;
-                _volume = session.SimpleAudioVolume.MasterVolume;
-                _mute = session.SimpleAudioVolume.Mute;
+                _session.OnSimpleVolumeChanged += session_OnSimpleVolumeChanged;
+                _volume = _session.SimpleAudioVolume.MasterVolume;
+                _mute = _session.SimpleAudioVolume.Mute;
                 OnGetAudioSession(new EventArgs());
             }
 
@@ -101,7 +101,7 @@ namespace Miotsukushi.Model.Audio
         {
             if (newVolume == _volume && newMute == _mute)
                 return; // 値が変わらなかった際はイベントを発行しない
-            OnVolumeChanged(new VolumeChangedEventArgs() { newvolume = newVolume, newmute = newMute, originvolume = _volume, originmute = _mute });
+            OnVolumeChanged(new VolumeChangedEventArgs() { NewVolume = newVolume, NewMute = newMute, OriginVolume = _volume, OriginMute = _mute });
             _volume = newVolume;
             _mute = newMute;
         }

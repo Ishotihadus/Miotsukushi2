@@ -15,8 +15,8 @@ namespace Miotsukushi.ViewModel.CheatWindow
         {
             ShipList = new ObservableCollection<ShipMasterItem>();
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipList, new object());
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            if (kcmodel.initializeCompleted)
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            if (kcmodel.InitializeCompleted)
                 MakeTable();
             else
                 kcmodel.InitializeComplete += (_, __) => MakeTable();   
@@ -24,18 +24,18 @@ namespace Miotsukushi.ViewModel.CheatWindow
 
         private void MakeTable()
         {
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            foreach (var c in kcmodel.charamaster)
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            foreach (var c in kcmodel.Charamaster)
                 ShipList.Add(new ShipMasterItem()
                 {
                     ID = c.Key,
-                    Name = c.Value.name,
-                    ShipType = kcmodel.shiptypemaster.ContainsKey(c.Value.shiptype) ? kcmodel.shiptypemaster[c.Value.shiptype].name : "不明",
-                    ShipTypeID = c.Value.shiptype,
-                    Yomi = c.Value.name_yomi,
-                    ResourceID = c.Value.resource_id,
-                    AfterShipLv = c.Value.aftership_lv,
-                    AfterShipName = c.Value.aftership_id.HasValue ? kcmodel.charamaster[c.Value.aftership_id.Value].name : null
+                    Name = c.Value.Name,
+                    ShipType = kcmodel.Shiptypemaster.ContainsKey(c.Value.Shiptype) ? kcmodel.Shiptypemaster[c.Value.Shiptype].Name : "不明",
+                    ShipTypeID = c.Value.Shiptype,
+                    Yomi = c.Value.NameYomi,
+                    ResourceID = c.Value.ResourceId,
+                    AfterShipLv = c.Value.AftershipLv,
+                    AfterShipName = c.Value.AftershipId.HasValue ? kcmodel.Charamaster[c.Value.AftershipId.Value].Name : null
                 });
         }
     }

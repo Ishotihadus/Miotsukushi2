@@ -9,23 +9,23 @@ namespace Miotsukushi.Tools
 {
     class KanColleTools
     {
-        public static void ShipResource(int level, int resource_now, int resource_max, out int real_now, out int real_max)
+        public static void ShipResource(int level, int resourceNow, int resourceMax, out int realNow, out int realMax)
         {
             if (level <= 99)
             {
-                real_now = resource_now;
-                real_max = resource_max;
+                realNow = resourceNow;
+                realMax = resourceMax;
             }
             else
             {
-                real_max = (int)Math.Floor(resource_max * 0.85);
+                realMax = (int)Math.Floor(resourceMax * 0.85);
 
-                if (resource_now == resource_max)
-                    real_now = real_max;
+                if (resourceNow == resourceMax)
+                    realNow = realMax;
                 else
                 {
-                    var decrease = Math.Max((int)Math.Floor((resource_max - resource_now) * 0.85), 1);
-                    real_now = real_max - decrease;
+                    var decrease = Math.Max((int)Math.Floor((resourceMax - resourceNow) * 0.85), 1);
+                    realNow = realMax - decrease;
                 }
             }
         }
@@ -85,16 +85,16 @@ namespace Miotsukushi.Tools
 
         public static int SlotAirMastery(Model.KanColle.SlotData slot, int onslot)
         {
-            if (slot.iteminfo == null)
+            if (slot.Iteminfo == null)
                 return 0;
 
-            switch (slot.iteminfo.type_equiptype)
+            switch (slot.Iteminfo.TypeEquiptype)
             {
                 case 6:
                 case 7:
                 case 8:
                 case 11:
-                    return (int)Math.Floor(slot.iteminfo.anti_air * Math.Sqrt(onslot));
+                    return (int)Math.Floor(slot.Iteminfo.AntiAir * Math.Sqrt(onslot));
                 default:
                     return 0;
             }
@@ -102,7 +102,7 @@ namespace Miotsukushi.Tools
 
         public static int ShipAirMastery(Model.KanColle.ShipData ship)
         {
-            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
                 ship == null || ship.Slots == null || ship.OnSlotCount == null)
                 return 0;
 
@@ -111,7 +111,7 @@ namespace Miotsukushi.Tools
 
             for (var i = 0; i < length; i++)
             {
-                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
+                var slotmodel = Model.MainModel.Current.KancolleModel.Slotdata.FirstOrDefault(_ => _.Id == ship.Slots[i]);
                 if (slotmodel != null)
                     ret += SlotAirMastery(slotmodel, ship.OnSlotCount[i]);
             }
@@ -121,7 +121,7 @@ namespace Miotsukushi.Tools
 
         public static int ShipDrumCount(Model.KanColle.ShipData ship)
         {
-            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
                 ship == null || ship.Slots == null || ship.OnSlotCount == null)
                 return 0;
 
@@ -129,8 +129,8 @@ namespace Miotsukushi.Tools
 
             for (var i = 0; i < ship.Slots.Count; i++)
             {
-                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
-                if (slotmodel != null && slotmodel.itemid == 75)
+                var slotmodel = Model.MainModel.Current.KancolleModel.Slotdata.FirstOrDefault(_ => _.Id == ship.Slots[i]);
+                if (slotmodel != null && slotmodel.Itemid == 75)
                     ++ret;
             }
 
@@ -145,7 +145,7 @@ namespace Miotsukushi.Tools
         /// <returns></returns>
         public static void ShipOkinoshimaSearchParameter(Model.KanColle.ShipData ship, out double parameter, out double error)
         {
-            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
                 ship == null || ship.Slots == null)
             {
                 parameter = 0;
@@ -173,17 +173,17 @@ namespace Miotsukushi.Tools
 
             double ret = 0;
             double err = 0;
-            var sosakuteki = ship.reconnaissance;
+            var sosakuteki = ship.Reconnaissance;
 
             for (var i = 0; i < ship.Slots.Count; i++)
             {
-                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
-                if (slotmodel != null && slotmodel.iteminfo != null)
+                var slotmodel = Model.MainModel.Current.KancolleModel.Slotdata.FirstOrDefault(_ => _.Id == ship.Slots[i]);
+                if (slotmodel != null && slotmodel.Iteminfo != null)
                 {
-                    sosakuteki -= slotmodel.iteminfo.reconnaissance;
+                    sosakuteki -= slotmodel.Iteminfo.Reconnaissance;
                     double coef = 0;
                     double errcoef = 0;
-                    switch(slotmodel.iteminfo.type_equiptype)
+                    switch(slotmodel.Iteminfo.TypeEquiptype)
                     {
                         case 7: // 艦上爆撃機 1.04
                             coef = 1.0376255;
@@ -218,8 +218,8 @@ namespace Miotsukushi.Tools
                             errcoef = 0.06582838;
                             break;
                     }
-                    ret += coef * slotmodel.iteminfo.reconnaissance;
-                    err += errcoef * slotmodel.iteminfo.reconnaissance;
+                    ret += coef * slotmodel.Iteminfo.Reconnaissance;
+                    err += errcoef * slotmodel.Iteminfo.Reconnaissance;
                 }
             }
             ret += Math.Sqrt(sosakuteki) * 1.6841056;
@@ -237,7 +237,7 @@ namespace Miotsukushi.Tools
             nightcutin = false;
             nightren = false;
 
-            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
                 ship == null || ship.Slots == null || ship.OnSlotCount == null)
                 return;
 
@@ -253,10 +253,10 @@ namespace Miotsukushi.Tools
 
             for (var i = 0; i < length; i++)
             {
-                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
-                if (slotmodel != null && slotmodel.iteminfo != null)
+                var slotmodel = Model.MainModel.Current.KancolleModel.Slotdata.FirstOrDefault(_ => _.Id == ship.Slots[i]);
+                if (slotmodel != null && slotmodel.Iteminfo != null)
                 {
-                    switch (slotmodel.iteminfo.type_equiptype)
+                    switch (slotmodel.Iteminfo.TypeEquiptype)
                     {
                         case 1:
                         case 2:
@@ -342,76 +342,76 @@ namespace Miotsukushi.Tools
             // 秋月改 330
             // 摩耶改二 428
 
-            if (Model.MainModel.Current == null || Model.MainModel.Current.kancolleModel == null || Model.MainModel.Current.kancolleModel.slotdata == null ||
+            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
                 ship == null || ship.Slots == null)
                 return false;
 
-            var anti_air_gun = 0; // 高角砲
+            var antiAirGun = 0; // 高角砲
             var hacs = 0; // 高射装置
             var machinegun = 0; // 対空機銃
             var radar = 0;
-            var anti_air_radar = 0;
-            var big_main_gun = 0;
-            var san_shiki = 0;
-            var twenty_five_mm_triple_machinegun = 0;
-            var ten_cm_anti_air_gun_with_hacs = 0;
-            var twelve_point_seven_cm_air_gun_with_hacs = 0;
+            var antiAirRadar = 0;
+            var bigMainGun = 0;
+            var sanShiki = 0;
+            var twentyFiveMmTripleMachinegun = 0;
+            var tenCmAntiAirGunWithHacs = 0;
+            var twelvePointSevenCmAirGunWithHacs = 0;
 
-            for (var i = 0; i < ship.Slots.Count; i++)
+            foreach (int slot in ship.Slots)
             {
-                var slotmodel = Model.MainModel.Current.kancolleModel.slotdata.FirstOrDefault(_ => _.id == ship.Slots[i]);
-                var iteminfo = slotmodel.iteminfo;
-                if (slotmodel != null && iteminfo != null)
+                var slotmodel = Model.MainModel.Current.KancolleModel.Slotdata.FirstOrDefault(_ => _.Id == slot);
+                if (slotmodel != null && slotmodel.Iteminfo != null)
                 {
-                    switch (iteminfo.type_equiptype)
+                    var iteminfo = slotmodel.Iteminfo;
+                    switch (iteminfo.TypeEquiptype)
                     {
                         case 36:
                             ++hacs;
                             break;
                         case 21:
-                            ++anti_air_gun;
+                            ++antiAirGun;
                             break;
                         case 12:
                         case 13:
                             ++radar;
-                            if (iteminfo.name.IndexOf("対空") != -1)
-                                ++anti_air_radar;
+                            if (iteminfo.Name.IndexOf("対空") != -1)
+                                ++antiAirRadar;
                             break;
                         case 3:
                         case 38:
-                            ++big_main_gun;
+                            ++bigMainGun;
                             break;
                         case 18:
-                            ++san_shiki;
+                            ++sanShiki;
                             break;
                     }
 
-                    if (iteminfo.type_icontype == 16)
-                        ++anti_air_gun;
+                    if (iteminfo.TypeIcontype == 16)
+                        ++antiAirGun;
 
-                    switch(slotmodel.itemid)
+                    switch(slotmodel.Itemid)
                     {
                         case 131:
-                            ++twenty_five_mm_triple_machinegun;
+                            ++twentyFiveMmTripleMachinegun;
                             break;
                         case 122:
-                            ++ten_cm_anti_air_gun_with_hacs;
+                            ++tenCmAntiAirGunWithHacs;
                             break;
                         case 130:
-                            ++twelve_point_seven_cm_air_gun_with_hacs;
+                            ++twelvePointSevenCmAirGunWithHacs;
                             break;
                     }
                 }
             }
 
             return
-                (anti_air_gun >= 1 && hacs >= 1) ||
-                (twenty_five_mm_triple_machinegun >= 1 && machinegun >= 2 && anti_air_radar >= 1) ||
-                (ten_cm_anti_air_gun_with_hacs >= 1 && anti_air_radar >= 1) ||
-                (twelve_point_seven_cm_air_gun_with_hacs >= 1 && anti_air_radar >= 1) ||
-                (big_main_gun >= 1 && hacs >= 1 && san_shiki >= 1) ||
-                ((ship.characterid == 421 || ship.characterid == 330) && anti_air_gun >= 1 && (radar >= 1 || anti_air_gun >= 2)) ||
-                (ship.characterid == 428 && anti_air_gun >= 2 && twenty_five_mm_triple_machinegun >= 1);
+                (antiAirGun >= 1 && hacs >= 1) ||
+                (twentyFiveMmTripleMachinegun >= 1 && machinegun >= 2 && antiAirRadar >= 1) ||
+                (tenCmAntiAirGunWithHacs >= 1 && antiAirRadar >= 1) ||
+                (twelvePointSevenCmAirGunWithHacs >= 1 && antiAirRadar >= 1) ||
+                (bigMainGun >= 1 && hacs >= 1 && sanShiki >= 1) ||
+                ((ship.Characterid == 421 || ship.Characterid == 330) && antiAirGun >= 1 && (radar >= 1 || antiAirGun >= 2)) ||
+                (ship.Characterid == 428 && antiAirGun >= 2 && twentyFiveMmTripleMachinegun >= 1);
         }
 
         /// <summary>

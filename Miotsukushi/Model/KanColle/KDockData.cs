@@ -9,7 +9,7 @@ namespace Miotsukushi.Model.KanColle
     class KDockData : NotifyModelBase
     {
         private KDockStatus _status = KDockStatus.Unknown;
-        public KDockStatus status
+        public KDockStatus Status
         {
             get
             {
@@ -21,13 +21,13 @@ namespace Miotsukushi.Model.KanColle
                 if (_status != value)
                 {
                     _status = value;
-                    OnPropertyChanged(() => status);
+                    OnPropertyChanged(() => Status);
                 }
             }
         }
 
         private int _charaid;
-        public int charaid
+        public int Charaid
         {
             get
             {
@@ -39,25 +39,25 @@ namespace Miotsukushi.Model.KanColle
                 if (_charaid != value)
                 {
                     _charaid = value;
-                    OnPropertyChanged(() => charaid);
+                    OnPropertyChanged(() => Charaid);
                 }
             }
         }
 
-        private DateTime _complete_time;
-        public DateTime complete_time
+        private DateTime _completeTime;
+        public DateTime CompleteTime
         {
             get
             {
-                return _complete_time;
+                return _completeTime;
             }
 
             set
             {
-                if (_complete_time != value)
+                if (_completeTime != value)
                 {
-                    _complete_time = value;
-                    OnPropertyChanged(() => complete_time);
+                    _completeTime = value;
+                    OnPropertyChanged(() => CompleteTime);
                 }
             }
         }
@@ -67,33 +67,33 @@ namespace Miotsukushi.Model.KanColle
             switch (data.state)
             {
                 case -1:
-                    status = KDockStatus.Locked;
+                    Status = KDockStatus.Locked;
                     break;
                 case 0:
-                    status = KDockStatus.Empty;
+                    Status = KDockStatus.Empty;
                     break;
                 case 2:
-                    status = KDockStatus.Building;
+                    Status = KDockStatus.Building;
                     break;
                 case 3:
-                    status = KDockStatus.Complete;
+                    Status = KDockStatus.Complete;
                     break;
                 default:
-                    status = KDockStatus.Unknown;
+                    Status = KDockStatus.Unknown;
                     break;
             
             }
 
-            charaid = data.created_ship_id;
+            Charaid = data.created_ship_id;
 
-            complete_time = Tools.TimeParser.ParseTimeFromLong(data.complete_time);
+            CompleteTime = Tools.TimeParser.ParseTimeFromLong(data.complete_time);
         }
 
         public void GetShip()
         {
-            status = KDockStatus.Empty;
-            charaid = 0;
-            complete_time = new DateTime();
+            Status = KDockStatus.Empty;
+            Charaid = 0;
+            CompleteTime = new DateTime();
         }
     }
 }

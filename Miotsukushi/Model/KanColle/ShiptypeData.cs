@@ -8,6 +8,6 @@ namespace Miotsukushi.Model.KanColle
 {
     class ShiptypeData
     {
-        public string name;
+        public string Name;
     }
 }

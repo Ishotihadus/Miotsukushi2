@@ -11,16 +11,16 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
         /// <summary>
         /// 勝利ランク
         /// </summary>
-        public string rank;
+        public string Rank;
 
         /// <summary>
         /// 艦娘を手に入れたか
         /// </summary>
-        public bool has_get_ship;
+        public bool HasGetShip;
 
         /// <summary>
         /// 手に入れた艦娘の名前
         /// </summary>
-        public string get_ship_name;
+        public string GetShipName;
     }
 }

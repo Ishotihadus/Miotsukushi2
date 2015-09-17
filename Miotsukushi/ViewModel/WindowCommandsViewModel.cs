@@ -90,7 +90,7 @@ namespace Miotsukushi.ViewModel
             {
                 if (_SaveSSCommand == null)
                 {
-                    _SaveSSCommand = new DelegateCommand(() => MainModel.Current.browserModel.RaiseSaveSS(), () => true);
+                    _SaveSSCommand = new DelegateCommand(() => MainModel.Current.BrowserModel.RaiseSaveSs(), () => true);
                 }
                 return _SaveSSCommand;
             }
@@ -102,14 +102,14 @@ namespace Miotsukushi.ViewModel
             get
             {
                 if (_BrowserRefreshCommand == null)
-                    _BrowserRefreshCommand = new DelegateCommand(() => MainModel.Current.browserModel.BrowserRefresh(), () => true);
+                    _BrowserRefreshCommand = new DelegateCommand(() => MainModel.Current.BrowserModel.BrowserRefresh(), () => true);
                 return _BrowserRefreshCommand;
             }
         }
 
         public WindowCommandsViewModel()
         {
-            volumemodel = MainModel.Current.volumeModel;
+            volumemodel = MainModel.Current.VolumeModel;
             volumemodel.GetAudioSession += volumemodel_GetAudioSession;
         }
 
@@ -123,8 +123,8 @@ namespace Miotsukushi.ViewModel
 
         void volumemodel_VolumeChanged(object sender, VolumeChangedEventArgs e)
         {
-            Volume = e.newvolume;
-            Mute = e.newmute;
+            Volume = e.NewVolume;
+            Mute = e.NewMute;
         }
 
 

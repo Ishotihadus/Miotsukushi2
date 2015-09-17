@@ -11,25 +11,25 @@ namespace Miotsukushi.Model
     {
         #region スクリーンショット
 
-        public class SaveSSCommandRaisedEventArgs : System.EventArgs
+        public class SaveSsCommandRaisedEventArgs : System.EventArgs
         {
-            public string filename;
+            public string Filename;
 
-            public SaveSSCommandRaisedEventArgs(string filename)
+            public SaveSsCommandRaisedEventArgs(string filename)
             {
-                this.filename = filename;
+                this.Filename = filename;
             }
         }
 
-        public void RaiseSaveSS()
+        public void RaiseSaveSs()
         {
             var filename = "ss\\ss_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png";
-            OnSaveSSCommandRaised(new SaveSSCommandRaisedEventArgs(filename));
+            OnSaveSsCommandRaised(new SaveSsCommandRaisedEventArgs(filename));
         }
 
-        public event SaveSSCommandRaisedEventHandler SaveSSCommandRaised;
-        public delegate void SaveSSCommandRaisedEventHandler(object sender, SaveSSCommandRaisedEventArgs e);
-        protected virtual void OnSaveSSCommandRaised(SaveSSCommandRaisedEventArgs e) { if (SaveSSCommandRaised != null) { SaveSSCommandRaised(this, e); } }
+        public event SaveSsCommandRaisedEventHandler SaveSsCommandRaised;
+        public delegate void SaveSsCommandRaisedEventHandler(object sender, SaveSsCommandRaisedEventArgs e);
+        protected virtual void OnSaveSsCommandRaised(SaveSsCommandRaisedEventArgs e) { if (SaveSsCommandRaised != null) { SaveSsCommandRaised(this, e); } }
 
         #endregion
 

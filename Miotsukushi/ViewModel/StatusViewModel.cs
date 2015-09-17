@@ -131,7 +131,7 @@ namespace Miotsukushi.ViewModel
 
         public StatusViewModel()
         {
-            model = Model.MainModel.Current.kancolleModel;
+            model = Model.MainModel.Current.KancolleModel;
 
             StatusText = "艦これの起動を待機しています...";
 
@@ -145,38 +145,38 @@ namespace Miotsukushi.ViewModel
                 {
                     StatusText = "準備完了";
                     StatusAlertTitle = "Notify";
-                    StatusAlertText = "艦これが起動しました。サーバーは " + (model.serverinfo.GetServerName() ?? "（不明）") + " です。";
+                    StatusAlertText = "艦これが起動しました。サーバーは " + (model.Serverinfo.GetServerName() ?? "（不明）") + " です。";
                 };
 
-            model.APIAnalyzeError += (_, e) =>
+            model.ApiAnalyzeError += (_, e) =>
                 {
                     StatusAlertTitle = "Error";
-                    StatusAlertText = e.kcsapiurl + " の解析に失敗しました。";
+                    StatusAlertText = e.Kcsapiurl + " の解析に失敗しました。";
                 };
 
-            model.UnknownAPIReceived += (_, e) =>
+            model.UnknownApiReceived += (_, e) =>
             {
                 StatusAlertTitle = "Info";
-                StatusAlertText = "未知のAPI " + e.kcsapiurl + " を受信しました。";
+                StatusAlertText = "未知のAPI " + e.Kcsapiurl + " を受信しました。";
             };
 
             model.GetFiddlerLog += (_, e) =>
                 {
                     StatusAlertTitle = "Fiddler";
-                    StatusAlertText = e.message;
+                    StatusAlertText = e.Message;
                 };
 
             model.CreateItem += (_, e) =>
                 {
-                    StatusAlertTitle = e.success ? "Success" : "Failed";
-                    StatusAlertText = (e.name ?? "（不明）") + " の開発に" + (e.success ? "成功" : "失敗") + "しました。"; 
+                    StatusAlertTitle = e.Success ? "Success" : "Failed";
+                    StatusAlertText = (e.Name ?? "（不明）") + " の開発に" + (e.Success ? "成功" : "失敗") + "しました。"; 
                 };
 
-            model.battlemodel.GetBattleResult += (_, e) =>
+            model.Battlemodel.GetBattleResult += (_, e) =>
                 {
                     var win = false;
                     var rankname = "";
-                    switch (e.rank)
+                    switch (e.Rank)
                     {
                         case "S":
                         case "A":
@@ -184,7 +184,7 @@ namespace Miotsukushi.ViewModel
                             win = true;
                             break;
                     }
-                    switch (e.rank)
+                    switch (e.Rank)
                     {
                         case "B":
                         case "C":
@@ -192,9 +192,9 @@ namespace Miotsukushi.ViewModel
                             break;
                     }
 
-                    rankname += (win ? "勝利" : "敗北") + e.rank;
+                    rankname += (win ? "勝利" : "敗北") + e.Rank;
                     StatusAlertTitle = win ? "Win" : "Lose";
-                    StatusAlertText = rankname + "。ドロップ艦は" + (e.has_get_ship ? " " + e.get_ship_name + " です。" : "ありません。");
+                    StatusAlertText = rankname + "。ドロップ艦は" + (e.HasGetShip ? " " + e.GetShipName + " です。" : "ありません。");
                 };
         }
     }

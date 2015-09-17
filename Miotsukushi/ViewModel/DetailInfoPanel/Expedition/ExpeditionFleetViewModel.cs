@@ -444,15 +444,15 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
         public ExpeditionFleetViewModel(int DeckID)
         {
             this.DeckID = DeckID;
-            model = Miotsukushi.Model.MainModel.Current.kancolleModel;
-            model.fleetdata.ExListChanged += Fleetdata_ExListChanged;
+            model = Miotsukushi.Model.MainModel.Current.KancolleModel;
+            model.Fleetdata.ExListChanged += Fleetdata_ExListChanged;
             model.InitializeComplete += Model_InitializeComplete;
-            Miotsukushi.Model.MainModel.Current.timerModel.TimerElapsed += TimerModel_TimerElapsed;
+            Miotsukushi.Model.MainModel.Current.TimerModel.TimerElapsed += TimerModel_TimerElapsed;
         }
 
         private void Model_InitializeComplete(object sender, EventArgs e)
         {
-            if(model.fleetdata.Count <= DeckID)
+            if(model.Fleetdata.Count <= DeckID)
             {
                 // 艦隊が未開放
                 Status = -2;
@@ -484,8 +484,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
         {
             if(e.ChangeType == Model.ExListChangedEventArgs.ChangeTypeEnum.Added && e.ChangedIndex == DeckID)
             {
-                model.fleetdata.ExListChanged -= Fleetdata_ExListChanged;
-                fleet = model.fleetdata[DeckID];
+                model.Fleetdata.ExListChanged -= Fleetdata_ExListChanged;
+                fleet = model.Fleetdata[DeckID];
 
                 DeckName = fleet.DeckName;
                 FlagShipLevel = fleet.FlagShipLevel;
@@ -497,16 +497,16 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
 
                 switch (fleet.ExpeditionStatus)
                 {
-                    case FleetExpeditionStatus.at_home:
+                    case FleetExpeditionStatus.AtHome:
                         Status = 0;
                         break;
-                    case FleetExpeditionStatus.on_expedition:
+                    case FleetExpeditionStatus.OnExpedition:
                         Status = 1;
                         break;
-                    case FleetExpeditionStatus.expedition_complete:
+                    case FleetExpeditionStatus.ExpeditionComplete:
                         Status = 2;
                         break;
-                    case FleetExpeditionStatus.force_backing:
+                    case FleetExpeditionStatus.ForceBacking:
                         Status = 3;
                         break;
                     default:
@@ -516,12 +516,12 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
 
                 if (Status >= 1)
                 {
-                    ExpeditionID = fleet.ExpeditionID;
-                    ExpeditionLength = TimeSpan.FromMinutes(model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].time_minute : 0);
-                    ExpeditionName = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].name : "不明";
-                    AreaName = (model.missionmaster.ContainsKey(ExpeditionID) && model.mapareamaster.ContainsKey(model.missionmaster[ExpeditionID].maparea_id) ?
-                        model.mapareamaster[model.missionmaster[ExpeditionID].maparea_id].name : "不明");
-                    Description = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].details : "不明";
+                    ExpeditionID = fleet.ExpeditionId;
+                    ExpeditionLength = TimeSpan.FromMinutes(model.Missionmaster.ContainsKey(ExpeditionID) ? model.Missionmaster[ExpeditionID].TimeMinute : 0);
+                    ExpeditionName = model.Missionmaster.ContainsKey(ExpeditionID) ? model.Missionmaster[ExpeditionID].Name : "不明";
+                    AreaName = (model.Missionmaster.ContainsKey(ExpeditionID) && model.Mapareamaster.ContainsKey(model.Missionmaster[ExpeditionID].MapareaId) ?
+                        model.Mapareamaster[model.Missionmaster[ExpeditionID].MapareaId].Name : "不明");
+                    Description = model.Missionmaster.ContainsKey(ExpeditionID) ? model.Missionmaster[ExpeditionID].Details : "不明";
                     CompleteTime = fleet.ExpeditionBacktime;
                     RemainLength = CompleteTime > DateTime.Now ? CompleteTime - DateTime.Now : TimeSpan.Zero;
                     if (RemainLengthMinutes < 1)
@@ -563,19 +563,16 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
                 case "ExpeditionStatus":
                     switch (fleet.ExpeditionStatus)
                     {
-                        case FleetExpeditionStatus.at_home:
+                        case FleetExpeditionStatus.AtHome:
                             Status = 0;
                             break;
-                        case FleetExpeditionStatus.on_expedition:
-                            if (RemainLengthMinutes < 1)
-                                Status = 4;
-                            else
-                                Status = 1;
+                        case FleetExpeditionStatus.OnExpedition:
+                            Status = RemainLengthMinutes < 1 ? 4 : 1;
                             break;
-                        case FleetExpeditionStatus.expedition_complete:
+                        case FleetExpeditionStatus.ExpeditionComplete:
                             Status = 2;
                             break;
-                        case FleetExpeditionStatus.force_backing:
+                        case FleetExpeditionStatus.ForceBacking:
                             if (RemainLengthMinutes < 1)
                                 Status = 5;
                             else
@@ -586,13 +583,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Expedition
                             break;
                     }
                     break;
-                case "ExpeditionID":
-                    ExpeditionID = fleet.ExpeditionID;
-                    ExpeditionLength = TimeSpan.FromMinutes(model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].time_minute : 0);
-                    ExpeditionName = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].name : "不明";
-                    AreaName = (model.missionmaster.ContainsKey(ExpeditionID) && model.mapareamaster.ContainsKey(model.missionmaster[ExpeditionID].maparea_id) ?
-                        model.mapareamaster[model.missionmaster[ExpeditionID].maparea_id].name : "不明");
-                    Description = model.missionmaster.ContainsKey(ExpeditionID) ? model.missionmaster[ExpeditionID].details : "不明";
+                case "ExpeditionId":
+                    ExpeditionID = fleet.ExpeditionId;
+                    ExpeditionLength = TimeSpan.FromMinutes(model.Missionmaster.ContainsKey(ExpeditionID) ? model.Missionmaster[ExpeditionID].TimeMinute : 0);
+                    ExpeditionName = model.Missionmaster.ContainsKey(ExpeditionID) ? model.Missionmaster[ExpeditionID].Name : "不明";
+                    AreaName = (model.Missionmaster.ContainsKey(ExpeditionID) && model.Mapareamaster.ContainsKey(model.Missionmaster[ExpeditionID].MapareaId) ?
+                        model.Mapareamaster[model.Missionmaster[ExpeditionID].MapareaId].Name : "不明");
+                    Description = model.Missionmaster.ContainsKey(ExpeditionID) ? model.Missionmaster[ExpeditionID].Details : "不明";
                     break;
                 case "ExpeditionBacktime":
                     CompleteTime = fleet.ExpeditionBacktime;

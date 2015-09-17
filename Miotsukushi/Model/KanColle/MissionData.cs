@@ -8,9 +8,9 @@ namespace Miotsukushi.Model.KanColle
 {
     class MissionData
     {
-        public string name;
-        public int time_minute;
-        public string details;
-        public int maparea_id;
+        public string Name;
+        public int TimeMinute;
+        public string Details;
+        public int MapareaId;
     }
 }

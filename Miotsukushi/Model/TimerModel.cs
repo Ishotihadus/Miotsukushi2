@@ -6,16 +6,16 @@ namespace Miotsukushi.Model
     internal class TimerModel
     {
         private double _timerinterval = 500.0;
-        private readonly Timer timer;
+        private readonly Timer _timer;
 
         public TimerModel()
         {
-            timer = new Timer(timerinterval);
-            timer.Elapsed += timer_Elapsed;
-            timer.Start();
+            _timer = new Timer(Timerinterval);
+            _timer.Elapsed += timer_Elapsed;
+            _timer.Start();
         }
 
-        public double timerinterval
+        public double Timerinterval
         {
             get { return _timerinterval; }
             set
@@ -23,9 +23,9 @@ namespace Miotsukushi.Model
                 if (_timerinterval != value)
                 {
                     _timerinterval = value;
-                    if (timer != null)
+                    if (_timer != null)
                     {
-                        timer.Interval = value;
+                        _timer.Interval = value;
                     }
                 }
             }

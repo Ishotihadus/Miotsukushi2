@@ -10,15 +10,15 @@ namespace Miotsukushi.Tools
 {
     class ResourceStringGetter
     {
-        const string _not_found_message = "### String Not Found ###";
-        public static CultureInfo culture = Thread.CurrentThread.CurrentCulture;
+        const string NotFoundMessage = "### String Not Found ###";
+        public static CultureInfo Culture = Thread.CurrentThread.CurrentCulture;
 
         public static string GetResourceString(string key)
         {
             if (string.IsNullOrEmpty(key))
-                return _not_found_message;
+                return NotFoundMessage;
 
-            return GetString(key) ?? _not_found_message;
+            return GetString(key) ?? NotFoundMessage;
         }
 
         public static string GetShipTypeNameResourceString(string key)
@@ -28,7 +28,7 @@ namespace Miotsukushi.Tools
 
         public static string GetShipNameResourceString(string key)
         {
-            if (string.IsNullOrEmpty(key) || IsCultureJP())
+            if (string.IsNullOrEmpty(key) || IsCultureJp())
                 return key;
 
             if (key.Length >= 2 && key.Substring(key.Length - 2) == "改二")
@@ -45,14 +45,11 @@ namespace Miotsukushi.Tools
             }
         }
 
-        private static bool IsCultureJP()
-        {
-            return culture.Name == "ja-JP";
-        }
+        private static bool IsCultureJp() => Culture.Name == "ja-JP";
 
         private static string GetNameResourceString(string key)
         {
-            if (string.IsNullOrEmpty(key) || IsCultureJP())
+            if (string.IsNullOrEmpty(key) || IsCultureJp())
                 return null;
 
             return GetString(key);
@@ -65,10 +62,10 @@ namespace Miotsukushi.Tools
         /// <returns></returns>
         private static string GetString(string key)
         {
-            if (Thread.CurrentThread.CurrentCulture != culture)
-                Thread.CurrentThread.CurrentCulture = culture;
-            if (Thread.CurrentThread.CurrentUICulture != culture)
-                Thread.CurrentThread.CurrentUICulture = culture;
+            if (Thread.CurrentThread.CurrentCulture != Culture)
+                Thread.CurrentThread.CurrentCulture = Culture;
+            if (Thread.CurrentThread.CurrentUICulture != Culture)
+                Thread.CurrentThread.CurrentUICulture = Culture;
             return Properties.Resources.ResourceManager.GetString(key);
         }
     }

@@ -8,67 +8,67 @@ namespace Miotsukushi.Model.KanColle
 {
     class ItemData
     {
-        public string name;
+        public string Name;
 
         /// <summary>
         /// よくわかんない
         /// </summary>
-        public int type;
+        public int Type;
 
 
-        public int type_cardtype;
-        public int type_equiptype;
-        public int type_icontype;
+        public int TypeCardtype;
+        public int TypeEquiptype;
+        public int TypeIcontype;
         
 
         /// <summary>
         /// 火力
         /// </summary>
-        public int firepower;
+        public int Firepower;
 
         /// <summary>
         /// 雷装
         /// </summary>
-        public int torpedo;
+        public int Torpedo;
 
         /// <summary>
         /// 爆装
         /// </summary>
-        public int bombing;
+        public int Bombing;
 
         /// <summary>
         /// 対空
         /// </summary>
-        public int anti_air;
+        public int AntiAir;
 
         /// <summary>
         /// 対潜
         /// </summary>
-        public int anti_submarines;
+        public int AntiSubmarines;
 
         /// <summary>
         /// 索敵
         /// </summary>
-        public int reconnaissance;
+        public int Reconnaissance;
 
         /// <summary>
         /// 命中
         /// </summary>
-        public int hit_rate;
+        public int HitRate;
 
         /// <summary>
         /// 回避
         /// </summary>
-        public int evasion;
+        public int Evasion;
 
         /// <summary>
         /// 装甲
         /// </summary>
-        public int armor;
+        public int Armor;
 
         /// <summary>
         /// 射程
         /// </summary>
-        public int range;
+        public int Range;
     }
 }

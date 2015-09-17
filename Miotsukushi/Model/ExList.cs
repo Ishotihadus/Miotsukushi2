@@ -9,34 +9,34 @@ namespace Miotsukushi.Model
 {
     class ExList<T> : IEnumerable<T>
     {
-        List<T> list;
+        List<T> _list;
 
         public T this[int index]
         {
-            get { return list[index]; }
+            get { return _list[index]; }
             set
             {
-                list[index] = value;
+                _list[index] = value;
                 OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Replaced, index));
             }
         }
 
-        public int Count { get { return list.Count; } }
+        public int Count => _list.Count;
 
         public ExList()
         {
-            list = new List<T>();
+            _list = new List<T>();
         }
 
         public void Add(T item)
         {
-            list.Add(item);
-            OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Added, list.Count - 1));
+            _list.Add(item);
+            OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Added, _list.Count - 1));
         }
 
         public bool Remove(T item)
         {
-            var index = list.IndexOf(item);
+            var index = _list.IndexOf(item);
             if (index != -1)
             {
                 RemoveAt(index);
@@ -48,13 +48,13 @@ namespace Miotsukushi.Model
 
         public void RemoveAt(int index)
         {
-            list.RemoveAt(index);
+            _list.RemoveAt(index);
             OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Removed, index));
         }
 
         public int RemoveAll(Predicate<T> match)
         {
-            var ret = list.RemoveAll(match);
+            var ret = _list.RemoveAll(match);
             OnExListChanged(new ExListChangedEventArgs(ExListChangedEventArgs.ChangeTypeEnum.Removed, -1));
             return ret;
         }
@@ -66,7 +66,7 @@ namespace Miotsukushi.Model
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (var item in list)
+            foreach (var item in _list)
                 yield return item;
         }
 

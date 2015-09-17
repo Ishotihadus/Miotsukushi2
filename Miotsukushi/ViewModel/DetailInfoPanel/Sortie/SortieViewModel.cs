@@ -182,11 +182,11 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
 
         public SortieViewModel()
         {
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            kcmodel.sortiemodel.SortieStarted += Sortiemodel_SortieStarted;
-            kcmodel.sortiemodel.CellAdvanced += Sortiemodel_CellAdvanced;
-            kcmodel.sortiemodel.GoBackPort += Sortiemodel_GoBackPort;
-            kcmodel.sortiemodel.goback_ships.ExListChanged += Goback_ships_ExListChanged;
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            kcmodel.Sortiemodel.SortieStarted += Sortiemodel_SortieStarted;
+            kcmodel.Sortiemodel.CellAdvanced += Sortiemodel_CellAdvanced;
+            kcmodel.Sortiemodel.GoBackPort += Sortiemodel_GoBackPort;
+            kcmodel.Sortiemodel.GobackShips.ExListChanged += Goback_ships_ExListChanged;
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsMe, new object());
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsCombined, new object());
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Comments, new object());
@@ -194,11 +194,11 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
 
         private void Goback_ships_ExListChanged(object sender, Model.ExListChangedEventArgs e)
         {
-            var kcmodel = Model.MainModel.Current.kancolleModel;
+            var kcmodel = Model.MainModel.Current.KancolleModel;
 
             for (var i = 0; i < ShipsMe.Count; i++)
             {
-                if (kcmodel.sortiemodel.goback_ships.Contains(i))
+                if (kcmodel.Sortiemodel.GobackShips.Contains(i))
                     ShipsMe[i].IsEscaped = true;
                 else
                     ShipsMe[i].IsEscaped = false;
@@ -206,7 +206,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
 
             for(var i = 0; i < ShipsCombined.Count; i++)
             {
-                if (kcmodel.sortiemodel.goback_ships.Contains(i + 6))
+                if (kcmodel.Sortiemodel.GobackShips.Contains(i + 6))
                     ShipsCombined[i].IsEscaped = true;
                 else
                     ShipsCombined[i].IsEscaped = false;
@@ -227,57 +227,57 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
 
         void CellAppend()
         {
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            var cellinfo = kcmodel.sortiemodel.now_cell;
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            var cellinfo = kcmodel.Sortiemodel.NowCell;
 
             if (cellinfo != null)
             {
-                CellID = cellinfo.cell_no;
-                switch (cellinfo.cell_type)
+                CellID = cellinfo.CellNo;
+                switch (cellinfo.CellType)
                 {
-                    case Model.KanColle.BattleModels.CellModel.CellType.start:
+                    case Model.KanColle.BattleModels.CellType.Start:
                         CellInfo = "始点";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.battle:
+                    case Model.KanColle.BattleModels.CellType.Battle:
                         CellInfo = "戦闘";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.night_sp_battle:
+                    case Model.KanColle.BattleModels.CellType.NightSpBattle:
                         CellInfo = "開幕夜戦";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.night_to_day_battle:
+                    case Model.KanColle.BattleModels.CellType.NightToDayBattle:
                         CellInfo = "夜戦→昼戦";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.air_battle:
+                    case Model.KanColle.BattleModels.CellType.AirBattle:
                         CellInfo = "航空戦";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.success_ship_guard:
+                    case Model.KanColle.BattleModels.CellType.SuccessShipGuard:
                         CellInfo = "船団護衛成功";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.air_search:
+                    case Model.KanColle.BattleModels.CellType.AirSearch:
                         CellInfo = "航空偵察";
-                        switch (cellinfo.cell_event_content_id)
+                        switch (cellinfo.CellEventContentId)
                         {
                             case 0: CellInfo += " 失敗"; break;
                             case 1: CellInfo += " 成功"; break;
                             case 2: CellInfo += " 大成功"; break;
                         }
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.no_battle:
-                        switch (cellinfo.cell_event_content_id)
+                    case Model.KanColle.BattleModels.CellType.NoBattle:
+                        switch (cellinfo.CellEventContentId)
                         {
                             case 1: CellInfo = "敵影を見ず"; break;
                             default: CellInfo = "気のせいだった"; break;
                         }
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.route_choice:
+                    case Model.KanColle.BattleModels.CellType.RouteChoice:
                         CellInfo = "能動分岐";
-                        if(cellinfo.cell_event_content_values != null)
-                            CellInfo += "（" + string.Join(", ", cellinfo.cell_event_content_values) + "）";
+                        if(cellinfo.CellEventContentValues != null)
+                            CellInfo += "（" + string.Join(", ", cellinfo.CellEventContentValues) + "）";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.supply:
+                    case Model.KanColle.BattleModels.CellType.Supply:
                         CellInfo = "補給";
                         break;
-                    case Model.KanColle.BattleModels.CellModel.CellType.happening:
+                    case Model.KanColle.BattleModels.CellType.Happening:
                         CellInfo = "うずしお";
                         break;
                     default:
@@ -285,7 +285,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                         break;
                 }
 
-                if(cellinfo.is_boss_battle)
+                if(cellinfo.IsBossBattle)
                 {
                     CellInfo += "（ボス戦）";
                 }
@@ -302,20 +302,20 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
 
         private void Sortiemodel_SortieStarted(object sender, EventArgs e)
         {
-            var kcmodel = Model.MainModel.Current.kancolleModel;
-            var mapinfo = kcmodel.sortiemodel.now_map;
+            var kcmodel = Model.MainModel.Current.KancolleModel;
+            var mapinfo = kcmodel.Sortiemodel.NowMap;
             Comments.Clear();
 
             if(mapinfo != null)
             {
-                AreaID = mapinfo.maparea_id;
-                MapID = mapinfo.map_no;
-                MapName = mapinfo.map_name;
-                OpeName = mapinfo.ope_title;
-                OpeInfo = mapinfo.ope_info.Replace("<br>", "");
-                if (mapinfo.selected_rank.HasValue)
+                AreaID = mapinfo.MapareaId;
+                MapID = mapinfo.MapNo;
+                MapName = mapinfo.MapName;
+                OpeName = mapinfo.OpeTitle;
+                OpeInfo = mapinfo.OpeInfo.Replace("<br>", "");
+                if (mapinfo.SelectedRank.HasValue)
                 {
-                    switch (mapinfo.selected_rank.Value)
+                    switch (mapinfo.SelectedRank.Value)
                     {
                         case 0: OpeName += "（難易度未設定）"; break;
                         case 1: OpeName += "（丙作戦）"; break;
@@ -324,25 +324,25 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                     }
                 }
 
-                if(mapinfo.required_defeat_count.HasValue)
-                    Comments.Add(string.Format("撃破回数: {0}/{1}", mapinfo.now_defeat_count.HasValue ? mapinfo.now_defeat_count.Value + "" : "-", mapinfo.required_defeat_count.Value));
-                if (mapinfo.max_hp.HasValue && mapinfo.now_hp.HasValue)
-                    Comments.Add(string.Format("マップHP: {0}/{1}", mapinfo.now_hp.HasValue ? mapinfo.now_hp.Value + "" : "-", mapinfo.max_hp.Value));
+                if(mapinfo.RequiredDefeatCount.HasValue)
+                    Comments.Add(string.Format("撃破回数: {0}/{1}", mapinfo.NowDefeatCount.HasValue ? mapinfo.NowDefeatCount.Value + "" : "-", mapinfo.RequiredDefeatCount.Value));
+                if (mapinfo.MaxHp.HasValue)
+                    Comments.Add(string.Format("マップHP: {0}/{1}", mapinfo.NowHp.HasValue ? mapinfo.NowHp.Value + "" : "-", mapinfo.MaxHp.Value));
             }
             CellAppend();
 
             ShipsMe.Clear();
-            sortiing_deck = kcmodel.fleetdata[kcmodel.sortiemodel.sortiing_deck - 1];
+            sortiing_deck = kcmodel.Fleetdata[kcmodel.Sortiemodel.SortiingDeck - 1];
             sortiing_deck.PropertyChanged += Sortiing_deck_PropertyChanged;
-            foreach (var ship in kcmodel.fleetdata[kcmodel.sortiemodel.sortiing_deck - 1].ships)
-                ShipsMe.Add(new SortieShipViewModel(kcmodel.shipdata.FirstOrDefault(_ => _.shipid == ship)));
+            foreach (var ship in kcmodel.Fleetdata[kcmodel.Sortiemodel.SortiingDeck - 1].Ships)
+                ShipsMe.Add(new SortieShipViewModel(kcmodel.Shipdata.FirstOrDefault(_ => _.Shipid == ship)));
 
             ShipsCombined.Clear();
-            if (kcmodel.combined_flag > 0 && kcmodel.sortiemodel.sortiing_deck == 1)
+            if (kcmodel.CombinedFlag > 0 && kcmodel.Sortiemodel.SortiingDeck == 1)
             {
-                sortiing_deck_combined = kcmodel.fleetdata[1];
-                foreach (var ship in kcmodel.fleetdata[1].ships)
-                    ShipsCombined.Add(new SortieShipViewModel(kcmodel.shipdata.FirstOrDefault(_ => _.shipid == ship)));
+                sortiing_deck_combined = kcmodel.Fleetdata[1];
+                foreach (var ship in kcmodel.Fleetdata[1].Ships)
+                    ShipsCombined.Add(new SortieShipViewModel(kcmodel.Shipdata.FirstOrDefault(_ => _.Shipid == ship)));
                 sortiing_deck_combined.PropertyChanged += Sortiing_deck_combined_PropertyChanged;
 
                 HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;

@@ -6,18 +6,17 @@ namespace Miotsukushi.Model.Debugger
 {
     class PacketSaver
     {
-        KanColleNotifier kclib;
+        KanColleNotifier _kclib;
 
-        string filename;
-        uint packet_counter = 0;
+        readonly string _filename = "log/" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".dat";
+        uint _packetCounter = 0;
 
-        bool enable = true;
+        bool _enable = true;
 
         public PacketSaver(KanColleNotifier kclib)
         {
-            filename = "log/" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".dat";
 
-            this.kclib = kclib;
+            this._kclib = kclib;
             kclib.GetKcsAPIData += Kclib_GetKcsAPIData;
             kclib.GetFiddlerLogString += Kclib_GetFiddlerLogString;
             kclib.KcsAPIDataAnalyzeFailed += Kclib_KcsAPIDataAnalyzeFailed;
@@ -26,17 +25,17 @@ namespace Miotsukushi.Model.Debugger
 
         private void PacketSaver_UnhandledExceptionRaised(object sender, UnhandledExceptionRaisedEventArgs e)
         {
-            ++packet_counter;
+            ++_packetCounter;
 
-            if (!enable)
+            if (!_enable)
                 return;
 
             DirectoryConfirm();
 
-            using (var sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(_filename, true))
             {
                 sw.WriteLine("================== !!! Unhandled Exception !!! ==================");
-                sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
+                sw.WriteLine("No." + _packetCounter + "  " + DateTime.Now.ToString());
                 sw.WriteLine("Type: " + e.exceptionType);
                 if (e.innerException != null)
                 {
@@ -51,17 +50,17 @@ namespace Miotsukushi.Model.Debugger
 
         private void Kclib_KcsAPIDataAnalyzeFailed(object sender, KanColleLib.EventArgs.KcsAPIDataAnalyzeFailedEventArgs e)
         {
-            ++packet_counter;
+            ++_packetCounter;
 
-            if (!enable)
+            if (!_enable)
                 return;
 
             DirectoryConfirm();
 
-            using (var sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(_filename, true))
             {
                 sw.WriteLine("================== !!! Error !!! ==================");
-                sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
+                sw.WriteLine("No." + _packetCounter + "  " + DateTime.Now.ToString());
                 sw.WriteLine("URL: " + e.kcsapiurl);
                 sw.WriteLine("Exception: " + e.originalexception.Message);
                 sw.WriteLine("Source: " + e.originalexception.Source);
@@ -79,34 +78,34 @@ namespace Miotsukushi.Model.Debugger
 
         private void Kclib_GetFiddlerLogString(object sender, KanColleLib.EventArgs.GetFiddlerLogStringEventArgs e)
         {
-            ++packet_counter;
+            ++_packetCounter;
 
-            if (!enable)
+            if (!_enable)
                 return;
 
             DirectoryConfirm();
 
-            using (var sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(_filename, true))
             {
                 sw.WriteLine("================== Fiddler Log ==================");
-                sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
+                sw.WriteLine("No." + _packetCounter + "  " + DateTime.Now.ToString());
                 sw.WriteLine(e.logtext);
             }
         }
 
         private void Kclib_GetKcsAPIData(object sender, KanColleLib.EventArgs.GetKcsAPIDataEventArgs e)
         {
-            ++packet_counter;
+            ++_packetCounter;
 
-            if (!enable)
+            if (!_enable)
                 return;
 
             DirectoryConfirm();
 
-            using (var sw = new StreamWriter(filename, true))
+            using (var sw = new StreamWriter(_filename, true))
             {
                 sw.WriteLine("================== KcsAPI Data ==================");
-                sw.WriteLine("No." + packet_counter + "  " + DateTime.Now.ToString());
+                sw.WriteLine("No." + _packetCounter + "  " + DateTime.Now.ToString());
                 sw.WriteLine("URL: " + e.kcsapiurl);
                 sw.WriteLine("[[Request]]");
                 sw.WriteLine(e.request);

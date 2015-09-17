@@ -6,25 +6,26 @@ using System.Threading.Tasks;
 
 namespace Miotsukushi.Model.KanColle.BattleModels
 {
+    public enum CellType
+    {
+        Unknown, Start, Battle, NightSpBattle, NightToDayBattle, AirBattle, AirSearch, SuccessShipGuard, RouteChoice, NoBattle, Supply, Happening
+    }
+
     class CellModel
     {
-        public enum CellType
-        {
-            unknown, start, battle, night_sp_battle, night_to_day_battle, air_battle, air_search, success_ship_guard, route_choice, no_battle, supply, happening
-        }
 
-        public int cell_no;
+        public int CellNo;
 
-        public int boss_cell_no;
+        public int BossCellNo;
 
         /// <summary>
         /// 終点かどうか
         /// </summary>
-        public bool has_no_way;
+        public bool HasNoWay;
 
-        public bool is_boss_battle;
+        public bool IsBossBattle;
 
-        public CellType cell_type;
+        public CellType CellType;
 
         /// <summary>
         /// air_search: 0失敗 1成功 2大成功
@@ -32,17 +33,17 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         /// supply: 手に入れたアイテムのID
         /// happening: 失ったアイテムのID
         /// </summary>
-        public int cell_event_content_id;
+        public int CellEventContentId;
 
         /// <summary>
         /// supply: 手に入れたアイテムの量
         /// happening: 失ったアイテムの量
         /// </summary>
-        public int cell_event_content_value;
+        public int CellEventContentValue;
 
         /// <summary>
         /// route_choice: 次に進めるマス
         /// </summary>
-        public int[] cell_event_content_values;
+        public int[] CellEventContentValues;
     }
 }

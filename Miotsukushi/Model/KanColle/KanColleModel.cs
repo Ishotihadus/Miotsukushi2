@@ -13,29 +13,29 @@ namespace Miotsukushi.Model.KanColle
 {
     class KanColleModel
     {
-        KanColleNotifier kclib;
-        public ServerInfo serverinfo = new ServerInfo();
-        public Dictionary<int, CharacterData> charamaster = new Dictionary<int,CharacterData>();
-        public Dictionary<int, ShiptypeData> shiptypemaster = new Dictionary<int,ShiptypeData>();
-        public Dictionary<int, MissionData> missionmaster = new Dictionary<int,MissionData>();
-        public Dictionary<int, ItemData> slotitemmaster = new Dictionary<int, ItemData>();
-        public Dictionary<int, ItemEquipTypeData> slotitem_equiptypemaster = new Dictionary<int, ItemEquipTypeData>();
-        public Dictionary<int, MapAreaData> mapareamaster = new Dictionary<int, MapAreaData>();
-        public Dictionary<int, MapInfoData> mapinfomaster = new Dictionary<int, MapInfoData>();
-        public ObservableCollection<SlotData> slotdata = new ObservableCollection<SlotData>();
-        public ObservableCollection<ShipData> shipdata = new ObservableCollection<ShipData>();
-        public ExList<FleetData> fleetdata = new ExList<FleetData>();
-        public ExList<KDockData> kdockdata = new ExList<KDockData>();
-        public ExList<NDockData> ndockdata = new ExList<NDockData>();
-        public BasicData basicdata = new BasicData();
-        public QuestData questdata = new QuestData();
+        KanColleNotifier _kclib;
+        public ServerInfo Serverinfo = new ServerInfo();
+        public Dictionary<int, CharacterData> Charamaster = new Dictionary<int,CharacterData>();
+        public Dictionary<int, ShiptypeData> Shiptypemaster = new Dictionary<int,ShiptypeData>();
+        public Dictionary<int, MissionData> Missionmaster = new Dictionary<int,MissionData>();
+        public Dictionary<int, ItemData> Slotitemmaster = new Dictionary<int, ItemData>();
+        public Dictionary<int, ItemEquipTypeData> SlotitemEquiptypemaster = new Dictionary<int, ItemEquipTypeData>();
+        public Dictionary<int, MapAreaData> Mapareamaster = new Dictionary<int, MapAreaData>();
+        public Dictionary<int, MapInfoData> Mapinfomaster = new Dictionary<int, MapInfoData>();
+        public ObservableCollection<SlotData> Slotdata = new ObservableCollection<SlotData>();
+        public ObservableCollection<ShipData> Shipdata = new ObservableCollection<ShipData>();
+        public ExList<FleetData> Fleetdata = new ExList<FleetData>();
+        public ExList<KDockData> Kdockdata = new ExList<KDockData>();
+        public ExList<NDockData> Ndockdata = new ExList<NDockData>();
+        public BasicData Basicdata = new BasicData();
+        public QuestData Questdata = new QuestData();
 
-        public BattleModels.BattleModel battlemodel;
-        public BattleModels.SortieModel sortiemodel;
-        public DebuggerModel debuggermodel;
-        public Plugins.StatisticsDBHelper statsticshelper;
-        public bool initializeCompleted = false;
-        public int combined_flag = 0;
+        public BattleModels.BattleModel Battlemodel;
+        public BattleModels.SortieModel Sortiemodel;
+        public DebuggerModel Debuggermodel;
+        public Plugins.StatisticsDbHelper Statsticshelper;
+        public bool InitializeCompleted = false;
+        public int CombinedFlag = 0;
 
         public KanColleModel()
         {
@@ -43,68 +43,68 @@ namespace Miotsukushi.Model.KanColle
             System.Diagnostics.Debug.WriteLine("Port:" + port);
             KanColleNotifier.FiddlerSetWinInetProxy();
 
-            kclib = new KanColleNotifier(true);
-            new PacketSaver(kclib);
-            statsticshelper = new Plugins.StatisticsDBHelper(kclib);
-            battlemodel = new BattleModels.BattleModel(this, kclib);
-            sortiemodel = new BattleModels.SortieModel(this, kclib);
-            debuggermodel = new DebuggerModel(kclib);
+            _kclib = new KanColleNotifier(true);
+            new PacketSaver(_kclib);
+            Statsticshelper = new Plugins.StatisticsDbHelper(_kclib);
+            Battlemodel = new BattleModels.BattleModel(this, _kclib);
+            Sortiemodel = new BattleModels.SortieModel(this, _kclib);
+            Debuggermodel = new DebuggerModel(_kclib);
 
-            kclib.GameStart += Kclib_GameStart;
-            kclib.KcsAPIDataAnalyzeFailed += (_, e) => OnAPIAnalyzeError(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
-            kclib.UnknownKcsAPIDataReceived += (_, e) => OnUnknownAPIReceived(new APIAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
-            kclib.GetFiddlerLogString += (_, e) => OnGetFiddlerLog(new StringEventArgs(e.logtext));
+            _kclib.GameStart += Kclib_GameStart;
+            _kclib.KcsAPIDataAnalyzeFailed += (_, e) => OnApiAnalyzeError(new ApiAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
+            _kclib.UnknownKcsAPIDataReceived += (_, e) => OnUnknownApiReceived(new ApiAnalyzeErrorEventArgs(e.kcsapiurl, e.request, e.response));
+            _kclib.GetFiddlerLogString += (_, e) => OnGetFiddlerLog(new StringEventArgs(e.logtext));
 
-            kclib.GetGetmemberBasic += kclib_GetGetmemberBasic;
-            kclib.GetGetmemberDeck += kclib_GetGetmemberDeck;
-            kclib.GetGetmemberKdock += kclib_GetGetmemberKdock;
-            kclib.GetGetmemberMaterial += kclib_GetGetmemberMaterial;
-            kclib.GetGetmemberNdock += kclib_GetGetmemberNdock;
-            kclib.GetGetmemberQuestlist += Kclib_GetGetmemberQuestlist;
-            kclib.GetGetmemberShip2 += kclib_GetGetmemberShip2;
-            kclib.GetGetmemberShip3 += kclib_GetGetmemberShip3;
-            kclib.GetGetmemberShipDeck += Kclib_GetGetmemberShipDeck;
-            kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
-            kclib.GetPortPort += kclib_GetPortPort;
-            kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
-            kclib.GetReqhenseiCombined += Kclib_GetReqhenseiCombined;
-            kclib.GetReqhokyuCharge += Kclib_GetReqhokyuCharge;
-            kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
-            kclib.GetReqkousyouDestroyitem2 += Kclib_GetReqkousyouDestroyitem2;
-            kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
-            kclib.GetReqkousyouGetship += kclib_GetReqkousyouGetship;
-            kclib.GetReqmemberUpdatedeckname += Kclib_GetReqmemberUpdatedeckname;
-            kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
-            kclib.GetReqmissionStart += kclib_GetReqmissionStart;
-            kclib.GetReqnyukyoSpeedchange += Kclib_GetReqnyukyoSpeedchange;
-            kclib.GetReqnyukyoStart += Kclib_GetReqnyukyoStart;
-            kclib.GetStart2 += kclib_GetStart2;
+            _kclib.GetGetmemberBasic += kclib_GetGetmemberBasic;
+            _kclib.GetGetmemberDeck += kclib_GetGetmemberDeck;
+            _kclib.GetGetmemberKdock += kclib_GetGetmemberKdock;
+            _kclib.GetGetmemberMaterial += kclib_GetGetmemberMaterial;
+            _kclib.GetGetmemberNdock += kclib_GetGetmemberNdock;
+            _kclib.GetGetmemberQuestlist += Kclib_GetGetmemberQuestlist;
+            _kclib.GetGetmemberShip2 += kclib_GetGetmemberShip2;
+            _kclib.GetGetmemberShip3 += kclib_GetGetmemberShip3;
+            _kclib.GetGetmemberShipDeck += Kclib_GetGetmemberShipDeck;
+            _kclib.GetGetmemberSlotItem += kclib_GetGetmemberSlotItem;
+            _kclib.GetPortPort += kclib_GetPortPort;
+            _kclib.GetReqhenseiChange += kclib_GetReqhenseiChange;
+            _kclib.GetReqhenseiCombined += Kclib_GetReqhenseiCombined;
+            _kclib.GetReqhokyuCharge += Kclib_GetReqhokyuCharge;
+            _kclib.GetReqkousyouCreateitem += kclib_GetReqkousyouCreateitem;
+            _kclib.GetReqkousyouDestroyitem2 += Kclib_GetReqkousyouDestroyitem2;
+            _kclib.GetReqkousyouDestroyship += kclib_GetReqkousyouDestroyship;
+            _kclib.GetReqkousyouGetship += kclib_GetReqkousyouGetship;
+            _kclib.GetReqmemberUpdatedeckname += Kclib_GetReqmemberUpdatedeckname;
+            _kclib.GetReqmissionReturnInstruction += kclib_GetReqmissionReturnInstruction;
+            _kclib.GetReqmissionStart += kclib_GetReqmissionStart;
+            _kclib.GetReqnyukyoSpeedchange += Kclib_GetReqnyukyoSpeedchange;
+            _kclib.GetReqnyukyoStart += Kclib_GetReqnyukyoStart;
+            _kclib.GetStart2 += kclib_GetStart2;
 
-            shipdata.CollectionChanged += shipdata_CollectionChanged;
-            slotdata.CollectionChanged += slotdata_CollectionChanged;
+            Shipdata.CollectionChanged += shipdata_CollectionChanged;
+            Slotdata.CollectionChanged += slotdata_CollectionChanged;
         }
 
         private void Kclib_GetReqhenseiCombined(object sender, KanColleLib.TransmissionRequest.api_req_hensei.CombinedRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_hensei.Combined> response)
         {
-            combined_flag = request.combined_type;
+            CombinedFlag = request.combined_type;
         }
 
         private void Kclib_GetReqnyukyoSpeedchange(object sender, KanColleLib.TransmissionRequest.api_req_nyukyo.SpeedchangeRequest request, KanColleLib.TransmissionData.Svdata<object> response)
         {
-            var shipid = ndockdata[request.ndock_id - 1].shipid;
-            ndockdata[request.ndock_id - 1].status = NDockStatus.Empty;
+            var shipid = Ndockdata[request.ndock_id - 1].Shipid;
+            Ndockdata[request.ndock_id - 1].Status = NDockStatus.Empty;
 
-            var ship = shipdata.FirstOrDefault(_ => _.shipid == shipid);
+            var ship = Shipdata.FirstOrDefault(_ => _.Shipid == shipid);
             if (ship != null)
             {
-                ship.hp_now = ship.hp_max;
-                ship.ndock_time = TimeSpan.Zero;
-                if (ship.condition < 40)
-                    ship.condition = 40;
+                ship.HpNow = ship.HpMax;
+                ship.NdockTime = TimeSpan.Zero;
+                if (ship.Condition < 40)
+                    ship.Condition = 40;
             }
 
-            foreach (var fleet in fleetdata)
-                if(fleet.ships.Contains(shipid))
+            foreach (var fleet in Fleetdata)
+                if(fleet.Ships.Contains(shipid))
                     fleet.ChangeNDockStatus();
         }
 
@@ -112,17 +112,17 @@ namespace Miotsukushi.Model.KanColle
         {
             if(request.highspeed)
             {
-                var ship = shipdata.FirstOrDefault(_ => _.shipid == request.ship_id);
+                var ship = Shipdata.FirstOrDefault(_ => _.Shipid == request.ship_id);
                 if(ship != null)
                 {
-                    ship.hp_now = ship.hp_max;
-                    ship.ndock_time = TimeSpan.Zero;
-                    if (ship.condition < 40)
-                        ship.condition = 40;
+                    ship.HpNow = ship.HpMax;
+                    ship.NdockTime = TimeSpan.Zero;
+                    if (ship.Condition < 40)
+                        ship.Condition = 40;
                 }
 
-                foreach (var fleet in fleetdata)
-                    if (fleet.ships.Contains(request.ship_id))
+                foreach (var fleet in Fleetdata)
+                    if (fleet.Ships.Contains(request.ship_id))
                         fleet.ChangeNDockStatus();
             }
         }
@@ -131,27 +131,27 @@ namespace Miotsukushi.Model.KanColle
         {
             foreach (var i in request.slotitem_ids)
             {
-                var s = slotdata.FirstOrDefault(_ => _.id == i);
+                var s = Slotdata.FirstOrDefault(_ => _.Id == i);
                 if (s != null)
-                    slotdata.Remove(s);
+                    Slotdata.Remove(s);
             }
 
-            basicdata.fuel += response.data.get_material[0];
-            basicdata.ammo += response.data.get_material[1];
-            basicdata.steel += response.data.get_material[2];
-            basicdata.bauxite += response.data.get_material[3];
+            Basicdata.Fuel += response.data.get_material[0];
+            Basicdata.Ammo += response.data.get_material[1];
+            Basicdata.Steel += response.data.get_material[2];
+            Basicdata.Bauxite += response.data.get_material[3];
         }
 
         private void Kclib_GetReqhokyuCharge(object sender, KanColleLib.TransmissionRequest.api_req_hokyu.ChargeRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_hokyu.Charge> response)
         {
-            basicdata.FromMaterialArray(response.data.material);
+            Basicdata.FromMaterialArray(response.data.material);
             foreach(var ship in response.data.ship)
             {
-                var s = shipdata.FirstOrDefault(_ => _.shipid == ship.id);
+                var s = Shipdata.FirstOrDefault(_ => _.Shipid == ship.id);
                 if (s != null)
                 {
-                    s.fuel = ship.fuel;
-                    s.ammo = ship.bull;
+                    s.Fuel = ship.fuel;
+                    s.Ammo = ship.bull;
                     for (var j = 0; j < ship.onslot.Length; j++)
                     {
                         if (s.OnSlotCount.Count > j)
@@ -164,8 +164,8 @@ namespace Miotsukushi.Model.KanColle
 
             // 1艦隊の中でしか一気に補給できないことを利用する
             if(response.data.ship.Count > 0)
-                foreach(var fleet in fleetdata)
-                    if(fleet.ships.Contains(response.data.ship[0].id))
+                foreach(var fleet in Fleetdata)
+                    if(fleet.Ships.Contains(response.data.ship[0].id))
                     {
                         fleet.ChangeSupplyStatus();
                         break;
@@ -176,7 +176,7 @@ namespace Miotsukushi.Model.KanColle
         {
             foreach(var deck in response.data.deck_data)
             {
-                fleetdata[deck.id - 1].FromDeckValue(deck);
+                Fleetdata[deck.id - 1].FromDeckValue(deck);
             }
 
             AppendShipDataFromList(response.data.ship_data);
@@ -184,61 +184,61 @@ namespace Miotsukushi.Model.KanColle
 
         private void Kclib_GetReqmemberUpdatedeckname(object sender, KanColleLib.TransmissionRequest.api_req_member.UpdatedecknameRequest request, KanColleLib.TransmissionData.Svdata<object> response)
         {
-            if (request.deck_id <= fleetdata.Count && request.deck_id > 1)
-                fleetdata[request.deck_id - 1].DeckName = request.name;
+            if (request.deck_id <= Fleetdata.Count && request.deck_id > 1)
+                Fleetdata[request.deck_id - 1].DeckName = request.name;
         }
 
         private void Kclib_GetGetmemberQuestlist(object sender, KanColleLib.TransmissionRequest.api_get_member.QuestlistRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Questlist> response)
         {
-            questdata.SetQuestList(response.data);
+            Questdata.SetQuestList(response.data);
         }
 
         private void Kclib_GameStart(object sender, KanColleLib.EventArgs.GameStartEventArgs e)
         {
-            serverinfo.SetServerAddress(e.main2Dadress);
-            System.Diagnostics.Debug.WriteLine("Server: " + serverinfo.address.ToString() + "（" + (serverinfo.GetServerName() ?? "不明") + "）");
+            Serverinfo.SetServerAddress(e.main2Dadress);
+            System.Diagnostics.Debug.WriteLine("Server: " + Serverinfo.Address.ToString() + "（" + (Serverinfo.GetServerName() ?? "不明") + "）");
             OnGameStart(new System.EventArgs());
         }
 
         void slotdata_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            basicdata.now_equipment_number = slotdata.Count;
+            Basicdata.NowEquipmentNumber = Slotdata.Count;
         }
 
         void shipdata_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            basicdata.now_ship_number = shipdata.Count;
+            Basicdata.NowShipNumber = Shipdata.Count;
         }
 
         void kclib_GetReqkousyouCreateitem(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.CreateitemRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Createitem> response)
         {
             if (response.data.slot_item != null)
-                slotdata.Add(new SlotData() { id = response.data.slot_item.id, itemid = response.data.slot_item.slotitem_id });
+                Slotdata.Add(new SlotData() { Id = response.data.slot_item.id, Itemid = response.data.slot_item.slotitem_id });
 
-            var args = new CreateItemEventArgs() { success = response.data.create_flag };
+            var args = new CreateItemEventArgs() { Success = response.data.create_flag };
             if (response.data.create_flag)
             {
                 if (response.data.slot_item != null)
                 {
-                    args.id = response.data.slot_item.id;
-                    args.item_id = response.data.slot_item.slotitem_id;
+                    args.Id = response.data.slot_item.id;
+                    args.ItemId = response.data.slot_item.slotitem_id;
                 }
             }
             else
             {
-                args.id = 0;
+                args.Id = 0;
                 try
                 {
-                    args.item_id = int.Parse(response.data.fdata.Split(',')[1]);
+                    args.ItemId = int.Parse(response.data.fdata.Split(',')[1]);
                 }
                 catch { }
             }
-            if (slotitemmaster.ContainsKey(args.item_id))
+            if (Slotitemmaster.ContainsKey(args.ItemId))
             {
-                args.name = slotitemmaster[args.item_id].name;
-                args.type_id = slotitemmaster[args.item_id].type_equiptype;
-                if (slotitem_equiptypemaster.ContainsKey(args.type_id))
-                    args.type = slotitem_equiptypemaster[args.type_id].name;
+                args.Name = Slotitemmaster[args.ItemId].Name;
+                args.TypeId = Slotitemmaster[args.ItemId].TypeEquiptype;
+                if (SlotitemEquiptypemaster.ContainsKey(args.TypeId))
+                    args.Type = SlotitemEquiptypemaster[args.TypeId].Name;
             }
             OnCreateItem(args);
         }
@@ -249,119 +249,119 @@ namespace Miotsukushi.Model.KanColle
             {
                 foreach (var item in response.data.slotitems)
                 {
-                    if (!slotdata.Any(_ => _.id == item.id))
+                    if (!Slotdata.Any(_ => _.Id == item.id))
                     {
-                        slotdata.Add(new SlotData() { id = item.id, itemid = item.slotitem_id, alv = item.alv });
+                        Slotdata.Add(new SlotData() { Id = item.id, Itemid = item.slotitem_id, Alv = item.alv });
                     }
                     else
                     {
-                        var s = slotdata.First(_ => _.id == item.id);
-                        s.alv = item.alv;
+                        var s = Slotdata.First(_ => _.Id == item.id);
+                        s.Alv = item.alv;
                     }
                 }
 
-                var deletelist = (from _ in slotdata where !response.data.slotitems.Any(__ => __.id == _.id) select _).ToList();
+                var deletelist = (from _ in Slotdata where !response.data.slotitems.Any(__ => __.id == _.Id) select _).ToList();
 
                 foreach (var item in deletelist)
                 {
-                    slotdata.Remove(item);
+                    Slotdata.Remove(item);
                 }
 
-                basicdata.now_equipment_number = slotdata.Count;
+                Basicdata.NowEquipmentNumber = Slotdata.Count;
             });
         }
 
         void kclib_GetReqhenseiChange(object sender, KanColleLib.TransmissionRequest.api_req_hensei.ChangeRequest request, KanColleLib.TransmissionData.Svdata<object> response)
         {
-            if (request.id - 1 < fleetdata.Count)
+            if (request.id - 1 < Fleetdata.Count)
             {
                 if (request.ship_id == -2)
                 {
                     // 旗艦以外全部解除
-                    var removecount = fleetdata[request.id - 1].ships.Count - 1;
+                    var removecount = Fleetdata[request.id - 1].Ships.Count - 1;
                     for (var i = 0; i < removecount; i++)
-                        fleetdata[request.id - 1].ships.RemoveAt(1);
+                        Fleetdata[request.id - 1].Ships.RemoveAt(1);
                 }
                 else if (request.ship_id == -1)
                 {
                     // その艦をはずす
-                    fleetdata[request.id - 1].ships.RemoveAt(request.ship_idx);
+                    Fleetdata[request.id - 1].Ships.RemoveAt(request.ship_idx);
                 }
                 else
                 {
-                    var replaceindex = fleetdata[request.id - 1].ships.IndexOf(request.ship_id);
+                    var replaceindex = Fleetdata[request.id - 1].Ships.IndexOf(request.ship_id);
 
                     if (replaceindex != -1)
                     {
                         // 艦隊の中に指定艦がいる場合
-                        if (fleetdata[request.id - 1].ships.Count > request.ship_idx)
+                        if (Fleetdata[request.id - 1].Ships.Count > request.ship_idx)
                         {
                             // 他の艦との交代である場合
-                            var replaceshipid = fleetdata[request.id - 1].ships[request.ship_idx];
-                            fleetdata[request.id - 1].ships[request.ship_idx] = request.ship_id;
-                            fleetdata[request.id - 1].ships[replaceindex] = replaceshipid;
+                            var replaceshipid = Fleetdata[request.id - 1].Ships[request.ship_idx];
+                            Fleetdata[request.id - 1].Ships[request.ship_idx] = request.ship_id;
+                            Fleetdata[request.id - 1].Ships[replaceindex] = replaceshipid;
                         }
                         else
                         {
                             // なにもないところに宣言した場合
-                            fleetdata[request.id - 1].ships.RemoveAt(replaceindex);
-                            fleetdata[request.id - 1].ships.Add(request.ship_id);
+                            Fleetdata[request.id - 1].Ships.RemoveAt(replaceindex);
+                            Fleetdata[request.id - 1].Ships.Add(request.ship_id);
                         }
                     }
                     else
                     {
                         int replaceshipid;
 
-                        if (fleetdata[request.id - 1].ships.Count > request.ship_idx)
+                        if (Fleetdata[request.id - 1].Ships.Count > request.ship_idx)
                         {
                             // 他の艦との交代である場合
                             // もとの艦のID
-                            replaceshipid = fleetdata[request.id - 1].ships[request.ship_idx];
-                            fleetdata[request.id - 1].ships[request.ship_idx] = request.ship_id;
+                            replaceshipid = Fleetdata[request.id - 1].Ships[request.ship_idx];
+                            Fleetdata[request.id - 1].Ships[request.ship_idx] = request.ship_id;
                         }
                         else
                         {
                             // なにもないところに宣言した場合
                             replaceshipid = -1;
-                            fleetdata[request.id - 1].ships.Add(request.ship_id);
+                            Fleetdata[request.id - 1].Ships.Add(request.ship_id);
                         }
 
-                        for (var i = 0; i < fleetdata.Count; i++)
+                        for (var i = 0; i < Fleetdata.Count; i++)
                         {
                             if (i == request.id - 1)
                                 continue;
-                            var rplidx = fleetdata[i].ships.IndexOf(request.ship_id);
+                            var rplidx = Fleetdata[i].Ships.IndexOf(request.ship_id);
                             if (rplidx != -1)
                             {
                                 if(replaceshipid == -1)
-                                    fleetdata[i].ships.RemoveAt(rplidx);
+                                    Fleetdata[i].Ships.RemoveAt(rplidx);
                                 else
-                                    fleetdata[i].ships[rplidx] = replaceshipid;
-                                fleetdata[i].Recalc();
+                                    Fleetdata[i].Ships[rplidx] = replaceshipid;
+                                Fleetdata[i].Recalc();
                                 break;
                             }
                         }
                     }
                 }
-                fleetdata[request.id - 1].Recalc();
+                Fleetdata[request.id - 1].Recalc();
             }
         }
 
         void kclib_GetGetmemberMaterial(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Material> response)
         {
-            basicdata.FromMaterial(response.data);
+            Basicdata.FromMaterial(response.data);
         }
 
         void kclib_GetGetmemberBasic(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Basic> response)
         {
-            basicdata.admiral_name = response.data.nickname;
-            basicdata.admiral_comment = response.data.comment;
-            basicdata.AppendRank(response.data.rank);
-            basicdata.admiral_level = response.data.level;
-            basicdata.admiral_exp = response.data.experience;
-            basicdata.furniture_coin = response.data.fcoin;
-            basicdata.max_ship = response.data.max_chara;
-            basicdata.max_equipment = response.data.max_slotitem;
+            Basicdata.AdmiralName = response.data.nickname;
+            Basicdata.AdmiralComment = response.data.comment;
+            Basicdata.AppendRank(response.data.rank);
+            Basicdata.AdmiralLevel = response.data.level;
+            Basicdata.AdmiralExp = response.data.experience;
+            Basicdata.FurnitureCoin = response.data.fcoin;
+            Basicdata.MaxShip = response.data.max_chara;
+            Basicdata.MaxEquipment = response.data.max_slotitem;
         }
 
         void kclib_GetReqkousyouDestroyship(object sender, KanColleLib.TransmissionRequest.api_req_kousyou.DestroyshipRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_kousyou.Destroyship> response)
@@ -369,14 +369,14 @@ namespace Miotsukushi.Model.KanColle
             DestroyShip(request.ship_id);
 
             // 艦隊にその艦娘がいたら削除
-            foreach(var fleet in fleetdata)
+            foreach(var fleet in Fleetdata)
             {
-                var rplidx = fleet.ships.IndexOf(request.ship_id);
+                var rplidx = fleet.Ships.IndexOf(request.ship_id);
                 if (rplidx != -1)
-                    fleet.ships.RemoveAt(rplidx);
+                    fleet.Ships.RemoveAt(rplidx);
             }
 
-            basicdata.FromMaterialArray(response.data.material);
+            Basicdata.FromMaterialArray(response.data.material);
         }
 
         void kclib_GetGetmemberNdock(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.NDock> response)
@@ -389,9 +389,9 @@ namespace Miotsukushi.Model.KanColle
             AppendKDockValue(response.data.kdock);
             foreach(var item in response.data.slotitem)
             {
-                if (!slotdata.Any(_ => _.id == item.id))
+                if (!Slotdata.Any(_ => _.Id == item.id))
                 {
-                    slotdata.Add(new SlotData() { id = item.id, itemid = item.slotitem_id });
+                    Slotdata.Add(new SlotData() { Id = item.id, Itemid = item.slotitem_id });
                 }
             }
             AppendShipData(response.data.ship);
@@ -404,19 +404,19 @@ namespace Miotsukushi.Model.KanColle
 
         void kclib_GetReqmissionReturnInstruction(object sender, KanColleLib.TransmissionRequest.api_req_mission.ReturnInstructionRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.ReturnInstruction> response)
         {
-            if (fleetdata.Count > request.deck_id - 1)
+            if (Fleetdata.Count > request.deck_id - 1)
             {
                 if (response.data.mission.Length >= 3)
-                    fleetdata[request.deck_id - 1].ChangeMissionStatus((int)response.data.mission[0], (int)response.data.mission[1], response.data.mission[2]);
+                    Fleetdata[request.deck_id - 1].ChangeMissionStatus((int)response.data.mission[0], (int)response.data.mission[1], response.data.mission[2]);
                 else
-                    fleetdata[request.deck_id - 1].ChangeMissionStatus(-1, -1, -1);
+                    Fleetdata[request.deck_id - 1].ChangeMissionStatus(-1, -1, -1);
             }
         }
 
         void kclib_GetReqmissionStart(object sender, KanColleLib.TransmissionRequest.api_req_mission.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_mission.Start> response)
         {
-            if (fleetdata.Count > request.deck_id - 1)
-                fleetdata[request.deck_id - 1].ChangeMissionStatus(1, request.mission_id, response.data.complatetime); // 遠征中の1は固定
+            if (Fleetdata.Count > request.deck_id - 1)
+                Fleetdata[request.deck_id - 1].ChangeMissionStatus(1, request.mission_id, response.data.complatetime); // 遠征中の1は固定
         }
 
         void kclib_GetGetmemberDeck(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Deck> response)
@@ -436,79 +436,79 @@ namespace Miotsukushi.Model.KanColle
 
         void kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
         {
-            basicdata.FromMaterial(response.data.material);
+            Basicdata.FromMaterial(response.data.material);
             AppendShipDataFromList(response.data.ship.ships);
             DeleteShipDataFromList(response.data.ship.ships);
             AppendDeckValue(response.data.deck_port);
             AppendNDockValue(response.data.ndock);
-            combined_flag = response.data.combined_flag;
+            CombinedFlag = response.data.combined_flag;
             InitializeConfirm();
         }
 
         void kclib_GetStart2(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_start2.Start2> response)
         {
-            charamaster = response.data.mst_ship.ToDictionary(_ => _.id, _ => CharacterData.fromKanColleLib(_));
+            Charamaster = response.data.mst_ship.ToDictionary(_ => _.id, _ => CharacterData.FromKanColleLib(_));
             foreach (var s in response.data.mst_shipgraph)
-                if(charamaster.ContainsKey(s.id))
-                    charamaster[s.id].resource_id = s.filename;
+                if(Charamaster.ContainsKey(s.id))
+                    Charamaster[s.id].ResourceId = s.filename;
 
-            shiptypemaster = response.data.mst_stype.ToDictionary(_ => _.id, _ => new ShiptypeData() { name = _.name });
+            Shiptypemaster = response.data.mst_stype.ToDictionary(_ => _.id, _ => new ShiptypeData() { Name = _.name });
 
-            missionmaster = response.data.mst_mission.ToDictionary(_ => _.id,
+            Missionmaster = response.data.mst_mission.ToDictionary(_ => _.id,
                 _ => new MissionData()
                 {
-                    name = _.name,
-                    time_minute = _.time,
-                    details = _.details,
-                    maparea_id = _.maparea_id
+                    Name = _.name,
+                    TimeMinute = _.time,
+                    Details = _.details,
+                    MapareaId = _.maparea_id
                 });
 
-            slotitemmaster = response.data.mst_slotitem.ToDictionary(_ => _.id,
+            Slotitemmaster = response.data.mst_slotitem.ToDictionary(_ => _.id,
                 _ => new ItemData()
                 {
-                    name = _.name,
-                    type = _.type[0],
-                    type_cardtype = _.type[1],
-                    type_equiptype = _.type[2],
-                    type_icontype = _.type[3],
-                    firepower = _.houg,
-                    torpedo = _.raig,
-                    bombing = _.baku,
-                    anti_air = _.tyku,
-                    anti_submarines = _.tais,
-                    reconnaissance = _.saku,
-                    hit_rate = _.houm,
-                    evasion = _.houk,
-                    armor = _.souk,
-                    range = _.leng
+                    Name = _.name,
+                    Type = _.type[0],
+                    TypeCardtype = _.type[1],
+                    TypeEquiptype = _.type[2],
+                    TypeIcontype = _.type[3],
+                    Firepower = _.houg,
+                    Torpedo = _.raig,
+                    Bombing = _.baku,
+                    AntiAir = _.tyku,
+                    AntiSubmarines = _.tais,
+                    Reconnaissance = _.saku,
+                    HitRate = _.houm,
+                    Evasion = _.houk,
+                    Armor = _.souk,
+                    Range = _.leng
                 });
 
-            slotitem_equiptypemaster = response.data.mst_slotitem_equiptype.ToDictionary(_ => _.id,
+            SlotitemEquiptypemaster = response.data.mst_slotitem_equiptype.ToDictionary(_ => _.id,
                 _ => new ItemEquipTypeData()
                 {
-                    name = _.name,
-                    typecolor = KanColleTools.GetSlotItemEquipTypeColor(_.id)
+                    Name = _.name,
+                    Typecolor = KanColleTools.GetSlotItemEquipTypeColor(_.id)
                 });
 
-            mapareamaster = response.data.mst_maparea.ToDictionary(_ => _.id,
+            Mapareamaster = response.data.mst_maparea.ToDictionary(_ => _.id,
                 _ => new MapAreaData()
                 {
-                    name = _.name,
-                    type = _.type
+                    Name = _.name,
+                    Type = _.type
                 });
 
-            mapinfomaster = response.data.mst_mapinfo.ToDictionary(_ => _.id,
+            Mapinfomaster = response.data.mst_mapinfo.ToDictionary(_ => _.id,
                 _ => new MapInfoData()
                 {
-                    name = _.name,
-                    area_id = _.maparea_id,
-                    map_id = _.no,
-                    map_level = _.level,
-                    opename = _.opetext,
-                    ope_info = _.infotext,
-                    defeat_type = _.required_defeat_count.HasValue ? MapInfoData.MapDefeatType.count_of_defeat :
-                                _.max_maphp.HasValue ? MapInfoData.MapDefeatType.max_hp : MapInfoData.MapDefeatType.normal,
-                    defeat_count = _.required_defeat_count.HasValue ? _.required_defeat_count.Value : 1
+                    Name = _.name,
+                    AreaId = _.maparea_id,
+                    MapId = _.no,
+                    MapLevel = _.level,
+                    Opename = _.opetext,
+                    OpeInfo = _.infotext,
+                    DefeatType = _.required_defeat_count.HasValue ? MapInfoData.MapDefeatType.CountOfDefeat :
+                                _.max_maphp.HasValue ? MapInfoData.MapDefeatType.MaxHp : MapInfoData.MapDefeatType.Normal,
+                    DefeatCount = _.required_defeat_count.HasValue ? _.required_defeat_count.Value : 1
                 });
             
             InitializeConfirm();
@@ -525,26 +525,26 @@ namespace Miotsukushi.Model.KanColle
             {
                 AppendShipData(ship);
             }
-            foreach (var deck in fleetdata)
+            foreach (var deck in Fleetdata)
                 deck.Recalc();
         }
 
         void AppendShipData(KanColleLib.TransmissionData.api_get_member.values.ShipValue ship)
         {
-            var is_found = false;
-            for (var i = 0; i < shipdata.Count; i++)
+            var isFound = false;
+            for (var i = 0; i < Shipdata.Count; i++)
             {
-                if (shipdata[i].shipid == ship.id)
+                if (Shipdata[i].Shipid == ship.id)
                 {
-                    is_found = true;
-                    shipdata[i].FromKanColleLib(ship);
+                    isFound = true;
+                    Shipdata[i].FromKanColleLib(ship);
                 }
             }
-            if (!is_found)
+            if (!isFound)
             {
                 var temp = new ShipData();
                 temp.FromKanColleLib(ship);
-                shipdata.Add(temp);
+                Shipdata.Add(temp);
             }
         }
 
@@ -555,10 +555,10 @@ namespace Miotsukushi.Model.KanColle
         /// <param name="existshiplist"></param>
         void DeleteShipDataFromList(List<KanColleLib.TransmissionData.api_get_member.values.ShipValue> existshiplist)
         {
-            var deletelist = (from _ in shipdata where !existshiplist.Any(__ => __.id == _.shipid) select _).ToList();
+            var deletelist = (from _ in Shipdata where !existshiplist.Any(__ => __.id == _.Shipid) select _).ToList();
             foreach (var item in deletelist)
             {
-                shipdata.Remove(item);
+                Shipdata.Remove(item);
             }
         }
 
@@ -568,14 +568,14 @@ namespace Miotsukushi.Model.KanColle
         /// <param name="ship"></param>
         void DestroyShip(int id)
         {
-            var deletelist = (from _ in shipdata where _.shipid == id select _).ToList();
+            var deletelist = (from _ in Shipdata where _.Shipid == id select _).ToList();
             foreach (var item in deletelist)
             {
                 foreach(var slot in item.Slots)
                 {
                     DestroyItem(slot);
                 }
-                shipdata.Remove(item);
+                Shipdata.Remove(item);
             }
         }
 
@@ -586,21 +586,21 @@ namespace Miotsukushi.Model.KanColle
         /// <param name="id"></param>
         void DestroyItem(int id)
         {
-            var deletelist = (from _ in slotdata where _.id == id select _).ToList();
+            var deletelist = (from _ in Slotdata where _.Id == id select _).ToList();
             foreach (var item in deletelist)
-                slotdata.Remove(item);
+                Slotdata.Remove(item);
         }
 
-        int initializecount = 0;
-        int initializecountflag = 2;
+        int _initializecount = 0;
+        int _initializecountflag = 2;
 
         void InitializeConfirm()
         {
-            ++initializecount;
-            if (initializecountflag == initializecount)
+            ++_initializecount;
+            if (_initializecountflag == _initializecount)
             {
                 OnInitializeComplete(new System.EventArgs());
-                initializeCompleted = true;
+                InitializeCompleted = true;
             }
         }
 
@@ -608,12 +608,12 @@ namespace Miotsukushi.Model.KanColle
         {
             for (var i = 0; i < data.ndocks.Count; i++)
             {
-                if (ndockdata.Count <= i)
-                    ndockdata.Add(new NDockData());
-                ndockdata[i].FromNDockValue(data.ndocks[i]);
+                if (Ndockdata.Count <= i)
+                    Ndockdata.Add(new NDockData());
+                Ndockdata[i].FromNDockValue(data.ndocks[i]);
             }
 
-            foreach (var fleet in fleetdata)
+            foreach (var fleet in Fleetdata)
                 fleet.ChangeNDockStatus();
         }
 
@@ -621,9 +621,9 @@ namespace Miotsukushi.Model.KanColle
         {
             for (var i = 0; i < data.kdocks.Count; i++)
             {
-                if (kdockdata.Count <= i)
-                    kdockdata.Add(new KDockData());
-                kdockdata[i].FromKDockValue(data.kdocks[i]);
+                if (Kdockdata.Count <= i)
+                    Kdockdata.Add(new KDockData());
+                Kdockdata[i].FromKDockValue(data.kdocks[i]);
             }
         }
 
@@ -631,12 +631,12 @@ namespace Miotsukushi.Model.KanColle
         {
             if (data.decks.Count >= 1)
             {
-                while (fleetdata.Count < data.decks.Count)
-                    fleetdata.Add(new FleetData());
-                while (fleetdata.Count > data.decks.Count)
-                    fleetdata.RemoveAt(fleetdata.Count - 1);
-                for (var i = 0; i < fleetdata.Count; i++)
-                    fleetdata[i].FromDeckValue(data.decks[i]);
+                while (Fleetdata.Count < data.decks.Count)
+                    Fleetdata.Add(new FleetData());
+                while (Fleetdata.Count > data.decks.Count)
+                    Fleetdata.RemoveAt(Fleetdata.Count - 1);
+                for (var i = 0; i < Fleetdata.Count; i++)
+                    Fleetdata[i].FromDeckValue(data.decks[i]);
             }
         }
 
@@ -655,13 +655,13 @@ namespace Miotsukushi.Model.KanColle
         /// <summary>
         /// APIの解析エラーが起きた際に呼び出されます
         /// </summary>
-        public event APIAnalyzeErrorEventHandler APIAnalyzeError;
-        public delegate void APIAnalyzeErrorEventHandler(object sender, APIAnalyzeErrorEventArgs e);
-        protected virtual void OnAPIAnalyzeError(APIAnalyzeErrorEventArgs e) { if (APIAnalyzeError != null) { APIAnalyzeError(this, e); } }
+        public event ApiAnalyzeErrorEventHandler ApiAnalyzeError;
+        public delegate void ApiAnalyzeErrorEventHandler(object sender, ApiAnalyzeErrorEventArgs e);
+        protected virtual void OnApiAnalyzeError(ApiAnalyzeErrorEventArgs e) { if (ApiAnalyzeError != null) { ApiAnalyzeError(this, e); } }
 
-        public event UnknownAPIReceivedEventHandler UnknownAPIReceived;
-        public delegate void UnknownAPIReceivedEventHandler(object sender, APIAnalyzeErrorEventArgs e);
-        protected virtual void OnUnknownAPIReceived(APIAnalyzeErrorEventArgs e) { if (UnknownAPIReceived != null) { UnknownAPIReceived(this, e); } }
+        public event UnknownApiReceivedEventHandler UnknownApiReceived;
+        public delegate void UnknownApiReceivedEventHandler(object sender, ApiAnalyzeErrorEventArgs e);
+        protected virtual void OnUnknownApiReceived(ApiAnalyzeErrorEventArgs e) { if (UnknownApiReceived != null) { UnknownApiReceived(this, e); } }
 
         /// <summary>
         /// FiddlerのLogを取得した際に呼び出されます

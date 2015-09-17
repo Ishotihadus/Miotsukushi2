@@ -20,9 +20,9 @@ namespace Miotsukushi.View.WindowParts
 
             try
             {
-                Model.MainModel.Current.kancolleModel.GameStart += kancolleModel_GameStart; // ゆるせ、後で何とかする
-                Model.MainModel.Current.browserModel.SaveSSCommandRaised += (o, e) => SaveScreenShot(e.filename);
-                Model.MainModel.Current.browserModel.BrowserRefreshCommandRaised += (o, e) => BrowserRefresh();
+                Model.MainModel.Current.KancolleModel.GameStart += kancolleModel_GameStart; // ゆるせ、後で何とかする
+                Model.MainModel.Current.BrowserModel.SaveSsCommandRaised += (o, e) => SaveScreenShot(e.Filename);
+                Model.MainModel.Current.BrowserModel.BrowserRefreshCommandRaised += (o, e) => BrowserRefresh();
             }
             catch { }
 
@@ -90,10 +90,10 @@ namespace Miotsukushi.View.WindowParts
                 var dpiX = desktop.DpiX;
                 var dpiY = desktop.DpiY;
 
-                var scalefactor_x = dpiX / 96;
-                var scalefactor_y = dpiX / 96;
+                var scalefactorX = dpiX / 96;
+                var scalefactorY = dpiX / 96;
 
-                var scale = (int)(scalefactor_x * scalefactor_x * 100);
+                var scale = (int)(scalefactorX * scalefactorX * 100);
 
                 var serviceGuid = SID_SWebBrowserApp;
                 var iid = typeof(SHDocVw.IWebBrowser2).GUID;
@@ -118,7 +118,7 @@ namespace Miotsukushi.View.WindowParts
         {
             if (!CheckAccess())
             {
-                Dispatcher.Invoke(() => BrowserRefresh());
+                Dispatcher.Invoke(BrowserRefresh);
                 return;
             }
             webBrowser.Refresh();
@@ -145,7 +145,7 @@ namespace Miotsukushi.View.WindowParts
         {
             if (!CheckAccess())
             {
-                Dispatcher.Invoke(() => BrowserSupressScriptError());
+                Dispatcher.Invoke(BrowserSupressScriptError);
                 return;
             }
 
@@ -168,8 +168,8 @@ namespace Miotsukushi.View.WindowParts
             var dpiX = desktop.DpiX;
             var dpiY = desktop.DpiY;
 
-            var scalefactor_x = dpiX / 96;
-            var scalefactor_y = dpiX / 96;
+            var scalefactorX = dpiX / 96;
+            var scalefactorY = dpiX / 96;
 
             var dv = new DrawingVisual();
             using (var dc = dv.RenderOpen())
@@ -177,7 +177,7 @@ namespace Miotsukushi.View.WindowParts
                 dc.DrawDrawing(dg);
             }
             
-            var bitmap = new RenderTargetBitmap((int)(width * scalefactor_x), (int)(height * scalefactor_y), dpiX, dpiY, PixelFormats.Pbgra32);
+            var bitmap = new RenderTargetBitmap((int)(width * scalefactorX), (int)(height * scalefactorY), dpiX, dpiY, PixelFormats.Pbgra32);
             bitmap.Render(dv);
 
             var encoder = new PngBitmapEncoder();

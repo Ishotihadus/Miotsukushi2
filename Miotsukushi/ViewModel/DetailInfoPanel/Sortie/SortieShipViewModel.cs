@@ -235,15 +235,15 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             
             shipmodel.PropertyChanged += Shipmodel_PropertyChanged;
             
-            ShipName = shipmodel.characterinfo != null ? shipmodel.characterinfo.name : "不明";
-            ShipLevel = shipmodel.level;
-            NowHP = shipmodel.hp_now;
-            MaxHP = shipmodel.hp_max;
-            Firepower = shipmodel.fire_power;
-            Torpedo = shipmodel.torpedo;
-            AntiAir = shipmodel.anti_air;
-            Armor = shipmodel.armor;
-            Speed = shipmodel.characterinfo != null ? shipmodel.characterinfo.speed : 0;
+            ShipName = shipmodel.Characterinfo != null ? shipmodel.Characterinfo.Name : "不明";
+            ShipLevel = shipmodel.Level;
+            NowHP = shipmodel.HpNow;
+            MaxHP = shipmodel.HpMax;
+            Firepower = shipmodel.FirePower;
+            Torpedo = shipmodel.Torpedo;
+            AntiAir = shipmodel.AntiAir;
+            Armor = shipmodel.Armor;
+            Speed = shipmodel.Characterinfo != null ? shipmodel.Characterinfo.Speed : 0;
             SlotAppend();
             shipmodel.Slots.CollectionChanged += Slots_CollectionChanged;
         }
@@ -263,14 +263,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                 }
                 else
                 {
-                    var kcmodel = Model.MainModel.Current.kancolleModel;
-                    var slotmodel = kcmodel.slotdata.FirstOrDefault(_ => _.id == slot);
-                    if(slotmodel != null && slotmodel.iteminfo != null)
+                    var kcmodel = Model.MainModel.Current.KancolleModel;
+                    var slotmodel = kcmodel.Slotdata.FirstOrDefault(_ => _.Id == slot);
+                    if(slotmodel != null && slotmodel.Iteminfo != null)
                     {
                         tmplist.Add(new SortieShipSlotViewModel()
                         {
-                            ItemTypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(slotmodel.iteminfo.type_equiptype),
-                            ItemName = slotmodel.iteminfo.name
+                            ItemTypeColor = Tools.KanColleTools.GetSlotItemEquipTypeColor(slotmodel.Iteminfo.TypeEquiptype),
+                            ItemName = slotmodel.Iteminfo.Name
                         });
                     }
                     else
@@ -295,30 +295,30 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
         {
             switch(e.PropertyName)
             {
-                case "level":
-                    ShipLevel = shipmodel.level;
+                case "Level":
+                    ShipLevel = shipmodel.Level;
                     break;
-                case "characterid":
-                    ShipName = shipmodel.characterinfo != null ? shipmodel.characterinfo.name : "不明";
-                    Speed = shipmodel.characterinfo != null ? shipmodel.characterinfo.speed : 0;
+                case "Characterid":
+                    ShipName = shipmodel.Characterinfo != null ? shipmodel.Characterinfo.Name : "不明";
+                    Speed = shipmodel.Characterinfo?.Speed ?? 0;
                     break;
-                case "hp_now":
-                    NowHP = shipmodel.hp_now;
+                case "HpNow":
+                    NowHP = shipmodel.HpNow;
                     break;
-                case "hp_max":
-                    MaxHP = shipmodel.hp_max;
+                case "HpMax":
+                    MaxHP = shipmodel.HpMax;
                     break;
-                case "fire_power":
-                    Firepower = shipmodel.fire_power;
+                case "FirePower":
+                    Firepower = shipmodel.FirePower;
                     break;
-                case "torpedo":
-                    Torpedo = shipmodel.torpedo;
+                case "Torpedo":
+                    Torpedo = shipmodel.Torpedo;
                     break;
-                case "anti_air":
-                    AntiAir = shipmodel.anti_air;
+                case "AntiAir":
+                    AntiAir = shipmodel.AntiAir;
                     break;
-                case "armor":
-                    Armor = shipmodel.armor;
+                case "Armor":
+                    Armor = shipmodel.Armor;
                     break;
                 case "Slots":
                     SlotAppend();

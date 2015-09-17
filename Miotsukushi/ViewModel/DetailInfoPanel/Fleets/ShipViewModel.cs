@@ -19,8 +19,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
             {
                 if (_shipdata == null)
                 {
-                    if(model.shipdata != null)
-                        _shipdata = model.shipdata.FirstOrDefault(_ => _.shipid == shipid);
+                    if(model.Shipdata != null)
+                        _shipdata = model.Shipdata.FirstOrDefault(_ => _.Shipid == shipid);
                 }
                 return _shipdata;
             }
@@ -456,13 +456,13 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         {
             Slots = new ObservableCollection<SlotViewModel>();
             System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Slots, new object());
-            model = Model.MainModel.Current.kancolleModel;
+            model = Model.MainModel.Current.KancolleModel;
             this.shipid = shipid;
             if (shipdata != null)
             {
-                charaid = shipdata.characterid;
+                charaid = shipdata.Characterid;
                 character_initialize();
-                initialize();
+                Initialize();
                 shipdata.PropertyChanged += shipdata_PropertyChanged;
                 shipdata.Slots.CollectionChanged += Slots_CollectionChanged;
                 shipdata.OnSlotCount.CollectionChanged += OnSlotCount_CollectionChanged;
@@ -526,70 +526,70 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         {
             switch (e.PropertyName)
             {
-                case "shipid":
+                case "Shipid":
                     // ありえない
                     break;
-                case "characterid":
+                case "Characterid":
                     character_initialize();
                     fuel_append();
                     ammo_append();
                     break;
-                case "level":
-                    ShipLevel = shipdata.level;
+                case "Level":
+                    ShipLevel = shipdata.Level;
                     break;
-                case "exp_total":
+                case "ExpTotal":
                     // 未使用
                     break;
-                case "exp_to_next_lv":
-                    ExpToNextLv = shipdata.exp_to_next_lv;
+                case "ExpToNextLv":
+                    ExpToNextLv = shipdata.ExpToNextLv;
                     break;
-                case "exp_percent_in_this_lv":
-                    ExpPercentage = shipdata.exp_percent_in_this_lv;
+                case "ExpPercentInThisLv":
+                    ExpPercentage = shipdata.ExpPercentInThisLv;
                     break;
-                case "hp_now":
-                    HpNow = shipdata.hp_now;
+                case "HpNow":
+                    HpNow = shipdata.HpNow;
                     break;
-                case "hp_max":
-                    HpMax = shipdata.hp_max;
+                case "HpMax":
+                    HpMax = shipdata.HpMax;
                     break;
-                case "condition":
-                    Cond = shipdata.condition;
+                case "Condition":
+                    Cond = shipdata.Condition;
                     break;
-                case "fuel":
+                case "Fuel":
                     fuel_append();
                     break;
-                case "ammo":
+                case "Ammo":
                     ammo_append();
                     break;
-                case "ndock_time":
+                case "NdockTime":
                     // 未使用
                     break;
-                case "air_mastery":
-                    AirMastery = shipdata.air_mastery;
+                case "AirMastery":
+                    AirMastery = shipdata.AirMastery;
                     break;
-                case "fire_power":
-                    Firepower = shipdata.fire_power;
+                case "FirePower":
+                    Firepower = shipdata.FirePower;
                     break;
-                case "armor":
-                    Armor = shipdata.armor;
+                case "Armor":
+                    Armor = shipdata.Armor;
                     break;
-                case "torpedo":
-                    Torpedo = shipdata.torpedo;
+                case "Torpedo":
+                    Torpedo = shipdata.Torpedo;
                     break;
-                case "evasion":
-                    Evasion = shipdata.evasion;
+                case "Evasion":
+                    Evasion = shipdata.Evasion;
                     break;
-                case "anti_air":
-                    AntiAir = shipdata.anti_air;
+                case "AntiAir":
+                    AntiAir = shipdata.AntiAir;
                     break;
-                case "anti_submarine":
-                    AntiSubmarine = shipdata.anti_submarine;
+                case "AntiSubmarine":
+                    AntiSubmarine = shipdata.AntiSubmarine;
                     break;
-                case "reconnaissance":
-                    Reconnaissance = shipdata.reconnaissance;
+                case "Reconnaissance":
+                    Reconnaissance = shipdata.Reconnaissance;
                     break;
-                case "luck":
-                    Luck = shipdata.luck;
+                case "Luck":
+                    Luck = shipdata.Luck;
                     break;
                 case "ExSlotOpened":
                     ExSlotOpened = shipdata.ExSlotOpened;
@@ -605,18 +605,18 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         /// </summary>
         void character_initialize()
         {
-            var character = shipdata.characterinfo;
+            var character = shipdata.Characterinfo;
             if (character != null)
             {
-                if (model.shiptypemaster.ContainsKey(character.shiptype))
+                if (model.Shiptypemaster.ContainsKey(character.Shiptype))
                 {
-                    ShipType = model.shiptypemaster[character.shiptype].name;
+                    ShipType = model.Shiptypemaster[character.Shiptype].Name;
                 }
                 else
                 {
                     ShipType = "不明";
                 }
-                ShipName = character.name;
+                ShipName = character.Name;
             }
             else
             {
@@ -628,23 +628,23 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         /// <summary>
         /// 艦娘固有のデータを初期化する
         /// </summary>
-        void initialize()
+        void Initialize()
         {
-            ShipLevel = shipdata.level;
-            ExpToNextLv = shipdata.exp_to_next_lv;
-            ExpPercentage = shipdata.exp_percent_in_this_lv;
-            HpNow = shipdata.hp_now;
-            HpMax = shipdata.hp_max;
-            Cond = shipdata.condition;
-            AirMastery = shipdata.air_mastery;
-            Firepower = shipdata.fire_power;
-            Armor = shipdata.armor;
-            Torpedo = shipdata.torpedo;
-            Evasion = shipdata.evasion;
-            AntiAir = shipdata.anti_air;
-            AntiSubmarine = shipdata.anti_submarine;
-            Reconnaissance = shipdata.reconnaissance;
-            Luck = shipdata.luck;
+            ShipLevel = shipdata.Level;
+            ExpToNextLv = shipdata.ExpToNextLv;
+            ExpPercentage = shipdata.ExpPercentInThisLv;
+            HpNow = shipdata.HpNow;
+            HpMax = shipdata.HpMax;
+            Cond = shipdata.Condition;
+            AirMastery = shipdata.AirMastery;
+            Firepower = shipdata.FirePower;
+            Armor = shipdata.Armor;
+            Torpedo = shipdata.Torpedo;
+            Evasion = shipdata.Evasion;
+            AntiAir = shipdata.AntiAir;
+            AntiSubmarine = shipdata.AntiSubmarine;
+            Reconnaissance = shipdata.Reconnaissance;
+            Luck = shipdata.Luck;
             ExSlotOpened = shipdata.ExSlotOpened;
             make_exslot_viewmodel();
             fuel_append();
@@ -658,14 +658,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         void fuel_append()
         {
             var fuel_max = 0;
-            if (model.charamaster.ContainsKey(charaid))
+            if (model.Charamaster.ContainsKey(charaid))
             {
-                fuel_max = model.charamaster[charaid].fuel_max;
+                fuel_max = model.Charamaster[charaid].FuelMax;
             }
 
             int real_fuel_now;
             int real_fuel_max;
-            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.fuel, fuel_max, out real_fuel_now, out real_fuel_max);
+            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.Fuel, fuel_max, out real_fuel_now, out real_fuel_max);
             FuelNow = real_fuel_now;
             FuelMax = real_fuel_max;
         }
@@ -673,14 +673,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Fleets
         void ammo_append()
         {
             var ammo_max = 0;
-            if (model.charamaster.ContainsKey(charaid))
+            if (model.Charamaster.ContainsKey(charaid))
             {
-                ammo_max = model.charamaster[charaid].ammo_max;
+                ammo_max = model.Charamaster[charaid].AmmoMax;
             }
 
             int real_ammo_max;
             int real_ammo_now;
-            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.ammo, ammo_max, out real_ammo_now, out real_ammo_max);
+            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.Ammo, ammo_max, out real_ammo_now, out real_ammo_max);
             AmmoNow = real_ammo_now;
             AmmoMax = real_ammo_max;
         }

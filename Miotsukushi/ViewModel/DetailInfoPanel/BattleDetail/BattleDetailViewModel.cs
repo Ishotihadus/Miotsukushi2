@@ -113,8 +113,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
 
         public BattleDetailViewModel()
         {
-            kcmodel = Model.MainModel.Current.kancolleModel;
-            kcmodel.battlemodel.BattleAnalyzed += Battlemodel_BattleAnalyzed;
+            kcmodel = Model.MainModel.Current.KancolleModel;
+            kcmodel.Battlemodel.BattleAnalyzed += Battlemodel_BattleAnalyzed;
         }
 
         readonly static PhaseViewModel.AttackViewModel.ShipViewModel dameconvm = new PhaseViewModel.AttackViewModel.ShipViewModel()
@@ -131,86 +131,86 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.BattleDetail
         {
             var ships = new Dictionary<BattleAnalyzedEventArgs.Ship, int>();
             var shipsvm = new Dictionary<BattleAnalyzedEventArgs.Ship, PhaseViewModel.AttackViewModel.ShipViewModel>();
-            foreach (var ship in e.friend)
+            foreach (var ship in e.Friend)
             {
-                ships.Add(ship, ship.before_hp);
+                ships.Add(ship, ship.BeforeHp);
                 shipsvm.Add(ship, new PhaseViewModel.AttackViewModel.ShipViewModel()
                 {
                     IsFriend = true,
-                    Name = ship.name,
-                    MaxHP = ship.max_hp,
-                    Speed = ship.speed
+                    Name = ship.Name,
+                    MaxHP = ship.MaxHp,
+                    Speed = ship.Speed
                 });
             }
-            if(e.friend_combined != null)
-                foreach (var ship in e.friend_combined)
+            if(e.FriendCombined != null)
+                foreach (var ship in e.FriendCombined)
                 {
-                    ships.Add(ship, ship.before_hp);
+                    ships.Add(ship, ship.BeforeHp);
                     shipsvm.Add(ship, new PhaseViewModel.AttackViewModel.ShipViewModel()
                     {
                         IsFriend = true,
-                        Name = ship.name,
-                        MaxHP = ship.max_hp,
-                        Speed = ship.speed
+                        Name = ship.Name,
+                        MaxHP = ship.MaxHp,
+                        Speed = ship.Speed
                     });
                 }
-            foreach (var ship in e.enemy)
+            foreach (var ship in e.Enemy)
             {
-                ships.Add(ship, ship.before_hp);
+                ships.Add(ship, ship.BeforeHp);
                 shipsvm.Add(ship, new PhaseViewModel.AttackViewModel.ShipViewModel()
                 {
                     IsFriend = false,
-                    Name = ship.name,
-                    MaxHP = ship.max_hp,
-                    Speed = ship.speed
+                    Name = ship.Name,
+                    MaxHP = ship.MaxHp,
+                    Speed = ship.Speed
                 });
             }
 
             var phases = new List<PhaseViewModel>();
-            foreach(var phasem in e.phases)
+            foreach(var phasem in e.Phases)
             {
                 var phasevm = new PhaseViewModel();
-                phasevm.PhaseName = phasem.phase_name;
+                phasevm.PhaseName = phasem.PhaseName;
                 phasevm.Attacks = new List<PhaseViewModel.AttackViewModel>();
                 if(phasem is BattleAnalyzedEventArgs.AllOverPhase)
                 {
                     var phasem_r = phasem as BattleAnalyzedEventArgs.AllOverPhase;
-                    foreach(var attack in phasem_r.attackee)
+                    foreach(var attack in phasem_r.Attackee)
                     {
-                        ships[attack.target_ship] -= attack.damage;
+                        ships[attack.TargetShip] -= attack.Damage;
                         phasevm.Attacks.Add(new PhaseViewModel.AttackViewModel()
                         {
-                            ShipTo = shipsvm[attack.target_ship],
-                            Damage = attack.damage,
-                            ShipToAfterHP = ships[attack.target_ship]
+                            ShipTo = shipsvm[attack.TargetShip],
+                            Damage = attack.Damage,
+                            ShipToAfterHP = ships[attack.TargetShip]
                         });
                     }
-                    foreach(var attack in phasem_r.damecon)
+                    foreach(var attack in phasem_r.Damecon)
                     {
-                        ships[attack.target_ship] -= attack.damage;
+                        ships[attack.TargetShip] -= attack.Damage;
                         phasevm.Attacks.Add(new PhaseViewModel.AttackViewModel()
                         {
-                            ShipFrom = attack.damecon_type == 2 ? damecongoddessvm : dameconvm,
-                            ShipTo = shipsvm[attack.target_ship],
-                            Damage = attack.damage,
-                            ShipToAfterHP = ships[attack.target_ship]
+                            ShipFrom = attack.DameconType == 2 ? damecongoddessvm : dameconvm,
+                            ShipTo = shipsvm[attack.TargetShip],
+                            Damage = attack.Damage,
+                            ShipToAfterHP = ships[attack.TargetShip]
                         });
                     }
                 }
                 else if(phasem is BattleAnalyzedEventArgs.InOrderPhase)
                 {
                     var phasem_r = phasem as BattleAnalyzedEventArgs.InOrderPhase;
-                    foreach (var attack in phasem_r.attacks)
+                    foreach (var attack in phasem_r.Attacks)
                     {
-                        ships[attack.target_ship] -= attack.damage;
+                        ships[attack.TargetShip] -= attack.Damage;
                         
                         phasevm.Attacks.Add(new PhaseViewModel.AttackViewModel()
                         {
-                            ShipFrom = attack.damecon_type == 0 ? shipsvm[attack.origin_ship] : 
-                                attack.damecon_type == 2 ? damecongoddessvm : dameconvm,
-                            ShipTo = shipsvm[attack.target_ship],
-                            Damage = attack.damage,
-                            ShipToAfterHP = ships[attack.target_ship]
+                            ShipFrom = attack.DameconType == 0 ? shipsvm[attack.OriginShip] : 
+                                attack.DameconType == 2 ? damecongoddessvm : dameconvm,
+                            ShipTo = shipsvm[attack.TargetShip],
+                            Damage = attack.Damage,
+                            ShipToAfterHP = ships[attack.TargetShip]
                         });
                     }
                 }

@@ -74,18 +74,14 @@ namespace Miotsukushi.ViewModel.CheatWindow
         {
             get
             {
-                if (_RaiseEventCommand == null)
+                return _RaiseEventCommand ?? (_RaiseEventCommand = new DelegateCommand(() =>
                 {
-                    _RaiseEventCommand = new DelegateCommand(() =>
-                        {
-                            Model.MainModel.Current.kancolleModel.debuggermodel.RaiseEvent(Kcsapiurl, Request, Response);
-                            Kcsapiurl = "";
-                            Request = "";
-                            Response = "";
-                        },
-                        () => Model.MainModel.Current.kancolleModel.debuggermodel.IsAvailable(Kcsapiurl, Request, Response));
-                }
-                return _RaiseEventCommand;
+                    Model.MainModel.Current.KancolleModel.Debuggermodel.RaiseEvent(Kcsapiurl, Request, Response);
+                    Kcsapiurl = "";
+                    Request = "";
+                    Response = "";
+                },
+                    () => Model.MainModel.Current.KancolleModel.Debuggermodel.IsAvailable(Kcsapiurl, Request, Response)));
             }
         }
 
@@ -94,12 +90,11 @@ namespace Miotsukushi.ViewModel.CheatWindow
         {
             get
             {
-                if (_RaiseEventFromFileCommand == null)
-                {
-                    _RaiseEventFromFileCommand = new DelegateCommand(() => Model.MainModel.Current.kancolleModel.debuggermodel.RaiseEventFromFileAsync(),
-                        () => true);
-                }
-                return _RaiseEventFromFileCommand;
+                return _RaiseEventFromFileCommand ??
+                       (_RaiseEventFromFileCommand =
+                           new DelegateCommand(
+                               () => Model.MainModel.Current.KancolleModel.Debuggermodel.RaiseEventFromFileAsync(),
+                               () => true));
             }
         }
 

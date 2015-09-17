@@ -13,41 +13,41 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             /// <summary>
             /// 昼戦
             /// </summary>
-            normal,
+            Normal,
 
             /// <summary>
             /// 昼戦（航空戦）
             /// </summary>
-            normal_air,
+            NormalAir,
 
             /// <summary>
             /// 昼戦（水上戦/連合艦隊のみ）
             /// </summary>
-            normal_water,
+            NormalWater,
 
             /// <summary>
             /// 昼戦の夜戦
             /// </summary>
-            normal_midnight,
+            NormalMidnight,
 
             /// <summary>
             /// 夜戦オンリー
             /// </summary>
-            sp_midnight
+            SpMidnight
         }
 
         public enum Formation
         {
-            unknown,
-            tanju = 1,
-            fukuju = 2,
-            rinkei = 3,
-            teikei = 4,
-            tanou = 5,
-            daiichikeikai = 11,
-            dainikeikai = 12,
-            daisankeikai = 13,
-            daiyonkeikai = 14
+            Unknown,
+            Tanju = 1,
+            Fukuju = 2,
+            Rinkei = 3,
+            Teikei = 4,
+            Tanou = 5,
+            Daiichikeikai = 11,
+            Dainikeikai = 12,
+            Daisankeikai = 13,
+            Daiyonkeikai = 14
         }
 
         public enum CrossingType
@@ -55,27 +55,27 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             /// <summary>
             /// 不明
             /// </summary>
-            unknown,
+            Unknown,
 
             /// <summary>
             /// 同航戦
             /// </summary>
-            parallel = 1,
+            Parallel = 1,
 
             /// <summary>
             /// 反航戦
             /// </summary>
-            anti_parallel = 2,
+            AntiParallel = 2,
 
             /// <summary>
             /// T字有利
             /// </summary>
-            cross_adv = 3,
+            CrossAdv = 3,
 
             /// <summary>
             /// T字不利
             /// </summary>
-            cross_disadv = 4
+            CrossDisadv = 4
         }
 
         public enum AirMasteryStatus
@@ -83,32 +83,32 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             /// <summary>
             /// 不明
             /// </summary>
-            unknown = -1,
+            Unknown = -1,
 
             /// <summary>
             /// 制空均衡
             /// </summary>
-            tie = 0,
+            Tie = 0,
 
             /// <summary>
             /// 制空権確保
             /// </summary>
-            secure = 1,
+            Secure = 1,
 
             /// <summary>
             /// 制空優勢
             /// </summary>
-            superior = 2,
+            Superior = 2,
 
             /// <summary>
             /// 制空劣勢
             /// </summary>
-            inferior = 3,
+            Inferior = 3,
 
             /// <summary>
             /// 制空権喪失
             /// </summary>
-            lost = 4
+            Lost = 4
         }
 
         /// <summary>
@@ -121,54 +121,54 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
                 None, Normal, Goddess
             }
 
-            public int character_id;
+            public int CharacterId;
 
             /// <summary>
             /// 艦娘のID（敵艦には存在しない）
             /// </summary>
-            public int original_id;
+            public int OriginalId;
 
-            public string name;
-            public int level;
-            public int max_hp;
-            public int before_hp;
-            public int after_hp;
+            public string Name;
+            public int Level;
+            public int MaxHp;
+            public int BeforeHp;
+            public int AfterHp;
             
             /// <summary>
             /// 退避フラグ
             /// </summary>
-            public bool escaped = false;
+            public bool Escaped = false;
 
             /// <summary>
             /// ダメコンの有り無し
             /// </summary>
-            public DameConType damecontype;
+            public DameConType Damecontype;
 
             /// <summary>
             /// ダメコンを使ったか
             /// </summary>
-            public bool use_damecon;
+            public bool UseDamecon;
 
-            public int fire_power;
-            public int torpedo;
-            public int anti_air;
-            public int armor;
+            public int FirePower;
+            public int Torpedo;
+            public int AntiAir;
+            public int Armor;
 
             /// <summary>
             /// 速度パラメータ
             /// </summary>
-            public int speed;
+            public int Speed;
 
             /// <summary>
             /// 与えたダメージの合計
             /// </summary>
-            public int sum_attack;
+            public int SumAttack;
 
             /// <summary>
             /// スロット情報
             /// -1は未装備
             /// </summary>
-            public int[] slot;
+            public int[] Slot;
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             /// <summary>
             /// フェイズの名前
             /// </summary>
-            public string phase_name;
+            public string PhaseName;
 
             /// <summary>
             /// フェイズの種類
@@ -200,25 +200,25 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
                 /// 攻撃元の艦
                 /// ダメコンの情報の時などはnull
                 /// </summary>
-                public Ship origin_ship;
+                public Ship OriginShip;
 
                 /// <summary>
                 /// 攻撃先の艦
                 /// ダメコンの情報の時はこれにダメコン発動艦が入る
                 /// </summary>
-                public Ship target_ship;
+                public Ship TargetShip;
                 
                 /// <summary>
                 /// ダメコン発動時は負の値とする
                 /// </summary>
-                public int damage;
-                public int type;
-                public bool flag_ship_protect;
+                public int Damage;
+                public int Type;
+                public bool FlagShipProtect;
 
                 /// <summary>
                 /// ダメコンであれば1、女神であれば2
                 /// </summary>
-                public int damecon_type = 0;
+                public int DameconType = 0;
             }
         }
 
@@ -230,12 +230,12 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
             /// <summary>
             /// 攻撃された情報
             /// </summary>
-            public List<Attack> attackee = new List<Attack>();
+            public List<Attack> Attackee = new List<Attack>();
 
             /// <summary>
             /// ダメコン発動情報
             /// </summary>
-            public List<Attack> damecon = new List<Attack>();
+            public List<Attack> Damecon = new List<Attack>();
 
             public AllOverPhase() : base()
             {
@@ -248,7 +248,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
         /// </summary>
         public class InOrderPhase : Phase
         {
-            public List<Attack> attacks = new List<Attack>();
+            public List<Attack> Attacks = new List<Attack>();
 
             public InOrderPhase() : base()
             {
@@ -264,47 +264,47 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
         /// <summary>
         /// 連合艦隊戦かどうか
         /// </summary>
-        public bool is_combined_battle;
+        public bool IsCombinedBattle;
 
         /// <summary>
         /// 自艦隊
         /// </summary>
-        public List<Ship> friend;
+        public List<Ship> Friend;
 
         /// <summary>
         /// 自艦隊（護衛艦隊）
         /// </summary>
-        public List<Ship> friend_combined;
+        public List<Ship> FriendCombined;
 
         /// <summary>
         /// 敵艦隊
         /// </summary>
-        public List<Ship> enemy;
+        public List<Ship> Enemy;
 
         /// <summary>
         /// フェイズ
         /// </summary>
-        public List<Phase> phases;
+        public List<Phase> Phases;
 
         /// <summary>
         /// 自艦隊ゲージ（1がMax）
         /// </summary>
-        public double friend_gauge;
+        public double FriendGauge;
 
         /// <summary>
         /// 敵艦隊ゲージ（1がMax）
         /// </summary>
-        public double enemy_gauge;
+        public double EnemyGauge;
 
         /// <summary>
         /// 自艦隊陣形
         /// </summary>
-        public Formation friend_formation;
+        public Formation FriendFormation;
 
         /// <summary>
         /// 敵艦隊陣形
         /// </summary>
-        public Formation enemy_formation;
+        public Formation EnemyFormation;
 
         /// <summary>
         /// 交戦形態
@@ -314,6 +314,6 @@ namespace Miotsukushi.Model.KanColle.BattleModels.EventArgs
         /// <summary>
         /// 制空状態
         /// </summary>
-        public AirMasteryStatus air_mastery;
+        public AirMasteryStatus AirMastery;
     }
 }

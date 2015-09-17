@@ -8,24 +8,24 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 {
     class MapModel : NotifyModelBase
     {
-        public int maparea_id;
-        public string maparea_name;
+        public int MapareaId;
+        public string MapareaName;
 
-        public int map_no;
-        public string map_name;
+        public int MapNo;
+        public string MapName;
 
-        public int level;
+        public int Level;
 
-        public string ope_title;
-        public string ope_info;
+        public string OpeTitle;
+        public string OpeInfo;
 
-        public bool is_cleared;
+        public bool IsCleared;
 
-        public int? required_defeat_count;
-        public int? now_defeat_count;
+        public int? RequiredDefeatCount;
+        public int? NowDefeatCount;
 
-        public int? max_hp;
-        public int? now_hp;
-        public int? selected_rank;
+        public int? MaxHp;
+        public int? NowHp;
+        public int? SelectedRank;
     }
 }

@@ -21,8 +21,8 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
             {
                 if (_shipdata == null)
                 {
-                    if (model.shipdata != null)
-                        _shipdata = model.shipdata.FirstOrDefault(_ => _.shipid == shipid);
+                    if (model.Shipdata != null)
+                        _shipdata = model.Shipdata.FirstOrDefault(_ => _.Shipid == shipid);
                 }
                 return _shipdata;
             }
@@ -211,11 +211,11 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
 
         public FleetSummaryShipViewModel(int shipid)
         {
-            model = Model.MainModel.Current.kancolleModel;
+            model = Model.MainModel.Current.KancolleModel;
             this.shipid = shipid;
             if (shipdata != null)
             {
-                charaid = shipdata.characterid;
+                charaid = shipdata.Characterid;
                 character_initialize();
                 initialize();
                 damecon_append();
@@ -235,10 +235,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         /// </summary>
         void character_initialize()
         {
-            var character = shipdata.characterinfo;
+            var character = shipdata.Characterinfo;
             if (character != null)
             {
-                ShipName = character.name;
+                ShipName = character.Name;
             }
             else
             {
@@ -251,10 +251,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         /// </summary>
         void initialize()
         {
-            ShipLevel = shipdata.level;
-            HpNow = shipdata.hp_now;
-            HpMax = shipdata.hp_max;
-            Cond = shipdata.condition;
+            ShipLevel = shipdata.Level;
+            HpNow = shipdata.HpNow;
+            HpMax = shipdata.HpMax;
+            Cond = shipdata.Condition;
             fuel_append();
             ammo_append();
         }
@@ -262,14 +262,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         void fuel_append()
         {
             var fuel_max = 0;
-            if (model.charamaster.ContainsKey(charaid))
+            if (model.Charamaster.ContainsKey(charaid))
             {
-                fuel_max = model.charamaster[charaid].fuel_max;
+                fuel_max = model.Charamaster[charaid].FuelMax;
             }
 
             int real_fuel_now;
             int real_fuel_max;
-            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.fuel, fuel_max, out real_fuel_now, out real_fuel_max);
+            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.Fuel, fuel_max, out real_fuel_now, out real_fuel_max);
             FuelNow = real_fuel_now;
             FuelMax = real_fuel_max;
         }
@@ -277,14 +277,14 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         void ammo_append()
         {
             var ammo_max = 0;
-            if (model.charamaster.ContainsKey(charaid))
+            if (model.Charamaster.ContainsKey(charaid))
             {
-                ammo_max = model.charamaster[charaid].ammo_max;
+                ammo_max = model.Charamaster[charaid].AmmoMax;
             }
 
             int real_ammo_max;
             int real_ammo_now;
-            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.ammo, ammo_max, out real_ammo_now, out real_ammo_max);
+            Tools.KanColleTools.ShipResource(ShipLevel, shipdata.Ammo, ammo_max, out real_ammo_now, out real_ammo_max);
             AmmoNow = real_ammo_now;
             AmmoMax = real_ammo_max;
         }
@@ -294,30 +294,30 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         {
             switch (e.PropertyName)
             {
-                case "shipid":
+                case "Shipid":
                     // ありえない
                     break;
-                case "characterid":
+                case "Characterid":
                     character_initialize();
                     fuel_append();
                     ammo_append();
                     break;
-                case "level":
-                    ShipLevel = shipdata.level;
+                case "Level":
+                    ShipLevel = shipdata.Level;
                     break;
-                case "hp_now":
-                    HpNow = shipdata.hp_now;
+                case "HpNow":
+                    HpNow = shipdata.HpNow;
                     break;
-                case "hp_max":
-                    HpMax = shipdata.hp_max;
+                case "HpMax":
+                    HpMax = shipdata.HpMax;
                     break;
-                case "condition":
-                    Cond = shipdata.condition;
+                case "Condition":
+                    Cond = shipdata.Condition;
                     break;
-                case "fuel":
+                case "Fuel":
                     fuel_append();
                     break;
-                case "ammo":
+                case "Ammo":
                     ammo_append();
                     break;
                 case "ExSlot":
@@ -330,21 +330,16 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.GeneralParts
         {
             var _hasdamecon = false;
 
-            var exitem = model.slotdata.FirstOrDefault(_ => _.id == shipdata.ExSlot);
-            if (exitem != null && exitem.iteminfo != null && exitem.iteminfo.type_equiptype == 23)
+            var exitem = model.Slotdata.FirstOrDefault(_ => _.Id == shipdata.ExSlot);
+            if (exitem?.Iteminfo != null && exitem.Iteminfo.TypeEquiptype == 23)
             {
                 _hasdamecon = true;
             }
 
             if(!_hasdamecon)
-                foreach (var slot in shipdata.Slots)
+                if (shipdata.Slots.Select(slot => model.Slotdata.FirstOrDefault(_ => _.Id == slot)).Any(item => item?.Iteminfo != null && item.Iteminfo.TypeEquiptype == 23))
                 {
-                    var item = model.slotdata.FirstOrDefault(_ => _.id == slot);
-                    if (item != null && item.iteminfo != null && item.iteminfo.type_equiptype == 23)
-                    {
-                        _hasdamecon = true;
-                        break;
-                    }
+                    _hasdamecon = true;
                 }
             
             HasDameCon = _hasdamecon;

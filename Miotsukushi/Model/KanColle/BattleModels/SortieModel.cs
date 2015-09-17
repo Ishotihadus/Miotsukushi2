@@ -9,26 +9,26 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 {
     class SortieModel
     {
-        public Dictionary<int, MapModel> mapmodels = new Dictionary<int, MapModel>();
-        
-        KanColleModel original_model;
-        KanColleNotifier kclib;
+        public Dictionary<int, MapModel> Mapmodels = new Dictionary<int, MapModel>();
 
-        public MapModel now_map;
-        public CellModel now_cell;
-        public int sortiing_deck;
+        readonly KanColleModel _originalModel;
+        KanColleNotifier _kclib;
 
-        public bool on_sortiing = false;
+        public MapModel NowMap;
+        public CellModel NowCell;
+        public int SortiingDeck;
+
+        public bool OnSortiing = false;
 
         /// <summary>
         /// 退避済みの艦（0-11）
         /// </summary>
-        public ExList<int> goback_ships = new ExList<int>();
+        public ExList<int> GobackShips = new ExList<int>();
 
-        public SortieModel(KanColleModel original_model, KanColleNotifier kclib)
+        public SortieModel(KanColleModel originalModel, KanColleNotifier kclib)
         {
-            this.original_model = original_model;
-            this.kclib = kclib;
+            this._originalModel = originalModel;
+            this._kclib = kclib;
 
             kclib.GetGetmemberMapinfo += Kclib_GetGetmemberMapinfo;
             kclib.GetReqmapStart += Kclib_GetReqmapStart;
@@ -41,41 +41,41 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         /// <summary>
         /// 前回の連合艦隊戦闘結果で送られてきたescape_idx（なければnull）
         /// </summary>
-        public int[] escape_idx;
+        public int[] EscapeIdx;
 
         /// <summary>
         /// 前回の連合艦隊戦闘結果で送られてきたtow_idx（なければnull）
         /// </summary>
-        public int[] tow_idx;
+        public int[] TowIdx;
 
         private void Kclib_GetReqcombinedbattleGobackPort(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<object> response)
         {
-            if (escape_idx != null && escape_idx.Length > 0)
-                goback_ships.Add(escape_idx[0] - 1);
-            if (tow_idx != null && tow_idx.Length > 0)
-                goback_ships.Add(tow_idx[0] - 1);
+            if (EscapeIdx != null && EscapeIdx.Length > 0)
+                GobackShips.Add(EscapeIdx[0] - 1);
+            if (TowIdx != null && TowIdx.Length > 0)
+                GobackShips.Add(TowIdx[0] - 1);
         }
 
         private void Kclib_GetReqcombinedbattleBattleresult(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_combined_battle.Battleresult> response)
         {
             if(response.data.escape == null)
             {
-                escape_idx = null;
-                tow_idx = null;
+                EscapeIdx = null;
+                TowIdx = null;
             }
             else
             {
-                escape_idx = response.data.escape.escape_idx;
-                tow_idx = response.data.escape.tow_idx;
+                EscapeIdx = response.data.escape.escape_idx;
+                TowIdx = response.data.escape.tow_idx;
             }
         }
 
         private void Kclib_GetPortPort(object sender, KanColleLib.TransmissionRequest.api_port.PortRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_port.Port> response)
         {
-            if(on_sortiing)
+            if(OnSortiing)
             {
                 OnGoBackPort(new System.EventArgs());
-                on_sortiing = false;
+                OnSortiing = false;
             }
         }
 
@@ -87,42 +87,42 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
         private void Kclib_GetReqmapStart(object sender, KanColleLib.TransmissionRequest.api_req_map.StartRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_map.Start> response)
         {
-            on_sortiing = true;
-            sortiing_deck = request.deck_id;
-            goback_ships.Clear();
-            var map = from _ in mapmodels where _.Value.maparea_id == request.maparea_id && _.Value.map_no == request.mapinfo_no select _;
+            OnSortiing = true;
+            SortiingDeck = request.deck_id;
+            GobackShips.Clear();
+            var map = from _ in Mapmodels where _.Value.MapareaId == request.maparea_id && _.Value.MapNo == request.mapinfo_no select _;
             if (map.Count() > 0)
-                now_map = map.First().Value;
+                NowMap = map.First().Value;
             AppendCellData(response.data.next_cell_data);
             OnSortieStarted(new System.EventArgs());
         }
         
         private void AppendCellData(KanColleLib.TransmissionData.api_req_map.values.NextCellData cell)
         {
-            now_cell = new CellModel();
-            now_cell.cell_no = cell.no;
-            now_cell.boss_cell_no = cell.bosscell_no;
-            now_cell.has_no_way = cell.next <= 0;
-            now_cell.is_boss_battle = cell.event_id == 5;
+            NowCell = new CellModel();
+            NowCell.CellNo = cell.no;
+            NowCell.BossCellNo = cell.bosscell_no;
+            NowCell.HasNoWay = cell.next <= 0;
+            NowCell.IsBossBattle = cell.event_id == 5;
             switch(cell.event_id)
             {
                 case 0: // 出発地
-                    now_cell.cell_type = CellModel.CellType.start;
+                    NowCell.CellType = CellType.Start;
                     break;
                 case 2: // 補給
-                    now_cell.cell_type = CellModel.CellType.supply;
+                    NowCell.CellType = CellType.Supply;
                     if(cell.itemget != null)
                     {
-                        now_cell.cell_event_content_id = cell.itemget.id;
-                        now_cell.cell_event_content_value = cell.itemget.getcount;
+                        NowCell.CellEventContentId = cell.itemget.id;
+                        NowCell.CellEventContentValue = cell.itemget.getcount;
                     }
                     break;
                 case 3: // うずしお
-                    now_cell.cell_type = CellModel.CellType.happening;
+                    NowCell.CellType = CellType.Happening;
                     if (cell.happening != null)
                     {
-                        now_cell.cell_event_content_id = cell.happening.mst_id;
-                        now_cell.cell_event_content_value = cell.happening.count;
+                        NowCell.CellEventContentId = cell.happening.mst_id;
+                        NowCell.CellEventContentValue = cell.happening.count;
                     }
                     break;
                 case 6: // 気のせいだった or 能動分岐
@@ -130,15 +130,15 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     {
                         case 0:
                         case 1:
-                            now_cell.cell_type = CellModel.CellType.no_battle;
-                            now_cell.cell_event_content_id = cell.event_id;
+                            NowCell.CellType = CellType.NoBattle;
+                            NowCell.CellEventContentId = cell.event_id;
                             break;
                         case 2: // 能動分岐
-                            now_cell.cell_type = CellModel.CellType.route_choice;
-                            now_cell.cell_event_content_values = cell.select_route.select_cells;
+                            NowCell.CellType = CellType.RouteChoice;
+                            NowCell.CellEventContentValues = cell.select_route.select_cells;
                             break;
                         default:
-                            now_cell.cell_type = CellModel.CellType.unknown;
+                            NowCell.CellType = CellType.Unknown;
                             break;
                     }
                     break;
@@ -146,19 +146,19 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     switch(cell.event_kind)
                     {
                         case 0: // 航空偵察
-                            now_cell.cell_type = CellModel.CellType.air_search;
-                            now_cell.cell_event_content_id = cell.airsearch != null ? cell.airsearch.result : 0;
+                            NowCell.CellType = CellType.AirSearch;
+                            NowCell.CellEventContentId = cell.airsearch?.result ?? 0;
                             break;
                         case 4: // 航空戦
-                            now_cell.cell_type = CellModel.CellType.air_battle;
+                            NowCell.CellType = CellType.AirBattle;
                             break;
                         default:
-                            now_cell.cell_type = CellModel.CellType.unknown;
+                            NowCell.CellType = CellType.Unknown;
                             break;
                     }
                     break;
                 case 8: // 船団護衛成功
-                    now_cell.cell_type = CellModel.CellType.success_ship_guard;
+                    NowCell.CellType = CellType.SuccessShipGuard;
                     break;
                 case 4: // 通常戦闘
                 case 5: // ボス戦闘
@@ -166,26 +166,26 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                     switch (cell.event_kind)
                     {
                         case 0: // 戦闘なし
-                            now_cell.cell_type = CellModel.CellType.no_battle;
+                            NowCell.CellType = CellType.NoBattle;
                             break;
                         case 1: // 昼戦
-                            now_cell.cell_type = CellModel.CellType.battle;
+                            NowCell.CellType = CellType.Battle;
                             break;
                         case 2: // 夜戦
-                            now_cell.cell_type = CellModel.CellType.night_sp_battle;
+                            NowCell.CellType = CellType.NightSpBattle;
                             break;
                         case 3: // 夜昼戦
-                            now_cell.cell_type = CellModel.CellType.night_to_day_battle;
+                            NowCell.CellType = CellType.NightToDayBattle;
                             break;
                         case 4: // 航空戦
-                            now_cell.cell_type = CellModel.CellType.air_battle;
+                            NowCell.CellType = CellType.AirBattle;
                             break;
                         case 6: // 能動分岐
-                            now_cell.cell_type = CellModel.CellType.route_choice;
-                            now_cell.cell_event_content_values = cell.select_route.select_cells;
+                            NowCell.CellType = CellType.RouteChoice;
+                            NowCell.CellEventContentValues = cell.select_route.select_cells;
                             break;
                         default:
-                            now_cell.cell_type = CellModel.CellType.unknown;
+                            NowCell.CellType = CellType.Unknown;
                             break;
                     }
                     break;
@@ -194,45 +194,45 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 
         private void Kclib_GetGetmemberMapinfo(object sender, KanColleLib.TransmissionRequest.RequestBase request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_get_member.Mapinfo> response)
         {
-            mapmodels = new Dictionary<int, MapModel>();
+            Mapmodels = new Dictionary<int, MapModel>();
             foreach(var map in response.data.mapinfos)
             {
                 var m = new MapModel();
-                if(original_model.mapinfomaster.ContainsKey(map.id))
+                if(_originalModel.Mapinfomaster.ContainsKey(map.id))
                 {
-                    var mst = original_model.mapinfomaster[map.id];
-                    m.maparea_id = mst.area_id;
-                    if (original_model.mapareamaster.ContainsKey(mst.area_id))
+                    var mst = _originalModel.Mapinfomaster[map.id];
+                    m.MapareaId = mst.AreaId;
+                    if (_originalModel.Mapareamaster.ContainsKey(mst.AreaId))
                     {
-                        var area_mst = original_model.mapareamaster[mst.area_id];
-                        m.maparea_name = area_mst.name;
+                        var areaMst = _originalModel.Mapareamaster[mst.AreaId];
+                        m.MapareaName = areaMst.Name;
                     }
-                    m.map_name = mst.name;
-                    m.map_no = mst.map_id;
-                    m.level = mst.map_level;
-                    m.ope_title = mst.opename;
-                    m.ope_info = mst.ope_info;
-                    switch(mst.defeat_type)
+                    m.MapName = mst.Name;
+                    m.MapNo = mst.MapId;
+                    m.Level = mst.MapLevel;
+                    m.OpeTitle = mst.Opename;
+                    m.OpeInfo = mst.OpeInfo;
+                    switch(mst.DefeatType)
                     {
-                        case MapInfoData.MapDefeatType.count_of_defeat:
-                            m.required_defeat_count = mst.defeat_count;
-                            m.now_defeat_count = 0;
+                        case MapInfoData.MapDefeatType.CountOfDefeat:
+                            m.RequiredDefeatCount = mst.DefeatCount;
+                            m.NowDefeatCount = 0;
                             break;
-                        case MapInfoData.MapDefeatType.max_hp:
-                            m.max_hp = 0;
-                            m.now_hp = 0;
+                        case MapInfoData.MapDefeatType.MaxHp:
+                            m.MaxHp = 0;
+                            m.NowHp = 0;
                             break;
                     }
                 }
-                m.is_cleared = map.cleared;
-                m.now_defeat_count = map.defeat_count;
+                m.IsCleared = map.cleared;
+                m.NowDefeatCount = map.defeat_count;
                 if(map.eventmap != null)
                 {
-                    m.max_hp = map.eventmap.max_maphp;
-                    m.now_hp = map.eventmap.now_maphp;
-                    m.selected_rank = map.eventmap.selected_rank;
+                    m.MaxHp = map.eventmap.max_maphp;
+                    m.NowHp = map.eventmap.now_maphp;
+                    m.SelectedRank = map.eventmap.selected_rank;
                 }
-                mapmodels.Add(map.id, m);
+                Mapmodels.Add(map.id, m);
             }
 
             OnGetMapInfo(new System.EventArgs());

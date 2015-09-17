@@ -9,45 +9,45 @@ namespace Miotsukushi.Model
 {
     class ThemeModel
     {
-        public Accent[] accents;
-        public AppTheme[] themes;
+        public Accent[] Accents;
+        public AppTheme[] Themes;
 
-        public string[] accent_name;
-        public string[] theme_name;
+        public string[] AccentName;
+        public string[] ThemeName;
 
-        private int _selected_theme;
+        private int _selectedTheme;
 
-        public int selected_theme
+        public int SelectedTheme
         {
             get
             {
-                return _selected_theme;
+                return _selectedTheme;
             }
 
             set
             {
-                if (_selected_theme != value && 0 <= value && value < themes.Length)
+                if (_selectedTheme != value && 0 <= value && value < Themes.Length)
                 {
-                    _selected_theme = value;
-                    ThemeManager.ChangeAppStyle(App.Current, accents[_selected_accent], themes[value]);
-                    Properties.Settings.Default.Theme = theme_name[value];
+                    _selectedTheme = value;
+                    ThemeManager.ChangeAppStyle(App.Current, Accents[_selectedAccent], Themes[value]);
+                    Properties.Settings.Default.Theme = ThemeName[value];
                     Properties.Settings.Default.Save();
                 }
             }
         }
 
-        private int _selected_accent;
+        private int _selectedAccent;
 
-        public int selected_accent
+        public int SelectedAccent
         {
-            get { return _selected_accent; }
+            get { return _selectedAccent; }
             set
             {
-                if(_selected_accent != value && 0 <= value && value < accents.Length)
+                if(_selectedAccent != value && 0 <= value && value < Accents.Length)
                 {
-                    _selected_accent = value;
-                    ThemeManager.ChangeAppStyle(App.Current, accents[value], themes[_selected_theme]);
-                    Properties.Settings.Default.AccentColor = accent_name[value];
+                    _selectedAccent = value;
+                    ThemeManager.ChangeAppStyle(App.Current, Accents[value], Themes[_selectedTheme]);
+                    Properties.Settings.Default.AccentColor = AccentName[value];
                     Properties.Settings.Default.Save();
                 }
             }
@@ -55,51 +55,51 @@ namespace Miotsukushi.Model
 
         public ThemeModel()
         {
-            accents = ThemeManager.Accents.ToArray();
-            themes = ThemeManager.AppThemes.ToArray();
+            Accents = ThemeManager.Accents.ToArray();
+            Themes = ThemeManager.AppThemes.ToArray();
 
-            accent_name = new string[accents.Length];
-            for (var i = 0; i < accents.Length; i++)
-                accent_name[i] = accents[i].Name;
+            AccentName = new string[Accents.Length];
+            for (var i = 0; i < Accents.Length; i++)
+                AccentName[i] = Accents[i].Name;
 
-            theme_name = new string[themes.Length];
-            for (var i = 0; i < themes.Length; i++)
-                theme_name[i] = themes[i].Name;
+            ThemeName = new string[Themes.Length];
+            for (var i = 0; i < Themes.Length; i++)
+                ThemeName[i] = Themes[i].Name;
 
             if (GetThemeIndex(Properties.Settings.Default.Theme) != -1 && GetAccentIndex(Properties.Settings.Default.AccentColor) != -1)
             {
-                _selected_theme = GetThemeIndex(Properties.Settings.Default.Theme);
-                _selected_accent = GetAccentIndex(Properties.Settings.Default.AccentColor);
-                ThemeManager.ChangeAppStyle(App.Current, accents[_selected_accent], themes[_selected_theme]);
+                _selectedTheme = GetThemeIndex(Properties.Settings.Default.Theme);
+                _selectedAccent = GetAccentIndex(Properties.Settings.Default.AccentColor);
+                ThemeManager.ChangeAppStyle(App.Current, Accents[_selectedAccent], Themes[_selectedTheme]);
             }
         }
 
         public void ChangeStyle(string theme, string accent)
         {
-            var acc_index = GetAccentIndex(accent);
-            var thm_index = GetThemeIndex(theme);
+            var accIndex = GetAccentIndex(accent);
+            var thmIndex = GetThemeIndex(theme);
 
-            if (acc_index == -1)
+            if (accIndex == -1)
                 throw new ArgumentException("accent");
-            if (thm_index == -1)
+            if (thmIndex == -1)
                 throw new ArgumentException("theme");
 
-            ThemeManager.ChangeAppStyle(App.Current, accents[acc_index], themes[thm_index]);
+            ThemeManager.ChangeAppStyle(System.Windows.Application.Current, Accents[accIndex], Themes[thmIndex]);
         }
 
 
-        public int GetAccentIndex(string Accent)
+        public int GetAccentIndex(string accent)
         {
-            for (var i = 0; i < accent_name.Length; i++)
-                if (Accent == accent_name[i])
+            for (var i = 0; i < AccentName.Length; i++)
+                if (accent == AccentName[i])
                     return i;
             return -1;
         }
 
-        public int GetThemeIndex(string Theme)
+        public int GetThemeIndex(string theme)
         {
-            for (var i = 0; i < theme_name.Length; i++)
-                if (Theme == theme_name[i])
+            for (var i = 0; i < ThemeName.Length; i++)
+                if (theme == ThemeName[i])
                     return i;
             return -1;
         }

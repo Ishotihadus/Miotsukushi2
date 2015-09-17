@@ -11,18 +11,18 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 {
     class BattleModel
     {
-        KanColleModel original_model;
-        KanColleNotifier kclib;
+        KanColleModel _originalModel;
+        KanColleNotifier _kclib;
 
-        public int area_id;
-        public int map_id;
-        public string map_name;
-        public int cell_id;
+        public int AreaId;
+        public int MapId;
+        public string MapName;
+        public int CellId;
 
-        public BattleModel(KanColleModel original_model, KanColleNotifier kclib)
+        public BattleModel(KanColleModel originalModel, KanColleNotifier kclib)
         {
-            this.original_model = original_model;
-            this.kclib = kclib;
+            this._originalModel = originalModel;
+            this._kclib = kclib;
 
             kclib.GetReqcombinedbattleAirbattle += Kclib_GetReqcombinedbattleAirbattle;
             kclib.GetReqcombinedbattleBattle += Kclib_GetReqcombinedbattleBattle;
@@ -42,12 +42,12 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         }
 
 
-        void NextCellDataAppend(KanColleLib.TransmissionData.api_req_map.values.NextCellData next_cell_data)
+        void NextCellDataAppend(KanColleLib.TransmissionData.api_req_map.values.NextCellData nextCellData)
         {
-            area_id = next_cell_data.maparea_id;
-            map_id = next_cell_data.mapinfo_no;
-            map_name = original_model.mapinfomaster.ContainsKey(area_id * 10 + map_id) ? original_model.mapinfomaster[area_id * 10 + map_id].name : "不明";
-            cell_id = next_cell_data.no;
+            AreaId = nextCellData.maparea_id;
+            MapId = nextCellData.mapinfo_no;
+            MapName = _originalModel.Mapinfomaster.ContainsKey(AreaId * 10 + MapId) ? _originalModel.Mapinfomaster[AreaId * 10 + MapId].Name : "不明";
+            CellId = nextCellData.no;
         }
 
         private void Kclib_GetReqmapNext(object sender, KanColleLib.TransmissionRequest.api_req_map.NextRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_map.Next> response)
@@ -111,9 +111,9 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             OnGetBattleResult(new GetBattleResultEventArgs()
             {
-                rank = response.data.win_rank,
-                has_get_ship = response.data.get_flag[1],
-                get_ship_name = response.data.get_ship != null ? response.data.get_ship.ship_name : ""
+                Rank = response.data.win_rank,
+                HasGetShip = response.data.get_flag[1],
+                GetShipName = response.data.get_ship != null ? response.data.get_ship.ship_name : ""
             });
         }
 
@@ -121,9 +121,9 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             OnGetBattleResult(new GetBattleResultEventArgs()
             {
-                rank = response.data.win_rank,
-                has_get_ship = response.data.get_flag[1],
-                get_ship_name = response.data.get_ship != null ? response.data.get_ship.ship_name : ""
+                Rank = response.data.win_rank,
+                HasGetShip = response.data.get_flag[1],
+                GetShipName = response.data.get_ship != null ? response.data.get_ship.ship_name : ""
             });
         }
 
