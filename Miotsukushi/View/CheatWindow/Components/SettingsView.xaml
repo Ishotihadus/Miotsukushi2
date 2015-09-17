@@ -25,7 +25,7 @@
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="アクセントカラー" VerticalAlignment="Center"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Grid.Column="1" ItemsSource="{Binding AccentColors}" SelectedIndex="{Binding AccentColorSelectedIndex, Mode=TwoWay}"/>
                 </Grid>
-                <CheckBox Margin="5" Content="ハードウェアレンダリングを強制的に無効化する" IsChecked="{Binding HardwareRenderingOn}" ToolTip="通常はオフにしてください。描画が極端に遅かったり描画が乱れたりするなどの問題が頻発する場合には、これをオンにすることで改善されるかもしれません。"/>
+                <CheckBox Margin="5" Content="ハードウェアレンダリングを強制的に無効化する" IsChecked="{Binding SoftwareRendering}" ToolTip="通常はオフにしてください。描画が極端に遅かったり描画が乱れたりするなどの問題が頻発する場合には、これをオンにすることで改善されるかもしれません。"/>
             </StackPanel>
         </Expander>
         <Expander Header="艦これ統計データベース" IsExpanded="True">
@@ -40,6 +40,12 @@
                     <TextBox Grid.Column="1" Text="{Binding StatisticsDBToken, Mode=TwoWay}"/>
                 </Grid>
                 <TextBlock Margin="5" Text="艦これ統計データベース（ http://kancolle-db.net/ ）にデータを送信することができます。当該サイトでTwitterアカウントを用いてログイン後トークンを発行し、そのトークンを上のテキストボックスに入力して利用してください。" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="デバッグ" IsExpanded="True">
+            <StackPanel>
+                <CheckBox Margin="5" Content="通信・エラーログを保存する（再起動後有効）" IsChecked="{Binding Logging}"/>
+                <TextBlock Margin="5" Text="作業ディレクトリ下logフォルダに通信およびエラーの記録を残します。デバッグにご協力いただける方はこの設定を有効にしていただき、エラーが出たり新実装のAPI等を受信したりしたら開発者に送っていただければ幸いです。なお送信していただいたデータは個人を特定しない範囲での開発のみに使用します。" TextWrapping="Wrap"/>
             </StackPanel>
         </Expander>
     </StackPanel>

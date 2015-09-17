@@ -105,14 +105,27 @@ namespace Miotsukushi.ViewModel.CheatWindow
                     OnPropertyChanged(() => SoftwareRendering);
                     Properties.Settings.Default.SoftwareRendering = value;
                     Properties.Settings.Default.Save();
-                    if (!value)
-                        System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;
-                    else
-                        System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+                    System.Windows.Media.RenderOptions.ProcessRenderMode = value ? System.Windows.Interop.RenderMode.SoftwareOnly : System.Windows.Interop.RenderMode.Default;
                 }
             }
         }
 
+        private bool _logging = true;
+
+        public bool Logging
+        {
+            get { return _logging; }
+            set
+            {
+                if (_logging != value)
+                {
+                    _logging = value;
+                    OnPropertyChanged(() => Logging);
+                    Properties.Settings.Default.Logging = value;
+                    Properties.Settings.Default.Save();
+                }
+            }
+        }
 
         public SettingsViewModel()
         {

@@ -11,11 +11,10 @@ namespace Miotsukushi.Model.Debugger
         readonly string _filename = "log/" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".dat";
         uint _packetCounter = 0;
 
-        bool _enable = true;
+        bool _enable = Properties.Settings.Default.Logging;
 
         public PacketSaver(KanColleNotifier kclib)
         {
-
             this._kclib = kclib;
             kclib.GetKcsAPIData += Kclib_GetKcsAPIData;
             kclib.GetFiddlerLogString += Kclib_GetFiddlerLogString;

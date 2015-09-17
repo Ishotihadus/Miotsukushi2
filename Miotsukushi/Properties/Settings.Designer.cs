@@ -82,5 +82,17 @@ namespace Miotsukushi.Properties {
                 this["SoftwareRendering"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Logging {
+            get {
+                return ((bool)(this["Logging"]));
+            }
+            set {
+                this["Logging"] = value;
+            }
+        }
     }
 }
