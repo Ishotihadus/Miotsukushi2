@@ -7,8 +7,13 @@
         xmlns:local="clr-namespace:Miotsukushi.View.CheatWindow"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Components="clr-namespace:Miotsukushi.View.CheatWindow.Components" x:Class="Miotsukushi.View.CheatWindow.CheatWindow"
+        xmlns:Converter="clr-namespace:Miotsukushi.Converter" 
         mc:Ignorable="d"
         Title="CheatWindow" Height="700" Width="900" GlowBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" ResizeMode="CanResizeWithGrip" ShowInTaskbar="False">
+
+    <Controls:MetroWindow.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Controls:MetroWindow.Resources>
 
     <TabControl Margin="0" TabStripPlacement="Left">
         <TabControl.Resources>
@@ -25,7 +30,7 @@
         <TabItem Header="設定">
             <Components:SettingsView/>
         </TabItem>
-        <TabItem Header="デバッガ">
+        <TabItem Header="デバッガ" Visibility="{Binding IsDebuggerActivated, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Components:Debugger/>
         </TabItem>
     </TabControl>

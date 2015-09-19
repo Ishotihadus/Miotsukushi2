@@ -46,6 +46,14 @@
             <StackPanel>
                 <CheckBox Margin="5" Content="通信・エラーログを保存する（再起動後有効）" IsChecked="{Binding Logging}"/>
                 <TextBlock Margin="5" Text="作業ディレクトリ下logフォルダに通信およびエラーの記録を残します。デバッグにご協力いただける方はこの設定を有効にしていただき、エラーが出たり新実装のAPI等を受信したりしたら開発者に送っていただければ幸いです。なお送信していただいたデータは個人を特定しない範囲での開発のみに使用します。" TextWrapping="Wrap"/>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="デバッガ起動用パスフレーズ" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding DebuggerPassword, Mode=TwoWay}"/>
+                </Grid>
             </StackPanel>
         </Expander>
     </StackPanel>

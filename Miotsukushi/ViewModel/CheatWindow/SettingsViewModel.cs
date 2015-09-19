@@ -127,6 +127,23 @@ namespace Miotsukushi.ViewModel.CheatWindow
             }
         }
 
+        private string _debuggerPassword;
+
+        public string DebuggerPassword
+        {
+            get { return _debuggerPassword; }
+            set
+            {
+                if (_debuggerPassword != value)
+                {
+                    _debuggerPassword = value;
+                    OnPropertyChanged(() => DebuggerPassword);
+                    Properties.Settings.Default.DebuggerPassword = value;
+                    Properties.Settings.Default.Save();
+                }
+            }
+        }
+
         public SettingsViewModel()
         {
             var model = Model.MainModel.Current;
@@ -137,10 +154,8 @@ namespace Miotsukushi.ViewModel.CheatWindow
             StatisticsDBToken = Properties.Settings.Default.StatisticsDBToken;
             StatisticsSendingOn = Properties.Settings.Default.StatisticsSendingOn;
             SoftwareRendering = Properties.Settings.Default.SoftwareRendering;
-            if(SoftwareRendering)
-                System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
-            else
-                System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;
+            DebuggerPassword = Properties.Settings.Default.DebuggerPassword;
+            System.Windows.Media.RenderOptions.ProcessRenderMode = SoftwareRendering ? System.Windows.Interop.RenderMode.SoftwareOnly : System.Windows.Interop.RenderMode.Default;
         }
     }
 }

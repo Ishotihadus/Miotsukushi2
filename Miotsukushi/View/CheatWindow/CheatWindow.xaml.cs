@@ -23,6 +23,12 @@ namespace Miotsukushi.View.CheatWindow
         public CheatWindow()
         {
             InitializeComponent();
+
+            try
+            {
+                DataContext = new ViewModel.CheatWindow.CheatWindowViewModel();
+            }
+            catch { }
         }
     }
 }

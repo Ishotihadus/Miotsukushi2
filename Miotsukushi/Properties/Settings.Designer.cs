@@ -94,5 +94,17 @@ namespace Miotsukushi.Properties {
                 this["Logging"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DebuggerPassword {
+            get {
+                return ((string)(this["DebuggerPassword"]));
+            }
+            set {
+                this["DebuggerPassword"] = value;
+            }
+        }
     }
 }
