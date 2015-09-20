@@ -193,6 +193,7 @@
     <Compile Include="Tools\KanColleTools.cs" />
     <Compile Include="Tools\TimeParser.cs" />
     <Compile Include="UnhandledExceptionRaisedEventArgs.cs" />
+    <Compile Include="ViewModel\CheatWindow\AboutViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\CheatWindowViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\DebuggerViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
@@ -229,6 +230,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CheatWindow\CheatWindow.xaml.cs">
       <DependentUpon>CheatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheatWindow\Components\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CheatWindow\Components\Debugger.xaml.cs">
       <DependentUpon>Debugger.xaml</DependentUpon>
@@ -329,6 +333,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CheatWindow\CheatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheatWindow\Components\AboutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -528,6 +536,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\miotukusi3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

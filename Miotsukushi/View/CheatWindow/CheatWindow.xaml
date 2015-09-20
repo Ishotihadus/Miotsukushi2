@@ -33,5 +33,8 @@
         <TabItem Header="デバッガ" Visibility="{Binding IsDebuggerActivated, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Components:Debugger/>
         </TabItem>
+        <TabItem Header="About">
+            <Components:AboutView/>
+        </TabItem>
     </TabControl>
 </Controls:MetroWindow>
