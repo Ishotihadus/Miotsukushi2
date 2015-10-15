@@ -77,32 +77,32 @@ namespace Miotsukushi.Model.KanColle
 #if DEBUG
         void PrintDebugQuestList()
         {
-            for (int i = 0; i < pages.Count; i++)
+            for (int i = 0; i < Pages.Count; i++)
             {
                 System.Diagnostics.Debug.WriteLine("Page #" + (i + 1));
-                if (pages[i] == null)
+                if (Pages[i] == null)
                 {
                     System.Diagnostics.Debug.WriteLine(" Unknown");
                     continue;
                 }
 
-                for (int j = 0; j < pages[i].Count; j++)
+                for (int j = 0; j < Pages[i].Count; j++)
                 {
-                    System.Diagnostics.Debug.WriteLine(" Quest #" + (j + 1) + " : " + pages[i][j].name);
+                    System.Diagnostics.Debug.WriteLine(" Quest #" + (j + 1) + " : " + Pages[i][j].Name);
                 }
             }
 
             System.Diagnostics.Debug.WriteLine("Executing Quests:");
-            if (executingquest == null)
+            if (Executingquest == null)
                 System.Diagnostics.Debug.WriteLine(" Unknown");
             else
             {
-                foreach (var quest in executingquest)
+                foreach (var quest in Executingquest)
                 {
-                    System.Diagnostics.Debug.WriteLine(" " + quest.name);
+                    System.Diagnostics.Debug.WriteLine(" " + quest.Name);
                 }
-                if (executingquest.Count < exec_count.Value)
-                    System.Diagnostics.Debug.WriteLine(" And other " + (exec_count.Value - executingquest.Count) + " unknown quest(s).");
+                if (Executingquest.Count < ExecCount.Value)
+                    System.Diagnostics.Debug.WriteLine(" And other " + (ExecCount.Value - Executingquest.Count) + " unknown quest(s).");
             }
         }
 #endif

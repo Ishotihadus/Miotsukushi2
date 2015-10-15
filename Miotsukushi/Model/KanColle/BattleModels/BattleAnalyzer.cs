@@ -1166,97 +1166,97 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         {
             var formationstring = new Dictionary<BattleAnalyzedEventArgs.Formation, string>()
             {
-                { BattleAnalyzedEventArgs.Formation.unknown, "不明" },
-                { BattleAnalyzedEventArgs.Formation.tanju, "単縦陣" },
-                { BattleAnalyzedEventArgs.Formation.fukuju, "複縦陣" },
-                { BattleAnalyzedEventArgs.Formation.rinkei, "輪形陣" },
-                { BattleAnalyzedEventArgs.Formation.teikei, "梯形陣" },
-                { BattleAnalyzedEventArgs.Formation.tanou, "単横陣" },
-                { BattleAnalyzedEventArgs.Formation.daiichikeikai, "第一警戒航行序列" },
-                { BattleAnalyzedEventArgs.Formation.dainikeikai, "第二警戒航行序列" },
-                { BattleAnalyzedEventArgs.Formation.daisankeikai, "第三警戒航行序列" },
-                { BattleAnalyzedEventArgs.Formation.daiyonkeikai, "第四警戒航行序列" }
+                { BattleAnalyzedEventArgs.Formation.Unknown, "不明" },
+                { BattleAnalyzedEventArgs.Formation.Tanju, "単縦陣" },
+                { BattleAnalyzedEventArgs.Formation.Fukuju, "複縦陣" },
+                { BattleAnalyzedEventArgs.Formation.Rinkei, "輪形陣" },
+                { BattleAnalyzedEventArgs.Formation.Teikei, "梯形陣" },
+                { BattleAnalyzedEventArgs.Formation.Tanou, "単横陣" },
+                { BattleAnalyzedEventArgs.Formation.Daiichikeikai, "第一警戒航行序列" },
+                { BattleAnalyzedEventArgs.Formation.Dainikeikai, "第二警戒航行序列" },
+                { BattleAnalyzedEventArgs.Formation.Daisankeikai, "第三警戒航行序列" },
+                { BattleAnalyzedEventArgs.Formation.Daiyonkeikai, "第四警戒航行序列" }
             };
 
             var crossingstring = new Dictionary<BattleAnalyzedEventArgs.CrossingType, string>()
             {
-                { BattleAnalyzedEventArgs.CrossingType.unknown, "不明" },
-                { BattleAnalyzedEventArgs.CrossingType.parallel, "同航戦" },
-                { BattleAnalyzedEventArgs.CrossingType.anti_parallel, "反航戦" },
-                { BattleAnalyzedEventArgs.CrossingType.cross_adv, "T字有利" },
-                { BattleAnalyzedEventArgs.CrossingType.cross_disadv, "T字不利" }
+                { BattleAnalyzedEventArgs.CrossingType.Unknown, "不明" },
+                { BattleAnalyzedEventArgs.CrossingType.Parallel, "同航戦" },
+                { BattleAnalyzedEventArgs.CrossingType.AntiParallel, "反航戦" },
+                { BattleAnalyzedEventArgs.CrossingType.CrossAdv, "T字有利" },
+                { BattleAnalyzedEventArgs.CrossingType.CrossDisadv, "T字不利" }
             };
 
             var airmasterystring = new Dictionary<BattleAnalyzedEventArgs.AirMasteryStatus, string>()
             {
-                { BattleAnalyzedEventArgs.AirMasteryStatus.unknown, "不明" },
-                { BattleAnalyzedEventArgs.AirMasteryStatus.inferior, "制空劣勢" },
-                { BattleAnalyzedEventArgs.AirMasteryStatus.lost, "制空権喪失" },
-                { BattleAnalyzedEventArgs.AirMasteryStatus.secure, "制空権確保" },
-                { BattleAnalyzedEventArgs.AirMasteryStatus.superior, "制空優勢" },
-                { BattleAnalyzedEventArgs.AirMasteryStatus.tie, "制空均衡" },
+                { BattleAnalyzedEventArgs.AirMasteryStatus.Unknown, "不明" },
+                { BattleAnalyzedEventArgs.AirMasteryStatus.Inferior, "制空劣勢" },
+                { BattleAnalyzedEventArgs.AirMasteryStatus.Lost, "制空権喪失" },
+                { BattleAnalyzedEventArgs.AirMasteryStatus.Secure, "制空権確保" },
+                { BattleAnalyzedEventArgs.AirMasteryStatus.Superior, "制空優勢" },
+                { BattleAnalyzedEventArgs.AirMasteryStatus.Tie, "制空均衡" },
 
             };
 
-            System.Diagnostics.Debug.WriteLine("自艦隊: " + formationstring[eventargs.friend_formation] + "   敵艦隊: " + formationstring[eventargs.enemy_formation]);
+            System.Diagnostics.Debug.WriteLine("自艦隊: " + formationstring[eventargs.FriendFormation] + "   敵艦隊: " + formationstring[eventargs.EnemyFormation]);
             System.Diagnostics.Debug.WriteLine("交戦形態: " + crossingstring[eventargs.crossing_type]);
-            System.Diagnostics.Debug.WriteLine("制空状態: " + airmasterystring[eventargs.air_mastery]);
+            System.Diagnostics.Debug.WriteLine("制空状態: " + airmasterystring[eventargs.AirMastery]);
             
-            foreach(var phase in eventargs.phases)
+            foreach(var phase in eventargs.Phases)
             {
-                System.Diagnostics.Debug.WriteLine("==============  " + phase.phase_name + "  ==============");
+                System.Diagnostics.Debug.WriteLine("==============  " + phase.PhaseName + "  ==============");
 
                 if(phase.phase_type == BattleAnalyzedEventArgs.Phase.PhaseType.AllOverPhase)
                 {
                     var aphase = (BattleAnalyzedEventArgs.AllOverPhase)phase;
-                    foreach(var attack in aphase.attackee)
+                    foreach(var attack in aphase.Attackee)
                     {
-                        System.Diagnostics.Debug.WriteLine(attack.target_ship.name + " - 被ダメージ " + attack.damage);
+                        System.Diagnostics.Debug.WriteLine(attack.TargetShip.Name + " - 被ダメージ " + attack.Damage);
                     }
-                    foreach(var attack in aphase.damecon)
+                    foreach(var attack in aphase.Damecon)
                     {
-                        System.Diagnostics.Debug.WriteLine(attack.target_ship.name + " - ダメコン発動  回復 " + -attack.damage);
+                        System.Diagnostics.Debug.WriteLine(attack.TargetShip.Name + " - ダメコン発動  回復 " + -attack.Damage);
                     }
                 }
                 else
                 {
                     var aphase = (BattleAnalyzedEventArgs.InOrderPhase)phase;
-                    foreach(var attack in aphase.attacks)
+                    foreach(var attack in aphase.Attacks)
                     {
-                        if(attack.damecon_type == 0)
+                        if(attack.DameconType == 0)
                         {
-                            System.Diagnostics.Debug.WriteLine(attack.origin_ship.name + " -> " + attack.target_ship.name + " - " + attack.damage);
+                            System.Diagnostics.Debug.WriteLine(attack.OriginShip.Name + " -> " + attack.TargetShip.Name + " - " + attack.Damage);
                         }
                         else
                         {
-                            System.Diagnostics.Debug.WriteLine(attack.target_ship.name + " - ダメコン発動  回復" + -attack.damage);
+                            System.Diagnostics.Debug.WriteLine(attack.TargetShip.Name + " - ダメコン発動  回復" + -attack.Damage);
                         }
                     }
                 }
             }
 
             System.Diagnostics.Debug.WriteLine("[ 自艦隊 ]");
-            foreach (var ship in eventargs.friend)
+            foreach (var ship in eventargs.Friend)
             {
-                System.Diagnostics.Debug.WriteLine(ship.name + " Lv." + ship.level + " - " + ship.before_hp + " -> " + Math.Max(ship.after_hp, 0) + " / " + ship.max_hp);
+                System.Diagnostics.Debug.WriteLine(ship.Name + " Lv." + ship.Level + " - " + ship.BeforeHp + " -> " + Math.Max(ship.AfterHp, 0) + " / " + ship.MaxHp);
             }
 
-            if(eventargs.is_combined_battle)
+            if(eventargs.IsCombinedBattle)
             {
                 System.Diagnostics.Debug.WriteLine("[ 随伴艦隊 ]");
-                foreach (var ship in eventargs.friend_combined)
+                foreach (var ship in eventargs.FriendCombined)
                 {
-                    System.Diagnostics.Debug.WriteLine(ship.name + " Lv." + ship.level + " - " + ship.before_hp + " -> " + Math.Max(ship.after_hp, 0) + " / " + ship.max_hp);
+                    System.Diagnostics.Debug.WriteLine(ship.Name + " Lv." + ship.Level + " - " + ship.BeforeHp + " -> " + Math.Max(ship.AfterHp, 0) + " / " + ship.MaxHp);
                 }
             }
 
             System.Diagnostics.Debug.WriteLine("[ 敵艦隊 ]");
-            foreach (var ship in eventargs.enemy)
+            foreach (var ship in eventargs.Enemy)
             {
-                System.Diagnostics.Debug.WriteLine(ship.name + " Lv." + ship.level + " - " + ship.before_hp + " -> " + Math.Max(ship.after_hp, 0) + " / " + ship.max_hp);
+                System.Diagnostics.Debug.WriteLine(ship.Name + " Lv." + ship.Level + " - " + ship.BeforeHp + " -> " + Math.Max(ship.AfterHp, 0) + " / " + ship.MaxHp);
             }
 
-            System.Diagnostics.Debug.WriteLine("ゲージ (%): " + (int)(eventargs.friend_gauge * 100) + " VS " + (int)(eventargs.enemy_gauge * 100));
+            System.Diagnostics.Debug.WriteLine("ゲージ (%): " + (int)(eventargs.FriendGauge * 100) + " VS " + (int)(eventargs.EnemyGauge * 100));
         }
 
 #endif
