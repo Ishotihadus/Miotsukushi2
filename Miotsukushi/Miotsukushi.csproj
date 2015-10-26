@@ -198,6 +198,7 @@
     <Compile Include="ViewModel\CheatWindow\DebuggerViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\CheatWindow\ShipListItemViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterItem.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\BattleDetail\BattleDetailViewModel.cs" />
