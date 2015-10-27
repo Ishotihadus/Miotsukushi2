@@ -88,16 +88,25 @@ namespace Miotsukushi.Tools
             if (slot.Iteminfo == null)
                 return 0;
 
+            var baseantiair = slot.Iteminfo.AntiAir * Math.Sqrt(onslot);
+            var alvbonus = 0.0;
+
             switch (slot.Iteminfo.TypeEquiptype)
             {
-                case 6:
-                case 7:
-                case 8:
-                case 11:
-                    return (int)Math.Floor(slot.Iteminfo.AntiAir * Math.Sqrt(onslot));
+                case 6: // 艦上戦闘機
+                    alvbonus = slot.Alv * slot.Alv / 2.0 ?? 0;
+                    break;
+                case 7: // 艦上爆撃機
+                case 8: // 艦上攻撃機
+                    alvbonus = slot.Alv / 2.0 ?? 0;
+                    break;
+                case 11: // 水上爆撃機
+                    alvbonus = slot.Alv * slot.Alv / 5.0 ?? 0;
+                    break;
                 default:
                     return 0;
             }
+            return (int) Math.Floor(baseantiair + alvbonus);
         }
 
         public static int ShipAirMastery(Model.KanColle.ShipData ship)
