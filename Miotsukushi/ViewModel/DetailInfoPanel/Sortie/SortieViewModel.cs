@@ -1,172 +1,169 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
 {
     class SortieViewModel : ViewModelBase
     {
-        private int _AreaID;
-        public int AreaID
+        private int _areaId;
+        public int AreaId
         {
             get
             {
-                return _AreaID;
+                return _areaId;
             }
 
             set
             {
-                if (_AreaID != value)
+                if (_areaId != value)
                 {
-                    _AreaID = value;
-                    OnPropertyChanged(() => AreaID);
+                    _areaId = value;
+                    OnPropertyChanged(() => AreaId);
                 }
             }
         }
 
-        private int _MapID;
-        public int MapID
+        private int _mapId;
+        public int MapId
         {
             get
             {
-                return _MapID;
+                return _mapId;
             }
 
             set
             {
-                if (_MapID != value)
+                if (_mapId != value)
                 {
-                    _MapID = value;
-                    OnPropertyChanged(() => MapID);
+                    _mapId = value;
+                    OnPropertyChanged(() => MapId);
                 }
             }
         }
 
-        private string _MapName;
+        private string _mapName;
         public string MapName
         {
             get
             {
-                return _MapName;
+                return _mapName;
             }
 
             set
             {
-                if (_MapName != value)
+                if (_mapName != value)
                 {
-                    _MapName = value;
+                    _mapName = value;
                     OnPropertyChanged(() => MapName);
                 }
             }
         }
 
-        private int _CellID;
-        public int CellID
+        private int _cellId;
+        public int CellId
         {
             get
             {
-                return _CellID;
+                return _cellId;
             }
 
             set
             {
-                if (_CellID != value)
+                if (_cellId != value)
                 {
-                    _CellID = value;
-                    OnPropertyChanged(() => CellID);
+                    _cellId = value;
+                    OnPropertyChanged(() => CellId);
                 }
             }
         }
 
-        private string _CellInfo;
+        private string _cellInfo;
         public string CellInfo
         {
             get
             {
-                return _CellInfo;
+                return _cellInfo;
             }
 
             set
             {
-                if (_CellInfo != value)
+                if (_cellInfo != value)
                 {
-                    _CellInfo = value;
+                    _cellInfo = value;
                     OnPropertyChanged(() => CellInfo);
                 }
             }
         }
 
-        private string _OpeName;
+        private string _opeName;
         public string OpeName
         {
             get
             {
-                return _OpeName;
+                return _opeName;
             }
 
             set
             {
-                if (_OpeName != value)
+                if (_opeName != value)
                 {
-                    _OpeName = value;
+                    _opeName = value;
                     OnPropertyChanged(() => OpeName);
                 }
             }
         }
 
-        private string _OpeInfo;
+        private string _opeInfo;
         public string OpeInfo
         {
             get
             {
-                return _OpeInfo;
+                return _opeInfo;
             }
 
             set
             {
-                if (_OpeInfo != value)
+                if (_opeInfo != value)
                 {
-                    _OpeInfo = value;
+                    _opeInfo = value;
                     OnPropertyChanged(() => OpeInfo);
                 }
             }
         }
 
 
-        private bool _OnSortie = false;
+        private bool _onSortie;
         public bool OnSortie
         {
             get
             {
-                return _OnSortie;
+                return _onSortie;
             }
 
             set
             {
-                if (_OnSortie != value)
+                if (_onSortie != value)
                 {
-                    _OnSortie = value;
+                    _onSortie = value;
                     OnPropertyChanged(() => OnSortie);
                 }
             }
         }
 
-        private bool _HasTaihaShip = false;
+        private bool _hasTaihaShip;
         public bool HasTaihaShip
         {
             get
             {
-                return _HasTaihaShip;
+                return _hasTaihaShip;
             }
 
             set
             {
-                if (_HasTaihaShip != value)
+                if (_hasTaihaShip != value)
                 {
-                    _HasTaihaShip = value;
+                    _hasTaihaShip = value;
                     OnPropertyChanged(() => HasTaihaShip);
                 }
             }
@@ -187,9 +184,6 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             kcmodel.Sortiemodel.CellAdvanced += Sortiemodel_CellAdvanced;
             kcmodel.Sortiemodel.GoBackPort += Sortiemodel_GoBackPort;
             kcmodel.Sortiemodel.GobackShips.ExListChanged += Goback_ships_ExListChanged;
-            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsMe, new object());
-            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(ShipsCombined, new object());
-            System.Windows.Data.BindingOperations.EnableCollectionSynchronization(Comments, new object());
         }
 
         private void Goback_ships_ExListChanged(object sender, Model.ExListChangedEventArgs e)
@@ -216,13 +210,25 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
         private void Sortiemodel_GoBackPort(object sender, EventArgs e)
         {
             OnSortie = false;
-            ShipsMe.Clear();
-            ShipsCombined.Clear();
-            if(sortiing_deck != null)
-                sortiing_deck.PropertyChanged -= Sortiing_deck_PropertyChanged;
-            if(sortiing_deck_combined != null)
-                sortiing_deck_combined.PropertyChanged -= Sortiing_deck_combined_PropertyChanged;
+            if (_sortiingDeck != null)
+                _sortiingDeck.PropertyChanged -= Sortiing_deck_PropertyChanged;
+            if (_sortiingDeckCombined != null)
+                _sortiingDeckCombined.PropertyChanged -= Sortiing_deck_combined_PropertyChanged;
             HasTaihaShip = false;
+
+            if (System.Windows.Application.Current.Dispatcher.CheckAccess())
+            {
+                ShipsMe.Clear();
+                ShipsCombined.Clear();
+            }
+            else
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ShipsMe.Clear();
+                    ShipsCombined.Clear();
+                });
+            }
         }
 
         void CellAppend()
@@ -232,7 +238,7 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
 
             if (cellinfo != null)
             {
-                CellID = cellinfo.CellNo;
+                CellId = cellinfo.CellNo;
                 switch (cellinfo.CellType)
                 {
                     case Model.KanColle.BattleModels.CellType.Start:
@@ -297,70 +303,88 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
             CellAppend();
         }
 
-        Model.KanColle.FleetData sortiing_deck;
-        Model.KanColle.FleetData sortiing_deck_combined;
+        Model.KanColle.FleetData _sortiingDeck;
+        Model.KanColle.FleetData _sortiingDeckCombined;
 
         private void Sortiemodel_SortieStarted(object sender, EventArgs e)
         {
-            var kcmodel = Model.MainModel.Current.KancolleModel;
-            var mapinfo = kcmodel.Sortiemodel.NowMap;
-            Comments.Clear();
-
-            if(mapinfo != null)
+            if (System.Windows.Application.Current.Dispatcher.CheckAccess())
             {
-                AreaID = mapinfo.MapareaId;
-                MapID = mapinfo.MapNo;
-                MapName = mapinfo.MapName;
-                OpeName = mapinfo.OpeTitle;
-                OpeInfo = mapinfo.OpeInfo.Replace("<br>", "");
-                if (mapinfo.SelectedRank.HasValue)
+                Comments.Clear();
+                ShipsMe.Clear();
+                ShipsCombined.Clear();
+
+                var kcmodel = Model.MainModel.Current.KancolleModel;
+                var mapinfo = kcmodel.Sortiemodel.NowMap;
+
+                if (mapinfo != null)
                 {
-                    switch (mapinfo.SelectedRank.Value)
+                    AreaId = mapinfo.MapareaId;
+                    MapId = mapinfo.MapNo;
+                    MapName = mapinfo.MapName;
+                    OpeName = mapinfo.OpeTitle;
+                    OpeInfo = mapinfo.OpeInfo.Replace("<br>", "");
+                    if (mapinfo.SelectedRank.HasValue)
                     {
-                        case 0: OpeName += "（難易度未設定）"; break;
-                        case 1: OpeName += "（丙作戦）"; break;
-                        case 2: OpeName += "（乙作戦）"; break;
-                        case 3: OpeName += "（甲作戦）"; break;
+                        switch (mapinfo.SelectedRank.Value)
+                        {
+                            case 0:
+                                OpeName += "（難易度未設定）";
+                                break;
+                            case 1:
+                                OpeName += "（丙作戦）";
+                                break;
+                            case 2:
+                                OpeName += "（乙作戦）";
+                                break;
+                            case 3:
+                                OpeName += "（甲作戦）";
+                                break;
+                        }
                     }
+
+                    if (mapinfo.RequiredDefeatCount.HasValue)
+                        Comments.Add(
+                            $"撃破回数: {(mapinfo.NowDefeatCount.HasValue ? mapinfo.NowDefeatCount.Value + "" : "-")}/{mapinfo.RequiredDefeatCount.Value}");
+                    if (mapinfo.MaxHp.HasValue)
+                        Comments.Add(
+                            $"マップHP: {(mapinfo.NowHp.HasValue ? mapinfo.NowHp.Value + "" : "-")}/{mapinfo.MaxHp.Value}");
+                }
+                CellAppend();
+
+                _sortiingDeck = kcmodel.Fleetdata[kcmodel.Sortiemodel.SortiingDeck - 1];
+                _sortiingDeck.PropertyChanged += Sortiing_deck_PropertyChanged;
+                foreach (var ship in kcmodel.Fleetdata[kcmodel.Sortiemodel.SortiingDeck - 1].Ships)
+                    ShipsMe.Add(new SortieShipViewModel(kcmodel.Shipdata.FirstOrDefault(_ => _.Shipid == ship)));
+
+                if (kcmodel.CombinedFlag > 0 && kcmodel.Sortiemodel.SortiingDeck == 1)
+                {
+                    _sortiingDeckCombined = kcmodel.Fleetdata[1];
+                    foreach (var ship in kcmodel.Fleetdata[1].Ships)
+                        ShipsCombined.Add(new SortieShipViewModel(kcmodel.Shipdata.FirstOrDefault(_ => _.Shipid == ship)));
+                    _sortiingDeckCombined.PropertyChanged += Sortiing_deck_combined_PropertyChanged;
+
+                    HasTaihaShip = _sortiingDeck.HasTaihaShip || _sortiingDeckCombined.HasTaihaShip;
+                }
+                else
+                {
+                    _sortiingDeckCombined = null;
+                    HasTaihaShip = _sortiingDeck.HasTaihaShip;
                 }
 
-                if(mapinfo.RequiredDefeatCount.HasValue)
-                    Comments.Add(string.Format("撃破回数: {0}/{1}", mapinfo.NowDefeatCount.HasValue ? mapinfo.NowDefeatCount.Value + "" : "-", mapinfo.RequiredDefeatCount.Value));
-                if (mapinfo.MaxHp.HasValue)
-                    Comments.Add(string.Format("マップHP: {0}/{1}", mapinfo.NowHp.HasValue ? mapinfo.NowHp.Value + "" : "-", mapinfo.MaxHp.Value));
-            }
-            CellAppend();
-
-            ShipsMe.Clear();
-            sortiing_deck = kcmodel.Fleetdata[kcmodel.Sortiemodel.SortiingDeck - 1];
-            sortiing_deck.PropertyChanged += Sortiing_deck_PropertyChanged;
-            foreach (var ship in kcmodel.Fleetdata[kcmodel.Sortiemodel.SortiingDeck - 1].Ships)
-                ShipsMe.Add(new SortieShipViewModel(kcmodel.Shipdata.FirstOrDefault(_ => _.Shipid == ship)));
-
-            ShipsCombined.Clear();
-            if (kcmodel.CombinedFlag > 0 && kcmodel.Sortiemodel.SortiingDeck == 1)
-            {
-                sortiing_deck_combined = kcmodel.Fleetdata[1];
-                foreach (var ship in kcmodel.Fleetdata[1].Ships)
-                    ShipsCombined.Add(new SortieShipViewModel(kcmodel.Shipdata.FirstOrDefault(_ => _.Shipid == ship)));
-                sortiing_deck_combined.PropertyChanged += Sortiing_deck_combined_PropertyChanged;
-
-                HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
+                OnSortie = true;
             }
             else
             {
-                sortiing_deck_combined = null;
-                HasTaihaShip = sortiing_deck.HasTaihaShip;
+                System.Windows.Application.Current.Dispatcher.Invoke(() => Sortiemodel_SortieStarted(sender, e));
             }
-
-            OnSortie = true;
         }
 
         private void Sortiing_deck_combined_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == "HasTaihaShip")
             {
-                HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
+                HasTaihaShip = _sortiingDeck.HasTaihaShip || _sortiingDeckCombined.HasTaihaShip;
             }
         }
 
@@ -368,10 +392,10 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
         {
             if (e.PropertyName == "HasTaihaShip")
             {
-                if (sortiing_deck_combined != null)
-                    HasTaihaShip = sortiing_deck.HasTaihaShip || sortiing_deck_combined.HasTaihaShip;
+                if (_sortiingDeckCombined != null)
+                    HasTaihaShip = _sortiingDeck.HasTaihaShip || _sortiingDeckCombined.HasTaihaShip;
                 else
-                    HasTaihaShip = sortiing_deck.HasTaihaShip;
+                    HasTaihaShip = _sortiingDeck.HasTaihaShip;
             }
         }
     }
