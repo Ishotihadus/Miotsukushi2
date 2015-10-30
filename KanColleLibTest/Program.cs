@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Codeplex.Data;
+using KanColleLib.TransmissionData.api_get_member;
 
 namespace KanColleLibTest
 {
@@ -231,8 +228,8 @@ namespace KanColleLibTest
 
         static void test_preset_dec()
         {
-            var presetdeck1 = KanColleLib.TransmissionData.api_req_hensei.PresetDeck.fromDynamic(DynamicJson.Parse("{\"api_max_num\":3,\"api_deck\":{}}"));
-            var presetdeck2 = KanColleLib.TransmissionData.api_req_hensei.PresetDeck.fromDynamic(DynamicJson.Parse("{\"api_max_num\":3,\"api_deck\":{\"1\":{\"api_preset_no\":1,\"api_name\":\"\\u96fb\\u6c17\\u96fb\\u5b50\\u60c5\\u5831\\u5b9f\\u9a13\\u6f14\\u7fd2\\u7b2c\\u4e8c\",\"api_name_id\":\"140749500\",\"api_ship\":[1490,-1,-1,-1,-1,-1]}}}"));
+            var presetdeck1 = PresetDeck.fromDynamic(DynamicJson.Parse("{\"api_max_num\":3,\"api_deck\":{}}"));
+            var presetdeck2 = PresetDeck.fromDynamic(DynamicJson.Parse("{\"api_max_num\":3,\"api_deck\":{\"1\":{\"api_preset_no\":1,\"api_name\":\"\\u96fb\\u6c17\\u96fb\\u5b50\\u60c5\\u5831\\u5b9f\\u9a13\\u6f14\\u7fd2\\u7b2c\\u4e8c\",\"api_name_id\":\"140749500\",\"api_ship\":[1490,-1,-1,-1,-1,-1]}}}"));
             var presetregister =
                 KanColleLib.TransmissionData.api_req_hensei.PresetRegister.fromDynamic(
                     DynamicJson.Parse(

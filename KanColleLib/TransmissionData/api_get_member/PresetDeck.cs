@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using KanColleLib.TransmissionData.api_req_hensei.values;
+﻿using System.Collections.Generic;
+using KanColleLib.TransmissionData.api_get_member.values;
 
-namespace KanColleLib.TransmissionData.api_req_hensei
+namespace KanColleLib.TransmissionData.api_get_member
 {
     public class PresetDeck
     {

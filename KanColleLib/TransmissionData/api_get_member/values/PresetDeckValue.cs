@@ -1,4 +1,4 @@
-﻿namespace KanColleLib.TransmissionData.api_req_hensei.values
+﻿namespace KanColleLib.TransmissionData.api_get_member.values
 {
     public class PresetDeckValue
     {
