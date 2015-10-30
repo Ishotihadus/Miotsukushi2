@@ -43,7 +43,7 @@ namespace Miotsukushi.Model.KanColle
             System.Diagnostics.Debug.WriteLine("Port:" + port);
             KanColleNotifier.FiddlerSetWinInetProxy();
 
-            _kclib = new KanColleNotifier(true);
+            _kclib = new KanColleNotifier();
             new PacketSaver(_kclib);
             Statsticshelper = new Plugins.StatisticsDbHelper(_kclib);
             Battlemodel = new BattleModels.BattleModel(this, _kclib);

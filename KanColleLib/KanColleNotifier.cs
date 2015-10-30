@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Fiddler;
 using KanColleLib.EventArgs;
@@ -12,16 +10,13 @@ namespace KanColleLib
 {
     public class KanColleNotifier
     {
-        List<double> processingcode = new List<double>();
-        Random random = new Random();
-        OutProxySettings proxy = new OutProxySettings();
+        readonly object _lockObject = new object();
+        readonly ConcurrentQueue<Session> _sessionQueue = new ConcurrentQueue<Session>();
+        readonly OutProxySettings _proxy = new OutProxySettings();
 
-        public KanColleNotifier(bool isAsync)
+        public KanColleNotifier()
         {
-            if (isAsync)
-                FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete_Async;
-            else
-                FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
+            FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
             FiddlerApplication.AfterSessionComplete += (oSession) => OnGetSessionData(new GetSessionDataEventArgs(oSession));
             FiddlerApplication.Log.OnLogString += (sender, e) => OnGetFiddlerLogString(new GetFiddlerLogStringEventArgs() { logtext = e.LogString });
@@ -29,8 +24,8 @@ namespace KanColleLib
 
         private void FiddlerApplication_BeforeRequest(Session oSession)
         {
-            if (proxy.enabled)
-                oSession["X-OverrideGateway"] = proxy.GetGatewayString();
+            if (_proxy.enabled)
+                oSession["X-OverrideGateway"] = _proxy.GetGatewayString();
         }
 
         public static int FiddlerStartup(int iListenPort=0)
@@ -42,73 +37,81 @@ namespace KanColleLib
 
         public static void FiddlerSetWinInetProxy()
         {
-            Fiddler.URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}", Fiddler.FiddlerApplication.oProxy.ListenPort), "<local>");
+            Fiddler.URLMonInterop.SetProxyInProcess($"127.0.0.1:{Fiddler.FiddlerApplication.oProxy.ListenPort}", "<local>");
         }
 
         public void SetUpstreamProxy(ProxyType type, string server, int port)
         {
-            proxy.type = type;
-            proxy.servername = server;
-            proxy.port = port;
-            proxy.enabled = true;
+            _proxy.type = type;
+            _proxy.servername = server;
+            _proxy.port = port;
+            _proxy.enabled = true;
         }
 
         public void DisableUpstreamProxy()
         {
-            proxy.enabled = false;
+            _proxy.enabled = false;
         }
 
-        async void FiddlerApplication_AfterSessionComplete_Async(Session oSession)
+        async void FiddlerApplication_AfterSessionComplete(Session oSession)
         {
-            await Task.Run(() => FiddlerApplication_AfterSessionComplete(oSession));
-        }
-
-        void FiddlerApplication_AfterSessionComplete(Session oSession)
-        {
-
-            string kcsapiurl = null;
-
             if (oSession.fullUrl.IndexOf("kcs/mainD2.swf") != -1)
                 OnGameStart(new GameStartEventArgs() { main2Dadress = oSession.fullUrl });
-
-            var kcsapiindex = oSession.fullUrl.IndexOf("/kcsapi/");
-            if (kcsapiindex != -1)
-                kcsapiurl = oSession.fullUrl.Substring(kcsapiindex + 8); // "/kcsapi/".Length
-
-            if (kcsapiurl != null && oSession.oResponse.MIMEType == "text/plain")
+            
+            if (oSession.fullUrl.IndexOf("/kcsapi/") != -1 && oSession.oResponse.MIMEType == "text/plain")
             {
-                // 処理の順番をなるべく保証する
-                var thisprocessingcode = random.NextDouble();
-                processingcode.Add(thisprocessingcode);
-                while (processingcode[0] != thisprocessingcode)
+                System.Diagnostics.Debug.WriteLine("Enqueue: " + oSession.fullUrl);
+                _sessionQueue.Enqueue(oSession);
+                await ProcessQueue();
+            }
+        }
+
+        private async Task ProcessQueue()
+        {
+            await Task.Run
+            (() =>
+            {
+                lock (_lockObject)
                 {
-                    System.Threading.Thread.Sleep(1);
-                }
+                    if (_sessionQueue.Count == 0)
+                        return;
 
-                var request = oSession.GetRequestBodyAsString();
-                var response = oSession.GetResponseBodyAsString();
+                    Session oSession;
+                    while (!_sessionQueue.TryDequeue(out oSession))
+                    {
+                        System.Threading.Thread.Sleep(1);
+                    }
 
-                OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
+                    System.Diagnostics.Debug.WriteLine("Dequeue: " + oSession.fullUrl);
+                    
+                    var request = oSession.GetRequestBodyAsString();
+                    var response = oSession.GetResponseBodyAsString();
+
+
+                    var kcsapiindex = oSession.fullUrl.IndexOf("/kcsapi/");
+                    var kcsapiurl = oSession.fullUrl.Substring(kcsapiindex + 8);
+
+                    OnGetKcsAPIData(new GetKcsAPIDataEventArgs(kcsapiurl, request, response));
 
 #if DEBUG
-                RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+                    RaiseEventFromKcsApiSessions(kcsapiurl, request, response);
 #else
-                try
-                {
-                    RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
-                }
-                catch (Exception e)
-                {
-                    // throw new KanColleLibException(string.Format("Session Response Analyze Error: {0}", kcsapiurl), e);
-                    OnKcsAPIDataAnalyzeFailed(new KcsAPIDataAnalyzeFailedEventArgs(kcsapiurl, request, response, e));
-                    System.Diagnostics.Debug.WriteLine("----------------------");
-                    System.Diagnostics.Debug.WriteLine("KanColleLibException: Session Response Analyze Error: " + kcsapiurl);
-                    System.Diagnostics.Debug.WriteLine(e);
-                    System.Diagnostics.Debug.WriteLine("Response: " + response);
-                }
+                    try
+                    {
+                        RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+                    }
+                    catch (Exception e)
+                    {
+                        // throw new KanColleLibException(string.Format("Session Response Analyze Error: {0}", kcsapiurl), e);
+                        OnKcsAPIDataAnalyzeFailed(new KcsAPIDataAnalyzeFailedEventArgs(kcsapiurl, request, response, e));
+                        System.Diagnostics.Debug.WriteLine("----------------------");
+                        System.Diagnostics.Debug.WriteLine("KanColleLibException: Session Response Analyze Error: " + kcsapiurl);
+                        System.Diagnostics.Debug.WriteLine(e);
+                        System.Diagnostics.Debug.WriteLine("Response: " + response);
+                    }
 #endif
-                processingcode.RemoveAt(0);
-            }
+                }
+            });
         }
 
         /// <summary>
@@ -119,10 +122,10 @@ namespace KanColleLib
         /// <param name="response">svdata=を含んだ状態でのレスポンス</param>
         public void ForceRaiseEvent(string kcsapiurl, string request, string response)
         {
-            RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+            RaiseEventFromKcsApiSessions(kcsapiurl, request, response);
         }
 
-        void RaiseEventFromKcsAPISessions(string kcsapiurl, string request, string response)
+        void RaiseEventFromKcsApiSessions(string kcsapiurl, string request, string response)
         {
             dynamic json = null;
 
