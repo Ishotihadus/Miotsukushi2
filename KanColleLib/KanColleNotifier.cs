@@ -98,7 +98,7 @@ namespace KanColleLib
 #else
                     try
                     {
-                        RaiseEventFromKcsAPISessions(kcsapiurl, request, response);
+                        RaiseEventFromKcsApiSessions(kcsapiurl, request, response);
                     }
                     catch (Exception e)
                     {
