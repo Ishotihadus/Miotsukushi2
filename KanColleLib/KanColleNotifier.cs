@@ -192,6 +192,12 @@ namespace KanColleLib
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
                     break;
+                case "api_get_member/preset_deck":
+                    if (json.api_data())
+                        OnGetGetmemberPresetdeck(new RequestBase(request), Svdata<TransmissionData.api_get_member.PresetDeck>.fromDynamic(json, TransmissionData.api_get_member.PresetDeck.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
                 case "api_get_member/questlist":
                     if (json.api_data())
                         OnGetGetmemberQuestlist(new TransmissionRequest.api_get_member.QuestlistRequest(request), Svdata<TransmissionData.api_get_member.Questlist>.fromDynamic(json, TransmissionData.api_get_member.Questlist.fromDynamic(json.api_data)));
@@ -311,6 +317,21 @@ namespace KanColleLib
                         OnGetReqhenseiLock(new TransmissionRequest.api_req_hensei.LockRequest(request), Svdata<TransmissionData.api_req_hensei.Lock>.fromDynamic(json, TransmissionData.api_req_hensei.Lock.fromDynamic(json.api_data)));
                     else
                         throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
+                case "api_req_hensei/preset_register":
+                    if (json.api_data())
+                        OnGetReqhenseiPresetregister(new TransmissionRequest.api_req_hensei.PresetRegisterRequest(request), Svdata<TransmissionData.api_req_hensei.PresetRegister>.fromDynamic(json, TransmissionData.api_req_hensei.PresetRegister.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
+                case "api_req_hensei/preset_select":
+                    if (json.api_data())
+                        OnGetReqhenseiPresetselect(new TransmissionRequest.api_req_hensei.PresetSelectRequest(request), Svdata<TransmissionData.api_req_hensei.PresetSelect>.fromDynamic(json, TransmissionData.api_req_hensei.PresetSelect.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                    break;
+                case "api_req_hensei/preset_delete":
+                    OnGetReqhenseiPresetdelete(new TransmissionRequest.api_req_hensei.PresetDeleteRequest(request), Svdata<object>.fromDynamic(json, null));
                     break;
                 case "api_req_hokyu/charge":
                     if (json.api_data())
@@ -557,6 +578,13 @@ namespace KanColleLib
         protected virtual void OnGetGetmemberNdock(RequestBase request, Svdata<TransmissionData.api_get_member.NDock> response) { if (GetGetmemberNdock != null) GetGetmemberNdock(this, request, response); }
 
         /// <summary>
+        /// api_get_member/preset_deck を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetGetmemberPresetdeckEventHandler GetGetmemberPresetdeck;
+        public delegate void GetGetmemberPresetdeckEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.PresetDeck> response);
+        protected virtual void OnGetGetmemberPresetdeck(RequestBase request, Svdata<TransmissionData.api_get_member.PresetDeck> response) { if (GetGetmemberPresetdeck != null) GetGetmemberPresetdeck(this, request, response); }
+
+        /// <summary>
         /// api_get_member/questlist を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberQuestlistEventHandler GetGetmemberQuestlist;
@@ -702,6 +730,27 @@ namespace KanColleLib
         public event GetReqhenseiLockEventHandler GetReqhenseiLock;
         public delegate void GetReqhenseiLockEventHandler(object sender, TransmissionRequest.api_req_hensei.LockRequest request, Svdata<TransmissionData.api_req_hensei.Lock> response);
         protected virtual void OnGetReqhenseiLock(TransmissionRequest.api_req_hensei.LockRequest request, Svdata<TransmissionData.api_req_hensei.Lock> response) { if (GetReqhenseiLock != null) GetReqhenseiLock(this, request, response); }
+
+        /// <summary>
+        /// api_req_hensei/preset_register を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqhenseiPresetregisterEventHandler GetReqhenseiPresetregister;
+        public delegate void GetReqhenseiPresetregisterEventHandler(object sender, TransmissionRequest.api_req_hensei.PresetRegisterRequest request, Svdata<TransmissionData.api_req_hensei.PresetRegister> response);
+        protected virtual void OnGetReqhenseiPresetregister(TransmissionRequest.api_req_hensei.PresetRegisterRequest request, Svdata<TransmissionData.api_req_hensei.PresetRegister> response) { if (GetReqhenseiPresetregister != null) GetReqhenseiPresetregister(this, request, response); }
+
+        /// <summary>
+        /// api_req_hensei/preset_select を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqhenseiPresetselectEventHandler GetReqhenseiPresetselect;
+        public delegate void GetReqhenseiPresetselectEventHandler(object sender, TransmissionRequest.api_req_hensei.PresetSelectRequest request, Svdata<TransmissionData.api_req_hensei.PresetSelect> response);
+        protected virtual void OnGetReqhenseiPresetselect(TransmissionRequest.api_req_hensei.PresetSelectRequest request, Svdata<TransmissionData.api_req_hensei.PresetSelect> response) { if (GetReqhenseiPresetselect != null) GetReqhenseiPresetselect(this, request, response); }
+
+        /// <summary>
+        /// api_req_hensei/preset_delete を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqhenseiPresetdeleteEventHandler GetReqhenseiPresetdelete;
+        public delegate void GetReqhenseiPresetdeleteEventHandler(object sender, TransmissionRequest.api_req_hensei.PresetDeleteRequest request, Svdata<object> response);
+        protected virtual void OnGetReqhenseiPresetdelete(TransmissionRequest.api_req_hensei.PresetDeleteRequest request, Svdata<object> response) { if (GetReqhenseiPresetdelete != null) GetReqhenseiPresetdelete(this, request, response); }
 
         /// <summary>
         /// api_req_hokyu/charge を受信して解析に成功した際に呼び出されます
