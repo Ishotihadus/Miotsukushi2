@@ -89,19 +89,18 @@ namespace Miotsukushi.Tools
                 return 0;
 
             var baseantiair = slot.Iteminfo.AntiAir * Math.Sqrt(onslot);
-            var alvbonus = 0.0;
+            var alvbonus = slot.Alv * (slot.Alv + 2) / 2.5 ?? 0;
 
             switch (slot.Iteminfo.TypeEquiptype)
             {
                 case 6: // 艦上戦闘機
-                    alvbonus = slot.Alv * slot.Alv / 2.0 ?? 0;
                     break;
                 case 7: // 艦上爆撃機
                 case 8: // 艦上攻撃機
-                    alvbonus = slot.Alv / 2.0 ?? 0;
+                    alvbonus /= 3;
                     break;
                 case 11: // 水上爆撃機
-                    alvbonus = slot.Alv * slot.Alv / 5.0 ?? 0;
+                    alvbonus /= 9;
                     break;
                 default:
                     return 0;
@@ -111,8 +110,7 @@ namespace Miotsukushi.Tools
 
         public static int ShipAirMastery(Model.KanColle.ShipData ship)
         {
-            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
-                ship == null || ship.Slots == null || ship.OnSlotCount == null)
+            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null || ship?.Slots == null || ship.OnSlotCount == null)
                 return 0;
 
             var length = Math.Min(ship.Slots.Count, ship.OnSlotCount.Count);
@@ -130,8 +128,7 @@ namespace Miotsukushi.Tools
 
         public static int ShipDrumCount(Model.KanColle.ShipData ship)
         {
-            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
-                ship == null || ship.Slots == null || ship.OnSlotCount == null)
+            if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null || ship?.Slots == null || ship.OnSlotCount == null)
                 return 0;
 
             var ret = 0;
@@ -332,8 +329,9 @@ namespace Miotsukushi.Tools
             // 3. 10cm高角砲+高射装置 対空電探
             // 4. 12.7cm高角砲+高射装置 対空電探
             // 5. 大口径主砲 高射装置 三式弾
-            // 秋月（改）: 高角砲 （任意の）電探or高角砲
+            // 秋月（改）・照月（改）: 高角砲 （任意の）電探or高角砲
             // 摩耶改二: 高角砲 25mm三連装機銃集中配備
+            // 五十鈴改二: 高角砲 対空機銃 対空電探
 
             // 高角砲: icontype==16
             // 高射装置: equiptype==36
@@ -348,8 +346,11 @@ namespace Miotsukushi.Tools
             // 12.7cm高角砲+高射装置 130
 
             // 秋月 421
+            // 照月 422
             // 秋月改 330
+            // 照月改 346
             // 摩耶改二 428
+            // 五十鈴改二 141
 
             if (Model.MainModel.Current == null || Model.MainModel.Current.KancolleModel == null || Model.MainModel.Current.KancolleModel.Slotdata == null ||
                 ship == null || ship.Slots == null)
@@ -358,58 +359,57 @@ namespace Miotsukushi.Tools
             var antiAirGun = 0; // 高角砲
             var hacs = 0; // 高射装置
             var machinegun = 0; // 対空機銃
-            var radar = 0;
-            var antiAirRadar = 0;
-            var bigMainGun = 0;
-            var sanShiki = 0;
-            var twentyFiveMmTripleMachinegun = 0;
-            var tenCmAntiAirGunWithHacs = 0;
-            var twelvePointSevenCmAirGunWithHacs = 0;
+            var radar = 0; // 電探
+            var antiAirRadar = 0; // 対空電探
+            var bigMainGun = 0; // 大口径主砲
+            var sanShiki = 0; // 三式弾
+            var twentyFiveMmTripleMachinegun = 0; // 25mmうんちゃら
+            var tenCmAntiAirGunWithHacs = 0; // 10cm高角砲＋高射装置
+            var twelvePointSevenCmAirGunWithHacs = 0; // 12.7cm高角砲＋高射装置
 
             foreach (int slot in ship.Slots)
             {
                 var slotmodel = Model.MainModel.Current.KancolleModel.Slotdata.FirstOrDefault(_ => _.Id == slot);
-                if (slotmodel != null && slotmodel.Iteminfo != null)
+                if (slotmodel?.Iteminfo == null) continue;
+
+                var iteminfo = slotmodel.Iteminfo;
+                switch (iteminfo.TypeEquiptype)
                 {
-                    var iteminfo = slotmodel.Iteminfo;
-                    switch (iteminfo.TypeEquiptype)
-                    {
-                        case 36:
-                            ++hacs;
-                            break;
-                        case 21:
-                            ++antiAirGun;
-                            break;
-                        case 12:
-                        case 13:
-                            ++radar;
-                            if (iteminfo.Name.IndexOf("対空") != -1)
-                                ++antiAirRadar;
-                            break;
-                        case 3:
-                        case 38:
-                            ++bigMainGun;
-                            break;
-                        case 18:
-                            ++sanShiki;
-                            break;
-                    }
-
-                    if (iteminfo.TypeIcontype == 16)
+                    case 36:
+                        ++hacs;
+                        break;
+                    case 21:
                         ++antiAirGun;
+                        break;
+                    case 12:
+                    case 13:
+                        ++radar;
+                        if (iteminfo.Name.IndexOf("対空") != -1)
+                            ++antiAirRadar;
+                        break;
+                    case 3:
+                    case 38:
+                        ++bigMainGun;
+                        break;
+                    case 18:
+                        ++sanShiki;
+                        break;
+                }
 
-                    switch(slotmodel.Itemid)
-                    {
-                        case 131:
-                            ++twentyFiveMmTripleMachinegun;
-                            break;
-                        case 122:
-                            ++tenCmAntiAirGunWithHacs;
-                            break;
-                        case 130:
-                            ++twelvePointSevenCmAirGunWithHacs;
-                            break;
-                    }
+                if (iteminfo.TypeIcontype == 16)
+                    ++antiAirGun;
+
+                switch(slotmodel.Itemid)
+                {
+                    case 131:
+                        ++twentyFiveMmTripleMachinegun;
+                        break;
+                    case 122:
+                        ++tenCmAntiAirGunWithHacs;
+                        break;
+                    case 130:
+                        ++twelvePointSevenCmAirGunWithHacs;
+                        break;
                 }
             }
 
@@ -419,8 +419,9 @@ namespace Miotsukushi.Tools
                 (tenCmAntiAirGunWithHacs >= 1 && antiAirRadar >= 1) ||
                 (twelvePointSevenCmAirGunWithHacs >= 1 && antiAirRadar >= 1) ||
                 (bigMainGun >= 1 && hacs >= 1 && sanShiki >= 1) ||
-                ((ship.Characterid == 421 || ship.Characterid == 330) && antiAirGun >= 1 && (radar >= 1 || antiAirGun >= 2)) ||
-                (ship.Characterid == 428 && antiAirGun >= 2 && twentyFiveMmTripleMachinegun >= 1);
+                ((ship.Characterid == 421 || ship.Characterid == 330 || ship.Characterid == 422 || ship.Characterid == 346) && antiAirGun >= 1 && (radar >= 1 || antiAirGun >= 2)) ||
+                (ship.Characterid == 428 && antiAirGun >= 2 && twentyFiveMmTripleMachinegun >= 1) || 
+                (ship.Characterid == 141 && antiAirGun >= 1 && machinegun >= 1 && antiAirRadar >= 1);
         }
 
         /// <summary>
