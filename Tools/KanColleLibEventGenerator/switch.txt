@@ -52,6 +52,12 @@ OnGetGetmemberNdock(new RequestBase(request), Svdata<TransmissionData.api_get_me
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
 break;
+case "api_get_member/preset_deck":
+if(json.api_data())
+OnGetGetmemberPresetdeck(new RequestBase(request), Svdata<TransmissionData.api_get_member.PresetDeck>.fromDynamic(json, TransmissionData.api_get_member.PresetDeck.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
 case "api_get_member/questlist":
 if(json.api_data())
 OnGetGetmemberQuestlist(new TransmissionRequest.api_get_member.QuestlistRequest(request), Svdata<TransmissionData.api_get_member.Questlist>.fromDynamic(json, TransmissionData.api_get_member.Questlist.fromDynamic(json.api_data)));
@@ -171,6 +177,21 @@ if(json.api_data())
 OnGetReqhenseiLock(new TransmissionRequest.api_req_hensei.LockRequest(request), Svdata<TransmissionData.api_req_hensei.Lock>.fromDynamic(json, TransmissionData.api_req_hensei.Lock.fromDynamic(json.api_data)));
 else
 throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_hensei/preset_register":
+if(json.api_data())
+OnGetReqhenseiPresetregister(new TransmissionRequest.api_req_hensei.PresetRegisterRequest(request), Svdata<TransmissionData.api_req_hensei.PresetRegister>.fromDynamic(json, TransmissionData.api_req_hensei.PresetRegister.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_hensei/preset_select":
+if(json.api_data())
+OnGetReqhenseiPresetselect(new TransmissionRequest.api_req_hensei.PresetSelectRequest(request), Svdata<TransmissionData.api_req_hensei.PresetSelect>.fromDynamic(json, TransmissionData.api_req_hensei.PresetSelect.fromDynamic(json.api_data)));
+else
+throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+break;
+case "api_req_hensei/preset_delete":
+OnGetReqhenseiPresetdelete(new TransmissionRequest.api_req_hensei.PresetDeleteRequest(request), Svdata<object>.fromDynamic(json, null));
 break;
 case "api_req_hokyu/charge":
 if(json.api_data())

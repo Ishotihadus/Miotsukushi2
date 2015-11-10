@@ -120,6 +120,10 @@
     <Compile Include="TransmissionData\api_req_combined_battle\values\KoukuStage3Combined.cs" />
     <Compile Include="TransmissionData\api_req_hensei\Combined.cs" />
     <Compile Include="TransmissionData\api_req_hensei\Lock.cs" />
+    <Compile Include="TransmissionData\api_get_member\PresetDeck.cs" />
+    <Compile Include="TransmissionData\api_req_hensei\PresetRegister.cs" />
+    <Compile Include="TransmissionData\api_req_hensei\PresetSelect.cs" />
+    <Compile Include="TransmissionData\api_get_member\values\PresetDeckValue.cs" />
     <Compile Include="TransmissionData\api_req_hokyu\Charge.cs" />
     <Compile Include="TransmissionData\api_req_hokyu\values\ShipValue.cs" />
     <Compile Include="TransmissionData\api_req_kousyou\Createitem.cs" />
@@ -197,6 +201,9 @@
     <Compile Include="TransmissionRequest\api_req_hensei\ChangeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\CombinedRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hensei\LockRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_hensei\PresetDeleteRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_hensei\PresetRegisterRequest.cs" />
+    <Compile Include="TransmissionRequest\api_req_hensei\PresetSelectRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_hokyu\ChargeRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kaisou\RemodelingRequest.cs" />
     <Compile Include="TransmissionRequest\api_req_kousyou\CreateitemRequest.cs" />

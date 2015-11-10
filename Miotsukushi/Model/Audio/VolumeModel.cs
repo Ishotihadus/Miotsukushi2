@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CoreAudio;
 
 namespace Miotsukushi.Model.Audio
 {
     class VolumeModel
     {
-        MMDeviceEnumerator _deviceenum;
-        MMDevice _activedevice;
-        AudioSessionManager2 _sessions;
+        readonly AudioSessionManager2 _sessions;
         AudioSessionControl2 _session;
 
-        int _processid;
+        readonly int _processid;
 
         public bool HasAudioSession { get; private set; }
 
@@ -51,10 +45,10 @@ namespace Miotsukushi.Model.Audio
             _processid = System.Diagnostics.Process.GetCurrentProcess().Id;
             HasAudioSession = false;
 
-            _deviceenum = new MMDeviceEnumerator();
-            _activedevice = _deviceenum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+            var deviceenum = new MMDeviceEnumerator();
+            var activedevice = deviceenum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
 
-            _sessions = _activedevice.AudioSessionManager2;
+            _sessions = activedevice.AudioSessionManager2;
 
             if(!StartupManager())
                 _sessions.OnSessionCreated += sessions_OnSessionCreated;

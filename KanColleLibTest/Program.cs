@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Codeplex.Data;
+using KanColleLib.TransmissionData.api_get_member;
 
 namespace KanColleLibTest
 {
@@ -16,8 +13,9 @@ namespace KanColleLibTest
             // test_req_map();
             // test_start2();
             // test_req_sortie();
-            test_battle();
+            // test_battle();
             // test_combined_battle();
+            test_preset_dec();
         }
         
         static void test_request()
@@ -226,6 +224,20 @@ namespace KanColleLibTest
             var test4 = KanColleLib.TransmissionData.api_req_combined_battle.Battle.fromDynamic(DynamicJson.Parse("{\"api_deck_id\":\"1\",\"api_ship_ke\":[-1,625,579,579,595,623,623],\"api_ship_lv\":[-1,1,1,1,1,1,1],\"api_nowhps\":[-1,96,83,50,25,67,45,350,96,96,88,46,46],\"api_maxhps\":[-1,96,83,50,67,67,45,350,96,96,88,46,46],\"api_nowhps_combined\":[-1,32,22,43,50,88,34],\"api_maxhps_combined\":[-1,39,50,43,50,96,36],\"api_midnight_flag\":1,\"api_eSlot\":[[550,550,541,554,-1],[547,548,549,549,-1],[547,548,549,549,-1],[505,505,515,525,-1],[502,559,544,-1,-1],[502,559,544,-1,-1]],\"api_eKyouka\":[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],\"api_fParam\":[[139,0,104,118],[98,0,82,95],[75,69,59,71],[64,0,82,76],[57,0,84,75],[29,0,39,59]],\"api_eParam\":[[75,88,70,150],[25,0,50,80],[25,0,50,80],[79,74,79,89],[58,76,48,36],[58,76,48,36]],\"api_fParam_combined\":[[49,84,63,61],[70,98,68,69],[63,139,49,63],[75,69,59,71],[99,36,70,95],[59,99,59,59]],\"api_search\":[1,1],\"api_formation\":[\"14\",3,2],\"api_stage_flag\":[1,1,1],\"api_kouku\":{\"api_plane_from\":[[4,5,6],[7,8,9]],\"api_stage1\":{\"api_f_count\":121,\"api_f_lostcount\":17,\"api_e_count\":224,\"api_e_lostcount\":93,\"api_disp_seiku\":0,\"api_touch_plane\":[-1,-1]},\"api_stage2\":{\"api_f_count\":22,\"api_f_lostcount\":10,\"api_e_count\":93,\"api_e_lostcount\":44,\"api_air_fire\":{\"api_idx\":11,\"api_kind\":5,\"api_use_items\":[122,122,106]}},\"api_stage3\":{\"api_frai_flag\":[-1,0,0,0,1,0,0],\"api_erai_flag\":[-1,0,0,0,0,1,0],\"api_fbak_flag\":[-1,0,0,0,0,1,1],\"api_ebak_flag\":[-1,0,0,0,0,0,0],\"api_fcl_flag\":[-1,0,0,0,0,0,0],\"api_ecl_flag\":[-1,0,0,0,0,0,0],\"api_fdam\":[-1,0,0,0,0,7.1,4],\"api_edam\":[-1,0,0,0,0,0,0]},\"api_stage3_combined\":{\"api_frai_flag\":[-1,0,0,0,1,0,0],\"api_fbak_flag\":[-1,1,0,0,0,0,0],\"api_fcl_flag\":[-1,0,0,0,0,0,0],\"api_fdam\":[-1,0,0,0,5,0,0]}},\"api_support_flag\":0,\"api_support_info\":null,\"api_opening_flag\":1,\"api_opening_atack\":{\"api_frai\":[-1,0,0,5,0,0,0],\"api_erai\":[-1,5,0,0,0,0,0],\"api_fdam\":[-1,0,0,0,0,8,0],\"api_edam\":[-1,0,0,0,0,83,0],\"api_fydam\":[-1,0,0,83,0,0,0],\"api_eydam\":[-1,8,0,0,0,0,0],\"api_fcl\":[-1,0,0,1,0,0,0],\"api_ecl\":[-1,1,0,0,0,0,0]},\"api_hourai_flag\":[1,1,1,1],\"api_hougeki1\":{\"api_at_list\":[-1,5,10,4,7,3,12,2,9,6,1],\"api_at_type\":[-1,0,0,0,0,0,0,0,0,0,0],\"api_df_list\":[-1,[8],[3],[9],[1],[8],[1],[9],[5],[12],[12]],\"api_si_list\":[-1,[8],[505],[50],[550],[-1],[502],[6],[-1],[122],[-1]],\"api_cl_list\":[-1,[1],[1],[0],[1],[2],[0],[0],[2],[0],[0]],\"api_damage\":[-1,[72],[4],[0],[3],[26],[0],[0.1],[29],[0],[0]]},\"api_raigeki\":{\"api_frai\":[-1,4,0,6,3,4,4],\"api_erai\":[-1,2,0,0,2,0,2],\"api_fdam\":[-1,0,1,0,0,0,0],\"api_edam\":[-1,0,0,11,24,0,85],\"api_fydam\":[-1,10,0,85,11,10,4],\"api_eydam\":[-1,0,0,0,0,0,1],\"api_fcl\":[-1,1,0,1,1,1,1],\"api_ecl\":[-1,0,0,0,0,0,1]},\"api_hougeki2\":{\"api_at_list\":[-1,1,10,2,7,3],\"api_at_type\":[-1,0,0,0,0,0],\"api_df_list\":[-1,[9],[2],[10],[5],[7]],\"api_si_list\":[-1,[128],[505],[8],[550],[90]],\"api_cl_list\":[-1,[1],[1],[1],[1],[0]],\"api_damage\":[-1,[88],[5],[38],[6],[0]]},\"api_hougeki3\":{\"api_at_list\":[-1,1,7,2,10,3],\"api_at_type\":[-1,0,0,0,0,0],\"api_df_list\":[-1,[7],[3],[7],[6],[7]],\"api_si_list\":[-1,[128],[550],[8],[505],[90]],\"api_cl_list\":[-1,[1],[1],[1],[1],[2]],\"api_damage\":[-1,[14],[4],[45],[2],[30]]}}"));
             var test5 = KanColleLib.TransmissionData.api_req_combined_battle.SpMidnight.fromDynamic(DynamicJson.Parse("{\"api_deck_id\":\"1\",\"api_ship_ke\":[-1,566,542,521,521,622,622],\"api_ship_lv\":[-1,1,1,1,1,1,1],\"api_nowhps\":[-1,31,44,-1,-1,-1,-1,88,88,50,50,43,43],\"api_maxhps\":[-1,31,44,-1,-1,-1,-1,88,88,50,50,43,43],\"api_nowhps_combined\":[-1,50,36,10,-1,-1,-1],\"api_maxhps_combined\":[-1,50,36,39,-1,-1,-1],\"api_eSlot\":[[505,505,515,526,-1],[509,508,512,528,-1],[506,514,514,-1,-1],[506,514,514,-1,-1],[502,502,559,-1,-1],[502,502,559,-1,-1]],\"api_eKyouka\":[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],\"api_fParam\":[[22,28,18,20],[43,72,29,69],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],\"api_eParam\":[[88,80,58,80],[75,0,65,88],[35,72,20,34],[35,72,20,34],[58,88,44,36],[58,88,44,36]],\"api_fParam_combined\":[[70,98,68,69],[59,99,59,59],[49,84,63,61],[0,0,0,0],[0,0,0,0],[0,0,0,0]],\"api_formation\":[\"1\",2,1],\"api_touch_plane\":[-1,-1],\"api_flare_pos\":[-1,-1],\"api_hougeki\":{\"api_at_list\":[-1,1,7,2,3,10,11,12],\"api_df_list\":[-1,[8],[1,1],[9],[11],[3],[2,2],[1,1]],\"api_si_list\":[-1,[-1],[505,515],[-1],[-1],[506],[502,502],[502,502]],\"api_cl_list\":[-1,[2],[1,2],[1],[0],[0],[1,1],[1,1]],\"api_sp_list\":[-1,0,2,0,0,0,1,1],\"api_damage\":[-1,[140],[3,36],[125.1],[0],[0],[2.1,4.1],[1,0]]}}"));
             var testresult = KanColleLib.TransmissionData.api_req_combined_battle.Battleresult.fromDynamic(DynamicJson.Parse("{\"api_ship_id\":[-1,625,579,579,595,623,623],\"api_win_rank\":\"S\",\"api_get_exp\":250,\"api_mvp\":1,\"api_mvp_combined\":4,\"api_member_lv\":102,\"api_member_exp\":2051651,\"api_get_base_exp\":350,\"api_get_ship_exp\":[-1,1260,420,420,420,420,420],\"api_get_ship_exp_combined\":[-1,630,420,420,840,420,420],\"api_get_exp_lvup\":[[446906,458000],[693637,701500],[295491,296200],[795318,851500],[511987,527000],[190299,195800]],\"api_get_exp_lvup_combined\":[[1220567,1223000],[481551,491500],[847033,851500],[465104,474500],[941314,1000000],[609176,631500]],\"api_dests\":6,\"api_destsf\":1,\"api_quest_name\":\"\u5357\u592a\u5e73\u6d0b\u6d77\u57df\",\"api_quest_level\":12,\"api_enemy_info\":{\"api_level\":\"\",\"api_rank\":\"\",\"api_deck_name\":\"\u6df1\u6d77\u4efb\u52d9\u90e8\u968a\u65d7\u8266\u8266\u968a\"},\"api_first_clear\":0,\"api_get_flag\":[0,1,0],\"api_get_ship\":{\"api_ship_id\":125,\"api_ship_type\":\"\u91cd\u5de1\u6d0b\u8266\",\"api_ship_name\":\"\u718a\u91ce\",\"api_ship_getmes\":\"\u3054\u304d\u3052\u3093\u3088\u3046\u3001<br>\u308f\u305f\u304f\u3057\u304c\u91cd\u5de1\u3001\u718a\u91ce\u3067\u3059\u308f\uff01\"},\"api_get_exmap_rate\":0,\"api_get_exmap_useitem_id\":0,\"api_escape_flag\":0,\"api_escape\":null}"));
+        }
+
+        static void test_preset_dec()
+        {
+            var presetdeck1 = PresetDeck.fromDynamic(DynamicJson.Parse("{\"api_max_num\":3,\"api_deck\":{}}"));
+            var presetdeck2 = PresetDeck.fromDynamic(DynamicJson.Parse("{\"api_max_num\":3,\"api_deck\":{\"1\":{\"api_preset_no\":1,\"api_name\":\"\\u96fb\\u6c17\\u96fb\\u5b50\\u60c5\\u5831\\u5b9f\\u9a13\\u6f14\\u7fd2\\u7b2c\\u4e8c\",\"api_name_id\":\"140749500\",\"api_ship\":[1490,-1,-1,-1,-1,-1]}}}"));
+            var presetregister =
+                KanColleLib.TransmissionData.api_req_hensei.PresetRegister.fromDynamic(
+                    DynamicJson.Parse(
+                        "{\"api_preset_no\":1,\"api_name\":\"\\u96fb\\u6c17\\u96fb\\u5b50\\u60c5\\u5831\\u5b9f\\u9a13\\u6f14\\u7fd2\\u7b2c\\u4e8c\",\"api_name_id\":\"140749500\",\"api_ship\":[1490,1739,-1,-1,-1,-1]}"));
+            var presetselect =
+                KanColleLib.TransmissionData.api_req_hensei.PresetSelect.fromDynamic(
+                    DynamicJson.Parse(
+                        "{\"api_member_id\":11073525,\"api_id\":1,\"api_name\":\"\\u96fb\\u6c17\\u96fb\\u5b50\\u60c5\\u5831\\u5b9f\\u9a13\\u6f14\\u7fd2\\u7b2c\\u4e8c\",\"api_name_id\":\"140749500\",\"api_mission\":[0,0,0,0],\"api_flagship\":\"0\",\"api_ship\":[1490,1739,-1,-1,-1,-1]}"));
         }
     }
 }

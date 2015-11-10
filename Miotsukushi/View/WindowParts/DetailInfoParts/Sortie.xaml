@@ -24,7 +24,7 @@
     </UserControl.Resources>
     <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4" FontSize="16"><Run Text="{Binding AreaID}"/><Run Text="-"/><Run Text="{Binding MapID}"/><Run Text=" "/><Run Text="{Binding MapName}"/><Run Text="  セル "/><Run Text="{Binding CellID}"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,4" FontSize="16"><Run Text="{Binding AreaId}"/><Run Text="-"/><Run Text="{Binding MapId}"/><Run Text=" "/><Run Text="{Binding MapName}"/><Run Text="  セル "/><Run Text="{Binding CellId}"/></TextBlock>
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3" Text="{Binding CellInfo}" FontSize="13.333"/>
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3" Background="#7FF3FF00" Foreground="Red" Text="⚠ 出撃艦隊に大破中の艦娘がいます! 十分に注意して進撃を行ってください!" FontWeight="Bold" Visibility="{Binding HasTaihaShip, Converter={StaticResource BooleanToVisibilityConverter}}" FontSize="13.333"/>
             <Rectangle Height="1" Fill="{DynamicResource GrayBrush2}" Margin="5"/>
