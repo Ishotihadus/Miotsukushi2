@@ -78,12 +78,9 @@ namespace KanColleLib.TransmissionData.api_req_battle_midnight
 
         public static SpMidnight fromDynamic(dynamic json)
         {
-            var deck_id = 0;
-            int.TryParse(json.api_deck_id as string, out deck_id);
-
             return new SpMidnight()
             {
-                deck_id = deck_id,
+                deck_id = json.api_deck_id is double ? (int)json.api_deck_id : int.Parse(json.api_deck_id),
                 nowhps = json.api_nowhps.Deserialize<int[]>(),
                 ship_ke = json.api_ship_ke.Deserialize<int[]>(),
                 ship_lv = json.api_ship_lv.Deserialize<int[]>(),
