@@ -236,14 +236,30 @@ namespace Miotsukushi.ViewModel.CheatWindow
         }
 
         private int _cond;
-
-
-
+        
         public ShipListItemViewModel(KanColleModel model, ShipData shipModel)
         {
             _shipModel = shipModel;
             _model = model;
+            Initialize();
             _shipModel.PropertyChanged += _shipModel_PropertyChanged;
+        }
+
+        private void Initialize()
+        {
+            ShipId = _shipModel.Shipid;
+            CharacterId = _shipModel.Characterid;
+            ShipName = _shipModel.Characterinfo?.Name;
+            ShipType = _shipModel.Characterinfo != null &&
+                       _model.Shiptypemaster.ContainsKey(_shipModel.Characterinfo.Shiptype)
+                ? _model.Shiptypemaster[_shipModel.Characterinfo.Shiptype].Name : null;
+            ShipTypeId = _shipModel.Characterinfo?.Shiptype ?? 0;
+            Yomi = _shipModel.Characterinfo?.NameYomi;
+            Level = _shipModel.Level;
+            ExpTotal = _shipModel.ExpTotal;
+            HpMax = _shipModel.HpMax;
+            HpNow = _shipModel.HpNow;
+            Cond = _shipModel.Condition;
         }
 
         private void _shipModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
