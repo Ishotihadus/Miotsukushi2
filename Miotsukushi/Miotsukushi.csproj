@@ -246,6 +246,9 @@
     <Compile Include="View\CheatWindow\Components\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CheatWindow\Components\ShipList.xaml.cs">
+      <DependentUpon>ShipList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CheatWindow\Components\ShipMasterList.xaml.cs">
       <DependentUpon>ShipMasterList.xaml</DependentUpon>
     </Compile>
@@ -352,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CheatWindow\Components\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheatWindow\Components\ShipList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

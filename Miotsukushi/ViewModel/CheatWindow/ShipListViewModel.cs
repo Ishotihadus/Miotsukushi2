@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
+using System.Windows.Data;
 using Miotsukushi.Model;
 using Miotsukushi.Model.KanColle;
 
@@ -16,7 +17,8 @@ namespace Miotsukushi.ViewModel.CheatWindow
 
         public ShipListViewModel()
         {
-            
+            BindingOperations.EnableCollectionSynchronization(List, new object());
+
             _kcmodel = MainModel.Current.KancolleModel;
 
             _modelCollection = _kcmodel.Shipdata;
