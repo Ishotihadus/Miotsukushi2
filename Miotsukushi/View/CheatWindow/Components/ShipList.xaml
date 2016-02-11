@@ -6,6 +6,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid x:Name="DataGrid" IsReadOnly="True" ItemsSource="{Binding List, Mode=OneWay}"/>
+        <DataGrid x:Name="DataGrid" IsReadOnly="True" ItemsSource="{Binding List, Mode=OneWay}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ShipId}"/>
+                <DataGridTextColumn Header="艦種" Binding="{Binding ShipType}" SortMemberPath="ShipTypeId"/>
+                <DataGridTextColumn Header="艦名" Binding="{Binding ShipName}" SortMemberPath="Yomi"/>
+                <DataGridTextColumn Header="Lv" Binding="{Binding Level}"/>
+                <DataGridTextColumn Header="累計経験値" Binding="{Binding ExpTotal}"/>
+                <DataGridTemplateColumn Header="HP">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding HpNow}"></Run>
+                                <Run Text=" / "></Run>
+                                <Run Text="{Binding HpMax}"></Run>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Cond" Binding="{Binding Cond}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
