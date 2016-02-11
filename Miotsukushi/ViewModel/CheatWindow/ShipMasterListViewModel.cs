@@ -1,12 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Miotsukushi.ViewModel.CheatWindow
 {
     class ShipMasterListViewModel : ViewModelBase
     {
-        readonly ObservableCollection<ShipMasterItem> _shipList;
+        readonly ObservableCollection<ShipMasterListItemViewModel> _shipList;
 
         public ICollectionView ShipListCollection { get; }
 
@@ -31,8 +32,8 @@ namespace Miotsukushi.ViewModel.CheatWindow
 
         public ShipMasterListViewModel()
         {
-            _shipList = new ObservableCollection<ShipMasterItem>();
-            BindingOperations.EnableCollectionSynchronization(_shipList, new object());
+            _shipList = new ObservableCollection<ShipMasterListItemViewModel>();
+
             var kcmodel = Model.MainModel.Current.KancolleModel;
             if (kcmodel.InitializeCompleted)
                 MakeTable();
@@ -43,7 +44,7 @@ namespace Miotsukushi.ViewModel.CheatWindow
             
             ShipListCollection.Filter += o =>
             {
-                var shipMasterItem = o as ShipMasterItem;
+                var shipMasterItem = o as ShipMasterListItemViewModel;
                 if (shipMasterItem?.Name != null && shipMasterItem.Yomi != null)
                 {
                     return shipMasterItem.Name.Contains(SearchText) || shipMasterItem.Yomi.Contains(SearchText);
@@ -54,9 +55,15 @@ namespace Miotsukushi.ViewModel.CheatWindow
 
         private void MakeTable()
         {
+            if (!Application.Current.Dispatcher.CheckAccess())
+            {
+                Application.Current.Dispatcher.Invoke(MakeTable);
+                return;
+            }
+
             var kcmodel = Model.MainModel.Current.KancolleModel;
             foreach (var c in kcmodel.Charamaster)
-                _shipList.Add(new ShipMasterItem
+                _shipList.Add(new ShipMasterListItemViewModel
                 {
                     Id = c.Key,
                     Name = c.Value.Name,

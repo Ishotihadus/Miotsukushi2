@@ -200,7 +200,7 @@
     <Compile Include="ViewModel\CheatWindow\SettingsViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipListItemViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipListViewModel.cs" />
-    <Compile Include="ViewModel\CheatWindow\ShipMasterItem.cs" />
+    <Compile Include="ViewModel\CheatWindow\ShipMasterListItemViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\BattleDetail\BattleDetailViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleShipViewModel.cs" />
