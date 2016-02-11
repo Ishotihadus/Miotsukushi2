@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Miotsukushi.View.CheatWindow.Components"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
@@ -13,8 +12,7 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="艦名" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="よみ" Binding="{Binding Yomi}"/>
-                <DataGridTextColumn Header="艦種" Binding="{Binding ShipType}" SortMemberPath="ShipTypeID"/>
-                <DataGridTextColumn Header="艦種ID" Binding="{Binding ShipTypeId}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="艦種" Binding="{Binding ShipType}" SortMemberPath="ShipTypeId"/>
                 <DataGridTextColumn Header="改造Lv" Binding="{Binding AfterShipLv}"/>
                 <DataGridTextColumn Header="改造後" Binding="{Binding AfterShipName}"/>
                 <DataGridTextColumn Header="リソースID" Binding="{Binding ResourceId}"/>

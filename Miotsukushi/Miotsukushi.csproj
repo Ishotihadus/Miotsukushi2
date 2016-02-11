@@ -198,7 +198,9 @@
     <Compile Include="ViewModel\CheatWindow\DebuggerViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ItemMasterListViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\SettingsViewModel.cs" />
-    <Compile Include="ViewModel\CheatWindow\ShipMasterItem.cs" />
+    <Compile Include="ViewModel\CheatWindow\ShipListItemViewModel.cs" />
+    <Compile Include="ViewModel\CheatWindow\ShipListViewModel.cs" />
+    <Compile Include="ViewModel\CheatWindow\ShipMasterListItemViewModel.cs" />
     <Compile Include="ViewModel\CheatWindow\ShipMasterListViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\BattleDetail\BattleDetailViewModel.cs" />
     <Compile Include="ViewModel\DetailInfoPanel\Battle\BattleShipViewModel.cs" />
@@ -243,6 +245,9 @@
     </Compile>
     <Compile Include="View\CheatWindow\Components\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheatWindow\Components\ShipList.xaml.cs">
+      <DependentUpon>ShipList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CheatWindow\Components\ShipMasterList.xaml.cs">
       <DependentUpon>ShipMasterList.xaml</DependentUpon>
@@ -350,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CheatWindow\Components\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheatWindow\Components\ShipList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

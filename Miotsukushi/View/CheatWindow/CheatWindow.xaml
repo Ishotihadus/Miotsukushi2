@@ -21,6 +21,9 @@
                 <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="18"/>
             </Style>
         </TabControl.Resources>
+        <TabItem Header="艦娘一覧">
+            <Components:ShipList/>
+        </TabItem>
         <TabItem Header="艦娘マスタ情報">
             <Components:ShipMasterList/>
         </TabItem>
