@@ -44,9 +44,9 @@ namespace Miotsukushi.ViewModel.CheatWindow
             ShipListCollection.Filter += o =>
             {
                 var shipMasterItem = o as ShipMasterItem;
-                if (shipMasterItem?.Name != null)
+                if (shipMasterItem?.Name != null && shipMasterItem.Yomi != null)
                 {
-                    return shipMasterItem.Name.Contains(SearchText);
+                    return shipMasterItem.Name.Contains(SearchText) || shipMasterItem.Yomi.Contains(SearchText);
                 }
                 return true;
             };
