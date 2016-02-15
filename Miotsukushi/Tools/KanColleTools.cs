@@ -83,28 +83,72 @@ namespace Miotsukushi.Tools
             }
         }
 
+        /// <summary>
+        /// 艦載機熟練度と装備の種類から判明する制空値ボーナス
+        /// </summary>
+        /// <param name="alv">熟練度</param>
+        /// <param name="equiptype">equiptype</param>
+        /// <returns>スロット当たりの制空値ボーナス</returns>
+        private static double BonusAirMasteryFromAlv(int alv, int equiptype)
+        {
+            int[] knsBonus = {0, 0, 2, 5, 9, 14, 14, 22};
+            int[] sbkBonus = {0, 0, 1, 1, 1, 3, 3, 6};
+
+            double bonus;
+
+            if (alv <= 0)
+                bonus = 0;
+            else if (alv <= 6)
+                bonus = Math.Sqrt((alv * 15 - 5) / 10.0);
+            else
+                bonus = Math.Sqrt(10);
+
+            if (equiptype == 6)
+            {
+                if (alv <= 0)
+                    bonus += knsBonus[0];
+                else if (alv <= 6)
+                    bonus += knsBonus[alv];
+                else
+                    bonus += knsBonus[7];
+            }
+            else if (equiptype == 11)
+            {
+                if (alv <= 0)
+                    bonus += sbkBonus[0];
+                else if (alv <= 6)
+                    bonus += sbkBonus[alv];
+                else
+                    bonus += sbkBonus[7];
+            }
+            else if (equiptype == 7 || equiptype == 8)
+            {
+
+            }
+            else
+            {
+                bonus = 0;
+            }
+
+            return bonus;
+        }
+
+        /// <summary>
+        /// スロット当たりの制空値を計算する
+        /// </summary>
+        /// <param name="slot">スロット情報</param>
+        /// <param name="onslot">搭載数</param>
+        /// <returns>スロット当たりの制空値</returns>
         public static int SlotAirMastery(Model.KanColle.SlotData slot, int onslot)
         {
-            if (slot.Iteminfo == null)
+            if (slot.Iteminfo == null ||
+                !(slot.Iteminfo.TypeEquiptype == 6 || slot.Iteminfo.TypeEquiptype == 7 ||
+                  slot.Iteminfo.TypeEquiptype == 8 || slot.Iteminfo.TypeEquiptype == 11))
                 return 0;
 
             var baseantiair = slot.Iteminfo.AntiAir * Math.Sqrt(onslot);
-            var alvbonus = slot.Alv * (slot.Alv + 2) / 2.5 ?? 0;
-
-            switch (slot.Iteminfo.TypeEquiptype)
-            {
-                case 6: // 艦上戦闘機
-                    break;
-                case 7: // 艦上爆撃機
-                case 8: // 艦上攻撃機
-                    alvbonus /= 3;
-                    break;
-                case 11: // 水上爆撃機
-                    alvbonus /= 9;
-                    break;
-                default:
-                    return 0;
-            }
+            var alvbonus = slot.Alv.HasValue ? BonusAirMasteryFromAlv(slot.Alv.Value, slot.Iteminfo.TypeEquiptype) : 0;
+            
             return (int) Math.Floor(baseantiair + alvbonus);
         }
 
