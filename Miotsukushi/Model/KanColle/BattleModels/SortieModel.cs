@@ -160,6 +160,9 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                 case 8: // 船団護衛成功
                     NowCell.CellType = CellType.SuccessShipGuard;
                     break;
+                case 10: // 空襲戦
+                    NowCell.CellType = CellType.AirRaid;
+                    break;
                 case 4: // 通常戦闘
                 case 5: // ボス戦闘
                 default:

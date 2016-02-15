@@ -8,7 +8,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
 {
     public enum CellType
     {
-        Unknown, Start, Battle, NightSpBattle, NightToDayBattle, AirBattle, AirSearch, SuccessShipGuard, RouteChoice, NoBattle, Supply, Happening
+        Unknown, Start, Battle, NightSpBattle, NightToDayBattle, AirBattle, AirSearch, SuccessShipGuard, RouteChoice, NoBattle, Supply, Happening, AirRaid
     }
 
     class CellModel

@@ -51,7 +51,7 @@ open( "source.txt" ) {|f|
 			file.puts "/// </summary>"
 			file.puts "public event Get" + eventname + "EventHandler Get" + eventname + ";"
 			file.puts "public delegate void Get" + eventname + "EventHandler(object sender, " + requestclass + " request, Svdata<" + responseclass + "> response);"
-			file.puts "protected virtual void OnGet" + eventname + "(" + requestclass + " request, Svdata<" + responseclass + "> response) { if (Get" + eventname + " != null) Get" + eventname + "(this, request, response); }"
+			file.puts "protected virtual void OnGet" + eventname + "(" + requestclass + " request, Svdata<" + responseclass + "> response) { Get" + eventname + "?.Invoke(this, request, response); }"
 		}
 
 		File.open("switch.txt", "a"){|file|
@@ -60,7 +60,7 @@ open( "source.txt" ) {|f|
 				file.puts "if(json.api_data())"
 				file.puts "OnGet" + eventname + "(new " + requestclass + "(request), Svdata<" + responseclass + ">.fromDynamic(json, " + responseclass + ".fromDynamic(json.api_data)));"
 				file.puts "else"
-				file.puts "throw new KanColleLibException(string.Format(\"No api_data: {0}\", kcsapiurl));"
+				file.puts "throw new KanColleLibException($\"No api_data: {kcsapiurl}\");"
 			else
 				file.puts "OnGet" + eventname + "(new " + requestclass + "(request), Svdata<" + responseclass + ">.fromDynamic(json, null));"
 			end

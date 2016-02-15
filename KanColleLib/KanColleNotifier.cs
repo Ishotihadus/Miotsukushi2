@@ -10,9 +10,9 @@ namespace KanColleLib
 {
     public class KanColleNotifier
     {
-        readonly object _lockObject = new object();
-        readonly ConcurrentQueue<Session> _sessionQueue = new ConcurrentQueue<Session>();
-        readonly OutProxySettings _proxy = new OutProxySettings();
+        private readonly object _lockObject = new object();
+        private readonly ConcurrentQueue<Session> _sessionQueue = new ConcurrentQueue<Session>();
+        private readonly OutProxySettings _proxy = new OutProxySettings();
 
         public KanColleNotifier()
         {
@@ -30,14 +30,14 @@ namespace KanColleLib
 
         public static int FiddlerStartup(int iListenPort=0)
         {
-            Fiddler.FiddlerApplication.Startup(iListenPort, Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway);
-            var port = Fiddler.FiddlerApplication.oProxy.ListenPort;
+            FiddlerApplication.Startup(iListenPort, FiddlerCoreStartupFlags.ChainToUpstreamGateway);
+            var port = FiddlerApplication.oProxy.ListenPort;
             return port;
         }
 
         public static void FiddlerSetWinInetProxy()
         {
-            Fiddler.URLMonInterop.SetProxyInProcess($"127.0.0.1:{Fiddler.FiddlerApplication.oProxy.ListenPort}", "<local>");
+            URLMonInterop.SetProxyInProcess($"127.0.0.1:{FiddlerApplication.oProxy.ListenPort}", "<local>");
         }
 
         public void SetUpstreamProxy(ProxyType type, string server, int port)
@@ -125,9 +125,9 @@ namespace KanColleLib
             RaiseEventFromKcsApiSessions(kcsapiurl, request, response);
         }
 
-        void RaiseEventFromKcsApiSessions(string kcsapiurl, string request, string response)
+        private void RaiseEventFromKcsApiSessions(string kcsapiurl, string request, string response)
         {
-            dynamic json = null;
+            dynamic json;
 
             try
             {
@@ -145,151 +145,151 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetGetmemberBasic(new RequestBase(request), Svdata<TransmissionData.api_get_member.Basic>.fromDynamic(json, TransmissionData.api_get_member.Basic.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/deck":
                     if (json.api_data())
                         OnGetGetmemberDeck(new RequestBase(request), Svdata<TransmissionData.api_get_member.Deck>.fromDynamic(json, TransmissionData.api_get_member.Deck.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/furniture":
                     if (json.api_data())
                         OnGetGetmemberFurniture(new RequestBase(request), Svdata<TransmissionData.api_get_member.Furniture>.fromDynamic(json, TransmissionData.api_get_member.Furniture.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/kdock":
                     if (json.api_data())
                         OnGetGetmemberKdock(new RequestBase(request), Svdata<TransmissionData.api_get_member.KDock>.fromDynamic(json, TransmissionData.api_get_member.KDock.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/mapcell":
                     if (json.api_data())
                         OnGetGetmemberMapcell(new TransmissionRequest.api_get_member.MapcellRequest(request), Svdata<TransmissionData.api_get_member.Mapcell>.fromDynamic(json, TransmissionData.api_get_member.Mapcell.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/mapinfo":
                     if (json.api_data())
                         OnGetGetmemberMapinfo(new RequestBase(request), Svdata<TransmissionData.api_get_member.Mapinfo>.fromDynamic(json, TransmissionData.api_get_member.Mapinfo.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/material":
                     if (json.api_data())
                         OnGetGetmemberMaterial(new RequestBase(request), Svdata<TransmissionData.api_get_member.Material>.fromDynamic(json, TransmissionData.api_get_member.Material.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/mission":
                     if (json.api_data())
                         OnGetGetmemberMission(new RequestBase(request), Svdata<TransmissionData.api_get_member.Mission>.fromDynamic(json, TransmissionData.api_get_member.Mission.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/ndock":
                     if (json.api_data())
                         OnGetGetmemberNdock(new RequestBase(request), Svdata<TransmissionData.api_get_member.NDock>.fromDynamic(json, TransmissionData.api_get_member.NDock.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/preset_deck":
                     if (json.api_data())
                         OnGetGetmemberPresetdeck(new RequestBase(request), Svdata<TransmissionData.api_get_member.PresetDeck>.fromDynamic(json, TransmissionData.api_get_member.PresetDeck.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/questlist":
                     if (json.api_data())
                         OnGetGetmemberQuestlist(new TransmissionRequest.api_get_member.QuestlistRequest(request), Svdata<TransmissionData.api_get_member.Questlist>.fromDynamic(json, TransmissionData.api_get_member.Questlist.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/ship2":
                     if (json.api_data())
                         OnGetGetmemberShip2(new TransmissionRequest.api_get_member.Ship2Request(request), Svdata<TransmissionData.api_get_member.Ship2>.fromDynamic(json, TransmissionData.api_get_member.Ship2.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/ship3":
                     if (json.api_data())
                         OnGetGetmemberShip3(new TransmissionRequest.api_get_member.Ship3Request(request), Svdata<TransmissionData.api_get_member.Ship3>.fromDynamic(json, TransmissionData.api_get_member.Ship3.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/ship_deck":
                     if (json.api_data())
                         OnGetGetmemberShipDeck(new TransmissionRequest.api_get_member.ShipDeckRequest(request), Svdata<TransmissionData.api_get_member.ShipDeck>.fromDynamic(json, TransmissionData.api_get_member.ShipDeck.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/slot_item":
                     if (json.api_data())
                         OnGetGetmemberSlotItem(new RequestBase(request), Svdata<TransmissionData.api_get_member.SlotItem>.fromDynamic(json, TransmissionData.api_get_member.SlotItem.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/sortie_conditions":
                     if (json.api_data())
                         OnGetGetmemberSortieConditions(new RequestBase(request), Svdata<TransmissionData.api_get_member.SortieConditions>.fromDynamic(json, TransmissionData.api_get_member.SortieConditions.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/unsetslot":
                     if (json.api_data())
                         OnGetGetmemberUnsetslot(new RequestBase(request), Svdata<TransmissionData.api_get_member.Unsetslot>.fromDynamic(json, TransmissionData.api_get_member.Unsetslot.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_get_member/useitem":
                     if (json.api_data())
                         OnGetGetmemberUseitem(new RequestBase(request), Svdata<TransmissionData.api_get_member.Useitem>.fromDynamic(json, TransmissionData.api_get_member.Useitem.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_port/port":
                     if (json.api_data())
                         OnGetPortPort(new TransmissionRequest.api_port.PortRequest(request), Svdata<TransmissionData.api_port.Port>.fromDynamic(json, TransmissionData.api_port.Port.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_battle_midnight/battle":
                     if (json.api_data())
                         OnGetReqbattlemidnightBattle(new TransmissionRequest.api_req_battle_midnight.BattleRequest(request), Svdata<TransmissionData.api_req_battle_midnight.Battle>.fromDynamic(json, TransmissionData.api_req_battle_midnight.Battle.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_battle_midnight/sp_midnight":
                     if (json.api_data())
                         OnGetReqbattlemidnightSpMidnight(new TransmissionRequest.api_req_battle_midnight.SpMidnightRequest(request), Svdata<TransmissionData.api_req_battle_midnight.SpMidnight>.fromDynamic(json, TransmissionData.api_req_battle_midnight.SpMidnight.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_combined_battle/airbattle":
                     if (json.api_data())
                         OnGetReqcombinedbattleAirbattle(new TransmissionRequest.api_req_combined_battle.AirbattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.Airbattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.Airbattle.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_combined_battle/battle":
                     if (json.api_data())
                         OnGetReqcombinedbattleBattle(new TransmissionRequest.api_req_combined_battle.BattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.Battle>.fromDynamic(json, TransmissionData.api_req_combined_battle.Battle.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_combined_battle/battleresult":
                     if (json.api_data())
                         OnGetReqcombinedbattleBattleresult(new RequestBase(request), Svdata<TransmissionData.api_req_combined_battle.Battleresult>.fromDynamic(json, TransmissionData.api_req_combined_battle.Battleresult.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_combined_battle/battle_water":
                     if (json.api_data())
                         OnGetReqcombinedbattleBattlewater(new TransmissionRequest.api_req_combined_battle.BattleWaterRequest(request), Svdata<TransmissionData.api_req_combined_battle.BattleWater>.fromDynamic(json, TransmissionData.api_req_combined_battle.BattleWater.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_combined_battle/goback_port":
                     OnGetReqcombinedbattleGobackPort(new RequestBase(request), Svdata<object>.fromDynamic(json, null));
@@ -298,13 +298,13 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqcombinedbattleMidnightbattle(new TransmissionRequest.api_req_combined_battle.MidnightBattleRequest(request), Svdata<TransmissionData.api_req_combined_battle.MidnightBattle>.fromDynamic(json, TransmissionData.api_req_combined_battle.MidnightBattle.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_combined_battle/sp_midnight":
                     if (json.api_data())
                         OnGetReqcombinedbattleSpMidnight(new TransmissionRequest.api_req_combined_battle.SpMidnightRequest(request), Svdata<TransmissionData.api_req_combined_battle.SpMidnight>.fromDynamic(json, TransmissionData.api_req_combined_battle.SpMidnight.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_hensei/change":
                     OnGetReqhenseiChange(new TransmissionRequest.api_req_hensei.ChangeRequest(request), Svdata<object>.fromDynamic(json, null));
@@ -313,25 +313,25 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqhenseiCombined(new TransmissionRequest.api_req_hensei.CombinedRequest(request), Svdata<TransmissionData.api_req_hensei.Combined>.fromDynamic(json, TransmissionData.api_req_hensei.Combined.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_hensei/lock":
                     if (json.api_data())
                         OnGetReqhenseiLock(new TransmissionRequest.api_req_hensei.LockRequest(request), Svdata<TransmissionData.api_req_hensei.Lock>.fromDynamic(json, TransmissionData.api_req_hensei.Lock.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_hensei/preset_register":
                     if (json.api_data())
                         OnGetReqhenseiPresetregister(new TransmissionRequest.api_req_hensei.PresetRegisterRequest(request), Svdata<TransmissionData.api_req_hensei.PresetRegister>.fromDynamic(json, TransmissionData.api_req_hensei.PresetRegister.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_hensei/preset_select":
                     if (json.api_data())
                         OnGetReqhenseiPresetselect(new TransmissionRequest.api_req_hensei.PresetSelectRequest(request), Svdata<TransmissionData.api_req_hensei.PresetSelect>.fromDynamic(json, TransmissionData.api_req_hensei.PresetSelect.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_hensei/preset_delete":
                     OnGetReqhenseiPresetdelete(new TransmissionRequest.api_req_hensei.PresetDeleteRequest(request), Svdata<object>.fromDynamic(json, null));
@@ -340,7 +340,7 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqhokyuCharge(new TransmissionRequest.api_req_hokyu.ChargeRequest(request), Svdata<TransmissionData.api_req_hokyu.Charge>.fromDynamic(json, TransmissionData.api_req_hokyu.Charge.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_kaisou/remodeling":
                     OnGetReqkaisouRemodeling(new TransmissionRequest.api_req_kaisou.RemodelingRequest(request), Svdata<object>.fromDynamic(json, null));
@@ -349,7 +349,7 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqkousyouCreateitem(new TransmissionRequest.api_req_kousyou.CreateitemRequest(request), Svdata<TransmissionData.api_req_kousyou.Createitem>.fromDynamic(json, TransmissionData.api_req_kousyou.Createitem.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_kousyou/createship":
                     OnGetReqkousyouCreateship(new TransmissionRequest.api_req_kousyou.CreateshipRequest(request), Svdata<object>.fromDynamic(json, null));
@@ -361,37 +361,37 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqkousyouDestroyitem2(new TransmissionRequest.api_req_kousyou.Destroyitem2Request(request), Svdata<TransmissionData.api_req_kousyou.Destroyitem2>.fromDynamic(json, TransmissionData.api_req_kousyou.Destroyitem2.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_kousyou/destroyship":
                     if (json.api_data())
                         OnGetReqkousyouDestroyship(new TransmissionRequest.api_req_kousyou.DestroyshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Destroyship>.fromDynamic(json, TransmissionData.api_req_kousyou.Destroyship.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_kousyou/getship":
                     if (json.api_data())
                         OnGetReqkousyouGetship(new TransmissionRequest.api_req_kousyou.GetshipRequest(request), Svdata<TransmissionData.api_req_kousyou.Getship>.fromDynamic(json, TransmissionData.api_req_kousyou.Getship.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_map/next":
                     if (json.api_data())
                         OnGetReqmapNext(new TransmissionRequest.api_req_map.NextRequest(request), Svdata<TransmissionData.api_req_map.Next>.fromDynamic(json, TransmissionData.api_req_map.Next.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_map/start":
                     if (json.api_data())
                         OnGetReqmapStart(new TransmissionRequest.api_req_map.StartRequest(request), Svdata<TransmissionData.api_req_map.Start>.fromDynamic(json, TransmissionData.api_req_map.Start.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_member/get_incentive":
                     if (json.api_data())
                         OnGetReqmemberGetIncentive(new RequestBase(request), Svdata<TransmissionData.api_req_member.GetIncentive>.fromDynamic(json, TransmissionData.api_req_member.GetIncentive.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_member/updatecomment":
                     OnGetReqmemberUpdatecomment(new TransmissionRequest.api_req_member.UpdatecommentRequest(request), Svdata<object>.fromDynamic(json, null));
@@ -403,19 +403,19 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqmissionResult(new TransmissionRequest.api_req_mission.ResultRequest(request), Svdata<TransmissionData.api_req_mission.Result>.fromDynamic(json, TransmissionData.api_req_mission.Result.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_mission/return_instruction":
                     if (json.api_data())
                         OnGetReqmissionReturnInstruction(new TransmissionRequest.api_req_mission.ReturnInstructionRequest(request), Svdata<TransmissionData.api_req_mission.ReturnInstruction>.fromDynamic(json, TransmissionData.api_req_mission.ReturnInstruction.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_mission/start":
                     if (json.api_data())
                         OnGetReqmissionStart(new TransmissionRequest.api_req_mission.StartRequest(request), Svdata<TransmissionData.api_req_mission.Start>.fromDynamic(json, TransmissionData.api_req_mission.Start.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_nyukyo/speedchange":
                     OnGetReqnyukyoSpeedchange(new TransmissionRequest.api_req_nyukyo.SpeedchangeRequest(request), Svdata<object>.fromDynamic(json, null));
@@ -427,7 +427,7 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqquestClearitemget(new TransmissionRequest.api_req_quest.ClearitemgetRequest(request), Svdata<TransmissionData.api_req_quest.Clearitemget>.fromDynamic(json, TransmissionData.api_req_quest.Clearitemget.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_quest/start":
                     OnGetReqquestStart(new TransmissionRequest.api_req_quest.StartRequest(request), Svdata<object>.fromDynamic(json, null));
@@ -439,25 +439,31 @@ namespace KanColleLib
                     if (json.api_data())
                         OnGetReqsortieAirbattle(new TransmissionRequest.api_req_sortie.AirbattleRequest(request), Svdata<TransmissionData.api_req_sortie.Airbattle>.fromDynamic(json, TransmissionData.api_req_sortie.Airbattle.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_sortie/battle":
                     if (json.api_data())
                         OnGetReqsortieBattle(new TransmissionRequest.api_req_sortie.BattleRequest(request), Svdata<TransmissionData.api_req_sortie.Battle>.fromDynamic(json, TransmissionData.api_req_sortie.Battle.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_req_sortie/battleresult":
                     if (json.api_data())
                         OnGetReqsortieBattleresult(new RequestBase(request), Svdata<TransmissionData.api_req_sortie.Battleresult>.fromDynamic(json, TransmissionData.api_req_sortie.Battleresult.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
+                    break;
+                case "api_req_sortie/ld_airbattle":
+                    if (json.api_data())
+                        OnGetReqsortieLdAirbattle(new TransmissionRequest.api_req_sortie.LdAirbattleRequest(request), Svdata<TransmissionData.api_req_sortie.LdAirbattle>.fromDynamic(json, TransmissionData.api_req_sortie.LdAirbattle.fromDynamic(json.api_data)));
+                    else
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 case "api_start2":
                     if (json.api_data())
                         OnGetStart2(new RequestBase(request), Svdata<TransmissionData.api_start2.Start2>.fromDynamic(json, TransmissionData.api_start2.Start2.fromDynamic(json.api_data)));
                     else
-                        throw new KanColleLibException(string.Format("No api_data: {0}", kcsapiurl));
+                        throw new KanColleLibException($"No api_data: {kcsapiurl}");
                     break;
                 default:
                     System.Diagnostics.Debug.WriteLine("REQUEST BODY: " + request);
@@ -469,49 +475,49 @@ namespace KanColleLib
         }
 
 
-#region 通常イベント定義
+        #region 通常イベント定義
 
         /// <summary>
         /// FiddlerがAfterSessionCompleteからデータを取り出した際に発生します。
         /// </summary>
         public event GetSessionDataEventHandler GetSessionData;
         public delegate void GetSessionDataEventHandler(object sender, GetSessionDataEventArgs e);
-        protected virtual void OnGetSessionData(GetSessionDataEventArgs e) { if (GetSessionData != null) { GetSessionData(this, e); } }
+        protected virtual void OnGetSessionData(GetSessionDataEventArgs e) { GetSessionData?.Invoke(this, e); }
 
         /// <summary>
         /// FiddlerからLogTextを受信した際に発生します。
         /// </summary>
         public event GetFiddlerLogStringEventHandler GetFiddlerLogString;
         public delegate void GetFiddlerLogStringEventHandler(object sender, GetFiddlerLogStringEventArgs e);
-        protected virtual void OnGetFiddlerLogString(GetFiddlerLogStringEventArgs e) { if (GetFiddlerLogString != null) { GetFiddlerLogString(this, e); } }
+        protected virtual void OnGetFiddlerLogString(GetFiddlerLogStringEventArgs e) { GetFiddlerLogString?.Invoke(this, e); }
 
         /// <summary>
         /// ゲームが開始された際に発生します。
         /// </summary>
         public event GameStartEventHandler GameStart;
         public delegate void GameStartEventHandler(object sender, GameStartEventArgs e);
-        protected virtual void OnGameStart(GameStartEventArgs e) { if (GameStart != null) { GameStart(this, e); } }
+        protected virtual void OnGameStart(GameStartEventArgs e) { GameStart?.Invoke(this, e); }
 
         /// <summary>
         /// 艦これのAPIからデータを受信した際に発生します。
         /// </summary>
         public event GetKcsAPIDataEventHandler GetKcsAPIData;
         public delegate void GetKcsAPIDataEventHandler(object sender, GetKcsAPIDataEventArgs e);
-        protected virtual void OnGetKcsAPIData(GetKcsAPIDataEventArgs e) { if (GetKcsAPIData != null) { GetKcsAPIData(this, e); } }
+        protected virtual void OnGetKcsAPIData(GetKcsAPIDataEventArgs e) { GetKcsAPIData?.Invoke(this, e); }
 
         /// <summary>
         /// 艦これのAPIデータの解析に失敗した際に発生します。
         /// </summary>
         public event KcsAPIDataAnalyzeFailedEventHandler KcsAPIDataAnalyzeFailed;
         public delegate void KcsAPIDataAnalyzeFailedEventHandler(object sender, KcsAPIDataAnalyzeFailedEventArgs e);
-        protected virtual void OnKcsAPIDataAnalyzeFailed(KcsAPIDataAnalyzeFailedEventArgs e) { if (KcsAPIDataAnalyzeFailed != null) { KcsAPIDataAnalyzeFailed(this, e); } }
+        protected virtual void OnKcsAPIDataAnalyzeFailed(KcsAPIDataAnalyzeFailedEventArgs e) { KcsAPIDataAnalyzeFailed?.Invoke(this, e); }
 
         /// <summary>
         /// 未知の艦これのAPIデータを受信した際に発生します。
         /// </summary>
         public event UnknownKcsAPIDataReceivedEventHandler UnknownKcsAPIDataReceived;
         public delegate void UnknownKcsAPIDataReceivedEventHandler(object sender, KcsAPIDataAnalyzeFailedEventArgs e);
-        protected virtual void OnUnknownKcsAPIDataReceived(KcsAPIDataAnalyzeFailedEventArgs e) { if (UnknownKcsAPIDataReceived != null) { UnknownKcsAPIDataReceived(this, e); } }
+        protected virtual void OnUnknownKcsAPIDataReceived(KcsAPIDataAnalyzeFailedEventArgs e) { UnknownKcsAPIDataReceived?.Invoke(this, e); }
 
         #endregion
 
@@ -522,413 +528,420 @@ namespace KanColleLib
         /// </summary>
         public event GetGetmemberBasicEventHandler GetGetmemberBasic;
         public delegate void GetGetmemberBasicEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Basic> response);
-        protected virtual void OnGetGetmemberBasic(RequestBase request, Svdata<TransmissionData.api_get_member.Basic> response) { if (GetGetmemberBasic != null) GetGetmemberBasic(this, request, response); }
+        protected virtual void OnGetGetmemberBasic(RequestBase request, Svdata<TransmissionData.api_get_member.Basic> response) { GetGetmemberBasic?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/deck を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberDeckEventHandler GetGetmemberDeck;
         public delegate void GetGetmemberDeckEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Deck> response);
-        protected virtual void OnGetGetmemberDeck(RequestBase request, Svdata<TransmissionData.api_get_member.Deck> response) { if (GetGetmemberDeck != null) GetGetmemberDeck(this, request, response); }
+        protected virtual void OnGetGetmemberDeck(RequestBase request, Svdata<TransmissionData.api_get_member.Deck> response) { GetGetmemberDeck?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/furniture を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberFurnitureEventHandler GetGetmemberFurniture;
         public delegate void GetGetmemberFurnitureEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Furniture> response);
-        protected virtual void OnGetGetmemberFurniture(RequestBase request, Svdata<TransmissionData.api_get_member.Furniture> response) { if (GetGetmemberFurniture != null) GetGetmemberFurniture(this, request, response); }
+        protected virtual void OnGetGetmemberFurniture(RequestBase request, Svdata<TransmissionData.api_get_member.Furniture> response) { GetGetmemberFurniture?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/kdock を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberKdockEventHandler GetGetmemberKdock;
         public delegate void GetGetmemberKdockEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.KDock> response);
-        protected virtual void OnGetGetmemberKdock(RequestBase request, Svdata<TransmissionData.api_get_member.KDock> response) { if (GetGetmemberKdock != null) GetGetmemberKdock(this, request, response); }
+        protected virtual void OnGetGetmemberKdock(RequestBase request, Svdata<TransmissionData.api_get_member.KDock> response) { GetGetmemberKdock?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/mapcell を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberMapcellEventHandler GetGetmemberMapcell;
         public delegate void GetGetmemberMapcellEventHandler(object sender, TransmissionRequest.api_get_member.MapcellRequest request, Svdata<TransmissionData.api_get_member.Mapcell> response);
-        protected virtual void OnGetGetmemberMapcell(TransmissionRequest.api_get_member.MapcellRequest request, Svdata<TransmissionData.api_get_member.Mapcell> response) { if (GetGetmemberMapcell != null) GetGetmemberMapcell(this, request, response); }
+        protected virtual void OnGetGetmemberMapcell(TransmissionRequest.api_get_member.MapcellRequest request, Svdata<TransmissionData.api_get_member.Mapcell> response) { GetGetmemberMapcell?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/mapinfo を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberMapinfoEventHandler GetGetmemberMapinfo;
         public delegate void GetGetmemberMapinfoEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Mapinfo> response);
-        protected virtual void OnGetGetmemberMapinfo(RequestBase request, Svdata<TransmissionData.api_get_member.Mapinfo> response) { if (GetGetmemberMapinfo != null) GetGetmemberMapinfo(this, request, response); }
+        protected virtual void OnGetGetmemberMapinfo(RequestBase request, Svdata<TransmissionData.api_get_member.Mapinfo> response) { GetGetmemberMapinfo?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/material を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberMaterialEventHandler GetGetmemberMaterial;
         public delegate void GetGetmemberMaterialEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Material> response);
-        protected virtual void OnGetGetmemberMaterial(RequestBase request, Svdata<TransmissionData.api_get_member.Material> response) { if (GetGetmemberMaterial != null) GetGetmemberMaterial(this, request, response); }
+        protected virtual void OnGetGetmemberMaterial(RequestBase request, Svdata<TransmissionData.api_get_member.Material> response) { GetGetmemberMaterial?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/mission を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberMissionEventHandler GetGetmemberMission;
         public delegate void GetGetmemberMissionEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Mission> response);
-        protected virtual void OnGetGetmemberMission(RequestBase request, Svdata<TransmissionData.api_get_member.Mission> response) { if (GetGetmemberMission != null) GetGetmemberMission(this, request, response); }
+        protected virtual void OnGetGetmemberMission(RequestBase request, Svdata<TransmissionData.api_get_member.Mission> response) { GetGetmemberMission?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/ndock を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberNdockEventHandler GetGetmemberNdock;
         public delegate void GetGetmemberNdockEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.NDock> response);
-        protected virtual void OnGetGetmemberNdock(RequestBase request, Svdata<TransmissionData.api_get_member.NDock> response) { if (GetGetmemberNdock != null) GetGetmemberNdock(this, request, response); }
+        protected virtual void OnGetGetmemberNdock(RequestBase request, Svdata<TransmissionData.api_get_member.NDock> response) { GetGetmemberNdock?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/preset_deck を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberPresetdeckEventHandler GetGetmemberPresetdeck;
         public delegate void GetGetmemberPresetdeckEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.PresetDeck> response);
-        protected virtual void OnGetGetmemberPresetdeck(RequestBase request, Svdata<TransmissionData.api_get_member.PresetDeck> response) { if (GetGetmemberPresetdeck != null) GetGetmemberPresetdeck(this, request, response); }
+        protected virtual void OnGetGetmemberPresetdeck(RequestBase request, Svdata<TransmissionData.api_get_member.PresetDeck> response) { GetGetmemberPresetdeck?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/questlist を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberQuestlistEventHandler GetGetmemberQuestlist;
         public delegate void GetGetmemberQuestlistEventHandler(object sender, TransmissionRequest.api_get_member.QuestlistRequest request, Svdata<TransmissionData.api_get_member.Questlist> response);
-        protected virtual void OnGetGetmemberQuestlist(TransmissionRequest.api_get_member.QuestlistRequest request, Svdata<TransmissionData.api_get_member.Questlist> response) { if (GetGetmemberQuestlist != null) GetGetmemberQuestlist(this, request, response); }
+        protected virtual void OnGetGetmemberQuestlist(TransmissionRequest.api_get_member.QuestlistRequest request, Svdata<TransmissionData.api_get_member.Questlist> response) { GetGetmemberQuestlist?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/ship2 を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberShip2EventHandler GetGetmemberShip2;
         public delegate void GetGetmemberShip2EventHandler(object sender, TransmissionRequest.api_get_member.Ship2Request request, Svdata<TransmissionData.api_get_member.Ship2> response);
-        protected virtual void OnGetGetmemberShip2(TransmissionRequest.api_get_member.Ship2Request request, Svdata<TransmissionData.api_get_member.Ship2> response) { if (GetGetmemberShip2 != null) GetGetmemberShip2(this, request, response); }
+        protected virtual void OnGetGetmemberShip2(TransmissionRequest.api_get_member.Ship2Request request, Svdata<TransmissionData.api_get_member.Ship2> response) { GetGetmemberShip2?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/ship3 を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberShip3EventHandler GetGetmemberShip3;
         public delegate void GetGetmemberShip3EventHandler(object sender, TransmissionRequest.api_get_member.Ship3Request request, Svdata<TransmissionData.api_get_member.Ship3> response);
-        protected virtual void OnGetGetmemberShip3(TransmissionRequest.api_get_member.Ship3Request request, Svdata<TransmissionData.api_get_member.Ship3> response) { if (GetGetmemberShip3 != null) GetGetmemberShip3(this, request, response); }
+        protected virtual void OnGetGetmemberShip3(TransmissionRequest.api_get_member.Ship3Request request, Svdata<TransmissionData.api_get_member.Ship3> response) { GetGetmemberShip3?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/ship_deck を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberShipDeckEventHandler GetGetmemberShipDeck;
         public delegate void GetGetmemberShipDeckEventHandler(object sender, TransmissionRequest.api_get_member.ShipDeckRequest request, Svdata<TransmissionData.api_get_member.ShipDeck> response);
-        protected virtual void OnGetGetmemberShipDeck(TransmissionRequest.api_get_member.ShipDeckRequest request, Svdata<TransmissionData.api_get_member.ShipDeck> response) { if (GetGetmemberShipDeck != null) GetGetmemberShipDeck(this, request, response); }
+        protected virtual void OnGetGetmemberShipDeck(TransmissionRequest.api_get_member.ShipDeckRequest request, Svdata<TransmissionData.api_get_member.ShipDeck> response) { GetGetmemberShipDeck?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/slot_item を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberSlotItemEventHandler GetGetmemberSlotItem;
         public delegate void GetGetmemberSlotItemEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.SlotItem> response);
-        protected virtual void OnGetGetmemberSlotItem(RequestBase request, Svdata<TransmissionData.api_get_member.SlotItem> response) { if (GetGetmemberSlotItem != null) GetGetmemberSlotItem(this, request, response); }
+        protected virtual void OnGetGetmemberSlotItem(RequestBase request, Svdata<TransmissionData.api_get_member.SlotItem> response) { GetGetmemberSlotItem?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/sortie_conditions を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberSortieConditionsEventHandler GetGetmemberSortieConditions;
         public delegate void GetGetmemberSortieConditionsEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.SortieConditions> response);
-        protected virtual void OnGetGetmemberSortieConditions(RequestBase request, Svdata<TransmissionData.api_get_member.SortieConditions> response) { if (GetGetmemberSortieConditions != null) GetGetmemberSortieConditions(this, request, response); }
+        protected virtual void OnGetGetmemberSortieConditions(RequestBase request, Svdata<TransmissionData.api_get_member.SortieConditions> response) { GetGetmemberSortieConditions?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/unsetslot を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberUnsetslotEventHandler GetGetmemberUnsetslot;
         public delegate void GetGetmemberUnsetslotEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Unsetslot> response);
-        protected virtual void OnGetGetmemberUnsetslot(RequestBase request, Svdata<TransmissionData.api_get_member.Unsetslot> response) { if (GetGetmemberUnsetslot != null) GetGetmemberUnsetslot(this, request, response); }
+        protected virtual void OnGetGetmemberUnsetslot(RequestBase request, Svdata<TransmissionData.api_get_member.Unsetslot> response) { GetGetmemberUnsetslot?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_get_member/useitem を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetGetmemberUseitemEventHandler GetGetmemberUseitem;
         public delegate void GetGetmemberUseitemEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_get_member.Useitem> response);
-        protected virtual void OnGetGetmemberUseitem(RequestBase request, Svdata<TransmissionData.api_get_member.Useitem> response) { if (GetGetmemberUseitem != null) GetGetmemberUseitem(this, request, response); }
+        protected virtual void OnGetGetmemberUseitem(RequestBase request, Svdata<TransmissionData.api_get_member.Useitem> response) { GetGetmemberUseitem?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_port/port を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetPortPortEventHandler GetPortPort;
         public delegate void GetPortPortEventHandler(object sender, TransmissionRequest.api_port.PortRequest request, Svdata<TransmissionData.api_port.Port> response);
-        protected virtual void OnGetPortPort(TransmissionRequest.api_port.PortRequest request, Svdata<TransmissionData.api_port.Port> response) { if (GetPortPort != null) GetPortPort(this, request, response); }
+        protected virtual void OnGetPortPort(TransmissionRequest.api_port.PortRequest request, Svdata<TransmissionData.api_port.Port> response) { GetPortPort?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_battle_midnight/battle を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqbattlemidnightBattleEventHandler GetReqbattlemidnightBattle;
         public delegate void GetReqbattlemidnightBattleEventHandler(object sender, TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response);
-        protected virtual void OnGetReqbattlemidnightBattle(TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response) { if (GetReqbattlemidnightBattle != null) GetReqbattlemidnightBattle(this, request, response); }
+        protected virtual void OnGetReqbattlemidnightBattle(TransmissionRequest.api_req_battle_midnight.BattleRequest request, Svdata<TransmissionData.api_req_battle_midnight.Battle> response) { GetReqbattlemidnightBattle?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_battle_midnight/sp_midnight を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqbattlemidnightSpMidnightEventHandler GetReqbattlemidnightSpMidnight;
         public delegate void GetReqbattlemidnightSpMidnightEventHandler(object sender, TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, Svdata<TransmissionData.api_req_battle_midnight.SpMidnight> response);
-        protected virtual void OnGetReqbattlemidnightSpMidnight(TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, Svdata<TransmissionData.api_req_battle_midnight.SpMidnight> response) { if (GetReqbattlemidnightSpMidnight != null) GetReqbattlemidnightSpMidnight(this, request, response); }
+        protected virtual void OnGetReqbattlemidnightSpMidnight(TransmissionRequest.api_req_battle_midnight.SpMidnightRequest request, Svdata<TransmissionData.api_req_battle_midnight.SpMidnight> response) { GetReqbattlemidnightSpMidnight?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/airbattle を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqcombinedbattleAirbattleEventHandler GetReqcombinedbattleAirbattle;
         public delegate void GetReqcombinedbattleAirbattleEventHandler(object sender, TransmissionRequest.api_req_combined_battle.AirbattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Airbattle> response);
-        protected virtual void OnGetReqcombinedbattleAirbattle(TransmissionRequest.api_req_combined_battle.AirbattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Airbattle> response) { if (GetReqcombinedbattleAirbattle != null) GetReqcombinedbattleAirbattle(this, request, response); }
+        protected virtual void OnGetReqcombinedbattleAirbattle(TransmissionRequest.api_req_combined_battle.AirbattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Airbattle> response) { GetReqcombinedbattleAirbattle?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/battle を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqcombinedbattleBattleEventHandler GetReqcombinedbattleBattle;
         public delegate void GetReqcombinedbattleBattleEventHandler(object sender, TransmissionRequest.api_req_combined_battle.BattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Battle> response);
-        protected virtual void OnGetReqcombinedbattleBattle(TransmissionRequest.api_req_combined_battle.BattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Battle> response) { if (GetReqcombinedbattleBattle != null) GetReqcombinedbattleBattle(this, request, response); }
+        protected virtual void OnGetReqcombinedbattleBattle(TransmissionRequest.api_req_combined_battle.BattleRequest request, Svdata<TransmissionData.api_req_combined_battle.Battle> response) { GetReqcombinedbattleBattle?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/battleresult を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqcombinedbattleBattleresultEventHandler GetReqcombinedbattleBattleresult;
         public delegate void GetReqcombinedbattleBattleresultEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_combined_battle.Battleresult> response);
-        protected virtual void OnGetReqcombinedbattleBattleresult(RequestBase request, Svdata<TransmissionData.api_req_combined_battle.Battleresult> response) { if (GetReqcombinedbattleBattleresult != null) GetReqcombinedbattleBattleresult(this, request, response); }
+        protected virtual void OnGetReqcombinedbattleBattleresult(RequestBase request, Svdata<TransmissionData.api_req_combined_battle.Battleresult> response) { GetReqcombinedbattleBattleresult?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/battle_water を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqcombinedbattleBattlewaterEventHandler GetReqcombinedbattleBattlewater;
         public delegate void GetReqcombinedbattleBattlewaterEventHandler(object sender, TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response);
-        protected virtual void OnGetReqcombinedbattleBattlewater(TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response) { if (GetReqcombinedbattleBattlewater != null) GetReqcombinedbattleBattlewater(this, request, response); }
+        protected virtual void OnGetReqcombinedbattleBattlewater(TransmissionRequest.api_req_combined_battle.BattleWaterRequest request, Svdata<TransmissionData.api_req_combined_battle.BattleWater> response) { GetReqcombinedbattleBattlewater?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/goback_port を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqcombinedbattleGobackPortEventHandler GetReqcombinedbattleGobackPort;
         public delegate void GetReqcombinedbattleGobackPortEventHandler(object sender, RequestBase request, Svdata<object> response);
-        protected virtual void OnGetReqcombinedbattleGobackPort(RequestBase request, Svdata<object> response) { if (GetReqcombinedbattleGobackPort != null) GetReqcombinedbattleGobackPort(this, request, response); }
+        protected virtual void OnGetReqcombinedbattleGobackPort(RequestBase request, Svdata<object> response) { GetReqcombinedbattleGobackPort?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/midnight_battle を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqcombinedbattleMidnightbattleEventHandler GetReqcombinedbattleMidnightbattle;
         public delegate void GetReqcombinedbattleMidnightbattleEventHandler(object sender, TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, Svdata<TransmissionData.api_req_combined_battle.MidnightBattle> response);
-        protected virtual void OnGetReqcombinedbattleMidnightbattle(TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, Svdata<TransmissionData.api_req_combined_battle.MidnightBattle> response) { if (GetReqcombinedbattleMidnightbattle != null) GetReqcombinedbattleMidnightbattle(this, request, response); }
+        protected virtual void OnGetReqcombinedbattleMidnightbattle(TransmissionRequest.api_req_combined_battle.MidnightBattleRequest request, Svdata<TransmissionData.api_req_combined_battle.MidnightBattle> response) { GetReqcombinedbattleMidnightbattle?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_combined_battle/sp_midnight を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqcombinedbattleSpMidnightEventHandler GetReqcombinedbattleSpMidnight;
         public delegate void GetReqcombinedbattleSpMidnightEventHandler(object sender, TransmissionRequest.api_req_combined_battle.SpMidnightRequest request, Svdata<TransmissionData.api_req_combined_battle.SpMidnight> response);
-        protected virtual void OnGetReqcombinedbattleSpMidnight(TransmissionRequest.api_req_combined_battle.SpMidnightRequest request, Svdata<TransmissionData.api_req_combined_battle.SpMidnight> response) { if (GetReqcombinedbattleSpMidnight != null) GetReqcombinedbattleSpMidnight(this, request, response); }
+        protected virtual void OnGetReqcombinedbattleSpMidnight(TransmissionRequest.api_req_combined_battle.SpMidnightRequest request, Svdata<TransmissionData.api_req_combined_battle.SpMidnight> response) { GetReqcombinedbattleSpMidnight?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/change を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhenseiChangeEventHandler GetReqhenseiChange;
         public delegate void GetReqhenseiChangeEventHandler(object sender, TransmissionRequest.api_req_hensei.ChangeRequest request, Svdata<object> response);
-        protected virtual void OnGetReqhenseiChange(TransmissionRequest.api_req_hensei.ChangeRequest request, Svdata<object> response) { if (GetReqhenseiChange != null) GetReqhenseiChange(this, request, response); }
+        protected virtual void OnGetReqhenseiChange(TransmissionRequest.api_req_hensei.ChangeRequest request, Svdata<object> response) { GetReqhenseiChange?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/combined を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhenseiCombinedEventHandler GetReqhenseiCombined;
         public delegate void GetReqhenseiCombinedEventHandler(object sender, TransmissionRequest.api_req_hensei.CombinedRequest request, Svdata<TransmissionData.api_req_hensei.Combined> response);
-        protected virtual void OnGetReqhenseiCombined(TransmissionRequest.api_req_hensei.CombinedRequest request, Svdata<TransmissionData.api_req_hensei.Combined> response) { if (GetReqhenseiCombined != null) GetReqhenseiCombined(this, request, response); }
+        protected virtual void OnGetReqhenseiCombined(TransmissionRequest.api_req_hensei.CombinedRequest request, Svdata<TransmissionData.api_req_hensei.Combined> response) { GetReqhenseiCombined?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/lock を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhenseiLockEventHandler GetReqhenseiLock;
         public delegate void GetReqhenseiLockEventHandler(object sender, TransmissionRequest.api_req_hensei.LockRequest request, Svdata<TransmissionData.api_req_hensei.Lock> response);
-        protected virtual void OnGetReqhenseiLock(TransmissionRequest.api_req_hensei.LockRequest request, Svdata<TransmissionData.api_req_hensei.Lock> response) { if (GetReqhenseiLock != null) GetReqhenseiLock(this, request, response); }
+        protected virtual void OnGetReqhenseiLock(TransmissionRequest.api_req_hensei.LockRequest request, Svdata<TransmissionData.api_req_hensei.Lock> response) { GetReqhenseiLock?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/preset_register を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhenseiPresetregisterEventHandler GetReqhenseiPresetregister;
         public delegate void GetReqhenseiPresetregisterEventHandler(object sender, TransmissionRequest.api_req_hensei.PresetRegisterRequest request, Svdata<TransmissionData.api_req_hensei.PresetRegister> response);
-        protected virtual void OnGetReqhenseiPresetregister(TransmissionRequest.api_req_hensei.PresetRegisterRequest request, Svdata<TransmissionData.api_req_hensei.PresetRegister> response) { if (GetReqhenseiPresetregister != null) GetReqhenseiPresetregister(this, request, response); }
+        protected virtual void OnGetReqhenseiPresetregister(TransmissionRequest.api_req_hensei.PresetRegisterRequest request, Svdata<TransmissionData.api_req_hensei.PresetRegister> response) { GetReqhenseiPresetregister?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/preset_select を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhenseiPresetselectEventHandler GetReqhenseiPresetselect;
         public delegate void GetReqhenseiPresetselectEventHandler(object sender, TransmissionRequest.api_req_hensei.PresetSelectRequest request, Svdata<TransmissionData.api_req_hensei.PresetSelect> response);
-        protected virtual void OnGetReqhenseiPresetselect(TransmissionRequest.api_req_hensei.PresetSelectRequest request, Svdata<TransmissionData.api_req_hensei.PresetSelect> response) { if (GetReqhenseiPresetselect != null) GetReqhenseiPresetselect(this, request, response); }
+        protected virtual void OnGetReqhenseiPresetselect(TransmissionRequest.api_req_hensei.PresetSelectRequest request, Svdata<TransmissionData.api_req_hensei.PresetSelect> response) { GetReqhenseiPresetselect?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_hensei/preset_delete を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhenseiPresetdeleteEventHandler GetReqhenseiPresetdelete;
         public delegate void GetReqhenseiPresetdeleteEventHandler(object sender, TransmissionRequest.api_req_hensei.PresetDeleteRequest request, Svdata<object> response);
-        protected virtual void OnGetReqhenseiPresetdelete(TransmissionRequest.api_req_hensei.PresetDeleteRequest request, Svdata<object> response) { if (GetReqhenseiPresetdelete != null) GetReqhenseiPresetdelete(this, request, response); }
+        protected virtual void OnGetReqhenseiPresetdelete(TransmissionRequest.api_req_hensei.PresetDeleteRequest request, Svdata<object> response) { GetReqhenseiPresetdelete?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_hokyu/charge を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqhokyuChargeEventHandler GetReqhokyuCharge;
         public delegate void GetReqhokyuChargeEventHandler(object sender, TransmissionRequest.api_req_hokyu.ChargeRequest request, Svdata<TransmissionData.api_req_hokyu.Charge> response);
-        protected virtual void OnGetReqhokyuCharge(TransmissionRequest.api_req_hokyu.ChargeRequest request, Svdata<TransmissionData.api_req_hokyu.Charge> response) { if (GetReqhokyuCharge != null) GetReqhokyuCharge(this, request, response); }
+        protected virtual void OnGetReqhokyuCharge(TransmissionRequest.api_req_hokyu.ChargeRequest request, Svdata<TransmissionData.api_req_hokyu.Charge> response) { GetReqhokyuCharge?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_kaisou/remodeling を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkaisouRemodelingEventHandler GetReqkaisouRemodeling;
         public delegate void GetReqkaisouRemodelingEventHandler(object sender, TransmissionRequest.api_req_kaisou.RemodelingRequest request, Svdata<object> response);
-        protected virtual void OnGetReqkaisouRemodeling(TransmissionRequest.api_req_kaisou.RemodelingRequest request, Svdata<object> response) { if (GetReqkaisouRemodeling != null) GetReqkaisouRemodeling(this, request, response); }
+        protected virtual void OnGetReqkaisouRemodeling(TransmissionRequest.api_req_kaisou.RemodelingRequest request, Svdata<object> response) { GetReqkaisouRemodeling?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/createitem を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkousyouCreateitemEventHandler GetReqkousyouCreateitem;
         public delegate void GetReqkousyouCreateitemEventHandler(object sender, TransmissionRequest.api_req_kousyou.CreateitemRequest request, Svdata<TransmissionData.api_req_kousyou.Createitem> response);
-        protected virtual void OnGetReqkousyouCreateitem(TransmissionRequest.api_req_kousyou.CreateitemRequest request, Svdata<TransmissionData.api_req_kousyou.Createitem> response) { if (GetReqkousyouCreateitem != null) GetReqkousyouCreateitem(this, request, response); }
+        protected virtual void OnGetReqkousyouCreateitem(TransmissionRequest.api_req_kousyou.CreateitemRequest request, Svdata<TransmissionData.api_req_kousyou.Createitem> response) { GetReqkousyouCreateitem?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/createship を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkousyouCreateshipEventHandler GetReqkousyouCreateship;
         public delegate void GetReqkousyouCreateshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.CreateshipRequest request, Svdata<object> response);
-        protected virtual void OnGetReqkousyouCreateship(TransmissionRequest.api_req_kousyou.CreateshipRequest request, Svdata<object> response) { if (GetReqkousyouCreateship != null) GetReqkousyouCreateship(this, request, response); }
+        protected virtual void OnGetReqkousyouCreateship(TransmissionRequest.api_req_kousyou.CreateshipRequest request, Svdata<object> response) { GetReqkousyouCreateship?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/createship_speedchange を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkousyouCreateshipSpeedchangeEventHandler GetReqkousyouCreateshipSpeedchange;
         public delegate void GetReqkousyouCreateshipSpeedchangeEventHandler(object sender, TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest request, Svdata<object> response);
-        protected virtual void OnGetReqkousyouCreateshipSpeedchange(TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest request, Svdata<object> response) { if (GetReqkousyouCreateshipSpeedchange != null) GetReqkousyouCreateshipSpeedchange(this, request, response); }
+        protected virtual void OnGetReqkousyouCreateshipSpeedchange(TransmissionRequest.api_req_kousyou.CreateshipSpeedchangeRequest request, Svdata<object> response) { GetReqkousyouCreateshipSpeedchange?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/destroyitem2 を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkousyouDestroyitem2EventHandler GetReqkousyouDestroyitem2;
         public delegate void GetReqkousyouDestroyitem2EventHandler(object sender, TransmissionRequest.api_req_kousyou.Destroyitem2Request request, Svdata<TransmissionData.api_req_kousyou.Destroyitem2> response);
-        protected virtual void OnGetReqkousyouDestroyitem2(TransmissionRequest.api_req_kousyou.Destroyitem2Request request, Svdata<TransmissionData.api_req_kousyou.Destroyitem2> response) { if (GetReqkousyouDestroyitem2 != null) GetReqkousyouDestroyitem2(this, request, response); }
+        protected virtual void OnGetReqkousyouDestroyitem2(TransmissionRequest.api_req_kousyou.Destroyitem2Request request, Svdata<TransmissionData.api_req_kousyou.Destroyitem2> response) { GetReqkousyouDestroyitem2?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/destroyship を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkousyouDestroyshipEventHandler GetReqkousyouDestroyship;
         public delegate void GetReqkousyouDestroyshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<TransmissionData.api_req_kousyou.Destroyship> response);
-        protected virtual void OnGetReqkousyouDestroyship(TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<TransmissionData.api_req_kousyou.Destroyship> response) { if (GetReqkousyouDestroyship != null) GetReqkousyouDestroyship(this, request, response); }
+        protected virtual void OnGetReqkousyouDestroyship(TransmissionRequest.api_req_kousyou.DestroyshipRequest request, Svdata<TransmissionData.api_req_kousyou.Destroyship> response) { GetReqkousyouDestroyship?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_kousyou/getship を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqkousyouGetshipEventHandler GetReqkousyouGetship;
         public delegate void GetReqkousyouGetshipEventHandler(object sender, TransmissionRequest.api_req_kousyou.GetshipRequest request, Svdata<TransmissionData.api_req_kousyou.Getship> response);
-        protected virtual void OnGetReqkousyouGetship(TransmissionRequest.api_req_kousyou.GetshipRequest request, Svdata<TransmissionData.api_req_kousyou.Getship> response) { if (GetReqkousyouGetship != null) GetReqkousyouGetship(this, request, response); }
+        protected virtual void OnGetReqkousyouGetship(TransmissionRequest.api_req_kousyou.GetshipRequest request, Svdata<TransmissionData.api_req_kousyou.Getship> response) { GetReqkousyouGetship?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_map/next を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmapNextEventHandler GetReqmapNext;
         public delegate void GetReqmapNextEventHandler(object sender, TransmissionRequest.api_req_map.NextRequest request, Svdata<TransmissionData.api_req_map.Next> response);
-        protected virtual void OnGetReqmapNext(TransmissionRequest.api_req_map.NextRequest request, Svdata<TransmissionData.api_req_map.Next> response) { if (GetReqmapNext != null) GetReqmapNext(this, request, response); }
+        protected virtual void OnGetReqmapNext(TransmissionRequest.api_req_map.NextRequest request, Svdata<TransmissionData.api_req_map.Next> response) { GetReqmapNext?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_map/start を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmapStartEventHandler GetReqmapStart;
         public delegate void GetReqmapStartEventHandler(object sender, TransmissionRequest.api_req_map.StartRequest request, Svdata<TransmissionData.api_req_map.Start> response);
-        protected virtual void OnGetReqmapStart(TransmissionRequest.api_req_map.StartRequest request, Svdata<TransmissionData.api_req_map.Start> response) { if (GetReqmapStart != null) GetReqmapStart(this, request, response); }
+        protected virtual void OnGetReqmapStart(TransmissionRequest.api_req_map.StartRequest request, Svdata<TransmissionData.api_req_map.Start> response) { GetReqmapStart?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_member/get_incentive を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmemberGetIncentiveEventHandler GetReqmemberGetIncentive;
         public delegate void GetReqmemberGetIncentiveEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_member.GetIncentive> response);
-        protected virtual void OnGetReqmemberGetIncentive(RequestBase request, Svdata<TransmissionData.api_req_member.GetIncentive> response) { if (GetReqmemberGetIncentive != null) GetReqmemberGetIncentive(this, request, response); }
+        protected virtual void OnGetReqmemberGetIncentive(RequestBase request, Svdata<TransmissionData.api_req_member.GetIncentive> response) { GetReqmemberGetIncentive?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_member/updatecomment を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmemberUpdatecommentEventHandler GetReqmemberUpdatecomment;
         public delegate void GetReqmemberUpdatecommentEventHandler(object sender, TransmissionRequest.api_req_member.UpdatecommentRequest request, Svdata<object> response);
-        protected virtual void OnGetReqmemberUpdatecomment(TransmissionRequest.api_req_member.UpdatecommentRequest request, Svdata<object> response) { if (GetReqmemberUpdatecomment != null) GetReqmemberUpdatecomment(this, request, response); }
+        protected virtual void OnGetReqmemberUpdatecomment(TransmissionRequest.api_req_member.UpdatecommentRequest request, Svdata<object> response) { GetReqmemberUpdatecomment?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_member/updatedeckname を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmemberUpdatedecknameEventHandler GetReqmemberUpdatedeckname;
         public delegate void GetReqmemberUpdatedecknameEventHandler(object sender, TransmissionRequest.api_req_member.UpdatedecknameRequest request, Svdata<object> response);
-        protected virtual void OnGetReqmemberUpdatedeckname(TransmissionRequest.api_req_member.UpdatedecknameRequest request, Svdata<object> response) { if (GetReqmemberUpdatedeckname != null) GetReqmemberUpdatedeckname(this, request, response); }
+        protected virtual void OnGetReqmemberUpdatedeckname(TransmissionRequest.api_req_member.UpdatedecknameRequest request, Svdata<object> response) { GetReqmemberUpdatedeckname?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_mission/result を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmissionResultEventHandler GetReqmissionResult;
         public delegate void GetReqmissionResultEventHandler(object sender, TransmissionRequest.api_req_mission.ResultRequest request, Svdata<TransmissionData.api_req_mission.Result> response);
-        protected virtual void OnGetReqmissionResult(TransmissionRequest.api_req_mission.ResultRequest request, Svdata<TransmissionData.api_req_mission.Result> response) { if (GetReqmissionResult != null) GetReqmissionResult(this, request, response); }
+        protected virtual void OnGetReqmissionResult(TransmissionRequest.api_req_mission.ResultRequest request, Svdata<TransmissionData.api_req_mission.Result> response) { GetReqmissionResult?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_mission/return_instruction を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmissionReturnInstructionEventHandler GetReqmissionReturnInstruction;
         public delegate void GetReqmissionReturnInstructionEventHandler(object sender, TransmissionRequest.api_req_mission.ReturnInstructionRequest request, Svdata<TransmissionData.api_req_mission.ReturnInstruction> response);
-        protected virtual void OnGetReqmissionReturnInstruction(TransmissionRequest.api_req_mission.ReturnInstructionRequest request, Svdata<TransmissionData.api_req_mission.ReturnInstruction> response) { if (GetReqmissionReturnInstruction != null) GetReqmissionReturnInstruction(this, request, response); }
+        protected virtual void OnGetReqmissionReturnInstruction(TransmissionRequest.api_req_mission.ReturnInstructionRequest request, Svdata<TransmissionData.api_req_mission.ReturnInstruction> response) { GetReqmissionReturnInstruction?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_mission/start を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqmissionStartEventHandler GetReqmissionStart;
         public delegate void GetReqmissionStartEventHandler(object sender, TransmissionRequest.api_req_mission.StartRequest request, Svdata<TransmissionData.api_req_mission.Start> response);
-        protected virtual void OnGetReqmissionStart(TransmissionRequest.api_req_mission.StartRequest request, Svdata<TransmissionData.api_req_mission.Start> response) { if (GetReqmissionStart != null) GetReqmissionStart(this, request, response); }
+        protected virtual void OnGetReqmissionStart(TransmissionRequest.api_req_mission.StartRequest request, Svdata<TransmissionData.api_req_mission.Start> response) { GetReqmissionStart?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_nyukyo/speedchange を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqnyukyoSpeedchangeEventHandler GetReqnyukyoSpeedchange;
         public delegate void GetReqnyukyoSpeedchangeEventHandler(object sender, TransmissionRequest.api_req_nyukyo.SpeedchangeRequest request, Svdata<object> response);
-        protected virtual void OnGetReqnyukyoSpeedchange(TransmissionRequest.api_req_nyukyo.SpeedchangeRequest request, Svdata<object> response) { if (GetReqnyukyoSpeedchange != null) GetReqnyukyoSpeedchange(this, request, response); }
+        protected virtual void OnGetReqnyukyoSpeedchange(TransmissionRequest.api_req_nyukyo.SpeedchangeRequest request, Svdata<object> response) { GetReqnyukyoSpeedchange?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_nyukyo/start を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqnyukyoStartEventHandler GetReqnyukyoStart;
         public delegate void GetReqnyukyoStartEventHandler(object sender, TransmissionRequest.api_req_nyukyo.StartRequest request, Svdata<object> response);
-        protected virtual void OnGetReqnyukyoStart(TransmissionRequest.api_req_nyukyo.StartRequest request, Svdata<object> response) { if (GetReqnyukyoStart != null) GetReqnyukyoStart(this, request, response); }
+        protected virtual void OnGetReqnyukyoStart(TransmissionRequest.api_req_nyukyo.StartRequest request, Svdata<object> response) { GetReqnyukyoStart?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_quest/clearitemget を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqquestClearitemgetEventHandler GetReqquestClearitemget;
         public delegate void GetReqquestClearitemgetEventHandler(object sender, TransmissionRequest.api_req_quest.ClearitemgetRequest request, Svdata<TransmissionData.api_req_quest.Clearitemget> response);
-        protected virtual void OnGetReqquestClearitemget(TransmissionRequest.api_req_quest.ClearitemgetRequest request, Svdata<TransmissionData.api_req_quest.Clearitemget> response) { if (GetReqquestClearitemget != null) GetReqquestClearitemget(this, request, response); }
+        protected virtual void OnGetReqquestClearitemget(TransmissionRequest.api_req_quest.ClearitemgetRequest request, Svdata<TransmissionData.api_req_quest.Clearitemget> response) { GetReqquestClearitemget?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_quest/start を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqquestStartEventHandler GetReqquestStart;
         public delegate void GetReqquestStartEventHandler(object sender, TransmissionRequest.api_req_quest.StartRequest request, Svdata<object> response);
-        protected virtual void OnGetReqquestStart(TransmissionRequest.api_req_quest.StartRequest request, Svdata<object> response) { if (GetReqquestStart != null) GetReqquestStart(this, request, response); }
+        protected virtual void OnGetReqquestStart(TransmissionRequest.api_req_quest.StartRequest request, Svdata<object> response) { GetReqquestStart?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_quest/stop を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqquestStopEventHandler GetReqquestStop;
         public delegate void GetReqquestStopEventHandler(object sender, TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response);
-        protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { if (GetReqquestStop != null) GetReqquestStop(this, request, response); }
+        protected virtual void OnGetReqquestStop(TransmissionRequest.api_req_quest.StopRequest request, Svdata<object> response) { GetReqquestStop?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_sortie/airbattle を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqsortieAirbattleEventHandler GetReqsortieAirbattle;
         public delegate void GetReqsortieAirbattleEventHandler(object sender, TransmissionRequest.api_req_sortie.AirbattleRequest request, Svdata<TransmissionData.api_req_sortie.Airbattle> response);
-        protected virtual void OnGetReqsortieAirbattle(TransmissionRequest.api_req_sortie.AirbattleRequest request, Svdata<TransmissionData.api_req_sortie.Airbattle> response) { if (GetReqsortieAirbattle != null) GetReqsortieAirbattle(this, request, response); }
+        protected virtual void OnGetReqsortieAirbattle(TransmissionRequest.api_req_sortie.AirbattleRequest request, Svdata<TransmissionData.api_req_sortie.Airbattle> response) { GetReqsortieAirbattle?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_sortie/battle を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqsortieBattleEventHandler GetReqsortieBattle;
         public delegate void GetReqsortieBattleEventHandler(object sender, TransmissionRequest.api_req_sortie.BattleRequest request, Svdata<TransmissionData.api_req_sortie.Battle> response);
-        protected virtual void OnGetReqsortieBattle(TransmissionRequest.api_req_sortie.BattleRequest request, Svdata<TransmissionData.api_req_sortie.Battle> response) { if (GetReqsortieBattle != null) GetReqsortieBattle(this, request, response); }
+        protected virtual void OnGetReqsortieBattle(TransmissionRequest.api_req_sortie.BattleRequest request, Svdata<TransmissionData.api_req_sortie.Battle> response) { GetReqsortieBattle?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_req_sortie/battleresult を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetReqsortieBattleresultEventHandler GetReqsortieBattleresult;
         public delegate void GetReqsortieBattleresultEventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_req_sortie.Battleresult> response);
-        protected virtual void OnGetReqsortieBattleresult(RequestBase request, Svdata<TransmissionData.api_req_sortie.Battleresult> response) { if (GetReqsortieBattleresult != null) GetReqsortieBattleresult(this, request, response); }
+        protected virtual void OnGetReqsortieBattleresult(RequestBase request, Svdata<TransmissionData.api_req_sortie.Battleresult> response) { GetReqsortieBattleresult?.Invoke(this, request, response); }
+
+        /// <summary>
+        /// api_req_sortie/ld_airbattle を受信して解析に成功した際に呼び出されます
+        /// </summary>
+        public event GetReqsortieLdAirbattleEventHandler GetReqsortieLdAirbattle;
+        public delegate void GetReqsortieLdAirbattleEventHandler(object sender, TransmissionRequest.api_req_sortie.LdAirbattleRequest request, Svdata<TransmissionData.api_req_sortie.LdAirbattle> response);
+        protected virtual void OnGetReqsortieLdAirbattle(TransmissionRequest.api_req_sortie.LdAirbattleRequest request, Svdata<TransmissionData.api_req_sortie.LdAirbattle> response) { GetReqsortieLdAirbattle?.Invoke(this, request, response); }
 
         /// <summary>
         /// api_start2 を受信して解析に成功した際に呼び出されます
         /// </summary>
         public event GetStart2EventHandler GetStart2;
         public delegate void GetStart2EventHandler(object sender, RequestBase request, Svdata<TransmissionData.api_start2.Start2> response);
-        protected virtual void OnGetStart2(RequestBase request, Svdata<TransmissionData.api_start2.Start2> response) { if (GetStart2 != null) GetStart2(this, request, response); }
+        protected virtual void OnGetStart2(RequestBase request, Svdata<TransmissionData.api_start2.Start2> response) { GetStart2?.Invoke(this, request, response); }
 
         #endregion
 

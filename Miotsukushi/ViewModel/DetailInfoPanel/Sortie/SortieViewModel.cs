@@ -286,6 +286,9 @@ namespace Miotsukushi.ViewModel.DetailInfoPanel.Sortie
                     case Model.KanColle.BattleModels.CellType.Happening:
                         CellInfo = "うずしお";
                         break;
+                    case Model.KanColle.BattleModels.CellType.AirRaid:
+                        CellInfo = "空襲戦";
+                        break;
                     default:
                         CellInfo = "不明";
                         break;
