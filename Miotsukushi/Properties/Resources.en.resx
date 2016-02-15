@@ -346,7 +346,7 @@
     <value>Akebono</value>
   </data>
   <data name="ShipName_祥鳳" xml:space="preserve">
-    <value>Shouhou</value>
+    <value>Shoho</value>
   </data>
   <data name="ShipName_信濃" xml:space="preserve">
     <value>Shinano</value>
@@ -767,5 +767,62 @@
   </data>
   <data name="ShipType_給油艦" xml:space="preserve">
     <value>Replenishment Oiler</value>
+  </data>
+  <data name="ShipName_初月" xml:space="preserve">
+    <value>Hatsuzuki</value>
+  </data>
+  <data name="ShipName_大波" xml:space="preserve">
+    <value>Onami</value>
+  </data>
+  <data name="ShipName_岸波" xml:space="preserve">
+    <value>Kishinami</value>
+  </data>
+  <data name="ShipName_巻波" xml:space="preserve">
+    <value>Makinami</value>
+  </data>
+  <data name="ShipName_新月" xml:space="preserve">
+    <value>Niizuki</value>
+  </data>
+  <data name="ShipName_早波" xml:space="preserve">
+    <value>Hayanami</value>
+  </data>
+  <data name="ShipName_沖波" xml:space="preserve">
+    <value>Okinami</value>
+  </data>
+  <data name="ShipName_浜波" xml:space="preserve">
+    <value>Hamanami</value>
+  </data>
+  <data name="ShipName_涼月" xml:space="preserve">
+    <value>Suzutsuki</value>
+  </data>
+  <data name="ShipName_涼波" xml:space="preserve">
+    <value>Suzunami</value>
+  </data>
+  <data name="ShipName_清波" xml:space="preserve">
+    <value>Kiyonami</value>
+  </data>
+  <data name="ShipName_照月" xml:space="preserve">
+    <value>Teruzuki</value>
+  </data>
+  <data name="ShipName_玉波" xml:space="preserve">
+    <value>Tamanami</value>
+  </data>
+  <data name="ShipName_秋霜" xml:space="preserve">
+    <value>Akishimo</value>
+  </data>
+  <data name="ShipName_若月" xml:space="preserve">
+    <value>Wakatsuki</value>
+  </data>
+  <data name="ShipName_藤波" xml:space="preserve">
+    <value>Fujinami</value>
+  </data>
+  <data name="ShipName_霜月" xml:space="preserve">
+    <value>Shimotsuki</value>
+  </data>
+  <data name="ShipName_香椎" xml:space="preserve">
+    <value>Kashii</value>
+  </data>
+  <data name="ShipName_鹿島" xml:space="preserve">
+    <value>Kashima</value>
   </data>
 </root>
