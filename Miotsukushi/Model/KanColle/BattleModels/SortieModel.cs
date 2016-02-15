@@ -183,9 +183,8 @@ namespace Miotsukushi.Model.KanColle.BattleModels
                         case 4: // 航空戦
                             NowCell.CellType = CellType.AirBattle;
                             break;
-                        case 6: // 能動分岐
-                            NowCell.CellType = CellType.RouteChoice;
-                            NowCell.CellEventContentValues = cell.select_route.select_cells;
+                        case 6: // 空襲戦
+                            NowCell.CellType = CellType.AirRaid;
                             break;
                         default:
                             NowCell.CellType = CellType.Unknown;
