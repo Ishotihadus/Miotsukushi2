@@ -784,6 +784,54 @@ namespace Miotsukushi.Model.KanColle.BattleModels
         }
 
         /// <summary>
+        /// 通常艦隊空襲戦
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static BattleAnalyzedEventArgs AnalyzeNormalAirRaid(api_req_sortie.LdAirbattle data)
+        {
+            var ret = new BattleAnalyzedEventArgs
+            {
+                battle_type = BattleAnalyzedEventArgs.BattleType.Normal,
+                IsCombinedBattle = false,
+                Phases = new List<BattleAnalyzedEventArgs.Phase>()
+            };
+
+            // 自艦隊の情報
+            var friendship = GetFriendshipList(data.dock_id, data.maxhps, data.nowhps, data.fParam);
+            ret.Friend = friendship;
+
+            // 敵艦隊の情報
+            var enemyship = GetEnemyshipList(data.ship_ke, data.ship_lv, data.maxhps, data.nowhps, data.eParam, data.eSlot);
+            ret.Enemy = enemyship;
+
+            ret.FriendFormation = (BattleAnalyzedEventArgs.Formation)data.formation[0];
+            ret.EnemyFormation = (BattleAnalyzedEventArgs.Formation)data.formation[1];
+            ret.crossing_type = (BattleAnalyzedEventArgs.CrossingType)data.formation[2];
+
+            // 航空戦フェイズ
+            if (data.stage_flag[0])
+                GetAirBattleStage1Phase(data.kouku.stage1, out ret.AirMastery);
+
+            if (data.stage_flag[2])
+            {
+                var koukuStage2Phase = GetAirBattleStage3Phase(data.kouku.stage3, friendship, enemyship);
+                if (koukuStage2Phase != null)
+                    ret.Phases.Add(koukuStage2Phase);
+            }
+            
+            CalcGauge(friendship, enemyship, out ret.FriendGauge, out ret.EnemyGauge);
+
+#if DEBUG
+            EventArgsDebugOutput(ret);
+#endif
+            if (data.midnight_flag)
+                _dayBattle = ret;
+
+            return ret;
+        }
+
+        /// <summary>
         /// 連合艦隊機動部隊通常戦
         /// </summary>
         /// <param name="data"></param>

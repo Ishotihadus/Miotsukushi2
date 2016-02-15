@@ -31,6 +31,7 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             kclib.GetReqcombinedbattleSpMidnight += Kclib_GetReqcombinedbattleSpMidnight;
             kclib.GetReqsortieAirbattle += Kclib_GetReqsortieAirbattle;
             kclib.GetReqsortieBattle += Kclib_GetReqsortieBattle;
+            kclib.GetReqsortieLdAirbattle += Kclib_GetReqsortieLdAirbattle;
             kclib.GetReqbattlemidnightBattle += Kclib_GetReqbattlemidnightBattle;
             kclib.GetReqbattlemidnightSpMidnight += Kclib_GetReqbattlemidnightSpMidnight;
 
@@ -41,6 +42,10 @@ namespace Miotsukushi.Model.KanColle.BattleModels
             kclib.GetReqmapNext += Kclib_GetReqmapNext;
         }
 
+        private void Kclib_GetReqsortieLdAirbattle(object sender, KanColleLib.TransmissionRequest.api_req_sortie.LdAirbattleRequest request, KanColleLib.TransmissionData.Svdata<KanColleLib.TransmissionData.api_req_sortie.LdAirbattle> response)
+        {
+            OnBattleAnalyzed(BattleAnalyzer.AnalyzeNormalAirRaid(response.data));
+        }
 
         void NextCellDataAppend(KanColleLib.TransmissionData.api_req_map.values.NextCellData nextCellData)
         {
